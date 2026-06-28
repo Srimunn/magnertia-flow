@@ -8,7 +8,7 @@ export type Column<T> = {
   className?: string;
 };
 
-export function DataTable<T extends { id?: string | number }>({
+export function DataTable<T extends Record<string, unknown>>({
   columns,
   data,
   mobileCard,
