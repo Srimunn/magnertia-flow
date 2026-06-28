@@ -43,7 +43,7 @@ export function DataTable<T extends Record<string, unknown>>({
             </thead>
             <tbody>
               {data.map((row, i) => (
-                <tr key={(row.id as string) ?? i} className="border-b border-border last:border-0 hover:bg-secondary/30 transition-colors">
+                <tr key={(row.id as string | number | undefined) ?? i} className="border-b border-border last:border-0 hover:bg-secondary/30 transition-colors">
                   {columns.map((c) => (
                     <td
                       key={c.key}
