@@ -64,7 +64,7 @@ export function DataTable<T extends Record<string, unknown>>({
       {/* Mobile cards */}
       <div className="grid gap-3 md:hidden">
         {data.map((row, i) => (
-          <div key={(row.id as string) ?? i} className="card-soft p-4">
+          <div key={(row.id as string | number | undefined) ?? i} className="card-soft p-4">
             {mobileCard(row)}
           </div>
         ))}
