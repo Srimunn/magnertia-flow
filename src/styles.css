@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * MAGNERTIA ERP - Design System
- * Deep Blue / Royal Blue / Sky Blue · Pure White · Premium Enterprise
+ * MAGNERTIA ERP — Design System
+ * Electric Violet · Dark Navy Sidebar · EV Green · Premium SaaS
  */
 
 @theme inline {
@@ -15,7 +15,6 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -54,80 +53,62 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --font-sans: "Inter", system-ui, sans-serif;
-  --font-display: "Poppins", "Inter", sans-serif;
-  --shadow-card: 0 1px 2px 0 oklch(0.45 0.15 255 / 0.04), 0 1px 3px 0 oklch(0.45 0.15 255 / 0.06);
-  --shadow-elevated: 0 4px 16px -2px oklch(0.45 0.15 255 / 0.08), 0 2px 6px -1px oklch(0.45 0.15 255 / 0.06);
+  --font-display: "Inter", system-ui, sans-serif;
+  --shadow-card: 0 1px 3px 0 rgb(15 17 35 / 0.06), 0 4px 12px 0 rgb(15 17 35 / 0.04);
+  --shadow-elevated: 0 8px 24px -4px rgb(15 17 35 / 0.10), 0 4px 10px -2px rgb(15 17 35 / 0.06);
 }
 
 :root {
   --radius: 0.75rem;
 
-  /* Brand palette */
-  --deep-blue: oklch(0.32 0.14 260);      /* Primary - deep blue */
-  --royal-blue: oklch(0.48 0.20 262);     /* Secondary - royal blue */
-  --sky-blue: oklch(0.72 0.13 235);       /* Accent - sky blue */
-  --sky-blue-soft: oklch(0.95 0.03 235);  /* Very light blue */
+  /* Magnertia brand palette (hex-mirrored for chart usage) */
+  --violet: oklch(0.58 0.22 285);          /* #6B4EFF */
+  --violet-soft: oklch(0.96 0.025 285);
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.22 0.04 260);
+  --background: oklch(0.985 0.003 270);    /* very light gray-violet */
+  --foreground: oklch(0.18 0.03 270);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.04 260);
+  --card-foreground: oklch(0.18 0.03 270);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.04 260);
+  --popover-foreground: oklch(0.18 0.03 270);
 
-  --primary: var(--deep-blue);
-  --primary-foreground: oklch(0.99 0.005 250);
-  --secondary: var(--sky-blue-soft);
-  --secondary-foreground: var(--deep-blue);
-  --muted: oklch(0.97 0.01 250);
-  --muted-foreground: oklch(0.48 0.03 260);
-  --accent: var(--sky-blue);
-  --accent-foreground: oklch(0.99 0.005 250);
+  --primary: var(--violet);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: var(--violet-soft);
+  --secondary-foreground: var(--violet);
+  --muted: oklch(0.96 0.005 270);
+  --muted-foreground: oklch(0.50 0.02 270);
+  --accent: var(--violet-soft);
+  --accent-foreground: var(--violet);
 
-  --destructive: oklch(0.6 0.22 25);
-  --destructive-foreground: oklch(0.99 0.005 250);
-  --success: oklch(0.62 0.16 155);
-  --success-foreground: oklch(0.99 0.005 250);
-  --warning: oklch(0.78 0.15 75);
-  --warning-foreground: oklch(0.22 0.04 260);
+  --destructive: oklch(0.62 0.22 25);      /* #EF4444 */
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.68 0.17 152);         /* #22C55E */
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.78 0.16 70);          /* #F59E0B */
+  --warning-foreground: oklch(0.22 0.04 70);
 
-  --border: oklch(0.93 0.015 250);
-  --input: oklch(0.93 0.015 250);
-  --ring: var(--royal-blue);
+  --border: oklch(0.92 0.008 270);
+  --input: oklch(0.92 0.008 270);
+  --ring: var(--violet);
 
-  --chart-1: oklch(0.48 0.20 262);
-  --chart-2: oklch(0.72 0.13 235);
-  --chart-3: oklch(0.62 0.16 155);
-  --chart-4: oklch(0.78 0.15 75);
-  --chart-5: oklch(0.6 0.22 25);
+  /* Chart palette (matches reference donut/bars) */
+  --chart-1: #6B4EFF;
+  --chart-2: #3B82F6;
+  --chart-3: #22C55E;
+  --chart-4: #F59E0B;
+  --chart-5: #EC4899;
+  --chart-bar-expense: #BFD3F5;
 
-  --sidebar: oklch(0.99 0.005 250);
-  --sidebar-foreground: oklch(0.22 0.04 260);
-  --sidebar-primary: var(--deep-blue);
-  --sidebar-primary-foreground: oklch(0.99 0.005 250);
-  --sidebar-accent: var(--sky-blue-soft);
-  --sidebar-accent-foreground: var(--deep-blue);
-  --sidebar-border: oklch(0.93 0.015 250);
-  --sidebar-ring: var(--royal-blue);
-}
-
-.dark {
-  --background: oklch(0.18 0.03 260);
-  --foreground: oklch(0.97 0.01 250);
-  --card: oklch(0.22 0.04 260);
-  --card-foreground: oklch(0.97 0.01 250);
-  --popover: oklch(0.22 0.04 260);
-  --popover-foreground: oklch(0.97 0.01 250);
-  --primary: oklch(0.72 0.13 235);
-  --primary-foreground: oklch(0.18 0.03 260);
-  --secondary: oklch(0.28 0.05 260);
-  --secondary-foreground: oklch(0.97 0.01 250);
-  --muted: oklch(0.28 0.05 260);
-  --muted-foreground: oklch(0.72 0.03 260);
-  --accent: oklch(0.48 0.20 262);
-  --accent-foreground: oklch(0.99 0.005 250);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
+  /* Sidebar — deep space navy */
+  --sidebar: #0F1123;
+  --sidebar-foreground: oklch(0.96 0.01 270);
+  --sidebar-primary: #6B4EFF;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: rgb(255 255 255 / 0.06);
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: rgb(255 255 255 / 0.08);
+  --sidebar-ring: #6B4EFF;
 }
 
 @layer base {
@@ -137,13 +118,15 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     -webkit-font-smoothing: antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
-  h1, h2, h3, h4, h5 { font-family: var(--font-display); letter-spacing: -0.01em; }
+  h1, h2, h3, h4, h5 { font-family: var(--font-display); letter-spacing: -0.015em; }
+  .tabular { font-variant-numeric: tabular-nums; }
 }
 
 @utility card-soft {
   background: var(--color-card);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow-card);
 }
