@@ -11,14 +11,23 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VendorsRouteImport } from './routes/vendors'
 import { Route as UsersRouteImport } from './routes/users'
+import { Route as TransactionsRouteImport } from './routes/transactions'
+import { Route as TaxRouteImport } from './routes/tax'
 import { Route as StationsRouteImport } from './routes/stations'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as RevenueRouteImport } from './routes/revenue'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as ReceivablesRouteImport } from './routes/receivables'
+import { Route as ProfitabilityRouteImport } from './routes/profitability'
 import { Route as PayablesRouteImport } from './routes/payables'
+import { Route as OverviewRouteImport } from './routes/overview'
 import { Route as LedgerRouteImport } from './routes/ledger'
 import { Route as ExpensesRouteImport } from './routes/expenses'
+import { Route as CostCentersRouteImport } from './routes/cost-centers'
+import { Route as ConsolidationRouteImport } from './routes/consolidation'
+import { Route as CashBankRouteImport } from './routes/cash-bank'
+import { Route as BudgetingRouteImport } from './routes/budgeting'
+import { Route as AuditRouteImport } from './routes/audit'
 import { Route as AssetsRouteImport } from './routes/assets'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -30,6 +39,16 @@ const VendorsRoute = VendorsRouteImport.update({
 const UsersRoute = UsersRouteImport.update({
   id: '/users',
   path: '/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransactionsRoute = TransactionsRouteImport.update({
+  id: '/transactions',
+  path: '/transactions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaxRoute = TaxRouteImport.update({
+  id: '/tax',
+  path: '/tax',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StationsRoute = StationsRouteImport.update({
@@ -57,9 +76,19 @@ const ReceivablesRoute = ReceivablesRouteImport.update({
   path: '/receivables',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfitabilityRoute = ProfitabilityRouteImport.update({
+  id: '/profitability',
+  path: '/profitability',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PayablesRoute = PayablesRouteImport.update({
   id: '/payables',
   path: '/payables',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OverviewRoute = OverviewRouteImport.update({
+  id: '/overview',
+  path: '/overview',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LedgerRoute = LedgerRouteImport.update({
@@ -70,6 +99,31 @@ const LedgerRoute = LedgerRouteImport.update({
 const ExpensesRoute = ExpensesRouteImport.update({
   id: '/expenses',
   path: '/expenses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CostCentersRoute = CostCentersRouteImport.update({
+  id: '/cost-centers',
+  path: '/cost-centers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsolidationRoute = ConsolidationRouteImport.update({
+  id: '/consolidation',
+  path: '/consolidation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CashBankRoute = CashBankRouteImport.update({
+  id: '/cash-bank',
+  path: '/cash-bank',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BudgetingRoute = BudgetingRouteImport.update({
+  id: '/budgeting',
+  path: '/budgeting',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditRoute = AuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AssetsRoute = AssetsRouteImport.update({
@@ -86,28 +140,46 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assets': typeof AssetsRoute
+  '/audit': typeof AuditRoute
+  '/budgeting': typeof BudgetingRoute
+  '/cash-bank': typeof CashBankRoute
+  '/consolidation': typeof ConsolidationRoute
+  '/cost-centers': typeof CostCentersRoute
   '/expenses': typeof ExpensesRoute
   '/ledger': typeof LedgerRoute
+  '/overview': typeof OverviewRoute
   '/payables': typeof PayablesRoute
+  '/profitability': typeof ProfitabilityRoute
   '/receivables': typeof ReceivablesRoute
   '/reports': typeof ReportsRoute
   '/revenue': typeof RevenueRoute
   '/settings': typeof SettingsRoute
   '/stations': typeof StationsRoute
+  '/tax': typeof TaxRoute
+  '/transactions': typeof TransactionsRoute
   '/users': typeof UsersRoute
   '/vendors': typeof VendorsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assets': typeof AssetsRoute
+  '/audit': typeof AuditRoute
+  '/budgeting': typeof BudgetingRoute
+  '/cash-bank': typeof CashBankRoute
+  '/consolidation': typeof ConsolidationRoute
+  '/cost-centers': typeof CostCentersRoute
   '/expenses': typeof ExpensesRoute
   '/ledger': typeof LedgerRoute
+  '/overview': typeof OverviewRoute
   '/payables': typeof PayablesRoute
+  '/profitability': typeof ProfitabilityRoute
   '/receivables': typeof ReceivablesRoute
   '/reports': typeof ReportsRoute
   '/revenue': typeof RevenueRoute
   '/settings': typeof SettingsRoute
   '/stations': typeof StationsRoute
+  '/tax': typeof TaxRoute
+  '/transactions': typeof TransactionsRoute
   '/users': typeof UsersRoute
   '/vendors': typeof VendorsRoute
 }
@@ -115,14 +187,23 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/assets': typeof AssetsRoute
+  '/audit': typeof AuditRoute
+  '/budgeting': typeof BudgetingRoute
+  '/cash-bank': typeof CashBankRoute
+  '/consolidation': typeof ConsolidationRoute
+  '/cost-centers': typeof CostCentersRoute
   '/expenses': typeof ExpensesRoute
   '/ledger': typeof LedgerRoute
+  '/overview': typeof OverviewRoute
   '/payables': typeof PayablesRoute
+  '/profitability': typeof ProfitabilityRoute
   '/receivables': typeof ReceivablesRoute
   '/reports': typeof ReportsRoute
   '/revenue': typeof RevenueRoute
   '/settings': typeof SettingsRoute
   '/stations': typeof StationsRoute
+  '/tax': typeof TaxRoute
+  '/transactions': typeof TransactionsRoute
   '/users': typeof UsersRoute
   '/vendors': typeof VendorsRoute
 }
@@ -131,42 +212,69 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/assets'
+    | '/audit'
+    | '/budgeting'
+    | '/cash-bank'
+    | '/consolidation'
+    | '/cost-centers'
     | '/expenses'
     | '/ledger'
+    | '/overview'
     | '/payables'
+    | '/profitability'
     | '/receivables'
     | '/reports'
     | '/revenue'
     | '/settings'
     | '/stations'
+    | '/tax'
+    | '/transactions'
     | '/users'
     | '/vendors'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/assets'
+    | '/audit'
+    | '/budgeting'
+    | '/cash-bank'
+    | '/consolidation'
+    | '/cost-centers'
     | '/expenses'
     | '/ledger'
+    | '/overview'
     | '/payables'
+    | '/profitability'
     | '/receivables'
     | '/reports'
     | '/revenue'
     | '/settings'
     | '/stations'
+    | '/tax'
+    | '/transactions'
     | '/users'
     | '/vendors'
   id:
     | '__root__'
     | '/'
     | '/assets'
+    | '/audit'
+    | '/budgeting'
+    | '/cash-bank'
+    | '/consolidation'
+    | '/cost-centers'
     | '/expenses'
     | '/ledger'
+    | '/overview'
     | '/payables'
+    | '/profitability'
     | '/receivables'
     | '/reports'
     | '/revenue'
     | '/settings'
     | '/stations'
+    | '/tax'
+    | '/transactions'
     | '/users'
     | '/vendors'
   fileRoutesById: FileRoutesById
@@ -174,14 +282,23 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AssetsRoute: typeof AssetsRoute
+  AuditRoute: typeof AuditRoute
+  BudgetingRoute: typeof BudgetingRoute
+  CashBankRoute: typeof CashBankRoute
+  ConsolidationRoute: typeof ConsolidationRoute
+  CostCentersRoute: typeof CostCentersRoute
   ExpensesRoute: typeof ExpensesRoute
   LedgerRoute: typeof LedgerRoute
+  OverviewRoute: typeof OverviewRoute
   PayablesRoute: typeof PayablesRoute
+  ProfitabilityRoute: typeof ProfitabilityRoute
   ReceivablesRoute: typeof ReceivablesRoute
   ReportsRoute: typeof ReportsRoute
   RevenueRoute: typeof RevenueRoute
   SettingsRoute: typeof SettingsRoute
   StationsRoute: typeof StationsRoute
+  TaxRoute: typeof TaxRoute
+  TransactionsRoute: typeof TransactionsRoute
   UsersRoute: typeof UsersRoute
   VendorsRoute: typeof VendorsRoute
 }
@@ -200,6 +317,20 @@ declare module '@tanstack/react-router' {
       path: '/users'
       fullPath: '/users'
       preLoaderRoute: typeof UsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transactions': {
+      id: '/transactions'
+      path: '/transactions'
+      fullPath: '/transactions'
+      preLoaderRoute: typeof TransactionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tax': {
+      id: '/tax'
+      path: '/tax'
+      fullPath: '/tax'
+      preLoaderRoute: typeof TaxRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/stations': {
@@ -237,11 +368,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReceivablesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profitability': {
+      id: '/profitability'
+      path: '/profitability'
+      fullPath: '/profitability'
+      preLoaderRoute: typeof ProfitabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/payables': {
       id: '/payables'
       path: '/payables'
       fullPath: '/payables'
       preLoaderRoute: typeof PayablesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/overview': {
+      id: '/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof OverviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ledger': {
@@ -256,6 +401,41 @@ declare module '@tanstack/react-router' {
       path: '/expenses'
       fullPath: '/expenses'
       preLoaderRoute: typeof ExpensesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cost-centers': {
+      id: '/cost-centers'
+      path: '/cost-centers'
+      fullPath: '/cost-centers'
+      preLoaderRoute: typeof CostCentersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/consolidation': {
+      id: '/consolidation'
+      path: '/consolidation'
+      fullPath: '/consolidation'
+      preLoaderRoute: typeof ConsolidationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cash-bank': {
+      id: '/cash-bank'
+      path: '/cash-bank'
+      fullPath: '/cash-bank'
+      preLoaderRoute: typeof CashBankRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/budgeting': {
+      id: '/budgeting'
+      path: '/budgeting'
+      fullPath: '/budgeting'
+      preLoaderRoute: typeof BudgetingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audit': {
+      id: '/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuditRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/assets': {
@@ -278,27 +458,26 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AssetsRoute: AssetsRoute,
+  AuditRoute: AuditRoute,
+  BudgetingRoute: BudgetingRoute,
+  CashBankRoute: CashBankRoute,
+  ConsolidationRoute: ConsolidationRoute,
+  CostCentersRoute: CostCentersRoute,
   ExpensesRoute: ExpensesRoute,
   LedgerRoute: LedgerRoute,
+  OverviewRoute: OverviewRoute,
   PayablesRoute: PayablesRoute,
+  ProfitabilityRoute: ProfitabilityRoute,
   ReceivablesRoute: ReceivablesRoute,
   ReportsRoute: ReportsRoute,
   RevenueRoute: RevenueRoute,
   SettingsRoute: SettingsRoute,
   StationsRoute: StationsRoute,
+  TaxRoute: TaxRoute,
+  TransactionsRoute: TransactionsRoute,
   UsersRoute: UsersRoute,
   VendorsRoute: VendorsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
