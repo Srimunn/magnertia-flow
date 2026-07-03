@@ -590,3 +590,154 @@ export type NewCashTransactionInput = {
   category: string;
   reference: string;
 };
+
+// ---------------------------------------------------------------------------
+// Fixed Assets module
+// ---------------------------------------------------------------------------
+
+export type FixedAssetCategory =
+  "Building" | "Machinery" | "IT Equipment" | "Vehicles" | "Furniture" | "Others";
+
+export type FixedAssetStatus = "Active" | "Maintenance" | "Fully Depreciated" | "Disposed";
+
+export type FixedAsset = {
+  id: string;
+  assetCode: string;
+  name: string;
+  category: FixedAssetCategory;
+  location: string;
+  purchaseDate: string;
+  cost: number;
+  accumulatedDepreciation: number;
+  netBookValue: number;
+  status: FixedAssetStatus;
+};
+
+export type FixedAssetFilters = {
+  search: string;
+  category: "All Categories" | FixedAssetCategory;
+  status: "All Statuses" | FixedAssetStatus;
+  location: "All Locations" | string;
+};
+
+export type DepreciationRun = {
+  id: string;
+  date: string;
+  period: string;
+  assetsCount: number;
+  totalDepreciation: number;
+  method: string;
+  status: "Posted" | "Draft";
+  executedBy: string;
+};
+
+export type AssetCategoryCount = {
+  name: string;
+  count: number;
+  percentage: number;
+  cost: number;
+  color: string;
+};
+
+export type FixedAssetKpis = {
+  totalAssets: number;
+  grossBookValue: number;
+  accumulatedDepreciation: number;
+  netBookValue: number;
+  assetsAddedThisYear: number;
+};
+
+export type FixedAssetSummaryStats = {
+  fullyDepreciatedCount: number;
+  fullyDepreciatedPct: number;
+  maintenanceCount: number;
+  maintenancePct: number;
+  inUseCount: number;
+  inUsePct: number;
+  disposedCount: number;
+  disposedNetBookValue: number;
+};
+
+export type FixedAssetDashboardData = {
+  kpis: FixedAssetKpis;
+  assets: FixedAsset[];
+  categoryDistribution: AssetCategoryCount[];
+  depreciationTrend: { month: string; depreciation: number }[];
+  topAssets: { name: string; netBookValue: number }[];
+  summaryStats: FixedAssetSummaryStats;
+};
+
+export type NewFixedAssetInput = {
+  name: string;
+  category: FixedAssetCategory;
+  location: string;
+  purchaseDate: string;
+  cost: number;
+  salvageValue: number;
+  usefulLifeYears: number;
+  depreciationMethod: string;
+};
+
+export type AssetDisposalInput = {
+  assetCode: string;
+  disposalDate: string;
+  saleProceeds: number;
+  disposalReason: string;
+};
+
+export type AssetTransferInput = {
+  assetCode: string;
+  transferDate: string;
+  destinationLocation: string;
+  authorizedBy: string;
+};
+
+export type AssetRevaluationInput = {
+  assetCode: string;
+  revaluationDate: string;
+  newMarketValue: number;
+  reason: string;
+};
+
+export type AssetCategoryRecord = {
+  id: string;
+  name: string;
+  description: string;
+  depMethod: string;
+  usefulLife: number;
+  assetAccount: string;
+  depAccount: string;
+};
+
+export type AssetDisposalRecord = {
+  id: string;
+  assetCode: string;
+  name: string;
+  disposalDate: string;
+  cost: number;
+  accumulatedDepreciation: number;
+  proceeds: number;
+  gainLoss: number;
+  status: string;
+};
+
+export type AssetRevaluationRecord = {
+  id: string;
+  assetCode: string;
+  name: string;
+  date: string;
+  oldNBV: number;
+  newNBV: number;
+  adjustment: number;
+  reason: string;
+};
+
+export type AssetTransferRecord = {
+  id: string;
+  assetCode: string;
+  name: string;
+  date: string;
+  sourceLocation: string;
+  destinationLocation: string;
+  authorizedBy: string;
+};

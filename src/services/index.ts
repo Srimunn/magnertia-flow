@@ -6,6 +6,7 @@ export {
   loadAccountsPayableDashboard,
   loadAccountsReceivableDashboard,
   loadCashBankDashboard,
+  loadFixedAssetsDashboard,
 } from "./financialManagementService";
 export * as authenticationService from "./authenticationService";
 export * as transactionService from "./transactionService";
@@ -22,3 +23,5 @@ export * as receiptCollectionService from "./receiptCollectionService";
 export * as cashBankService from "./cashBankService";
 export * as bankAccountService from "./bankAccountService";
 export * as bankReconciliatorService from "./bankReconciliatorService";
+export * as fixedAssetService from "./fixedAssetService";
+export * as depreciationEngineService from "./depreciationEngineService";

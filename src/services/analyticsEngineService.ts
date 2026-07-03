@@ -203,3 +203,47 @@ export function calculateFinancialInsights(query: DashboardQuery): Promise<Finan
     }),
   );
 }
+
+export function generateAssetDistribution(query: DashboardQuery): Promise<AssetCategoryCount[]> {
+  return apiRequest(
+    `/api/financial/analytics/fixed-assets/distribution?fy=${query.fiscalYear}`,
+    () => [
+      { name: "Building", count: 348, percentage: 28, cost: 8020000.0, color: "#0A3C75" },
+      { name: "Machinery", count: 298, percentage: 24, cost: 6880000.0, color: "#336B9F" },
+      { name: "IT Equipment", count: 224, percentage: 18, cost: 5160000.0, color: "#729FC9" },
+      { name: "Vehicles", count: 149, percentage: 12, cost: 3440000.0, color: "#B2C9DF" },
+      { name: "Furniture", count: 100, percentage: 8, cost: 2290000.0, color: "#E2D9C5" },
+      { name: "Others", count: 126, percentage: 10, cost: 2850000.0, color: "#F59E0B" },
+    ],
+  );
+}
+
+export function generateDepreciationTrend(
+  query: DashboardQuery,
+): Promise<{ month: string; depreciation: number }[]> {
+  return apiRequest(
+    `/api/financial/analytics/fixed-assets/depreciation-trend?fy=${query.fiscalYear}`,
+    () => [
+      { month: "Apr '24", depreciation: 680000.0 },
+      { month: "May '24", depreciation: 750000.0 },
+      { month: "Jun '24", depreciation: 780000.0 },
+      { month: "Jul '24", depreciation: 890000.0 },
+      { month: "Aug '24", depreciation: 1100000.0 },
+      { month: "Sep '24", depreciation: 980000.0 },
+      { month: "Oct '24", depreciation: 1200000.0 },
+      { month: "Mar '25", depreciation: 1300000.0 },
+    ],
+  );
+}
+
+export function calculateTopAssets(
+  query: DashboardQuery,
+): Promise<{ name: string; netBookValue: number }[]> {
+  return apiRequest(`/api/financial/analytics/fixed-assets/top?fy=${query.fiscalYear}`, () => [
+    { name: "Office Building", netBookValue: 6800000.0 },
+    { name: "Plant & Machinery - Line 1", netBookValue: 2975000.0 },
+    { name: "Computer Equipment", netBookValue: 192500.0 },
+    { name: "Office Renovation", netBookValue: 176000.0 },
+    { name: "Generator Set", netBookValue: 162500.0 },
+  ]);
+}
