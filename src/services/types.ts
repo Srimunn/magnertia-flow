@@ -844,3 +844,123 @@ export type BudgetComparisonReport = {
     difference: number;
   }[];
 };
+
+// ---------------------------------------------------------------------------
+// Financial Reporting module
+// ---------------------------------------------------------------------------
+
+export type ReportCategory =
+  | "Financial Statements"
+  | "Management Reports"
+  | "Cash Flow Reports"
+  | "Budget Reports"
+  | "Tax Reports"
+  | "Custom Reports";
+
+export type ReportRecord = {
+  id: string;
+  name: string;
+  description: string;
+  category: ReportCategory;
+  type: "Standard" | "Custom";
+  lastModified: string;
+  lastModifiedBy: string;
+  isFavorite: boolean;
+};
+
+export type ReportFilters = {
+  search: string;
+  category: "All Reports" | ReportCategory;
+  type: "All" | "Standard" | "Custom";
+  dateRange: string;
+  fromDate: string;
+  toDate: string;
+  companyId: string;
+};
+
+export type ReportScheduleRecord = {
+  id: string;
+  reportId: string;
+  reportName: string;
+  frequency: "Daily" | "Weekly" | "Monthly";
+  format: "PDF" | "XLSX" | "CSV";
+  recipients: string;
+  status: "Active" | "Paused";
+  nextRun: string;
+};
+
+export type ReportShareRecord = {
+  id: string;
+  reportId: string;
+  reportName: string;
+  sharedWith: string;
+  dateShared: string;
+  accessLevel: "View" | "Edit";
+};
+
+export type RecentReportActivity = {
+  id: string;
+  reportName: string;
+  activity: string;
+  performedBy: string;
+  timestamp: string;
+};
+
+export type FinancialPerformancePoint = {
+  month: string;
+  revenue: number;
+  grossProfit: number;
+  netIncome: number;
+};
+
+export type ReportCategoryCount = {
+  name: string;
+  count: number;
+  percentage: number;
+  color: string;
+};
+
+export type FinancialReportingKpis = {
+  totalRevenue: number;
+  totalRevenueDelta: number;
+  grossProfit: number;
+  grossProfitDelta: number;
+  netIncome: number;
+  netIncomeDelta: number;
+  totalAssets: number;
+  totalAssetsDelta: number;
+  totalLiabilities: number;
+  totalLiabilitiesDelta: number;
+};
+
+export type FinancialReportingDashboardData = {
+  kpis: FinancialReportingKpis;
+  reports: ReportRecord[];
+  trend: FinancialPerformancePoint[];
+  categoryDistribution: ReportCategoryCount[];
+  activities: RecentReportActivity[];
+  scheduled: ReportScheduleRecord[];
+  shared: ReportShareRecord[];
+};
+
+export type NewReportInput = {
+  name: string;
+  description: string;
+  category: ReportCategory;
+  type: "Standard" | "Custom";
+  templateId?: string;
+};
+
+export type NewReportScheduleInput = {
+  reportId: string;
+  frequency: ReportScheduleRecord["frequency"];
+  format: ReportScheduleRecord["format"];
+  recipients: string;
+};
+
+export type NewReportShareInput = {
+  reportId: string;
+  sharedWith: string;
+  accessLevel: ReportShareRecord["accessLevel"];
+  message?: string;
+};

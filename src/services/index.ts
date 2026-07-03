@@ -8,6 +8,7 @@ export {
   loadCashBankDashboard,
   loadFixedAssetsDashboard,
   loadBudgetingDashboard,
+  loadFinancialReportingDashboard,
 } from "./financialManagementService";
 export * as authenticationService from "./authenticationService";
 export * as transactionService from "./transactionService";
@@ -29,3 +30,6 @@ export * as depreciationEngineService from "./depreciationEngineService";
 export * as budgetService from "./budgetService";
 export * as departmentService from "./departmentService";
 export * as costCenterService from "./costCenterService";
+export * as reportManagementService from "./reportManagementService";
+export * as reportSchedulerService from "./reportSchedulerService";
+export * as reportSharingService from "./reportSharingService";

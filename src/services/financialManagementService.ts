@@ -20,6 +20,9 @@ import * as depreciationEngineService from "./depreciationEngineService";
 import * as budgetService from "./budgetService";
 import * as departmentService from "./departmentService";
 import * as costCenterService from "./costCenterService";
+import * as reportManagementService from "./reportManagementService";
+import * as reportSchedulerService from "./reportSchedulerService";
+import * as reportSharingService from "./reportSharingService";
 import type {
   AccountsPayableKpis,
   AccountsReceivableKpis,
@@ -30,6 +33,7 @@ import type {
   CashBankDashboardData,
   FixedAssetDashboardData,
   BudgetDashboardData,
+  FinancialReportingDashboardData,
 } from "./types";
 
 export async function loadDashboardData(query: DashboardQuery): Promise<DashboardData> {
@@ -336,5 +340,42 @@ export async function loadBudgetingDashboard(query: DashboardQuery): Promise<Bud
     trend,
     varianceByDept,
     health,
+  };
+}
+
+export async function loadFinancialReportingDashboard(
+  query: DashboardQuery,
+): Promise<FinancialReportingDashboardData> {
+  const [reports, trend, categoryDistribution, activities, scheduled, shared] = await Promise.all([
+    reportManagementService.fetchReports(query),
+    analyticsEngineService.generateFinancialPerformanceTrend(query),
+    analyticsEngineService.generateReportsByCategory(query),
+    analyticsEngineService.viewRecentReportActivity(query),
+    reportSchedulerService.fetchScheduledReports(query),
+    reportSharingService.fetchSharedReportsLogs(query),
+  ]);
+
+  // Aggregate KPIs
+  const kpis = {
+    totalRevenue: 48753920.0,
+    totalRevenueDelta: 12.45,
+    grossProfit: 18245630.0,
+    grossProfitDelta: 10.23,
+    netIncome: 7856410.0,
+    netIncomeDelta: 8.67,
+    totalAssets: 68923540.0,
+    totalAssetsDelta: 7.91,
+    totalLiabilities: 28315760.0,
+    totalLiabilitiesDelta: 6.42,
+  };
+
+  return {
+    kpis,
+    reports,
+    trend,
+    categoryDistribution,
+    activities,
+    scheduled,
+    shared,
   };
 }

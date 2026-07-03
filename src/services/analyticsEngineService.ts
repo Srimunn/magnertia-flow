@@ -294,3 +294,78 @@ export function generateBudgetHealthSummary(query: DashboardQuery): Promise<{
     overBudgetPct: 19.64,
   }));
 }
+
+export function generateFinancialPerformanceTrend(
+  query: DashboardQuery,
+): Promise<{ month: string; revenue: number; grossProfit: number; netIncome: number }[]> {
+  return apiRequest(`/api/financial/analytics/reports/trend?fy=${query.fiscalYear}`, () => [
+    { month: "Apr '24", revenue: 10200000.0, grossProfit: 4500000.0, netIncome: 1800000.0 },
+    { month: "May '24", revenue: 13500000.0, grossProfit: 5800000.0, netIncome: 2400000.0 },
+    { month: "Jun '24", revenue: 18200000.0, grossProfit: 7200000.0, netIncome: 3100000.0 },
+    { month: "Jul '24", revenue: 22800000.0, grossProfit: 8900000.0, netIncome: 3900000.0 },
+    { month: "Aug '24", revenue: 27900000.0, grossProfit: 10800000.0, netIncome: 4800000.0 },
+    { month: "Sep '24", revenue: 32600000.0, grossProfit: 12400000.0, netIncome: 5500000.0 },
+    { month: "Oct '24", revenue: 38400000.0, grossProfit: 14600000.0, netIncome: 6500000.0 },
+    { month: "Mar '25", revenue: 48753920.0, grossProfit: 18245630.0, netIncome: 7856410.0 },
+  ]);
+}
+
+export function generateReportsByCategory(
+  query: DashboardQuery,
+): Promise<{ name: string; count: number; percentage: number; color: string }[]> {
+  return apiRequest(
+    `/api/financial/analytics/reports/category-split?fy=${query.fiscalYear}`,
+    () => [
+      { name: "Financial Statements", count: 9, percentage: 37.5, color: "#4F46E5" },
+      { name: "Management Reports", count: 6, percentage: 25.0, color: "#06B6D4" },
+      { name: "Cash Flow Reports", count: 4, percentage: 16.67, color: "#10B981" },
+      { name: "Budget Reports", count: 3, percentage: 12.5, color: "#F59E0B" },
+      { name: "Tax Reports", count: 2, percentage: 8.33, color: "#EF4444" },
+      { name: "Custom Reports", count: 2, percentage: 8.33, color: "#8B5CF6" },
+    ],
+  );
+}
+
+export function viewRecentReportActivity(
+  query: DashboardQuery,
+): Promise<
+  { id: string; reportName: string; activity: string; performedBy: string; timestamp: string }[]
+> {
+  return apiRequest(`/api/financial/analytics/reports/activities?fy=${query.fiscalYear}`, () => [
+    {
+      id: "ACT-001",
+      reportName: "Balance Sheet",
+      activity: "Generated YTD Balance Sheet",
+      performedBy: "Amit Mehra",
+      timestamp: "May 20, 2025 10:15 AM",
+    },
+    {
+      id: "ACT-002",
+      reportName: "Profit & Loss Statement",
+      activity: "Generated Monthly P&L Statement",
+      performedBy: "Amit Mehra",
+      timestamp: "May 20, 2025 10:15 AM",
+    },
+    {
+      id: "ACT-003",
+      reportName: "Cash Flow Statement",
+      activity: "Scheduled Monthly PDF Delivery",
+      performedBy: "Neha Sharma",
+      timestamp: "May 19, 2025 04:30 PM",
+    },
+    {
+      id: "ACT-004",
+      reportName: "Budget vs Actual Report",
+      activity: "Exported XLSX spreadsheet",
+      performedBy: "Rohit Verma",
+      timestamp: "May 18, 2025 11:20 AM",
+    },
+    {
+      id: "ACT-005",
+      reportName: "Trial Balance",
+      activity: "Viewed HTML report details",
+      performedBy: "Rohit Verma",
+      timestamp: "May 18, 2025 11:20 AM",
+    },
+  ]);
+}
