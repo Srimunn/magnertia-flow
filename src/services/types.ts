@@ -964,3 +964,187 @@ export type NewReportShareInput = {
   accessLevel: ReportShareRecord["accessLevel"];
   message?: string;
 };
+
+// ---------------------------------------------------------------------------
+// Tax Management module
+// ---------------------------------------------------------------------------
+
+export type TaxObligation = {
+  id: string;
+  taxType: string;
+  jurisdiction: string;
+  period: string;
+  dueDate: string;
+  taxLiability: number;
+  paid: number;
+  payable: number;
+  status: "Paid" | "Partially Paid" | "Due Soon" | "Pending";
+};
+
+export type TaxFiling = {
+  id: string;
+  taxType: string;
+  period: string;
+  filingDate: string;
+  filedBy: string;
+  returnAmount: number;
+  acknowledgementNo: string;
+  status: "Filed" | "Draft" | "Rejected";
+};
+
+export type TaxPayment = {
+  id: string;
+  taxType: string;
+  period: string;
+  paymentDate: string;
+  bankAccount: string;
+  amount: number;
+  transactionRef: string;
+  status: "Cleared" | "Processing";
+};
+
+export type TaxAuthority = {
+  id: string;
+  name: string;
+  jurisdiction: string;
+  taxType: string;
+  portalUrl: string;
+  contactPerson: string;
+  email: string;
+};
+
+export type TaxReconciliation = {
+  id: string;
+  taxType: string;
+  period: string;
+  returnsLiability: number;
+  booksLiability: number;
+  difference: number;
+  status: "Reconciled" | "Mismatched";
+};
+
+export type TaxFilters = {
+  search: string;
+  taxType: string;
+  status: string;
+  dueDate: string;
+};
+
+export type ComplianceSummary = {
+  rate: number;
+  onTrackCount: number;
+  dueSoonCount: number;
+  overdueCount: number;
+};
+
+export type TaxKpis = {
+  totalTaxLiability: number;
+  totalTaxLiabilityDelta: number;
+  totalTaxPaid: number;
+  totalTaxPaidDelta: number;
+  taxPayable: number;
+  upcomingFilings: number;
+  complianceStatus: number;
+};
+
+export type TaxDashboardData = {
+  kpis: TaxKpis;
+  obligations: TaxObligation[];
+  trend: { month: string; liability: number; paid: number }[];
+  typeDistribution: { name: string; value: number; percentage: number; color: string }[];
+  upcomingFilingsList: { name: string; period: string; dueDate: string; daysLeft: number }[];
+  compliance: ComplianceSummary;
+  filings: TaxFiling[];
+  payments: TaxPayment[];
+  authorities: TaxAuthority[];
+  reconciliations: TaxReconciliation[];
+};
+
+export type NewFilingInput = {
+  taxType: string;
+  period: string;
+  returnAmount: number;
+  filedBy: string;
+};
+
+export type NewTaxPaymentInput = {
+  taxType: string;
+  period: string;
+  bankAccount: string;
+  amount: number;
+  transactionRef: string;
+};
+
+// ---------------------------------------------------------------------------
+// Cost Center module
+// ---------------------------------------------------------------------------
+
+export type CostCenterRecord = {
+  id: string;
+  code: string;
+  name: string;
+  department: string;
+  manager: string;
+  budget: number;
+  actual: number;
+  variance: number;
+  utilization: number;
+  status: "Active" | "Inactive";
+  type: "Operational" | "Support" | "Administrative" | "Revenue-Generating";
+  parentId?: string;
+};
+
+export type NewCostCenterInput = {
+  code: string;
+  name: string;
+  department: string;
+  manager: string;
+  budget: number;
+  type: "Operational" | "Support" | "Administrative" | "Revenue-Generating";
+  parentId?: string;
+};
+
+export type NewSubCostCenterInput = {
+  parentId: string;
+  code: string;
+  name: string;
+  department: string;
+  manager: string;
+  budget: number;
+};
+
+export type CostCenterVarianceRecord = {
+  costCenter: string;
+  variance: number;
+  percentage: number;
+};
+
+export type CostCenterKpis = {
+  totalCostCenters: number;
+  totalBudget: number;
+  totalActual: number;
+  variance: number;
+  variancePercentage: number;
+  budgetUtilization: number;
+};
+
+export type CostCenterHierarchyNode = {
+  name: string;
+  children?: CostCenterHierarchyNode[];
+};
+
+export type CostCenterDashboardData = {
+  kpis: CostCenterKpis;
+  costCenters: CostCenterRecord[];
+  trend: { month: string; budget: number; actual: number; forecast: number }[];
+  departmentSplits: { name: string; value: number; percentage: number; color: string }[];
+  topVariances: CostCenterVarianceRecord[];
+  hierarchy: CostCenterHierarchyNode;
+  summary: {
+    totalBudget: number;
+    totalActual: number;
+    totalCommitments: number;
+    totalForecast: number;
+    budgetUtilization: number;
+  };
+};

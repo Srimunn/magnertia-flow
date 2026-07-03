@@ -23,6 +23,10 @@ import * as costCenterService from "./costCenterService";
 import * as reportManagementService from "./reportManagementService";
 import * as reportSchedulerService from "./reportSchedulerService";
 import * as reportSharingService from "./reportSharingService";
+import * as taxManagementService from "./taxManagementService";
+import * as taxFilingService from "./taxFilingService";
+import * as taxPaymentService from "./taxPaymentService";
+import * as complianceService from "./complianceService";
 import type {
   AccountsPayableKpis,
   AccountsReceivableKpis,
@@ -34,6 +38,8 @@ import type {
   FixedAssetDashboardData,
   BudgetDashboardData,
   FinancialReportingDashboardData,
+  TaxDashboardData,
+  CostCenterDashboardData,
 } from "./types";
 
 export async function loadDashboardData(query: DashboardQuery): Promise<DashboardData> {
@@ -377,5 +383,114 @@ export async function loadFinancialReportingDashboard(
     activities,
     scheduled,
     shared,
+  };
+}
+
+export async function loadTaxManagementDashboard(query: DashboardQuery): Promise<TaxDashboardData> {
+  const [
+    obligations,
+    filings,
+    payments,
+    authorities,
+    reconciliations,
+    trend,
+    typeDistribution,
+    compliance,
+  ] = await Promise.all([
+    taxManagementService.fetchObligations(query),
+    taxFilingService.fetchFilings(query),
+    taxPaymentService.fetchPayments(query),
+    taxManagementService.fetchTaxAuthorities(query),
+    complianceService.fetchReconciliations(query),
+    analyticsEngineService.generateTaxLiabilityTrend(query),
+    analyticsEngineService.generateTaxLiabilityByType(query),
+    complianceService.fetchComplianceOverview(query),
+  ]);
+
+  // Aggregate KPIs
+  const kpis = {
+    totalTaxLiability: 12845760.0,
+    totalTaxLiabilityDelta: 8.62,
+    totalTaxPaid: 9456230.0,
+    totalTaxPaidDelta: 7.15,
+    taxPayable: 3389530.0,
+    upcomingFilings: 7,
+    complianceStatus: 98,
+  };
+
+  const upcomingFilingsList = [
+    { name: "GST Return - GSTR 3B", period: "Apr 2025", dueDate: "May 20, 2025", daysLeft: 5 },
+    {
+      name: "TDS Return - June 2024",
+      period: "Apr - Jun 2025",
+      dueDate: "May 31, 2025",
+      daysLeft: 16,
+    },
+    { name: "VAT Return - May 2025", period: "May 2025", dueDate: "May 25, 2025", daysLeft: 10 },
+    {
+      name: "Professional Tax - Q1 FY25-26",
+      period: "Apr - Jun 2025",
+      dueDate: "Jun 15, 2025",
+      daysLeft: 31,
+    },
+    {
+      name: "Income Tax Advance Tax - Q1",
+      period: "Apr - Jun 2025",
+      dueDate: "Jun 30, 2025",
+      daysLeft: 46,
+    },
+  ];
+
+  return {
+    kpis,
+    obligations,
+    trend,
+    typeDistribution,
+    upcomingFilingsList,
+    compliance,
+    filings,
+    payments,
+    authorities,
+    reconciliations,
+  };
+}
+
+export async function loadCostCentersDashboard(
+  query: DashboardQuery,
+): Promise<CostCenterDashboardData> {
+  const [costCenters, trend, departmentSplits, topVariances, hierarchy] = await Promise.all([
+    costCenterService.fetchCostCenters(query),
+    analyticsEngineService.generateCostCenterTrend(query),
+    analyticsEngineService.generateCostCenterDepartmentSplit(query),
+    analyticsEngineService.generateCostCenterVariances(query),
+    analyticsEngineService.generateCostCenterHierarchyModel(query),
+  ]);
+
+  // Aggregate KPIs
+  const kpis = {
+    totalCostCenters: 56,
+    totalBudget: 24850000.0,
+    totalActual: 18765430.0,
+    variance: 6084570.0,
+    variancePercentage: 24.49,
+    budgetUtilization: 75.54,
+  };
+
+  const summary = {
+    totalBudget: 24850000.0,
+    totalActual: 18765430.0,
+    totalCommitments: 1980250.0,
+    totalForecast: 23120680.0,
+    budgetUtilization: 75.54,
+  };
+
+  return {
+    kpis,
+    costCenters,
+    trend,
+    departmentSplits,
+    topVariances,
+    hierarchy,
+    summary,
   };
 }

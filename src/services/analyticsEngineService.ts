@@ -33,6 +33,7 @@ import type {
   TopCustomer,
   TopVendor,
   TrendPoint,
+  CostCenterHierarchyNode,
 } from "./types";
 
 export function calculateCurrentRatio(query: DashboardQuery): Promise<CurrentRatio> {
@@ -368,4 +369,128 @@ export function viewRecentReportActivity(
       timestamp: "May 18, 2025 11:20 AM",
     },
   ]);
+}
+
+export function generateTaxLiabilityByType(
+  query: DashboardQuery,
+): Promise<{ name: string; value: number; percentage: number; color: string }[]> {
+  return apiRequest(`/api/financial/analytics/tax/type-split?fy=${query.fiscalYear}`, () => [
+    { name: "GST", value: 4250000, percentage: 33.09, color: "#4F46E5" },
+    { name: "Income Tax", value: 2900000, percentage: 22.56, color: "#3B82F6" },
+    { name: "TDS - Salaries", value: 1250000, percentage: 9.73, color: "#10B981" },
+    { name: "TDS - Contractors", value: 680000, percentage: 5.29, color: "#EF4444" },
+    { name: "VAT", value: 980000, percentage: 7.63, color: "#F59E0B" },
+    { name: "Others", value: 2785760, percentage: 21.7, color: "#8B5CF6" },
+  ]);
+}
+
+export function generateTaxLiabilityTrend(
+  query: DashboardQuery,
+): Promise<{ month: string; liability: number; paid: number }[]> {
+  return apiRequest(`/api/financial/analytics/tax/trend?fy=${query.fiscalYear}`, () => [
+    { month: "Apr '24", liability: 800000, paid: 600000 },
+    { month: "May '24", liability: 1100000, paid: 800000 },
+    { month: "Jun '24", liability: 1500000, paid: 1100000 },
+    { month: "Jul '24", liability: 1200000, paid: 950000 },
+    { month: "Aug '24", liability: 1650000, paid: 1300000 },
+    { month: "Sep '24", liability: 1350000, paid: 1100000 },
+    { month: "Oct '24", liability: 1800000, paid: 1400000 },
+    { month: "Mar '25", liability: 12845760, paid: 9456230 },
+  ]);
+}
+
+export function generateTaxPaymentSummary(
+  query: DashboardQuery,
+): Promise<{ liabilityYTD: number; paidYTD: number; payable: number; effectiveRate: number }> {
+  return apiRequest(`/api/financial/analytics/tax/payment-summary?fy=${query.fiscalYear}`, () => ({
+    liabilityYTD: 12845760.0,
+    paidYTD: 9456230.0,
+    payable: 3389530.0,
+    effectiveRate: 24.36,
+  }));
+}
+
+export function generateCostCenterTrend(
+  query: DashboardQuery,
+): Promise<{ month: string; budget: number; actual: number; forecast: number }[]> {
+  return apiRequest(`/api/financial/analytics/cost-centers/trend?fy=${query.fiscalYear}`, () => [
+    { month: "Apr '24", budget: 1500000, actual: 1100000, forecast: 1400000 },
+    { month: "May '24", budget: 1600000, actual: 1250000, forecast: 1500000 },
+    { month: "Jun '24", budget: 1800000, actual: 1400000, forecast: 1700000 },
+    { month: "Jul '24", budget: 1750000, actual: 1350000, forecast: 1650000 },
+    { month: "Aug '24", budget: 1900000, actual: 1500000, forecast: 1850000 },
+    { month: "Sep '24", budget: 1850000, actual: 1450000, forecast: 1800000 },
+    { month: "Oct '24", budget: 2000000, actual: 1600000, forecast: 1950000 },
+    { month: "Nov '24", budget: 2100000, actual: 1700000, forecast: 2050000 },
+    { month: "Dec '24", budget: 2200000, actual: 1850000, forecast: 2150000 },
+    { month: "Jan '25", budget: 2300000, actual: 1950000, forecast: 2250000 },
+    { month: "Feb '25", budget: 2400000, actual: 2050000, forecast: 2350000 },
+    { month: "Mar '25", budget: 2500000, actual: 2200000, forecast: 2450000 },
+  ]);
+}
+
+export function generateCostCenterDepartmentSplit(
+  query: DashboardQuery,
+): Promise<{ name: string; value: number; percentage: number; color: string }[]> {
+  return apiRequest(
+    `/api/financial/analytics/cost-centers/dept-split?fy=${query.fiscalYear}`,
+    () => [
+      { name: "Sales", value: 4983320, percentage: 26.55, color: "#4F46E5" },
+      { name: "IT", value: 3085600, percentage: 16.45, color: "#3B82F6" },
+      { name: "Finance", value: 2320750, percentage: 12.37, color: "#10B981" },
+      { name: "R&D", value: 2145790, percentage: 11.43, color: "#EF4444" },
+      { name: "Marketing", value: 2010200, percentage: 10.72, color: "#F59E0B" },
+      { name: "Others", value: 4219770, percentage: 22.48, color: "#8B5CF6" },
+    ],
+  );
+}
+
+export function generateCostCenterVariances(
+  query: DashboardQuery,
+): Promise<{ costCenter: string; variance: number; percentage: number }[]> {
+  return apiRequest(
+    `/api/financial/analytics/cost-centers/variances?fy=${query.fiscalYear}`,
+    () => [
+      { costCenter: "Sales", variance: 1516680.0, percentage: 23.33 },
+      { costCenter: "Finance", variance: 779250.0, percentage: 25.14 },
+      { costCenter: "Marketing", variance: 739800.0, percentage: 26.9 },
+      { costCenter: "IT", variance: 1164400.0, percentage: 27.4 },
+      { costCenter: "HR", variance: 665340.0, percentage: 44.36 },
+      { costCenter: "Administration", variance: 454570.0, percentage: 20.2 },
+      { costCenter: "Production", variance: 343000.0, percentage: 34.3 },
+      { costCenter: "R&D", variance: 854210.0, percentage: 28.47 },
+    ],
+  );
+}
+
+export function generateCostCenterHierarchyModel(
+  query: DashboardQuery,
+): Promise<CostCenterHierarchyNode> {
+  return apiRequest(
+    `/api/financial/analytics/cost-centers/hierarchy?fy=${query.fiscalYear}`,
+    () => ({
+      name: "Total Organization",
+      children: [
+        {
+          name: "Administration",
+          children: [{ name: "HR" }, { name: "R&D" }, { name: "Accounts" }, { name: "Legal" }],
+        },
+        {
+          name: "Finance",
+        },
+        {
+          name: "Operations",
+          children: [{ name: "Production" }, { name: "Supply Chain" }],
+        },
+        {
+          name: "Commercial",
+          children: [{ name: "Sales" }, { name: "Marketing" }],
+        },
+        {
+          name: "Technology",
+          children: [{ name: "IT" }, { name: "R&D" }],
+        },
+      ],
+    }),
+  );
 }

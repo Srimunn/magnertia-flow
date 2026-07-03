@@ -9,6 +9,8 @@ export {
   loadFixedAssetsDashboard,
   loadBudgetingDashboard,
   loadFinancialReportingDashboard,
+  loadTaxManagementDashboard,
+  loadCostCentersDashboard,
 } from "./financialManagementService";
 export * as authenticationService from "./authenticationService";
 export * as transactionService from "./transactionService";
@@ -33,3 +35,7 @@ export * as costCenterService from "./costCenterService";
 export * as reportManagementService from "./reportManagementService";
 export * as reportSchedulerService from "./reportSchedulerService";
 export * as reportSharingService from "./reportSharingService";
+export * as taxManagementService from "./taxManagementService";
+export * as taxFilingService from "./taxFilingService";
+export * as taxPaymentService from "./taxPaymentService";
+export * as complianceService from "./complianceService";

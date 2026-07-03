@@ -3410,6 +3410,417 @@ export const mockReportsCategoryDistribution = [
   { name: "Custom Reports", count: 2, percentage: 8.33, color: "#8B5CF6" },
 ];
 
+/* -------- Tax Management Mock Data -------- */
+
+export const mockTaxObligations = [
+  {
+    id: "TX-001",
+    taxType: "GST",
+    jurisdiction: "India (GSTN)",
+    period: "Apr - Mar 2024-25",
+    dueDate: "May 20, 2025",
+    taxLiability: 4250000.0,
+    paid: 3750000.0,
+    payable: 500000.0,
+    status: "Partially Paid" as const,
+  },
+  {
+    id: "TX-002",
+    taxType: "TDS - Salaries",
+    jurisdiction: "India (Income Tax)",
+    period: "Apr - Mar 2024-25",
+    dueDate: "May 31, 2025",
+    taxLiability: 1250000.0,
+    paid: 1250000.0,
+    payable: 0.0,
+    status: "Paid" as const,
+  },
+  {
+    id: "TX-003",
+    taxType: "TDS - Contractors",
+    jurisdiction: "India (Income Tax)",
+    period: "Apr - Mar 2024-25",
+    dueDate: "May 31, 2025",
+    taxLiability: 680000.0,
+    paid: 480000.0,
+    payable: 200000.0,
+    status: "Due Soon" as const,
+  },
+  {
+    id: "TX-004",
+    taxType: "Income Tax",
+    jurisdiction: "India (Income Tax)",
+    period: "Apr - Mar 2024-25",
+    dueDate: "Jun 30, 2025",
+    taxLiability: 2900000.0,
+    paid: 1450000.0,
+    payable: 1450000.0,
+    status: "Pending" as const,
+  },
+  {
+    id: "TX-005",
+    taxType: "Professional Tax",
+    jurisdiction: "Maharashtra State",
+    period: "Apr - Mar 2024-25",
+    dueDate: "Jun 15, 2025",
+    taxLiability: 1200000.0,
+    paid: 1200000.0,
+    payable: 0.0,
+    status: "Paid" as const,
+  },
+  {
+    id: "TX-006",
+    taxType: "VAT",
+    jurisdiction: "Karnataka State",
+    period: "Apr - Mar 2024-25",
+    dueDate: "May 25, 2025",
+    taxLiability: 980000.0,
+    paid: 780000.0,
+    payable: 200000.0,
+    status: "Due Soon" as const,
+  },
+  {
+    id: "TX-007",
+    taxType: "Customs Duty",
+    jurisdiction: "India (Customs)",
+    period: "Apr - Mar 2024-25",
+    dueDate: "May 18, 2025",
+    taxLiability: 430000.0,
+    paid: 430000.0,
+    payable: 0.0,
+    status: "Paid" as const,
+  },
+  {
+    id: "TX-008",
+    taxType: "Service Tax (Legacy)",
+    jurisdiction: "India (CBIC)",
+    period: "Apr - Mar 2024-25",
+    dueDate: "Jul 15, 2025",
+    taxLiability: 235760.0,
+    paid: 0.0,
+    payable: 235760.0,
+    status: "Pending" as const,
+  },
+];
+
+export const mockTaxFilings = [
+  {
+    id: "FIL-001",
+    taxType: "GST - GSTR 3B",
+    period: "Apr 2025",
+    filingDate: "2025-05-18",
+    filedBy: "Amit Mehra",
+    returnAmount: 500000.0,
+    acknowledgementNo: "ACK-GST-202505-8831",
+    status: "Filed" as const,
+  },
+  {
+    id: "FIL-002",
+    taxType: "TDS - 24Q (Salaries)",
+    period: "Q4 FY24-25",
+    filingDate: "2025-05-10",
+    filedBy: "Neha Sharma",
+    returnAmount: 1250000.0,
+    acknowledgementNo: "ACK-TDS-Q4-81923",
+    status: "Filed" as const,
+  },
+  {
+    id: "FIL-003",
+    taxType: "VAT Return",
+    period: "Apr 2025",
+    filingDate: "2025-05-15",
+    filedBy: "Amit Mehra",
+    returnAmount: 200000.0,
+    acknowledgementNo: "ACK-VAT-KAR-2025-018",
+    status: "Filed" as const,
+  },
+];
+
+export const mockTaxPayments = [
+  {
+    id: "PAY-001",
+    taxType: "GST liability payout",
+    period: "Apr 2025",
+    paymentDate: "2025-05-18",
+    bankAccount: "HDFC Operating A/c",
+    amount: 3750000.0,
+    transactionRef: "TXN-GST-9923-HD",
+    status: "Cleared" as const,
+  },
+  {
+    id: "PAY-002",
+    taxType: "TDS Quarter 4 payment",
+    period: "Q4 FY24-25",
+    paymentDate: "2025-05-10",
+    bankAccount: "SBI Treasury A/c",
+    amount: 1250000.0,
+    transactionRef: "TXN-TDS-Q4-SBI-31",
+    status: "Cleared" as const,
+  },
+];
+
+export const mockTaxAuthorities = [
+  {
+    id: "AUTH-001",
+    name: "Goods and Services Tax Network (GSTN)",
+    jurisdiction: "India",
+    taxType: "Indirect Tax (GST)",
+    portalUrl: "https://www.gst.gov.in",
+    contactPerson: "Rajesh Kumar",
+    email: "rajesh.kumar@gstn.gov.in",
+  },
+  {
+    id: "AUTH-002",
+    name: "Income Tax Department",
+    jurisdiction: "India",
+    taxType: "Direct Tax (Income Tax / TDS)",
+    portalUrl: "https://www.incometax.gov.in",
+    contactPerson: "Sunita Deshmukh",
+    email: "sunita.d@incometax.gov.in",
+  },
+];
+
+export const mockTaxReconciliations = [
+  {
+    id: "REC-001",
+    taxType: "GST liability",
+    period: "Apr 2025",
+    returnsLiability: 4250000.0,
+    booksLiability: 4250000.0,
+    difference: 0.0,
+    status: "Reconciled" as const,
+  },
+  {
+    id: "REC-002",
+    taxType: "TDS Contractors",
+    period: "Q4 FY24-25",
+    returnsLiability: 680000.0,
+    booksLiability: 678000.0,
+    difference: 2000.0,
+    status: "Mismatched" as const,
+  },
+];
+
+export const mockTaxTrend = [
+  { month: "Apr '24", liability: 800000, paid: 600000 },
+  { month: "May '24", liability: 1100000, paid: 800000 },
+  { month: "Jun '24", liability: 1500000, paid: 1100000 },
+  { month: "Jul '24", liability: 1200000, paid: 950000 },
+  { month: "Aug '24", liability: 1650000, paid: 1300000 },
+  { month: "Sep '24", liability: 1350000, paid: 1100000 },
+  { month: "Oct '24", liability: 1800000, paid: 1400000 },
+  { month: "Mar '25", liability: 12845760, paid: 9456230 },
+];
+
+export const mockTaxTypeDistribution = [
+  { name: "GST", value: 4250000, percentage: 33.09, color: "#4F46E5" },
+  { name: "Income Tax", value: 2900000, percentage: 22.56, color: "#3B82F6" },
+  { name: "TDS - Salaries", value: 1250000, percentage: 9.73, color: "#10B981" },
+  { name: "TDS - Contractors", value: 680000, percentage: 5.29, color: "#EF4444" },
+  { name: "VAT", value: 980000, percentage: 7.63, color: "#F59E0B" },
+  { name: "Others", value: 2785760, percentage: 21.7, color: "#8B5CF6" },
+];
+
+export const mockComplianceSummary = {
+  rate: 98,
+  onTrackCount: 59,
+  dueSoonCount: 1,
+  overdueCount: 0,
+};
+
+/* -------- Cost Centers Mock Data -------- */
+
+export const mockCostCenters = [
+  {
+    id: "CC-001",
+    code: "ADM-001",
+    name: "Administration",
+    department: "Administration",
+    manager: "Amit Mehra",
+    budget: 2250000.0,
+    actual: 1795430.0,
+    variance: 454570.0,
+    utilization: 79.8,
+    status: "Active" as const,
+    type: "Administrative" as const,
+  },
+  {
+    id: "CC-002",
+    code: "FIN-002",
+    name: "Finance",
+    department: "Finance",
+    manager: "Neha Sharma",
+    budget: 3100000.0,
+    actual: 2320750.0,
+    variance: 779250.0,
+    utilization: 74.86,
+    status: "Active" as const,
+    type: "Support" as const,
+  },
+  {
+    id: "CC-003",
+    code: "MKT-003",
+    name: "Marketing",
+    department: "Marketing",
+    manager: "Rohan Verma",
+    budget: 2750000.0,
+    actual: 2010200.0,
+    variance: 739800.0,
+    utilization: 73.1,
+    status: "Active" as const,
+    type: "Support" as const,
+  },
+  {
+    id: "CC-004",
+    code: "SAL-004",
+    name: "Sales",
+    department: "Sales",
+    manager: "Vikram Singh",
+    budget: 6500000.0,
+    actual: 4983320.0,
+    variance: 1516680.0,
+    utilization: 76.67,
+    status: "Active" as const,
+    type: "Revenue-Generating" as const,
+  },
+  {
+    id: "CC-005",
+    code: "IT-005",
+    name: "Information Technology",
+    department: "IT",
+    manager: "Pooja Nair",
+    budget: 4250000.0,
+    actual: 3085600.0,
+    variance: 1164400.0,
+    utilization: 72.6,
+    status: "Active" as const,
+    type: "Support" as const,
+  },
+  {
+    id: "CC-006",
+    code: "HR-006",
+    name: "Human Resources",
+    department: "HR",
+    manager: "Anjali Desai",
+    budget: 1500000.0,
+    actual: 834660.0,
+    variance: 665340.0,
+    utilization: 55.64,
+    status: "Active" as const,
+    type: "Support" as const,
+  },
+  {
+    id: "CC-007",
+    code: "RND-007",
+    name: "Research & Development",
+    department: "R&D",
+    manager: "Sanjay Iyer",
+    budget: 3000000.0,
+    actual: 2145790.0,
+    variance: 854210.0,
+    utilization: 71.53,
+    status: "Active" as const,
+    type: "Operational" as const,
+  },
+  {
+    id: "CC-008",
+    code: "PRD-008",
+    name: "Production",
+    department: "Operations",
+    manager: "Manish Gupta",
+    budget: 1000000.0,
+    actual: 657000.0,
+    variance: 343000.0,
+    utilization: 65.7,
+    status: "Active" as const,
+    type: "Operational" as const,
+  },
+];
+
+export const mockCostCenterTrend = [
+  { month: "Apr '24", budget: 1500000, actual: 1100000, forecast: 1400000 },
+  { month: "May '24", budget: 1600000, actual: 1250000, forecast: 1500000 },
+  { month: "Jun '24", budget: 1800000, actual: 1400000, forecast: 1700000 },
+  { month: "Jul '24", budget: 1750000, actual: 1350000, forecast: 1650000 },
+  { month: "Aug '24", budget: 1900000, actual: 1500000, forecast: 1850000 },
+  { month: "Sep '24", budget: 1850000, actual: 1450000, forecast: 1800000 },
+  { month: "Oct '24", budget: 2000000, actual: 1600000, forecast: 1950000 },
+  { month: "Nov '24", budget: 2100000, actual: 1700000, forecast: 2050000 },
+  { month: "Dec '24", budget: 2200000, actual: 1850000, forecast: 2150000 },
+  { month: "Jan '25", budget: 2300000, actual: 1950000, forecast: 2250000 },
+  { month: "Feb '25", budget: 2400000, actual: 2050000, forecast: 2350000 },
+  { month: "Mar '25", budget: 2500000, actual: 2200000, forecast: 2450000 },
+];
+
+export const mockCostCenterDepartmentSplits = [
+  { name: "Sales", value: 4983320, percentage: 26.55, color: "#4F46E5" },
+  { name: "IT", value: 3085600, percentage: 16.45, color: "#3B82F6" },
+  { name: "Finance", value: 2320750, percentage: 12.37, color: "#10B981" },
+  { name: "R&D", value: 2145790, percentage: 11.43, color: "#EF4444" },
+  { name: "Marketing", value: 2010200, percentage: 10.72, color: "#F59E0B" },
+  { name: "Others", value: 4219770, percentage: 22.48, color: "#8B5CF6" },
+];
+
+export const mockCostCenterVariances = [
+  { costCenter: "Sales", variance: 1516680.0, percentage: 23.33 },
+  { costCenter: "Finance", variance: 779250.0, percentage: 25.14 },
+  { costCenter: "Marketing", variance: 739800.0, percentage: 26.9 },
+  { costCenter: "IT", variance: 1164400.0, percentage: 27.4 },
+  { costCenter: "HR", variance: 665340.0, percentage: 44.36 },
+  { costCenter: "Administration", variance: 454570.0, percentage: 20.2 },
+  { costCenter: "Production", variance: 343000.0, percentage: 34.3 },
+  { costCenter: "R&D", variance: 854210.0, percentage: 28.47 },
+];
+
+export const mockCostCenterHierarchy = {
+  name: "Total Organization",
+  children: [
+    {
+      name: "Administration",
+      children: [{ name: "HR" }, { name: "R&D" }, { name: "Accounts" }, { name: "Legal" }],
+    },
+    {
+      name: "Finance",
+    },
+    {
+      name: "Operations",
+      children: [{ name: "Production" }, { name: "Supply Chain" }],
+    },
+    {
+      name: "Commercial",
+      children: [{ name: "Sales" }, { name: "Marketing" }],
+    },
+    {
+      name: "Technology",
+      children: [{ name: "IT" }, { name: "R&D" }],
+    },
+  ],
+};
+
+export const mockCostCenterCommitments = [
+  {
+    id: "COM-001",
+    costCenter: "IT-005",
+    description: "AWS Annual Subscription Contract",
+    commitmentAmount: 1200000.0,
+    status: "Active",
+  },
+  {
+    id: "COM-002",
+    costCenter: "MKT-003",
+    description: "Q3 Advertising Campaign PO",
+    commitmentAmount: 350000.0,
+    status: "Active",
+  },
+  {
+    id: "COM-003",
+    costCenter: "ADM-001",
+    description: "Office Maintenance Agreement",
+    commitmentAmount: 430250.0,
+    status: "Active",
+  },
+];
+
 export function formatCurrency(n: number, compact = false) {
   const sign = n < 0 ? "-" : "";
   const v = Math.abs(n);
