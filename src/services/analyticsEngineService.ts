@@ -598,3 +598,36 @@ export function generateConsolidatedProfitTrend(
     ],
   );
 }
+
+export function generateActivityTrend(
+  query: DashboardQuery,
+): Promise<{ month: string; value: number }[]> {
+  return apiRequest(`/api/financial/analytics/audit/activity-trend?fy=${query.fiscalYear}`, () => [
+    { month: "Apr '24", value: 500 },
+    { month: "May '24", value: 950 },
+    { month: "Jun '24", value: 850 },
+    { month: "Jul '24", value: 780 },
+    { month: "Aug '24", value: 980 },
+    { month: "Sep '24", value: 1100 },
+    { month: "Oct '24", value: 1050 },
+    { month: "Nov '24", value: 1250 },
+    { month: "Dec '24", value: 1450 },
+    { month: "Jan '25", value: 1350 },
+    { month: "Feb '25", value: 1600 },
+    { month: "Mar '25", value: 1550 },
+  ]);
+}
+
+export function generateActivitiesByModule(
+  query: DashboardQuery,
+): Promise<{ name: string; value: number; percentage: number; color: string }[]> {
+  return apiRequest(`/api/financial/analytics/audit/module-splits?fy=${query.fiscalYear}`, () => [
+    { name: "General Ledger", value: 2845, percentage: 22.82, color: "#4F46E5" },
+    { name: "Accounts Payable", value: 2150, percentage: 17.25, color: "#3B82F6" },
+    { name: "Accounts Receivable", value: 1988, percentage: 15.95, color: "#10B981" },
+    { name: "Cash & Bank", value: 1512, percentage: 12.14, color: "#F59E0B" },
+    { name: "Budgeting", value: 1124, percentage: 9.02, color: "#EF4444" },
+    { name: "Tax Management", value: 824, percentage: 6.62, color: "#8B5CF6" },
+    { name: "Others", value: 2015, percentage: 16.2, color: "#6B7280" },
+  ]);
+}

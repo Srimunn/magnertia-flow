@@ -42,9 +42,11 @@ import type {
   CostCenterDashboardData,
   ProfitabilityDashboardData,
   ConsolidationDashboardData,
+  AuditDashboardData,
 } from "./types";
 import * as profitabilityService from "./profitabilityService";
 import * as consolidationService from "./consolidationService";
+import * as auditTrailService from "./auditTrailService";
 
 export async function loadDashboardData(query: DashboardQuery): Promise<DashboardData> {
   // -- [KPI Summary] --
@@ -614,5 +616,40 @@ export async function loadConsolidationDashboard(
     profitTrend,
     mappings,
     validations,
+  };
+}
+
+export async function loadAuditTrailDashboard(query: DashboardQuery): Promise<AuditDashboardData> {
+  const [logs, activityTrend, moduleSplits, sensitiveChanges, securityEvents, configLogs] =
+    await Promise.all([
+      auditTrailService.fetchAuditLogs(query),
+      analyticsEngineService.generateActivityTrend(query),
+      analyticsEngineService.generateActivitiesByModule(query),
+      auditTrailService.fetchRecentSensitiveChanges(query),
+      auditTrailService.fetchSecurityEvents(query),
+      auditTrailService.fetchConfigurationLogs(query),
+    ]);
+
+  const kpis = {
+    totalActivitiesYTD: 12458,
+    totalActivitiesYTDDelta: 18.75,
+    uniqueUsersCount: 156,
+    uniqueUsersDelta: 7.32,
+    successfulActivitiesCount: 11982,
+    successfulActivitiesDelta: 18.4,
+    failedActivitiesCount: 476,
+    failedActivitiesDelta: -5.12,
+    sensitiveChangesCount: 2184,
+    sensitiveChangesDelta: 11.63,
+  };
+
+  return {
+    kpis,
+    logs,
+    activityTrend,
+    moduleSplits,
+    sensitiveChanges,
+    securityEvents,
+    configLogs,
   };
 }

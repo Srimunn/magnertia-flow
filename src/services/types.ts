@@ -1297,3 +1297,74 @@ export type ConsolidationDashboardData = {
   mappings: AccountMappingRecord[];
   validations: EntityValidationResult[];
 };
+
+// ---------------------------------------------------------------------------
+// Audit Trail module
+// ---------------------------------------------------------------------------
+
+export type AuditLogEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  module: string;
+  activityType: "Create" | "Update" | "Delete" | "Approve" | "Run" | "Login" | "Logout" | "Export";
+  description: string;
+  referenceId: string;
+  status: "Success" | "Failed" | "Warning";
+  ipAddress: string;
+  details?: {
+    before?: Record<string, unknown>;
+    after?: Record<string, unknown>;
+    metadata?: Record<string, string>;
+  };
+};
+
+export type SensitiveChangeRecord = {
+  id: string;
+  changeType: string;
+  referenceId: string;
+  timestamp: string;
+  user: string;
+  severity: "Critical" | "High" | "Medium" | "Low";
+  description: string;
+};
+
+export type SecurityEventEntry = {
+  id: string;
+  eventName: string;
+  user: string;
+  timestamp: string;
+  severity: "Critical" | "High" | "Medium" | "Low";
+  status: "Blocked" | "Flagged" | "Resolved";
+  ipAddress: string;
+};
+
+export type ConfigurationLogEntry = {
+  id: string;
+  parameter: string;
+  beforeValue: string;
+  afterValue: string;
+  user: string;
+  timestamp: string;
+};
+
+export type AuditDashboardData = {
+  kpis: {
+    totalActivitiesYTD: number;
+    totalActivitiesYTDDelta: number;
+    uniqueUsersCount: number;
+    uniqueUsersDelta: number;
+    successfulActivitiesCount: number;
+    successfulActivitiesDelta: number;
+    failedActivitiesCount: number;
+    failedActivitiesDelta: number;
+    sensitiveChangesCount: number;
+    sensitiveChangesDelta: number;
+  };
+  logs: AuditLogEntry[];
+  activityTrend: { month: string; value: number }[];
+  moduleSplits: { name: string; value: number; percentage: number; color: string }[];
+  sensitiveChanges: SensitiveChangeRecord[];
+  securityEvents: SecurityEventEntry[];
+  configLogs: ConfigurationLogEntry[];
+};
