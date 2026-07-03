@@ -1223,3 +1223,77 @@ export type ProfitabilityDashboardData = {
   };
   allocationRules: CostAllocationRule[];
 };
+
+// ---------------------------------------------------------------------------
+// Consolidation module
+// ---------------------------------------------------------------------------
+
+export type ConsolidationRecord = {
+  code: string;
+  name: string;
+  revenue: number;
+  expenses: number;
+  operatingProfit: number;
+  netProfit: number;
+  netMargin: number | null;
+  status: "Consolidated" | "Included" | "Eliminated" | "Pending";
+  isEliminationAdjustment?: boolean;
+};
+
+export type IntercompanyTransaction = {
+  fromEntity: string;
+  toEntity: string;
+  amount: number;
+  matched: boolean;
+  ref: string;
+  date: string;
+};
+
+export type ConsolidationTimelineMilestone = {
+  name: string;
+  date: string;
+  status: "Completed" | "Pending" | "Failed";
+};
+
+export type ConsolidationProgressSummary = {
+  dataCollected: string;
+  intercompanyMatching: string;
+  eliminations: string;
+  consolidation: string;
+  percentage: number;
+};
+
+export type AccountMappingRecord = {
+  id: string;
+  sourceAccount: string;
+  targetAccount: string;
+  entity: string;
+};
+
+export type EntityValidationResult = {
+  id: string;
+  checkName: string;
+  status: "Passed" | "Warning" | "Failed";
+  message: string;
+};
+
+export type ConsolidationDashboardData = {
+  kpis: {
+    totalEntities: number;
+    consolidatedRevenueYTD: number;
+    consolidatedRevenueYTDDelta: number;
+    consolidatedNetProfitYTD: number;
+    consolidatedNetProfitYTDDelta: number;
+    eliminationEntriesYTD: number;
+    eliminationEntriesCount: number;
+    status: string;
+  };
+  summaryData: ConsolidationRecord[];
+  progress: ConsolidationProgressSummary;
+  timeline: ConsolidationTimelineMilestone[];
+  intercompanyTrend: { month: string; value: number }[];
+  topIntercompany: IntercompanyTransaction[];
+  profitTrend: { month: string; netProfit: number; netMargin: number }[];
+  mappings: AccountMappingRecord[];
+  validations: EntityValidationResult[];
+};

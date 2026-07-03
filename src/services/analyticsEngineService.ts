@@ -559,3 +559,42 @@ export function generateTopPerformers(query: DashboardQuery): Promise<TopPerform
     ],
   );
 }
+
+export function generateIntercompanyBalancesTrend(
+  query: DashboardQuery,
+): Promise<{ month: string; value: number }[]> {
+  return apiRequest(
+    `/api/financial/analytics/consolidation/intercompany-trend?fy=${query.fiscalYear}`,
+    () => [
+      { month: "Apr '24", value: 1950000 },
+      { month: "Jun '24", value: 1750000 },
+      { month: "Aug '24", value: 1550000 },
+      { month: "Oct '24", value: 1050000 },
+      { month: "Dec '24", value: 650000 },
+      { month: "Feb '25", value: 350000 },
+      { month: "Mar '25", value: 250000 },
+    ],
+  );
+}
+
+export function generateConsolidatedProfitTrend(
+  query: DashboardQuery,
+): Promise<{ month: string; netProfit: number; netMargin: number }[]> {
+  return apiRequest(
+    `/api/financial/analytics/consolidation/profit-trend?fy=${query.fiscalYear}`,
+    () => [
+      { month: "Apr '24", netProfit: 4500000, netMargin: 15.2 },
+      { month: "May '24", netProfit: 4700000, netMargin: 15.6 },
+      { month: "Jun '24", netProfit: 5100000, netMargin: 15.4 },
+      { month: "Jul '24", netProfit: 4900000, netMargin: 15.0 },
+      { month: "Aug '24", netProfit: 5400000, netMargin: 15.9 },
+      { month: "Sep '24", netProfit: 6200000, netMargin: 15.5 },
+      { month: "Oct '24", netProfit: 6600000, netMargin: 14.8 },
+      { month: "Nov '24", netProfit: 7100000, netMargin: 15.3 },
+      { month: "Dec '24", netProfit: 7900000, netMargin: 15.6 },
+      { month: "Jan '25", netProfit: 8100000, netMargin: 15.5 },
+      { month: "Feb '25", netProfit: 8600000, netMargin: 15.8 },
+      { month: "Mar '25", netProfit: 10100000, netMargin: 16.4 },
+    ],
+  );
+}

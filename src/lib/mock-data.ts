@@ -3998,6 +3998,213 @@ export const mockDrilldownTransactions = [
   },
 ];
 
+/* -------- Consolidation Mock Data -------- */
+
+export const mockConsolidationOverview = [
+  {
+    code: "GP-001",
+    name: "Magnertia Group (Parent)",
+    revenue: 48753920.0,
+    expenses: 39652510.0,
+    operatingProfit: 9101410.0,
+    netProfit: 7856410.0,
+    netMargin: 16.11,
+    status: "Consolidated" as const,
+  },
+  {
+    code: "SUB-001",
+    name: "Magnertia Technologies Inc.",
+    revenue: 18245630.0,
+    expenses: 14852300.0,
+    operatingProfit: 3393330.0,
+    netProfit: 2945210.0,
+    netMargin: 16.12,
+    status: "Included" as const,
+  },
+  {
+    code: "SUB-002",
+    name: "Magnertia Solutions LLC",
+    revenue: 12876450.0,
+    expenses: 10289760.0,
+    operatingProfit: 2586690.0,
+    netProfit: 2118340.0,
+    netMargin: 16.48,
+    status: "Included" as const,
+  },
+  {
+    code: "SUB-003",
+    name: "Magnertia Europe GmbH",
+    revenue: 8765210.0,
+    expenses: 7112340.0,
+    operatingProfit: 1652870.0,
+    netProfit: 1248300.0,
+    netMargin: 14.25,
+    status: "Included" as const,
+  },
+  {
+    code: "SUB-004",
+    name: "Magnertia India Pvt. Ltd.",
+    revenue: 5432670.0,
+    expenses: 4168950.0,
+    operatingProfit: 1263720.0,
+    netProfit: 1034210.0,
+    netMargin: 19.04,
+    status: "Included" as const,
+  },
+  {
+    code: "SUB-005",
+    name: "Magnertia Canada Inc.",
+    revenue: 2156780.0,
+    expenses: 1789560.0,
+    operatingProfit: 367220.0,
+    netProfit: 289750.0,
+    netMargin: 13.44,
+    status: "Included" as const,
+  },
+  {
+    code: "ELIM-001",
+    name: "- Elimination Adjustments",
+    revenue: -1245780.0,
+    expenses: -1245780.0,
+    operatingProfit: 0.0,
+    netProfit: -1245780.0,
+    netMargin: null,
+    status: "Eliminated" as const,
+    isEliminationAdjustment: true,
+  },
+];
+
+export const mockConsolidationProgress = {
+  dataCollected: "12/12",
+  intercompanyMatching: "12/12",
+  eliminations: "156/156",
+  consolidation: "12/12",
+  percentage: 100,
+};
+
+export const mockConsolidationTimeline = [
+  { name: "Data Collection", date: "Apr 1, 2025", status: "Completed" as const },
+  { name: "Intercompany Matching", date: "Apr 8, 2025", status: "Completed" as const },
+  { name: "Elimination Entries", date: "Apr 10, 2025", status: "Completed" as const },
+  { name: "Consolidation", date: "Apr 12, 2025", status: "Completed" as const },
+];
+
+export const mockIntercompanyTrend = [
+  { month: "Apr '24", value: 1950000 },
+  { month: "Jun '24", value: 1750000 },
+  { month: "Aug '24", value: 1550000 },
+  { month: "Oct '24", value: 1050000 },
+  { month: "Dec '24", value: 650000 },
+  { month: "Feb '25", value: 350000 },
+  { month: "Mar '25", value: 250000 },
+];
+
+export const mockTopIntercompanyTransactions = [
+  {
+    fromEntity: "Magnertia Technologies Inc.",
+    toEntity: "Magnertia Solutions LLC",
+    amount: 425630.0,
+    matched: true,
+    ref: "IC-TRX-101",
+    date: "2025-05-18",
+  },
+  {
+    fromEntity: "Magnertia Europe GmbH",
+    toEntity: "Magnertia India Pvt. Ltd.",
+    amount: 318750.0,
+    matched: true,
+    ref: "IC-TRX-102",
+    date: "2025-05-17",
+  },
+  {
+    fromEntity: "Magnertia Solutions LLC",
+    toEntity: "Magnertia Canada Inc.",
+    amount: 287940.0,
+    matched: true,
+    ref: "IC-TRX-103",
+    date: "2025-05-15",
+  },
+  {
+    fromEntity: "Magnertia India Pvt. Ltd.",
+    toEntity: "Magnertia Technologies Inc.",
+    amount: 213450.0,
+    matched: true,
+    ref: "IC-TRX-104",
+    date: "2025-05-12",
+  },
+  {
+    fromEntity: "Magnertia Canada Inc.",
+    toEntity: "Magnertia Europe GmbH",
+    amount: 147000.0,
+    matched: true,
+    ref: "IC-TRX-105",
+    date: "2025-05-10",
+  },
+];
+
+export const mockConsolidatedProfitTrend = [
+  { month: "Apr '24", netProfit: 4500000, netMargin: 15.2 },
+  { month: "May '24", netProfit: 4700000, netMargin: 15.6 },
+  { month: "Jun '24", netProfit: 5100000, netMargin: 15.4 },
+  { month: "Jul '24", netProfit: 4900000, netMargin: 15.0 },
+  { month: "Aug '24", netProfit: 5400000, netMargin: 15.9 },
+  { month: "Sep '24", netProfit: 6200000, netMargin: 15.5 },
+  { month: "Oct '24", netProfit: 6600000, netMargin: 14.8 },
+  { month: "Nov '24", netProfit: 7100000, netMargin: 15.3 },
+  { month: "Dec '24", netProfit: 7900000, netMargin: 15.6 },
+  { month: "Jan '25", netProfit: 8100000, netMargin: 15.5 },
+  { month: "Feb '25", netProfit: 8600000, netMargin: 15.8 },
+  { month: "Mar '25", netProfit: 10100000, netMargin: 16.4 },
+];
+
+export const mockConsolidationMappings = [
+  {
+    id: "MAP-001",
+    sourceAccount: "1100 - Accounts Receivable (Sub)",
+    targetAccount: "1105 - Consolidated Accounts Receivable",
+    entity: "Technologies Inc.",
+  },
+  {
+    id: "MAP-002",
+    sourceAccount: "2100 - Accounts Payable (Sub)",
+    targetAccount: "2105 - Consolidated Accounts Payable",
+    entity: "Solutions LLC",
+  },
+  {
+    id: "MAP-003",
+    sourceAccount: "4100 - Direct Sales Revenue",
+    targetAccount: "4000 - Consolidated Revenue",
+    entity: "Europe GmbH",
+  },
+];
+
+export const mockConsolidationValidations = [
+  {
+    id: "VAL-001",
+    checkName: "Entity Ledger Balance Matching",
+    status: "Passed" as const,
+    message: "All 12 entity trial balances successfully matched to local ledger balances.",
+  },
+  {
+    id: "VAL-002",
+    checkName: "Intercompany Matching Difference Check",
+    status: "Passed" as const,
+    message: "Out-of-balance difference is exactly $0 (fully matched).",
+  },
+  {
+    id: "VAL-003",
+    checkName: "Fiscal Period Configuration Check",
+    status: "Passed" as const,
+    message: "All entities mapped to standard fiscal year (Apr 1 - Mar 31).",
+  },
+  {
+    id: "VAL-004",
+    checkName: "Foreign Exchange Rates Mapping Check",
+    status: "Passed" as const,
+    message: "All foreign exchange conversions (EUR, INR, CAD to USD) map cleanly.",
+  },
+];
+
 export function formatCurrency(n: number, compact = false) {
   const sign = n < 0 ? "-" : "";
   const v = Math.abs(n);

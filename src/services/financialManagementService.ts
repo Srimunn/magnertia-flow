@@ -41,8 +41,10 @@ import type {
   TaxDashboardData,
   CostCenterDashboardData,
   ProfitabilityDashboardData,
+  ConsolidationDashboardData,
 } from "./types";
 import * as profitabilityService from "./profitabilityService";
+import * as consolidationService from "./consolidationService";
 
 export async function loadDashboardData(query: DashboardQuery): Promise<DashboardData> {
   // -- [KPI Summary] --
@@ -546,5 +548,71 @@ export async function loadProfitabilityDashboard(
     topPerformers,
     summary,
     allocationRules,
+  };
+}
+
+export async function loadConsolidationDashboard(
+  query: DashboardQuery,
+): Promise<ConsolidationDashboardData> {
+  const [summaryData, timeline, intercompanyTrend, topIntercompany, profitTrend, validations] =
+    await Promise.all([
+      consolidationService.fetchConsolidationSummary(query),
+      consolidationService.fetchTimelineMilestones(query),
+      analyticsEngineService.generateIntercompanyBalancesTrend(query),
+      consolidationService.fetchIntercompanyTransactions(query),
+      analyticsEngineService.generateConsolidatedProfitTrend(query),
+      consolidationService.validateEntityData(query),
+    ]);
+
+  const kpis = {
+    totalEntities: 12,
+    consolidatedRevenueYTD: 48753920.0,
+    consolidatedRevenueYTDDelta: 12.45,
+    consolidatedNetProfitYTD: 7856410.0,
+    consolidatedNetProfitYTDDelta: 8.67,
+    eliminationEntriesYTD: 1245780.0,
+    eliminationEntriesCount: 156,
+    status: "On Track",
+  };
+
+  const progress = {
+    dataCollected: "12/12",
+    intercompanyMatching: "12/12",
+    eliminations: "156/156",
+    consolidation: "12/12",
+    percentage: 100,
+  };
+
+  const mappings = [
+    {
+      id: "MAP-001",
+      sourceAccount: "1100 - Accounts Receivable (Sub)",
+      targetAccount: "1105 - Consolidated Accounts Receivable",
+      entity: "Technologies Inc.",
+    },
+    {
+      id: "MAP-002",
+      sourceAccount: "2100 - Accounts Payable (Sub)",
+      targetAccount: "2105 - Consolidated Accounts Payable",
+      entity: "Solutions LLC",
+    },
+    {
+      id: "MAP-003",
+      sourceAccount: "4100 - Direct Sales Revenue",
+      targetAccount: "4000 - Consolidated Revenue",
+      entity: "Europe GmbH",
+    },
+  ];
+
+  return {
+    kpis,
+    summaryData,
+    progress,
+    timeline,
+    intercompanyTrend,
+    topIntercompany,
+    profitTrend,
+    mappings,
+    validations,
   };
 }
