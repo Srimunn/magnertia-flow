@@ -247,3 +247,50 @@ export function calculateTopAssets(
     { name: "Generator Set", netBookValue: 162500.0 },
   ]);
 }
+
+export function generateBudgetVsActualTrend(
+  query: DashboardQuery,
+): Promise<{ month: string; budget: number; actual: number; forecast: number }[]> {
+  return apiRequest(`/api/financial/analytics/budget/trend?fy=${query.fiscalYear}`, () => [
+    { month: "Apr '24", budget: 10000000, actual: 8000000, forecast: 10000000 },
+    { month: "May '24", budget: 11500000, actual: 9500000, forecast: 11500000 },
+    { month: "Jun '24", budget: 13000000, actual: 11200000, forecast: 12800000 },
+    { month: "Jul '24", budget: 14500000, actual: 12500000, forecast: 14200000 },
+    { month: "Aug '24", budget: 16000000, actual: 13900000, forecast: 15600000 },
+    { month: "Sep '24", budget: 18200000, actual: 14800000, forecast: 17200000 },
+    { month: "Oct '24", budget: 20500000, actual: 16200000, forecast: 19100000 },
+    { month: "Mar '25", budget: 24850000, actual: 18765430, forecast: 21980000 },
+  ]);
+}
+
+export function generateVarianceAnalysis(
+  query: DashboardQuery,
+): Promise<{ name: string; variance: number }[]> {
+  return apiRequest(`/api/financial/analytics/budget/variance?fy=${query.fiscalYear}`, () => [
+    { name: "Sales & Marketing", variance: 1374750.0 },
+    { name: "Operations", variance: 1747570.0 },
+    { name: "IT", variance: 1008120.0 },
+    { name: "Finance", variance: 495700.0 },
+    { name: "HR", variance: 585440.0 },
+    { name: "R&D", variance: 723460.0 },
+    { name: "Administration", variance: 299530.0 },
+  ]);
+}
+
+export function generateBudgetHealthSummary(query: DashboardQuery): Promise<{
+  onTrackCount: number;
+  onTrackPct: number;
+  atRiskCount: number;
+  atRiskPct: number;
+  overBudgetCount: number;
+  overBudgetPct: number;
+}> {
+  return apiRequest(`/api/financial/analytics/budget/health?fy=${query.fiscalYear}`, () => ({
+    onTrackCount: 28,
+    onTrackPct: 50.0,
+    atRiskCount: 17,
+    atRiskPct: 30.36,
+    overBudgetCount: 11,
+    overBudgetPct: 19.64,
+  }));
+}

@@ -2844,6 +2844,200 @@ export const mockAssetTransfers = [
   },
 ];
 
+/* -------- Budgeting Mock Data -------- */
+
+export const mockDepartmentBudgets = [
+  {
+    id: "DB-001",
+    department: "Sales & Marketing",
+    budget: 6250000.0,
+    actual: 4875250.0,
+    variance: 1374750.0,
+    variancePct: 22.0,
+    utilization: 78.0,
+  },
+  {
+    id: "DB-002",
+    department: "Operations",
+    budget: 7850000.0,
+    actual: 6102430.0,
+    variance: 1747570.0,
+    variancePct: 22.26,
+    utilization: 77.72,
+  },
+  {
+    id: "DB-003",
+    department: "Information Technology",
+    budget: 3250000.0,
+    actual: 2241880.0,
+    variance: 1008120.0,
+    variancePct: 31.02,
+    utilization: 68.98,
+  },
+  {
+    id: "DB-004",
+    department: "Finance",
+    budget: 2150000.0,
+    actual: 1654300.0,
+    variance: 495700.0,
+    variancePct: 23.06,
+    utilization: 76.95,
+  },
+  {
+    id: "DB-005",
+    department: "Human Resources",
+    budget: 1850000.0,
+    actual: 1264560.0,
+    variance: 585440.0,
+    variancePct: 31.65,
+    utilization: 68.35,
+  },
+  {
+    id: "DB-006",
+    department: "Research & Development",
+    budget: 2750000.0,
+    actual: 2026540.0,
+    variance: 723460.0,
+    variancePct: 26.31,
+    utilization: 73.69,
+  },
+  {
+    id: "DB-007",
+    department: "Administration",
+    budget: 900000.0,
+    actual: 600470.0,
+    variance: 299530.0,
+    variancePct: 33.28,
+    utilization: 66.72,
+  },
+];
+
+export const mockCostCenterBudgets = [
+  {
+    id: "CCB-001",
+    costCenter: "Sales HQ",
+    code: "CC-101",
+    budget: 4500000.0,
+    actual: 3600000.0,
+    variance: 900000.0,
+    variancePct: 20.0,
+    utilization: 80.0,
+  },
+  {
+    id: "CCB-002",
+    costCenter: "R&D Software",
+    code: "CC-202",
+    budget: 2000000.0,
+    actual: 1450000.0,
+    variance: 550000.0,
+    variancePct: 27.5,
+    utilization: 72.5,
+  },
+  {
+    id: "CCB-003",
+    costCenter: "Production Line 1",
+    code: "CC-303",
+    budget: 5000000.0,
+    actual: 4100000.0,
+    variance: 900000.0,
+    variancePct: 18.0,
+    utilization: 82.0,
+  },
+  {
+    id: "CCB-004",
+    costCenter: "Corporate Finance",
+    code: "CC-404",
+    budget: 1500000.0,
+    actual: 1100000.0,
+    variance: 400000.0,
+    variancePct: 26.67,
+    utilization: 73.33,
+  },
+];
+
+export const mockProjectBudgets = [
+  {
+    id: "PRJ-001",
+    project: "Cloud Migration ERP",
+    manager: "Neha Sharma",
+    budget: 1200000.0,
+    actual: 950000.0,
+    variance: 250000.0,
+    utilization: 79.17,
+    status: "On Track" as const,
+  },
+  {
+    id: "PRJ-002",
+    project: "Warehouse IoT Integration",
+    manager: "Neha Kapoor",
+    budget: 650000.0,
+    actual: 620000.0,
+    variance: 30000.0,
+    utilization: 95.38,
+    status: "At Risk" as const,
+  },
+  {
+    id: "PRJ-003",
+    project: "Executive Office Redesign",
+    manager: "Amit Mehra",
+    budget: 150000.0,
+    actual: 185000.0,
+    variance: -35000.0,
+    utilization: 123.33,
+    status: "Over Budget" as const,
+  },
+];
+
+export const mockBudgetVersions = [
+  {
+    id: "BV-001",
+    name: "FY 2024-25 Annual Budget",
+    type: "Original" as const,
+    status: "Active" as const,
+    totalBudget: 24850000.0,
+    createdBy: "Amit Mehra",
+    lastUpdated: "May 20, 2025 10:30 AM",
+  },
+  {
+    id: "BV-002",
+    name: "FY 2024-25 Budget - Revision 1",
+    type: "Revision" as const,
+    status: "Draft" as const,
+    totalBudget: 25350000.0,
+    createdBy: "Neha Sharma",
+    lastUpdated: "May 10, 2025 03:15 PM",
+  },
+  {
+    id: "BV-003",
+    name: "FY 2024-25 Budget - Forecast",
+    type: "Forecast" as const,
+    status: "Active" as const,
+    totalBudget: 25980000.0,
+    createdBy: "Amit Mehra",
+    lastUpdated: "May 20, 2025 10:30 AM",
+  },
+];
+
+export const mockBudgetTrend = [
+  { month: "Apr '24", budget: 10000000, actual: 8000000, forecast: 10000000 },
+  { month: "May '24", budget: 11500000, actual: 9500000, forecast: 11500000 },
+  { month: "Jun '24", budget: 13000000, actual: 11200000, forecast: 12800000 },
+  { month: "Jul '24", budget: 14500000, actual: 12500000, forecast: 14200000 },
+  { month: "Aug '24", budget: 16000000, actual: 13900000, forecast: 15600000 },
+  { month: "Sep '24", budget: 18200000, actual: 14800000, forecast: 17200000 },
+  { month: "Oct '24", budget: 20500000, actual: 16200000, forecast: 19100000 },
+  { month: "Mar '25", budget: 24850000, actual: 18765430, forecast: 21980000 },
+];
+
+export const mockBudgetHealth = {
+  onTrackCount: 28,
+  onTrackPct: 50.0,
+  atRiskCount: 17,
+  atRiskPct: 30.36,
+  overBudgetCount: 11,
+  overBudgetPct: 19.64,
+};
+
 export function formatCurrency(n: number, compact = false) {
   const sign = n < 0 ? "-" : "";
   const v = Math.abs(n);

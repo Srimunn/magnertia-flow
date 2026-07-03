@@ -17,6 +17,9 @@ import * as bankAccountService from "./bankAccountService";
 import * as bankReconciliatorService from "./bankReconciliatorService";
 import * as fixedAssetService from "./fixedAssetService";
 import * as depreciationEngineService from "./depreciationEngineService";
+import * as budgetService from "./budgetService";
+import * as departmentService from "./departmentService";
+import * as costCenterService from "./costCenterService";
 import type {
   AccountsPayableKpis,
   AccountsReceivableKpis,
@@ -26,6 +29,7 @@ import type {
   TransactionsKpis,
   CashBankDashboardData,
   FixedAssetDashboardData,
+  BudgetDashboardData,
 } from "./types";
 
 export async function loadDashboardData(query: DashboardQuery): Promise<DashboardData> {
@@ -293,5 +297,44 @@ export async function loadFixedAssetsDashboard(
     depreciationTrend,
     topAssets,
     summaryStats,
+  };
+}
+
+export async function loadBudgetingDashboard(query: DashboardQuery): Promise<BudgetDashboardData> {
+  const [departments, costCenters, projects, versions, trend, varianceByDept, health] =
+    await Promise.all([
+      departmentService.fetchDepartmentBudgets(query),
+      costCenterService.fetchCostCenterBudgets(query),
+      budgetService.fetchProjectBudgets(query),
+      budgetService.fetchBudgetVersions(query),
+      analyticsEngineService.generateBudgetVsActualTrend(query),
+      analyticsEngineService.generateVarianceAnalysis(query),
+      analyticsEngineService.generateBudgetHealthSummary(query),
+    ]);
+
+  // Aggregate KPIs
+  const totalBudget = 24850000.0;
+  const totalActual = 18765430.0;
+  const budgetUtilization = 75.54;
+  const variance = 6084570.0;
+  const activeBudgetsCount = 56;
+
+  const kpis = {
+    totalBudget,
+    totalActual,
+    budgetUtilization,
+    variance,
+    activeBudgetsCount,
+  };
+
+  return {
+    kpis,
+    departments,
+    costCenters,
+    projects,
+    versions,
+    trend,
+    varianceByDept,
+    health,
   };
 }

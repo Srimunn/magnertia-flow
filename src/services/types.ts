@@ -741,3 +741,106 @@ export type AssetTransferRecord = {
   destinationLocation: string;
   authorizedBy: string;
 };
+
+// ---------------------------------------------------------------------------
+// Budgeting module
+// ---------------------------------------------------------------------------
+
+export type DepartmentBudget = {
+  id: string;
+  department: string;
+  budget: number;
+  actual: number;
+  variance: number;
+  variancePct: number;
+  utilization: number;
+};
+
+export type CostCenterBudget = {
+  id: string;
+  costCenter: string;
+  code: string;
+  budget: number;
+  actual: number;
+  variance: number;
+  variancePct: number;
+  utilization: number;
+};
+
+export type ProjectBudget = {
+  id: string;
+  project: string;
+  manager: string;
+  budget: number;
+  actual: number;
+  variance: number;
+  utilization: number;
+  status: "On Track" | "At Risk" | "Over Budget";
+};
+
+export type BudgetVersion = {
+  id: string;
+  name: string;
+  type: "Original" | "Revision" | "Forecast";
+  status: "Active" | "Draft" | "Archived";
+  totalBudget: number;
+  createdBy: string;
+  lastUpdated: string;
+};
+
+export type BudgetKpis = {
+  totalBudget: number;
+  totalActual: number;
+  budgetUtilization: number;
+  variance: number;
+  activeBudgetsCount: number;
+};
+
+export type BudgetHealthSummary = {
+  onTrackCount: number;
+  onTrackPct: number;
+  atRiskCount: number;
+  atRiskPct: number;
+  overBudgetCount: number;
+  overBudgetPct: number;
+};
+
+export type BudgetDashboardData = {
+  kpis: BudgetKpis;
+  departments: DepartmentBudget[];
+  costCenters: CostCenterBudget[];
+  projects: ProjectBudget[];
+  versions: BudgetVersion[];
+  trend: { month: string; budget: number; actual: number; forecast: number }[];
+  varianceByDept: { name: string; variance: number }[];
+  health: BudgetHealthSummary;
+};
+
+export type NewBudgetInput = {
+  name: string;
+  totalBudget: number;
+  type: BudgetVersion["type"];
+  status: BudgetVersion["status"];
+  createdBy: string;
+};
+
+export type NewBudgetVersionInput = {
+  parentVersionId: string;
+  name: string;
+  type: BudgetVersion["type"];
+  totalBudget: number;
+  createdBy: string;
+};
+
+export type BudgetComparisonReport = {
+  version1: BudgetVersion;
+  version2: BudgetVersion;
+  totalDifference: number;
+  differencePct: number;
+  departmentDifferences: {
+    department: string;
+    v1Amount: number;
+    v2Amount: number;
+    difference: number;
+  }[];
+};
