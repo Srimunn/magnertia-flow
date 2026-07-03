@@ -3821,6 +3821,183 @@ export const mockCostCenterCommitments = [
   },
 ];
 
+/* -------- Profitability Analysis Mock Data -------- */
+
+export const mockProfitabilityProducts = [
+  {
+    code: "PRD-001",
+    name: "Industrial Pumps",
+    revenue: 12845300.0,
+    cogs: 7214650.0,
+    grossProfit: 5630650.0,
+    grossMargin: 43.85,
+    netProfit: 2480230.0,
+    netMargin: 19.32,
+  },
+  {
+    code: "PRD-002",
+    name: "Valves & Fittings",
+    revenue: 9765200.0,
+    cogs: 5552180.0,
+    grossProfit: 4213020.0,
+    grossMargin: 43.17,
+    netProfit: 1890450.0,
+    netMargin: 19.37,
+  },
+  {
+    code: "PRD-003",
+    name: "Compressors",
+    revenue: 8920750.0,
+    cogs: 5031440.0,
+    grossProfit: 3889310.0,
+    grossMargin: 43.59,
+    netProfit: 1652890.0,
+    netMargin: 18.53,
+  },
+  {
+    code: "PRD-004",
+    name: "Heat Exchangers",
+    revenue: 6812430.0,
+    cogs: 3808690.0,
+    grossProfit: 3003740.0,
+    grossMargin: 44.06,
+    netProfit: 1171260.0,
+    netMargin: 17.19,
+  },
+  {
+    code: "PRD-005",
+    name: "Industrial Motors",
+    revenue: 4956320.0,
+    cogs: 2792410.0,
+    grossProfit: 2163910.0,
+    grossMargin: 43.64,
+    netProfit: 912130.0,
+    netMargin: 18.4,
+  },
+  {
+    code: "PRD-006",
+    name: "Control Systems",
+    revenue: 3256780.0,
+    cogs: 1788170.0,
+    grossProfit: 1468610.0,
+    grossMargin: 45.05,
+    netProfit: 642790.0,
+    netMargin: 19.73,
+  },
+  {
+    code: "PRD-007",
+    name: "Spare Parts",
+    revenue: 2197140.0,
+    cogs: 1102980.0,
+    grossProfit: 1094160.0,
+    grossMargin: 49.81,
+    netProfit: 512470.0,
+    netMargin: 23.33,
+  },
+];
+
+export const mockProfitabilityCustomers = [
+  {
+    code: "CUST-001",
+    name: "Apex Global Solutions",
+    revenue: 8500000.0,
+    cogs: 4800000.0,
+    grossProfit: 3700000.0,
+    grossMargin: 43.53,
+    netProfit: 1550000.0,
+    netMargin: 18.24,
+  },
+  {
+    code: "CUST-002",
+    name: "Zenith Corp",
+    revenue: 7200000.0,
+    cogs: 4100000.0,
+    grossProfit: 3100000.0,
+    grossMargin: 43.06,
+    netProfit: 1320000.0,
+    netMargin: 18.33,
+  },
+  {
+    code: "CUST-003",
+    name: "Prime Industries",
+    revenue: 6100000.0,
+    cogs: 3400000.0,
+    grossProfit: 2700000.0,
+    grossMargin: 44.26,
+    netProfit: 1150000.0,
+    netMargin: 18.85,
+  },
+];
+
+export const mockProfitabilityRegions = [
+  { region: "North America", netMargin: 18.91 },
+  { region: "Europe", netMargin: 17.42 },
+  { region: "Asia Pacific", netMargin: 16.83 },
+  { region: "Middle East", netMargin: 15.27 },
+  { region: "South America", netMargin: 13.58 },
+  { region: "Africa", netMargin: 12.11 },
+];
+
+export const mockProfitabilitySalesChannels = [
+  { name: "Direct Sales", value: 4320000, percentage: 20.34, color: "#4F46E5" },
+  { name: "Distributors", value: 2910000, percentage: 17.89, color: "#3B82F6" },
+  { name: "Online Sales", value: 1630000, percentage: 18.17, color: "#10B981" },
+  { name: "Retail Partners", value: 980000, percentage: 16.25, color: "#F59E0B" },
+  { name: "Others", value: 480000, percentage: 15.32, color: "#8B5CF6" },
+];
+
+export const mockProfitabilityTrend = [
+  { month: "Apr '24", netProfit: 400000, netMargin: 14.5 },
+  { month: "May '24", netProfit: 420000, netMargin: 15.1 },
+  { month: "Jun '24", netProfit: 480000, netMargin: 14.8 },
+  { month: "Jul '24", netProfit: 450000, netMargin: 14.2 },
+  { month: "Aug '24", netProfit: 520000, netMargin: 15.3 },
+  { month: "Sep '24", netProfit: 600000, netMargin: 14.9 },
+  { month: "Oct '24", netProfit: 650000, netMargin: 14.1 },
+  { month: "Nov '24", netProfit: 700000, netMargin: 14.7 },
+  { month: "Dec '24", netProfit: 780000, netMargin: 15.0 },
+  { month: "Jan '25", netProfit: 800000, netMargin: 14.9 },
+  { month: "Feb '25", netProfit: 850000, netMargin: 15.2 },
+  { month: "Mar '25", netProfit: 1000000, netMargin: 15.8 },
+];
+
+export const mockProfitabilityAllocationRules = [
+  { id: "AR-001", costCenter: "IT-005", allocationKey: "Headcount" as const, weight: 45 },
+  { id: "AR-002", costCenter: "HR-006", allocationKey: "Headcount" as const, weight: 25 },
+  { id: "AR-003", costCenter: "ADM-001", allocationKey: "Square Footage" as const, weight: 30 },
+];
+
+export const mockDrilldownTransactions = [
+  {
+    date: "2025-05-18",
+    ref: "TXN-REV-0912",
+    description: "Industrial Pumps shipment to Apex Global",
+    amount: 45000.0,
+    type: "Revenue",
+  },
+  {
+    date: "2025-05-17",
+    ref: "TXN-EXP-0842",
+    description: "Direct labor assembly allocation",
+    amount: -15000.0,
+    type: "COGS",
+  },
+  {
+    date: "2025-05-15",
+    ref: "TXN-REV-0811",
+    description: "Spare Parts emergency kit order",
+    amount: 12500.0,
+    type: "Revenue",
+  },
+  {
+    date: "2025-05-12",
+    ref: "TXN-EXP-0618",
+    description: "Freight charges allocation",
+    amount: -4200.0,
+    type: "COGS",
+  },
+];
+
 export function formatCurrency(n: number, compact = false) {
   const sign = n < 0 ? "-" : "";
   const v = Math.abs(n);

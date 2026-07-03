@@ -40,7 +40,9 @@ import type {
   FinancialReportingDashboardData,
   TaxDashboardData,
   CostCenterDashboardData,
+  ProfitabilityDashboardData,
 } from "./types";
+import * as profitabilityService from "./profitabilityService";
 
 export async function loadDashboardData(query: DashboardQuery): Promise<DashboardData> {
   // -- [KPI Summary] --
@@ -492,5 +494,57 @@ export async function loadCostCentersDashboard(
     topVariances,
     hierarchy,
     summary,
+  };
+}
+
+export async function loadProfitabilityDashboard(
+  query: DashboardQuery,
+): Promise<ProfitabilityDashboardData> {
+  const [dimensionData, trend, regional, salesChannels, topPerformers] = await Promise.all([
+    profitabilityService.fetchProfitabilityByDimension(query, "Product"),
+    analyticsEngineService.generateProfitabilityTrend(query),
+    analyticsEngineService.generateRegionalProfitability(query),
+    analyticsEngineService.generateSalesChannelProfitability(query),
+    analyticsEngineService.generateTopPerformers(query),
+  ]);
+
+  // Aggregate KPIs
+  const kpis = {
+    revenueYTD: 48753920.0,
+    revenueYTDDelta: 12.45,
+    grossProfitYTD: 18245630.0,
+    grossProfitYTDDelta: 10.23,
+    grossMarginYTD: 37.4,
+    grossMarginYTDDelta: 2.14,
+    netProfitYTD: 7856410.0,
+    netProfitYTDDelta: 8.67,
+    netMarginYTD: 16.11,
+    netMarginYTDDelta: -0.54,
+  };
+
+  const summary = {
+    revenue: 48753920.0,
+    cogs: 27290520.0,
+    grossProfit: 21463400.0,
+    netProfit: 9262220.0,
+    netMargin: 18.99,
+  };
+
+  // Get initial allocation rules
+  const allocationRules = [
+    { id: "AR-001", costCenter: "IT-005", allocationKey: "Headcount" as const, weight: 45 },
+    { id: "AR-002", costCenter: "HR-006", allocationKey: "Headcount" as const, weight: 25 },
+    { id: "AR-003", costCenter: "ADM-001", allocationKey: "Square Footage" as const, weight: 30 },
+  ];
+
+  return {
+    kpis,
+    dimensionData,
+    trend,
+    regional,
+    salesChannels,
+    topPerformers,
+    summary,
+    allocationRules,
   };
 }

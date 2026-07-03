@@ -1148,3 +1148,78 @@ export type CostCenterDashboardData = {
     budgetUtilization: number;
   };
 };
+
+// ---------------------------------------------------------------------------
+// Profitability Analysis module
+// ---------------------------------------------------------------------------
+
+export type ProfitabilityRecord = {
+  code: string;
+  name: string;
+  revenue: number;
+  cogs: number;
+  grossProfit: number;
+  grossMargin: number;
+  netProfit: number;
+  netMargin: number;
+};
+
+export type ProfitabilityTrendPoint = {
+  month: string;
+  netProfit: number;
+  netMargin: number;
+};
+
+export type RegionalProfitabilityPoint = {
+  region: string;
+  netMargin: number;
+};
+
+export type SalesChannelProfitabilityPoint = {
+  name: string;
+  value: number;
+  percentage: number;
+  color: string;
+};
+
+export type TopPerformer = {
+  rank: number;
+  name: string;
+  netMargin: number;
+  netProfit: number;
+};
+
+export type CostAllocationRule = {
+  id: string;
+  costCenter: string;
+  allocationKey: "Headcount" | "Square Footage" | "Direct Revenue" | "Direct Expense";
+  weight: number;
+};
+
+export type ProfitabilityDashboardData = {
+  kpis: {
+    revenueYTD: number;
+    revenueYTDDelta: number;
+    grossProfitYTD: number;
+    grossProfitYTDDelta: number;
+    grossMarginYTD: number;
+    grossMarginYTDDelta: number;
+    netProfitYTD: number;
+    netProfitYTDDelta: number;
+    netMarginYTD: number;
+    netMarginYTDDelta: number;
+  };
+  dimensionData: ProfitabilityRecord[];
+  trend: ProfitabilityTrendPoint[];
+  regional: RegionalProfitabilityPoint[];
+  salesChannels: SalesChannelProfitabilityPoint[];
+  topPerformers: TopPerformer[];
+  summary: {
+    revenue: number;
+    cogs: number;
+    grossProfit: number;
+    netProfit: number;
+    netMargin: number;
+  };
+  allocationRules: CostAllocationRule[];
+};

@@ -34,6 +34,10 @@ import type {
   TopVendor,
   TrendPoint,
   CostCenterHierarchyNode,
+  ProfitabilityTrendPoint,
+  RegionalProfitabilityPoint,
+  SalesChannelProfitabilityPoint,
+  TopPerformer,
 } from "./types";
 
 export function calculateCurrentRatio(query: DashboardQuery): Promise<CurrentRatio> {
@@ -492,5 +496,66 @@ export function generateCostCenterHierarchyModel(
         },
       ],
     }),
+  );
+}
+
+export function generateProfitabilityTrend(
+  query: DashboardQuery,
+): Promise<ProfitabilityTrendPoint[]> {
+  return apiRequest(`/api/financial/analytics/profitability/trend?fy=${query.fiscalYear}`, () => [
+    { month: "Apr '24", netProfit: 400000, netMargin: 14.5 },
+    { month: "May '24", netProfit: 420000, netMargin: 15.1 },
+    { month: "Jun '24", netProfit: 480000, netMargin: 14.8 },
+    { month: "Jul '24", netProfit: 450000, netMargin: 14.2 },
+    { month: "Aug '24", netProfit: 520000, netMargin: 15.3 },
+    { month: "Sep '24", netProfit: 600000, netMargin: 14.9 },
+    { month: "Oct '24", netProfit: 650000, netMargin: 14.1 },
+    { month: "Nov '24", netProfit: 700000, netMargin: 14.7 },
+    { month: "Dec '24", netProfit: 780000, netMargin: 15.0 },
+    { month: "Jan '25", netProfit: 800000, netMargin: 14.9 },
+    { month: "Feb '25", netProfit: 850000, netMargin: 15.2 },
+    { month: "Mar '25", netProfit: 1000000, netMargin: 15.8 },
+  ]);
+}
+
+export function generateRegionalProfitability(
+  query: DashboardQuery,
+): Promise<RegionalProfitabilityPoint[]> {
+  return apiRequest(
+    `/api/financial/analytics/profitability/regional?fy=${query.fiscalYear}`,
+    () => [
+      { region: "North America", netMargin: 18.91 },
+      { region: "Europe", netMargin: 17.42 },
+      { region: "Asia Pacific", netMargin: 16.83 },
+      { region: "Middle East", netMargin: 15.27 },
+      { region: "South America", netMargin: 13.58 },
+      { region: "Africa", netMargin: 12.11 },
+    ],
+  );
+}
+
+export function generateSalesChannelProfitability(
+  query: DashboardQuery,
+): Promise<SalesChannelProfitabilityPoint[]> {
+  return apiRequest(
+    `/api/financial/analytics/profitability/sales-channel?fy=${query.fiscalYear}`,
+    () => [
+      { name: "Direct Sales", value: 4320000, percentage: 20.34, color: "#4F46E5" },
+      { name: "Distributors", value: 2910000, percentage: 17.89, color: "#3B82F6" },
+      { name: "Online Sales", value: 1630000, percentage: 18.17, color: "#10B981" },
+      { name: "Retail Partners", value: 980000, percentage: 16.25, color: "#F59E0B" },
+      { name: "Others", value: 480000, percentage: 15.32, color: "#8B5CF6" },
+    ],
+  );
+}
+
+export function generateTopPerformers(query: DashboardQuery): Promise<TopPerformer[]> {
+  return apiRequest(
+    `/api/financial/analytics/profitability/top-performers?fy=${query.fiscalYear}`,
+    () => [
+      { rank: 1, name: "Spare Parts", netMargin: 23.33, netProfit: 512470.0 },
+      { rank: 2, name: "Control Systems", netMargin: 19.73, netProfit: 642790.0 },
+      { rank: 3, name: "Valves & Fittings", netMargin: 19.37, netProfit: 1890450.0 },
+    ],
   );
 }
