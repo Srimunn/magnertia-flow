@@ -447,3 +447,146 @@ export type CreateCreditMemoInput = {
   amount: number;
   reason: string;
 };
+
+// ---------------------------------------------------------------------------
+// Cash & Bank module
+// ---------------------------------------------------------------------------
+
+export type BankAccountType = "Operating" | "Payroll" | "Collections" | "Petty Cash" | "Savings";
+export type BankAccountStatus = "Active" | "Inactive";
+export type ReconciliationStatus = "Reconciled" | "Partially Reconciled" | "Not Reconciled";
+
+export type BankAccount = {
+  id: string;
+  name: string;
+  bankName: string;
+  type: BankAccountType;
+  accountNo: string;
+  currency: string;
+  currentBalance: number;
+  status: BankAccountStatus;
+  reconciliationStatus: ReconciliationStatus;
+  unreconciledAmount: number;
+};
+
+export type BankAccountFilters = {
+  search: string;
+  type: "All Types" | BankAccountType;
+  status: "All Statuses" | BankAccountStatus;
+  currency: "All Currency" | string;
+};
+
+export type CashTransactionType = "Inflow" | "Outflow";
+export type CashTransactionStatus = "Posted" | "Cleared" | "Pending";
+
+export type CashTransaction = {
+  id: string;
+  date: string;
+  description: string;
+  type: CashTransactionType;
+  amount: number;
+  bankAccountNo: string;
+  reference: string;
+  category: string;
+  status: CashTransactionStatus;
+};
+
+export type CashReconciliationRecord = {
+  id: string;
+  accountNo: string;
+  statementDate: string;
+  statementBalance: number;
+  ledgerBalance: number;
+  unreconciledAmount: number;
+  status: ReconciliationStatus;
+  lastReconciledAt?: string;
+};
+
+export type ChequeStatus = "Cleared" | "Pending" | "Void";
+
+export type ChequeRecord = {
+  id: string;
+  chequeNo: string;
+  issueDate: string;
+  payee: string;
+  amount: number;
+  bankAccountNo: string;
+  status: ChequeStatus;
+};
+
+export type DepositStatus = "Cleared" | "Pending" | "Rejected";
+
+export type DepositRecord = {
+  id: string;
+  depositNo: string;
+  depositDate: string;
+  source: string;
+  amount: number;
+  bankAccountNo: string;
+  status: DepositStatus;
+};
+
+export type CashBankKpiDetail = {
+  value: number;
+  deltaPct: number;
+  direction: "up" | "down";
+  label: string;
+};
+
+export type CashBankKpis = {
+  totalCashBalance: CashBankKpiDetail;
+  operatingCash: CashBankKpiDetail;
+  cashInflowMtd: CashBankKpiDetail;
+  cashOutflowMtd: CashBankKpiDetail;
+  netCashFlowMtd: CashBankKpiDetail;
+};
+
+export type CashPositionTrendPoint = {
+  month: string;
+  inflow: number;
+  outflow: number;
+  netFlow: number;
+};
+
+export type BankReconciliationSummary = {
+  reconciledCount: number;
+  partiallyReconciledCount: number;
+  notReconciledCount: number;
+  totalAccounts: number;
+};
+
+export type AccountSummaryStats = {
+  totalAccounts: number;
+  activeAccounts: number;
+  inactiveAccounts: number;
+  totalBalanceUsd: number;
+  totalBalanceBaseCurrency: number;
+  unreconciledAmount: number;
+};
+
+export type CashBankDashboardData = {
+  kpis: CashBankKpis;
+  bankAccounts: BankAccount[];
+  accountSummary: AccountSummaryStats;
+  cashPositionTrend: CashPositionTrendPoint[];
+  reconciliationSummary: BankReconciliationSummary;
+};
+
+export type NewBankAccountInput = {
+  name: string;
+  bankName: string;
+  type: BankAccountType;
+  accountNo: string;
+  currency: string;
+  initialBalance: number;
+};
+
+export type NewCashTransactionInput = {
+  date: string;
+  description: string;
+  type: CashTransactionType;
+  amount: number;
+  bankAccountNo: string;
+  category: string;
+  reference: string;
+};

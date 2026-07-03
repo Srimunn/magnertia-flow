@@ -13,6 +13,8 @@ import * as paymentService from "./paymentService";
 import * as receiptCollectionService from "./receiptCollectionService";
 import * as revenueService from "./revenueService";
 import * as transactionService from "./transactionService";
+import * as bankAccountService from "./bankAccountService";
+import * as bankReconciliatorService from "./bankReconciliatorService";
 import type {
   AccountsPayableKpis,
   AccountsReceivableKpis,
@@ -20,6 +22,7 @@ import type {
   DashboardQuery,
   LedgerKpis,
   TransactionsKpis,
+  CashBankDashboardData,
 } from "./types";
 
 export async function loadDashboardData(query: DashboardQuery): Promise<DashboardData> {
@@ -144,5 +147,91 @@ export async function loadAccountsReceivableDashboard(
     dueWithin30PctOfTotal: dueWithin30.pctOfTotal,
     collectedThisMonth,
     openInvoices,
+  };
+}
+
+export async function loadCashBankDashboard(query: DashboardQuery): Promise<CashBankDashboardData> {
+  const [cashPosition, operatingCash, flowDetails, bankAccounts, reconciliationSummary] =
+    await Promise.all([
+      cashBankService.fetchCashBalance(query),
+      cashBankService.calculateOperatingCash(query),
+      cashBankService.calculateCashFlowMtd(query),
+      bankAccountService.fetchBankAccounts(query, {
+        search: "",
+        type: "All Types",
+        status: "All Statuses",
+        currency: "All Currency",
+      }),
+      bankReconciliatorService.generateReconciliationSummary(query),
+    ]);
+
+  const cashPositionTrend = [
+    { month: "Apr '24", inflow: 4800000, outflow: 3600000, netFlow: 1200000 },
+    { month: "May '24", inflow: 5200000, outflow: 4000000, netFlow: 1200000 },
+    { month: "Jun '24", inflow: 4500000, outflow: 3800000, netFlow: 700000 },
+    { month: "Jul '24", inflow: 5000000, outflow: 4200000, netFlow: 800000 },
+    { month: "Aug '24", inflow: 5500000, outflow: 4500000, netFlow: 1000000 },
+    { month: "Sep '24", inflow: 4900000, outflow: 4100000, netFlow: 800000 },
+    { month: "Oct '24", inflow: 5800000, outflow: 4700000, netFlow: 1100000 },
+    { month: "Nov '24", inflow: 6000000, outflow: 5000000, netFlow: 1000000 },
+    { month: "Dec '24", inflow: 6500000, outflow: 5200000, netFlow: 1300000 },
+    { month: "Jan '25", inflow: 7200000, outflow: 5800000, netFlow: 1400000 },
+    { month: "Feb '25", inflow: 8000000, outflow: 6200000, netFlow: 1800000 },
+    { month: "Mar '25", inflow: 8500000, outflow: 6500000, netFlow: 2000000 },
+    { month: "Apr '25", inflow: 8945320, outflow: 6781240, netFlow: 2164080 },
+  ];
+
+  const activeAccounts = bankAccounts.filter((a) => a.status === "Active").length;
+  const inactiveAccounts = bankAccounts.filter((a) => a.status === "Inactive").length;
+  const totalBalanceUsd = cashPosition.cashBalance;
+  const totalBalanceBaseCurrency = cashPosition.cashBalance;
+  const unreconciledAmount = bankAccounts.reduce((sum, a) => sum + a.unreconciledAmount, 0);
+
+  const kpis = {
+    totalCashBalance: {
+      value: cashPosition.cashBalance,
+      deltaPct: 12.45,
+      direction: "up" as const,
+      label: "vs. Last Month",
+    },
+    operatingCash: {
+      value: operatingCash,
+      deltaPct: 8.32,
+      direction: "up" as const,
+      label: "vs. Last Month",
+    },
+    cashInflowMtd: {
+      value: flowDetails.inflow,
+      deltaPct: 15.67,
+      direction: "up" as const,
+      label: "vs. Last Month",
+    },
+    cashOutflowMtd: {
+      value: flowDetails.outflow,
+      deltaPct: 9.18,
+      direction: "up" as const,
+      label: "vs. Last Month",
+    },
+    netCashFlowMtd: {
+      value: flowDetails.netFlow,
+      deltaPct: 22.31,
+      direction: "up" as const,
+      label: "vs. Last Month",
+    },
+  };
+
+  return {
+    kpis,
+    bankAccounts,
+    accountSummary: {
+      totalAccounts: bankAccounts.length,
+      activeAccounts,
+      inactiveAccounts,
+      totalBalanceUsd,
+      totalBalanceBaseCurrency,
+      unreconciledAmount,
+    },
+    cashPositionTrend,
+    reconciliationSummary,
   };
 }
