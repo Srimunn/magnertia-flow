@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -52,7 +53,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
-            onClick={() => { router.invalidate(); reset(); }}
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Try again
@@ -75,18 +79,34 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Magnertia ERP Suite" },
-      { name: "description", content: "Magnertia ERP — the operating platform for EV charging operations, finance, assets and stations." },
+      {
+        name: "description",
+        content:
+          "Magnertia ERP — the operating platform for EV charging operations, finance, assets and stations.",
+      },
       { name: "author", content: "Magnertia" },
       { property: "og:title", content: "Magnertia ERP Suite" },
-      { property: "og:description", content: "Enterprise ERP for EV charging infrastructure — finance, assets, stations, revenue." },
+      {
+        property: "og:description",
+        content:
+          "Enterprise ERP for EV charging infrastructure — finance, assets, stations, revenue.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
     links: [
+      {
+        rel: "icon",
+        type: "image/svg+xml",
+        href: "data:image/svg+xml,%3Csvg viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg transform='translate(2.4, -7.2)'%3E%3Cpath d='M 46 38 C 41 33, 36 38, 36 45 C 36 58, 48 76, 42 85 C 39 89, 36 86, 38 78 C 42 62, 53 45, 59 34 C 61 29, 66 29, 65 36 C 64 50, 52 70, 52 82 C 52 89, 55 93, 61 95' stroke='%230B4075' stroke-width='8.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='70' cy='98' r='4.5' fill='%23082F57'/%3E%3Ccircle cx='79' cy='100' r='4.5' fill='%23082F57'/%3E%3C/g%3E%3C/svg%3E",
+      },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -114,6 +134,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
+      <Toaster />
     </QueryClientProvider>
   );
 }

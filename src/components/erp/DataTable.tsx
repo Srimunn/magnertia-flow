@@ -33,7 +33,11 @@ export function DataTable<T extends Record<string, unknown>>({
                   <th
                     key={c.key}
                     className={`px-4 py-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground ${
-                      c.align === "right" ? "text-right" : c.align === "center" ? "text-center" : "text-left"
+                      c.align === "right"
+                        ? "text-right"
+                        : c.align === "center"
+                          ? "text-center"
+                          : "text-left"
                     } ${c.className ?? ""}`}
                   >
                     {c.header}
@@ -43,12 +47,19 @@ export function DataTable<T extends Record<string, unknown>>({
             </thead>
             <tbody>
               {data.map((row, i) => (
-                <tr key={(row.id as string | number | undefined) ?? i} className="border-b border-border last:border-0 hover:bg-secondary/30 transition-colors">
+                <tr
+                  key={(row.id as string | number | undefined) ?? i}
+                  className="border-b border-border last:border-0 hover:bg-secondary/30 transition-colors"
+                >
                   {columns.map((c) => (
                     <td
                       key={c.key}
                       className={`px-4 py-3.5 align-middle text-foreground ${
-                        c.align === "right" ? "text-right tabular-nums" : c.align === "center" ? "text-center" : "text-left"
+                        c.align === "right"
+                          ? "text-right tabular-nums"
+                          : c.align === "center"
+                            ? "text-center"
+                            : "text-left"
                       } ${c.className ?? ""}`}
                     >
                       {c.cell(row)}
@@ -74,12 +85,24 @@ export function DataTable<T extends Record<string, unknown>>({
 }
 
 export function EmptyState({
-  title, description, action,
-}: { title: string; description: string; action?: ReactNode }) {
+  title,
+  description,
+  action,
+}: {
+  title: string;
+  description: string;
+  action?: ReactNode;
+}) {
   return (
     <div className="card-soft flex flex-col items-center justify-center px-6 py-16 text-center">
       <div className="grid h-14 w-14 place-items-center rounded-2xl bg-secondary text-primary">
-        <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" stroke="currentColor" className="h-7 w-7">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          strokeWidth="2"
+          stroke="currentColor"
+          className="h-7 w-7"
+        >
           <path d="M3 7h18M3 12h18M3 17h12" strokeLinecap="round" />
         </svg>
       </div>

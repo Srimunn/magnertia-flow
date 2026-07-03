@@ -55,73 +55,89 @@
   --font-sans: "Inter", system-ui, sans-serif;
   --font-display: "Inter", system-ui, sans-serif;
   --shadow-card: 0 1px 3px 0 rgb(15 17 35 / 0.06), 0 4px 12px 0 rgb(15 17 35 / 0.04);
-  --shadow-elevated: 0 8px 24px -4px rgb(15 17 35 / 0.10), 0 4px 10px -2px rgb(15 17 35 / 0.06);
+  --shadow-elevated: 0 8px 24px -4px rgb(15 17 35 / 0.1), 0 4px 10px -2px rgb(15 17 35 / 0.06);
 }
 
 :root {
   --radius: 0.75rem;
 
-  /* Magnertia brand palette (hex-mirrored for chart usage) */
-  --violet: oklch(0.58 0.22 285);          /* #6B4EFF */
-  --violet-soft: oklch(0.96 0.025 285);
+  /* Magnertia brand palette (shades of blue, beige, white) */
+  --blue-brand: oklch(0.38 0.14 245); /* #0A3C75 */
+  --blue-soft: oklch(0.94 0.02 245); /* #E2EDF7 */
+  --beige-bg: oklch(0.985 0.006 85); /* #FAF9F5 */
+  --beige-muted: oklch(0.955 0.01 85); /* #F3EFE7 */
 
-  --background: oklch(0.985 0.003 270);    /* very light gray-violet */
-  --foreground: oklch(0.18 0.03 270);
+  --background: var(--beige-bg);
+  --foreground: oklch(0.18 0.02 245);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.03 270);
+  --card-foreground: oklch(0.18 0.02 245);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.03 270);
+  --popover-foreground: oklch(0.18 0.02 245);
 
-  --primary: var(--violet);
+  --primary: var(--blue-brand);
   --primary-foreground: oklch(1 0 0);
-  --secondary: var(--violet-soft);
-  --secondary-foreground: var(--violet);
-  --muted: oklch(0.96 0.005 270);
-  --muted-foreground: oklch(0.50 0.02 270);
-  --accent: var(--violet-soft);
-  --accent-foreground: var(--violet);
+  --secondary: var(--blue-soft);
+  --secondary-foreground: var(--blue-brand);
+  --muted: var(--beige-muted);
+  --muted-foreground: oklch(0.5 0.01 245);
+  --accent: var(--blue-soft);
+  --accent-foreground: var(--blue-brand);
 
-  --destructive: oklch(0.62 0.22 25);      /* #EF4444 */
+  --destructive: oklch(0.62 0.22 25); /* #EF4444 */
   --destructive-foreground: oklch(1 0 0);
-  --success: oklch(0.68 0.17 152);         /* #22C55E */
+  --success: oklch(0.68 0.17 152); /* #22C55E */
   --success-foreground: oklch(1 0 0);
-  --warning: oklch(0.78 0.16 70);          /* #F59E0B */
+  --warning: oklch(0.78 0.16 70); /* #F59E0B */
   --warning-foreground: oklch(0.22 0.04 70);
 
-  --border: oklch(0.92 0.008 270);
-  --input: oklch(0.92 0.008 270);
-  --ring: var(--violet);
+  --border: oklch(0.92 0.005 85);
+  --input: oklch(0.92 0.005 85);
+  --ring: var(--blue-brand);
 
   /* Chart palette (matches reference donut/bars) */
-  --chart-1: #6B4EFF;
-  --chart-2: #3B82F6;
-  --chart-3: #22C55E;
-  --chart-4: #F59E0B;
-  --chart-5: #EC4899;
-  --chart-bar-expense: #BFD3F5;
+  --chart-1: #0a3c75;
+  --chart-2: #3b82f6;
+  --chart-3: #22c55e;
+  --chart-4: #f59e0b;
+  --chart-5: #ec4899;
+  --chart-bar-expense: #e2d9c5; /* Soft beige for expenses */
 
-  /* Sidebar — deep space navy */
-  --sidebar: #0F1123;
-  --sidebar-foreground: oklch(0.96 0.01 270);
-  --sidebar-primary: #6B4EFF;
-  --sidebar-primary-foreground: #FFFFFF;
+  /* Sidebar — deep space navy blue */
+  --sidebar: #06101e;
+  --sidebar-foreground: oklch(0.96 0.005 245);
+  --sidebar-primary: #0a3c75;
+  --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: rgb(255 255 255 / 0.06);
-  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-accent-foreground: #ffffff;
   --sidebar-border: rgb(255 255 255 / 0.08);
-  --sidebar-ring: #6B4EFF;
+  --sidebar-ring: #0a3c75;
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html, body { font-family: var(--font-sans); }
+  * {
+    border-color: var(--color-border);
+  }
+  html,
+  body {
+    font-family: var(--font-sans);
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     -webkit-font-smoothing: antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
-  h1, h2, h3, h4, h5 { font-family: var(--font-display); letter-spacing: -0.015em; }
-  .tabular { font-variant-numeric: tabular-nums; }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
 }
 
 @utility card-soft {

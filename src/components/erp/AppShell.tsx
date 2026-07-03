@@ -1,12 +1,33 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import {
-  LayoutDashboard, BarChart2, ArrowLeftRight, BookOpen, CreditCard, Users,
-  Landmark, Package, PieChart, FileText, Receipt, Building2, TrendingUp,
-  Layers, Shield, Settings, Bell, Menu, X, RefreshCw, ChevronDown, Calendar, Grid3x3,
+  LayoutDashboard,
+  BarChart2,
+  ArrowLeftRight,
+  BookOpen,
+  CreditCard,
+  Users,
+  Landmark,
+  Package,
+  PieChart,
+  FileText,
+  Receipt,
+  Building2,
+  TrendingUp,
+  Layers,
+  Shield,
+  Settings,
+  Bell,
+  Menu,
+  X,
+  RefreshCw,
+  ChevronDown,
+  Calendar,
+  Grid3x3,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { company } from "@/lib/mock-data";
+import { Logo } from "./Logo";
 
 type NavItem = { to: string; label: string; icon: React.ComponentType<{ className?: string }> };
 
@@ -30,9 +51,12 @@ const NAV: NavItem[] = [
 
 function Brand() {
   return (
-    <Link to="/" className="flex items-center gap-3 px-2">
-      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#6B4EFF] to-[#8B6FFF] text-white shadow-[0_6px_18px_-4px_rgba(107,78,255,0.6)]">
-        <span className="font-display text-xl font-extrabold leading-none">M</span>
+    <Link
+      to="/"
+      className="flex items-center gap-3 px-2 transition-opacity duration-200 hover:opacity-90"
+    >
+      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white shadow-sm">
+        <Logo className="h-7 w-7" showShadow={false} />
       </div>
       <div className="font-display text-[20px] font-bold tracking-tight text-white leading-none">
         Magnertia
@@ -47,7 +71,9 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
     <nav className="flex-1 overflow-y-auto px-3 pb-4">
       <div className="px-3 pb-3 pt-1">
         <div className="font-display text-[15px] font-bold leading-tight text-white">Financial</div>
-        <div className="font-display text-[15px] font-bold leading-tight text-white">Management</div>
+        <div className="font-display text-[15px] font-bold leading-tight text-white">
+          Management
+        </div>
       </div>
       <ul className="space-y-1">
         {NAV.map((item) => {
@@ -61,7 +87,7 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
                 className={cn(
                   "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-medium transition-colors",
                   active
-                    ? "bg-[#6B4EFF] text-white shadow-[0_4px_12px_-2px_rgba(107,78,255,0.5)]"
+                    ? "bg-primary text-white shadow-[0_4px_12px_-2px_rgba(10,60,117,0.4)]"
                     : "text-white/70 hover:bg-white/[0.06] hover:text-white",
                 )}
               >
@@ -90,8 +116,18 @@ function SidebarFooter() {
   );
 }
 
-function Topbar({ onMenuClick, title, breadcrumb, description }: {
-  onMenuClick: () => void; title: string; breadcrumb?: string; description?: string;
+function Topbar({
+  onMenuClick,
+  title,
+  breadcrumb,
+  description,
+  actions,
+}: {
+  onMenuClick: () => void;
+  title: string;
+  breadcrumb?: string;
+  description?: string;
+  actions?: ReactNode;
 }) {
   return (
     <header className="border-b border-border bg-background/80 px-4 pt-4 pb-5 backdrop-blur-md lg:px-8 lg:pt-6">
@@ -107,7 +143,7 @@ function Topbar({ onMenuClick, title, breadcrumb, description }: {
         <div className="min-w-0 flex-1">
           {breadcrumb && (
             <div className="mb-1 flex items-center gap-1.5 text-[13px]">
-              <span className="font-medium text-[#6B4EFF]">{breadcrumb}</span>
+              <span className="font-medium text-primary">{breadcrumb}</span>
               <span className="text-muted-foreground">›</span>
               <span className="text-muted-foreground">{title}</span>
             </div>
@@ -115,9 +151,7 @@ function Topbar({ onMenuClick, title, breadcrumb, description }: {
           <h1 className="font-display text-[26px] font-bold leading-tight tracking-tight text-foreground sm:text-[28px]">
             {title}
           </h1>
-          {description && (
-            <p className="mt-1 text-sm text-muted-foreground">{description}</p>
-          )}
+          {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
         </div>
 
         <div className="hidden shrink-0 items-center gap-2 md:flex">
@@ -131,12 +165,19 @@ function Topbar({ onMenuClick, title, breadcrumb, description }: {
             All Companies
             <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
           </button>
-          <button className="grid h-9 w-9 place-items-center rounded-lg border border-border bg-card text-muted-foreground shadow-sm hover:bg-muted/50" aria-label="Refresh">
+          {actions}
+          <button
+            className="grid h-9 w-9 place-items-center rounded-lg border border-border bg-card text-muted-foreground shadow-sm hover:bg-muted/50"
+            aria-label="Refresh"
+          >
             <RefreshCw className="h-4 w-4" />
           </button>
         </div>
 
-        <button className="relative ml-auto shrink-0 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground md:hidden" aria-label="Notifications">
+        <button
+          className="relative ml-auto shrink-0 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground md:hidden"
+          aria-label="Notifications"
+        >
           <Bell className="h-5 w-5" />
           <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-destructive ring-2 ring-background" />
         </button>
@@ -152,11 +193,18 @@ function Topbar({ onMenuClick, title, breadcrumb, description }: {
   );
 }
 
-export function AppShell({ children, title, breadcrumb, description }: {
+export function AppShell({
+  children,
+  title,
+  breadcrumb,
+  description,
+  topbarActions,
+}: {
   children: ReactNode;
   title?: string;
   breadcrumb?: string;
   description?: string;
+  topbarActions?: ReactNode;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -181,7 +229,11 @@ export function AppShell({ children, title, breadcrumb, description }: {
           <aside className="fixed inset-y-0 left-0 z-50 flex w-[260px] flex-col bg-sidebar shadow-2xl lg:hidden animate-in slide-in-from-left duration-200">
             <div className="flex items-center justify-between px-5 pt-5 pb-3">
               <Brand />
-              <button onClick={() => setMobileOpen(false)} className="rounded-lg p-2 text-white/70 hover:bg-white/10" aria-label="Close menu">
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="rounded-lg p-2 text-white/70 hover:bg-white/10"
+                aria-label="Close menu"
+              >
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -198,6 +250,7 @@ export function AppShell({ children, title, breadcrumb, description }: {
             title={title}
             breadcrumb={breadcrumb}
             description={description}
+            actions={topbarActions}
           />
         )}
         <main className="px-4 py-6 lg:px-8 lg:py-7">{children}</main>
@@ -207,12 +260,20 @@ export function AppShell({ children, title, breadcrumb, description }: {
 }
 
 export function PageHeader({
-  title, description, actions,
-}: { title: string; description?: string; actions?: ReactNode }) {
+  title,
+  description,
+  actions,
+}: {
+  title: string;
+  description?: string;
+  actions?: ReactNode;
+}) {
   return (
     <div className="mb-6 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4 sm:flex sm:items-center sm:justify-between">
       <div className="min-w-0">
-        <h1 className="truncate font-display text-2xl font-bold text-foreground sm:text-[28px]">{title}</h1>
+        <h1 className="truncate font-display text-2xl font-bold text-foreground sm:text-[28px]">
+          {title}
+        </h1>
         {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
       </div>
       {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
