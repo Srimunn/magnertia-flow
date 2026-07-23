@@ -14,6 +14,8 @@ import { Route as UsersRouteImport } from './routes/users'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as RevenueRouteImport } from './routes/revenue'
+import { Route as OverviewRouteImport } from './routes/overview'
+import { Route as LedgerRouteImport } from './routes/ledger'
 import { Route as ExpensesRouteImport } from './routes/expenses'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ManagementFinanceTaxRouteImport } from './routes/management.finance.tax'
@@ -89,6 +91,16 @@ const SettingsRoute = SettingsRouteImport.update({
 const RevenueRoute = RevenueRouteImport.update({
   id: '/revenue',
   path: '/revenue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OverviewRoute = OverviewRouteImport.update({
+  id: '/overview',
+  path: '/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LedgerRoute = LedgerRouteImport.update({
+  id: '/ledger',
+  path: '/ledger',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExpensesRoute = ExpensesRouteImport.update({
@@ -394,6 +406,8 @@ const DevelopmentIpDevelopmentPatentManagementNewRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/expenses': typeof ExpensesRoute
+  '/ledger': typeof LedgerRoute
+  '/overview': typeof OverviewRoute
   '/revenue': typeof RevenueRoute
   '/settings': typeof SettingsRoute
   '/transactions': typeof TransactionsRoute
@@ -452,6 +466,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/expenses': typeof ExpensesRoute
+  '/ledger': typeof LedgerRoute
+  '/overview': typeof OverviewRoute
   '/revenue': typeof RevenueRoute
   '/settings': typeof SettingsRoute
   '/transactions': typeof TransactionsRoute
@@ -511,6 +527,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/expenses': typeof ExpensesRoute
+  '/ledger': typeof LedgerRoute
+  '/overview': typeof OverviewRoute
   '/revenue': typeof RevenueRoute
   '/settings': typeof SettingsRoute
   '/transactions': typeof TransactionsRoute
@@ -571,6 +589,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/expenses'
+    | '/ledger'
+    | '/overview'
     | '/revenue'
     | '/settings'
     | '/transactions'
@@ -629,6 +649,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/expenses'
+    | '/ledger'
+    | '/overview'
     | '/revenue'
     | '/settings'
     | '/transactions'
@@ -687,6 +709,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/expenses'
+    | '/ledger'
+    | '/overview'
     | '/revenue'
     | '/settings'
     | '/transactions'
@@ -746,6 +770,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExpensesRoute: typeof ExpensesRoute
+  LedgerRoute: typeof LedgerRoute
+  OverviewRoute: typeof OverviewRoute
   RevenueRoute: typeof RevenueRoute
   SettingsRoute: typeof SettingsRoute
   TransactionsRoute: typeof TransactionsRoute
@@ -837,6 +863,20 @@ declare module '@tanstack/react-router' {
       path: '/revenue'
       fullPath: '/revenue'
       preLoaderRoute: typeof RevenueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/overview': {
+      id: '/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ledger': {
+      id: '/ledger'
+      path: '/ledger'
+      fullPath: '/ledger'
+      preLoaderRoute: typeof LedgerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/expenses': {
@@ -1202,6 +1242,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExpensesRoute: ExpensesRoute,
+  LedgerRoute: LedgerRoute,
+  OverviewRoute: OverviewRoute,
   RevenueRoute: RevenueRoute,
   SettingsRoute: SettingsRoute,
   TransactionsRoute: TransactionsRoute,
