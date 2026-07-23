@@ -36,8 +36,7 @@ export function useWidgetPreferencesQuery() {
   return useQuery({
     queryKey: PREFS_KEY,
     queryFn: fetchPreferences,
-    // After the initial load the cache is authoritative: optimistic writes must
-    // not be clobbered by a background refetch on window focus.
+    placeholderData: EMPTY_PREFS,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
     retry: 1,
@@ -69,8 +68,6 @@ export function useSavePreferences() {
       toast.error((err as Error)?.message || "Couldn't save your layout.");
     },
     onSettled: () => {
-      // Only refetch once the last in-flight save settles, otherwise a burst of
-      // rapid edits would each trigger a refetch that reverts newer local state.
       if (queryClient.isMutating({ mutationKey: SAVE_MUTATION_KEY }) === 1) {
         queryClient.invalidateQueries({ queryKey: PREFS_KEY });
       }
@@ -91,20 +88,10 @@ export function useWidgetPreferences() {
 
   const prefs = query.data ?? EMPTY_PREFS;
 
-  const update = useCallback(
-    (reducer: (current: WidgetPreferencesDoc) => WidgetPreferencesPatch) => {
-      const current = queryClient.getQueryData<WidgetPreferencesDoc>(PREFS_KEY) ?? EMPTY_PREFS;
-      const patch = reducer(current);
-      if (Object.keys(patch).length === 0) return;
-      saveMutation.mutate(patch);
-    },
-    [queryClient, saveMutation],
-  );
-
   return {
     prefs,
-    /** True only on the very first load — used to gate first paint. */
-    isLoading: query.isLoading,
+    /** False once placeholder data exists so first paint is instantaneous. */
+    isLoading: query.isLoading && !query.data,
     isError: query.isError,
     error: query.error,
     isSaving: saveMutation.isPending,

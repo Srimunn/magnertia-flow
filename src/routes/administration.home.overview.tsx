@@ -19,21 +19,37 @@ import { CardHeader } from "@/components/erp/CardHeader";
 import { StatCard } from "@/components/erp/StatCard";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { DataTable } from "@/components/erp/DataTable";
-import { loadAdministrationHomeData } from "@/services";
-import type { CompanyRecord, LoginHistoryEntry } from "@/services/types";
+import {
+  mockCompanies,
+  mockLoginHistory,
+  mockUserActivityTrend,
+  mockUsersByDepartment,
+  mockUserStatusSummary,
+} from "@/lib/mock-data";
+import type { AdminHomeDashboardData, CompanyRecord, LoginHistoryEntry } from "@/services/types";
 
 export const Route = createFileRoute("/administration/home/overview")({
   head: () => ({ meta: [{ title: "Administration · Magnertia ERP" }] }),
   component: AdministrationOverviewPage,
 });
 
+const INITIAL_ADMIN_DATA: AdminHomeDashboardData = {
+  kpis: { activeUsersCount: 142, branchCount: 12, loginsToday: 89 },
+  companies: mockCompanies,
+  recentLogins: mockLoginHistory.slice(0, 5),
+  activityTrend: mockUserActivityTrend,
+  usersByDepartment: mockUsersByDepartment,
+  userStatusSummary: mockUserStatusSummary,
+};
+
 function AdministrationOverviewPage() {
   const dashboardQuery = useQuery({
     queryKey: ["administration", "home", "dashboard"],
     queryFn: () => loadAdministrationHomeData(),
+    placeholderData: INITIAL_ADMIN_DATA,
   });
-  const data = dashboardQuery.data;
-  const isLoading = dashboardQuery.isLoading;
+  const data = dashboardQuery.data ?? INITIAL_ADMIN_DATA;
+  const isLoading = dashboardQuery.isLoading && !dashboardQuery.data;
 
   return (
     <AppShell
