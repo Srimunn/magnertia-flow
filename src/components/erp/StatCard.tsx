@@ -1,5 +1,6 @@
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
+import { KPIWidgetCard } from "@/widgets/components/WidgetCustomizer";
 
 export type StatDelta = { label: string; direction: "up" | "down"; tone: "positive" | "negative" };
 
@@ -41,25 +42,35 @@ export function StatCard({
         : "text-muted-foreground";
 
   return (
-    <div className="card-soft p-5 transition-shadow hover:shadow-[var(--shadow-elevated)]">
+    <KPIWidgetCard label={label} value={value} className="card-soft p-5" actionsPosition="left">
       <div className="flex items-center gap-4">
         <div
-          className={`grid h-12 w-12 shrink-0 place-items-center rounded-full ${iconBg} ${iconColor}`}
+          className={`grid h-12 w-12 shrink-0 place-items-center rounded-full ${iconBg} ${iconColor} group-hover:opacity-0 group-hover:scale-75 transition-all duration-200`}
         >
           {icon}
         </div>
         <div className="min-w-0">
-          <div className="text-[13px] font-medium text-muted-foreground">{label}</div>
-          <div className="mt-0.5 font-display text-[22px] font-bold leading-tight text-foreground tabular">
+          <div className="text-[13px] font-medium leading-snug text-muted-foreground" title={label}>
+            {label}
+          </div>
+          <div
+            className="mt-0.5 truncate font-display text-[22px] font-bold leading-tight text-foreground tabular"
+            title={value}
+          >
             {value}
           </div>
           {delta && <StatDeltaLine delta={delta} />}
           {neutralText && (
-            <div className={`mt-1 text-[12px] font-medium ${captionColor}`}>{neutralText}</div>
+            <div
+              className={`mt-1 truncate text-[12px] font-medium ${captionColor}`}
+              title={neutralText}
+            >
+              {neutralText}
+            </div>
           )}
         </div>
       </div>
-    </div>
+    </KPIWidgetCard>
   );
 }
 
@@ -67,8 +78,11 @@ export function StatDeltaLine({ delta }: { delta: StatDelta }) {
   const color = delta.tone === "positive" ? "text-[#22C55E]" : "text-[#EF4444]";
   const Arrow = delta.direction === "up" ? ArrowUpRight : ArrowDownRight;
   return (
-    <div className={`mt-1 flex items-center gap-1 text-[12px] font-medium ${color}`}>
-      <Arrow className="h-3 w-3" /> {delta.label}
+    <div
+      className={`mt-1 flex items-center gap-1 text-[12px] font-medium ${color}`}
+      title={delta.label}
+    >
+      <Arrow className="h-3 w-3 shrink-0" /> <span className="truncate">{delta.label}</span>
     </div>
   );
 }

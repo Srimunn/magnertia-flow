@@ -5,6 +5,35 @@ import type {
   PayableInvoice,
   ReceivableInvoice,
   TransactionRecord,
+  CompanyRecord,
+  BranchRecord,
+  DepartmentRecord,
+  RoleRecord,
+  UserRecord,
+  LoginHistoryEntry,
+  ComplianceRecord,
+  ChecklistItem,
+  RegulatoryDocument,
+  BomRecord,
+  RoutingRecord,
+  WorkOrderRecord,
+  QcInspectionEntry,
+  LeadRecord,
+  OpportunityRecord,
+  SchemeRecord,
+  ApplicationRecord,
+  CashTransaction,
+  FixedAsset,
+  DepreciationRun,
+  BudgetVersion,
+  ReportRecord,
+  ReportScheduleRecord,
+  TaxFiling,
+  TaxPayment,
+  TaxReconciliation,
+  CostCenterRecord,
+  CostAllocationRule,
+  BankAccount,
 } from "@/services/types";
 
 export const company = {
@@ -48,11 +77,11 @@ export const cashFlowSummary = [
 export const netCashFlow = 4_980_000;
 
 export const expenseDistribution = [
-  { name: "Cost of Goods Sold", value: 35, color: "#0A3C75" },
-  { name: "Operating Expenses", value: 25, color: "#336B9F" },
-  { name: "Employee Expenses", value: 20, color: "#729FC9" },
-  { name: "Marketing & Sales", value: 10, color: "#B2C9DF" },
-  { name: "Other Expenses", value: 10, color: "#E2D9C5" },
+  { name: "Cost of Goods Sold", value: 35, color: "#4F46E5" },
+  { name: "Operating Expenses", value: 25, color: "#3B82F6" },
+  { name: "Employee Expenses", value: 20, color: "#10B981" },
+  { name: "Marketing & Sales", value: 10, color: "#F59E0B" },
+  { name: "Other Expenses", value: 10, color: "#8B5CF6" },
 ];
 
 export const agingReceivable = {
@@ -2170,14 +2199,14 @@ export const users = [
 
 /* -------- Cash & Bank Mock Data -------- */
 
-export const mockBankAccounts = [
+export const mockBankAccounts: BankAccount[] = [
   {
     id: "BA-001",
-    name: "Operating Account - USD",
+    name: "Operating Account - INR",
     bankName: "HDFC Bank",
     type: "Operating" as const,
     accountNo: "50200012345678",
-    currency: "USD",
+    currency: "INR",
     currentBalance: 2345680.0,
     status: "Active" as const,
     reconciliationStatus: "Reconciled" as const,
@@ -2185,11 +2214,11 @@ export const mockBankAccounts = [
   },
   {
     id: "BA-002",
-    name: "Payroll Account - USD",
+    name: "Payroll Account - INR",
     bankName: "ICICI Bank",
     type: "Payroll" as const,
     accountNo: "12340567890123",
-    currency: "USD",
+    currency: "INR",
     currentBalance: 785450.0,
     status: "Active" as const,
     reconciliationStatus: "Reconciled" as const,
@@ -2197,11 +2226,11 @@ export const mockBankAccounts = [
   },
   {
     id: "BA-003",
-    name: "Collections Account - USD",
+    name: "Collections Account - INR",
     bankName: "Axis Bank",
     type: "Collections" as const,
     accountNo: "91802034567890",
-    currency: "USD",
+    currency: "INR",
     currentBalance: 1104320.0,
     status: "Active" as const,
     reconciliationStatus: "Reconciled" as const,
@@ -2209,11 +2238,11 @@ export const mockBankAccounts = [
   },
   {
     id: "BA-004",
-    name: "Petty Cash Account - USD",
+    name: "Petty Cash Account - INR",
     bankName: "HDFC Bank",
     type: "Petty Cash" as const,
     accountNo: "50200099887766",
-    currency: "USD",
+    currency: "INR",
     currentBalance: 15250.0,
     status: "Active" as const,
     reconciliationStatus: "Not Reconciled" as const,
@@ -2221,11 +2250,11 @@ export const mockBankAccounts = [
   },
   {
     id: "BA-005",
-    name: "Savings Account - USD",
+    name: "Savings Account - INR",
     bankName: "State Bank of India",
     type: "Savings" as const,
     accountNo: "000000321654987",
-    currency: "USD",
+    currency: "INR",
     currentBalance: 1245750.0,
     status: "Active" as const,
     reconciliationStatus: "Reconciled" as const,
@@ -2257,7 +2286,7 @@ export const mockBankAccounts = [
   },
 ];
 
-export const mockCashTransactions = [
+export const mockCashTransactions: CashTransaction[] = [
   {
     id: "CT-001",
     date: "2025-05-20",
@@ -2556,7 +2585,7 @@ export const mockReconciliationRecords = [
 
 /* -------- Fixed Assets Mock Data -------- */
 
-export const mockFixedAssets = [
+export const mockFixedAssets: FixedAsset[] = [
   {
     id: "AST-001",
     assetCode: "FA-0001",
@@ -2703,7 +2732,7 @@ export const mockFixedAssets = [
   },
 ];
 
-export const mockDepreciationRuns = [
+export const mockDepreciationRuns: DepreciationRun[] = [
   {
     id: "DEP-RUN-001",
     date: "2025-05-01",
@@ -2988,7 +3017,7 @@ export const mockProjectBudgets = [
   },
 ];
 
-export const mockBudgetVersions = [
+export const mockBudgetVersions: BudgetVersion[] = [
   {
     id: "BV-001",
     name: "FY 2024-25 Annual Budget",
@@ -3040,7 +3069,7 @@ export const mockBudgetHealth = {
 
 /* -------- Financial Reporting Mock Data -------- */
 
-export const mockReports = [
+export const mockReports: ReportRecord[] = [
   {
     id: "REP-001",
     name: "Balance Sheet",
@@ -3342,7 +3371,7 @@ export const mockRecentReportActivities = [
   },
 ];
 
-export const mockReportSchedules = [
+export const mockReportSchedules: ReportScheduleRecord[] = [
   {
     id: "SCH-001",
     reportId: "REP-002",
@@ -3503,7 +3532,7 @@ export const mockTaxObligations = [
   },
 ];
 
-export const mockTaxFilings = [
+export const mockTaxFilings: TaxFiling[] = [
   {
     id: "FIL-001",
     taxType: "GST - GSTR 3B",
@@ -3536,7 +3565,7 @@ export const mockTaxFilings = [
   },
 ];
 
-export const mockTaxPayments = [
+export const mockTaxPayments: TaxPayment[] = [
   {
     id: "PAY-001",
     taxType: "GST liability payout",
@@ -3580,7 +3609,7 @@ export const mockTaxAuthorities = [
   },
 ];
 
-export const mockTaxReconciliations = [
+export const mockTaxReconciliations: TaxReconciliation[] = [
   {
     id: "REC-001",
     taxType: "GST liability",
@@ -3630,7 +3659,7 @@ export const mockComplianceSummary = {
 
 /* -------- Cost Centers Mock Data -------- */
 
-export const mockCostCenters = [
+export const mockCostCenters: CostCenterRecord[] = [
   {
     id: "CC-001",
     code: "ADM-001",
@@ -3961,7 +3990,7 @@ export const mockProfitabilityTrend = [
   { month: "Mar '25", netProfit: 1000000, netMargin: 15.8 },
 ];
 
-export const mockProfitabilityAllocationRules = [
+export const mockProfitabilityAllocationRules: CostAllocationRule[] = [
   { id: "AR-001", costCenter: "IT-005", allocationKey: "Headcount" as const, weight: 45 },
   { id: "AR-002", costCenter: "HR-006", allocationKey: "Headcount" as const, weight: 25 },
   { id: "AR-003", costCenter: "ADM-001", allocationKey: "Square Footage" as const, weight: 30 },
@@ -4189,7 +4218,7 @@ export const mockConsolidationValidations = [
     id: "VAL-002",
     checkName: "Intercompany Matching Difference Check",
     status: "Passed" as const,
-    message: "Out-of-balance difference is exactly $0 (fully matched).",
+    message: "Out-of-balance difference is exactly ₹0 (fully matched).",
   },
   {
     id: "VAL-003",
@@ -4479,20 +4508,1255 @@ export const mockConfigurationLogs = [
   },
 ];
 
+/* -------- Administration module -------- */
+export const mockCompanies: CompanyRecord[] = [
+  {
+    id: "CO-001",
+    code: "MAG-IN",
+    name: "Magnertia EV Infrastructure Pvt Ltd",
+    taxId: "27AACCM1234F1Z5",
+    status: "Active" as const,
+    branchCount: 4,
+    createdDate: "Jan 10, 2022",
+  },
+  {
+    id: "CO-002",
+    code: "MAG-US",
+    name: "Magnertia Charging Solutions Inc.",
+    taxId: "US-84-3921765",
+    status: "Active" as const,
+    branchCount: 2,
+    createdDate: "Jun 4, 2023",
+  },
+  {
+    id: "CO-003",
+    code: "MAG-EU",
+    name: "Magnertia Europe GmbH",
+    taxId: "DE-291837465",
+    status: "Inactive" as const,
+    branchCount: 1,
+    createdDate: "Mar 22, 2024",
+  },
+];
+
+export const mockBranches: BranchRecord[] = [
+  {
+    id: "BR-001",
+    code: "BLR-01",
+    name: "Bengaluru HQ",
+    companyId: "CO-001",
+    companyName: "Magnertia EV Infrastructure Pvt Ltd",
+    city: "Bengaluru, India",
+    status: "Active" as const,
+    departmentCount: 6,
+  },
+  {
+    id: "BR-002",
+    code: "PUN-01",
+    name: "Pune Manufacturing",
+    companyId: "CO-001",
+    companyName: "Magnertia EV Infrastructure Pvt Ltd",
+    city: "Pune, India",
+    status: "Active" as const,
+    departmentCount: 4,
+  },
+  {
+    id: "BR-003",
+    code: "DEL-01",
+    name: "Delhi Sales Office",
+    companyId: "CO-001",
+    companyName: "Magnertia EV Infrastructure Pvt Ltd",
+    city: "New Delhi, India",
+    status: "Active" as const,
+    departmentCount: 2,
+  },
+  {
+    id: "BR-004",
+    code: "CHN-01",
+    name: "Chennai Service Hub",
+    companyId: "CO-001",
+    companyName: "Magnertia EV Infrastructure Pvt Ltd",
+    city: "Chennai, India",
+    status: "Inactive" as const,
+    departmentCount: 1,
+  },
+  {
+    id: "BR-005",
+    code: "AUS-01",
+    name: "Austin Charging Ops",
+    companyId: "CO-002",
+    companyName: "Magnertia Charging Solutions Inc.",
+    city: "Austin, USA",
+    status: "Active" as const,
+    departmentCount: 3,
+  },
+  {
+    id: "BR-006",
+    code: "SFO-01",
+    name: "San Francisco R&D",
+    companyId: "CO-002",
+    companyName: "Magnertia Charging Solutions Inc.",
+    city: "San Francisco, USA",
+    status: "Active" as const,
+    departmentCount: 2,
+  },
+];
+
+export const mockDepartmentsMaster: DepartmentRecord[] = [
+  {
+    id: "DP-001",
+    code: "FIN",
+    name: "Finance",
+    companyId: "CO-001",
+    branchId: "BR-001",
+    branchName: "Bengaluru HQ",
+    head: "Amit Mehra",
+    employeeCount: 18,
+    status: "Active" as const,
+  },
+  {
+    id: "DP-002",
+    code: "ENG",
+    name: "Engineering",
+    companyId: "CO-001",
+    branchId: "BR-002",
+    branchName: "Pune Manufacturing",
+    head: "Neha Sharma",
+    employeeCount: 42,
+    status: "Active" as const,
+  },
+  {
+    id: "DP-003",
+    code: "SALES",
+    name: "Sales",
+    companyId: "CO-001",
+    branchId: "BR-003",
+    branchName: "Delhi Sales Office",
+    head: "Rohan Kapoor",
+    employeeCount: 15,
+    status: "Active" as const,
+  },
+  {
+    id: "DP-004",
+    code: "SUP",
+    name: "Customer Support",
+    companyId: "CO-001",
+    branchId: "BR-004",
+    branchName: "Chennai Service Hub",
+    head: "Priya Nair",
+    employeeCount: 9,
+    status: "Active" as const,
+  },
+  {
+    id: "DP-005",
+    code: "HR",
+    name: "Human Resources",
+    companyId: "CO-001",
+    branchId: "BR-001",
+    branchName: "Bengaluru HQ",
+    head: "Vikram Singh",
+    employeeCount: 7,
+    status: "Active" as const,
+  },
+  {
+    id: "DP-006",
+    code: "OPS-US",
+    name: "Operations",
+    companyId: "CO-002",
+    branchId: "BR-005",
+    branchName: "Austin Charging Ops",
+    head: "Sarah Chen",
+    employeeCount: 11,
+    status: "Active" as const,
+  },
+];
+
+export const mockRoles: RoleRecord[] = [
+  {
+    id: "ROLE-001",
+    name: "System Administrator",
+    description: "Full access to all modules, companies, and system configuration.",
+    permissionsCount: 42,
+    usersAssignedCount: 3,
+    status: "Active" as const,
+  },
+  {
+    id: "ROLE-002",
+    name: "Finance Manager",
+    description: "Read/write access to Financial Management modules across companies.",
+    permissionsCount: 24,
+    usersAssignedCount: 8,
+    status: "Active" as const,
+  },
+  {
+    id: "ROLE-003",
+    name: "Department Head",
+    description: "Manage own department's users, budgets, and reports.",
+    permissionsCount: 16,
+    usersAssignedCount: 12,
+    status: "Active" as const,
+  },
+  {
+    id: "ROLE-004",
+    name: "Employee",
+    description: "Standard access — submit expenses, view own records.",
+    permissionsCount: 6,
+    usersAssignedCount: 152,
+    status: "Active" as const,
+  },
+  {
+    id: "ROLE-005",
+    name: "Auditor (Read-Only)",
+    description: "View-only access to audit trails and financial reports.",
+    permissionsCount: 8,
+    usersAssignedCount: 4,
+    status: "Inactive" as const,
+  },
+];
+
+export const mockUsers: UserRecord[] = [
+  {
+    id: "USR-001",
+    name: "Amit Mehra",
+    email: "amit.mehra@magnertia.com",
+    companyName: "Magnertia EV Infrastructure Pvt Ltd",
+    branchName: "Bengaluru HQ",
+    department: "Finance",
+    role: "Finance Manager",
+    status: "Active" as const,
+    lastLogin: "Today, 09:12 AM",
+  },
+  {
+    id: "USR-002",
+    name: "Neha Sharma",
+    email: "neha.sharma@magnertia.com",
+    companyName: "Magnertia EV Infrastructure Pvt Ltd",
+    branchName: "Pune Manufacturing",
+    department: "Engineering",
+    role: "Department Head",
+    status: "Active" as const,
+    lastLogin: "Today, 08:47 AM",
+  },
+  {
+    id: "USR-003",
+    name: "Rohan Kapoor",
+    email: "rohan.kapoor@magnertia.com",
+    companyName: "Magnertia EV Infrastructure Pvt Ltd",
+    branchName: "Delhi Sales Office",
+    department: "Sales",
+    role: "Department Head",
+    status: "Active" as const,
+    lastLogin: "Yesterday, 06:20 PM",
+  },
+  {
+    id: "USR-004",
+    name: "Priya Nair",
+    email: "priya.nair@magnertia.com",
+    companyName: "Magnertia EV Infrastructure Pvt Ltd",
+    branchName: "Chennai Service Hub",
+    department: "Customer Support",
+    role: "Department Head",
+    status: "Locked" as const,
+    lastLogin: "May 12, 2025",
+  },
+  {
+    id: "USR-005",
+    name: "Vikram Singh",
+    email: "vikram.singh@magnertia.com",
+    companyName: "Magnertia EV Infrastructure Pvt Ltd",
+    branchName: "Bengaluru HQ",
+    department: "Human Resources",
+    role: "System Administrator",
+    status: "Active" as const,
+    lastLogin: "Today, 07:55 AM",
+  },
+  {
+    id: "USR-006",
+    name: "Sarah Chen",
+    email: "sarah.chen@magnertia.com",
+    companyName: "Magnertia Charging Solutions Inc.",
+    branchName: "Austin Charging Ops",
+    department: "Operations",
+    role: "Department Head",
+    status: "Active" as const,
+    lastLogin: "Today, 06:30 AM",
+  },
+  {
+    id: "USR-007",
+    name: "David Kim",
+    email: "david.kim@magnertia.com",
+    companyName: "Magnertia Charging Solutions Inc.",
+    branchName: "San Francisco R&D",
+    department: "Engineering",
+    role: "Employee",
+    status: "Inactive" as const,
+    lastLogin: "Apr 2, 2025",
+  },
+];
+
+export const mockLoginHistory: LoginHistoryEntry[] = [
+  {
+    id: "LOG-001",
+    user: "Amit Mehra",
+    timestamp: "Today, 09:12 AM",
+    ipAddress: "192.168.1.42",
+    device: "Chrome / Windows",
+    status: "Success" as const,
+  },
+  {
+    id: "LOG-002",
+    user: "Neha Sharma",
+    timestamp: "Today, 08:47 AM",
+    ipAddress: "192.168.1.58",
+    device: "Safari / macOS",
+    status: "Success" as const,
+  },
+  {
+    id: "LOG-003",
+    user: "unknown",
+    timestamp: "Today, 08:30 AM",
+    ipAddress: "203.0.113.19",
+    device: "Chrome / Windows",
+    status: "Failed" as const,
+  },
+  {
+    id: "LOG-004",
+    user: "Vikram Singh",
+    timestamp: "Today, 07:55 AM",
+    ipAddress: "192.168.1.11",
+    device: "Edge / Windows",
+    status: "Success" as const,
+  },
+  {
+    id: "LOG-005",
+    user: "Sarah Chen",
+    timestamp: "Today, 06:30 AM",
+    ipAddress: "10.0.4.21",
+    device: "Chrome / macOS",
+    status: "Success" as const,
+  },
+  {
+    id: "LOG-006",
+    user: "Priya Nair",
+    timestamp: "May 12, 2025 11:04 AM",
+    ipAddress: "192.168.1.73",
+    device: "Chrome / Android",
+    status: "Failed" as const,
+  },
+];
+
+export const mockUserActivityTrend = [
+  { date: "Apr 20", logins: 38 },
+  { date: "Apr 23", logins: 45 },
+  { date: "Apr 26", logins: 41 },
+  { date: "Apr 29", logins: 52 },
+  { date: "May 2", logins: 49 },
+  { date: "May 5", logins: 58 },
+  { date: "May 8", logins: 61 },
+  { date: "May 11", logins: 55 },
+  { date: "May 14", logins: 64 },
+  { date: "May 17", logins: 60 },
+  { date: "May 20", logins: 67 },
+];
+
+export const mockUsersByDepartment = [
+  { name: "Engineering", value: 42, color: "#4F46E5" },
+  { name: "Sales", value: 15, color: "#3B82F6" },
+  { name: "Finance", value: 18, color: "#10B981" },
+  { name: "Customer Support", value: 9, color: "#F59E0B" },
+  { name: "Human Resources", value: 7, color: "#8B5CF6" },
+];
+
+export const mockUserStatusSummary = { activeCount: 172, inactiveCount: 12 };
+
+/* -------- Regulatory Compliance Management module -------- */
+export const mockComplianceRecords: ComplianceRecord[] = [
+  {
+    id: "CMP-001",
+    regulationName: "GDPR Data Protection",
+    framework: "GDPR",
+    owner: "Neha Sharma",
+    status: "Compliant",
+    dueDate: "Dec 1, 2025",
+    lastReviewed: "May 10, 2025",
+  },
+  {
+    id: "CMP-002",
+    regulationName: "Sarbanes-Oxley Financial Controls",
+    framework: "SOX",
+    owner: "Amit Mehra",
+    status: "Compliant",
+    dueDate: "Sep 30, 2025",
+    lastReviewed: "Apr 28, 2025",
+  },
+  {
+    id: "CMP-003",
+    regulationName: "Information Security Management",
+    framework: "ISO 27001",
+    owner: "Vikram Singh",
+    status: "Pending Review",
+    dueDate: "Jun 15, 2025",
+    lastReviewed: "Mar 2, 2025",
+  },
+  {
+    id: "CMP-004",
+    regulationName: "Factory Labor Standards",
+    framework: "Labor Law",
+    owner: "Priya Nair",
+    status: "Overdue",
+    dueDate: "May 1, 2025",
+    lastReviewed: "Jan 20, 2025",
+  },
+  {
+    id: "CMP-005",
+    regulationName: "Emissions & Waste Disposal",
+    framework: "Environmental",
+    owner: "Rohan Kapoor",
+    status: "Non-Compliant",
+    dueDate: "May 15, 2025",
+    lastReviewed: "Apr 5, 2025",
+  },
+  {
+    id: "CMP-006",
+    regulationName: "Workplace Safety Standards (OSHA-equivalent)",
+    framework: "Labor Law",
+    owner: "Priya Nair",
+    status: "Compliant",
+    dueDate: "Nov 1, 2025",
+    lastReviewed: "May 1, 2025",
+  },
+  {
+    id: "CMP-007",
+    regulationName: "Payment Card Data Security",
+    framework: "ISO 27001",
+    owner: "Vikram Singh",
+    status: "Compliant",
+    dueDate: "Aug 20, 2025",
+    lastReviewed: "Apr 18, 2025",
+  },
+];
+
+export const mockChecklistItems: ChecklistItem[] = [
+  {
+    id: "CHK-001",
+    regulationName: "GDPR Data Protection",
+    framework: "GDPR",
+    checklistItem: "Data Processing Agreement signed with all vendors",
+    completed: true,
+    verifiedBy: "Neha Sharma",
+    verifiedDate: "May 10, 2025",
+  },
+  {
+    id: "CHK-002",
+    regulationName: "GDPR Data Protection",
+    framework: "GDPR",
+    checklistItem: "Data Subject Access Request process documented",
+    completed: true,
+    verifiedBy: "Neha Sharma",
+    verifiedDate: "May 8, 2025",
+  },
+  {
+    id: "CHK-003",
+    regulationName: "Sarbanes-Oxley Financial Controls",
+    framework: "SOX",
+    checklistItem: "Quarterly internal control testing completed",
+    completed: true,
+    verifiedBy: "Amit Mehra",
+    verifiedDate: "Apr 28, 2025",
+  },
+  {
+    id: "CHK-004",
+    regulationName: "Information Security Management",
+    framework: "ISO 27001",
+    checklistItem: "Annual penetration test report reviewed",
+    completed: false,
+    verifiedBy: "",
+    verifiedDate: "",
+  },
+  {
+    id: "CHK-005",
+    regulationName: "Information Security Management",
+    framework: "ISO 27001",
+    checklistItem: "Access control audit for privileged accounts",
+    completed: false,
+    verifiedBy: "",
+    verifiedDate: "",
+  },
+  {
+    id: "CHK-006",
+    regulationName: "Factory Labor Standards",
+    framework: "Labor Law",
+    checklistItem: "Overtime pay records reconciled",
+    completed: false,
+    verifiedBy: "",
+    verifiedDate: "",
+  },
+  {
+    id: "CHK-007",
+    regulationName: "Emissions & Waste Disposal",
+    framework: "Environmental",
+    checklistItem: "Quarterly emissions report filed",
+    completed: false,
+    verifiedBy: "",
+    verifiedDate: "",
+  },
+  {
+    id: "CHK-008",
+    regulationName: "Workplace Safety Standards (OSHA-equivalent)",
+    framework: "Labor Law",
+    checklistItem: "Safety incident log reviewed and closed",
+    completed: true,
+    verifiedBy: "Priya Nair",
+    verifiedDate: "May 1, 2025",
+  },
+];
+
+export const mockRegulatoryDocuments: RegulatoryDocument[] = [
+  {
+    id: "DOC-001",
+    regulationName: "GDPR Data Protection",
+    documentName: "DPA_Vendor_Agreements_2025.pdf",
+    uploadedBy: "Neha Sharma",
+    uploadDate: "May 10, 2025",
+    verificationStatus: "Verified",
+  },
+  {
+    id: "DOC-002",
+    regulationName: "Sarbanes-Oxley Financial Controls",
+    documentName: "Q1_Internal_Controls_Report.pdf",
+    uploadedBy: "Amit Mehra",
+    uploadDate: "Apr 28, 2025",
+    verificationStatus: "Verified",
+  },
+  {
+    id: "DOC-003",
+    regulationName: "Information Security Management",
+    documentName: "Pentest_Report_2025.pdf",
+    uploadedBy: "Vikram Singh",
+    uploadDate: "May 15, 2025",
+    verificationStatus: "Pending",
+  },
+  {
+    id: "DOC-004",
+    regulationName: "Factory Labor Standards",
+    documentName: "Overtime_Records_April.xlsx",
+    uploadedBy: "Priya Nair",
+    uploadDate: "May 3, 2025",
+    verificationStatus: "Pending",
+  },
+  {
+    id: "DOC-005",
+    regulationName: "Emissions & Waste Disposal",
+    documentName: "Emissions_Report_Q1_2025.pdf",
+    uploadedBy: "Rohan Kapoor",
+    uploadDate: "Apr 5, 2025",
+    verificationStatus: "Rejected",
+  },
+  {
+    id: "DOC-006",
+    regulationName: "Payment Card Data Security",
+    documentName: "PCI_DSS_Compliance_Cert.pdf",
+    uploadedBy: "Vikram Singh",
+    uploadDate: "Apr 18, 2025",
+    verificationStatus: "Verified",
+  },
+];
+
+export const mockComplianceScoreTrend = [
+  { month: "Dec '24", score: 82 },
+  { month: "Jan '25", score: 84 },
+  { month: "Feb '25", score: 86 },
+  { month: "Mar '25", score: 85 },
+  { month: "Apr '25", score: 88 },
+  { month: "May '25", score: 87 },
+];
+
+export const mockComplianceStatusBreakdown = [
+  { name: "Compliant", value: 4, color: "#22C55E" },
+  { name: "Non-Compliant", value: 1, color: "#EF4444" },
+  { name: "Pending Review", value: 1, color: "#F59E0B" },
+  { name: "Overdue", value: 1, color: "#9CA3AF" },
+];
+
+export const mockComplianceFrameworkBreakdown = [
+  { name: "GDPR", value: 1, color: "#4F46E5" },
+  { name: "SOX", value: 1, color: "#3B82F6" },
+  { name: "ISO 27001", value: 2, color: "#10B981" },
+  { name: "Labor Law", value: 2, color: "#F59E0B" },
+  { name: "Environmental", value: 1, color: "#8B5CF6" },
+];
+
+/* -------- Manufacturing (MRP) module -------- */
+export const mockBomRecords: BomRecord[] = [
+  {
+    id: "BOM-001",
+    productName: "EV Charging Station - Model A",
+    productCode: "CS-A100",
+    version: "v3.2",
+    componentCount: 24,
+    status: "Active",
+    lastUpdated: "May 12, 2025",
+  },
+  {
+    id: "BOM-002",
+    productName: "EV Charging Station - Model B (Fast)",
+    productCode: "CS-B200",
+    version: "v2.1",
+    componentCount: 31,
+    status: "Active",
+    lastUpdated: "May 8, 2025",
+  },
+  {
+    id: "BOM-003",
+    productName: "Battery Pack Module",
+    productCode: "BP-M500",
+    version: "v1.4",
+    componentCount: 18,
+    status: "Active",
+    lastUpdated: "Apr 28, 2025",
+  },
+  {
+    id: "BOM-004",
+    productName: "Charging Cable Assembly",
+    productCode: "CBL-A10",
+    version: "v4.0",
+    componentCount: 9,
+    status: "Draft",
+    lastUpdated: "May 18, 2025",
+  },
+  {
+    id: "BOM-005",
+    productName: "Wall Mount Charger - Legacy",
+    productCode: "WM-L050",
+    version: "v1.0",
+    componentCount: 12,
+    status: "Obsolete",
+    lastUpdated: "Jan 15, 2025",
+  },
+];
+
+export const mockRoutingRecords: RoutingRecord[] = [
+  {
+    id: "RT-001",
+    productName: "EV Charging Station - Model A",
+    productCode: "CS-A100",
+    workCenter: "Assembly Line 1",
+    sequence: 10,
+    operationName: "Chassis Assembly",
+    standardTimeMins: 45,
+    status: "Active",
+  },
+  {
+    id: "RT-002",
+    productName: "EV Charging Station - Model A",
+    productCode: "CS-A100",
+    workCenter: "Welding Bay",
+    sequence: 20,
+    operationName: "Frame Welding",
+    standardTimeMins: 30,
+    status: "Active",
+  },
+  {
+    id: "RT-003",
+    productName: "EV Charging Station - Model A",
+    productCode: "CS-A100",
+    workCenter: "Paint Shop",
+    sequence: 30,
+    operationName: "Powder Coating",
+    standardTimeMins: 60,
+    status: "Active",
+  },
+  {
+    id: "RT-004",
+    productName: "EV Charging Station - Model B (Fast)",
+    productCode: "CS-B200",
+    workCenter: "Assembly Line 2",
+    sequence: 10,
+    operationName: "Chassis Assembly",
+    standardTimeMins: 50,
+    status: "Active",
+  },
+  {
+    id: "RT-005",
+    productName: "Battery Pack Module",
+    productCode: "BP-M500",
+    workCenter: "Battery Line",
+    sequence: 10,
+    operationName: "Cell Stacking",
+    standardTimeMins: 25,
+    status: "Active",
+  },
+  {
+    id: "RT-006",
+    productName: "Battery Pack Module",
+    productCode: "BP-M500",
+    workCenter: "QC Station",
+    sequence: 20,
+    operationName: "Safety Testing",
+    standardTimeMins: 40,
+    status: "Active",
+  },
+  {
+    id: "RT-007",
+    productName: "Charging Cable Assembly",
+    productCode: "CBL-A10",
+    workCenter: "Cable Shop",
+    sequence: 10,
+    operationName: "Cable Molding",
+    standardTimeMins: 15,
+    status: "Inactive",
+  },
+];
+
+export const mockWorkOrders: WorkOrderRecord[] = [
+  {
+    id: "WO-001",
+    workOrderNo: "WO-2025-0041",
+    productName: "EV Charging Station - Model A",
+    productCode: "CS-A100",
+    quantity: 50,
+    workCenter: "Assembly Line 1",
+    startDate: "May 10, 2025",
+    dueDate: "May 24, 2025",
+    status: "In Progress",
+    qcStatus: "Pending",
+  },
+  {
+    id: "WO-002",
+    workOrderNo: "WO-2025-0042",
+    productName: "EV Charging Station - Model B (Fast)",
+    productCode: "CS-B200",
+    quantity: 30,
+    workCenter: "Assembly Line 2",
+    startDate: "May 12, 2025",
+    dueDate: "May 26, 2025",
+    status: "In Progress",
+    qcStatus: "Pending",
+  },
+  {
+    id: "WO-003",
+    workOrderNo: "WO-2025-0038",
+    productName: "Battery Pack Module",
+    productCode: "BP-M500",
+    quantity: 100,
+    workCenter: "Battery Line",
+    startDate: "May 1, 2025",
+    dueDate: "May 15, 2025",
+    status: "Completed",
+    qcStatus: "Passed",
+  },
+  {
+    id: "WO-004",
+    workOrderNo: "WO-2025-0039",
+    productName: "Charging Cable Assembly",
+    productCode: "CBL-A10",
+    quantity: 200,
+    workCenter: "Cable Shop",
+    startDate: "May 3, 2025",
+    dueDate: "May 17, 2025",
+    status: "Completed",
+    qcStatus: "Failed",
+  },
+  {
+    id: "WO-005",
+    workOrderNo: "WO-2025-0044",
+    productName: "EV Charging Station - Model A",
+    productCode: "CS-A100",
+    quantity: 25,
+    workCenter: "Assembly Line 1",
+    startDate: "May 20, 2025",
+    dueDate: "Jun 3, 2025",
+    status: "Planned",
+    qcStatus: "Pending",
+  },
+  {
+    id: "WO-006",
+    workOrderNo: "WO-2025-0036",
+    productName: "Battery Pack Module",
+    productCode: "BP-M500",
+    quantity: 80,
+    workCenter: "Battery Line",
+    startDate: "Apr 22, 2025",
+    dueDate: "May 6, 2025",
+    status: "On Hold",
+    qcStatus: "Pending",
+  },
+  {
+    id: "WO-007",
+    workOrderNo: "WO-2025-0035",
+    productName: "EV Charging Station - Model B (Fast)",
+    productCode: "CS-B200",
+    quantity: 15,
+    workCenter: "Assembly Line 2",
+    startDate: "Apr 18, 2025",
+    dueDate: "May 2, 2025",
+    status: "Completed",
+    qcStatus: "Passed",
+  },
+];
+
+export const mockQcInspections: QcInspectionEntry[] = [
+  {
+    id: "QC-001",
+    workOrderNo: "WO-2025-0038",
+    productName: "Battery Pack Module",
+    inspector: "Vikram Singh",
+    inspectionDate: "May 15, 2025",
+    qcStatus: "Passed",
+    notes: "All cells within voltage tolerance.",
+  },
+  {
+    id: "QC-002",
+    workOrderNo: "WO-2025-0039",
+    productName: "Charging Cable Assembly",
+    inspector: "Neha Sharma",
+    inspectionDate: "May 17, 2025",
+    qcStatus: "Failed",
+    notes: "Connector molding defect on 12 units — rework required.",
+  },
+  {
+    id: "QC-003",
+    workOrderNo: "WO-2025-0035",
+    productName: "EV Charging Station - Model B (Fast)",
+    inspector: "Vikram Singh",
+    inspectionDate: "May 2, 2025",
+    qcStatus: "Passed",
+    notes: "Passed full functional test suite.",
+  },
+  {
+    id: "QC-004",
+    workOrderNo: "WO-2025-0036",
+    productName: "Battery Pack Module",
+    inspector: "Neha Sharma",
+    inspectionDate: "May 6, 2025",
+    qcStatus: "Pending",
+    notes: "Awaiting safety testing resumption after line hold.",
+  },
+  {
+    id: "QC-005",
+    workOrderNo: "WO-2025-0033",
+    productName: "EV Charging Station - Model A",
+    inspector: "Vikram Singh",
+    inspectionDate: "Apr 20, 2025",
+    qcStatus: "Passed",
+    notes: "Minor cosmetic touch-up, approved.",
+  },
+  {
+    id: "QC-006",
+    workOrderNo: "WO-2025-0031",
+    productName: "Wall Mount Charger - Legacy",
+    inspector: "Neha Sharma",
+    inspectionDate: "Apr 10, 2025",
+    qcStatus: "Failed",
+    notes: "Discontinued model — batch scrapped.",
+  },
+];
+
+export const mockProductionTrend = [
+  { date: "Apr 20", unitsProduced: 42 },
+  { date: "Apr 23", unitsProduced: 48 },
+  { date: "Apr 26", unitsProduced: 45 },
+  { date: "Apr 29", unitsProduced: 52 },
+  { date: "May 2", unitsProduced: 58 },
+  { date: "May 5", unitsProduced: 55 },
+  { date: "May 8", unitsProduced: 61 },
+  { date: "May 11", unitsProduced: 59 },
+  { date: "May 14", unitsProduced: 65 },
+  { date: "May 17", unitsProduced: 63 },
+  { date: "May 20", unitsProduced: 68 },
+];
+
+export const mockWorkOrdersByStatus = [
+  { name: "Planned", value: 1, color: "#3B82F6" },
+  { name: "In Progress", value: 2, color: "#F59E0B" },
+  { name: "Completed", value: 3, color: "#22C55E" },
+  { name: "On Hold", value: 1, color: "#9CA3AF" },
+];
+
+export const mockQcPassRateSummary = { passedCount: 4, failedCount: 2, pendingCount: 3 };
+
+export const mockOnTimeProductionPct = 87;
+
+/* -------- CRM module -------- */
+export const mockLeads: LeadRecord[] = [
+  {
+    id: "LD-001",
+    name: "Rajesh Kumar",
+    company: "GreenFleet Logistics",
+    email: "rajesh.kumar@greenfleet.com",
+    phone: "+91 98765 43210",
+    source: "Website",
+    status: "New",
+    assignedTo: "Sarah Chen",
+    createdDate: "May 18, 2025",
+    supportStatus: "None",
+  },
+  {
+    id: "LD-002",
+    name: "Meera Pillai",
+    company: "Urban Transit Corp",
+    email: "meera.pillai@urbantransit.com",
+    phone: "+91 98765 11223",
+    source: "Referral",
+    status: "Contacted",
+    assignedTo: "David Kim",
+    createdDate: "May 15, 2025",
+    supportStatus: "Open",
+  },
+  {
+    id: "LD-003",
+    name: "Arjun Mehta",
+    company: "Skyline Cabs",
+    email: "arjun.mehta@skylinecabs.com",
+    phone: "+91 98765 33445",
+    source: "Trade Show",
+    status: "Qualified",
+    assignedTo: "Sarah Chen",
+    createdDate: "May 10, 2025",
+    supportStatus: "None",
+  },
+  {
+    id: "LD-004",
+    name: "Kavita Rao",
+    company: "Metro Delivery Services",
+    email: "kavita.rao@metrodelivery.com",
+    phone: "+91 98765 55667",
+    source: "Cold Call",
+    status: "Converted",
+    assignedTo: "David Kim",
+    createdDate: "Apr 28, 2025",
+    supportStatus: "Resolved",
+  },
+  {
+    id: "LD-005",
+    name: "Sanjay Verma",
+    company: "QuickShip Couriers",
+    email: "sanjay.verma@quickship.com",
+    phone: "+91 98765 77889",
+    source: "Website",
+    status: "Converted",
+    assignedTo: "Sarah Chen",
+    createdDate: "Apr 20, 2025",
+    supportStatus: "None",
+  },
+  {
+    id: "LD-006",
+    name: "Divya Nair",
+    company: "CityLink Buses",
+    email: "divya.nair@citylink.com",
+    phone: "+91 98765 99001",
+    source: "Referral",
+    status: "Lost",
+    assignedTo: "David Kim",
+    createdDate: "Apr 12, 2025",
+    supportStatus: "None",
+  },
+  {
+    id: "LD-007",
+    name: "Anil Joshi",
+    company: "FastTrack Freight",
+    email: "anil.joshi@fasttrack.com",
+    phone: "+91 98765 22110",
+    source: "Trade Show",
+    status: "Contacted",
+    assignedTo: "Sarah Chen",
+    createdDate: "May 19, 2025",
+    supportStatus: "None",
+  },
+  {
+    id: "LD-008",
+    name: "Pooja Iyer",
+    company: "Zenith Ride Share",
+    email: "pooja.iyer@zenithride.com",
+    phone: "+91 98765 44556",
+    source: "Website",
+    status: "New",
+    assignedTo: "David Kim",
+    createdDate: "May 20, 2025",
+    supportStatus: "Open",
+  },
+];
+
+export const mockOpportunities: OpportunityRecord[] = [
+  {
+    id: "OPP-001",
+    name: "GreenFleet Logistics - 50 Unit Fleet Charging",
+    accountName: "GreenFleet Logistics",
+    contactName: "Rajesh Kumar",
+    stage: "Prospecting",
+    value: 1250000,
+    assignedTo: "Sarah Chen",
+    closeDate: "Jul 15, 2025",
+    supportStatus: "None",
+  },
+  {
+    id: "OPP-002",
+    name: "Metro Delivery - Depot Charging Rollout",
+    accountName: "Metro Delivery Services",
+    contactName: "Kavita Rao",
+    stage: "Negotiation",
+    value: 3200000,
+    assignedTo: "David Kim",
+    closeDate: "Jun 10, 2025",
+    supportStatus: "Resolved",
+  },
+  {
+    id: "OPP-003",
+    name: "QuickShip Couriers - Pilot Program",
+    accountName: "QuickShip Couriers",
+    contactName: "Sanjay Verma",
+    stage: "Proposal",
+    value: 680000,
+    assignedTo: "Sarah Chen",
+    closeDate: "Jun 25, 2025",
+    supportStatus: "None",
+  },
+  {
+    id: "OPP-004",
+    name: "Skyline Cabs - Charging Network Expansion",
+    accountName: "Skyline Cabs",
+    contactName: "Arjun Mehta",
+    stage: "Qualification",
+    value: 2100000,
+    assignedTo: "David Kim",
+    closeDate: "Aug 1, 2025",
+    supportStatus: "None",
+  },
+  {
+    id: "OPP-005",
+    name: "Urban Transit - Bus Depot Charging",
+    accountName: "Urban Transit Corp",
+    contactName: "Meera Pillai",
+    stage: "Closed Won",
+    value: 4500000,
+    assignedTo: "Sarah Chen",
+    closeDate: "Apr 30, 2025",
+    supportStatus: "Open",
+  },
+  {
+    id: "OPP-006",
+    name: "CityLink Buses - Fleet Electrification",
+    accountName: "CityLink Buses",
+    contactName: "Divya Nair",
+    stage: "Closed Lost",
+    value: 1800000,
+    assignedTo: "David Kim",
+    closeDate: "Apr 18, 2025",
+    supportStatus: "None",
+  },
+  {
+    id: "OPP-007",
+    name: "FastTrack Freight - Regional Charging Hubs",
+    accountName: "FastTrack Freight",
+    contactName: "Anil Joshi",
+    stage: "Prospecting",
+    value: 950000,
+    assignedTo: "Sarah Chen",
+    closeDate: "Sep 5, 2025",
+    supportStatus: "None",
+  },
+];
+
+export const mockConversionRateTrend = [
+  { month: "Dec '24", rate: 18 },
+  { month: "Jan '25", rate: 21 },
+  { month: "Feb '25", rate: 19 },
+  { month: "Mar '25", rate: 24 },
+  { month: "Apr '25", rate: 27 },
+  { month: "May '25", rate: 25 },
+];
+
+export const mockOpportunitiesByStage = [
+  { name: "Prospecting", value: 2, color: "#3B82F6" },
+  { name: "Qualification", value: 1, color: "#8B5CF6" },
+  { name: "Proposal", value: 1, color: "#F59E0B" },
+  { name: "Negotiation", value: 1, color: "#F59E0B" },
+  { name: "Closed Won", value: 1, color: "#22C55E" },
+  { name: "Closed Lost", value: 1, color: "#EF4444" },
+];
+
+export const mockLeadStatusBreakdown = [
+  { name: "New", value: 2, color: "#3B82F6" },
+  { name: "Contacted", value: 2, color: "#F59E0B" },
+  { name: "Qualified", value: 1, color: "#8B5CF6" },
+  { name: "Converted", value: 2, color: "#22C55E" },
+  { name: "Lost", value: 1, color: "#EF4444" },
+];
+
+/* -------- Government Scheme Management module -------- */
+export const mockSchemes: SchemeRecord[] = [
+  {
+    id: "SCH-001",
+    name: "FAME II Subsidy",
+    department: "Ministry of Heavy Industries",
+    grantAmountRange: "₹10L - ₹2Cr",
+    eligibilityCriteria: "EV manufacturers with domestic value addition ≥ 50%.",
+    applicationDeadline: "Mar 31, 2026",
+    status: "Active",
+  },
+  {
+    id: "SCH-002",
+    name: "State EV Manufacturing Incentive",
+    department: "State Industries Department",
+    grantAmountRange: "₹5L - ₹1.5Cr",
+    eligibilityCriteria: "Manufacturing units located within state EV corridor zones.",
+    applicationDeadline: "Dec 15, 2025",
+    status: "Active",
+  },
+  {
+    id: "SCH-003",
+    name: "PLI Scheme for Auto Components",
+    department: "Ministry of Heavy Industries",
+    grantAmountRange: "₹20L - ₹5Cr",
+    eligibilityCriteria: "Auto component manufacturers with min. annual turnover threshold.",
+    applicationDeadline: "Jun 30, 2026",
+    status: "Active",
+  },
+  {
+    id: "SCH-004",
+    name: "Green Energy Infrastructure Grant",
+    department: "Ministry of Power",
+    grantAmountRange: "₹7.5L - ₹80L",
+    eligibilityCriteria: "Charging infrastructure projects connected to renewable energy sources.",
+    applicationDeadline: "Sep 1, 2025",
+    status: "Active",
+  },
+  {
+    id: "SCH-005",
+    name: "Export Promotion Capital Goods Scheme",
+    department: "Ministry of Commerce",
+    grantAmountRange: "₹3L - ₹60L",
+    eligibilityCriteria: "Manufacturers exporting a minimum percentage of production output.",
+    applicationDeadline: "Jan 10, 2025",
+    status: "Expired",
+  },
+];
+
+export const mockApplications: ApplicationRecord[] = [
+  {
+    id: "APP-001",
+    applicationNo: "GSA-2025-014",
+    schemeName: "FAME II Subsidy",
+    department: "Manufacturing",
+    grantAmount: 850000,
+    stage: "Monitoring",
+    assignedTo: "Neha Sharma",
+    submittedDate: "Feb 10, 2025",
+    lastUpdated: "May 12, 2025",
+  },
+  {
+    id: "APP-002",
+    applicationNo: "GSA-2025-021",
+    schemeName: "State EV Manufacturing Incentive",
+    department: "Manufacturing",
+    grantAmount: 620000,
+    stage: "Submission",
+    assignedTo: "Amit Mehra",
+    submittedDate: "Apr 2, 2025",
+    lastUpdated: "May 15, 2025",
+  },
+  {
+    id: "APP-003",
+    applicationNo: "GSA-2025-027",
+    schemeName: "PLI Scheme for Auto Components",
+    department: "R&D",
+    grantAmount: 2100000,
+    stage: "Approval",
+    assignedTo: "Vikram Singh",
+    submittedDate: "Apr 20, 2025",
+    lastUpdated: "May 18, 2025",
+  },
+  {
+    id: "APP-004",
+    applicationNo: "GSA-2025-030",
+    schemeName: "Green Energy Infrastructure Grant",
+    department: "Operations",
+    grantAmount: 340000,
+    stage: "DPR",
+    assignedTo: "Neha Sharma",
+    submittedDate: "May 5, 2025",
+    lastUpdated: "May 19, 2025",
+  },
+  {
+    id: "APP-005",
+    applicationNo: "GSA-2025-032",
+    schemeName: "FAME II Subsidy",
+    department: "R&D",
+    grantAmount: 500000,
+    stage: "Eligibility",
+    assignedTo: "Amit Mehra",
+    submittedDate: "May 12, 2025",
+    lastUpdated: "May 17, 2025",
+  },
+  {
+    id: "APP-006",
+    applicationNo: "GSA-2025-033",
+    schemeName: "State EV Manufacturing Incentive",
+    department: "Manufacturing",
+    grantAmount: 410000,
+    stage: "Scheme Search",
+    assignedTo: "Vikram Singh",
+    submittedDate: "May 19, 2025",
+    lastUpdated: "May 19, 2025",
+  },
+  {
+    id: "APP-007",
+    applicationNo: "GSA-2025-009",
+    schemeName: "PLI Scheme for Auto Components",
+    department: "Manufacturing",
+    grantAmount: 1750000,
+    stage: "Monitoring",
+    assignedTo: "Neha Sharma",
+    submittedDate: "Jan 15, 2025",
+    lastUpdated: "May 1, 2025",
+  },
+];
+
+export const mockGrantsAppliedTrend = [
+  { month: "Dec '24", count: 2 },
+  { month: "Jan '25", count: 3 },
+  { month: "Feb '25", count: 1 },
+  { month: "Mar '25", count: 2 },
+  { month: "Apr '25", count: 3 },
+  { month: "May '25", count: 4 },
+];
+
+export const mockApplicationsByScheme = [
+  { name: "FAME II Subsidy", value: 2, color: "#4F46E5" },
+  { name: "State EV Manufacturing Incentive", value: 2, color: "#3B82F6" },
+  { name: "PLI Scheme for Auto Components", value: 2, color: "#10B981" },
+  { name: "Green Energy Infrastructure Grant", value: 1, color: "#F59E0B" },
+];
+
+export const mockApplicationsByStage = [
+  { name: "Scheme Search", value: 1, color: "#F59E0B" },
+  { name: "Eligibility", value: 1, color: "#F59E0B" },
+  { name: "DPR", value: 1, color: "#F59E0B" },
+  { name: "Approval", value: 1, color: "#F59E0B" },
+  { name: "Submission", value: 1, color: "#22C55E" },
+  { name: "Monitoring", value: 2, color: "#22C55E" },
+];
+
 export function formatCurrency(n: number, compact = false) {
   const sign = n < 0 ? "-" : "";
   const v = Math.abs(n);
   if (compact) {
-    if (v >= 1_000_000) {
-      const millions = (v / 1_000_000).toLocaleString("en-US", {
+    if (v >= 1_00_00_000) {
+      const crores = (v / 1_00_00_000).toLocaleString("en-IN", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       });
-      return `${sign}$${millions}M`;
+      return `${sign}₹${crores}Cr`;
     }
-    if (v >= 1_000) return `${sign}$${(v / 1_000).toFixed(1)}K`;
+    if (v >= 1_00_000) {
+      const lakhs = (v / 1_00_000).toLocaleString("en-IN", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+      return `${sign}₹${lakhs}L`;
+    }
   }
-  return `${sign}$${v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  return `${sign}₹${v.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
 export function formatSignedCurrency(n: number, compact = false) {

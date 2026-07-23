@@ -100,7 +100,7 @@ function RevenuePage() {
                   fontSize={12}
                   tickLine={false}
                   axisLine={false}
-                  tickFormatter={(v) => `${(v / 100000).toFixed(0)}L`}
+                  tickFormatter={(v) => `₹${(v / 100000).toFixed(0)}L`}
                 />
                 <Tooltip
                   contentStyle={{
@@ -178,7 +178,7 @@ function RevenuePage() {
                 fontSize={11}
                 tickLine={false}
                 axisLine={false}
-                tickFormatter={(v) => `${(v / 100000).toFixed(0)}L`}
+                tickFormatter={(v) => `₹${(v / 100000).toFixed(0)}L`}
               />
               <YAxis
                 dataKey="station"

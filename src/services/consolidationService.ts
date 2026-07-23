@@ -51,7 +51,7 @@ export function runConsolidation(
       log: [
         "Data collection completed for 12 entities.",
         "Currency translation calculations executed cleanly.",
-        "Intercompany transactions matched (Variance: $0).",
+        "Intercompany transactions matched (Variance: ₹0).",
         "Elimination journal entries posted (Total: 156 entries).",
         "Consolidation process completed successfully.",
       ],

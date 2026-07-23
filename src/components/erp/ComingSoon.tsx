@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { AppShell } from "@/components/erp/AppShell";
 import { Sparkles } from "lucide-react";
 
@@ -5,13 +6,15 @@ export function ComingSoon({
   title,
   breadcrumb = "Financial Management",
   description,
+  tabs,
 }: {
   title: string;
   breadcrumb?: string;
   description?: string;
+  tabs?: ReactNode;
 }) {
   return (
-    <AppShell title={title} breadcrumb={breadcrumb} description={description}>
+    <AppShell title={title} breadcrumb={breadcrumb} description={description} tabs={tabs}>
       <div className="card-soft grid place-items-center px-6 py-20 text-center">
         <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary/10 text-primary">
           <Sparkles className="h-6 w-6" />

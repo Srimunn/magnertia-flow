@@ -1,6 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { KPIWidgetCard } from "@/widgets/components/WidgetCustomizer";
 
 type Tone = "default" | "success" | "warning" | "danger";
 
@@ -27,18 +28,33 @@ export function KpiCard({
   }[tone];
 
   return (
-    <div className="card-soft p-5 transition-shadow hover:shadow-[var(--shadow-elevated)]">
+    <KPIWidgetCard label={label} value={value} className="card-soft p-5" actionsPosition="right">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          <div
+            className="truncate text-xs font-medium uppercase tracking-wider text-muted-foreground"
+            title={label}
+          >
             {label}
           </div>
-          <div className="mt-2 font-display text-2xl font-bold tracking-tight text-foreground">
+          <div
+            className="mt-2 truncate font-display text-2xl font-bold tracking-tight text-foreground"
+            title={value}
+          >
             {value}
           </div>
-          {hint && <div className="mt-1 text-xs text-muted-foreground">{hint}</div>}
+          {hint && (
+            <div className="mt-1 truncate text-xs text-muted-foreground" title={hint}>
+              {hint}
+            </div>
+          )}
         </div>
-        <div className={cn("grid h-10 w-10 shrink-0 place-items-center rounded-xl", toneRing)}>
+        <div
+          className={cn(
+            "grid h-10 w-10 shrink-0 place-items-center rounded-xl transition-all duration-200 group-hover:opacity-0 group-hover:scale-75",
+            toneRing,
+          )}
+        >
           <Icon className="h-5 w-5" />
         </div>
       </div>
@@ -60,6 +76,6 @@ export function KpiCard({
           <span className="text-muted-foreground">vs last month</span>
         </div>
       )}
-    </div>
+    </KPIWidgetCard>
   );
 }

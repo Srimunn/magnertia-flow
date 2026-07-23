@@ -12,4 +12,19 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    // dnd-kit is only reached through a lazy import (the widget Edit Mode
+    // layer), so Vite would otherwise discover it late and pre-bundle it in a
+    // second pass — producing a second copy of React and an "Invalid hook call"
+    // the moment Edit Mode opens. Listing it here forces it into the initial
+    // optimize pass alongside React.
+    optimizeDeps: {
+      include: ["@dnd-kit/core", "@dnd-kit/sortable", "@dnd-kit/utilities", "@dnd-kit/modifiers"],
+    },
+    build: {
+      rollupOptions: {
+        external: ["mongodb"],
+      },
+    },
+  },
 });

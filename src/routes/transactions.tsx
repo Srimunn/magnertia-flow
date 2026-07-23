@@ -355,7 +355,7 @@ function TransactionsPage() {
       </div>
 
       <div className="mt-4 flex justify-center text-[11px] text-muted-foreground">
-        All amounts are in USD &nbsp;|&nbsp; Data as of: May 20, 2025 10:30 AM
+        All amounts are in INR &nbsp;|&nbsp; Data as of: May 20, 2025 10:30 AM
       </div>
     </AppShell>
   );

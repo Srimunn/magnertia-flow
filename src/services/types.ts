@@ -274,6 +274,152 @@ export type TrialBalanceReport = {
 };
 
 // ---------------------------------------------------------------------------
+// General Ledger — Journal Entry & Approval Workflow (live, Postgres-backed)
+// ---------------------------------------------------------------------------
+
+export type JournalTypeValue = "Manual" | "Automatic" | "Recurring" | "Reversing";
+export type JournalStatusValue = "Draft" | "Approved" | "Posted" | "Closed" | "Reversed";
+export type ApprovalLevelName =
+  "Accountant" | "Finance Manager" | "Financial Controller" | "CFO" | "CEO";
+export type ApprovalStepStatusValue = "Pending" | "Approved" | "Rejected";
+
+export type JournalLineInput = {
+  accountCode: string;
+  accountName: string;
+  description: string;
+  debit: number;
+  credit: number;
+  dimensions?: {
+    costCenter?: string;
+    profitCenter?: string;
+    businessUnit?: string;
+    project?: string;
+    department?: string;
+    product?: string;
+    customer?: string;
+    vendor?: string;
+  };
+};
+
+export type ApprovalStepRecord = {
+  level: ApprovalLevelName;
+  approverName: string;
+  status: ApprovalStepStatusValue;
+  date: string | null;
+};
+
+export type CurrencyInfo = {
+  transactionCurrency: string;
+  baseCurrency: string;
+  exchangeRate: number;
+  exchangeRateDate: string;
+  foreignCurrencyGainLoss: number;
+};
+
+export type TaxInfo = {
+  gstType: string;
+  gstin: string;
+  taxCode: string;
+  taxAmount: number;
+  reverseCharge: boolean;
+  tds: number;
+  tcs: number;
+};
+
+export type DocumentSlot = {
+  status: "Attached" | "Not Attached";
+  fileName?: string;
+  fileSize?: number;
+  fileType?: string;
+  fileData?: string; // base64-encoded file content, stored directly in MongoDB
+  uploadedAt?: string;
+};
+
+export type SupportingDocumentsInfo = {
+  journalVoucher: DocumentSlot;
+  invoice: DocumentSlot;
+  purchaseOrder: DocumentSlot;
+  paymentVoucher: DocumentSlot;
+  bankStatement: DocumentSlot;
+  taxDocument: DocumentSlot;
+  approvalRecord: DocumentSlot;
+};
+
+export type JournalMetadata = {
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  journalVersion: number;
+  erpReferenceNumber: string;
+  fiscalCalendar: string;
+  auditTrail: boolean;
+  digitalSignature: boolean;
+  recordStatus: "Active" | "Archived";
+};
+
+export type JournalRecord = {
+  id: string;
+  journalNumber: string;
+  voucherNumber: string | null;
+  postingDate: string;
+  accountingDate: string;
+  fiscalYear: string;
+  accountingPeriod: string;
+  journalType: JournalTypeValue;
+  status: JournalStatusValue;
+  companyId: string | null;
+  businessUnitId: string | null;
+  divisionId: string | null;
+  branchId: string | null;
+  costCenterId: string | null;
+  profitCenterId: string | null;
+  projectId: string | null;
+  departmentId: string | null;
+  lines: JournalLineInput[];
+  totalDebit: number;
+  totalCredit: number;
+  approvalSteps: ApprovalStepRecord[];
+  createdAt: string;
+  currencyInfo?: CurrencyInfo;
+  taxInfo?: TaxInfo;
+  supportingDocuments?: SupportingDocumentsInfo;
+  metadataInfo?: JournalMetadata;
+};
+
+export type NewJournalInput = {
+  voucherNumber?: string;
+  postingDate: string;
+  accountingDate: string;
+  fiscalYear: string;
+  accountingPeriod: string;
+  journalType: JournalTypeValue;
+  companyId?: string;
+  businessUnitId?: string;
+  divisionId?: string;
+  branchId?: string;
+  costCenterId?: string;
+  profitCenterId?: string;
+  projectId?: string;
+  departmentId?: string;
+  lines: JournalLineInput[];
+  currencyInfo?: CurrencyInfo;
+  taxInfo?: TaxInfo;
+  supportingDocuments?: SupportingDocumentsInfo;
+  metadataInfo?: JournalMetadata;
+};
+
+export type NewAccountInput = {
+  code: string;
+  name: string;
+  parentAccountCode?: string | null;
+  type: AccountType;
+  group: string;
+  currency: string;
+  isActive: boolean;
+};
+
+// ---------------------------------------------------------------------------
 // Accounts Payable module
 // ---------------------------------------------------------------------------
 
@@ -1315,7 +1461,7 @@ export type AuditLogEntry = {
   details?: {
     before?: Record<string, unknown>;
     after?: Record<string, unknown>;
-    metadata?: Record<string, string>;
+    metadata?: Record<string, string | undefined>;
   };
 };
 
@@ -1368,3 +1514,4517 @@ export type AuditDashboardData = {
   securityEvents: SecurityEventEntry[];
   configLogs: ConfigurationLogEntry[];
 };
+
+// ---------------------------------------------------------------------------
+// Administration module (Company, Branch, Department, Role, User)
+// ---------------------------------------------------------------------------
+
+export type CompanyRecord = {
+  id: string;
+  code: string;
+  name: string;
+  taxId: string;
+  status: "Active" | "Inactive";
+  branchCount: number;
+  createdDate: string;
+};
+
+export type NewCompanyInput = {
+  code: string;
+  name: string;
+  taxId: string;
+};
+
+export type BranchRecord = {
+  id: string;
+  code: string;
+  name: string;
+  companyId: string;
+  companyName: string;
+  city: string;
+  status: "Active" | "Inactive";
+  departmentCount: number;
+};
+
+export type NewBranchInput = {
+  code: string;
+  name: string;
+  companyId: string;
+  city: string;
+};
+
+export type DepartmentRecord = {
+  id: string;
+  code: string;
+  name: string;
+  companyId: string;
+  branchId: string;
+  branchName: string;
+  head: string;
+  employeeCount: number;
+  status: "Active" | "Inactive";
+};
+
+export type NewDepartmentInput = {
+  code: string;
+  name: string;
+  branchId: string;
+  head: string;
+};
+
+export type RoleRecord = {
+  id: string;
+  name: string;
+  description: string;
+  permissionsCount: number;
+  usersAssignedCount: number;
+  status: "Active" | "Inactive";
+};
+
+export type NewRoleInput = {
+  name: string;
+  description: string;
+};
+
+export type UserRecord = {
+  id: string;
+  name: string;
+  email: string;
+  companyName: string;
+  branchName: string;
+  department: string;
+  role: string;
+  status: "Active" | "Inactive" | "Locked";
+  lastLogin: string;
+};
+
+export type NewUserInput = {
+  name: string;
+  email: string;
+  department: string;
+  role: string;
+};
+
+export type LoginHistoryEntry = {
+  id: string;
+  user: string;
+  timestamp: string;
+  ipAddress: string;
+  device: string;
+  status: "Success" | "Failed";
+};
+
+export type AdminHomeDashboardData = {
+  kpis: {
+    activeUsersCount: number;
+    branchCount: number;
+    loginsToday: number;
+  };
+  companies: CompanyRecord[];
+  recentLogins: LoginHistoryEntry[];
+  activityTrend: { date: string; logins: number }[];
+  usersByDepartment: { name: string; value: number; color: string }[];
+  userStatusSummary: { activeCount: number; inactiveCount: number };
+};
+
+// ---------------------------------------------------------------------------
+// Regulatory Compliance Management module
+// ---------------------------------------------------------------------------
+
+export type ComplianceStatus = "Compliant" | "Non-Compliant" | "Pending Review" | "Overdue";
+
+export type ComplianceRecord = {
+  id: string;
+  regulationName: string;
+  framework: string;
+  owner: string;
+  status: ComplianceStatus;
+  dueDate: string;
+  lastReviewed: string;
+};
+
+export type NewComplianceRecordInput = {
+  regulationName: string;
+  framework: string;
+  owner: string;
+  dueDate: string;
+};
+
+export type ChecklistItem = {
+  id: string;
+  regulationName: string;
+  framework: string;
+  checklistItem: string;
+  completed: boolean;
+  verifiedBy: string;
+  verifiedDate: string;
+};
+
+export type RegulatoryDocument = {
+  id: string;
+  regulationName: string;
+  documentName: string;
+  uploadedBy: string;
+  uploadDate: string;
+  verificationStatus: "Verified" | "Pending" | "Rejected";
+};
+
+export type ComplianceDashboardData = {
+  kpis: {
+    complianceScore: number;
+  };
+  records: ComplianceRecord[];
+  recentDocuments: RegulatoryDocument[];
+  scoreTrend: { month: string; score: number }[];
+  statusBreakdown: { name: string; value: number; color: string }[];
+  frameworkBreakdown: { name: string; value: number; color: string }[];
+};
+
+// ---------------------------------------------------------------------------
+// Manufacturing (MRP) module
+// ---------------------------------------------------------------------------
+
+export type BomStatus = "Draft" | "Active" | "Obsolete";
+
+export type BomRecord = {
+  id: string;
+  productName: string;
+  productCode: string;
+  version: string;
+  componentCount: number;
+  status: BomStatus;
+  lastUpdated: string;
+};
+
+export type NewBomInput = {
+  productName: string;
+  productCode: string;
+  version: string;
+};
+
+export type RoutingRecord = {
+  id: string;
+  productName: string;
+  productCode: string;
+  workCenter: string;
+  sequence: number;
+  operationName: string;
+  standardTimeMins: number;
+  status: "Active" | "Inactive";
+};
+
+export type NewRoutingInput = {
+  productName: string;
+  productCode: string;
+  workCenter: string;
+  operationName: string;
+  standardTimeMins: number;
+};
+
+export type WorkOrderStatus = "Planned" | "In Progress" | "Completed" | "On Hold";
+export type QcStatus = "Passed" | "Failed" | "Pending";
+
+export type WorkOrderRecord = {
+  id: string;
+  workOrderNo: string;
+  productName: string;
+  productCode: string;
+  quantity: number;
+  workCenter: string;
+  startDate: string;
+  dueDate: string;
+  status: WorkOrderStatus;
+  qcStatus: QcStatus;
+};
+
+export type NewWorkOrderInput = {
+  productName: string;
+  productCode: string;
+  quantity: number;
+  workCenter: string;
+  dueDate: string;
+};
+
+export type QcInspectionEntry = {
+  id: string;
+  workOrderNo: string;
+  productName: string;
+  inspector: string;
+  inspectionDate: string;
+  qcStatus: QcStatus;
+  notes: string;
+};
+
+export type ManufacturingDashboardData = {
+  kpis: {
+    onTimeProductionPct: number;
+  };
+  bomRecords: BomRecord[];
+  workOrders: WorkOrderRecord[];
+  recentQcInspections: QcInspectionEntry[];
+  productionTrend: { date: string; unitsProduced: number }[];
+  workOrdersByStatus: { name: string; value: number; color: string }[];
+  qcPassRateSummary: { passedCount: number; failedCount: number; pendingCount: number };
+};
+
+// ---------------------------------------------------------------------------
+// CRM module
+// ---------------------------------------------------------------------------
+
+export type LeadStatus = "New" | "Contacted" | "Qualified" | "Converted" | "Lost";
+// Lightweight reference field only (not a ticket/case system) — see the
+// module's "Customer Support" note. "None" = no support involvement.
+export type SupportStatus = "None" | "Open" | "Resolved";
+
+export type LeadRecord = {
+  id: string;
+  name: string;
+  company: string;
+  email: string;
+  phone: string;
+  source: string;
+  status: LeadStatus;
+  assignedTo: string;
+  createdDate: string;
+  supportStatus: SupportStatus;
+};
+
+export type NewLeadInput = {
+  name: string;
+  company: string;
+  email: string;
+  phone: string;
+  source: string;
+};
+
+export type OpportunityStage =
+  "Prospecting" | "Qualification" | "Proposal" | "Negotiation" | "Closed Won" | "Closed Lost";
+
+export type OpportunityRecord = {
+  id: string;
+  name: string;
+  accountName: string;
+  contactName: string;
+  stage: OpportunityStage;
+  value: number;
+  assignedTo: string;
+  closeDate: string;
+  supportStatus: SupportStatus;
+};
+
+export type NewOpportunityInput = {
+  name: string;
+  accountName: string;
+  contactName: string;
+  value: number;
+  closeDate: string;
+};
+
+export type CrmDashboardData = {
+  kpis: {
+    totalLeads: number;
+    totalContacts: number;
+    totalOpportunities: number;
+    wonDeals: number;
+  };
+  leads: LeadRecord[];
+  opportunities: OpportunityRecord[];
+  conversionRateTrend: { month: string; rate: number }[];
+  opportunitiesByStage: { name: string; value: number; color: string }[];
+  leadStatusBreakdown: { name: string; value: number; color: string }[];
+};
+
+// ---------------------------------------------------------------------------
+// Government Scheme Management module
+// ---------------------------------------------------------------------------
+
+export type SchemeStatus = "Active" | "Inactive" | "Expired";
+
+export type SchemeRecord = {
+  id: string;
+  name: string;
+  department: string;
+  grantAmountRange: string;
+  eligibilityCriteria: string;
+  applicationDeadline: string;
+  status: SchemeStatus;
+};
+
+export type NewSchemeInput = {
+  name: string;
+  department: string;
+  grantAmountRange: string;
+  eligibilityCriteria: string;
+  applicationDeadline: string;
+};
+
+export type ApplicationStage =
+  "Scheme Search" | "Eligibility" | "DPR" | "Approval" | "Submission" | "Monitoring";
+
+export type ApplicationRecord = {
+  id: string;
+  applicationNo: string;
+  schemeName: string;
+  department: string;
+  grantAmount: number;
+  stage: ApplicationStage;
+  assignedTo: string;
+  submittedDate: string;
+  lastUpdated: string;
+};
+
+export type NewApplicationInput = {
+  schemeName: string;
+  department: string;
+  grantAmount: number;
+  assignedTo: string;
+};
+
+export type GovSchemeDashboardData = {
+  kpis: {
+    totalApplied: number;
+    approved: number;
+    pending: number;
+  };
+  schemes: SchemeRecord[];
+  applications: ApplicationRecord[];
+  grantsAppliedTrend: { month: string; count: number }[];
+  applicationsByScheme: { name: string; value: number; color: string }[];
+  applicationsByStage: { name: string; value: number; color: string }[];
+};
+
+// ---------------------------------------------------------------------------
+// Legal Firms Management module
+// ---------------------------------------------------------------------------
+
+export type LegalCaseStage =
+  "Requirement" | "Assign Law Firm" | "Opinion" | "Documentation" | "Closure";
+
+export type LegalFirmRecord = {
+  id: string;
+  name: string;
+  primaryPracticeArea: string;
+  contactPerson: string;
+  email: string;
+  phone: string;
+  status: "Active" | "Inactive";
+  rating: number;
+  casesCount: number;
+  totalSpend: number;
+};
+
+export type LegalCaseRecord = {
+  id: string;
+  caseNo: string;
+  title: string;
+  description: string;
+  stage: LegalCaseStage;
+  priority: "High" | "Medium" | "Low";
+  assignedFirmId?: string;
+  assignedFirmName?: string;
+  department: string;
+  filedDate: string;
+  closedDate?: string;
+  spendAmount: number;
+  lastUpdated: string;
+  status: "Active" | "Closed" | "Pending";
+};
+
+export type LegalCaseHistoryRecord = {
+  id: string;
+  caseId: string;
+  caseNo: string;
+  caseTitle: string;
+  action: string;
+  performedBy: string;
+  timestamp: string;
+  notes?: string;
+};
+
+export type NewLegalCaseInput = {
+  title: string;
+  description: string;
+  priority: "High" | "Medium" | "Low";
+  assignedFirmId?: string;
+  department: string;
+};
+
+export type NewLegalFirmInput = {
+  name: string;
+  primaryPracticeArea: string;
+  contactPerson: string;
+  email: string;
+  phone: string;
+};
+
+export type LegalFirmDashboardData = {
+  kpis: {
+    totalCases: number;
+    activeCases: number;
+    underOpinion: number;
+    inDocumentation: number;
+    closedCases: number;
+  };
+  cases: LegalCaseRecord[];
+  firms: LegalFirmRecord[];
+  history: LegalCaseHistoryRecord[];
+  casesTrend: { month: string; count: number }[];
+  casesByStage: { name: string; value: number; color: string }[];
+  firmAllocation: { name: string; value: number; color: string }[];
+};
+
+/* ===========================================================================
+   Idea Management (Development → Research & Innovation Development)
+   ---------------------------------------------------------------------------
+   Data model for the innovation pipeline. AI Evaluation (Section 13) is
+   intentionally excluded here — no AI score/recommendation fields exist on any
+   type below, and the workflow skips the AI Preliminary Evaluation step.
+   All scores below are CALCULATED from the manually-entered ratings.
+   =========================================================================== */
+
+/** Workflow stage = the idea's current status. Real transitions are recorded
+ *  in `IdeaRecord.workflow`, not just this label. */
+export type IdeaStatus =
+  | "Draft"
+  | "Submitted"
+  | "Initial Screening"
+  | "Technical Review"
+  | "Business Review"
+  | "Patentability Review"
+  | "Innovation Committee Review"
+  | "Approved"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected"
+  | "Archived"
+  | "Converted to Feasibility Study";
+
+/** The reviewer roles that act at each review stage (simulated — no real RBAC
+ *  engine yet). "Employee" and "System" are non-reviewer actors. */
+export type IdeaReviewerRole =
+  | "Department Manager"
+  | "Technical Reviewer"
+  | "Business Reviewer"
+  | "IP & Patent Team"
+  | "Innovation Committee";
+
+export type IdeaActorRole = IdeaReviewerRole | "Employee" | "System";
+
+export type IdeaPriority = "Low" | "Medium" | "High" | "Critical";
+
+/** Decision a reviewer can record at their stage. */
+export type IdeaDecision =
+  | "Pending"
+  | "Forwarded"
+  | "Returned for Correction"
+  | "Approved"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected";
+
+/** One real state-change record (IDEA_WORKFLOW). */
+export interface IdeaWorkflowEntry {
+  fromStatus: IdeaStatus | null;
+  toStatus: IdeaStatus;
+  action: string;
+  actorRole: IdeaActorRole;
+  actorName: string;
+  comment?: string;
+  at: string;
+}
+
+/** One reviewer decision at a review stage (IDEA_APPROVALS). */
+export interface IdeaApproval {
+  stage: IdeaStatus;
+  role: IdeaReviewerRole;
+  decision: IdeaDecision;
+  reviewer: string;
+  date: string | null;
+  comment?: string;
+}
+
+/** Activity / comments feed (IDEA_HISTORY). */
+export interface IdeaHistoryEntry {
+  at: string;
+  actor: string;
+  actorRole: IdeaActorRole;
+  action: string;
+  detail?: string;
+}
+
+/** Automatic ERP activity record (IDEA_AUDIT_LOG). */
+export interface IdeaAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+}
+
+/** File metadata only for now — mock URL, no real cloud storage (IDEA_ATTACHMENTS). */
+export type IdeaAttachmentCategory =
+  | "Sketches"
+  | "Drawings"
+  | "Images"
+  | "CAD Files"
+  | "Documents"
+  | "Research Papers"
+  | "Patent Documents"
+  | "Videos"
+  | "Presentations";
+
+export interface IdeaAttachment {
+  id: string;
+  category: IdeaAttachmentCategory;
+  filename: string;
+  fileType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  url: string;
+}
+
+/** Section 1 — Basic Information (IDEA_MASTER core). */
+export interface IdeaBasic {
+  title: string;
+  shortDescription: string;
+  detailedDescription: string;
+  category: string;
+  subCategory: string;
+  businessUnit: string;
+  department: string;
+  productLine: string;
+  project: string;
+  strategicInitiative: string;
+  innovationTheme: string;
+  teamMembers: string[];
+}
+
+/** Section 2 — Idea Classification (IDEA_CATEGORY). */
+export interface IdeaClassification {
+  innovationType: string;
+  innovationLevel: string;
+  technologyArea: string[];
+  industry: string;
+  applicationArea: string;
+  marketSegment: string;
+  customerType: string;
+  productCategory: string;
+  internalExternal: string;
+  openInnovation: boolean;
+}
+
+/** Section 3 — Problem Statement. */
+export interface IdeaProblem {
+  existingProblem: string;
+  currentSolution: string;
+  painPoints: string;
+  rootCause: string;
+  opportunityDescription: string;
+  customerNeed: string;
+  evidenceAvailable: boolean;
+}
+
+/** Section 4 — Proposed Solution. */
+export interface IdeaSolution {
+  proposedSolution: string;
+  uniqueValueProposition: string;
+  keyFeatures: string;
+  technologyUsed: string[];
+  noveltyDescription: string;
+  competitiveAdvantage: string;
+  expectedBenefits: string;
+}
+
+/** Section 5 — Innovation Assessment (ratings 1–10). */
+export interface IdeaInnovation {
+  technicalNovelty: number;
+  businessValue: number;
+  customerValue: number;
+  strategicAlignment: number;
+  scalability: number;
+  sustainability: number;
+  complexity: number;
+  riskLevel: number;
+}
+
+/** Section 6 — Business Impact. */
+export interface IdeaBusinessImpact {
+  expectedRevenue: number;
+  costSaving: number;
+  timeSaving: number;
+  productivityImprovement: number;
+  qualityImprovement: number;
+  customerSatisfactionImpact: number;
+  marketExpansionPotential: number;
+  competitiveDifferentiation: number;
+}
+
+/** Section 7 — Technical Feasibility. */
+export interface IdeaTechnical {
+  technologyReadinessLevel: string;
+  technologyAvailability: string;
+  requiredRnD: boolean;
+  prototypeRequired: boolean;
+  estimatedDevelopmentTime: number;
+  estimatedDevelopmentCost: number;
+  requiredResources: string;
+  requiredSkills: string;
+}
+
+/** Section 8 — Intellectual Property. Workflow-driven fields (patentSearchStatus,
+ *  ipRisk, patentRecommendation) are filled by the IP & Patent Team at review. */
+export interface IdeaIP {
+  patentable: boolean;
+  patentSearchCompleted: boolean;
+  existingPatentReferences: string[];
+  tradeSecret: boolean;
+  copyrightApplicable: boolean;
+  trademarkApplicable: boolean;
+  ipComments: string;
+  patentSearchStatus: string | null;
+  ipRisk: string | null;
+  patentRecommendation: string | null;
+}
+
+/** Section 9 — Market Opportunity. */
+export interface IdeaMarket {
+  targetMarket: string;
+  marketSize: number;
+  tam: number;
+  sam: number;
+  som: number;
+  marketGrowthRate: number;
+  customerDemand: number;
+  competitorAvailability: string;
+  marketReadiness: number;
+}
+
+/** Section 10 — Risk Assessment (ratings 1–10). */
+export interface IdeaRisk {
+  technicalRisk: number;
+  financialRisk: number;
+  marketRisk: number;
+  regulatoryRisk: number;
+  operationalRisk: number;
+  supplyChainRisk: number;
+}
+
+/** Section 11 — ESG Assessment (ratings 1–10). */
+export interface IdeaESG {
+  environmentalImpact: number;
+  energyEfficiency: number;
+  carbonReduction: number;
+  wasteReduction: number;
+  socialImpact: number;
+  governanceImpact: number;
+}
+
+/** Section 12 — Financial Estimation. Manual inputs + calculated outputs. */
+export interface IdeaFinancials {
+  estimatedInvestment: number;
+  fundingRequired: number;
+  // Calculated (C):
+  expectedROI: number;
+  paybackPeriod: number;
+  estimatedProfitMargin: number;
+  estimatedBreakEven: number;
+}
+
+/** ERP Calculations (IDEA_SCORES). All derived from manual ratings — 0..100. */
+export interface IdeaScores {
+  overallInnovationScore: number;
+  technicalFeasibilityScore: number;
+  businessFeasibilityScore: number;
+  marketOpportunityScore: number;
+  riskScore: number;
+  esgScore: number;
+  overallEvaluationScore: number;
+  ideaRanking: string;
+}
+
+/** The editable (M) payload the wizard submits. A/C/W fields are server-owned. */
+export interface IdeaFormInput {
+  basic: IdeaBasic;
+  classification: IdeaClassification;
+  problem: IdeaProblem;
+  solution: IdeaSolution;
+  innovation: IdeaInnovation;
+  businessImpact: IdeaBusinessImpact;
+  technical: IdeaTechnical;
+  ip: Omit<IdeaIP, "patentSearchStatus" | "ipRisk" | "patentRecommendation">;
+  market: IdeaMarket;
+  risk: IdeaRisk;
+  esg: IdeaESG;
+  financials: Pick<IdeaFinancials, "estimatedInvestment" | "fundingRequired">;
+  attachments: IdeaAttachment[];
+}
+
+/** The full persisted idea document. */
+export interface IdeaRecord {
+  id: string;
+  ideaCode: string; // A — e.g. IDEA-00001
+  status: IdeaStatus; // W
+  priority: IdeaPriority; // W
+  version: number; // A
+  submittedBy: string; // I (logged-in employee)
+  dateSubmitted: string | null; // A — set on Submit
+  createdAt: string; // A
+  updatedAt: string; // A
+
+  basic: IdeaBasic;
+  classification: IdeaClassification;
+  problem: IdeaProblem;
+  solution: IdeaSolution;
+  innovation: IdeaInnovation;
+  businessImpact: IdeaBusinessImpact;
+  technical: IdeaTechnical;
+  ip: IdeaIP;
+  market: IdeaMarket;
+  risk: IdeaRisk;
+  esg: IdeaESG;
+  financials: IdeaFinancials;
+  scores: IdeaScores;
+  attachments: IdeaAttachment[];
+
+  workflow: IdeaWorkflowEntry[];
+  approvals: IdeaApproval[];
+  history: IdeaHistoryEntry[];
+  auditLog: IdeaAuditEntry[];
+
+  feasibilityProjectId: string | null; // set when Approved
+}
+
+/** Compact row for dashboard/list tables. */
+export type IdeaListRow = {
+  id: string;
+  ideaCode: string;
+  title: string;
+  status: IdeaStatus;
+  category: string;
+  department: string;
+  technologyArea: string[];
+  overallEvaluationScore: number;
+  ideaRanking: string;
+  priority: IdeaPriority;
+  submittedBy: string;
+  dateSubmitted: string | null;
+  updatedAt: string;
+  expectedRevenue: number;
+  costSaving: number;
+  patentable: boolean;
+};
+
+export interface IdeaNotification {
+  id: string;
+  ideaId: string | null;
+  ideaCode: string | null;
+  title: string;
+  body: string;
+  role: IdeaActorRole | "All";
+  read: boolean;
+  createdAt: string;
+}
+
+/** Lookup options (I — imported; mock data until HRM/CRM/Product/Patent exist). */
+export interface IdeaLookups {
+  categories: { name: string; subCategories: string[] }[];
+  businessUnits: string[];
+  departments: string[];
+  productLines: string[];
+  projects: string[];
+  strategicInitiatives: string[];
+  innovationThemes: string[];
+  employees: string[];
+  innovationTypes: string[];
+  innovationLevels: string[];
+  technologyAreas: string[];
+  industries: string[];
+  applicationAreas: string[];
+  marketSegments: string[];
+  customerTypes: string[];
+  productCategories: string[];
+  technologyReadinessLevels: string[];
+  existingPatents: string[];
+}
+
+export interface IdeaDashboard {
+  kpis: {
+    totalIdeas: number;
+    ideasThisMonth: number;
+    approvalRate: number;
+    rejectionRate: number;
+    averageInnovationScore: number;
+    patentableIdeas: number;
+    estimatedRevenuePipeline: number;
+    estimatedCostSavings: number;
+    portfolioRiskIndex: number;
+    esgImpactScore: number;
+    averageReviewTimeDays: number;
+    convertedToFeasibility: number;
+  };
+  rows: IdeaListRow[];
+  pipelineTrend: { month: string; submitted: number; approved: number }[];
+  byDepartment: { name: string; value: number; color: string }[];
+  byTechnologyArea: { name: string; value: number; color: string }[];
+  byStatus: { name: string; value: number; color: string }[];
+}
+
+export interface FeasibilityProjectRecord {
+  id: string;
+  projectCode: string;
+  ideaId: string;
+  ideaCode: string;
+  title: string;
+  createdAt: string;
+  status: string;
+}
+
+/* ===========================================================================
+   Opportunity Discovery (Development → Research & Innovation Development)
+   ---------------------------------------------------------------------------
+   Turns a validated Idea into a qualified opportunity. Upstream = Idea
+   Management; downstream = Feasibility Study. Every "AI" score below is a
+   DETERMINISTIC calculation over the entered fields — no LLM involved.
+   =========================================================================== */
+
+export type OpportunityStatus =
+  "draft" | "under_review" | "revision_required" | "approved" | "on_hold" | "rejected" | "archived";
+
+/** Sequential functional review stages once an opportunity is qualified. */
+export type OpportunityReviewStage =
+  "Initial Review" | "Market Validation" | "Business Validation" | "Innovation Committee Review";
+
+export type OpportunityDecision =
+  "Approved" | "Revision Required" | "On Hold" | "Rejected" | "Forwarded";
+
+export type OpportunityPriority = "Low" | "Medium" | "High" | "Critical";
+export type ImpactLevel = "Low" | "Medium" | "High";
+
+/** Section 1 — Opportunity Information. */
+export interface OpportunityInformation {
+  title: string;
+  description: string;
+  category: string;
+  subCategory: string;
+  source: string;
+  businessUnit: string;
+  department: string;
+  productLine: string;
+  strategicInitiative: string;
+}
+
+/** Section 2 — Source Identification (linked idea + discovery triggers). */
+export interface OpportunitySourceIdentification {
+  linkedIdeaId: string | null;
+  linkedIdeaCode: string | null;
+  customerRequest: boolean;
+  marketResearch: boolean;
+  competitorAnalysis: boolean;
+  technologyTrend: boolean;
+  governmentPolicy: boolean;
+  internalSuggestion: boolean;
+  researchPublication: boolean;
+  startupEcosystem: boolean;
+}
+
+/** Section 3 — Customer Opportunity. */
+export interface OpportunityCustomer {
+  targetCustomer: string;
+  customerSegment: string;
+  customerNeed: string;
+  painPoints: string;
+  customerExpectations: string;
+  existingSolution: string;
+  customerFeedback: string;
+}
+
+/** Section 4 — Market Opportunity. */
+export interface OpportunityMarket {
+  industry: string;
+  targetMarket: string;
+  marketSize: number;
+  tam: number;
+  sam: number;
+  som: number;
+  growthRate: number;
+  marketMaturity: string;
+  marketReadiness: string;
+}
+
+/** Section 5 — Technology Opportunity. */
+export interface OpportunityTechnology {
+  technologyDomain: string;
+  emergingTechnology: string;
+  technologyReadiness: string;
+  existingTechnology: string;
+  technologyGap: string;
+  technologyTrend: string;
+  technologyPartner: string;
+}
+
+/** Section 6 — Competitive Analysis. */
+export interface OpportunityCompetitive {
+  existingCompetitors: string;
+  competitorProducts: string;
+  marketLeader: string;
+  competitiveAdvantage: string;
+  marketGap: string;
+  swotSummary: string;
+}
+
+/** Section 7 — Business Opportunity (manual inputs + calculated outputs). */
+export interface OpportunityBusiness {
+  revenueOpportunity: number;
+  estimatedInvestment: number;
+  businessRisk: ImpactLevel;
+  // Calculated (C):
+  grossMargin: number;
+  roi: number;
+  paybackPeriod: number;
+}
+
+/** Section 8 — Regulatory & ESG Assessment. */
+export interface OpportunityRegulatoryESG {
+  regulatoryRequirement: string;
+  applicableStandards: string[];
+  environmentalImpact: ImpactLevel;
+  socialImpact: ImpactLevel;
+  governanceImpact: ImpactLevel;
+  // Calculated (C):
+  esgScore: number;
+}
+
+/** Section 9 — AI Opportunity Analysis (computed from the fields above). */
+export interface OpportunityAIAnalysis {
+  aiMarketScore: number;
+  aiTechnologyScore: number;
+  aiCompetitionScore: number;
+  aiRiskScore: number;
+  aiOpportunityScore: number;
+  aiRecommendation: string;
+  aiSuggestedMarkets: string;
+  aiSuggestedImprovements: string;
+}
+
+/** Section 10 — Opportunity Evaluation (all calculated). */
+export interface OpportunityEvaluation {
+  strategicAlignmentScore: number;
+  customerValueScore: number;
+  technologyScore: number;
+  marketScore: number;
+  businessScore: number;
+  overallOpportunityScore: number;
+  opportunityRank: number;
+}
+
+export interface OpportunityAttachment {
+  id: string;
+  category: string;
+  filename: string;
+  fileType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  url: string;
+}
+
+/** Review & Approval (workflow-driven). */
+export interface OpportunityReview {
+  stage: OpportunityReviewStage;
+  reviewer: string;
+  decision: OpportunityDecision | "Pending";
+  comments: string;
+  date: string | null;
+}
+
+export interface OpportunityAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  fromStatus?: OpportunityStatus;
+  toStatus?: OpportunityStatus;
+}
+
+/** The editable (M) payload the form submits. */
+export interface OpportunityFormInput {
+  name: string;
+  information: OpportunityInformation;
+  sourceIdentification: OpportunitySourceIdentification;
+  customer: OpportunityCustomer;
+  market: OpportunityMarket;
+  technology: OpportunityTechnology;
+  competitive: OpportunityCompetitive;
+  business: Pick<
+    OpportunityBusiness,
+    "revenueOpportunity" | "estimatedInvestment" | "businessRisk"
+  >;
+  regulatoryESG: Omit<OpportunityRegulatoryESG, "esgScore">;
+  attachments: OpportunityAttachment[];
+}
+
+/** The full persisted opportunity document.
+ *  Named `Discovery*` because CRM already owns `OpportunityRecord` — module
+ *  scoped types stay separate per the architecture convention. */
+export interface DiscoveryOpportunityRecord {
+  id: string;
+  opportunityCode: string; // A — OPP-YYYY-00001
+  name: string;
+  status: OpportunityStatus; // W
+  reviewStage: OpportunityReviewStage | null; // W
+  priority: OpportunityPriority; // W
+  nextAction: string; // W (computed)
+  version: number; // A
+  owner: string; // I
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  discoveryDate: string; // A
+
+  information: OpportunityInformation;
+  sourceIdentification: OpportunitySourceIdentification;
+  customer: OpportunityCustomer;
+  market: OpportunityMarket;
+  technology: OpportunityTechnology;
+  competitive: OpportunityCompetitive;
+  business: OpportunityBusiness;
+  regulatoryESG: OpportunityRegulatoryESG;
+  aiAnalysis: OpportunityAIAnalysis | null; // populated on submit
+  evaluation: OpportunityEvaluation | null; // populated on submit
+  attachments: OpportunityAttachment[];
+
+  reviews: OpportunityReview[];
+  auditTrail: OpportunityAuditEntry[];
+  revisionNote: string | null;
+  feasibilityProjectId: string | null;
+  feasibilityProjectCode: string | null;
+}
+
+/** Compact row for the opportunity register. */
+export type OpportunityListRow = {
+  id: string;
+  opportunityCode: string;
+  name: string;
+  status: OpportunityStatus;
+  reviewStage: OpportunityReviewStage | null;
+  category: string;
+  department: string;
+  owner: string;
+  overallScore: number;
+  opportunityRank: number;
+  revenueOpportunity: number;
+  linkedIdeaCode: string | null;
+  updatedAt: string;
+};
+
+/* ===========================================================================
+   Design Thinking (Development → Research & Innovation Development)
+   ---------------------------------------------------------------------------
+   Upstream = an APPROVED Opportunity Discovery record (which itself carries the
+   source Idea); downstream = Problem Validation. The 5 design-thinking stages
+   are real state — a later stage cannot be worked before its predecessor has
+   started. Every "AI" output is a deterministic function of the entered data.
+   =========================================================================== */
+
+export type DesignThinkingStatus =
+  | "draft"
+  | "in_progress"
+  | "under_review"
+  | "revision_required"
+  | "approved"
+  | "rejected"
+  | "archived";
+
+export type DesignThinkingStage = "empathize" | "define" | "ideate" | "prototype" | "test";
+export type DesignStageStatus = "completed" | "in_progress" | "pending";
+
+export interface DesignStageState {
+  stage: DesignThinkingStage;
+  status: DesignStageStatus;
+  startedAt: string | null;
+  completedAt: string | null;
+}
+
+/** Stage 1 — Empathize (Customer Understanding). */
+export interface DTEmpathize {
+  customerType: string;
+  targetPersona: string;
+  userJourney: string;
+  customerGoals: string;
+  painPoints: string;
+  frustrations: string;
+  existingWorkaround: string;
+  customerQuotes: string[];
+  observationNotes: string;
+  interviewSummary: string;
+}
+
+/** Stage 2 — Define (Problem Definition). */
+export interface DTDefine {
+  problemStatement: string;
+  rootCause: string;
+  customerNeed: string;
+  opportunityStatement: string;
+  designChallenge: string;
+  businessImpact: string;
+  successCriteria: string;
+}
+
+/** Stage 3 — Ideate (Solution Brainstorming). */
+export interface DTIdeate {
+  brainstormSession: string;
+  totalIdeasGenerated: number;
+  selectedIdea: string;
+  alternativeSolutions: string[];
+  innovationLevel: string;
+  technologyUsed: string[];
+  estimatedCustomerValue: number; // 1..10
+  estimatedBusinessValue: number; // 1..10
+}
+
+/** Stage 4 — Prototype (Prototype Planning). */
+export interface DTPrototype {
+  prototypeType: string;
+  prototypeObjective: string;
+  prototypeDescription: string;
+  prototypeVersion: string; // A
+  materialsRequired: string;
+  estimatedCost: number;
+  estimatedDuration: number; // days
+  prototypeOwner: string;
+}
+
+/** Stage 5 — Test (User Validation). */
+export interface DTTest {
+  testParticipants: number;
+  testingMethod: string;
+  customerFeedback: string;
+  positiveFeedback: string;
+  improvementSuggestions: string;
+  satisfactionScore: number; // 1..10 (displayed /5 as stars)
+  testResult: string;
+  recommendation: string;
+}
+
+/** Section 6 — Innovation Assessment. All calculated, /10. */
+export interface DTAssessment {
+  customerValueScore: number;
+  innovationScore: number;
+  technicalFeasibility: number;
+  businessFeasibility: number;
+  marketPotential: number;
+  esgImpact: number;
+  overallDesignScore: number;
+}
+
+/** Section 7 — AI Design Thinking Assistant. Generated, never hand-entered. */
+export interface DTAIAssistant {
+  personaAnalysis: string;
+  painPointAnalysis: string;
+  suggestedIdeas: string;
+  alternativeSolutions: string;
+  prototypeSuggestions: string;
+  riskAnalysis: string;
+  aiOpportunityScore: number; // /100
+  recommendation: string;
+  generatedAt: string;
+}
+
+export interface DTAttachment {
+  id: string;
+  category: string;
+  filename: string;
+  fileType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  url: string;
+}
+
+export interface DTAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: DesignThinkingStage;
+  fromStatus?: DesignThinkingStatus;
+  toStatus?: DesignThinkingStatus;
+}
+
+/** The editable payload the form submits. */
+export interface DesignThinkingFormInput {
+  projectName: string;
+  workshopDate: string;
+  facilitator: string;
+  businessUnit: string;
+  department: string;
+  linkedOpportunityId: string | null;
+  empathize: DTEmpathize;
+  define: DTDefine;
+  ideate: DTIdeate;
+  prototype: DTPrototype;
+  test: DTTest;
+  attachments: DTAttachment[];
+}
+
+export interface DesignThinkingRecord {
+  id: string;
+  formCode: string; // A — DT-2026-00125
+  designThinkingId: string; // A — DT-000125
+  projectName: string;
+  workshopDate: string;
+  facilitator: string;
+  businessUnit: string;
+  department: string;
+
+  status: DesignThinkingStatus; // W
+  currentStage: DesignThinkingStage; // W
+  stages: DesignStageState[]; // W
+  version: number;
+
+  // Linked upstream records (resolved, not free text).
+  linkedOpportunityId: string | null;
+  linkedOpportunityCode: string | null;
+  linkedIdeaId: string | null;
+  linkedIdeaCode: string | null;
+
+  empathize: DTEmpathize;
+  define: DTDefine;
+  ideate: DTIdeate;
+  prototype: DTPrototype;
+  test: DTTest;
+  assessment: DTAssessment | null;
+  aiAssistant: DTAIAssistant | null;
+  attachments: DTAttachment[];
+
+  reviewComments: string | null;
+  nextAction: string;
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  auditTrail: DTAuditEntry[];
+
+  problemValidationId: string | null;
+  problemValidationCode: string | null;
+}
+
+export type DesignThinkingListRow = {
+  id: string;
+  formCode: string;
+  designThinkingId: string;
+  projectName: string;
+  status: DesignThinkingStatus;
+  currentStage: DesignThinkingStage;
+  facilitator: string;
+  linkedOpportunityCode: string | null;
+  linkedIdeaCode: string | null;
+  overallDesignScore: number;
+  updatedAt: string;
+};
+
+/** The linked Opportunity summary shown in "Opportunity At A Glance". */
+export interface DTOpportunityGlance {
+  opportunityId: string;
+  opportunityCode: string;
+  name: string;
+  category: string;
+  marketPotential: string;
+  strategicInitiative: string;
+  overallOpportunityScore: number;
+  ideaId: string | null;
+  ideaCode: string | null;
+}
+
+/* ===========================================================================
+   Problem Validation (Development → Research & Innovation Development)
+   ---------------------------------------------------------------------------
+   Verifies a problem is real, significant and worth solving before Feasibility
+   Study. Upstream = an approved Design Thinking project (which carries the
+   Opportunity + Idea); downstream = Feasibility Study. Five validation stages
+   are real state; each stage's AI output is deterministic (no LLM). Section 8
+   (AI) and Section 9 (Summary) are a single computed source shared with the
+   sidebar — never duplicated static values.
+   =========================================================================== */
+
+export type ProblemValidationStatus =
+  | "draft"
+  | "in_progress"
+  | "under_review"
+  | "more_research_required"
+  | "revision_required"
+  | "validated"
+  | "validation_failed"
+  | "archived";
+
+export type PVStage =
+  | "problem_definition"
+  | "customer_validation"
+  | "market_validation"
+  | "technical_validation"
+  | "business_validation";
+
+export type PVStageStatus = "completed" | "in_progress" | "pending";
+
+export interface PVStageState {
+  stage: PVStage;
+  status: PVStageStatus;
+  startedAt: string | null;
+  completedAt: string | null;
+}
+
+/** Section 1 — Problem Information. */
+export interface PVProblemInfo {
+  problemTitle: string;
+  problemDescription: string;
+  problemCategory: string;
+  problemSubCategory: string;
+  industry: string;
+  customerSegment: string;
+  businessArea: string;
+  geographicRegion: string;
+  problemSource: string;
+  problemOwner: string;
+}
+
+/** Section 2 — Customer Validation. */
+export interface PVCustomerValidation {
+  targetCustomer: string;
+  customerPersona: string;
+  numberOfInterviews: number;
+  surveyResponses: number;
+  observationSessions: number;
+  customerPainLevel: number; // 1..10 (shown /5 as stars)
+  customerQuotes: string[];
+}
+
+/** Section 3 — Problem Evidence. */
+export interface PVProblemEvidence {
+  existingSolution: string;
+  currentProcess: string;
+  rootCause: string;
+  supportingData: string;
+  fieldNotes: string;
+}
+
+/** Section 4 — Impact Assessment. */
+export interface PVImpactAssessment {
+  customerImpact: number; // rating 1..10
+  financialImpact: number; // currency
+  timeLoss: number; // hrs/month
+  productivityLoss: number; // %
+  qualityImpact: number; // rating
+  safetyImpact: number; // rating
+  environmentalImpact: number; // rating
+  regulatoryImpact: number; // rating
+}
+
+/** Section 5 — Market Validation. */
+export interface PVMarketValidation {
+  customersAffected: number;
+  marketSize: number;
+  growthRate: number;
+  frequencyOfProblem: string;
+  existingCompetitors: string;
+  marketGap: string;
+}
+
+/** Section 6 — Technical Validation. */
+export interface PVTechnicalValidation {
+  technicalChallenge: string;
+  existingTechnologies: string;
+  technologyGap: string;
+  technologyReadiness: string;
+  technicalComplexity: string;
+  requiredExpertise: string[];
+}
+
+/** Section 7 — Business Validation. */
+export interface PVBusinessValidation {
+  revenueOpportunity: number;
+  costSavingOpportunity: number;
+  strategicAlignment: number; // rating 1..10
+  businessPriority: string;
+  investmentJustification: string;
+}
+
+/** Section 8 — AI Problem Validation (computed, /100). */
+export interface PVAIValidation {
+  problemSeverityScore: number;
+  customerValidationScore: number;
+  marketValidationScore: number;
+  businessValueScore: number;
+  technicalComplexityScore: number;
+  overallValidationScore: number;
+  recommendation: string;
+  suggestedImprovements: string[];
+  generatedAt: string;
+}
+
+export type PVValidationDecision =
+  | "Under Review"
+  | "Validated"
+  | "Partially Validated"
+  | "More Research Required"
+  | "Revision Required"
+  | "Validation Failed"
+  | "Put on Hold";
+
+/** Section 9 — Validation Summary (calculated, single source w/ section 8). */
+export interface PVSummary {
+  problemSeverity: number;
+  customerDemandScore: number;
+  marketOpportunityScore: number;
+  technicalFeasibilityScore: number;
+  businessPotentialScore: number;
+  overallValidationScore: number;
+  validationDecision: PVValidationDecision;
+}
+
+export interface PVReviewer {
+  role: string;
+  name: string;
+  status: "approved" | "pending";
+}
+
+export interface PVAttachment {
+  id: string;
+  category: string;
+  filename: string;
+  fileType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  url: string;
+}
+
+export interface PVAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: PVStage;
+  fromStatus?: ProblemValidationStatus;
+  toStatus?: ProblemValidationStatus;
+}
+
+/** The editable payload the form submits. */
+export interface ProblemValidationFormInput {
+  validationLead: string;
+  validationDate: string;
+  businessUnit: string;
+  department: string;
+  linkedDesignThinkingId: string | null;
+  problemInfo: PVProblemInfo;
+  customerValidation: PVCustomerValidation;
+  problemEvidence: PVProblemEvidence;
+  impactAssessment: PVImpactAssessment;
+  marketValidation: PVMarketValidation;
+  technicalValidation: PVTechnicalValidation;
+  businessValidation: PVBusinessValidation;
+  attachments: PVAttachment[];
+}
+
+export interface ProblemValidationRecord2 {
+  id: string;
+  formCode: string; // A — PV-2026-00078
+  problemValidationId: string; // A — PV-00078
+  status: ProblemValidationStatus; // W
+  currentStage: PVStage; // W
+  stages: PVStageState[];
+  version: number;
+
+  project: string;
+  validationLead: string;
+  validationDate: string;
+  businessUnit: string;
+  department: string;
+
+  // Linked upstream records (resolved).
+  linkedDesignThinkingId: string | null;
+  linkedDesignThinkingCode: string | null;
+  linkedOpportunityId: string | null;
+  linkedOpportunityCode: string | null;
+  linkedIdeaId: string | null;
+  linkedIdeaCode: string | null;
+
+  problemInfo: PVProblemInfo;
+  customerValidation: PVCustomerValidation;
+  problemEvidence: PVProblemEvidence;
+  impactAssessment: PVImpactAssessment;
+  marketValidation: PVMarketValidation;
+  technicalValidation: PVTechnicalValidation;
+  businessValidation: PVBusinessValidation;
+  aiValidation: PVAIValidation | null;
+  summary: PVSummary | null;
+  attachments: PVAttachment[];
+  reviewers: PVReviewer[];
+
+  validationRank: number;
+  reviewComments: string | null;
+  approvalDate: string | null;
+  nextAction: string;
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  auditTrail: PVAuditEntry[];
+
+  feasibilityProjectId: string | null;
+  feasibilityProjectCode: string | null;
+}
+
+export type ProblemValidationListRow = {
+  id: string;
+  formCode: string;
+  problemValidationId: string;
+  problemTitle: string;
+  status: ProblemValidationStatus;
+  currentStage: PVStage;
+  validationLead: string;
+  linkedDesignThinkingCode: string | null;
+  overallValidationScore: number;
+  validationRank: number;
+  updatedAt: string;
+};
+
+/** Linked-records summary for the header + creation prefill. */
+export interface PVDesignThinkingGlance {
+  designThinkingId: string;
+  designThinkingCode: string;
+  projectName: string;
+  opportunityId: string | null;
+  opportunityCode: string | null;
+  ideaId: string | null;
+  ideaCode: string | null;
+}
+
+/* ===========================================================================
+   Innovation Portfolio (Development → Research & Innovation Development)
+   ---------------------------------------------------------------------------
+   The executive rollup layer over the whole innovation pipeline. A portfolio
+   doesn't hold its own project data — it aggregates live counts/scores from
+   Idea Management, Opportunity Discovery, Design Thinking and Problem
+   Validation each time it's viewed/refreshed, plus its own budget/resource/
+   risk inputs. Every "AI"/computed value is deterministic (no LLM).
+   =========================================================================== */
+
+export type PortfolioStatus =
+  | "draft"
+  | "under_review"
+  | "active"
+  | "revision_required"
+  | "budget_review"
+  | "rejected"
+  | "archived";
+
+export type ImpactRating = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
+/** The editable (M) portfolio-level payload. */
+export interface PortfolioFormInput {
+  portfolioName: string;
+  portfolioManager: string;
+  businessUnit: string;
+  department: string;
+  financialYear: string;
+  portfolioCategory: string;
+  portfolioObjective: string;
+  strategicTheme: string;
+  innovationFocus: string[];
+  portfolioDescription: string;
+  innovationType: string;
+  technologyDomain: string[];
+  industry: string;
+  market: string;
+  customerSegment: string;
+  // Strategic alignment (0-100 each, manually set by portfolio manager).
+  corporateObjectiveAlignment: number;
+  strategicInitiativeAlignment: number;
+  businessGoalAlignment: number;
+  esgGoalAlignment: number;
+  // Financial inputs (M).
+  approvedBudget: number;
+  // Resource inputs (M).
+  equipmentAvailability: string;
+  laboratoryAvailability: string;
+  // Risk inputs (M, 1..10 each).
+  technologyRisk: number;
+  marketRisk: number;
+  financialRisk: number;
+  regulatoryRisk: number;
+  operationalRisk: number;
+  attachments: PortfolioAttachment[];
+}
+
+export interface PortfolioAttachment {
+  id: string;
+  category: string;
+  filename: string;
+  fileType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  url: string;
+}
+
+/** One row rolled up from an upstream pipeline module. */
+export type PortfolioProjectRow = {
+  id: string;
+  moduleCode: string; // IDEA-…, OPP-…, DT-…, PV-…
+  title: string;
+  stage:
+    | "Ideas"
+    | "Opportunities"
+    | "Technology Scouting"
+    | "Design Thinking"
+    | "Problem Validation"
+    | "Feasibility Study";
+  category: string;
+  budget: number;
+  progress: number; // 0..100, derived from stage/status
+  overallScore: number; // 0..100
+  owner: string;
+  riskLevel: "Low" | "Moderate" | "High" | "Critical";
+};
+
+/** Section — Innovation Projects (rolled up, count = C). */
+export interface PortfolioProjectRollup {
+  linkedIdeaIds: string[];
+  linkedOpportunityIds: string[];
+  linkedDesignThinkingIds: string[];
+  linkedProblemValidationIds: string[];
+  /** Approved Technology Scouting records handed off into the portfolio.
+   *  Optional: portfolios created before the Technology Scouting module lack it. */
+  linkedTechnologyScoutingIds?: string[];
+  totalActiveProjects: number;
+  rows: PortfolioProjectRow[];
+}
+
+/** Portfolio Composition — by innovation type. */
+export type PortfolioSlice = { name: string; value: number; color: string };
+
+/** Projects by Stage — funnel. */
+export type PortfolioFunnelStage = { stage: string; count: number };
+
+/** Investment vs Return, by financial year. */
+export type PortfolioInvestmentPoint = { year: string; investment: number; revenue: number };
+
+/** Financial portfolio (mostly calculated). */
+export interface PortfolioFinancials {
+  approvedBudget: number;
+  budgetUtilized: number;
+  remainingBudget: number;
+  estimatedRevenue: number;
+  estimatedROI: number;
+  npv: number;
+  irr: number;
+  paybackPeriod: number;
+}
+
+/** Resource portfolio (calculated). */
+export interface PortfolioResources {
+  totalEmployees: number;
+  internalExperts: number;
+  externalConsultants: number;
+  resourceAdequacy: number; // /100
+}
+
+/** Risk portfolio (calculated). */
+export interface PortfolioRisk {
+  technologyRisk: number;
+  marketRisk: number;
+  financialRisk: number;
+  regulatoryRisk: number;
+  operationalRisk: number;
+  portfolioRiskScore: number; // /100
+  distribution: PortfolioSlice[]; // Low/Moderate/High/Critical across rows
+}
+
+/** Innovation Performance (calculated). */
+export interface PortfolioPerformance {
+  totalIdeas: number;
+  opportunities: number;
+  designThinkingProjects: number;
+  validatedProblems: number;
+  feasibilityStudies: number;
+  successRate: number; // %
+}
+
+/** AI Portfolio Analytics — generated, deterministic. */
+export interface PortfolioAIAnalytics {
+  healthScore: number; // /100
+  growthPotential: "Low" | "Medium" | "High";
+  riskLevel: "Low" | "Moderate" | "High" | "Critical";
+  roiPotential: "Low" | "Medium" | "High";
+  investmentRecommendation: string;
+  riskPrediction: string;
+  resourceOptimization: string;
+  projectPrioritization: string;
+  recommendation: string;
+  generatedAt: string;
+}
+
+/** KPI Dashboard — the bottom metric strip (calculated). */
+export interface PortfolioKPIDashboard {
+  innovationIndex: number; // /100
+  portfolioValue: number;
+  innovationVelocity: number; // /100
+  averageTRL: number; // /9
+  portfolioROI: number; // %
+  innovationMaturity: number; // /100
+  commercializationReadiness: number; // %
+  esgImpactScore: number; // /100
+}
+
+export interface PortfolioAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  fromStatus?: PortfolioStatus;
+  toStatus?: PortfolioStatus;
+}
+
+export type ExecutiveDecision =
+  "Approved" | "Approved with Conditions" | "Revision Required" | "Deferred" | "Rejected";
+export type FundingDecision =
+  | "Fully Funded"
+  | "Partially Funded"
+  | "Additional Budget Required"
+  | "External Funding Required"
+  | "Not Approved";
+
+export interface PortfolioReviewer {
+  role: string;
+  name: string;
+  status: "approved" | "pending";
+}
+
+/** The full persisted portfolio document. */
+export interface InnovationPortfolioRecord {
+  id: string;
+  portfolioId: string; // A — IP-2026-00032
+  portfolioCode: string; // A — <initials>-2026-25
+  status: PortfolioStatus; // W
+  version: number;
+
+  portfolioName: string;
+  portfolioManager: string;
+  businessUnit: string;
+  department: string;
+  financialYear: string;
+  portfolioCategory: string;
+  portfolioObjective: string;
+  strategicTheme: string;
+  innovationFocus: string[];
+  portfolioDescription: string;
+  innovationType: string;
+  technologyDomain: string[];
+  industry: string;
+  market: string;
+  customerSegment: string;
+
+  projects: PortfolioProjectRollup;
+  composition: PortfolioSlice[];
+  funnel: PortfolioFunnelStage[];
+  investmentReturn: PortfolioInvestmentPoint[];
+
+  financials: PortfolioFinancials;
+  resources: PortfolioResources;
+  risk: PortfolioRisk;
+  performance: PortfolioPerformance;
+  aiAnalytics: PortfolioAIAnalytics | null;
+  kpiDashboard: PortfolioKPIDashboard | null;
+
+  corporateObjectiveAlignment: number;
+  strategicInitiativeAlignment: number;
+  businessGoalAlignment: number;
+  esgGoalAlignment: number;
+  alignmentScore: number; // C — average
+
+  equipmentAvailability: string;
+  laboratoryAvailability: string;
+  attachments: PortfolioAttachment[];
+
+  reviewers: PortfolioReviewer[];
+  executiveDecision: ExecutiveDecision | null;
+  fundingDecision: FundingDecision | null;
+  portfolioPriority: string | null;
+  reviewNotes: string | null;
+  approvalDate: string | null;
+  nextAction: string;
+
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  auditTrail: PortfolioAuditEntry[];
+}
+
+export type PortfolioListRow = {
+  id: string;
+  portfolioId: string;
+  portfolioCode: string;
+  portfolioName: string;
+  status: PortfolioStatus;
+  portfolioManager: string;
+  financialYear: string;
+  totalProjects: number;
+  overallScore: number;
+  updatedAt: string;
+};
+
+export interface PortfolioLookups {
+  categories: string[];
+  strategicThemes: string[];
+  innovationFocusAreas: string[];
+  innovationTypes: string[];
+  technologyDomains: string[];
+  industries: string[];
+  markets: string[];
+  customerSegments: string[];
+  equipmentAvailability: string[];
+  laboratoryAvailability: string[];
+  executiveDecisions: string[];
+  fundingDecisions: string[];
+  priorities: string[];
+  managers: string[];
+  businessUnits: string[];
+  departments: string[];
+  financialYears: string[];
+  attachmentCategories: string[];
+}
+
+export interface ProblemValidationLookups {
+  problemCategories: string[];
+  problemSubCategories: string[];
+  industries: string[];
+  customerSegments: string[];
+  businessAreas: string[];
+  geographicRegions: string[];
+  problemSources: string[];
+  targetCustomers: string[];
+  frequencies: string[];
+  technologyReadinessLevels: string[];
+  technicalComplexities: string[];
+  businessPriorities: string[];
+  validationDecisions: string[];
+  nextActions: string[];
+  expertise: string[];
+  validationLeads: string[];
+  businessUnits: string[];
+  departments: string[];
+  attachmentCategories: string[];
+}
+
+export interface DesignThinkingLookups {
+  customerTypes: string[];
+  testingMethods: string[];
+  prototypeTypes: string[];
+  innovationLevels: string[];
+  testResults: string[];
+  recommendations: string[];
+  technologies: string[];
+  facilitators: string[];
+  projects: string[];
+  businessUnits: string[];
+  departments: string[];
+  attachmentCategories: string[];
+}
+
+export interface ProblemValidationRecord {
+  id: string;
+  projectCode: string;
+  designThinkingId: string;
+  designThinkingCode: string;
+  title: string;
+  createdAt: string;
+  status: string;
+}
+
+export interface OpportunityLookups {
+  categories: { name: string; subCategories: string[] }[];
+  sources: string[];
+  businessUnits: string[];
+  departments: string[];
+  productLines: string[];
+  strategicInitiatives: string[];
+  targetCustomers: string[];
+  customerSegments: string[];
+  industries: string[];
+  targetMarkets: string[];
+  marketMaturities: string[];
+  marketReadinessLevels: string[];
+  technologyDomains: string[];
+  emergingTechnologies: string[];
+  technologyReadinessLevels: string[];
+  technologyPartners: string[];
+  applicableStandards: string[];
+  attachmentCategories: string[];
+}
+
+/* ===========================================================================
+   Technology Scouting (Development → Research & Innovation Development)
+   ---------------------------------------------------------------------------
+   One record per scouted technology. Embeds the 4 assessment stages
+   (Identification → Technical → Market → IP & Risk), the AI Technology
+   Analysis, the Decision Summary, reviewers, monitoring alerts and the audit
+   trail. The 9-step tracker is driven by `status`, the 4 stages by `stages`.
+   =========================================================================== */
+
+export type TechScoutingStatus =
+  | "identified"
+  | "under_evaluation"
+  | "technical_review"
+  | "business_review"
+  | "ip_review"
+  | "executive_review"
+  | "approved"
+  | "monitoring"
+  | "rejected"
+  | "closed";
+
+export type TechScoutingStage =
+  "identification" | "technical_assessment" | "market_assessment" | "ip_risk_assessment";
+
+export interface TechScoutingStageState {
+  stage: TechScoutingStage;
+  status: "pending" | "in_progress" | "completed";
+  startedAt: string | null;
+  completedAt: string | null;
+}
+
+/** Section 1 — Technology Information. */
+export interface TechScoutingInfo {
+  technologyName: string;
+  technologyCategory: string;
+  technologySubcategory: string;
+  technologyDomain: string;
+  technologyDescription: string;
+  keywords: string[];
+  technologyMaturity: string;
+  trl: string;
+}
+
+/** Section 2 — Source Information. */
+export interface TechScoutingSource {
+  sourceType: string;
+  organizationName: string;
+  country: string;
+  website: string;
+  contactPerson: string;
+  publicationReference: string;
+  sourceReliability: number; // 1..5 stars
+}
+
+/** Section 3 — Market Intelligence. */
+export interface TechScoutingMarket {
+  industry: string;
+  targetMarket: string;
+  marketTrend: string;
+  adoptionLevel: string;
+  marketGrowthRate: number; // %
+  marketSize: number; // currency
+  competitorsUsingTechnology: string;
+}
+
+/** Section 4 — Technical Assessment. */
+export interface TechScoutingTechnical {
+  coreTechnology: string;
+  keyFeatures: string;
+  technicalAdvantages: string;
+  technicalLimitations: string;
+  requiredInfrastructure: string;
+  integrationComplexity: string;
+  compatibility: number; // 1..5 stars
+}
+
+/** Section 5 — Intellectual Property. */
+export interface TechScoutingIP {
+  patentAvailable: boolean;
+  patentNumber: string;
+  patentOwner: string;
+  ipStatus: string;
+  freedomToOperate: string;
+  licensingAvailability: string;
+}
+
+/** Section 6 — Business Assessment. */
+export interface TechScoutingBusiness {
+  businessOpportunity: string;
+  potentialApplications: string;
+  strategicFit: number; // 1..5 stars
+  revenuePotential: number;
+  investmentEstimate: number;
+  timeToCommercialization: number; // years
+}
+
+/** Section 7 — Risk Assessment (each 1..5 stars; overall level is computed). */
+export interface TechScoutingRisk {
+  technologyRisk: number;
+  marketRisk: number;
+  regulatoryRisk: number;
+  supplyChainRisk: number;
+  cybersecurityRisk: number;
+}
+
+export type TechScoutingRiskLevel = "Low" | "Moderate" | "High";
+
+/** Section 8 — Attachments (same shape as the portfolio module attachments). */
+export interface TechScoutingAttachment {
+  id: string;
+  category: string;
+  filename: string;
+  fileType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  url: string;
+}
+
+/** AI Technology Analysis — all computed server-side from the entered data
+ *  and stage completions; never hardcoded and no LLM involved. */
+export interface TechScoutingAIAnalysis {
+  aiTechnologyScore: number; // /100
+  aiInnovationScore: number;
+  aiMarketPotential: number;
+  aiTechnicalFeasibility: number;
+  aiStrategicAlignment: number;
+  aiCompetitiveAdvantage: number;
+  recommendation: string;
+  /** Stage 1 outputs */
+  technologyClassification: string;
+  emergingTrendAnalysis: string;
+  /** Stage 2 outputs */
+  technicalComplexity: string;
+  integrationDifficulty: string;
+  infrastructureRequirements: string;
+  /** Stage 3 outputs */
+  marketOpportunityScore: number;
+  competitiveAdvantageBand: string;
+  /** Stage 4 outputs */
+  patentLandscape: string;
+  generatedAt: string;
+}
+
+/** Decision Summary — score/rank computed, action/owner/dates workflow-set. */
+export interface TechScoutingDecision {
+  overallTechnologyScore: number; // /100
+  priorityRanking: number; // 1 = best across all records
+  recommendedAction: string;
+  technologyOwner: string;
+  targetProject: string;
+  followUpDate: string;
+}
+
+export type TechScoutingAlertType =
+  "Technology Update" | "New Competitor" | "Patent Alert" | "Market Alert";
+
+export interface TechScoutingAlert {
+  type: TechScoutingAlertType;
+  message: string;
+  at: string;
+}
+
+/** Continuous monitoring state (populated once approved / on the watchlist). */
+export interface TechScoutingMonitoring {
+  watchlisted: boolean;
+  lastCheckedAt: string | null;
+  alerts: TechScoutingAlert[];
+}
+
+export interface TechScoutingReviewer {
+  role: string;
+  name: string;
+  status: "reviewed" | "pending";
+  date: string | null;
+}
+
+export type TechScoutingApprovalDecision =
+  "Approved" | "Monitor Technology" | "Conduct Further Evaluation" | "Rejected";
+
+export interface TechScoutingAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: TechScoutingStage;
+  fromStatus?: TechScoutingStatus;
+  toStatus?: TechScoutingStatus;
+}
+
+/** Everything the form edits directly (computed fields excluded). */
+export interface TechScoutingFormInput {
+  technologyScout: string;
+  businessUnit: string;
+  department: string;
+  scoutingDate: string;
+  linkedOpportunityId?: string | null;
+  info: TechScoutingInfo;
+  source: TechScoutingSource;
+  market: TechScoutingMarket;
+  technical: TechScoutingTechnical;
+  ip: TechScoutingIP;
+  business: TechScoutingBusiness;
+  risk: TechScoutingRisk;
+  attachments: TechScoutingAttachment[];
+  technologyOwner: string;
+  targetProject: string;
+  followUpDate: string;
+  recommendedAction: string;
+}
+
+export interface TechnologyScoutingRecord {
+  id: string;
+  scoutingId: string; // TS-2026-0001
+  status: TechScoutingStatus;
+  currentStage: TechScoutingStage;
+  stages: TechScoutingStageState[];
+  version: number;
+  technologyScout: string;
+  businessUnit: string;
+  department: string;
+  scoutingDate: string;
+  linkedOpportunityId: string | null;
+  linkedOpportunityCode: string | null;
+  linkedOpportunityName: string | null;
+  info: TechScoutingInfo;
+  source: TechScoutingSource;
+  market: TechScoutingMarket;
+  technical: TechScoutingTechnical;
+  ip: TechScoutingIP;
+  business: TechScoutingBusiness;
+  risk: TechScoutingRisk;
+  overallRiskLevel: TechScoutingRiskLevel;
+  aiAnalysis: TechScoutingAIAnalysis;
+  decision: TechScoutingDecision;
+  monitoring: TechScoutingMonitoring;
+  attachments: TechScoutingAttachment[];
+  reviewers: TechScoutingReviewer[];
+  approvalDecision: TechScoutingApprovalDecision | null;
+  reviewNextAction: string | null;
+  reviewComments: string | null;
+  approvalDate: string | null;
+  nextAction: string; // computed workflow hint
+  addedToPortfolioAt: string | null;
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  auditTrail: TechScoutingAuditEntry[];
+}
+
+export type TechScoutingListRow = {
+  id: string;
+  scoutingId: string;
+  technologyName: string;
+  technologyCategory: string;
+  status: TechScoutingStatus;
+  currentStage: TechScoutingStage;
+  technologyScout: string;
+  overallTechnologyScore: number;
+  priorityRanking: number;
+  trl: string;
+  updatedAt: string;
+};
+
+export interface TechScoutingLookups {
+  technologyCategories: string[];
+  technologySubcategories: string[];
+  technologyDomains: string[];
+  technologyMaturities: string[];
+  trlLevels: string[];
+  sourceTypes: string[];
+  countries: string[];
+  contactPersons: string[];
+  industries: string[];
+  targetMarkets: string[];
+  marketTrends: string[];
+  adoptionLevels: string[];
+  integrationComplexities: string[];
+  ipStatuses: string[];
+  ftoOptions: string[];
+  licensingOptions: string[];
+  recommendedActions: string[];
+  nextActions: string[];
+  approvalDecisions: string[];
+  scouts: string[];
+  businessUnits: string[];
+  departments: string[];
+  targetProjects: string[];
+  attachmentCategories: string[];
+  keywordSuggestions: string[];
+}
+
+/* ===========================================================================
+   Research Management (Development → Research & Innovation Development)
+   ---------------------------------------------------------------------------
+   One record per research project. Embeds the 4 execution stages
+   (Research Planning → Resource Planning → Research Execution → Review &
+   Approval), the milestone checklist (single source of truth for progress),
+   AI Research Analytics, KPIs, reviewers and the audit trail. The header
+   badge is driven by `status`; the sidebar progress gauge by `milestones`.
+   =========================================================================== */
+
+export type ResearchStatus =
+  | "planning"
+  | "resource_planning"
+  | "in_progress"
+  | "under_review"
+  | "approved"
+  | "approved_with_conditions"
+  | "revision_required"
+  | "rejected"
+  | "archived";
+
+export type ResearchStage =
+  "research_planning" | "resource_planning" | "research_execution" | "review_approval";
+
+export interface ResearchStageState {
+  stage: ResearchStage;
+  status: "pending" | "in_progress" | "completed";
+  startedAt: string | null;
+  completedAt: string | null;
+}
+
+/** A milestone in the plan. `completed` drives the Research Progress %. The
+ *  first six map to the sidebar's fixed progress checklist. */
+export interface ResearchMilestone {
+  id: string;
+  label: string;
+  targetDate: string;
+  completed: boolean;
+}
+
+/** Section 1 — Research Overview. */
+export interface ResearchOverview {
+  researchObjective: string;
+  linkedInnovationPortfolioId: string | null;
+  researchDomain: string;
+  technologyDomain: string;
+  strategicTheme: string;
+  keywords: string[];
+  expectedOutcome: string;
+}
+
+/** Section 2 — Research Planning. */
+export interface ResearchPlanning {
+  researchMethodology: string;
+  startDate: string;
+  endDate: string;
+  estimatedDuration: string; // computed label e.g. "24 Months"
+  milestones: ResearchMilestone[];
+}
+
+/** Section 3 — Literature Review. */
+export interface ResearchLiterature {
+  papersReviewed: number;
+  patentsReviewed: number;
+  standardsReviewed: number;
+  researchGap: string;
+  literatureSummary: string;
+}
+
+/** Section 4 — Experimental Design. */
+export interface ResearchExperimental {
+  testMethod: string;
+  laboratory: string;
+  equipmentRequired: string;
+  safetyRequirements: string;
+}
+
+/** Section 5 — Research Resources. */
+export interface ResearchResources {
+  researchTeam: string[];
+  universities: string[];
+  budgetApproved: number;
+  budgetUtilized: number;
+  // remainingBudget is computed = approved - utilized
+}
+
+/** Section 6 — Research Outputs. */
+export interface ResearchOutputs {
+  prototypeGenerated: boolean;
+  publications: number;
+  patentOpportunities: number;
+  technologyDeveloped: string;
+}
+
+export type ResearchTRL =
+  | "TRL 1 - Basic Principles"
+  | "TRL 2 - Technology Concept"
+  | "TRL 3 - Experimental Proof"
+  | "TRL 4 - Validated in Lab"
+  | "TRL 5 - Validated in Relevant Environment"
+  | "TRL 6 - Demonstrated in Relevant Environment"
+  | "TRL 7 - System Prototype Demonstration"
+  | "TRL 8 - System Complete & Qualified"
+  | "TRL 9 - Proven in Operations";
+
+/** Section 8 — Risk Assessment (each 1..10 star rating; band is computed). */
+export interface ResearchRisk {
+  technicalRisk: number;
+  marketRisk: number;
+  regulatoryRisk: number;
+  supplyChainRisk: number;
+}
+
+export type ResearchCommercialPotential = "Low" | "Medium" | "High";
+
+/** Section 9 — Commercialization. */
+export interface ResearchCommercialization {
+  marketSize: number;
+  commercialPotential: ResearchCommercialPotential;
+  licensingOpportunity: boolean;
+  startupOpportunity: boolean;
+}
+
+export interface ResearchAttachment {
+  id: string;
+  category: string;
+  filename: string;
+  fileType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  url: string;
+}
+
+/** AI Research Analytics — all computed server-side; no LLM, no hardcoding. */
+export interface ResearchAIAnalytics {
+  aiNoveltyScore: number; // /10
+  aiTechnicalMerit: number;
+  aiCommercialPotential: number;
+  aiPublicationPotential: number;
+  aiPatentPotential: number;
+  researchImpactScore: number; // /10, composite
+  recommendation: string;
+  /** Stage 1 outputs */
+  researchCompletenessScore: number; // /100
+  literatureGapAnalysis: string;
+  noveltyAssessment: string;
+  /** Stage 2 outputs */
+  resourceOptimization: string;
+  budgetOptimization: string;
+  riskAssessment: string;
+  /** Stage 3 outputs */
+  progressAnalysis: string;
+  researchQualityScore: number; // /100
+  generatedAt: string;
+}
+
+/** Key Research KPIs — derived from the sections, not re-entered. */
+export interface ResearchKPIs {
+  researchImpactScore: number; // /10
+  trl: ResearchTRL;
+  trlNumber: number;
+  publications: number;
+  patentOpportunities: number;
+}
+
+export interface ResearchReviewer {
+  role: string;
+  name: string;
+  status: "reviewed" | "pending";
+  date: string | null;
+}
+
+export type ResearchApprovalDecision =
+  "Approved" | "Approved with Conditions" | "Revision Required" | "Rejected";
+
+export interface ResearchActivityEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: ResearchStage;
+  fromStatus?: ResearchStatus;
+  toStatus?: ResearchStatus;
+}
+
+/** Everything the form edits directly (computed fields excluded). */
+export interface ResearchFormInput {
+  researchTitle: string;
+  researchCategory: string;
+  researchType: string;
+  businessUnit: string;
+  department: string;
+  principalInvestigator: string;
+  linkedOpportunityId?: string | null;
+  linkedTechnologyScoutingId?: string | null;
+  overview: ResearchOverview;
+  planning: ResearchPlanning;
+  literature: ResearchLiterature;
+  experimental: ResearchExperimental;
+  resources: ResearchResources;
+  outputs: ResearchOutputs;
+  trl: ResearchTRL;
+  risk: ResearchRisk;
+  commercialization: ResearchCommercialization;
+  attachments: ResearchAttachment[];
+  productDevelopmentRecommendation: string;
+}
+
+export interface ResearchManagementRecord {
+  id: string;
+  researchId: string; // RES-2026-0001
+  researchCode: string; // system-generated short code
+  status: ResearchStatus;
+  currentStage: ResearchStage;
+  currentPhase: string;
+  stages: ResearchStageState[];
+  version: number;
+  researchTitle: string;
+  researchCategory: string;
+  researchType: string;
+  businessUnit: string;
+  department: string;
+  principalInvestigator: string;
+  linkedOpportunityId: string | null;
+  linkedOpportunityCode: string | null;
+  linkedTechnologyScoutingId: string | null;
+  linkedTechnologyScoutingCode: string | null;
+  linkedInnovationPortfolioId: string | null;
+  linkedInnovationPortfolioCode: string | null;
+  overview: ResearchOverview;
+  planning: ResearchPlanning;
+  literature: ResearchLiterature;
+  experimental: ResearchExperimental;
+  resources: ResearchResources;
+  outputs: ResearchOutputs;
+  trl: ResearchTRL;
+  risk: ResearchRisk;
+  commercialization: ResearchCommercialization;
+  productDevelopmentRecommendation: string;
+  progressPercentage: number; // computed from milestones
+  aiAnalytics: ResearchAIAnalytics;
+  kpis: ResearchKPIs;
+  attachments: ResearchAttachment[];
+  reviewers: ResearchReviewer[];
+  approvalDecision: ResearchApprovalDecision | null;
+  reviewNextAction: string | null;
+  reviewComments: string | null;
+  reviewConditions: string | null;
+  approvalDate: string | null;
+  nextAction: string;
+  feasibilityProjectId: string | null;
+  feasibilityProjectCode: string | null;
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  auditTrail: ResearchActivityEntry[];
+}
+
+export type ResearchListRow = {
+  id: string;
+  researchId: string;
+  researchCode: string;
+  researchTitle: string;
+  researchCategory: string;
+  status: ResearchStatus;
+  currentPhase: string;
+  principalInvestigator: string;
+  progressPercentage: number;
+  researchImpactScore: number;
+  trlNumber: number;
+  updatedAt: string;
+};
+
+export interface ResearchLookups {
+  researchCategories: string[];
+  researchTypes: string[];
+  researchDomains: string[];
+  technologyDomains: string[];
+  strategicThemes: string[];
+  researchMethodologies: string[];
+  testMethods: string[];
+  laboratories: string[];
+  currentPhases: string[];
+  trlLevels: string[];
+  productDevelopmentRecommendations: string[];
+  approvalDecisions: string[];
+  nextActions: string[];
+  principalInvestigators: string[];
+  researchTeamMembers: string[];
+  universities: string[];
+  businessUnits: string[];
+  departments: string[];
+  attachmentCategories: string[];
+  keywordSuggestions: string[];
+  milestoneTemplates: string[];
+}
+
+/* ===========================================================================
+   Feasibility Study (Development → Research & Innovation Development)
+   ---------------------------------------------------------------------------
+   The primary investment-decision gate. One record per full feasibility study,
+   created from a validated Problem. Embeds the 5 evaluation stages (Technical →
+   Market → Financial → Operational → Compliance & Risk), the 11 section shapes,
+   the AI Feasibility Assessment, the Decision Summary, reviewers and the audit
+   trail. Distinct from FeasibilityProjectRecord (the lightweight FSP breadcrumb
+   auto-created by Problem Validation / Research Management approval).
+   =========================================================================== */
+
+export type FeasibilityStatus =
+  | "draft"
+  | "technical_feasibility"
+  | "market_feasibility"
+  | "financial_feasibility"
+  | "operational_feasibility"
+  | "compliance_risk"
+  | "under_review"
+  | "approved"
+  | "conditional_approval"
+  | "revision_required"
+  | "rejected"
+  | "archived";
+
+export type FeasibilityStage =
+  "technical" | "market" | "financial" | "operational" | "compliance_risk";
+
+export interface FeasibilityStageState {
+  stage: FeasibilityStage;
+  status: "pending" | "in_progress" | "completed";
+  startedAt: string | null;
+  completedAt: string | null;
+}
+
+/** Section 1 — Executive Summary. */
+export interface FSExecutiveSummary {
+  studyObjective: string;
+  businessNeed: string;
+  opportunityDescription: string;
+  expectedBenefits: string;
+  keyAssumptions: string;
+}
+
+export type FeasibilityTRL =
+  | "TRL 1 - Basic Principles"
+  | "TRL 2 - Technology Concept"
+  | "TRL 3 - Experimental Proof"
+  | "TRL 4 - Validated in Lab"
+  | "TRL 5 - Validated in Relevant Environment"
+  | "TRL 6 - Demonstrated in Relevant Environment"
+  | "TRL 7 - System Prototype Demonstration"
+  | "TRL 8 - System Complete & Qualified"
+  | "TRL 9 - Proven in Operations";
+
+/** Section 2 — Technical Feasibility. */
+export interface FSTechnical {
+  technologyDescription: string;
+  trl: FeasibilityTRL;
+  technologyMaturity: string;
+  technicalComplexity: string; // Low | Medium | High
+  requiredTechnologies: string[];
+  engineeringChallenges: string;
+  prototypeRequired: boolean;
+  infrastructureAvailability: string;
+}
+
+/** Section 3 — Market Feasibility. */
+export interface FSMarket {
+  targetMarket: string;
+  customerSegment: string;
+  tam: number;
+  sam: number;
+  som: number;
+  marketGrowthRate: number; // %
+  customerDemand: number; // 1..10 stars
+  competitivePosition: number; // 1..10 stars
+}
+
+/** Section 4 — Financial Feasibility (calculated fields recomputed server-side). */
+export interface FSFinancial {
+  estimatedDevelopmentCost: number;
+  capex: number;
+  opex: number;
+  opexAnnual: number;
+  revenueForecast: number; // Yr 5
+  // Calculated (C):
+  grossMargin: number; // %
+  ebitda: number; // %
+  roi: number; // %
+  npv: number;
+  irr: number; // %
+  paybackPeriod: number; // months
+  breakEvenPoint: number; // months
+}
+
+/** Section 5 — Operational Feasibility (each 1..10 stars; score computed). */
+export interface FSOperational {
+  manufacturingCapability: number;
+  supplyChainReadiness: number;
+  resourceAvailability: number;
+  vendorAvailability: number;
+  facilityReadiness: number;
+  scalability: number;
+}
+
+/** Section 6 — Legal & Regulatory Feasibility. */
+export interface FSLegal {
+  applicableRegulations: string;
+  applicableStandards: string[];
+  certificationRequired: string[];
+  patentRisk: number; // 1..10 stars
+  freedomToOperate: string;
+}
+
+/** Section 7 — Risk Assessment (each 1..10 stars; overall score computed). */
+export interface FSRisk {
+  technicalRisk: number;
+  financialRisk: number;
+  marketRisk: number;
+  regulatoryRisk: number;
+  supplyChainRisk: number;
+  cybersecurityRisk: number;
+  esgRisk: number;
+}
+
+/** Section 8 — Resource Planning. */
+export interface FSResources {
+  projectTeam: string[];
+  internalExperts: string[];
+  externalExperts: string[];
+  equipmentRequired: string;
+  laboratoryRequired: string;
+  timeline: number; // months
+  // budgetRequired is computed = dev cost + capex + opex
+}
+
+export interface FSAttachment {
+  id: string;
+  category: string;
+  filename: string;
+  fileType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  url: string;
+}
+
+/** Section 9 — AI Feasibility Assessment (computed; single source of truth,
+ *  the sidebar AI summary reads the same object). */
+export interface FSAIAssessment {
+  aiTechnicalScore: number; // /100
+  aiFinancialScore: number;
+  aiMarketScore: number;
+  aiOperationalScore: number;
+  aiRiskScore: number;
+  aiSuccessProbability: number; // %
+  recommendation: string;
+  suggestedImprovements: string;
+  // AI Feasibility Assessment card also shows the six research-style scores:
+  aiNoveltyScore: number; // /100
+  aiTechnicalMerit: number;
+  aiCommercialPotential: number;
+  aiPublicationPotential: number;
+  aiPatentPotential: number;
+  aiResearchImpactScore: number;
+  generatedAt: string;
+}
+
+export type FeasibilityPriority = "Strategic" | "Critical" | "High" | "Medium" | "Low";
+
+/** Decision Summary — all scores computed; priority/action workflow-set. */
+export interface FSDecisionSummary {
+  technicalScore: number; // /100
+  commercialScore: number;
+  financialScore: number;
+  operationalScore: number;
+  strategicScore: number;
+  overallFeasibilityScore: number;
+  investmentPriority: FeasibilityPriority;
+  recommendedAction: string;
+}
+
+/** Per-section computed scores (tiles on the form). */
+export interface FSSectionScores {
+  technicalFeasibilityScore: number;
+  marketFeasibilityScore: number;
+  operationalScore: number;
+  complianceScore: number;
+  overallRiskScore: number;
+}
+
+export interface FSReviewer {
+  role: string;
+  name: string;
+  status: "reviewed" | "pending";
+  date: string | null;
+}
+
+export type FSApprovalDecision =
+  "Approved" | "Approved with Conditions" | "Revision Required" | "Deferred" | "Rejected";
+
+export type FSFundingApproval = "Pending" | "Approved" | "Rejected";
+
+export interface FSAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: FeasibilityStage;
+  fromStatus?: FeasibilityStatus;
+  toStatus?: FeasibilityStatus;
+}
+
+/** Everything the form edits directly (computed fields excluded). */
+export interface FeasibilityFormInput {
+  studyTitle: string;
+  businessUnit: string;
+  department: string;
+  projectManager: string;
+  studyDate: string;
+  linkedProblemValidationId?: string | null;
+  executiveSummary: FSExecutiveSummary;
+  overallRecommendation: string;
+  technical: FSTechnical;
+  market: FSMarket;
+  financial: FSFinancial;
+  operational: FSOperational;
+  legal: FSLegal;
+  risk: FSRisk;
+  resources: FSResources;
+  attachments: FSAttachment[];
+  investmentPriority: FeasibilityPriority;
+  recommendedAction: string;
+}
+
+export interface FeasibilityStudyRecord {
+  id: string;
+  feasibilityId: string; // FS-2026-00125
+  formCode: string; // FS-2026-25
+  status: FeasibilityStatus;
+  currentStage: FeasibilityStage;
+  stages: FeasibilityStageState[];
+  version: number;
+  studyTitle: string;
+  businessUnit: string;
+  department: string;
+  projectManager: string;
+  studyDate: string;
+  // Linked upstream records (resolved).
+  linkedProblemValidationId: string | null;
+  linkedProblemValidationCode: string | null;
+  linkedPortfolioId: string | null;
+  linkedPortfolioCode: string | null;
+  linkedTechnologyScoutingId: string | null;
+  linkedTechnologyScoutingCode: string | null;
+  linkedResearchProjectId: string | null;
+  linkedResearchProjectCode: string | null;
+  executiveSummary: FSExecutiveSummary;
+  overallRecommendation: string;
+  technical: FSTechnical;
+  market: FSMarket;
+  financial: FSFinancial;
+  operational: FSOperational;
+  legal: FSLegal;
+  risk: FSRisk;
+  resources: FSResources;
+  budgetRequired: number; // computed
+  sectionScores: FSSectionScores;
+  aiAssessment: FSAIAssessment;
+  decisionSummary: FSDecisionSummary;
+  attachments: FSAttachment[];
+  reviewers: FSReviewer[];
+  approvalDecision: FSApprovalDecision | null;
+  fundingApproval: FSFundingApproval;
+  reviewComments: string | null;
+  reviewConditions: string | null;
+  approvalDate: string | null;
+  nextAction: string;
+  pocProjectId: string | null;
+  pocProjectCode: string | null;
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  auditTrail: FSAuditEntry[];
+}
+
+export type FeasibilityListRow = {
+  id: string;
+  feasibilityId: string;
+  formCode: string;
+  studyTitle: string;
+  status: FeasibilityStatus;
+  projectManager: string;
+  overallFeasibilityScore: number;
+  investmentPriority: FeasibilityPriority;
+  linkedProblemValidationCode: string | null;
+  updatedAt: string;
+};
+
+export interface FeasibilityLookups {
+  technologyMaturities: string[];
+  technicalComplexities: string[];
+  trlLevels: string[];
+  requiredTechnologies: string[];
+  infrastructureAvailability: string[];
+  targetMarkets: string[];
+  customerSegments: string[];
+  applicableStandards: string[];
+  certifications: string[];
+  freedomToOperate: string[];
+  investmentPriorities: string[];
+  recommendedActions: string[];
+  overallRecommendations: string[];
+  approvalDecisions: string[];
+  fundingApprovals: string[];
+  projectManagers: string[];
+  teamMembers: string[];
+  internalExperts: string[];
+  externalExperts: string[];
+  laboratories: string[];
+  businessUnits: string[];
+  departments: string[];
+  attachmentCategories: string[];
+}
+
+/* ===========================================================================
+   Proof of Concept — PoC (Development → Research & Innovation Development)
+   ---------------------------------------------------------------------------
+   The technical-validation gateway. One record per full PoC project, created
+   from an approved Feasibility Study. Embeds the 5 build/test stages (Technical
+   Implementation → Build & Integration → Experimental Testing → Commercial
+   Assessment → Final Review), the section shapes, the AI PoC Assessment, the
+   PoC Summary, reviewers and the audit trail. Distinct from PocProjectRecord's
+   lightweight `proof_of_concept` breadcrumb (auto-created on FS approval).
+   =========================================================================== */
+
+export type PocStatus =
+  | "draft"
+  | "technical_implementation"
+  | "build_integration"
+  | "experimental_testing"
+  | "commercial_assessment"
+  | "final_review"
+  | "approved"
+  | "conditional_approval"
+  | "revision_required"
+  | "rejected"
+  | "archived";
+
+export type PocStage =
+  | "technical_implementation"
+  | "build_integration"
+  | "experimental_testing"
+  | "commercial_assessment"
+  | "final_review";
+
+export interface PocStageState {
+  stage: PocStage;
+  status: "pending" | "in_progress" | "completed";
+  startedAt: string | null;
+  completedAt: string | null;
+}
+
+/** Section 1 — PoC Overview. */
+export interface PocOverview {
+  objective: string;
+  problemBeingSolved: string;
+  proposedSolution: string;
+  successCriteria: string;
+  scope: string;
+  assumptions: string;
+  constraints: string;
+}
+
+/** Section 2 — Technical Implementation. */
+export interface PocTechnical {
+  technologyStack: string[];
+  hardwareComponents: string;
+  softwareComponents: string;
+  architecture: string;
+  prototypeLevel: string;
+  engineeringApproach: string;
+  integrationRequirements: string;
+}
+
+/** Section 3 — Experimental Plan. */
+export interface PocExperimental {
+  experimentObjective: string;
+  testMethod: string;
+  testEnvironment: string;
+  variables: string;
+  performanceParameters: string;
+  acceptanceCriteria: string;
+  testScheduleStart: string;
+  testScheduleEnd: string;
+}
+
+/** Section 4 — Resources. */
+export interface PocResources {
+  projectTeam: string[];
+  technicalExperts: string[];
+  laboratory: string;
+  equipmentRequired: string;
+  softwareTools: string[];
+  budgetApproved: number;
+  budgetUtilized: number;
+  // remainingBudget computed = approved - utilized
+}
+
+/** Section 5 — Test Results (ratings 1..10; efficiency is %). */
+export interface PocTestResults {
+  functionalValidation: number;
+  performanceValidation: number;
+  reliability: number;
+  efficiency: number; // %
+  safetyValidation: number;
+  complianceValidation: number;
+  observations: string;
+}
+
+/** Section 6 — Issues & Improvements. */
+export interface PocIssues {
+  technicalIssues: string;
+  rootCause: string;
+  correctiveActions: string;
+  lessonsLearned: string;
+  improvementSuggestions: string;
+}
+
+/** Section 7 — Commercial Assessment (ratings 1..10). */
+export interface PocCommercial {
+  customerAcceptance: number;
+  marketReadiness: number;
+  scalability: number;
+  manufacturingReadiness: number;
+  commercialViability: number;
+  goToMarketReadiness: number;
+}
+
+/** Section 8 — AI PoC Assessment (computed; single source of truth for the
+ *  sidebar Key Scores + AI Success Probability). */
+export interface PocAIAssessment {
+  aiTechnicalScore: number; // /100
+  aiPerformanceScore: number;
+  aiReliabilityScore: number;
+  aiCommercialScore: number;
+  aiSuccessProbability: number; // %
+  recommendations: string;
+  improvementSuggestions: string;
+  /** Stage outputs (deterministic). */
+  architectureAssessment: string;
+  designRisks: string;
+  integrationStatus: string;
+  readinessScore: number; // /100
+  generatedAt: string;
+}
+
+export type PocTRL =
+  | "TRL 4 - Validated in Lab"
+  | "TRL 5 - Validated in Relevant Environment"
+  | "TRL 6 - Demonstrated in Relevant Environment"
+  | "TRL 7 - System Prototype Demonstration";
+
+/** PoC Summary — computed scores + recommendation. */
+export interface PocSummary {
+  technicalScore: number; // /100
+  performanceScore: number;
+  commercialScore: number;
+  riskScore: number; // /100 (higher = safer)
+  overallPocScore: number;
+  technologyReadinessLevel: PocTRL;
+  recommendation: string;
+}
+
+export interface PocAttachment {
+  id: string;
+  category: string;
+  filename: string;
+  fileType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  url: string;
+}
+
+export interface PocReviewer {
+  role: string;
+  name: string;
+  status: "reviewed" | "pending";
+  date: string | null;
+}
+
+export type PocApprovalDecision =
+  "Approved" | "Approved with Conditions" | "Revision Required" | "On Hold" | "Rejected";
+
+export interface PocAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: PocStage;
+  fromStatus?: PocStatus;
+  toStatus?: PocStatus;
+}
+
+/** Everything the form edits directly (computed fields excluded). */
+export interface PocFormInput {
+  pocTitle: string;
+  businessUnit: string;
+  department: string;
+  projectManager: string;
+  pocStartDate: string;
+  linkedFeasibilityStudyId?: string | null;
+  overview: PocOverview;
+  technical: PocTechnical;
+  experimental: PocExperimental;
+  resources: PocResources;
+  testResults: PocTestResults;
+  issues: PocIssues;
+  commercial: PocCommercial;
+  attachments: PocAttachment[];
+  recommendation: string;
+}
+
+export interface PocProjectRecord {
+  id: string;
+  pocId: string; // POC-2026-0056
+  formCode: string; // POC-2026-25
+  status: PocStatus;
+  currentStage: PocStage;
+  currentStageLabel: string;
+  stages: PocStageState[];
+  progressPercentage: number;
+  version: number;
+  pocTitle: string;
+  businessUnit: string;
+  department: string;
+  projectManager: string;
+  pocStartDate: string;
+  // Linked upstream records (resolved).
+  linkedFeasibilityStudyId: string | null;
+  linkedFeasibilityStudyCode: string | null;
+  linkedResearchProjectId: string | null;
+  linkedResearchProjectCode: string | null;
+  linkedTechnologyId: string | null;
+  linkedTechnologyCode: string | null;
+  overview: PocOverview;
+  technical: PocTechnical;
+  experimental: PocExperimental;
+  resources: PocResources;
+  testResults: PocTestResults;
+  issues: PocIssues;
+  commercial: PocCommercial;
+  aiAssessment: PocAIAssessment;
+  summary: PocSummary;
+  attachments: PocAttachment[];
+  reviewers: PocReviewer[];
+  approvalDecision: PocApprovalDecision | null;
+  reviewNextAction: string | null;
+  reviewComments: string | null;
+  reviewConditions: string | null;
+  approvalDate: string | null;
+  nextAction: string;
+  prototypeProjectId: string | null;
+  prototypeProjectCode: string | null;
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  auditTrail: PocAuditEntry[];
+}
+
+export type PocListRow = {
+  id: string;
+  pocId: string;
+  formCode: string;
+  pocTitle: string;
+  status: PocStatus;
+  projectManager: string;
+  progressPercentage: number;
+  overallPocScore: number;
+  aiSuccessProbability: number;
+  linkedFeasibilityStudyCode: string | null;
+  updatedAt: string;
+};
+
+export interface PocLookups {
+  prototypeLevels: string[];
+  engineeringApproaches: string[];
+  testMethods: string[];
+  testEnvironments: string[];
+  technologyStack: string[];
+  softwareTools: string[];
+  laboratories: string[];
+  recommendations: string[];
+  approvalDecisions: string[];
+  nextActions: string[];
+  projectManagers: string[];
+  teamMembers: string[];
+  technicalExperts: string[];
+  businessUnits: string[];
+  departments: string[];
+  attachmentCategories: string[];
+}
+
+/* ===========================================================================
+   Prototype Development (Development → Research & Innovation Development)
+   ---------------------------------------------------------------------------
+   The engineering-realization stage. One record per full prototype project,
+   created from an approved PoC. Embeds the 4 engineering stages (Engineering
+   Design → Prototype Manufacturing → Testing & Validation → Engineering
+   Review), the section shapes, the AI Engineering Assessment, the Prototype
+   Summary, reviewers and the audit trail. Distinct from the lightweight
+   `prototype_development` breadcrumb (auto-created on PoC approval).
+   =========================================================================== */
+
+export type PrototypeStatus =
+  | "draft"
+  | "engineering_design"
+  | "prototype_manufacturing"
+  | "testing_validation"
+  | "engineering_review"
+  | "approved"
+  | "approved_with_conditions"
+  | "revision_required"
+  | "rejected"
+  | "archived";
+
+export type PrototypeStage =
+  "engineering_design" | "prototype_manufacturing" | "testing_validation" | "engineering_review";
+
+export interface PrototypeStageState {
+  stage: PrototypeStage;
+  status: "pending" | "in_progress" | "completed";
+  startedAt: string | null;
+  completedAt: string | null;
+}
+
+/** Section 1 — Prototype Overview. */
+export interface PrototypeOverview {
+  prototypeCategory: string;
+  prototypeType: string;
+  engineeringDiscipline: string[];
+  designObjective: string;
+  successCriteria: string;
+  prototypeObjective: string;
+  productDescription: string;
+}
+
+/** Section 2 — Product Architecture. */
+export interface PrototypeArchitecture {
+  systemArchitecture: string;
+  mechanicalDesign: string;
+  electricalDesign: string;
+  electronicsDesign: string;
+  embeddedSoftware: string;
+  firmwareVersion: string;
+  communicationProtocols: string[];
+  systemInterfaces: string;
+}
+
+export interface PrototypeDesignFile {
+  id: string;
+  name: string;
+  fileType: string;
+  sizeLabel: string;
+}
+
+/** Section 3 — Engineering Design. */
+export interface PrototypeEngineering {
+  designFiles: PrototypeDesignFile[];
+  materialSpecification: string;
+  designStandards: string[];
+}
+
+/** Section 4 — Prototype Manufacturing. */
+export interface PrototypeManufacturing {
+  manufacturingMethod: string;
+  prototypeQuantity: number;
+  manufacturingPartner: string;
+  fabricationStatus: string;
+  assemblyStatus: string;
+  qualityInspection: string;
+  manufacturingCost: number;
+}
+
+/** Section 5 — Testing & Validation (ratings 1..10; score computed). */
+export interface PrototypeTesting {
+  functionalTest: number;
+  performanceTest: number;
+  reliabilityTest: number;
+  safetyTest: number;
+  emcEmiTest: number;
+  environmentalTest: number;
+  complianceTest: number;
+  validationSummary: string;
+}
+
+/** Section 6 — Design Improvements. */
+export interface PrototypeImprovements {
+  designIssues: string;
+  rootCause: string;
+  engineeringChanges: string;
+  designOptimization: string;
+  lessonsLearned: string;
+  futureImprovements: string;
+}
+
+/** Section 7 — Commercial Readiness. */
+export interface PrototypeCommercial {
+  manufacturingReadinessLevel: string;
+  technologyReadinessLevel: string;
+  costOptimization: number; // rating 1..10
+  productionScalability: number;
+  serviceability: number;
+  customerDemonstrationReady: boolean;
+}
+
+/** Section 8 — AI Engineering Assessment (computed; single source of truth for
+ *  section 9 + the sidebar Key Scores). */
+export interface PrototypeAIAssessment {
+  aiDesignQualityScore: number; // /100
+  aiManufacturingScore: number;
+  aiReliabilityScore: number;
+  aiComplianceScore: number;
+  aiRiskScore: number;
+  aiReadinessScore: number;
+  recommendations: string;
+  /** Stage outputs (deterministic). */
+  manufacturabilityAnalysis: string;
+  riskAssessment: string;
+  designOptimizationSuggestions: string;
+  costAnalysis: string;
+  improvementRecommendations: string;
+  generatedAt: string;
+}
+
+/** Section 9 — Prototype Summary (computed scores + recommendation). */
+export interface PrototypeSummary {
+  engineeringScore: number; // /100
+  validationScore: number;
+  manufacturingScore: number;
+  commercialReadinessScore: number;
+  overallPrototypeScore: number;
+  recommendation: string;
+}
+
+export interface PrototypeAttachment {
+  id: string;
+  category: string;
+  filename: string;
+  fileType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  url: string;
+}
+
+export interface PrototypeReviewer {
+  role: string;
+  name: string;
+  status: "reviewed" | "pending";
+  date: string | null;
+}
+
+export type PrototypeApprovalDecision =
+  "Approved" | "Approved with Conditions" | "Revision Required" | "On Hold" | "Rejected";
+
+export interface PrototypeAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: PrototypeStage;
+  fromStatus?: PrototypeStatus;
+  toStatus?: PrototypeStatus;
+}
+
+/** Everything the form edits directly (computed fields excluded). */
+export interface PrototypeFormInput {
+  prototypeName: string;
+  businessUnit: string;
+  department: string;
+  prototypeOwner: string;
+  developmentStartDate: string;
+  targetCompletion: string;
+  linkedPocId?: string | null;
+  overview: PrototypeOverview;
+  architecture: PrototypeArchitecture;
+  engineering: PrototypeEngineering;
+  manufacturing: PrototypeManufacturing;
+  testing: PrototypeTesting;
+  improvements: PrototypeImprovements;
+  commercial: PrototypeCommercial;
+  attachments: PrototypeAttachment[];
+  recommendation: string;
+}
+
+export interface PrototypeProjectRecord {
+  id: string;
+  prototypeId: string; // PRD-2026-00078
+  formCode: string; // PRD-2026-25
+  status: PrototypeStatus;
+  currentStage: PrototypeStage;
+  currentStageLabel: string;
+  stages: PrototypeStageState[];
+  progressPercentage: number;
+  prototypeVersion: string; // e.g. "1.2"
+  version: number;
+  prototypeName: string;
+  businessUnit: string;
+  department: string;
+  prototypeOwner: string;
+  developmentStartDate: string;
+  targetCompletion: string;
+  // Linked upstream records (resolved).
+  linkedPocId: string | null;
+  linkedPocCode: string | null;
+  linkedFeasibilityStudyId: string | null;
+  linkedFeasibilityStudyCode: string | null;
+  linkedResearchProjectId: string | null;
+  linkedResearchProjectCode: string | null;
+  overview: PrototypeOverview;
+  architecture: PrototypeArchitecture;
+  engineering: PrototypeEngineering;
+  manufacturing: PrototypeManufacturing;
+  testing: PrototypeTesting;
+  improvements: PrototypeImprovements;
+  commercial: PrototypeCommercial;
+  aiAssessment: PrototypeAIAssessment;
+  summary: PrototypeSummary;
+  attachments: PrototypeAttachment[];
+  reviewers: PrototypeReviewer[];
+  approvalDecision: PrototypeApprovalDecision | null;
+  reviewNextAction: string | null;
+  reviewComments: string | null;
+  reviewConditions: string | null;
+  approvalDate: string | null;
+  nextAction: string;
+  engineeringValidationId: string | null;
+  engineeringValidationCode: string | null;
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  auditTrail: PrototypeAuditEntry[];
+}
+
+export type PrototypeListRow = {
+  id: string;
+  prototypeId: string;
+  formCode: string;
+  prototypeName: string;
+  status: PrototypeStatus;
+  prototypeOwner: string;
+  progressPercentage: number;
+  overallPrototypeScore: number;
+  prototypeVersion: string;
+  linkedPocCode: string | null;
+  updatedAt: string;
+};
+
+export interface PrototypeLookups {
+  prototypeCategories: string[];
+  prototypeTypes: string[];
+  engineeringDisciplines: string[];
+  communicationProtocols: string[];
+  designStandards: string[];
+  manufacturingMethods: string[];
+  fabricationStatuses: string[];
+  assemblyStatuses: string[];
+  qualityInspectionStatuses: string[];
+  manufacturingReadinessLevels: string[];
+  technologyReadinessLevels: string[];
+  recommendations: string[];
+  approvalDecisions: string[];
+  nextActions: string[];
+  manufacturingPartners: string[];
+  prototypeOwners: string[];
+  businessUnits: string[];
+  departments: string[];
+  attachmentCategories: string[];
+}
+
+/* ===========================================================================
+   Experiment Management (Development → Research & Innovation Development)
+   ---------------------------------------------------------------------------
+   The evidence-generation stage. One record per experiment, created from an
+   approved Prototype. Embeds the 5 stages (Experiment Planning → Laboratory
+   Preparation → Experiment Execution → Validation → Technical Review), the 12
+   section shapes, the AI Experiment Assessment, the Experiment Summary,
+   reviewers and the audit trail.
+   =========================================================================== */
+
+export type ExperimentStatus =
+  | "draft"
+  | "experiment_planning"
+  | "laboratory_preparation"
+  | "experiment_execution"
+  | "validation"
+  | "technical_review"
+  | "approved"
+  | "approved_with_conditions"
+  | "revision_required"
+  | "rejected"
+  | "archived";
+
+export type ExperimentStage =
+  | "experiment_planning"
+  | "laboratory_preparation"
+  | "experiment_execution"
+  | "validation"
+  | "technical_review";
+
+export interface ExperimentStageState {
+  stage: ExperimentStage;
+  status: "pending" | "in_progress" | "completed";
+  startedAt: string | null;
+  completedAt: string | null;
+}
+
+/** Section 1 — Experiment Overview. */
+export interface ExperimentOverview {
+  objective: string;
+  hypothesis: string;
+  engineeringProblem: string;
+  scope: string;
+  expectedOutcome: string;
+  successCriteria: string;
+  priority: string; // Low | Medium | High
+}
+
+/** Section 2 — Experimental Design. */
+export interface ExperimentDesign {
+  experimentMethod: string;
+  testProcedure: string;
+  independentVariables: string;
+  dependentVariables: string;
+  controlledVariables: string;
+  sampleSize: number;
+  numberOfTrials: number;
+  statisticalMethod: string;
+}
+
+/** Section 3 — Test Environment. */
+export interface ExperimentEnvironment {
+  testBench: string;
+  equipmentUsed: string[];
+  instrumentCalibration: boolean;
+  environmentalConditions: string;
+  softwareTools: string[];
+  safetyChecklist: string;
+}
+
+/** Section 4 — Resource Planning. */
+export interface ExperimentResources {
+  projectTeam: string[];
+  technicalExperts: string[];
+  materialsRequired: string;
+  budgetApproved: number;
+  budgetUtilized: number;
+  // remainingBudget computed = approved - utilized
+  // experimentDuration computed from start/end dates
+}
+
+export interface ExperimentFile {
+  id: string;
+  name: string;
+  fileType: string;
+  sizeLabel: string;
+}
+
+/** Section 5 — Experimental Observations. */
+export interface ExperimentObservations {
+  trialNumber: number;
+  totalTrials: number;
+  observations: string;
+  measurements: string; // key-value list as text
+  anomalies: string;
+  rawDataFiles: ExperimentFile[];
+  imageFiles: ExperimentFile[];
+  videoFiles: ExperimentFile[];
+  sensorDataFiles: ExperimentFile[];
+}
+
+/** Section 6 — Data Analysis. */
+export interface ExperimentDataAnalysis {
+  dataProcessingMethod: string;
+  statisticalAnalysis: string;
+  performanceMetrics: string;
+  varianceAnalysis: string;
+  rootCauseAnalysis: string;
+  interpretation: string;
+  chartFiles: ExperimentFile[];
+}
+
+/** Section 7 — Validation Results (accuracy/precision %, ratings 1..10). */
+export interface ExperimentValidation {
+  objectiveAchieved: boolean;
+  accuracy: number; // %
+  precision: number; // %
+  repeatability: number; // rating 1..10
+  reliability: number;
+  compliance: number;
+  validationSummary: string;
+}
+
+/** Section 8 — AI Experiment Assessment (computed; single source of truth for
+ *  section 9 + the sidebar Key Scores / AI confidence). */
+export interface ExperimentAIAssessment {
+  aiExperimentScore: number; // /100
+  aiDataQualityScore: number; // /100
+  aiConfidenceLevel: number; // %
+  trendAnalysis: string;
+  failurePrediction: string;
+  optimizationSuggestions: string;
+  recommendation: string;
+  /** Stage outputs (deterministic). */
+  experimentalDesignScore: number; // /100
+  sampleSizeRecommendation: string;
+  riskAssessment: string;
+  statisticalConfidence: number; // %
+  repeatabilityScore: number; // /100
+  generatedAt: string;
+}
+
+/** Section 9 — Experiment Summary (computed scores + recommendation). */
+export interface ExperimentSummary {
+  technicalScore: number; // /100
+  statisticalConfidence: number; // %
+  validationScore: number; // /100
+  overallExperimentScore: number; // /100
+  recommendation: string;
+}
+
+export interface ExperimentAttachment {
+  id: string;
+  category: string;
+  filename: string;
+  fileType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  url: string;
+}
+
+export interface ExperimentReviewer {
+  role: string;
+  name: string;
+  status: "reviewed" | "pending";
+  date: string | null;
+}
+
+export type ExperimentApprovalDecision =
+  "Approved" | "Approved with Conditions" | "Revision Required" | "On Hold" | "Rejected";
+
+export interface ExperimentAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: ExperimentStage;
+  fromStatus?: ExperimentStatus;
+  toStatus?: ExperimentStatus;
+}
+
+/** Everything the form edits directly (computed fields excluded). */
+export interface ExperimentFormInput {
+  experimentTitle: string;
+  experimentCategory: string;
+  laboratory: string;
+  principalInvestigator: string;
+  startDate: string;
+  endDate: string;
+  linkedPrototypeId?: string | null;
+  overview: ExperimentOverview;
+  design: ExperimentDesign;
+  environment: ExperimentEnvironment;
+  resources: ExperimentResources;
+  observations: ExperimentObservations;
+  dataAnalysis: ExperimentDataAnalysis;
+  validation: ExperimentValidation;
+  attachments: ExperimentAttachment[];
+  recommendation: string;
+}
+
+export interface ExperimentProjectRecord {
+  id: string;
+  experimentId: string; // EXP-2026-0096
+  formCode: string; // EXP-2026-25
+  status: ExperimentStatus;
+  currentStage: ExperimentStage;
+  currentStageLabel: string;
+  stages: ExperimentStageState[];
+  progressPercentage: number;
+  version: number;
+  experimentTitle: string;
+  experimentCategory: string;
+  laboratory: string;
+  principalInvestigator: string;
+  startDate: string;
+  endDate: string;
+  // Linked upstream records (resolved).
+  linkedPrototypeId: string | null;
+  linkedPrototypeCode: string | null;
+  linkedPocId: string | null;
+  linkedPocCode: string | null;
+  linkedResearchProjectId: string | null;
+  linkedResearchProjectCode: string | null;
+  overview: ExperimentOverview;
+  design: ExperimentDesign;
+  environment: ExperimentEnvironment;
+  resources: ExperimentResources;
+  observations: ExperimentObservations;
+  dataAnalysis: ExperimentDataAnalysis;
+  validation: ExperimentValidation;
+  aiAssessment: ExperimentAIAssessment;
+  summary: ExperimentSummary;
+  attachments: ExperimentAttachment[];
+  reviewers: ExperimentReviewer[];
+  approvalDecision: ExperimentApprovalDecision | null;
+  reviewNextAction: string | null;
+  reviewComments: string | null;
+  reviewConditions: string | null;
+  approvalDate: string | null;
+  nextAction: string;
+  engineeringValidationId: string | null;
+  engineeringValidationCode: string | null;
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  auditTrail: ExperimentAuditEntry[];
+}
+
+export type ExperimentListRow = {
+  id: string;
+  experimentId: string;
+  formCode: string;
+  experimentTitle: string;
+  experimentCategory: string;
+  status: ExperimentStatus;
+  principalInvestigator: string;
+  progressPercentage: number;
+  overallExperimentScore: number;
+  linkedPrototypeCode: string | null;
+  updatedAt: string;
+};
+
+export interface ExperimentLookups {
+  experimentCategories: string[];
+  experimentMethods: string[];
+  statisticalMethods: string[];
+  dataProcessingMethods: string[];
+  laboratories: string[];
+  testBenches: string[];
+  equipment: string[];
+  softwareTools: string[];
+  priorities: string[];
+  recommendations: string[];
+  approvalDecisions: string[];
+  nextActions: string[];
+  principalInvestigators: string[];
+  teamMembers: string[];
+  technicalExperts: string[];
+  attachmentCategories: string[];
+}
+
+/* ===========================================================================
+   Patent Management (Development → IP Development → Patent Management)
+   ---------------------------------------------------------------------------
+   One record per patent. Created from an approved IP record. Embeds the 5
+   lifecycle stages (Preparation → Filing → Examination → Grant →
+   Commercialization), the 12 section shapes, the AI Patent Analytics, the
+   Patent Summary, the review table and the audit trail. Genuinely date-driven:
+   Next Action, Response-Due alert and Renewal Status are all computed.
+   =========================================================================== */
+
+export type PatentStatus =
+  | "draft"
+  | "preparation"
+  | "filing"
+  | "examination"
+  | "granted"
+  | "commercialization"
+  | "active"
+  | "revision_required"
+  | "abandoned"
+  | "closed";
+
+export type PatentStage =
+  | "preparation"
+  | "filing"
+  | "examination"
+  | "grant"
+  | "commercialization";
+
+export interface PatentStageState {
+  stage: PatentStage;
+  status: "pending" | "in_progress" | "completed";
+  startedAt: string | null;
+  completedAt: string | null;
+}
+
+/** Section 1 — Patent Information. */
+export interface PatentInformation {
+  abstract: string;
+  patentType: string;
+  technologyArea: string;
+  industrySector: string;
+  keywords: string[];
+  patentStatus: string;
+}
+
+/** Section 2 — Inventor Information. */
+export interface PatentInventors {
+  leadInventor: string;
+  coInventors: string[];
+  organization: string;
+  ownership: string;
+  assignmentAgreement: boolean;
+  ndaSigned: boolean;
+}
+
+export interface PatentFile {
+  id: string;
+  name: string;
+  fileType: string;
+  sizeLabel: string;
+}
+
+/** Section 3 — Patent Filing. */
+export interface PatentFiling {
+  filingRoute: string;
+  filingCountries: string[];
+  patentOffice: string;
+  filingAttorney: string;
+  filingCost: number;
+  filingReceipt: PatentFile | null;
+  priorityDate: string;
+  publicationDate: string;
+}
+
+/** Section 4 — Patent Prosecution (Response Due Date is deadline-tracked). */
+export interface PatentProsecution {
+  examiner: string;
+  officeAction: string;
+  officeActionDate: string;
+  responseDueDate: string;
+  responseSubmitted: boolean;
+  amendmentRequired: boolean;
+  currentStage: string;
+}
+
+/** Section 5 — Patent Grant (Renewal Status derived from grant + frequency). */
+export interface PatentGrant {
+  grantNumber: string;
+  grantDate: string;
+  expiryDate: string;
+  patentTerm: number; // years
+  renewalFrequency: string;
+  renewalCostNext: number;
+}
+
+/** Section 6 — International Protection. */
+export interface PatentInternational {
+  pctFiled: boolean;
+  pctNumber: string;
+  nationalPhaseCountries: string[];
+  epFiling: boolean;
+  usFiling: boolean;
+  indiaFiling: boolean;
+  otherJurisdictions: string[];
+}
+
+/** Section 7 — Commercialization. */
+export interface PatentCommercialization {
+  licensingStatus: string;
+  licensee: string;
+  royaltyModel: string;
+  annualRoyalty: number;
+  technologyTransfer: boolean;
+  strategicImportance: number; // 1..10 stars
+  commercialValue: number;
+}
+
+/** Section 8 — AI Patent Analytics (computed; single source of truth for
+ *  section 9. Litigation risk: lower is better. No LLM, nothing hardcoded). */
+export interface PatentAIAnalytics {
+  patentStrengthScore: number; // /100
+  claimQualityScore: number; // /100
+  litigationRisk: number; // /100 (lower = better)
+  licensingPotential: number; // /100
+  commercialScore: number; // /100
+  renewalRecommendation: string;
+  portfolioRecommendation: string;
+  /** Stage outputs. */
+  noveltyAssessment: string;
+  inventiveStepAnalysis: string;
+  suggestedClaimImprovements: string;
+  objectionAnalysis: string;
+  suggestedResponses: string;
+  grantProbability: number; // %
+  portfolioImportance: string;
+  generatedAt: string;
+}
+
+export type PatentRenewalState = "Upcoming" | "Due" | "Overdue" | "Paid" | "N/A";
+export type PatentDeadlineTone = "ok" | "soon" | "due" | "overdue" | "none";
+
+/** Computed deadline state (Response Due, Renewal, Target Grant, Expiry). */
+export interface PatentDeadlines {
+  responseDueTone: PatentDeadlineTone;
+  responseDaysLeft: number | null;
+  renewalState: PatentRenewalState;
+  renewalDueDate: string | null;
+  renewalDaysLeft: number | null;
+  targetGrantTone: PatentDeadlineTone;
+  targetGrantDaysLeft: number | null;
+  expiryTone: PatentDeadlineTone;
+  expiryDaysLeft: number | null;
+}
+
+/** Section 9 — Patent Summary (computed scores + recommendation). */
+export interface PatentSummary {
+  legalScore: number; // /100
+  patentStrengthScore: number; // /100
+  commercialScore: number; // /100
+  portfolioScore: number; // /100
+  overallPatentScore: number; // /100
+  recommendation: string;
+}
+
+export interface PatentAttachment {
+  id: string;
+  category: string;
+  filename: string;
+  fileType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  url: string;
+}
+
+/** Section 11 — Review & Approval TABLE row (not chips). */
+export interface PatentReviewRow {
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Rejected";
+  comments: string;
+  status: "Reviewed" | "Pending";
+  date: string | null;
+}
+
+export type PatentApprovalDecision =
+  | "Approved"
+  | "Approved with Recommendations"
+  | "Revision Required"
+  | "Abandon Patent";
+
+export interface PatentAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  kind?: "audit" | "activity" | "change" | "workflow";
+  stage?: PatentStage;
+  fromStatus?: PatentStatus;
+  toStatus?: PatentStatus;
+}
+
+/** Everything the form edits directly (computed fields excluded). */
+export interface PatentFormInput {
+  patentTitle: string;
+  technologyDomain: string;
+  inventors: string[];
+  patentManager: string;
+  filingDate: string;
+  targetGrantDate: string;
+  linkedIpRecordId?: string | null;
+  information: PatentInformation;
+  inventorInfo: PatentInventors;
+  filing: PatentFiling;
+  prosecution: PatentProsecution;
+  grant: PatentGrant;
+  international: PatentInternational;
+  commercialization: PatentCommercialization;
+  attachments: PatentAttachment[];
+  recommendation: string;
+}
+
+export interface PatentRecord {
+  id: string;
+  patentId: string; // PAT-2026-0125
+  patentNumber: string; // IN202641012345
+  applicationNumber: string;
+  formCode: string;
+  status: PatentStatus;
+  currentStage: PatentStage;
+  currentStageLabel: string;
+  stages: PatentStageState[];
+  patentFamily: string;
+  version: number;
+  patentTitle: string;
+  technologyDomain: string;
+  inventors: string[];
+  patentManager: string;
+  filingDate: string;
+  targetGrantDate: string;
+  // Linked upstream records (resolved).
+  linkedIpRecordId: string | null;
+  linkedIpRecordCode: string | null;
+  linkedProductId: string | null;
+  linkedProductCode: string | null;
+  information: PatentInformation;
+  inventorInfo: PatentInventors;
+  filing: PatentFiling;
+  prosecution: PatentProsecution;
+  grant: PatentGrant;
+  international: PatentInternational;
+  commercialization: PatentCommercialization;
+  aiAnalytics: PatentAIAnalytics;
+  summary: PatentSummary;
+  deadlines: PatentDeadlines;
+  nextAction: string;
+  submittedForReview: boolean;
+  attachments: PatentAttachment[];
+  reviewRows: PatentReviewRow[];
+  approvalDecision: PatentApprovalDecision | null;
+  reviewComments: string | null;
+  approvalDate: string | null;
+  portfolioEntryId: string | null;
+  portfolioEntryCode: string | null;
+  licensingRecordId: string | null;
+  licensingRecordCode: string | null;
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  auditTrail: PatentAuditEntry[];
+}
+
+export type PatentListRow = {
+  id: string;
+  patentId: string;
+  patentNumber: string;
+  patentTitle: string;
+  status: PatentStatus;
+  patentManager: string;
+  overallPatentScore: number;
+  nextAction: string;
+  renewalState: PatentRenewalState;
+  responseDueTone: PatentDeadlineTone;
+  updatedAt: string;
+};
+
+export interface PatentLookups {
+  patentTypes: string[];
+  technologyAreas: string[];
+  technologyDomains: string[];
+  industrySectors: string[];
+  patentStatuses: string[];
+  ownerships: string[];
+  organizations: string[];
+  filingRoutes: string[];
+  filingCountries: string[];
+  patentOffices: string[];
+  filingAttorneys: string[];
+  officeActions: string[];
+  prosecutionStages: string[];
+  renewalFrequencies: string[];
+  licensingStatuses: string[];
+  royaltyModels: string[];
+  recommendations: string[];
+  approvalDecisions: string[];
+  patentManagers: string[];
+  inventors: string[];
+  jurisdictions: string[];
+  keywordSuggestions: string[];
+  attachmentCategories: string[];
+}
+
+// ---------------------------------------------------------------------------
+// TRL Assessment module
+// ---------------------------------------------------------------------------
+
+export type TrlLevelNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+
+export type TrlStatus =
+  | "draft"
+  | "technology_assessment"
+  | "technical_validation"
+  | "demonstration_review"
+  | "risk_commercial_assessment"
+  | "executive_review"
+  | "approved"
+  | "approved_with_improvements"
+  | "revision_required"
+  | "rejected"
+  | "archived";
+
+export type TrlStage =
+  | "technology_assessment"
+  | "technical_validation"
+  | "demonstration_review"
+  | "risk_commercial_assessment"
+  | "executive_review";
+
+export type TrlApprovalDecision = "Approved" | "Approved with Improvements" | "Revision Required" | "Rejected";
+
+export interface TrlStageState {
+  stage: TrlStage;
+  label: string;
+  completed: boolean;
+  active: boolean;
+  completedAt?: string;
+  completedBy?: string;
+}
+
+export interface TrlTechnologyInfo {
+  technologyName: string;
+  technologyDomain: string;
+  technologyDescription: string;
+  productCategory: string;
+  applicationArea: string[];
+  innovationType: string;
+  strategicImportance: number; // 1-5 stars
+}
+
+export interface TrlCurrentAssessment {
+  currentTrlLevel: TrlLevelNumber;
+  previousTrlLevel: TrlLevelNumber;
+  targetTrlLevel: TrlLevelNumber;
+  assessmentMethod: string;
+  assessmentEvidence: string;
+  assessmentScore: number; // /100
+  confidenceLevel: number; // %
+}
+
+export interface TrlTechnicalValidation {
+  scientificValidation: number; // 1-5 stars
+  laboratoryValidation: number; // 1-5 stars
+  prototypeValidation: number; // 1-5 stars
+  systemIntegration: number; // 1-5 stars
+  functionalDemonstration: number; // 1-5 stars
+  environmentalValidation: number; // 1-5 stars
+  validationEvidence: string;
+}
+
+export interface TrlTechnologyDemonstration {
+  demonstrationEnvironment: string;
+  testResults: string;
+  performanceMetrics: string;
+  reliabilityResults: string;
+  safetyAssessment: number; // 1-5 stars
+  complianceStatus: string;
+  demonstrationOutcome: string;
+}
+
+export interface TrlRiskAssessment {
+  technicalRisk: number; // 1-5 stars
+  manufacturingRisk: number; // 1-5 stars
+  supplyChainRisk: number; // 1-5 stars
+  regulatoryRisk: number; // 1-5 stars
+  commercialRisk: number; // 1-5 stars
+  overallRiskScore: number; // /100 (lower is better)
+  riskMitigationPlan: string;
+}
+
+export interface TrlCommercialReadiness {
+  mrlLevel: number; // 1-10 (MRL 3)
+  marketReadiness: number; // 1-5 stars
+  customerValidation: number; // 1-5 stars
+  investmentReadiness: number; // 1-5 stars
+  businessReadiness: number; // 1-5 stars
+  commercialPotential: number; // 1-5 stars
+  goToMarketStatus: string;
+}
+
+export interface TrlAIAssessment {
+  aiTechnologyScore: number; // /100
+  aiReadinessPrediction: "On Track" | "Needs Attention" | "At Risk";
+  aiTechnicalGapAnalysis: string;
+  aiDevelopmentRoadmap: string;
+  aiRiskPrediction: string;
+  aiRecommendation: string;
+  aiEstimatedTimeToNextTrl: string;
+}
+
+export interface TrlSummary {
+  overallTechnicalScore: number; // /100
+  validationScore: number; // /100
+  commercialScore: number; // /100
+  riskScore: number; // /100 (Polarity explicit: 32 Risk / 68 Safety Control)
+  finalTrlScore: number; // /100
+  recommendedTrlLevel: string; // e.g. "TRL 6"
+  recommendation: string;
+}
+
+export interface TrlAttachment {
+  id: string;
+  fileName: string;
+  fileSize: string;
+  fileType: string;
+  uploadDate: string;
+  uploadedBy: string;
+  url?: string;
+}
+
+export interface TrlReviewRow {
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Revision Required" | "Rejected";
+  status: "Approved" | "In Review" | "Pending" | "Revision Requested";
+  date: string;
+}
+
+export interface TrlAuditEntry {
+  id: string;
+  timestamp: string;
+  actor: string;
+  event: string;
+  kind?: "audit" | "activity" | "change" | "workflow";
+  stage?: TrlStage;
+  fromStatus?: TrlStatus;
+  toStatus?: TrlStatus;
+}
+
+export interface TrlFormInput {
+  assessmentTitle: string;
+  businessUnit: string;
+  assessmentTeam: string[];
+  assessmentDate: string;
+  linkedTechnologyId?: string | null;
+  linkedResearchProjectId?: string | null;
+  linkedPrototypeId?: string | null;
+  linkedProductId?: string | null;
+  technologyInfo: TrlTechnologyInfo;
+  currentAssessment: TrlCurrentAssessment;
+  technicalValidation: TrlTechnicalValidation;
+  technologyDemonstration: TrlTechnologyDemonstration;
+  riskAssessment: TrlRiskAssessment;
+  commercialReadiness: TrlCommercialReadiness;
+  attachments: TrlAttachment[];
+  recommendationOverride?: string;
+}
+
+export interface TrlAssessmentRecord {
+  id: string;
+  trlAssessmentId: string; // e.g. TRL-2024-0087
+  formCode: string; // e.g. TRL-2024-25
+  assessmentTitle: string;
+  status: TrlStatus;
+  currentStage: TrlStage;
+  currentStageLabel: string;
+  stages: TrlStageState[];
+  version: string;
+  businessUnit: string;
+  assessmentTeam: string[];
+  assessmentDate: string;
+  // Linked records (resolved)
+  linkedTechnologyId: string | null;
+  linkedTechnologyCode: string | null;
+  linkedResearchProjectId: string | null;
+  linkedResearchProjectCode: string | null;
+  linkedPrototypeId: string | null;
+  linkedPrototypeCode: string | null;
+  linkedProductId: string | null;
+  linkedProductCode: string | null;
+  // Form sections
+  technologyInfo: TrlTechnologyInfo;
+  currentAssessment: TrlCurrentAssessment;
+  technicalValidation: TrlTechnicalValidation;
+  technologyDemonstration: TrlTechnologyDemonstration;
+  riskAssessment: TrlRiskAssessment;
+  commercialReadiness: TrlCommercialReadiness;
+  aiAssessment: TrlAIAssessment;
+  summary: TrlSummary;
+  attachments: TrlAttachment[];
+  reviewRows: TrlReviewRow[];
+  approvalDecision: TrlApprovalDecision | null;
+  reviewComments: string | null;
+  approvalDate: string | null;
+  // Created MRL linkage if approved
+  linkedMrlAssessmentId?: string | null;
+  linkedMrlAssessmentCode?: string | null;
+  // System info
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  auditTrail: TrlAuditEntry[];
+}
+
+export type TrlListRow = {
+  id: string;
+  trlAssessmentId: string;
+  assessmentTitle: string;
+  technologyName: string;
+  currentTrlLevel: number;
+  targetTrlLevel: number;
+  status: TrlStatus;
+  finalTrlScore: number;
+  recommendedTrlLevel: string;
+  updatedAt: string;
+};
+
+export interface TrlLookups {
+  technologyDomains: string[];
+  productCategories: string[];
+  applicationAreas: string[];
+  innovationTypes: string[];
+  assessmentMethods: string[];
+  demonstrationEnvironments: string[];
+  complianceStatuses: string[];
+  goToMarketStatuses: string[];
+  businessUnits: string[];
+  recommendations: string[];
+  trlLevels: { level: number; descriptor: string }[];
+  mrlLevels: { level: number; descriptor: string }[];
+}
+
+// ---------------------------------------------------------------------------
+// Commercialization Planning module
+// ---------------------------------------------------------------------------
+
+export type CommercializationStatus =
+  | "draft"
+  | "product_readiness"
+  | "manufacturing_supply_chain"
+  | "sales_marketing_planning"
+  | "executive_review"
+  | "approved"
+  | "approved_with_conditions"
+  | "revision_required"
+  | "rejected"
+  | "archived";
+
+export type CommercializationStage =
+  | "product_readiness"
+  | "manufacturing_supply_chain"
+  | "sales_marketing_planning"
+  | "executive_review";
+
+export type CommercializationApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected";
+
+export interface CommercializationStageState {
+  stage: CommercializationStage;
+  label: string;
+  completed: boolean;
+  active: boolean;
+  completedAt?: string;
+  completedBy?: string;
+}
+
+export interface CommercializationProductOverview {
+  productName: string;
+  productCategory: string;
+  productDescription: string;
+  targetIndustry: string;
+  targetCustomers: string[];
+  valueProposition: string;
+  competitiveAdvantage: string;
+}
+
+export interface CommercializationMarketAnalysis {
+  tamAmount: number; // TAM currency
+  samAmount: number; // SAM currency
+  somAmount: number; // SOM currency
+  customerSegments: string;
+  competitorAnalysis: string;
+  marketEntryStrategy: string;
+  demandForecast5Yr: number; // Currency
+}
+
+export interface CommercializationProductReadiness {
+  inheritedTrl: string; // e.g. "TRL 6 – Technology Demonstrated in Relevant Environment"
+  inheritedMrl: string; // e.g. "MRL 4 – Pilot Line Capability"
+  certificationStatus: string;
+  regulatoryCompliance: string;
+  productValidationStatus: string;
+  productionReadiness: string;
+  launchReadinessScore: number; // /100
+}
+
+export interface CommercializationManufacturingSupplyChain {
+  manufacturingStrategy: string;
+  productionCapacityAnnual: string; // e.g. "2,500 Units / Year"
+  contractManufacturer: string;
+  keySuppliers: string[];
+  procurementStatus: string;
+  inventoryReadiness: string;
+  distributionNetwork: string;
+}
+
+export interface CommercializationFinancialPlanning {
+  initialInvestment: number;
+  manufacturingCostPerUnit: number;
+  sellingPricePerUnit: number;
+  revenueProjection5Yr: number;
+  breakEvenPeriodMonths: number;
+  grossMarginPct: number; // computed: ((price - cost)/price)*100
+  roiPct: number; // computed
+}
+
+export interface CommercializationSalesMarketing {
+  salesModel: string;
+  pricingStrategy: string;
+  marketingChannels: string[];
+  distributionChannels: string[];
+  brandingStrategy: string;
+  launchCampaign: string;
+  customerSupportStrategy: string;
+}
+
+export interface CommercializationPartnerships {
+  strategicPartners: string[];
+  technologyPartners: string[];
+  manufacturingPartners: string[];
+  channelPartners: string[];
+  governmentSupport: string[];
+  investors: string[];
+  partnershipStatus: string;
+}
+
+export interface CommercializationRiskAssessment {
+  technicalRisk: number; // 1-5 stars
+  marketRisk: number; // 1-5 stars
+  financialRisk: number; // 1-5 stars
+  operationalRisk: number; // 1-5 stars
+  regulatoryRisk: number; // 1-5 stars
+  overallRiskScore: number; // /100 (lower is better)
+  riskMitigationPlan: string;
+}
+
+export interface CommercializationAIAnalytics {
+  aiMarketOpportunityScore: number; // /100
+  aiLaunchReadinessScore: number; // /100
+  aiRevenueForecast5Yr: number; // currency
+  aiCustomerAdoptionPredictionPct: number; // %
+  aiCompetitivePositionScore: number; // /100
+  aiGrowthStrategy: string;
+  aiRecommendations: string;
+}
+
+export interface CommercializationSummary {
+  productReadinessScore: number; // /100
+  marketReadinessScore: number; // /100
+  financialReadinessScore: number; // /100
+  commercializationScore: number; // /100
+  riskControlScore: number; // /100 (100 - riskScore)
+  overallLaunchReadiness: number; // /100
+  recommendedAction: string;
+  recommendationText: string;
+}
+
+export interface CommercializationAttachment {
+  id: string;
+  fileName: string;
+  fileSize: string;
+  fileType: string;
+  uploadDate: string;
+  uploadedBy: string;
+  url?: string;
+}
+
+export interface CommercializationReviewRow {
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Revision Required" | "Rejected";
+  status: "Approved" | "In Review" | "Pending" | "Revision Requested";
+  date: string;
+}
+
+export interface CommercializationAuditEntry {
+  id: string;
+  timestamp: string;
+  actor: string;
+  event: string;
+  kind?: "audit" | "activity" | "change" | "workflow";
+  stage?: CommercializationStage;
+  fromStatus?: CommercializationStatus;
+  toStatus?: CommercializationStatus;
+}
+
+export interface CommercializationFormInput {
+  commercializationProject: string;
+  businessUnit: string;
+  commercializationManager: string;
+  launchTargetDate: string;
+  linkedProductId?: string | null;
+  linkedTechnologyId?: string | null;
+  linkedPatentId?: string | null;
+  linkedBusinessCaseId?: string | null;
+  productOverview: CommercializationProductOverview;
+  marketAnalysis: CommercializationMarketAnalysis;
+  productReadiness: CommercializationProductReadiness;
+  manufacturingSupplyChain: CommercializationManufacturingSupplyChain;
+  financialPlanning: CommercializationFinancialPlanning;
+  salesMarketing: CommercializationSalesMarketing;
+  partnerships: CommercializationPartnerships;
+  riskAssessment: CommercializationRiskAssessment;
+  attachments: CommercializationAttachment[];
+  approvalDecision?: CommercializationApprovalDecision | null;
+  reviewComments?: string;
+  approvalDate?: string;
+}
+
+export interface CommercializationRecord {
+  id: string;
+  commercializationPlanId: string; // e.g. CMP-2024-0021
+  formCode: string; // e.g. CMP-2024-15
+  commercializationProject: string;
+  status: CommercializationStatus;
+  currentStage: CommercializationStage;
+  currentStageLabel: string;
+  stages: CommercializationStageState[];
+  version: string;
+  businessUnit: string;
+  commercializationManager: string;
+  launchTargetDate: string; // YYYY-MM-DD
+  // Linked upstream records (resolved)
+  linkedProductId: string | null;
+  linkedProductCode: string | null;
+  linkedTechnologyId: string | null;
+  linkedTechnologyCode: string | null;
+  linkedPatentId: string | null;
+  linkedPatentCode: string | null;
+  linkedBusinessCaseId: string | null;
+  linkedBusinessCaseCode: string | null;
+  // Form sections 1-10
+  productOverview: CommercializationProductOverview;
+  marketAnalysis: CommercializationMarketAnalysis;
+  productReadiness: CommercializationProductReadiness;
+  manufacturingSupplyChain: CommercializationManufacturingSupplyChain;
+  financialPlanning: CommercializationFinancialPlanning;
+  salesMarketing: CommercializationSalesMarketing;
+  partnerships: CommercializationPartnerships;
+  riskAssessment: CommercializationRiskAssessment;
+  aiAnalytics: CommercializationAIAnalytics;
+  summary: CommercializationSummary;
+  // Form sections 11-13
+  attachments: CommercializationAttachment[];
+  reviewRows: CommercializationReviewRow[];
+  approvalDecision: CommercializationApprovalDecision | null;
+  reviewComments: string | null;
+  approvalDate: string | null;
+  // Auto-created product launch project if approved
+  linkedProductLaunchProjectId?: string | null;
+  linkedProductLaunchProjectCode?: string | null;
+  // Audit & system info
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  auditTrail: CommercializationAuditEntry[];
+}
+
+export type CommercializationListRow = {
+  id: string;
+  commercializationPlanId: string;
+  commercializationProject: string;
+  productName: string;
+  status: CommercializationStatus;
+  overallLaunchReadiness: number;
+  roiPct: number;
+  launchTargetDate: string;
+  updatedAt: string;
+};
+
+export interface CommercializationLookups {
+  productCategories: string[];
+  targetIndustries: string[];
+  marketEntryStrategies: string[];
+  certificationStatuses: string[];
+  regulatoryCompliances: string[];
+  productValidationStatuses: string[];
+  productionReadinesses: string[];
+  manufacturingStrategies: string[];
+  procurementStatuses: string[];
+  inventoryReadinesses: string[];
+  salesModels: string[];
+  pricingStrategies: string[];
+  partnershipStatuses: string[];
+  businessUnits: string[];
+  commercializationManagers: string[];
+  recommendedActions: string[];
+}
+
+

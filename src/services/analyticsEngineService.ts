@@ -38,6 +38,7 @@ import type {
   RegionalProfitabilityPoint,
   SalesChannelProfitabilityPoint,
   TopPerformer,
+  AssetCategoryCount,
 } from "./types";
 
 export function calculateCurrentRatio(query: DashboardQuery): Promise<CurrentRatio> {

@@ -102,6 +102,13 @@
   --chart-5: #ec4899;
   --chart-bar-expense: #e2d9c5; /* Soft beige for expenses */
 
+  /* Widget accents — the four WidgetTheme options. Default reads as the
+     brand navy; the rest are the existing chart/status hues, not new colors. */
+  --widget-accent-default: var(--primary);
+  --widget-accent-blue: #3b82f6;
+  --widget-accent-green: #22c55e;
+  --widget-accent-purple: #7c5cff;
+
   /* Sidebar — deep space navy blue */
   --sidebar: #06101e;
   --sidebar-foreground: oklch(0.96 0.005 245);
@@ -145,4 +152,93 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-card);
+}
+
+/* ---------------------------------------------------------------------------
+   Widget grid
+   ---------------------------------------------------------------------------
+   Presented to users as the spec's 12-column desktop grid, but implemented on
+   60 columns: 60 is the LCM of 3/4/5, which is what lets a 5-across KPI row
+   (12 each) and thirds (20) / quarters (15) / halves (30) all land on integer
+   spans. Without it the existing 5-up KPI rows could not be reproduced exactly.
+
+   Spans arrive as inline custom properties (--ws-md/--ws-lg/--ws-xl) rather
+   than Tailwind classes because the values are computed at runtime and Tailwind
+   cannot generate arbitrary span utilities ahead of time.
+   Tiers: mobile 1 col -> tablet/laptop 6 col -> desktop (>=1280px) 60 col. */
+@utility widget-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  /* `stretch` (the default) is load-bearing: before the widget system each card
+     WAS the grid item and stretched to its row height. Cells stretch, and the
+     shell passes that height down, so cards in a row stay equal height. */
+  align-items: stretch;
+
+  & > * {
+    grid-column: span 1 / span 1;
+    min-width: 0;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    & > * {
+      grid-column: span var(--ws-md, 6) / span var(--ws-md, 6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    & > * {
+      grid-column: span var(--ws-lg, 6) / span var(--ws-lg, 6);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(60, minmax(0, 1fr));
+    & > * {
+      grid-column: span var(--ws-xl, 60) / span var(--ws-xl, 60);
+    }
+  }
+}
+
+/* Dashed cell guides, shown only while Edit Mode is active. */
+@utility widget-grid-editing {
+  outline: 1px dashed color-mix(in oklch, var(--color-primary) 30%, transparent);
+  outline-offset: 8px;
+  border-radius: var(--radius-lg);
+}
+
+/* A finance page's OWN KPI card, tagged clickable by the KpiQuickAddLayer.
+   Clicking it opens the widget settings dialog to add that metric to the
+   Dashboard or Overview. The affordance is subtle so the page still reads as
+   before until you hover. */
+[data-kpi-quickadd] {
+  cursor: pointer;
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+[data-kpi-quickadd]:hover {
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--color-primary) 45%, transparent);
+  transform: translateY(-1px);
+}
+
+/* Custom scrollbar for the sidebar navigation */
+.sidebar-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.sidebar-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+.sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+.sidebar-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
 }

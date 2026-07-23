@@ -12,24 +12,59 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VendorsRouteImport } from './routes/vendors'
 import { Route as UsersRouteImport } from './routes/users'
 import { Route as TransactionsRouteImport } from './routes/transactions'
-import { Route as TaxRouteImport } from './routes/tax'
-import { Route as StationsRouteImport } from './routes/stations'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as RevenueRouteImport } from './routes/revenue'
-import { Route as ReportsRouteImport } from './routes/reports'
-import { Route as ReceivablesRouteImport } from './routes/receivables'
-import { Route as ProfitabilityRouteImport } from './routes/profitability'
-import { Route as PayablesRouteImport } from './routes/payables'
-import { Route as OverviewRouteImport } from './routes/overview'
-import { Route as LedgerRouteImport } from './routes/ledger'
 import { Route as ExpensesRouteImport } from './routes/expenses'
-import { Route as CostCentersRouteImport } from './routes/cost-centers'
-import { Route as ConsolidationRouteImport } from './routes/consolidation'
-import { Route as CashBankRouteImport } from './routes/cash-bank'
-import { Route as BudgetingRouteImport } from './routes/budgeting'
-import { Route as AuditRouteImport } from './routes/audit'
-import { Route as AssetsRouteImport } from './routes/assets'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ManagementFinanceTaxRouteImport } from './routes/management.finance.tax'
+import { Route as ManagementFinanceSetupRouteImport } from './routes/management.finance.setup'
+import { Route as ManagementFinanceReportsRouteImport } from './routes/management.finance.reports'
+import { Route as ManagementFinanceReceivablesRouteImport } from './routes/management.finance.receivables'
+import { Route as ManagementFinanceProfitabilityRouteImport } from './routes/management.finance.profitability'
+import { Route as ManagementFinancePayablesRouteImport } from './routes/management.finance.payables'
+import { Route as ManagementFinanceOverviewRouteImport } from './routes/management.finance.overview'
+import { Route as ManagementFinanceLedgerRouteImport } from './routes/management.finance.ledger'
+import { Route as ManagementFinanceCostCentersRouteImport } from './routes/management.finance.cost-centers'
+import { Route as ManagementFinanceConsolidationRouteImport } from './routes/management.finance.consolidation'
+import { Route as ManagementFinanceCashBankRouteImport } from './routes/management.finance.cash-bank'
+import { Route as ManagementFinanceBudgetingRouteImport } from './routes/management.finance.budgeting'
+import { Route as ManagementFinanceAuditRouteImport } from './routes/management.finance.audit'
+import { Route as ManagementFinanceAssetsRouteImport } from './routes/management.finance.assets'
+import { Route as AdministrationHomeUsersRouteImport } from './routes/administration.home.users'
+import { Route as AdministrationHomeRolesRouteImport } from './routes/administration.home.roles'
+import { Route as AdministrationHomeOverviewRouteImport } from './routes/administration.home.overview'
+import { Route as AdministrationHomeDepartmentsRouteImport } from './routes/administration.home.departments'
+import { Route as AdministrationHomeCompaniesRouteImport } from './routes/administration.home.companies'
+import { Route as AdministrationHomeBranchesRouteImport } from './routes/administration.home.branches'
+import { Route as DevelopmentResearchInnovationTrlAssessmentIndexRouteImport } from './routes/development.research-innovation.trl-assessment.index'
+import { Route as DevelopmentResearchInnovationTechnologyScoutingIndexRouteImport } from './routes/development.research-innovation.technology-scouting.index'
+import { Route as DevelopmentResearchInnovationResearchManagementIndexRouteImport } from './routes/development.research-innovation.research-management.index'
+import { Route as DevelopmentResearchInnovationPrototypeDevelopmentIndexRouteImport } from './routes/development.research-innovation.prototype-development.index'
+import { Route as DevelopmentResearchInnovationProofOfConceptIndexRouteImport } from './routes/development.research-innovation.proof-of-concept.index'
+import { Route as DevelopmentResearchInnovationProblemValidationIndexRouteImport } from './routes/development.research-innovation.problem-validation.index'
+import { Route as DevelopmentResearchInnovationOpportunityDiscoveryIndexRouteImport } from './routes/development.research-innovation.opportunity-discovery.index'
+import { Route as DevelopmentResearchInnovationInnovationPortfolioIndexRouteImport } from './routes/development.research-innovation.innovation-portfolio.index'
+import { Route as DevelopmentResearchInnovationIdeaManagementIndexRouteImport } from './routes/development.research-innovation.idea-management.index'
+import { Route as DevelopmentResearchInnovationFeasibilityStudyIndexRouteImport } from './routes/development.research-innovation.feasibility-study.index'
+import { Route as DevelopmentResearchInnovationExperimentManagementIndexRouteImport } from './routes/development.research-innovation.experiment-management.index'
+import { Route as DevelopmentResearchInnovationDesignThinkingIndexRouteImport } from './routes/development.research-innovation.design-thinking.index'
+import { Route as DevelopmentResearchInnovationCommercializationPlanningIndexRouteImport } from './routes/development.research-innovation.commercialization-planning.index'
+import { Route as DevelopmentIpDevelopmentPatentManagementIndexRouteImport } from './routes/development.ip-development.patent-management.index'
+import { Route as DevelopmentResearchInnovationTrlAssessmentNewRouteImport } from './routes/development.research-innovation.trl-assessment.new'
+import { Route as DevelopmentResearchInnovationTechnologyScoutingNewRouteImport } from './routes/development.research-innovation.technology-scouting.new'
+import { Route as DevelopmentResearchInnovationResearchManagementNewRouteImport } from './routes/development.research-innovation.research-management.new'
+import { Route as DevelopmentResearchInnovationPrototypeDevelopmentNewRouteImport } from './routes/development.research-innovation.prototype-development.new'
+import { Route as DevelopmentResearchInnovationProofOfConceptNewRouteImport } from './routes/development.research-innovation.proof-of-concept.new'
+import { Route as DevelopmentResearchInnovationProblemValidationNewRouteImport } from './routes/development.research-innovation.problem-validation.new'
+import { Route as DevelopmentResearchInnovationOpportunityDiscoveryNewRouteImport } from './routes/development.research-innovation.opportunity-discovery.new'
+import { Route as DevelopmentResearchInnovationInnovationPortfolioNewRouteImport } from './routes/development.research-innovation.innovation-portfolio.new'
+import { Route as DevelopmentResearchInnovationIdeaManagementNewRouteImport } from './routes/development.research-innovation.idea-management.new'
+import { Route as DevelopmentResearchInnovationIdeaManagementIdeaIdRouteImport } from './routes/development.research-innovation.idea-management.$ideaId'
+import { Route as DevelopmentResearchInnovationFeasibilityStudyNewRouteImport } from './routes/development.research-innovation.feasibility-study.new'
+import { Route as DevelopmentResearchInnovationExperimentManagementNewRouteImport } from './routes/development.research-innovation.experiment-management.new'
+import { Route as DevelopmentResearchInnovationDesignThinkingNewRouteImport } from './routes/development.research-innovation.design-thinking.new'
+import { Route as DevelopmentResearchInnovationCommercializationPlanningNewRouteImport } from './routes/development.research-innovation.commercialization-planning.new'
+import { Route as DevelopmentIpDevelopmentPatentManagementNewRouteImport } from './routes/development.ip-development.patent-management.new'
 
 const VendorsRoute = VendorsRouteImport.update({
   id: '/vendors',
@@ -46,16 +81,6 @@ const TransactionsRoute = TransactionsRouteImport.update({
   path: '/transactions',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TaxRoute = TaxRouteImport.update({
-  id: '/tax',
-  path: '/tax',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StationsRoute = StationsRouteImport.update({
-  id: '/stations',
-  path: '/stations',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -66,69 +91,9 @@ const RevenueRoute = RevenueRouteImport.update({
   path: '/revenue',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ReportsRoute = ReportsRouteImport.update({
-  id: '/reports',
-  path: '/reports',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ReceivablesRoute = ReceivablesRouteImport.update({
-  id: '/receivables',
-  path: '/receivables',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProfitabilityRoute = ProfitabilityRouteImport.update({
-  id: '/profitability',
-  path: '/profitability',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PayablesRoute = PayablesRouteImport.update({
-  id: '/payables',
-  path: '/payables',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OverviewRoute = OverviewRouteImport.update({
-  id: '/overview',
-  path: '/overview',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LedgerRoute = LedgerRouteImport.update({
-  id: '/ledger',
-  path: '/ledger',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ExpensesRoute = ExpensesRouteImport.update({
   id: '/expenses',
   path: '/expenses',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CostCentersRoute = CostCentersRouteImport.update({
-  id: '/cost-centers',
-  path: '/cost-centers',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ConsolidationRoute = ConsolidationRouteImport.update({
-  id: '/consolidation',
-  path: '/consolidation',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CashBankRoute = CashBankRouteImport.update({
-  id: '/cash-bank',
-  path: '/cash-bank',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BudgetingRoute = BudgetingRouteImport.update({
-  id: '/budgeting',
-  path: '/budgeting',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuditRoute = AuditRouteImport.update({
-  id: '/audit',
-  path: '/audit',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AssetsRoute = AssetsRouteImport.update({
-  id: '/assets',
-  path: '/assets',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -136,171 +101,705 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ManagementFinanceTaxRoute = ManagementFinanceTaxRouteImport.update({
+  id: '/management/finance/tax',
+  path: '/management/finance/tax',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManagementFinanceSetupRoute = ManagementFinanceSetupRouteImport.update({
+  id: '/management/finance/setup',
+  path: '/management/finance/setup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManagementFinanceReportsRoute =
+  ManagementFinanceReportsRouteImport.update({
+    id: '/management/finance/reports',
+    path: '/management/finance/reports',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManagementFinanceReceivablesRoute =
+  ManagementFinanceReceivablesRouteImport.update({
+    id: '/management/finance/receivables',
+    path: '/management/finance/receivables',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManagementFinanceProfitabilityRoute =
+  ManagementFinanceProfitabilityRouteImport.update({
+    id: '/management/finance/profitability',
+    path: '/management/finance/profitability',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManagementFinancePayablesRoute =
+  ManagementFinancePayablesRouteImport.update({
+    id: '/management/finance/payables',
+    path: '/management/finance/payables',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManagementFinanceOverviewRoute =
+  ManagementFinanceOverviewRouteImport.update({
+    id: '/management/finance/overview',
+    path: '/management/finance/overview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManagementFinanceLedgerRoute = ManagementFinanceLedgerRouteImport.update({
+  id: '/management/finance/ledger',
+  path: '/management/finance/ledger',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManagementFinanceCostCentersRoute =
+  ManagementFinanceCostCentersRouteImport.update({
+    id: '/management/finance/cost-centers',
+    path: '/management/finance/cost-centers',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManagementFinanceConsolidationRoute =
+  ManagementFinanceConsolidationRouteImport.update({
+    id: '/management/finance/consolidation',
+    path: '/management/finance/consolidation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManagementFinanceCashBankRoute =
+  ManagementFinanceCashBankRouteImport.update({
+    id: '/management/finance/cash-bank',
+    path: '/management/finance/cash-bank',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManagementFinanceBudgetingRoute =
+  ManagementFinanceBudgetingRouteImport.update({
+    id: '/management/finance/budgeting',
+    path: '/management/finance/budgeting',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManagementFinanceAuditRoute = ManagementFinanceAuditRouteImport.update({
+  id: '/management/finance/audit',
+  path: '/management/finance/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManagementFinanceAssetsRoute = ManagementFinanceAssetsRouteImport.update({
+  id: '/management/finance/assets',
+  path: '/management/finance/assets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdministrationHomeUsersRoute = AdministrationHomeUsersRouteImport.update({
+  id: '/administration/home/users',
+  path: '/administration/home/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdministrationHomeRolesRoute = AdministrationHomeRolesRouteImport.update({
+  id: '/administration/home/roles',
+  path: '/administration/home/roles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdministrationHomeOverviewRoute =
+  AdministrationHomeOverviewRouteImport.update({
+    id: '/administration/home/overview',
+    path: '/administration/home/overview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AdministrationHomeDepartmentsRoute =
+  AdministrationHomeDepartmentsRouteImport.update({
+    id: '/administration/home/departments',
+    path: '/administration/home/departments',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AdministrationHomeCompaniesRoute =
+  AdministrationHomeCompaniesRouteImport.update({
+    id: '/administration/home/companies',
+    path: '/administration/home/companies',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AdministrationHomeBranchesRoute =
+  AdministrationHomeBranchesRouteImport.update({
+    id: '/administration/home/branches',
+    path: '/administration/home/branches',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationTrlAssessmentIndexRoute =
+  DevelopmentResearchInnovationTrlAssessmentIndexRouteImport.update({
+    id: '/development/research-innovation/trl-assessment/',
+    path: '/development/research-innovation/trl-assessment/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationTechnologyScoutingIndexRoute =
+  DevelopmentResearchInnovationTechnologyScoutingIndexRouteImport.update({
+    id: '/development/research-innovation/technology-scouting/',
+    path: '/development/research-innovation/technology-scouting/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationResearchManagementIndexRoute =
+  DevelopmentResearchInnovationResearchManagementIndexRouteImport.update({
+    id: '/development/research-innovation/research-management/',
+    path: '/development/research-innovation/research-management/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute =
+  DevelopmentResearchInnovationPrototypeDevelopmentIndexRouteImport.update({
+    id: '/development/research-innovation/prototype-development/',
+    path: '/development/research-innovation/prototype-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationProofOfConceptIndexRoute =
+  DevelopmentResearchInnovationProofOfConceptIndexRouteImport.update({
+    id: '/development/research-innovation/proof-of-concept/',
+    path: '/development/research-innovation/proof-of-concept/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationProblemValidationIndexRoute =
+  DevelopmentResearchInnovationProblemValidationIndexRouteImport.update({
+    id: '/development/research-innovation/problem-validation/',
+    path: '/development/research-innovation/problem-validation/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute =
+  DevelopmentResearchInnovationOpportunityDiscoveryIndexRouteImport.update({
+    id: '/development/research-innovation/opportunity-discovery/',
+    path: '/development/research-innovation/opportunity-discovery/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationInnovationPortfolioIndexRoute =
+  DevelopmentResearchInnovationInnovationPortfolioIndexRouteImport.update({
+    id: '/development/research-innovation/innovation-portfolio/',
+    path: '/development/research-innovation/innovation-portfolio/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationIdeaManagementIndexRoute =
+  DevelopmentResearchInnovationIdeaManagementIndexRouteImport.update({
+    id: '/development/research-innovation/idea-management/',
+    path: '/development/research-innovation/idea-management/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationFeasibilityStudyIndexRoute =
+  DevelopmentResearchInnovationFeasibilityStudyIndexRouteImport.update({
+    id: '/development/research-innovation/feasibility-study/',
+    path: '/development/research-innovation/feasibility-study/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationExperimentManagementIndexRoute =
+  DevelopmentResearchInnovationExperimentManagementIndexRouteImport.update({
+    id: '/development/research-innovation/experiment-management/',
+    path: '/development/research-innovation/experiment-management/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationDesignThinkingIndexRoute =
+  DevelopmentResearchInnovationDesignThinkingIndexRouteImport.update({
+    id: '/development/research-innovation/design-thinking/',
+    path: '/development/research-innovation/design-thinking/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationCommercializationPlanningIndexRoute =
+  DevelopmentResearchInnovationCommercializationPlanningIndexRouteImport.update(
+    {
+      id: '/development/research-innovation/commercialization-planning/',
+      path: '/development/research-innovation/commercialization-planning/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const DevelopmentIpDevelopmentPatentManagementIndexRoute =
+  DevelopmentIpDevelopmentPatentManagementIndexRouteImport.update({
+    id: '/development/ip-development/patent-management/',
+    path: '/development/ip-development/patent-management/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationTrlAssessmentNewRoute =
+  DevelopmentResearchInnovationTrlAssessmentNewRouteImport.update({
+    id: '/development/research-innovation/trl-assessment/new',
+    path: '/development/research-innovation/trl-assessment/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationTechnologyScoutingNewRoute =
+  DevelopmentResearchInnovationTechnologyScoutingNewRouteImport.update({
+    id: '/development/research-innovation/technology-scouting/new',
+    path: '/development/research-innovation/technology-scouting/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationResearchManagementNewRoute =
+  DevelopmentResearchInnovationResearchManagementNewRouteImport.update({
+    id: '/development/research-innovation/research-management/new',
+    path: '/development/research-innovation/research-management/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationPrototypeDevelopmentNewRoute =
+  DevelopmentResearchInnovationPrototypeDevelopmentNewRouteImport.update({
+    id: '/development/research-innovation/prototype-development/new',
+    path: '/development/research-innovation/prototype-development/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationProofOfConceptNewRoute =
+  DevelopmentResearchInnovationProofOfConceptNewRouteImport.update({
+    id: '/development/research-innovation/proof-of-concept/new',
+    path: '/development/research-innovation/proof-of-concept/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationProblemValidationNewRoute =
+  DevelopmentResearchInnovationProblemValidationNewRouteImport.update({
+    id: '/development/research-innovation/problem-validation/new',
+    path: '/development/research-innovation/problem-validation/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationOpportunityDiscoveryNewRoute =
+  DevelopmentResearchInnovationOpportunityDiscoveryNewRouteImport.update({
+    id: '/development/research-innovation/opportunity-discovery/new',
+    path: '/development/research-innovation/opportunity-discovery/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationInnovationPortfolioNewRoute =
+  DevelopmentResearchInnovationInnovationPortfolioNewRouteImport.update({
+    id: '/development/research-innovation/innovation-portfolio/new',
+    path: '/development/research-innovation/innovation-portfolio/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationIdeaManagementNewRoute =
+  DevelopmentResearchInnovationIdeaManagementNewRouteImport.update({
+    id: '/development/research-innovation/idea-management/new',
+    path: '/development/research-innovation/idea-management/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationIdeaManagementIdeaIdRoute =
+  DevelopmentResearchInnovationIdeaManagementIdeaIdRouteImport.update({
+    id: '/development/research-innovation/idea-management/$ideaId',
+    path: '/development/research-innovation/idea-management/$ideaId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationFeasibilityStudyNewRoute =
+  DevelopmentResearchInnovationFeasibilityStudyNewRouteImport.update({
+    id: '/development/research-innovation/feasibility-study/new',
+    path: '/development/research-innovation/feasibility-study/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationExperimentManagementNewRoute =
+  DevelopmentResearchInnovationExperimentManagementNewRouteImport.update({
+    id: '/development/research-innovation/experiment-management/new',
+    path: '/development/research-innovation/experiment-management/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationDesignThinkingNewRoute =
+  DevelopmentResearchInnovationDesignThinkingNewRouteImport.update({
+    id: '/development/research-innovation/design-thinking/new',
+    path: '/development/research-innovation/design-thinking/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationCommercializationPlanningNewRoute =
+  DevelopmentResearchInnovationCommercializationPlanningNewRouteImport.update({
+    id: '/development/research-innovation/commercialization-planning/new',
+    path: '/development/research-innovation/commercialization-planning/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentIpDevelopmentPatentManagementNewRoute =
+  DevelopmentIpDevelopmentPatentManagementNewRouteImport.update({
+    id: '/development/ip-development/patent-management/new',
+    path: '/development/ip-development/patent-management/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/assets': typeof AssetsRoute
-  '/audit': typeof AuditRoute
-  '/budgeting': typeof BudgetingRoute
-  '/cash-bank': typeof CashBankRoute
-  '/consolidation': typeof ConsolidationRoute
-  '/cost-centers': typeof CostCentersRoute
   '/expenses': typeof ExpensesRoute
-  '/ledger': typeof LedgerRoute
-  '/overview': typeof OverviewRoute
-  '/payables': typeof PayablesRoute
-  '/profitability': typeof ProfitabilityRoute
-  '/receivables': typeof ReceivablesRoute
-  '/reports': typeof ReportsRoute
   '/revenue': typeof RevenueRoute
   '/settings': typeof SettingsRoute
-  '/stations': typeof StationsRoute
-  '/tax': typeof TaxRoute
   '/transactions': typeof TransactionsRoute
   '/users': typeof UsersRoute
   '/vendors': typeof VendorsRoute
+  '/administration/home/branches': typeof AdministrationHomeBranchesRoute
+  '/administration/home/companies': typeof AdministrationHomeCompaniesRoute
+  '/administration/home/departments': typeof AdministrationHomeDepartmentsRoute
+  '/administration/home/overview': typeof AdministrationHomeOverviewRoute
+  '/administration/home/roles': typeof AdministrationHomeRolesRoute
+  '/administration/home/users': typeof AdministrationHomeUsersRoute
+  '/management/finance/assets': typeof ManagementFinanceAssetsRoute
+  '/management/finance/audit': typeof ManagementFinanceAuditRoute
+  '/management/finance/budgeting': typeof ManagementFinanceBudgetingRoute
+  '/management/finance/cash-bank': typeof ManagementFinanceCashBankRoute
+  '/management/finance/consolidation': typeof ManagementFinanceConsolidationRoute
+  '/management/finance/cost-centers': typeof ManagementFinanceCostCentersRoute
+  '/management/finance/ledger': typeof ManagementFinanceLedgerRoute
+  '/management/finance/overview': typeof ManagementFinanceOverviewRoute
+  '/management/finance/payables': typeof ManagementFinancePayablesRoute
+  '/management/finance/profitability': typeof ManagementFinanceProfitabilityRoute
+  '/management/finance/receivables': typeof ManagementFinanceReceivablesRoute
+  '/management/finance/reports': typeof ManagementFinanceReportsRoute
+  '/management/finance/setup': typeof ManagementFinanceSetupRoute
+  '/management/finance/tax': typeof ManagementFinanceTaxRoute
+  '/development/ip-development/patent-management/new': typeof DevelopmentIpDevelopmentPatentManagementNewRoute
+  '/development/research-innovation/commercialization-planning/new': typeof DevelopmentResearchInnovationCommercializationPlanningNewRoute
+  '/development/research-innovation/design-thinking/new': typeof DevelopmentResearchInnovationDesignThinkingNewRoute
+  '/development/research-innovation/experiment-management/new': typeof DevelopmentResearchInnovationExperimentManagementNewRoute
+  '/development/research-innovation/feasibility-study/new': typeof DevelopmentResearchInnovationFeasibilityStudyNewRoute
+  '/development/research-innovation/idea-management/$ideaId': typeof DevelopmentResearchInnovationIdeaManagementIdeaIdRoute
+  '/development/research-innovation/idea-management/new': typeof DevelopmentResearchInnovationIdeaManagementNewRoute
+  '/development/research-innovation/innovation-portfolio/new': typeof DevelopmentResearchInnovationInnovationPortfolioNewRoute
+  '/development/research-innovation/opportunity-discovery/new': typeof DevelopmentResearchInnovationOpportunityDiscoveryNewRoute
+  '/development/research-innovation/problem-validation/new': typeof DevelopmentResearchInnovationProblemValidationNewRoute
+  '/development/research-innovation/proof-of-concept/new': typeof DevelopmentResearchInnovationProofOfConceptNewRoute
+  '/development/research-innovation/prototype-development/new': typeof DevelopmentResearchInnovationPrototypeDevelopmentNewRoute
+  '/development/research-innovation/research-management/new': typeof DevelopmentResearchInnovationResearchManagementNewRoute
+  '/development/research-innovation/technology-scouting/new': typeof DevelopmentResearchInnovationTechnologyScoutingNewRoute
+  '/development/research-innovation/trl-assessment/new': typeof DevelopmentResearchInnovationTrlAssessmentNewRoute
+  '/development/ip-development/patent-management/': typeof DevelopmentIpDevelopmentPatentManagementIndexRoute
+  '/development/research-innovation/commercialization-planning/': typeof DevelopmentResearchInnovationCommercializationPlanningIndexRoute
+  '/development/research-innovation/design-thinking/': typeof DevelopmentResearchInnovationDesignThinkingIndexRoute
+  '/development/research-innovation/experiment-management/': typeof DevelopmentResearchInnovationExperimentManagementIndexRoute
+  '/development/research-innovation/feasibility-study/': typeof DevelopmentResearchInnovationFeasibilityStudyIndexRoute
+  '/development/research-innovation/idea-management/': typeof DevelopmentResearchInnovationIdeaManagementIndexRoute
+  '/development/research-innovation/innovation-portfolio/': typeof DevelopmentResearchInnovationInnovationPortfolioIndexRoute
+  '/development/research-innovation/opportunity-discovery/': typeof DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute
+  '/development/research-innovation/problem-validation/': typeof DevelopmentResearchInnovationProblemValidationIndexRoute
+  '/development/research-innovation/proof-of-concept/': typeof DevelopmentResearchInnovationProofOfConceptIndexRoute
+  '/development/research-innovation/prototype-development/': typeof DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute
+  '/development/research-innovation/research-management/': typeof DevelopmentResearchInnovationResearchManagementIndexRoute
+  '/development/research-innovation/technology-scouting/': typeof DevelopmentResearchInnovationTechnologyScoutingIndexRoute
+  '/development/research-innovation/trl-assessment/': typeof DevelopmentResearchInnovationTrlAssessmentIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/assets': typeof AssetsRoute
-  '/audit': typeof AuditRoute
-  '/budgeting': typeof BudgetingRoute
-  '/cash-bank': typeof CashBankRoute
-  '/consolidation': typeof ConsolidationRoute
-  '/cost-centers': typeof CostCentersRoute
   '/expenses': typeof ExpensesRoute
-  '/ledger': typeof LedgerRoute
-  '/overview': typeof OverviewRoute
-  '/payables': typeof PayablesRoute
-  '/profitability': typeof ProfitabilityRoute
-  '/receivables': typeof ReceivablesRoute
-  '/reports': typeof ReportsRoute
   '/revenue': typeof RevenueRoute
   '/settings': typeof SettingsRoute
-  '/stations': typeof StationsRoute
-  '/tax': typeof TaxRoute
   '/transactions': typeof TransactionsRoute
   '/users': typeof UsersRoute
   '/vendors': typeof VendorsRoute
+  '/administration/home/branches': typeof AdministrationHomeBranchesRoute
+  '/administration/home/companies': typeof AdministrationHomeCompaniesRoute
+  '/administration/home/departments': typeof AdministrationHomeDepartmentsRoute
+  '/administration/home/overview': typeof AdministrationHomeOverviewRoute
+  '/administration/home/roles': typeof AdministrationHomeRolesRoute
+  '/administration/home/users': typeof AdministrationHomeUsersRoute
+  '/management/finance/assets': typeof ManagementFinanceAssetsRoute
+  '/management/finance/audit': typeof ManagementFinanceAuditRoute
+  '/management/finance/budgeting': typeof ManagementFinanceBudgetingRoute
+  '/management/finance/cash-bank': typeof ManagementFinanceCashBankRoute
+  '/management/finance/consolidation': typeof ManagementFinanceConsolidationRoute
+  '/management/finance/cost-centers': typeof ManagementFinanceCostCentersRoute
+  '/management/finance/ledger': typeof ManagementFinanceLedgerRoute
+  '/management/finance/overview': typeof ManagementFinanceOverviewRoute
+  '/management/finance/payables': typeof ManagementFinancePayablesRoute
+  '/management/finance/profitability': typeof ManagementFinanceProfitabilityRoute
+  '/management/finance/receivables': typeof ManagementFinanceReceivablesRoute
+  '/management/finance/reports': typeof ManagementFinanceReportsRoute
+  '/management/finance/setup': typeof ManagementFinanceSetupRoute
+  '/management/finance/tax': typeof ManagementFinanceTaxRoute
+  '/development/ip-development/patent-management/new': typeof DevelopmentIpDevelopmentPatentManagementNewRoute
+  '/development/research-innovation/commercialization-planning/new': typeof DevelopmentResearchInnovationCommercializationPlanningNewRoute
+  '/development/research-innovation/design-thinking/new': typeof DevelopmentResearchInnovationDesignThinkingNewRoute
+  '/development/research-innovation/experiment-management/new': typeof DevelopmentResearchInnovationExperimentManagementNewRoute
+  '/development/research-innovation/feasibility-study/new': typeof DevelopmentResearchInnovationFeasibilityStudyNewRoute
+  '/development/research-innovation/idea-management/$ideaId': typeof DevelopmentResearchInnovationIdeaManagementIdeaIdRoute
+  '/development/research-innovation/idea-management/new': typeof DevelopmentResearchInnovationIdeaManagementNewRoute
+  '/development/research-innovation/innovation-portfolio/new': typeof DevelopmentResearchInnovationInnovationPortfolioNewRoute
+  '/development/research-innovation/opportunity-discovery/new': typeof DevelopmentResearchInnovationOpportunityDiscoveryNewRoute
+  '/development/research-innovation/problem-validation/new': typeof DevelopmentResearchInnovationProblemValidationNewRoute
+  '/development/research-innovation/proof-of-concept/new': typeof DevelopmentResearchInnovationProofOfConceptNewRoute
+  '/development/research-innovation/prototype-development/new': typeof DevelopmentResearchInnovationPrototypeDevelopmentNewRoute
+  '/development/research-innovation/research-management/new': typeof DevelopmentResearchInnovationResearchManagementNewRoute
+  '/development/research-innovation/technology-scouting/new': typeof DevelopmentResearchInnovationTechnologyScoutingNewRoute
+  '/development/research-innovation/trl-assessment/new': typeof DevelopmentResearchInnovationTrlAssessmentNewRoute
+  '/development/ip-development/patent-management': typeof DevelopmentIpDevelopmentPatentManagementIndexRoute
+  '/development/research-innovation/commercialization-planning': typeof DevelopmentResearchInnovationCommercializationPlanningIndexRoute
+  '/development/research-innovation/design-thinking': typeof DevelopmentResearchInnovationDesignThinkingIndexRoute
+  '/development/research-innovation/experiment-management': typeof DevelopmentResearchInnovationExperimentManagementIndexRoute
+  '/development/research-innovation/feasibility-study': typeof DevelopmentResearchInnovationFeasibilityStudyIndexRoute
+  '/development/research-innovation/idea-management': typeof DevelopmentResearchInnovationIdeaManagementIndexRoute
+  '/development/research-innovation/innovation-portfolio': typeof DevelopmentResearchInnovationInnovationPortfolioIndexRoute
+  '/development/research-innovation/opportunity-discovery': typeof DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute
+  '/development/research-innovation/problem-validation': typeof DevelopmentResearchInnovationProblemValidationIndexRoute
+  '/development/research-innovation/proof-of-concept': typeof DevelopmentResearchInnovationProofOfConceptIndexRoute
+  '/development/research-innovation/prototype-development': typeof DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute
+  '/development/research-innovation/research-management': typeof DevelopmentResearchInnovationResearchManagementIndexRoute
+  '/development/research-innovation/technology-scouting': typeof DevelopmentResearchInnovationTechnologyScoutingIndexRoute
+  '/development/research-innovation/trl-assessment': typeof DevelopmentResearchInnovationTrlAssessmentIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/assets': typeof AssetsRoute
-  '/audit': typeof AuditRoute
-  '/budgeting': typeof BudgetingRoute
-  '/cash-bank': typeof CashBankRoute
-  '/consolidation': typeof ConsolidationRoute
-  '/cost-centers': typeof CostCentersRoute
   '/expenses': typeof ExpensesRoute
-  '/ledger': typeof LedgerRoute
-  '/overview': typeof OverviewRoute
-  '/payables': typeof PayablesRoute
-  '/profitability': typeof ProfitabilityRoute
-  '/receivables': typeof ReceivablesRoute
-  '/reports': typeof ReportsRoute
   '/revenue': typeof RevenueRoute
   '/settings': typeof SettingsRoute
-  '/stations': typeof StationsRoute
-  '/tax': typeof TaxRoute
   '/transactions': typeof TransactionsRoute
   '/users': typeof UsersRoute
   '/vendors': typeof VendorsRoute
+  '/administration/home/branches': typeof AdministrationHomeBranchesRoute
+  '/administration/home/companies': typeof AdministrationHomeCompaniesRoute
+  '/administration/home/departments': typeof AdministrationHomeDepartmentsRoute
+  '/administration/home/overview': typeof AdministrationHomeOverviewRoute
+  '/administration/home/roles': typeof AdministrationHomeRolesRoute
+  '/administration/home/users': typeof AdministrationHomeUsersRoute
+  '/management/finance/assets': typeof ManagementFinanceAssetsRoute
+  '/management/finance/audit': typeof ManagementFinanceAuditRoute
+  '/management/finance/budgeting': typeof ManagementFinanceBudgetingRoute
+  '/management/finance/cash-bank': typeof ManagementFinanceCashBankRoute
+  '/management/finance/consolidation': typeof ManagementFinanceConsolidationRoute
+  '/management/finance/cost-centers': typeof ManagementFinanceCostCentersRoute
+  '/management/finance/ledger': typeof ManagementFinanceLedgerRoute
+  '/management/finance/overview': typeof ManagementFinanceOverviewRoute
+  '/management/finance/payables': typeof ManagementFinancePayablesRoute
+  '/management/finance/profitability': typeof ManagementFinanceProfitabilityRoute
+  '/management/finance/receivables': typeof ManagementFinanceReceivablesRoute
+  '/management/finance/reports': typeof ManagementFinanceReportsRoute
+  '/management/finance/setup': typeof ManagementFinanceSetupRoute
+  '/management/finance/tax': typeof ManagementFinanceTaxRoute
+  '/development/ip-development/patent-management/new': typeof DevelopmentIpDevelopmentPatentManagementNewRoute
+  '/development/research-innovation/commercialization-planning/new': typeof DevelopmentResearchInnovationCommercializationPlanningNewRoute
+  '/development/research-innovation/design-thinking/new': typeof DevelopmentResearchInnovationDesignThinkingNewRoute
+  '/development/research-innovation/experiment-management/new': typeof DevelopmentResearchInnovationExperimentManagementNewRoute
+  '/development/research-innovation/feasibility-study/new': typeof DevelopmentResearchInnovationFeasibilityStudyNewRoute
+  '/development/research-innovation/idea-management/$ideaId': typeof DevelopmentResearchInnovationIdeaManagementIdeaIdRoute
+  '/development/research-innovation/idea-management/new': typeof DevelopmentResearchInnovationIdeaManagementNewRoute
+  '/development/research-innovation/innovation-portfolio/new': typeof DevelopmentResearchInnovationInnovationPortfolioNewRoute
+  '/development/research-innovation/opportunity-discovery/new': typeof DevelopmentResearchInnovationOpportunityDiscoveryNewRoute
+  '/development/research-innovation/problem-validation/new': typeof DevelopmentResearchInnovationProblemValidationNewRoute
+  '/development/research-innovation/proof-of-concept/new': typeof DevelopmentResearchInnovationProofOfConceptNewRoute
+  '/development/research-innovation/prototype-development/new': typeof DevelopmentResearchInnovationPrototypeDevelopmentNewRoute
+  '/development/research-innovation/research-management/new': typeof DevelopmentResearchInnovationResearchManagementNewRoute
+  '/development/research-innovation/technology-scouting/new': typeof DevelopmentResearchInnovationTechnologyScoutingNewRoute
+  '/development/research-innovation/trl-assessment/new': typeof DevelopmentResearchInnovationTrlAssessmentNewRoute
+  '/development/ip-development/patent-management/': typeof DevelopmentIpDevelopmentPatentManagementIndexRoute
+  '/development/research-innovation/commercialization-planning/': typeof DevelopmentResearchInnovationCommercializationPlanningIndexRoute
+  '/development/research-innovation/design-thinking/': typeof DevelopmentResearchInnovationDesignThinkingIndexRoute
+  '/development/research-innovation/experiment-management/': typeof DevelopmentResearchInnovationExperimentManagementIndexRoute
+  '/development/research-innovation/feasibility-study/': typeof DevelopmentResearchInnovationFeasibilityStudyIndexRoute
+  '/development/research-innovation/idea-management/': typeof DevelopmentResearchInnovationIdeaManagementIndexRoute
+  '/development/research-innovation/innovation-portfolio/': typeof DevelopmentResearchInnovationInnovationPortfolioIndexRoute
+  '/development/research-innovation/opportunity-discovery/': typeof DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute
+  '/development/research-innovation/problem-validation/': typeof DevelopmentResearchInnovationProblemValidationIndexRoute
+  '/development/research-innovation/proof-of-concept/': typeof DevelopmentResearchInnovationProofOfConceptIndexRoute
+  '/development/research-innovation/prototype-development/': typeof DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute
+  '/development/research-innovation/research-management/': typeof DevelopmentResearchInnovationResearchManagementIndexRoute
+  '/development/research-innovation/technology-scouting/': typeof DevelopmentResearchInnovationTechnologyScoutingIndexRoute
+  '/development/research-innovation/trl-assessment/': typeof DevelopmentResearchInnovationTrlAssessmentIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/assets'
-    | '/audit'
-    | '/budgeting'
-    | '/cash-bank'
-    | '/consolidation'
-    | '/cost-centers'
     | '/expenses'
-    | '/ledger'
-    | '/overview'
-    | '/payables'
-    | '/profitability'
-    | '/receivables'
-    | '/reports'
     | '/revenue'
     | '/settings'
-    | '/stations'
-    | '/tax'
     | '/transactions'
     | '/users'
     | '/vendors'
+    | '/administration/home/branches'
+    | '/administration/home/companies'
+    | '/administration/home/departments'
+    | '/administration/home/overview'
+    | '/administration/home/roles'
+    | '/administration/home/users'
+    | '/management/finance/assets'
+    | '/management/finance/audit'
+    | '/management/finance/budgeting'
+    | '/management/finance/cash-bank'
+    | '/management/finance/consolidation'
+    | '/management/finance/cost-centers'
+    | '/management/finance/ledger'
+    | '/management/finance/overview'
+    | '/management/finance/payables'
+    | '/management/finance/profitability'
+    | '/management/finance/receivables'
+    | '/management/finance/reports'
+    | '/management/finance/setup'
+    | '/management/finance/tax'
+    | '/development/ip-development/patent-management/new'
+    | '/development/research-innovation/commercialization-planning/new'
+    | '/development/research-innovation/design-thinking/new'
+    | '/development/research-innovation/experiment-management/new'
+    | '/development/research-innovation/feasibility-study/new'
+    | '/development/research-innovation/idea-management/$ideaId'
+    | '/development/research-innovation/idea-management/new'
+    | '/development/research-innovation/innovation-portfolio/new'
+    | '/development/research-innovation/opportunity-discovery/new'
+    | '/development/research-innovation/problem-validation/new'
+    | '/development/research-innovation/proof-of-concept/new'
+    | '/development/research-innovation/prototype-development/new'
+    | '/development/research-innovation/research-management/new'
+    | '/development/research-innovation/technology-scouting/new'
+    | '/development/research-innovation/trl-assessment/new'
+    | '/development/ip-development/patent-management/'
+    | '/development/research-innovation/commercialization-planning/'
+    | '/development/research-innovation/design-thinking/'
+    | '/development/research-innovation/experiment-management/'
+    | '/development/research-innovation/feasibility-study/'
+    | '/development/research-innovation/idea-management/'
+    | '/development/research-innovation/innovation-portfolio/'
+    | '/development/research-innovation/opportunity-discovery/'
+    | '/development/research-innovation/problem-validation/'
+    | '/development/research-innovation/proof-of-concept/'
+    | '/development/research-innovation/prototype-development/'
+    | '/development/research-innovation/research-management/'
+    | '/development/research-innovation/technology-scouting/'
+    | '/development/research-innovation/trl-assessment/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/assets'
-    | '/audit'
-    | '/budgeting'
-    | '/cash-bank'
-    | '/consolidation'
-    | '/cost-centers'
     | '/expenses'
-    | '/ledger'
-    | '/overview'
-    | '/payables'
-    | '/profitability'
-    | '/receivables'
-    | '/reports'
     | '/revenue'
     | '/settings'
-    | '/stations'
-    | '/tax'
     | '/transactions'
     | '/users'
     | '/vendors'
+    | '/administration/home/branches'
+    | '/administration/home/companies'
+    | '/administration/home/departments'
+    | '/administration/home/overview'
+    | '/administration/home/roles'
+    | '/administration/home/users'
+    | '/management/finance/assets'
+    | '/management/finance/audit'
+    | '/management/finance/budgeting'
+    | '/management/finance/cash-bank'
+    | '/management/finance/consolidation'
+    | '/management/finance/cost-centers'
+    | '/management/finance/ledger'
+    | '/management/finance/overview'
+    | '/management/finance/payables'
+    | '/management/finance/profitability'
+    | '/management/finance/receivables'
+    | '/management/finance/reports'
+    | '/management/finance/setup'
+    | '/management/finance/tax'
+    | '/development/ip-development/patent-management/new'
+    | '/development/research-innovation/commercialization-planning/new'
+    | '/development/research-innovation/design-thinking/new'
+    | '/development/research-innovation/experiment-management/new'
+    | '/development/research-innovation/feasibility-study/new'
+    | '/development/research-innovation/idea-management/$ideaId'
+    | '/development/research-innovation/idea-management/new'
+    | '/development/research-innovation/innovation-portfolio/new'
+    | '/development/research-innovation/opportunity-discovery/new'
+    | '/development/research-innovation/problem-validation/new'
+    | '/development/research-innovation/proof-of-concept/new'
+    | '/development/research-innovation/prototype-development/new'
+    | '/development/research-innovation/research-management/new'
+    | '/development/research-innovation/technology-scouting/new'
+    | '/development/research-innovation/trl-assessment/new'
+    | '/development/ip-development/patent-management'
+    | '/development/research-innovation/commercialization-planning'
+    | '/development/research-innovation/design-thinking'
+    | '/development/research-innovation/experiment-management'
+    | '/development/research-innovation/feasibility-study'
+    | '/development/research-innovation/idea-management'
+    | '/development/research-innovation/innovation-portfolio'
+    | '/development/research-innovation/opportunity-discovery'
+    | '/development/research-innovation/problem-validation'
+    | '/development/research-innovation/proof-of-concept'
+    | '/development/research-innovation/prototype-development'
+    | '/development/research-innovation/research-management'
+    | '/development/research-innovation/technology-scouting'
+    | '/development/research-innovation/trl-assessment'
   id:
     | '__root__'
     | '/'
-    | '/assets'
-    | '/audit'
-    | '/budgeting'
-    | '/cash-bank'
-    | '/consolidation'
-    | '/cost-centers'
     | '/expenses'
-    | '/ledger'
-    | '/overview'
-    | '/payables'
-    | '/profitability'
-    | '/receivables'
-    | '/reports'
     | '/revenue'
     | '/settings'
-    | '/stations'
-    | '/tax'
     | '/transactions'
     | '/users'
     | '/vendors'
+    | '/administration/home/branches'
+    | '/administration/home/companies'
+    | '/administration/home/departments'
+    | '/administration/home/overview'
+    | '/administration/home/roles'
+    | '/administration/home/users'
+    | '/management/finance/assets'
+    | '/management/finance/audit'
+    | '/management/finance/budgeting'
+    | '/management/finance/cash-bank'
+    | '/management/finance/consolidation'
+    | '/management/finance/cost-centers'
+    | '/management/finance/ledger'
+    | '/management/finance/overview'
+    | '/management/finance/payables'
+    | '/management/finance/profitability'
+    | '/management/finance/receivables'
+    | '/management/finance/reports'
+    | '/management/finance/setup'
+    | '/management/finance/tax'
+    | '/development/ip-development/patent-management/new'
+    | '/development/research-innovation/commercialization-planning/new'
+    | '/development/research-innovation/design-thinking/new'
+    | '/development/research-innovation/experiment-management/new'
+    | '/development/research-innovation/feasibility-study/new'
+    | '/development/research-innovation/idea-management/$ideaId'
+    | '/development/research-innovation/idea-management/new'
+    | '/development/research-innovation/innovation-portfolio/new'
+    | '/development/research-innovation/opportunity-discovery/new'
+    | '/development/research-innovation/problem-validation/new'
+    | '/development/research-innovation/proof-of-concept/new'
+    | '/development/research-innovation/prototype-development/new'
+    | '/development/research-innovation/research-management/new'
+    | '/development/research-innovation/technology-scouting/new'
+    | '/development/research-innovation/trl-assessment/new'
+    | '/development/ip-development/patent-management/'
+    | '/development/research-innovation/commercialization-planning/'
+    | '/development/research-innovation/design-thinking/'
+    | '/development/research-innovation/experiment-management/'
+    | '/development/research-innovation/feasibility-study/'
+    | '/development/research-innovation/idea-management/'
+    | '/development/research-innovation/innovation-portfolio/'
+    | '/development/research-innovation/opportunity-discovery/'
+    | '/development/research-innovation/problem-validation/'
+    | '/development/research-innovation/proof-of-concept/'
+    | '/development/research-innovation/prototype-development/'
+    | '/development/research-innovation/research-management/'
+    | '/development/research-innovation/technology-scouting/'
+    | '/development/research-innovation/trl-assessment/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AssetsRoute: typeof AssetsRoute
-  AuditRoute: typeof AuditRoute
-  BudgetingRoute: typeof BudgetingRoute
-  CashBankRoute: typeof CashBankRoute
-  ConsolidationRoute: typeof ConsolidationRoute
-  CostCentersRoute: typeof CostCentersRoute
   ExpensesRoute: typeof ExpensesRoute
-  LedgerRoute: typeof LedgerRoute
-  OverviewRoute: typeof OverviewRoute
-  PayablesRoute: typeof PayablesRoute
-  ProfitabilityRoute: typeof ProfitabilityRoute
-  ReceivablesRoute: typeof ReceivablesRoute
-  ReportsRoute: typeof ReportsRoute
   RevenueRoute: typeof RevenueRoute
   SettingsRoute: typeof SettingsRoute
-  StationsRoute: typeof StationsRoute
-  TaxRoute: typeof TaxRoute
   TransactionsRoute: typeof TransactionsRoute
   UsersRoute: typeof UsersRoute
   VendorsRoute: typeof VendorsRoute
+  AdministrationHomeBranchesRoute: typeof AdministrationHomeBranchesRoute
+  AdministrationHomeCompaniesRoute: typeof AdministrationHomeCompaniesRoute
+  AdministrationHomeDepartmentsRoute: typeof AdministrationHomeDepartmentsRoute
+  AdministrationHomeOverviewRoute: typeof AdministrationHomeOverviewRoute
+  AdministrationHomeRolesRoute: typeof AdministrationHomeRolesRoute
+  AdministrationHomeUsersRoute: typeof AdministrationHomeUsersRoute
+  ManagementFinanceAssetsRoute: typeof ManagementFinanceAssetsRoute
+  ManagementFinanceAuditRoute: typeof ManagementFinanceAuditRoute
+  ManagementFinanceBudgetingRoute: typeof ManagementFinanceBudgetingRoute
+  ManagementFinanceCashBankRoute: typeof ManagementFinanceCashBankRoute
+  ManagementFinanceConsolidationRoute: typeof ManagementFinanceConsolidationRoute
+  ManagementFinanceCostCentersRoute: typeof ManagementFinanceCostCentersRoute
+  ManagementFinanceLedgerRoute: typeof ManagementFinanceLedgerRoute
+  ManagementFinanceOverviewRoute: typeof ManagementFinanceOverviewRoute
+  ManagementFinancePayablesRoute: typeof ManagementFinancePayablesRoute
+  ManagementFinanceProfitabilityRoute: typeof ManagementFinanceProfitabilityRoute
+  ManagementFinanceReceivablesRoute: typeof ManagementFinanceReceivablesRoute
+  ManagementFinanceReportsRoute: typeof ManagementFinanceReportsRoute
+  ManagementFinanceSetupRoute: typeof ManagementFinanceSetupRoute
+  ManagementFinanceTaxRoute: typeof ManagementFinanceTaxRoute
+  DevelopmentIpDevelopmentPatentManagementNewRoute: typeof DevelopmentIpDevelopmentPatentManagementNewRoute
+  DevelopmentResearchInnovationCommercializationPlanningNewRoute: typeof DevelopmentResearchInnovationCommercializationPlanningNewRoute
+  DevelopmentResearchInnovationDesignThinkingNewRoute: typeof DevelopmentResearchInnovationDesignThinkingNewRoute
+  DevelopmentResearchInnovationExperimentManagementNewRoute: typeof DevelopmentResearchInnovationExperimentManagementNewRoute
+  DevelopmentResearchInnovationFeasibilityStudyNewRoute: typeof DevelopmentResearchInnovationFeasibilityStudyNewRoute
+  DevelopmentResearchInnovationIdeaManagementIdeaIdRoute: typeof DevelopmentResearchInnovationIdeaManagementIdeaIdRoute
+  DevelopmentResearchInnovationIdeaManagementNewRoute: typeof DevelopmentResearchInnovationIdeaManagementNewRoute
+  DevelopmentResearchInnovationInnovationPortfolioNewRoute: typeof DevelopmentResearchInnovationInnovationPortfolioNewRoute
+  DevelopmentResearchInnovationOpportunityDiscoveryNewRoute: typeof DevelopmentResearchInnovationOpportunityDiscoveryNewRoute
+  DevelopmentResearchInnovationProblemValidationNewRoute: typeof DevelopmentResearchInnovationProblemValidationNewRoute
+  DevelopmentResearchInnovationProofOfConceptNewRoute: typeof DevelopmentResearchInnovationProofOfConceptNewRoute
+  DevelopmentResearchInnovationPrototypeDevelopmentNewRoute: typeof DevelopmentResearchInnovationPrototypeDevelopmentNewRoute
+  DevelopmentResearchInnovationResearchManagementNewRoute: typeof DevelopmentResearchInnovationResearchManagementNewRoute
+  DevelopmentResearchInnovationTechnologyScoutingNewRoute: typeof DevelopmentResearchInnovationTechnologyScoutingNewRoute
+  DevelopmentResearchInnovationTrlAssessmentNewRoute: typeof DevelopmentResearchInnovationTrlAssessmentNewRoute
+  DevelopmentIpDevelopmentPatentManagementIndexRoute: typeof DevelopmentIpDevelopmentPatentManagementIndexRoute
+  DevelopmentResearchInnovationCommercializationPlanningIndexRoute: typeof DevelopmentResearchInnovationCommercializationPlanningIndexRoute
+  DevelopmentResearchInnovationDesignThinkingIndexRoute: typeof DevelopmentResearchInnovationDesignThinkingIndexRoute
+  DevelopmentResearchInnovationExperimentManagementIndexRoute: typeof DevelopmentResearchInnovationExperimentManagementIndexRoute
+  DevelopmentResearchInnovationFeasibilityStudyIndexRoute: typeof DevelopmentResearchInnovationFeasibilityStudyIndexRoute
+  DevelopmentResearchInnovationIdeaManagementIndexRoute: typeof DevelopmentResearchInnovationIdeaManagementIndexRoute
+  DevelopmentResearchInnovationInnovationPortfolioIndexRoute: typeof DevelopmentResearchInnovationInnovationPortfolioIndexRoute
+  DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute: typeof DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute
+  DevelopmentResearchInnovationProblemValidationIndexRoute: typeof DevelopmentResearchInnovationProblemValidationIndexRoute
+  DevelopmentResearchInnovationProofOfConceptIndexRoute: typeof DevelopmentResearchInnovationProofOfConceptIndexRoute
+  DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute: typeof DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute
+  DevelopmentResearchInnovationResearchManagementIndexRoute: typeof DevelopmentResearchInnovationResearchManagementIndexRoute
+  DevelopmentResearchInnovationTechnologyScoutingIndexRoute: typeof DevelopmentResearchInnovationTechnologyScoutingIndexRoute
+  DevelopmentResearchInnovationTrlAssessmentIndexRoute: typeof DevelopmentResearchInnovationTrlAssessmentIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -326,20 +825,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TransactionsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tax': {
-      id: '/tax'
-      path: '/tax'
-      fullPath: '/tax'
-      preLoaderRoute: typeof TaxRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/stations': {
-      id: '/stations'
-      path: '/stations'
-      fullPath: '/stations'
-      preLoaderRoute: typeof StationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -354,95 +839,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RevenueRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/reports': {
-      id: '/reports'
-      path: '/reports'
-      fullPath: '/reports'
-      preLoaderRoute: typeof ReportsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/receivables': {
-      id: '/receivables'
-      path: '/receivables'
-      fullPath: '/receivables'
-      preLoaderRoute: typeof ReceivablesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/profitability': {
-      id: '/profitability'
-      path: '/profitability'
-      fullPath: '/profitability'
-      preLoaderRoute: typeof ProfitabilityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/payables': {
-      id: '/payables'
-      path: '/payables'
-      fullPath: '/payables'
-      preLoaderRoute: typeof PayablesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/overview': {
-      id: '/overview'
-      path: '/overview'
-      fullPath: '/overview'
-      preLoaderRoute: typeof OverviewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ledger': {
-      id: '/ledger'
-      path: '/ledger'
-      fullPath: '/ledger'
-      preLoaderRoute: typeof LedgerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/expenses': {
       id: '/expenses'
       path: '/expenses'
       fullPath: '/expenses'
       preLoaderRoute: typeof ExpensesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cost-centers': {
-      id: '/cost-centers'
-      path: '/cost-centers'
-      fullPath: '/cost-centers'
-      preLoaderRoute: typeof CostCentersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/consolidation': {
-      id: '/consolidation'
-      path: '/consolidation'
-      fullPath: '/consolidation'
-      preLoaderRoute: typeof ConsolidationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cash-bank': {
-      id: '/cash-bank'
-      path: '/cash-bank'
-      fullPath: '/cash-bank'
-      preLoaderRoute: typeof CashBankRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/budgeting': {
-      id: '/budgeting'
-      path: '/budgeting'
-      fullPath: '/budgeting'
-      preLoaderRoute: typeof BudgetingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/audit': {
-      id: '/audit'
-      path: '/audit'
-      fullPath: '/audit'
-      preLoaderRoute: typeof AuditRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/assets': {
-      id: '/assets'
-      path: '/assets'
-      fullPath: '/assets'
-      preLoaderRoute: typeof AssetsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -452,31 +853,438 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/management/finance/tax': {
+      id: '/management/finance/tax'
+      path: '/management/finance/tax'
+      fullPath: '/management/finance/tax'
+      preLoaderRoute: typeof ManagementFinanceTaxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management/finance/setup': {
+      id: '/management/finance/setup'
+      path: '/management/finance/setup'
+      fullPath: '/management/finance/setup'
+      preLoaderRoute: typeof ManagementFinanceSetupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management/finance/reports': {
+      id: '/management/finance/reports'
+      path: '/management/finance/reports'
+      fullPath: '/management/finance/reports'
+      preLoaderRoute: typeof ManagementFinanceReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management/finance/receivables': {
+      id: '/management/finance/receivables'
+      path: '/management/finance/receivables'
+      fullPath: '/management/finance/receivables'
+      preLoaderRoute: typeof ManagementFinanceReceivablesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management/finance/profitability': {
+      id: '/management/finance/profitability'
+      path: '/management/finance/profitability'
+      fullPath: '/management/finance/profitability'
+      preLoaderRoute: typeof ManagementFinanceProfitabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management/finance/payables': {
+      id: '/management/finance/payables'
+      path: '/management/finance/payables'
+      fullPath: '/management/finance/payables'
+      preLoaderRoute: typeof ManagementFinancePayablesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management/finance/overview': {
+      id: '/management/finance/overview'
+      path: '/management/finance/overview'
+      fullPath: '/management/finance/overview'
+      preLoaderRoute: typeof ManagementFinanceOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management/finance/ledger': {
+      id: '/management/finance/ledger'
+      path: '/management/finance/ledger'
+      fullPath: '/management/finance/ledger'
+      preLoaderRoute: typeof ManagementFinanceLedgerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management/finance/cost-centers': {
+      id: '/management/finance/cost-centers'
+      path: '/management/finance/cost-centers'
+      fullPath: '/management/finance/cost-centers'
+      preLoaderRoute: typeof ManagementFinanceCostCentersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management/finance/consolidation': {
+      id: '/management/finance/consolidation'
+      path: '/management/finance/consolidation'
+      fullPath: '/management/finance/consolidation'
+      preLoaderRoute: typeof ManagementFinanceConsolidationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management/finance/cash-bank': {
+      id: '/management/finance/cash-bank'
+      path: '/management/finance/cash-bank'
+      fullPath: '/management/finance/cash-bank'
+      preLoaderRoute: typeof ManagementFinanceCashBankRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management/finance/budgeting': {
+      id: '/management/finance/budgeting'
+      path: '/management/finance/budgeting'
+      fullPath: '/management/finance/budgeting'
+      preLoaderRoute: typeof ManagementFinanceBudgetingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management/finance/audit': {
+      id: '/management/finance/audit'
+      path: '/management/finance/audit'
+      fullPath: '/management/finance/audit'
+      preLoaderRoute: typeof ManagementFinanceAuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management/finance/assets': {
+      id: '/management/finance/assets'
+      path: '/management/finance/assets'
+      fullPath: '/management/finance/assets'
+      preLoaderRoute: typeof ManagementFinanceAssetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/administration/home/users': {
+      id: '/administration/home/users'
+      path: '/administration/home/users'
+      fullPath: '/administration/home/users'
+      preLoaderRoute: typeof AdministrationHomeUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/administration/home/roles': {
+      id: '/administration/home/roles'
+      path: '/administration/home/roles'
+      fullPath: '/administration/home/roles'
+      preLoaderRoute: typeof AdministrationHomeRolesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/administration/home/overview': {
+      id: '/administration/home/overview'
+      path: '/administration/home/overview'
+      fullPath: '/administration/home/overview'
+      preLoaderRoute: typeof AdministrationHomeOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/administration/home/departments': {
+      id: '/administration/home/departments'
+      path: '/administration/home/departments'
+      fullPath: '/administration/home/departments'
+      preLoaderRoute: typeof AdministrationHomeDepartmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/administration/home/companies': {
+      id: '/administration/home/companies'
+      path: '/administration/home/companies'
+      fullPath: '/administration/home/companies'
+      preLoaderRoute: typeof AdministrationHomeCompaniesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/administration/home/branches': {
+      id: '/administration/home/branches'
+      path: '/administration/home/branches'
+      fullPath: '/administration/home/branches'
+      preLoaderRoute: typeof AdministrationHomeBranchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/trl-assessment/': {
+      id: '/development/research-innovation/trl-assessment/'
+      path: '/development/research-innovation/trl-assessment'
+      fullPath: '/development/research-innovation/trl-assessment/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationTrlAssessmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/technology-scouting/': {
+      id: '/development/research-innovation/technology-scouting/'
+      path: '/development/research-innovation/technology-scouting'
+      fullPath: '/development/research-innovation/technology-scouting/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationTechnologyScoutingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/research-management/': {
+      id: '/development/research-innovation/research-management/'
+      path: '/development/research-innovation/research-management'
+      fullPath: '/development/research-innovation/research-management/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationResearchManagementIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/prototype-development/': {
+      id: '/development/research-innovation/prototype-development/'
+      path: '/development/research-innovation/prototype-development'
+      fullPath: '/development/research-innovation/prototype-development/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationPrototypeDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/proof-of-concept/': {
+      id: '/development/research-innovation/proof-of-concept/'
+      path: '/development/research-innovation/proof-of-concept'
+      fullPath: '/development/research-innovation/proof-of-concept/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationProofOfConceptIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/problem-validation/': {
+      id: '/development/research-innovation/problem-validation/'
+      path: '/development/research-innovation/problem-validation'
+      fullPath: '/development/research-innovation/problem-validation/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationProblemValidationIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/opportunity-discovery/': {
+      id: '/development/research-innovation/opportunity-discovery/'
+      path: '/development/research-innovation/opportunity-discovery'
+      fullPath: '/development/research-innovation/opportunity-discovery/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationOpportunityDiscoveryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/innovation-portfolio/': {
+      id: '/development/research-innovation/innovation-portfolio/'
+      path: '/development/research-innovation/innovation-portfolio'
+      fullPath: '/development/research-innovation/innovation-portfolio/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationInnovationPortfolioIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/idea-management/': {
+      id: '/development/research-innovation/idea-management/'
+      path: '/development/research-innovation/idea-management'
+      fullPath: '/development/research-innovation/idea-management/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationIdeaManagementIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/feasibility-study/': {
+      id: '/development/research-innovation/feasibility-study/'
+      path: '/development/research-innovation/feasibility-study'
+      fullPath: '/development/research-innovation/feasibility-study/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationFeasibilityStudyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/experiment-management/': {
+      id: '/development/research-innovation/experiment-management/'
+      path: '/development/research-innovation/experiment-management'
+      fullPath: '/development/research-innovation/experiment-management/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationExperimentManagementIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/design-thinking/': {
+      id: '/development/research-innovation/design-thinking/'
+      path: '/development/research-innovation/design-thinking'
+      fullPath: '/development/research-innovation/design-thinking/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationDesignThinkingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/commercialization-planning/': {
+      id: '/development/research-innovation/commercialization-planning/'
+      path: '/development/research-innovation/commercialization-planning'
+      fullPath: '/development/research-innovation/commercialization-planning/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationCommercializationPlanningIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/ip-development/patent-management/': {
+      id: '/development/ip-development/patent-management/'
+      path: '/development/ip-development/patent-management'
+      fullPath: '/development/ip-development/patent-management/'
+      preLoaderRoute: typeof DevelopmentIpDevelopmentPatentManagementIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/trl-assessment/new': {
+      id: '/development/research-innovation/trl-assessment/new'
+      path: '/development/research-innovation/trl-assessment/new'
+      fullPath: '/development/research-innovation/trl-assessment/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationTrlAssessmentNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/technology-scouting/new': {
+      id: '/development/research-innovation/technology-scouting/new'
+      path: '/development/research-innovation/technology-scouting/new'
+      fullPath: '/development/research-innovation/technology-scouting/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationTechnologyScoutingNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/research-management/new': {
+      id: '/development/research-innovation/research-management/new'
+      path: '/development/research-innovation/research-management/new'
+      fullPath: '/development/research-innovation/research-management/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationResearchManagementNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/prototype-development/new': {
+      id: '/development/research-innovation/prototype-development/new'
+      path: '/development/research-innovation/prototype-development/new'
+      fullPath: '/development/research-innovation/prototype-development/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationPrototypeDevelopmentNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/proof-of-concept/new': {
+      id: '/development/research-innovation/proof-of-concept/new'
+      path: '/development/research-innovation/proof-of-concept/new'
+      fullPath: '/development/research-innovation/proof-of-concept/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationProofOfConceptNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/problem-validation/new': {
+      id: '/development/research-innovation/problem-validation/new'
+      path: '/development/research-innovation/problem-validation/new'
+      fullPath: '/development/research-innovation/problem-validation/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationProblemValidationNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/opportunity-discovery/new': {
+      id: '/development/research-innovation/opportunity-discovery/new'
+      path: '/development/research-innovation/opportunity-discovery/new'
+      fullPath: '/development/research-innovation/opportunity-discovery/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationOpportunityDiscoveryNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/innovation-portfolio/new': {
+      id: '/development/research-innovation/innovation-portfolio/new'
+      path: '/development/research-innovation/innovation-portfolio/new'
+      fullPath: '/development/research-innovation/innovation-portfolio/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationInnovationPortfolioNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/idea-management/new': {
+      id: '/development/research-innovation/idea-management/new'
+      path: '/development/research-innovation/idea-management/new'
+      fullPath: '/development/research-innovation/idea-management/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationIdeaManagementNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/idea-management/$ideaId': {
+      id: '/development/research-innovation/idea-management/$ideaId'
+      path: '/development/research-innovation/idea-management/$ideaId'
+      fullPath: '/development/research-innovation/idea-management/$ideaId'
+      preLoaderRoute: typeof DevelopmentResearchInnovationIdeaManagementIdeaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/feasibility-study/new': {
+      id: '/development/research-innovation/feasibility-study/new'
+      path: '/development/research-innovation/feasibility-study/new'
+      fullPath: '/development/research-innovation/feasibility-study/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationFeasibilityStudyNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/experiment-management/new': {
+      id: '/development/research-innovation/experiment-management/new'
+      path: '/development/research-innovation/experiment-management/new'
+      fullPath: '/development/research-innovation/experiment-management/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationExperimentManagementNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/design-thinking/new': {
+      id: '/development/research-innovation/design-thinking/new'
+      path: '/development/research-innovation/design-thinking/new'
+      fullPath: '/development/research-innovation/design-thinking/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationDesignThinkingNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/commercialization-planning/new': {
+      id: '/development/research-innovation/commercialization-planning/new'
+      path: '/development/research-innovation/commercialization-planning/new'
+      fullPath: '/development/research-innovation/commercialization-planning/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationCommercializationPlanningNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/ip-development/patent-management/new': {
+      id: '/development/ip-development/patent-management/new'
+      path: '/development/ip-development/patent-management/new'
+      fullPath: '/development/ip-development/patent-management/new'
+      preLoaderRoute: typeof DevelopmentIpDevelopmentPatentManagementNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AssetsRoute: AssetsRoute,
-  AuditRoute: AuditRoute,
-  BudgetingRoute: BudgetingRoute,
-  CashBankRoute: CashBankRoute,
-  ConsolidationRoute: ConsolidationRoute,
-  CostCentersRoute: CostCentersRoute,
   ExpensesRoute: ExpensesRoute,
-  LedgerRoute: LedgerRoute,
-  OverviewRoute: OverviewRoute,
-  PayablesRoute: PayablesRoute,
-  ProfitabilityRoute: ProfitabilityRoute,
-  ReceivablesRoute: ReceivablesRoute,
-  ReportsRoute: ReportsRoute,
   RevenueRoute: RevenueRoute,
   SettingsRoute: SettingsRoute,
-  StationsRoute: StationsRoute,
-  TaxRoute: TaxRoute,
   TransactionsRoute: TransactionsRoute,
   UsersRoute: UsersRoute,
   VendorsRoute: VendorsRoute,
+  AdministrationHomeBranchesRoute: AdministrationHomeBranchesRoute,
+  AdministrationHomeCompaniesRoute: AdministrationHomeCompaniesRoute,
+  AdministrationHomeDepartmentsRoute: AdministrationHomeDepartmentsRoute,
+  AdministrationHomeOverviewRoute: AdministrationHomeOverviewRoute,
+  AdministrationHomeRolesRoute: AdministrationHomeRolesRoute,
+  AdministrationHomeUsersRoute: AdministrationHomeUsersRoute,
+  ManagementFinanceAssetsRoute: ManagementFinanceAssetsRoute,
+  ManagementFinanceAuditRoute: ManagementFinanceAuditRoute,
+  ManagementFinanceBudgetingRoute: ManagementFinanceBudgetingRoute,
+  ManagementFinanceCashBankRoute: ManagementFinanceCashBankRoute,
+  ManagementFinanceConsolidationRoute: ManagementFinanceConsolidationRoute,
+  ManagementFinanceCostCentersRoute: ManagementFinanceCostCentersRoute,
+  ManagementFinanceLedgerRoute: ManagementFinanceLedgerRoute,
+  ManagementFinanceOverviewRoute: ManagementFinanceOverviewRoute,
+  ManagementFinancePayablesRoute: ManagementFinancePayablesRoute,
+  ManagementFinanceProfitabilityRoute: ManagementFinanceProfitabilityRoute,
+  ManagementFinanceReceivablesRoute: ManagementFinanceReceivablesRoute,
+  ManagementFinanceReportsRoute: ManagementFinanceReportsRoute,
+  ManagementFinanceSetupRoute: ManagementFinanceSetupRoute,
+  ManagementFinanceTaxRoute: ManagementFinanceTaxRoute,
+  DevelopmentIpDevelopmentPatentManagementNewRoute:
+    DevelopmentIpDevelopmentPatentManagementNewRoute,
+  DevelopmentResearchInnovationCommercializationPlanningNewRoute:
+    DevelopmentResearchInnovationCommercializationPlanningNewRoute,
+  DevelopmentResearchInnovationDesignThinkingNewRoute:
+    DevelopmentResearchInnovationDesignThinkingNewRoute,
+  DevelopmentResearchInnovationExperimentManagementNewRoute:
+    DevelopmentResearchInnovationExperimentManagementNewRoute,
+  DevelopmentResearchInnovationFeasibilityStudyNewRoute:
+    DevelopmentResearchInnovationFeasibilityStudyNewRoute,
+  DevelopmentResearchInnovationIdeaManagementIdeaIdRoute:
+    DevelopmentResearchInnovationIdeaManagementIdeaIdRoute,
+  DevelopmentResearchInnovationIdeaManagementNewRoute:
+    DevelopmentResearchInnovationIdeaManagementNewRoute,
+  DevelopmentResearchInnovationInnovationPortfolioNewRoute:
+    DevelopmentResearchInnovationInnovationPortfolioNewRoute,
+  DevelopmentResearchInnovationOpportunityDiscoveryNewRoute:
+    DevelopmentResearchInnovationOpportunityDiscoveryNewRoute,
+  DevelopmentResearchInnovationProblemValidationNewRoute:
+    DevelopmentResearchInnovationProblemValidationNewRoute,
+  DevelopmentResearchInnovationProofOfConceptNewRoute:
+    DevelopmentResearchInnovationProofOfConceptNewRoute,
+  DevelopmentResearchInnovationPrototypeDevelopmentNewRoute:
+    DevelopmentResearchInnovationPrototypeDevelopmentNewRoute,
+  DevelopmentResearchInnovationResearchManagementNewRoute:
+    DevelopmentResearchInnovationResearchManagementNewRoute,
+  DevelopmentResearchInnovationTechnologyScoutingNewRoute:
+    DevelopmentResearchInnovationTechnologyScoutingNewRoute,
+  DevelopmentResearchInnovationTrlAssessmentNewRoute:
+    DevelopmentResearchInnovationTrlAssessmentNewRoute,
+  DevelopmentIpDevelopmentPatentManagementIndexRoute:
+    DevelopmentIpDevelopmentPatentManagementIndexRoute,
+  DevelopmentResearchInnovationCommercializationPlanningIndexRoute:
+    DevelopmentResearchInnovationCommercializationPlanningIndexRoute,
+  DevelopmentResearchInnovationDesignThinkingIndexRoute:
+    DevelopmentResearchInnovationDesignThinkingIndexRoute,
+  DevelopmentResearchInnovationExperimentManagementIndexRoute:
+    DevelopmentResearchInnovationExperimentManagementIndexRoute,
+  DevelopmentResearchInnovationFeasibilityStudyIndexRoute:
+    DevelopmentResearchInnovationFeasibilityStudyIndexRoute,
+  DevelopmentResearchInnovationIdeaManagementIndexRoute:
+    DevelopmentResearchInnovationIdeaManagementIndexRoute,
+  DevelopmentResearchInnovationInnovationPortfolioIndexRoute:
+    DevelopmentResearchInnovationInnovationPortfolioIndexRoute,
+  DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute:
+    DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute,
+  DevelopmentResearchInnovationProblemValidationIndexRoute:
+    DevelopmentResearchInnovationProblemValidationIndexRoute,
+  DevelopmentResearchInnovationProofOfConceptIndexRoute:
+    DevelopmentResearchInnovationProofOfConceptIndexRoute,
+  DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute:
+    DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute,
+  DevelopmentResearchInnovationResearchManagementIndexRoute:
+    DevelopmentResearchInnovationResearchManagementIndexRoute,
+  DevelopmentResearchInnovationTechnologyScoutingIndexRoute:
+    DevelopmentResearchInnovationTechnologyScoutingIndexRoute,
+  DevelopmentResearchInnovationTrlAssessmentIndexRoute:
+    DevelopmentResearchInnovationTrlAssessmentIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

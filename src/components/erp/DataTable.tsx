@@ -2,7 +2,7 @@ import { type ReactNode } from "react";
 
 export type Column<T> = {
   key: string;
-  header: string;
+  header: ReactNode;
   cell: (row: T) => ReactNode;
   align?: "left" | "right" | "center";
   className?: string;
@@ -13,11 +13,13 @@ export function DataTable<T extends Record<string, unknown>>({
   data,
   mobileCard,
   empty,
+  onRowClick,
 }: {
   columns: Column<T>[];
   data: T[];
   mobileCard: (row: T) => ReactNode;
   empty?: ReactNode;
+  onRowClick?: (row: T) => void;
 }) {
   if (data.length === 0) return <>{empty}</>;
 
@@ -49,7 +51,8 @@ export function DataTable<T extends Record<string, unknown>>({
               {data.map((row, i) => (
                 <tr
                   key={(row.id as string | number | undefined) ?? i}
-                  className="border-b border-border last:border-0 hover:bg-secondary/30 transition-colors"
+                  onClick={onRowClick ? () => onRowClick(row) : undefined}
+                  className={`border-b border-border last:border-0 hover:bg-secondary/30 transition-colors ${onRowClick ? "cursor-pointer" : ""}`}
                 >
                   {columns.map((c) => (
                     <td
@@ -75,7 +78,11 @@ export function DataTable<T extends Record<string, unknown>>({
       {/* Mobile cards */}
       <div className="grid gap-3 md:hidden">
         {data.map((row, i) => (
-          <div key={(row.id as string | number | undefined) ?? i} className="card-soft p-4">
+          <div
+            key={(row.id as string | number | undefined) ?? i}
+            onClick={onRowClick ? () => onRowClick(row) : undefined}
+            className={`card-soft p-4 ${onRowClick ? "cursor-pointer" : ""}`}
+          >
             {mobileCard(row)}
           </div>
         ))}

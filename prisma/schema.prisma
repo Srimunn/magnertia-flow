@@ -1,0 +1,116 @@
+// General Ledger — Chart of Accounts, Journal Entry, Approval Workflow.
+// See prisma.config.ts for the CLI-time DATABASE_URL source.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum AccountType {
+  Asset
+  Liability
+  Equity
+  Revenue
+  Expense
+}
+
+model Account {
+  id              String        @id @default(cuid())
+  code            String        @unique
+  name            String
+  parentAccountId String?
+  parentAccount   Account?      @relation("AccountHierarchy", fields: [parentAccountId], references: [id])
+  children        Account[]     @relation("AccountHierarchy")
+  type            AccountType
+  group           String
+  currency        String        @default("INR")
+  isActive        Boolean       @default(true)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  journalLines    JournalLine[]
+}
+
+enum JournalType {
+  Manual
+  Automatic
+  Recurring
+  Reversing
+}
+
+enum JournalStatus {
+  Draft
+  Approved
+  Posted
+  Closed
+  Reversed
+}
+
+model Journal {
+  id               String        @id @default(cuid())
+  journalNumber    String        @unique
+  voucherNumber    String?
+  postingDate      DateTime
+  accountingDate   DateTime
+  fiscalYear       String
+  accountingPeriod String
+  journalType      JournalType   @default(Manual)
+  status           JournalStatus @default(Draft)
+
+  // Plain reference strings, not real foreign keys — Company/BusinessUnit/
+  // Division/Branch/CostCenter/ProfitCenter/Project/Department master tables
+  // are out of scope for this pass.
+  companyId      String?
+  businessUnitId String?
+  divisionId     String?
+  branchId       String?
+  costCenterId   String?
+  profitCenterId String?
+  projectId      String?
+  departmentId   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  lines         JournalLine[]
+  approvalSteps ApprovalStep[]
+}
+
+model JournalLine {
+  id          String  @id @default(cuid())
+  journalId   String
+  journal     Journal @relation(fields: [journalId], references: [id], onDelete: Cascade)
+  accountId   String
+  account     Account @relation(fields: [accountId], references: [id])
+  description String?
+  debit       Decimal @default(0) @db.Decimal(18, 2)
+  credit      Decimal @default(0) @db.Decimal(18, 2)
+  lineNumber  Int
+}
+
+enum ApprovalLevel {
+  Accountant
+  FinanceManager
+  FinancialController
+  CFO
+  CEO
+}
+
+enum ApprovalStepStatus {
+  Pending
+  Approved
+  Rejected
+}
+
+model ApprovalStep {
+  id           String             @id @default(cuid())
+  journalId    String
+  journal      Journal            @relation(fields: [journalId], references: [id], onDelete: Cascade)
+  level        ApprovalLevel
+  approverName String
+  status       ApprovalStepStatus @default(Pending)
+  date         DateTime?
+}

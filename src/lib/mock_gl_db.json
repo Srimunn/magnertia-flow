@@ -1,0 +1,456 @@
+{
+  "accounts": [
+    {
+      "code": "1000",
+      "name": "Assets",
+      "type": "Asset",
+      "group": "Assets",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": null,
+      "openingBalance": 0,
+      "_id": "6a50b29db089a0384566ba55"
+    },
+    {
+      "code": "1100",
+      "name": "Current Assets",
+      "type": "Asset",
+      "group": "Current Assets",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "1000",
+      "openingBalance": 0,
+      "_id": "6a50b29db089a0384566ba56"
+    },
+    {
+      "code": "1110",
+      "name": "Cash and Cash Equivalents",
+      "type": "Asset",
+      "group": "Current Assets",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "1100",
+      "openingBalance": 62000000,
+      "_id": "6a50b29db089a0384566ba57"
+    },
+    {
+      "code": "1120",
+      "name": "Accounts Receivable",
+      "type": "Asset",
+      "group": "Current Assets",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "1100",
+      "openingBalance": 78450000,
+      "_id": "6a50b29db089a0384566ba58"
+    },
+    {
+      "code": "1130",
+      "name": "Inventory",
+      "type": "Asset",
+      "group": "Current Assets",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "1100",
+      "openingBalance": 41000000,
+      "_id": "6a50b29db089a0384566ba59"
+    },
+    {
+      "code": "1140",
+      "name": "Prepaid Expenses",
+      "type": "Asset",
+      "group": "Current Assets",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "1100",
+      "openingBalance": 1800000,
+      "_id": "6a50b29db089a0384566ba5a"
+    },
+    {
+      "code": "1200",
+      "name": "Non-Current Assets",
+      "type": "Asset",
+      "group": "Non-Current Assets",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "1000",
+      "openingBalance": 0,
+      "_id": "6a50b29db089a0384566ba5b"
+    },
+    {
+      "code": "1210",
+      "name": "Property, Plant & Equipment",
+      "type": "Asset",
+      "group": "Non-Current Assets",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "1200",
+      "openingBalance": 210000000,
+      "_id": "6a50b29db089a0384566ba5c"
+    },
+    {
+      "code": "1220",
+      "name": "Accumulated Depreciation",
+      "type": "Asset",
+      "group": "Non-Current Assets",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "1200",
+      "openingBalance": -58000000,
+      "_id": "6a50b29db089a0384566ba5d"
+    },
+    {
+      "code": "1230",
+      "name": "Intangible Assets",
+      "type": "Asset",
+      "group": "Non-Current Assets",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "1200",
+      "openingBalance": 27000000,
+      "_id": "6a50b29db089a0384566ba5e"
+    },
+    {
+      "code": "1240",
+      "name": "Other Assets",
+      "type": "Asset",
+      "group": "Non-Current Assets",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "1200",
+      "openingBalance": 2600000,
+      "_id": "6a50b29db089a0384566ba5f"
+    },
+    {
+      "code": "2000",
+      "name": "Liabilities",
+      "type": "Liability",
+      "group": "Liabilities",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": null,
+      "openingBalance": 0,
+      "_id": "6a50b29db089a0384566ba60"
+    },
+    {
+      "code": "2100",
+      "name": "Current Liabilities",
+      "type": "Liability",
+      "group": "Current Liabilities",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "2000",
+      "openingBalance": 0,
+      "_id": "6a50b29db089a0384566ba61"
+    },
+    {
+      "code": "2110",
+      "name": "Accounts Payable",
+      "type": "Liability",
+      "group": "Current Liabilities",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "2100",
+      "openingBalance": -48000000,
+      "_id": "6a50b29db089a0384566ba62"
+    },
+    {
+      "code": "2120",
+      "name": "Short-term Loans",
+      "type": "Liability",
+      "group": "Current Liabilities",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "2100",
+      "openingBalance": -9000000,
+      "_id": "6a50b29db089a0384566ba63"
+    },
+    {
+      "code": "3000",
+      "name": "Equity",
+      "type": "Equity",
+      "group": "Equity",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": null,
+      "openingBalance": 0,
+      "_id": "6a50b29db089a0384566ba64"
+    },
+    {
+      "code": "3100",
+      "name": "Common Stock",
+      "type": "Equity",
+      "group": "Equity",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "3000",
+      "openingBalance": -170000000,
+      "_id": "6a50b29db089a0384566ba65"
+    },
+    {
+      "code": "3200",
+      "name": "Retained Earnings",
+      "type": "Equity",
+      "group": "Equity",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "3000",
+      "openingBalance": -55000000,
+      "_id": "6a50b29db089a0384566ba66"
+    },
+    {
+      "code": "4000",
+      "name": "Revenue",
+      "type": "Revenue",
+      "group": "Revenue",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": null,
+      "openingBalance": 0,
+      "_id": "6a50b29db089a0384566ba67"
+    },
+    {
+      "code": "4100",
+      "name": "Product Revenue",
+      "type": "Revenue",
+      "group": "Revenue",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "4000",
+      "openingBalance": -140000000,
+      "_id": "6a50b29db089a0384566ba68"
+    },
+    {
+      "code": "4200",
+      "name": "Service Revenue",
+      "type": "Revenue",
+      "group": "Revenue",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "4000",
+      "openingBalance": -65000000,
+      "_id": "6a50b29db089a0384566ba69"
+    },
+    {
+      "code": "5000",
+      "name": "Expenses",
+      "type": "Expense",
+      "group": "Expenses",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": null,
+      "openingBalance": 0,
+      "_id": "6a50b29db089a0384566ba6a"
+    },
+    {
+      "code": "5100",
+      "name": "Operating Expenses",
+      "type": "Expense",
+      "group": "Expenses",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "5000",
+      "openingBalance": 48000000,
+      "_id": "6a50b29db089a0384566ba6b"
+    },
+    {
+      "code": "5200",
+      "name": "Cost of Goods Sold",
+      "type": "Expense",
+      "group": "Expenses",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": "5000",
+      "openingBalance": 26000000,
+      "_id": "6a50b29db089a0384566ba6c"
+    },
+    {
+      "code": "9999",
+      "name": "Test Verification Account",
+      "type": "Asset",
+      "group": "Test Group",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": null,
+      "openingBalance": 0,
+      "_id": "6a5355d1613274778daf3b96"
+    },
+    {
+      "code": "1121",
+      "name": "Accounts Receivable",
+      "type": "Asset",
+      "group": "Current Assets",
+      "currency": "INR",
+      "isActive": true,
+      "parentAccountCode": null,
+      "openingBalance": 0,
+      "_id": "6a536083c3357921f91d695e"
+    }
+  ],
+  "journals": [
+    {
+      "journalNumber": "JE-00001",
+      "voucherNumber": null,
+      "postingDate": "2026-07-12T00:00:00.000Z",
+      "accountingDate": "2026-07-12T00:00:00.000Z",
+      "fiscalYear": "FY 2026-27",
+      "accountingPeriod": "Jul 2026",
+      "journalType": "Manual",
+      "status": "Posted",
+      "companyId": "Magnertia Motors",
+      "businessUnitId": "EV Division",
+      "divisionId": "Manufacturing Division",
+      "branchId": "Chennai Plant",
+      "costCenterId": "CC-101",
+      "profitCenterId": "PC-501",
+      "projectId": "PROJ-EV9",
+      "departmentId": "R&D Department",
+      "lines": [
+        {
+          "accountCode": "1110",
+          "accountName": "Cash and Cash Equivalents",
+          "description": "",
+          "debit": 5000,
+          "credit": 0,
+          "dimensions": {
+            "costCenter": "",
+            "profitCenter": "",
+            "businessUnit": "",
+            "project": "",
+            "department": "",
+            "product": "",
+            "customer": "",
+            "vendor": ""
+          }
+        },
+        {
+          "accountCode": "4000",
+          "accountName": "Revenue",
+          "description": "",
+          "debit": 0,
+          "credit": 5000,
+          "dimensions": {
+            "costCenter": "",
+            "profitCenter": "",
+            "businessUnit": "",
+            "project": "",
+            "department": "",
+            "product": "",
+            "customer": "",
+            "vendor": ""
+          }
+        }
+      ],
+      "totalDebit": 5000,
+      "totalCredit": 5000,
+      "approvalSteps": [
+        {
+          "level": "Accountant",
+          "approverName": "Priya Sharma",
+          "status": "Approved",
+          "date": "2026-07-12T09:22:31.123Z"
+        },
+        {
+          "level": "Finance Manager",
+          "approverName": "Priya Sharma",
+          "status": "Approved",
+          "date": "2026-07-12T09:47:51.362Z"
+        },
+        {
+          "level": "Financial Controller",
+          "approverName": "Priya Sharma",
+          "status": "Approved",
+          "date": "2026-07-12T09:51:03.023Z"
+        },
+        {
+          "level": "CFO",
+          "approverName": "Priya Sharma",
+          "status": "Approved",
+          "date": "2026-07-12T09:52:31.329Z"
+        }
+      ],
+      "createdAt": "2026-07-12T09:04:49.750Z",
+      "currencyInfo": {
+        "transactionCurrency": "INR",
+        "baseCurrency": "INR",
+        "exchangeRate": 1,
+        "exchangeRateDate": "2026-07-12",
+        "foreignCurrencyGainLoss": 0
+      },
+      "taxInfo": {
+        "gstType": "CGST/SGST",
+        "gstin": "33AAAAA1111A1Z1",
+        "taxCode": "GST-18%",
+        "taxAmount": 900,
+        "reverseCharge": false,
+        "tds": 0,
+        "tcs": 0
+      },
+      "supportingDocuments": {
+        "journalVoucher": {
+          "status": "Not Attached"
+        },
+        "invoice": {
+          "status": "Not Attached"
+        },
+        "purchaseOrder": {
+          "status": "Not Attached"
+        },
+        "paymentVoucher": {
+          "status": "Not Attached"
+        },
+        "bankStatement": {
+          "status": "Not Attached"
+        },
+        "taxDocument": {
+          "status": "Not Attached"
+        },
+        "approvalRecord": {
+          "status": "Not Attached"
+        }
+      },
+      "metadataInfo": {
+        "createdBy": "Priya Sharma",
+        "createdDate": "2026-07-12T09:04:49.750Z",
+        "lastModifiedBy": "Priya Sharma",
+        "lastModifiedDate": "2026-07-12T09:04:49.750Z",
+        "journalVersion": 1,
+        "erpReferenceNumber": "ERP-REF-089750",
+        "fiscalCalendar": "FY 2026-27",
+        "auditTrail": true,
+        "digitalSignature": true,
+        "recordStatus": "Active"
+      },
+      "_id": "6a5358b1c3357921f91d695d",
+      "metadataInfo.lastModifiedDate": "2026-07-12T09:52:31.329Z",
+      "metadataInfo.lastModifiedBy": "Priya Sharma"
+    }
+  ],
+  "settings": [
+    {
+      "_id": "integration_settings",
+      "accountsPayable": "Connected",
+      "accountsReceivable": "Connected",
+      "banking": "Connected",
+      "inventory": "Not Connected",
+      "manufacturing": "Not Connected",
+      "payroll": "Connected",
+      "fixedAssets": "Not Connected",
+      "projects": "Not Connected",
+      "taxManagement": "Connected",
+      "erpIntegration": "Connected"
+    }
+  ],
+  "widget_preferences": [
+    {
+      "_id": "widget_preferences::Priya Sharma",
+      "userId": "Priya Sharma",
+      "role": "CEO",
+      "pages": {},
+      "favorites": [],
+      "recentlyUsed": [],
+      "templates": [],
+      "updatedAt": "2026-07-21T11:58:00.479Z"
+    }
+  ]
+}
