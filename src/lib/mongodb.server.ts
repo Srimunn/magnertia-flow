@@ -71,10 +71,16 @@ let mockDbLoaded = false;
 
 function loadMockDb() {
   if (mockDbLoaded) return;
+  if (typeof window !== "undefined" || !fs || typeof fs.existsSync !== "function") {
+    mockDbLoaded = true;
+    return;
+  }
   try {
-    const dir = path.dirname(MOCK_DB_PATH);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
+    const dir = path && typeof path.dirname === "function" ? path.dirname(MOCK_DB_PATH) : "";
+    if (dir && fs.existsSync(dir) === false) {
+      if (typeof fs.mkdirSync === "function") {
+        fs.mkdirSync(dir, { recursive: true });
+      }
     }
     if (fs.existsSync(MOCK_DB_PATH)) {
       const raw = fs.readFileSync(MOCK_DB_PATH, "utf-8");
@@ -89,6 +95,7 @@ function loadMockDb() {
 }
 
 function saveMockDb() {
+  if (typeof window !== "undefined" || !fs || typeof fs.writeFileSync !== "function") return;
   try {
     fs.writeFileSync(MOCK_DB_PATH, JSON.stringify(mockDbData, null, 2), "utf-8");
   } catch (err) {
