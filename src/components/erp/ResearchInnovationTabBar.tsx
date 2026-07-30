@@ -20,6 +20,12 @@ const TAB_ACTIVE = "border-primary text-primary hover:text-primary font-bold";
  *  sync with this one source of truth. */
 export const RESEARCH_INNOVATION_TABS: { to: string; label: string; full: string }[] = [
   { to: "/development/research-innovation/overview", label: "Overview", full: "Research & Innovation Overview" },
+  { to: "/development/research-innovation/certification-readiness/new", label: "Certification", full: "Certification Readiness" },
+  { to: "/development/research-innovation/testing-validation/new", label: "Testing", full: "Testing & Validation" },
+  { to: "/development/research-innovation/simulation-analysis/new", label: "Simulation", full: "Simulation & Analysis" },
+  { to: "/development/research-innovation/cybersecurity-engineering/new", label: "Cybersecurity", full: "Cybersecurity Engineering" },
+  { to: "/development/research-innovation/cloud-platform-development/new", label: "Cloud Platform", full: "Cloud Platform Development" },
+  { to: "/development/research-innovation/ai-model-development/new", label: "AI Model", full: "AI Model Development" },
   { to: "/development/research-innovation/idea-management", label: "Ideas", full: "Idea Management" },
   { to: "/development/research-innovation/opportunity-discovery", label: "Opportunities", full: "Opportunity Discovery" },
   { to: "/development/research-innovation/design-thinking", label: "Design", full: "Design Thinking" },
@@ -36,6 +42,8 @@ export const RESEARCH_INNOVATION_TABS: { to: string; label: string; full: string
   { to: "/development/research-innovation/product-strategy", label: "Strategy", full: "Product Strategy" },
   { to: "/development/research-innovation/continuous-innovation", label: "Innovation", full: "Continuous Innovation" },
   { to: "/development/ip-development/patent-management", label: "Patents", full: "Patent Management" },
+  { to: "/development/research-innovation/ui-ux-development/new", label: "UI/UX", full: "UI/UX Development" },
+  { to: "/development/research-innovation/api-development/new", label: "API", full: "API Development" },
   { to: "/development/research-innovation/reports", label: "Reports", full: "Research & Innovation Reports" },
 ];
 
@@ -43,6 +51,14 @@ export const RESEARCH_INNOVATION_TABS: { to: string; label: string; full: string
  *  description and the record-type badge word. Keyed by route slug. New modules
  *  fall back to DEFAULT_MODULE_META if an entry is missing. */
 export const MODULE_META: Record<string, { description: string; recordLabel: string }> = {
+  "certification-readiness": { description: "Evaluate product certification readiness, standards compliance, gap analysis, and regulatory approvals.", recordLabel: "CERTIFICATION READINESS" },
+  "testing-validation": { description: "Manage end-to-end product verification, laboratory testing, regulatory compliance, and validation.", recordLabel: "TESTING & VALIDATION" },
+  "simulation-analysis": { description: "Execute multi-physics FEA/CFD CAE simulations, mesh validation, and digital twin correlation.", recordLabel: "SIMULATION" },
+  "cybersecurity-engineering": { description: "Govern secure-by-design threat modeling, Zero Trust, IAM, and DevSecOps compliance.", recordLabel: "CYBERSECURITY" },
+  "cloud-platform-development": { description: "Design, provision, secure, monitor and scale enterprise cloud platforms.", recordLabel: "CLOUD PLATFORM" },
+  "ai-model-development": { description: "Develop, train, evaluate, govern, and deploy enterprise AI models.", recordLabel: "AI MODEL" },
+  "api-development": { description: "Design, secure, test, deploy and monitor enterprise APIs.", recordLabel: "API" },
+  "ui-ux-development": { description: "Design, validate, and hand off enterprise UI/UX design systems and wireframes.", recordLabel: "UI/UX" },
   "idea-management": { description: "Capture, evaluate, and track ideas through the innovation pipeline.", recordLabel: "IDEA" },
   "opportunity-discovery": { description: "Discover and qualify innovation opportunities from validated ideas.", recordLabel: "OPPORTUNITY" },
   "design-thinking": { description: "Run design-thinking cycles from empathy through tested prototypes.", recordLabel: "DESIGN" },

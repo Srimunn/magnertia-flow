@@ -42,6 +42,8 @@ import {
   Target,
   Map,
   Box,
+  Cloud,
+  Activity,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { company, mockUsers } from "@/lib/mock-data";
@@ -215,6 +217,62 @@ const NAV_GROUPS: GroupItem[] = [
           },
           {
             kind: "leaf",
+            to: "/development/research-innovation/api-development/new",
+            matchPrefix: "/development/research-innovation/api-development",
+            label: "API Development",
+            icon: Cloud,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/ui-ux-development/new",
+            matchPrefix: "/development/research-innovation/ui-ux-development",
+            label: "UI/UX Development",
+            icon: Palette,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/simulation-analysis/new",
+            matchPrefix: "/development/research-innovation/simulation-analysis",
+            label: "Simulation & Analysis",
+            icon: Activity,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/testing-validation/new",
+            matchPrefix: "/development/research-innovation/testing-validation",
+            label: "Testing & Validation",
+            icon: ClipboardCheck,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/certification-readiness/new",
+            matchPrefix: "/development/research-innovation/certification-readiness",
+            label: "Certification Readiness",
+            icon: Stamp,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/cybersecurity-engineering/new",
+            matchPrefix: "/development/research-innovation/cybersecurity-engineering",
+            label: "Cybersecurity Engineering",
+            icon: ShieldCheck,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/cloud-platform-development/new",
+            matchPrefix: "/development/research-innovation/cloud-platform-development",
+            label: "Cloud Platform Development",
+            icon: Cloud,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/ai-model-development/new",
+            matchPrefix: "/development/research-innovation/ai-model-development",
+            label: "AI Model Development",
+            icon: Cpu,
+          },
+          {
+            kind: "leaf",
             to: "/development/research-innovation/overview",
             matchPrefix: "/development/research-innovation",
             label: "Research & Innovation",
@@ -222,6 +280,11 @@ const NAV_GROUPS: GroupItem[] = [
             subItems: [
               // Overview pinned first (default landing tab); the rest are A→Z.
               { to: "/development/research-innovation/overview", label: "Overview" },
+              { to: "/development/research-innovation/simulation-analysis/new", label: "Simulation & Analysis" },
+              { to: "/development/research-innovation/cybersecurity-engineering/new", label: "Cybersecurity Engineering" },
+              { to: "/development/research-innovation/cloud-platform-development/new", label: "Cloud Platform Development" },
+              { to: "/development/research-innovation/ai-model-development/new", label: "AI Model Development" },
+              { to: "/development/research-innovation/api-development/new", label: "API Development" },
               { to: "/development/research-innovation/commercialization-planning", label: "Commercialization" },
               { to: "/development/research-innovation/design-thinking", label: "Design" },
               { to: "/development/research-innovation/experiment-management", label: "Experiments" },
@@ -240,6 +303,7 @@ const NAV_GROUPS: GroupItem[] = [
               { to: "/development/research-innovation/research-management", label: "Research" },
               { to: "/development/research-innovation/technology-scouting", label: "Scouting" },
               { to: "/development/research-innovation/trl-assessment", label: "TRL" },
+              { to: "/development/research-innovation/ui-ux-development/new", label: "UI/UX Development" },
               { to: "/development/research-innovation/problem-validation", label: "Validation" },
             ],
           },

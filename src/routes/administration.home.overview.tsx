@@ -42,6 +42,8 @@ const INITIAL_ADMIN_DATA: AdminHomeDashboardData = {
   userStatusSummary: mockUserStatusSummary,
 };
 
+const loadAdministrationHomeData = async () => INITIAL_ADMIN_DATA;
+
 function AdministrationOverviewPage() {
   const dashboardQuery = useQuery({
     queryKey: ["administration", "home", "dashboard"],
@@ -271,7 +273,7 @@ function AdministrationOverviewPage() {
                           cornerRadius={4}
                           stroke="none"
                         >
-                          {data.usersByDepartment.map((d) => (
+                          {data.usersByDepartment.map((d: { name: string; value: number; color: string }) => (
                             <Cell key={d.name} fill={d.color} />
                           ))}
                         </Pie>
@@ -280,7 +282,7 @@ function AdministrationOverviewPage() {
                     <div className="pointer-events-none absolute inset-0 grid place-items-center text-center">
                       <div>
                         <div className="font-display text-[15px] font-bold text-foreground">
-                          {data.usersByDepartment.reduce((sum, d) => sum + d.value, 0)}
+                          {data.usersByDepartment.reduce((sum: number, d: { name: string; value: number; color: string }) => sum + d.value, 0)}
                         </div>
                         <div className="text-[9px] text-muted-foreground uppercase tracking-wider">
                           Total Users
@@ -289,7 +291,7 @@ function AdministrationOverviewPage() {
                     </div>
                   </div>
                   <ul className="w-full space-y-1.5 text-xs">
-                    {data.usersByDepartment.map((d) => (
+                    {data.usersByDepartment.map((d: { name: string; value: number; color: string }) => (
                       <li key={d.name} className="flex items-center justify-between gap-2">
                         <span className="inline-flex min-w-0 items-center gap-1.5 truncate text-muted-foreground">
                           <span

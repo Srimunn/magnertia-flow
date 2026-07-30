@@ -446,11 +446,104 @@
       "_id": "widget_preferences::Priya Sharma",
       "userId": "Priya Sharma",
       "role": "CEO",
-      "pages": {},
+      "pages": {
+        "dashboard": {
+          "instances": [
+            {
+              "theme": "default",
+              "pinned": false,
+              "id": "dash-kpi-revenue",
+              "widgetId": "kpi.total-revenue",
+              "size": "sm"
+            },
+            {
+              "theme": "default",
+              "pinned": false,
+              "id": "dash-kpi-net-profit",
+              "widgetId": "kpi.net-profit",
+              "size": "sm"
+            },
+            {
+              "theme": "default",
+              "pinned": false,
+              "id": "dash-kpi-expenses",
+              "widgetId": "kpi.total-expenses",
+              "size": "sm"
+            },
+            {
+              "theme": "default",
+              "pinned": false,
+              "id": "dash-kpi-cash",
+              "widgetId": "kpi.cash-balance",
+              "size": "sm"
+            },
+            {
+              "theme": "default",
+              "pinned": false,
+              "id": "dash-kpi-current-ratio",
+              "widgetId": "kpi.current-ratio",
+              "size": "sm"
+            },
+            {
+              "theme": "default",
+              "pinned": false,
+              "id": "dash-trend",
+              "widgetId": "chart.revenue-expense-trend",
+              "size": "lg"
+            },
+            {
+              "theme": "default",
+              "pinned": false,
+              "id": "dash-cash-flow",
+              "widgetId": "list.cash-flow-summary",
+              "size": "md",
+              "spanOverride": {
+                "xl": 15,
+                "lg": 3,
+                "md": 3
+              }
+            },
+            {
+              "theme": "default",
+              "pinned": false,
+              "id": "dash-expense-donut",
+              "widgetId": "chart.expense-donut",
+              "size": "md",
+              "spanOverride": {
+                "xl": 15,
+                "lg": 3,
+                "md": 3
+              }
+            },
+            {
+              "theme": "default",
+              "pinned": false,
+              "id": "dash-aging-ar",
+              "widgetId": "chart.aging-receivable",
+              "size": "md"
+            },
+            {
+              "theme": "default",
+              "pinned": false,
+              "id": "dash-recent-txn",
+              "widgetId": "table.recent-transactions",
+              "size": "md"
+            },
+            {
+              "theme": "default",
+              "pinned": false,
+              "id": "dash-insights",
+              "widgetId": "insight.quick-financial",
+              "size": "full"
+            }
+          ],
+          "updatedAt": "2026-07-30T07:25:24.619Z"
+        }
+      },
       "favorites": [],
       "recentlyUsed": [],
       "templates": [],
-      "updatedAt": "2026-07-21T11:58:00.479Z"
+      "updatedAt": "2026-07-30T07:25:24.630Z"
     }
   ]
 }

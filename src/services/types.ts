@@ -8929,6 +8929,1615 @@ export interface MobileDevelopmentRecord {
   auditTrail: MobileDevelopmentAuditEntry[];
 }
 
+/* ===========================================================================
+   API Development Module Interfaces & Types
+   =========================================================================== */
+
+export type ApiDevelopmentStatus = "In Progress" | "In Review" | "Approved" | "Changes Requested" | "Archived";
+
+export type ApiDevelopmentApprovalDecision = "Approved" | "Approved with Conditions" | "Changes Requested" | "Rejected" | "Pending";
+
+export type ApiEndpoint = {
+  id: string;
+  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+  path: string;
+  name: string;
+  description: string;
+  authRequired: boolean;
+  status: "Stable" | "Beta" | "Deprecated";
+  requestSchemaName: string;
+  requestSchemaSize: string;
+  responseSchemaName: string;
+  responseSchemaSize: string;
+  sampleResponse: string;
+};
+
+export type ApiSecurityPolicy = {
+  authMethod: string;
+  authorizationModel: string;
+  tokenExpiryMinutes: number;
+  apiKeyManagement: boolean;
+  rbacEnabled: boolean;
+  rateLimit: string;
+  securityScore: number;
+};
+
+export type ApiIntegrationConfig = {
+  primaryDataSource: string;
+  databaseConnection: string;
+  erpIntegration: boolean;
+  cloudIntegration: boolean;
+  thirdPartyIntegration: boolean;
+  webhookIntegration: boolean;
+  integrationScore: number;
+};
+
+export type ApiDocumentationInfo = {
+  openApiSpecName: string;
+  openApiSpecSize: string;
+  swaggerDocName: string;
+  swaggerDocSize: string;
+  sampleRequestsName: string;
+  sampleRequestsSize: string;
+  sampleResponsesName: string;
+  sampleResponsesSize: string;
+  errorCodesCount: number;
+  sdkLanguages: string[];
+  documentationScore: number;
+};
+
+export type ApiTestSummary = {
+  unitTesting: "Completed" | "In Progress" | "Pending";
+  integrationTesting: "Completed" | "In Progress" | "Pending";
+  loadTesting: "Completed" | "In Progress" | "Pending";
+  securityTesting: "Completed" | "In Progress" | "Pending";
+  contractTesting: "Completed" | "In Progress" | "Pending";
+  testCoveragePercentage: number;
+  validationScore: number;
+};
+
+export type ApiDeploymentConfig = {
+  cicdPipeline: string;
+  apiGateway: string;
+  environment: string;
+  versionStrategy: string;
+  deprecationPolicy: string;
+  releaseStatus: string;
+  deploymentReadinessScore: number;
+};
+
+export type ApiMonitoringSummary = {
+  apiMonitoringTool: string;
+  requestAnalyticsEnabled: boolean;
+  errorMonitoringEnabled: boolean;
+  latencyMonitoringEnabled: boolean;
+  slaMonitoringEnabled: boolean;
+  usageDashboardEnabled: boolean;
+  operationalScore: number;
+  requestTrend7Days: { day: string; requests: number }[];
+};
+
+export type ApiAiAssessment = {
+  aiApiDesignScore: number;
+  aiSecurityReview: number;
+  aiPerformanceAnalysis: number;
+  aiScalabilityAnalysis: number;
+  aiDocumentationReview: number;
+  aiImprovementSuggestionsCount: number;
+  aiOverallScore: number;
+  recommendations: string[];
+};
+
+export type ApiReadinessSummary = {
+  designReadiness: number;
+  securityReadiness: number;
+  testingReadiness: number;
+  deploymentReadiness: number;
+  overallApiScore: number;
+  recommendation: string;
+};
+
+export type ApiAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadedBy: string;
+  date: string;
+  url: string;
+};
+
+export type ApiReviewer = {
+  role: string;
+  person: string;
+  avatar: string;
+  decision: ApiDevelopmentApprovalDecision;
+  date: string;
+  comments: string;
+};
+
+export type ApiAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar: string;
+  action: string;
+  details: string;
+  ipAddress: string;
+};
+
+export type ApiDevelopmentFormInput = {
+  apiName: string;
+  businessObjective: string;
+  functionalDescription: string;
+  apiCategory: string;
+  deploymentEnvironment: string;
+  apiStyle: string;
+  protocol: string;
+  endpointStructure: string;
+  uriNamingConvention: string;
+  authMethod: string;
+  authorizationModel: string;
+  tokenExpiryMinutes: number;
+  rateLimit: string;
+  primaryDataSource: string;
+  databaseConnection: string;
+  cicdPipeline: string;
+  apiGateway: string;
+  versionStrategy: string;
+  deprecationPolicy: string;
+  recommendation: string;
+};
+
+export type ApiDevelopmentRecord = {
+  id: string;
+  apiDevelopmentId: string; // e.g. API-2024-0017
+  formCode: string; // e.g. APF-2024-25
+  apiProjectName: string; // e.g. EV Charging APIs
+  apiVersion: string; // e.g. v2.1.0
+  workflowStatus: ApiDevelopmentStatus;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  // Linked references
+  linkedProductId: string; // e.g. Smart EV Platform
+  linkedSoftwareDevId: string; // e.g. SWD-2024-0012
+  linkedCloudPlatformId: string; // e.g. CLD-2024-0001
+  linkedMobileAppDevId: string; // e.g. MAD-2024-0005
+  linkedEmbeddedSystemsDevId: string; // e.g. EMD-2024-0004
+  apiArchitectName: string;
+  apiArchitectAvatar: string;
+  businessUnit: string;
+
+  // Overview Card Data
+  apiName: string;
+  businessObjective: string;
+  functionalDescription: string;
+  consumerApplications: string[];
+  apiCategory: string;
+  deploymentEnvironment: string;
+  developmentStatus: string;
+
+  // Section Scores & Sub-Objects
+  designReadinessScore: number;
+  securityScore: number;
+  integrationScore: number;
+  documentationScore: number;
+  validationScore: number;
+  deploymentReadinessScore: number;
+  operationalScore: number;
+  aiOverallScore: number;
+  overallApiScore: number;
+
+  endpoints: ApiEndpoint[];
+  securityPolicy: ApiSecurityPolicy;
+  integrationConfig: ApiIntegrationConfig;
+  documentationInfo: ApiDocumentationInfo;
+  testSummary: ApiTestSummary;
+  deploymentConfig: ApiDeploymentConfig;
+  monitoringSummary: ApiMonitoringSummary;
+  aiAssessment: ApiAiAssessment;
+  readinessSummary: ApiReadinessSummary;
+  attachments: ApiAttachment[];
+  reviewers: ApiReviewer[];
+  approvalDecision?: ApiDevelopmentApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+  auditTrail: ApiAuditEntry[];
+};
+
+/* ===========================================================================
+   AI Model Development Module Interfaces & Types
+   =========================================================================== */
+
+export type AiModelStatus = "In Progress" | "In Review" | "Approved" | "Changes Requested" | "Archived";
+
+export type AiModelApprovalDecision = "Approved" | "Approved with Conditions" | "Changes Requested" | "Rejected" | "Pending";
+
+export type AiDatasetConfig = {
+  datasetName: string;
+  datasetSource: string;
+  datasetSize: string;
+  dataFormat: string;
+  trainDataset: string;
+  valDataset: string;
+  testDataset: string;
+  dataQualityScore: number;
+  completeness: number;
+  consistency: number;
+  accuracy: number;
+  timeliness: number;
+  uniqueness: number;
+};
+
+export type AiFeatureConfig = {
+  selectionMethod: string;
+  extraction: string;
+  scaling: string;
+  preprocessing: string;
+  missingValueStrategy: string;
+  featureReadinessScore: number;
+};
+
+export type AiArchitectureConfig = {
+  aiCategory: string;
+  modelType: string;
+  framework: string;
+  language: string;
+  hyperparameters: string;
+  modelDesignScore: number;
+};
+
+export type AiTrainingMetrics = {
+  strategy: string;
+  optimizer: string;
+  lossFunction: string;
+  batchSize: number;
+  epochs: number;
+  gpuUtilization: string;
+  trainingStatus: string;
+  trainingScore: number;
+  learningCurve: { epoch: number; trainLoss: number; valLoss: number }[];
+};
+
+export type AiEvaluationMetrics = {
+  accuracy: number;
+  precision: number;
+  recall: number;
+  f1Score: number;
+  rocAuc: number;
+  confusionMatrix: number[][];
+  evaluationScore: number;
+};
+
+export type AiGovernancePolicy = {
+  explainabilityMethod: string;
+  biasDetection: string;
+  fairnessAssessment: string;
+  privacyCompliance: string;
+  ethicalReview: string;
+  riskClassification: string;
+  governanceScore: number;
+};
+
+export type AiMlopsDeployment = {
+  platform: string;
+  containerization: string;
+  registry: string;
+  cicdPipeline: string;
+  monitoringPlatform: string;
+  inferenceEndpoint: string;
+  deploymentStatus: string;
+  deploymentReadinessScore: number;
+};
+
+export type AiModelAssessmentInfo = {
+  aiPerformanceScore: number;
+  aiRobustnessReview: string;
+  aiSecurityReview: string;
+  aiDriftPrediction: string;
+  aiOptimizationSuggestions: string;
+  aiExplainabilityReview: string;
+  aiOverallScore: number;
+};
+
+export type AiReadinessSummaryInfo = {
+  datasetReadiness: number;
+  modelReadiness: number;
+  deploymentReadiness: number;
+  governanceReadiness: number;
+  overallAiModelScore: number;
+  recommendation: string;
+};
+
+export type AiAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadedBy: string;
+  date: string;
+  url: string;
+};
+
+export type AiReviewer = {
+  role: string;
+  person: string;
+  avatar: string;
+  decision: AiModelApprovalDecision;
+  date: string;
+  comments: string;
+};
+
+export type AiAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar: string;
+  action: string;
+  details: string;
+  ipAddress: string;
+};
+
+export type AiModelFormInput = {
+  aiProjectName: string;
+  businessObjective: string;
+  aiUseCase: string;
+  problemStatement: string;
+  expectedBusinessOutcome: string;
+  developmentStatus: string;
+  datasetName: string;
+  modelType: string;
+  framework: string;
+  hyperparameters: string;
+  deploymentPlatform: string;
+  inferenceEndpoint: string;
+  recommendation: string;
+};
+
+export type AiModelRecord = {
+  id: string;
+  aiModelDevelopmentId: string; // e.g. AIMD-2024-0018
+  formCode: string; // e.g. AMDF-2024-25
+  aiProjectName: string; // e.g. EV Demand Forecasting Model
+  modelVersion: string; // e.g. v1.2.0
+  workflowStatus: AiModelStatus;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  // Linked references
+  linkedProductId: string; // e.g. Smart EV Platform
+  linkedCloudPlatformId: string; // e.g. CLD-2024-0001
+  linkedDataEngineeringId: string; // e.g. DE-2024-0005
+  linkedSoftwareDevId: string; // e.g. SWD-2024-0012
+  linkedApiDevId: string; // e.g. API-2024-0017
+  aiLeadEngineerName: string;
+  aiLeadEngineerAvatar: string;
+  businessUnit: string;
+
+  // Overview Card Data
+  businessObjective: string;
+  aiUseCase: string;
+  targetUsers: string[];
+  problemStatement: string;
+  expectedBusinessOutcome: string;
+  developmentStatus: string;
+
+  // Section Scores & Sub-Objects
+  datasetReadinessScore: number;
+  featureReadinessScore: number;
+  modelDesignScore: number;
+  trainingScore: number;
+  evaluationScore: number;
+  governanceScore: number;
+  deploymentReadinessScore: number;
+  aiOverallScore: number;
+  overallAiModelScore: number;
+
+  datasetConfig: AiDatasetConfig;
+  featureConfig: AiFeatureConfig;
+  architectureConfig: AiArchitectureConfig;
+  trainingMetrics: AiTrainingMetrics;
+  evaluationMetrics: AiEvaluationMetrics;
+  governancePolicy: AiGovernancePolicy;
+  mlopsDeployment: AiMlopsDeployment;
+  aiAssessment: AiModelAssessmentInfo;
+  readinessSummary: AiReadinessSummaryInfo;
+  attachments: AiAttachment[];
+  reviewers: AiReviewer[];
+  approvalDecision?: AiModelApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+  auditTrail: AiAuditEntry[];
+};
+
+// ---------------------------------------------------------------------------
+// Cloud Platform Development Module Types
+// ---------------------------------------------------------------------------
+
+export type CloudPlatformStatus = "In Progress" | "In Review" | "Approved" | "Changes Requested" | "Archived";
+export type CloudPlatformApprovalDecision = "Approved" | "Approved with Conditions" | "Changes Requested" | "Rejected" | "Pending";
+
+export type CloudArchitectureConfig = {
+  architectureStyle: string;
+  deploymentModel: string;
+  computePlatform: string;
+  storageArchitecture: string;
+  networkTopology: string;
+  loadBalancers: string;
+  apiGateway: string;
+  serviceMesh: string;
+  drStrategy: string;
+  architectureStatus: string;
+  architectureReadinessScore: number;
+};
+
+export type CloudServiceItem = {
+  name: string;
+  category: string;
+  status: "Active" | "Configured font-semibold" | "Pending";
+  provider: string;
+  score: number;
+};
+
+export type CloudServicesConfig = {
+  apiGateway: string;
+  authenticationService: string;
+  authorizationService: string;
+  notificationService: string;
+  messagingQueue: string;
+  objectStorage: string;
+  fileStorage: string;
+  iotDeviceServices: string;
+  secretsManagement: string;
+  serviceDiscovery: string;
+  serviceReadinessScore: number;
+  servicesList: CloudServiceItem[];
+};
+
+export type CloudDatabaseConfig = {
+  primaryDatabase: string;
+  cachePlatform: string;
+  dataWarehouse: string;
+  backupStrategy: string;
+  disasterRecovery: string;
+  replicationStrategy: string;
+  storageAnalytics: string;
+  dataRetentionPolicy: string;
+  dbScalingStrategy: string;
+  dataPlatformScore: number;
+};
+
+export type CloudSecurityConfig = {
+  identityProvider: string;
+  authenticationMethod: string;
+  authorizationModel: string;
+  oauthProtocol: string;
+  oidcProvider: string;
+  rbacPolicy: string;
+  encryptionStandard: string;
+  secretsManager: string;
+  certificateManagement: string;
+  complianceStandards: string[];
+  securityScore: number;
+};
+
+export type CloudDevOpsConfig = {
+  infrastructureAsCode: string;
+  containerPlatform: string;
+  kubernetesCluster: string;
+  cicdPipeline: string;
+  containerRegistry: string;
+  monitoringPlatform: string;
+  loggingPlatform: string;
+  terraformVersion: string;
+  gitOpsTool: string;
+  deploymentStatus: string;
+  infrastructureReadinessScore: number;
+};
+
+export type CloudScalabilityMetrics = {
+  autoScalingStrategy: string;
+  loadBalancingType: string;
+  cdnIntegration: string;
+  highAvailability: string;
+  performanceBenchmark: string;
+  capacityPlanning: string;
+  latencyAvgMs: number;
+  throughputTps: number;
+  scalabilityScore: number;
+};
+
+export type CloudMonitoringConfig = {
+  applicationMonitoring: string;
+  infrastructureMonitoring: string;
+  alertManagement: string;
+  incidentResponsePlan: string;
+  slaMonitoring: string;
+  operationalDashboard: string;
+  uptime30DaysPct: number;
+  activeAlertsCount: number;
+  incidentsCount: number;
+  operationsReadinessScore: number;
+};
+
+export type CloudAiAssessmentInfo = {
+  aiArchitectureScore: number;
+  aiCostOptimizationScore: number;
+  aiPerformanceOptimizationScore: number;
+  aiSecurityAssessmentScore: number;
+  aiCapacityPredictionScore: number;
+  aiReliabilityAnalysisScore: number;
+  aiOverallCloudScore: number;
+  aiSuggestions: string[];
+};
+
+export type CloudReadinessSummaryInfo = {
+  architectureReadiness: number;
+  securityReadiness: number;
+  infrastructureReadiness: number;
+  operationsReadiness: number;
+  performanceReadiness: number;
+  overallCloudPlatformScore: number;
+  recommendation: string;
+  riskSummary: string;
+};
+
+export type CloudAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadedBy: string;
+  date: string;
+  url: string;
+};
+
+export type CloudReviewer = {
+  role: string;
+  person: string;
+  avatar: string;
+  decision: CloudPlatformApprovalDecision;
+  date: string;
+  comments: string;
+};
+
+export type CloudAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar: string;
+  action: string;
+  details: string;
+  ipAddress: string;
+};
+
+export type CloudPlatformFormInput = {
+  cloudProjectName: string;
+  businessPurpose: string;
+  platformObjective: string;
+  targetUsers: string[];
+  deploymentModel: string;
+  computePlatform: string;
+  primaryDatabase: string;
+  identityProvider: string;
+  containerPlatform: string;
+  recommendation: string;
+};
+
+export type CloudPlatformRecord = {
+  id: string;
+  cloudPlatformDevelopmentId: string; // e.g. CLD-2024-0001
+  formCode: string; // e.g. CLD-F-2024-25
+  cloudProjectName: string; // e.g. Magnertia Cloud Platform
+  platformVersion: string; // e.g. v2.1.0
+  workflowStatus: CloudPlatformStatus;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  // Linked references
+  linkedSoftwareDevId: string; // e.g. SWD-2024-0012
+  linkedMobileDevId: string; // e.g. MAD-2024-0005
+  linkedEmbeddedDevId: string; // e.g. EMD-2024-0003
+  linkedProductArchitectureId: string; // e.g. PA-2024-0011
+  linkedProductId: string; // e.g. Smart EV Platform
+  businessUnit: string;
+  cloudArchitectName: string;
+  cloudArchitectAvatar: string;
+
+  // Overview Card Data
+  platformName: string;
+  platformObjective: string;
+  businessPurpose: string;
+  targetUsers: string[];
+  supportedProducts: string;
+  slaTarget: string;
+  developmentStatus: string;
+
+  // Section Scores & Configs
+  architectureReadinessScore: number;
+  securityScore: number;
+  infrastructureReadinessScore: number;
+  operationsReadinessScore: number;
+  performanceScore: number;
+  overallCloudPlatformScore: number;
+
+  architectureConfig: CloudArchitectureConfig;
+  servicesConfig: CloudServicesConfig;
+  dataPlatformConfig: CloudDatabaseConfig;
+  securityConfig: CloudSecurityConfig;
+  devOpsConfig: CloudDevOpsConfig;
+  scalabilityMetrics: CloudScalabilityMetrics;
+  monitoringConfig: CloudMonitoringConfig;
+  aiAssessment: CloudAiAssessmentInfo;
+  readinessSummary: CloudReadinessSummaryInfo;
+  attachments: CloudAttachment[];
+  reviewers: CloudReviewer[];
+  approvalDecision?: CloudPlatformApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+  auditTrail: CloudAuditEntry[];
+};
+
+// ---------------------------------------------------------------------------
+// Cybersecurity Engineering Module Types
+// ---------------------------------------------------------------------------
+
+export type CybersecurityStatus = "In Progress" | "In Review" | "Approved" | "Changes Requested" | "Archived";
+export type CybersecurityApprovalDecision = "Approved" | "Approved with Conditions" | "Changes Requested" | "Rejected" | "Pending";
+
+export type CybersecurityThreatModelConfig = {
+  method: string; // e.g. STRIDE
+  assetsIdentified: number;
+  attackSurface: string; // e.g. High
+  threatScenariosCount: number;
+  riskRating: string; // e.g. High
+  securityControlsProposed: number;
+  threatModelScore: number; // e.g. 88
+};
+
+export type CybersecurityArchitectureConfig = {
+  securityArchitecture: string; // e.g. architecture_v1.2.pdf
+  zeroTrustApplied: boolean;
+  networkSegmentation: string;
+  secureCommunication: string; // e.g. TLS 1.3
+  encryptionStandard: string; // e.g. AES-256
+  keyManagement: string; // e.g. AWS KMS
+  architectureSecurityScore: number; // e.g. 92
+};
+
+export type CybersecurityIamConfig = {
+  authenticationMethod: string; // e.g. OAuth 2.0 / OIDC
+  mfaEnabled: boolean;
+  authorizationModel: string; // e.g. RBAC
+  roleBasedAccessControl: boolean;
+  certificateManagement: string; // e.g. AES ACM
+  secretsManagement: string; // e.g. HashiCorp Vault
+  iamReadinessScore: number; // e.g. 90
+};
+
+export type CybersecuritySecureDevConfig = {
+  secureCodingStandard: string; // e.g. OWASP ASVS
+  sastStatus: string; // e.g. Completed
+  scaStatus: string; // e.g. Completed
+  dependencyScanning: boolean;
+  codeReviewCompleted: boolean;
+  vulnerabilitiesFoundCount: number; // e.g. 4
+  secureDevelopmentScore: number; // e.g. 89
+};
+
+export type CybersecurityTestingConfig = {
+  dastStatus: string; // e.g. Completed
+  penetrationTesting: string; // e.g. Completed
+  apiSecurityTesting: string; // e.g. Completed
+  firmwareSecurityTesting: string; // e.g. Completed
+  iotSecurityTesting: string; // e.g. Completed
+  complianceValidation: string; // e.g. Passed
+  validationScore: number; // e.g. 93
+};
+
+export type CybersecurityMonitoringConfig = {
+  siemPlatform: string; // e.g. Microsoft Sentinel
+  logManagement: string; // e.g. Azure Log Analytics
+  threatIntelligence: string; // e.g. Recorded Future
+  incidentResponsePlan: string; // e.g. incident_response_v1.0.pdf
+  vulnerabilityManagement: string; // e.g. Qualys VMDR
+  securityDashboardStatus: string;
+  monitoringScore: number; // e.g. 91
+};
+
+export type CybersecurityComplianceConfig = {
+  applicableStandards: string[]; // e.g. ["ISO 27001", "NIST CSF", "OWASP ASVS"]
+  privacyCompliance: string; // e.g. GDPR
+  riskAssessmentFile: string; // e.g. risk_assessment_v1.pdf
+  auditSchedule: string; // e.g. Quarterly
+  complianceStatus: string; // e.g. Compliant
+  residualRisk: string; // e.g. Low
+  governanceScore: number; // e.g. 93
+};
+
+export type CybersecurityAiAssessmentInfo = {
+  aiThreatDetectionScore: number; // 92
+  aiVulnerabilityAnalysis: string; // Low risk detected
+  aiSecurityRecommendationsCount: number; // 12
+  aiComplianceReview: string; // Compliant
+  aiRiskPrediction: string; // Low risk for next 90 days
+  aiOverallSecurityScore: number; // 92
+};
+
+export type CybersecurityReadinessSummaryInfo = {
+  threatReadiness: number; // 90
+  architectureSecurityScore: number; // 92
+  secureDevelopmentScore: number; // 89
+  complianceScore: number; // 93
+  overallCybersecurityScore: number; // 91
+  recommendation: string; // Proceed to Production
+};
+
+export type CybersecurityAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadedBy: string;
+  date: string;
+  url: string;
+};
+
+export type CybersecurityReviewer = {
+  role: string;
+  person: string;
+  avatar: string;
+  decision: CybersecurityApprovalDecision;
+  date: string;
+  comments: string;
+};
+
+export type CybersecurityAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar: string;
+  action: string;
+  details: string;
+  ipAddress: string;
+};
+
+export type CybersecurityFormInput = {
+  securityProjectName: string;
+  businessObjective: string;
+  securityScope: string;
+  productCategory: string;
+  criticalityLevel: string;
+  targetDeployment: string[];
+  recommendation: string;
+};
+
+export type CybersecurityRecord = {
+  id: string;
+  cybersecurityEngineeringId: string; // e.g. CSE-2024-0018
+  formCode: string; // e.g. CSEF-2024-25
+  securityProjectName: string; // e.g. Smart EV Charging Security
+  securityVersion: string; // e.g. v1.2.0
+  workflowStatus: CybersecurityStatus;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  // Linked references
+  linkedProductId: string; // e.g. Smart EV Charger
+  linkedSoftwareDevId: string; // e.g. SWD-2024-0012
+  linkedCloudPlatformDevId: string; // e.g. CLD-2024-0001
+  linkedEmbeddedSystemsDevId: string; // e.g. EMD-2024-0013
+  linkedApiDevId: string; // e.g. API-2024-0011
+  linkedAiModelDevId: string; // e.g. AIMD-2024-0007
+  linkedIotDevId: string; // e.g. IOT-2024-0009
+  securityArchitectName: string;
+  securityArchitectAvatar: string;
+
+  // Overview Card Data
+  businessObjective: string;
+  securityScope: string;
+  productCategory: string;
+  criticalityLevel: string;
+  targetDeployment: string[];
+  developmentStatus: string;
+
+  // Section Scores & Sub-Objects
+  threatReadinessScore: number;
+  architectureSecurityScore: number;
+  iamReadinessScore: number;
+  secureDevelopmentScore: number;
+  validationScore: number;
+  monitoringScore: number;
+  governanceScore: number;
+  overallCybersecurityScore: number;
+
+  threatModelConfig: CybersecurityThreatModelConfig;
+  architectureConfig: CybersecurityArchitectureConfig;
+  iamConfig: CybersecurityIamConfig;
+  secureDevConfig: CybersecuritySecureDevConfig;
+  testingConfig: CybersecurityTestingConfig;
+  monitoringConfig: CybersecurityMonitoringConfig;
+  complianceConfig: CybersecurityComplianceConfig;
+  aiAssessment: CybersecurityAiAssessmentInfo;
+  readinessSummary: CybersecurityReadinessSummaryInfo;
+  attachments: CybersecurityAttachment[];
+  reviewers: CybersecurityReviewer[];
+  approvalDecision?: CybersecurityApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+  auditTrail: CybersecurityAuditEntry[];
+};
+
+// ---------------------------------------------------------------------------
+// Simulation & Analysis Module Types
+// ---------------------------------------------------------------------------
+
+export type SimulationStatus = "In Progress" | "In Review" | "Approved" | "Changes Requested" | "Archived";
+export type SimulationApprovalDecision = "Approved" | "Approved with Conditions" | "Revision Required" | "Rejected" | "Pending";
+
+export type SimulationModelPrepConfig = {
+  cadModel: string; // e.g. W-EVSE_Housing_v2.step
+  materialLibrary: string; // e.g. Aluminium 6061-T6
+  meshStrategy: string; // e.g. Tetrahedral
+  totalElements: string; // e.g. 1,245,876
+  meshQuality: string; // e.g. 0.92 (Excellent)
+  meshPreviewStatus: string;
+  modelCompletenessScore: number; // 90
+};
+
+export type SimulationBoundaryConditionsConfig = {
+  loadConditions: string[]; // e.g. ["Weight", "Mounting Load", "Wind Load"]
+  constraints: string; // e.g. Fixed Support (Base)
+  environmentalConditions: string; // e.g. Ambient: 45 °C, Convection: 25 W/m²K
+  operatingScenario: string; // e.g. Continuous Operation (Max Load)
+  boundaryValidationStatus: string; // e.g. Validated
+  boundaryConditionScore: number; // 92
+};
+
+export type SimulationConfigurationConfig = {
+  solverType: string; // e.g. ANSYS Mechanical
+  solverVersion: string; // e.g. 2024 R1
+  analysisMethod: string; // e.g. Transient Thermal + Static Structural
+  timeStep: string; // e.g. 0.02 sec
+  convergenceCriteria: string; // e.g. Energy (1e-6)
+  computingPlatform: string; // e.g. HPC Cluster (GPU)
+  configurationScore: number; // 93
+};
+
+export type SimulationAnalysisCategoriesConfig = {
+  structuralAnalysisStatus: string; // Completed
+  thermalAnalysisStatus: string; // Completed
+  cfdAnalysisStatus: string; // Completed
+  electromagneticAnalysisStatus: string; // Not Required
+  dynamicAnalysisStatus: string; // Completed
+  fatigueAnalysisStatus: string; // Not Required
+  multiPhysicsAnalysisStatus: string; // Completed
+  analysisCompletionScore: number; // 95
+};
+
+export type SimulationResultsConfig = {
+  maxStressVonMises: string; // e.g. 78.6 MPa
+  maxDisplacement: string; // e.g. 0.42 mm
+  maxTemperature: string; // e.g. 78.4 °C
+  heatTransferCoefficient: string; // e.g. 25 W/m²K
+  efficiencyPrediction: string; // e.g. 94.2%
+  correlationWithPrototype: string; // e.g. 96.3%
+  validationScore: number; // 93
+};
+
+export type SimulationOptimizationConfig = {
+  designOptimization: string; // Completed
+  topologyOptimization: string; // Not Required
+  weightReductionPct: number; // 8.7%
+  performanceImprovementPct: number; // 11.3%
+  costOptimizationPct: number; // 6.4%
+  optimizationRecommendations: string; // e.g. Add ribs near mounting region, Optimize fin geometry for better thermal dissipation.
+  optimizationScore: number; // 89
+  iterationsData: { iteration: string; weightKg: number; maxTempC: number }[];
+};
+
+export type SimulationAiAssessmentInfo = {
+  aiSimulationReview: string; // Model accurate with high confidence.
+  aiDesignValidation: string; // All critical zones validated successfully.
+  aiPerformancePrediction: string; // Thermal margin is sufficient (18.6 °C).
+  aiFailurePrediction: string; // Low risk of thermal stress failure.
+  aiOptimizationSuggestions: string; // Improve airflow path and fin spacing.
+  aiEngineeringScore: number; // 92
+};
+
+export type SimulationReadinessSummaryInfo = {
+  modelReadiness: number; // 90
+  simulationAccuracy: number; // 92
+  validationScore: number; // 93
+  optimizationScore: number; // 89
+  overallSimulationScore: number; // 91
+  recommendation: string; // Proceed to Prototype Development
+};
+
+export type SimulationAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadedBy: string;
+  date: string;
+  url: string;
+};
+
+export type SimulationReviewer = {
+  role: string;
+  person: string;
+  avatar: string;
+  decision: SimulationApprovalDecision;
+  date: string;
+  comments: string;
+};
+
+export type SimulationAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar: string;
+  action: string;
+  details: string;
+  ipAddress: string;
+};
+
+export type SimulationFormInput = {
+  simulationProjectName: string;
+  simulationType: string;
+  engineeringDomain: string;
+  simulationPurpose: string;
+  operatingScenario: string;
+  targetProduct: string;
+  recommendation: string;
+};
+
+export type SimulationRecord = {
+  id: string;
+  simulationId: string; // e.g. SIM-2024-0027
+  formCode: string; // e.g. SIMF-2024-25
+  simulationProjectName: string; // e.g. W-EVSE Thermal & Structural Analysis
+  simulationVersion: string; // e.g. v2.1.0
+  workflowStatus: SimulationStatus;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  // Linked references
+  linkedProductId: string; // e.g. Autonomous W-EVSE
+  linkedMechanicalDevId: string; // e.g. MECH-2024-0015
+  linkedElectricalDevId: string; // e.g. ELEC-2024-0012
+  linkedElectronicsDevId: string; // e.g. ELEC-2024-0018
+  linkedEmbeddedDevId: string; // e.g. EMBD-2024-0011
+  simulationEngineerName: string;
+  simulationEngineerAvatar: string;
+
+  // Overview Data
+  simulationType: string;
+  engineeringDomain: string;
+  simulationPurpose: string;
+  developmentStage: string;
+  projectPriority: string;
+  solver: string;
+  analysisType: string;
+
+  // Section Scores & Sub-Objects
+  modelReadinessScore: number;
+  configurationScore: number;
+  boundaryConditionScore: number;
+  analysisCompletionScore: number;
+  validationScore: number;
+  optimizationScore: number;
+  aiEngineeringScore: number;
+  overallSimulationScore: number;
+
+  modelPrepConfig: SimulationModelPrepConfig;
+  boundaryConditionsConfig: SimulationBoundaryConditionsConfig;
+  configurationConfig: SimulationConfigurationConfig;
+  analysisCategoriesConfig: SimulationAnalysisCategoriesConfig;
+  resultsConfig: SimulationResultsConfig;
+  optimizationConfig: SimulationOptimizationConfig;
+  aiAssessment: SimulationAiAssessmentInfo;
+  readinessSummary: SimulationReadinessSummaryInfo;
+  attachments: SimulationAttachment[];
+  reviewers: SimulationReviewer[];
+  approvalDecision?: SimulationApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+  auditTrail: SimulationAuditEntry[];
+
+  // Digital Twin status
+  digitalTwinStatus: string;
+  digitalTwinLastUpdated: string;
+};
+
+// ---------------------------------------------------------------------------
+// UI/UX Development Module Types
+// ---------------------------------------------------------------------------
+
+export type UiUxDevelopmentStatus = "In Progress" | "In Review" | "Approved" | "Changes Requested" | "Archived";
+export type UiUxDevelopmentApprovalDecision = "Approved" | "Approved with Conditions" | "Changes Requested" | "Rejected" | "Pending";
+
+export type UiUxUserPersona = {
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  age: number;
+  location: string;
+  bio: string;
+  goals: string[];
+  painPoints: string[];
+  techSavviness: number;
+  quote: string;
+};
+
+export type UiUxWireframeScreen = {
+  id: string;
+  title: string;
+  category?: string;
+  screenType?: string;
+  fidelity?: string;
+  responsiveBreakpoints?: string[];
+  status: string;
+  previewUrl: string;
+  notes?: string;
+  type?: string;
+  screenFlow?: string;
+  version?: string;
+};
+
+export type UiUxAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadedBy?: string;
+  date: string;
+  url?: string;
+  version?: string;
+};
+
+export type UiUxWcagAudit = {
+  id: string;
+  criterion?: string;
+  level?: string;
+  status: string;
+  impact?: string;
+  notes?: string;
+  criteria?: string;
+  wcagLevel?: string;
+};
+
+export type UiUxReviewer = {
+  role: string;
+  person: string;
+  avatar: string;
+  decision: UiUxDevelopmentApprovalDecision;
+  date: string;
+  comments: string;
+};
+
+export type UiUxAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar: string;
+  action: string;
+  details: string;
+  ipAddress: string;
+};
+
+export type UiUxDevelopmentFormInput = {
+  uiUxProjectName: string;
+  productName: string;
+  projectObjective: string;
+  businessGoals: string;
+  targetPlatforms: string[];
+  designStatus: string;
+  researchReadinessScore?: number;
+  uxReadinessScore?: number;
+  uiReadinessScore?: number;
+  accessibilityScore?: number;
+  developmentReadinessScore?: number;
+  overallDesignScore?: number;
+  lastUpdated?: string;
+};
+
+export type UiUxDevelopmentRecord = {
+  id: string;
+  uiUxDevelopmentId: string;
+  formCode: string;
+  uiUxProjectName: string;
+  designVersion: string;
+  workflowStatus: UiUxDevelopmentStatus;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+  linkedPrdId: string;
+  linkedPrdTitle: string;
+  linkedSoftwareDevId: string;
+  linkedSoftwareDevTitle: string;
+  linkedMobileAppDevId: string;
+  linkedMobileAppDevTitle: string;
+  linkedProductArchitectureId: string;
+  linkedProductArchitectureTitle: string;
+  linkedProductId: string;
+  linkedProductName: string;
+  businessUnit: string;
+  designerId: string;
+  designerName: string;
+  designerAvatar: string;
+
+  // Overview
+  productName: string;
+  projectObjective: string;
+  businessGoals: string;
+  targetPlatforms: string[];
+  designStatus: string;
+
+  // Research
+  researchMethods: string[];
+  personasCount: number;
+  userJourneysCount: number;
+  painPointsCount: number;
+  customerFeedbackCount: number;
+  customerFeedbackScore: number;
+  competitorsAnalyzed: number;
+  personas: UiUxUserPersona[];
+  painPoints?: string[];
+
+  // Information Architecture & UX
+  informationArchitectureNodesCount: number;
+  userFlowsCount: number;
+  wireframesCount: number;
+  interactivePrototypesCount: number;
+  wireframeScreens: UiUxWireframeScreen[];
+
+  // Design System & UI
+  colorPaletteCount: number;
+  typographyStylesCount: number;
+  reusableComponentsCount: number;
+  designTokensCount: number;
+  figmaLibrarySynced: boolean;
+  figmaLibraryVersion: string;
+
+  // Accessibility & Usability
+  wcagComplianceLevel: string;
+  wcagPassRatePct: number;
+  usabilityScore: number;
+  accessibilityAuditsCount: number;
+  wcagAudits: UiUxWcagAudit[];
+
+  // Handoff & Dev Readiness
+  handoffStatus: string;
+  assetExportFormat: string[];
+  componentSpecsDocumented: boolean;
+
+  // AI Design Assessment
+  aiDesignReview: string;
+  aiAccessibilityCheck: string;
+  aiUsabilityPrediction: string;
+
+  // Scores & Helper Properties
+  researchReadinessScore: number;
+  uxReadinessScore: number;
+  uiReadinessScore: number;
+  accessibilityScore: number;
+  developmentReadinessScore: number;
+  overallDesignScore: number;
+
+  architectureReadinessScore?: number;
+  uxScore?: number;
+  visualDesignScore?: number;
+  designSystemVersion?: string;
+  userSatisfactionScore?: number;
+  aiOverallDesignScore?: number;
+  aiUxScore?: number;
+  aiAccessibilityReview?: number | string;
+  aiConsistencyAnalysis?: number | string;
+  aiUserJourneyAnalysis?: number | string;
+  aiVisualDesignReview?: number | string;
+  aiSuggestions?: string[];
+  recommendation?: string;
+  userJourneys?: { id: string; title: string; satisfactionScore: number; steps: string[]; keyTakeaway: string }[];
+  wireframes?: UiUxWireframeScreen[];
+
+  attachments: UiUxAttachment[];
+  reviewers: UiUxReviewer[];
+  approvalDecision?: UiUxDevelopmentApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+  auditTrail: UiUxAuditEntry[];
+};
+
+// ---------------------------------------------------------------------------
+// Testing & Validation Module Types
+// ---------------------------------------------------------------------------
+
+export type TestingStatus = "In Progress" | "In Review" | "Approved" | "Changes Requested" | "Archived";
+export type TestingApprovalDecision = "Approved" | "Approved with Conditions" | "Revision Required" | "On Hold" | "Rejected" | "Pending";
+
+export type TestCaseRecord = {
+  id: string;
+  testCaseId: string; // e.g. TC-FUNC-001
+  title: string; // e.g. Charging Session Initialization
+  category: string; // e.g. Functional
+  status: string; // e.g. Passed, Running, Failed, Ready
+  expectedResult: string;
+  actualResult: string;
+  executionTime: string;
+  testerName: string;
+};
+
+export type EquipmentRecord = {
+  id: string;
+  equipmentId: string; // e.g. EQ-OSC-04
+  name: string; // e.g. Keysight 4-Channel Oscilloscope
+  model: string; // e.g. InfiniiVision 3000G
+  calibrationStatus: string; // e.g. Validated, Expiry Warning
+  calibrationExpiry: string; // e.g. 15 Oct 2024
+  assignedLab: string;
+};
+
+export type DefectRecord = {
+  id: string;
+  defectId: string; // e.g. DEF-2024-003
+  title: string;
+  severity: string; // e.g. Minor, Major, Critical
+  status: string; // e.g. Open, In Progress, Resolved
+  detectedIn: string;
+  assignedTo: string;
+};
+
+export type TestingPlanningConfig = {
+  testStrategy: string; // e.g. System & Regression Testing
+  testPlanFile: string; // e.g. test_plan_v1.2.pdf
+  testCasesFile: string; // e.g. test_cases_v1.2.xlsx
+  acceptanceCriteria: string; // e.g. Defined (IEC 61851-1 Compliant)
+  resourceAllocation: string; // e.g. Team of 5 | Lab - 2 Shifts
+  planningScore: number; // 92
+};
+
+export type TestingPrototypeEquipmentConfig = {
+  prototypeVersion: string; // e.g. PRT-2024-0032
+  equipmentUsedCount: number; // 7 Selected
+  testLaboratory: string; // e.g. Magnertia EV Lab - Coimbatore
+  environmentalConditions: string; // e.g. 25°C, 60% RH
+  calibrationCertificateFile: string; // e.g. calibration_jun24.pdf
+  equipmentReadiness: string; // Ready
+  readinessScore: number; // 94
+  equipmentList: EquipmentRecord[];
+};
+
+export type TestingFunctionalConfig = {
+  functionalTestStatus: string; // Passed
+  electricalTestStatus: string; // Passed
+  mechanicalTestStatus: string; // Passed
+  firmwareTestStatus: string; // Passed
+  softwareTestStatus: string; // Passed
+  passFailSummary: string; // 24 / 24 Passed
+  functionalScore: number; // 90
+  testCases: TestCaseRecord[];
+};
+
+export type TestingPerformanceConfig = {
+  performanceTestStatus: string; // Passed
+  loadTestStatus: string; // Passed
+  thermalTestStatus: string; // Passed
+  efficiencyTestStatus: string; // Passed
+  enduranceTestStatus: string; // Passed
+  reliabilityTestStatus: string; // Passed
+  mtbfEstimate: string; // 12,500 Hrs
+  reliabilityScore: number; // 92
+};
+
+export type TestingSafetyComplianceConfig = {
+  electricalSafetyStatus: string; // Passed
+  emcEmiTestStatus: string; // Passed
+  ipRatingTestStatus: string; // Passed (IP54)
+  environmentalTestStatus: string; // Passed
+  cybersecurityValidationStatus: string; // Passed
+  regulatoryStandards: string[]; // ["IEC 61851", "IEC 62196", "IEC 61000", "IEC 60529", "IEC 62443"]
+  complianceScore: number; // 93
+};
+
+export type TestingResultsConfig = {
+  testResultsFile: string; // test_results_v1.2.pdf
+  defectsIdentifiedCount: number; // 3
+  criticalIssuesCount: number; // 0
+  validationReportFile: string; // validation_report_v1.2.pdf
+  prototypeCorrelationPct: number; // 95%
+  customerRequirementCompliancePct: number; // 96%
+  validationScore: number; // 89
+  defectsList: DefectRecord[];
+};
+
+export type TestingAiAssessmentInfo = {
+  aiTestAnalysis: string; // All test cases executed as per plan.
+  aiDefectPrediction: string; // Low risk of major defects.
+  aiReliabilityPrediction: string; // High reliability expected in field use.
+  aiComplianceAssessment: string; // Standards compliance confirmed.
+  aiImprovementSuggestions: string; // Improve heat sink design for better long-term performance.
+  aiValidationScore: number; // 91
+};
+
+export type TestingSummaryInfo = {
+  functionalScore: number; // 90
+  reliabilityScore: number; // 92
+  complianceScore: number; // 93
+  validationScore: number; // 89
+  overallQualityScore: number; // 91
+  recommendation: string; // Proceed to Product Certification
+};
+
+export type TestingAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadedBy: string;
+  date: string;
+  url: string;
+};
+
+export type TestingReviewer = {
+  role: string;
+  person: string;
+  avatar: string;
+  decision: TestingApprovalDecision;
+  date: string;
+  comments: string;
+};
+
+export type TestingAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar: string;
+  action: string;
+  details: string;
+  ipAddress: string;
+};
+
+export type TestingFormInput = {
+  testProjectName: string;
+  testObjective: string;
+  testScope: string;
+  testEnvironment: string;
+  priority: string;
+  recommendation: string;
+};
+
+export type TestingValidationRecord = {
+  id: string;
+  testingValidationId: string; // e.g. TV-2024-0075
+  formCode: string; // e.g. TVF-2024-25
+  testProjectName: string; // e.g. Smart EV Charger Validation
+  testVersion: string; // e.g. v1.2.0
+  workflowStatus: TestingStatus;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  // Linked references
+  linkedProductId: string; // e.g. Smart EV Charger AC 7kW
+  linkedPrototypeId: string; // e.g. PRT-2024-0032
+  linkedSimulationId: string; // e.g. SIM-2024-0061
+  testEngineerName: string;
+  testEngineerAvatar: string;
+  qaEngineerName: string;
+  qaEngineerAvatar: string;
+  testEnvironment: string;
+  developmentStage: string;
+  priority: string;
+
+  // Overview Data
+  productName: string;
+  testObjective: string;
+  productCategory: string;
+  testScope: string;
+
+  // Scores & Configurations
+  functionalScore: number;
+  reliabilityScore: number;
+  complianceScore: number;
+  validationScore: number;
+  overallQualityScore: number;
+
+  planningConfig: TestingPlanningConfig;
+  prototypeEquipmentConfig: TestingPrototypeEquipmentConfig;
+  functionalConfig: TestingFunctionalConfig;
+  performanceConfig: TestingPerformanceConfig;
+  safetyComplianceConfig: TestingSafetyComplianceConfig;
+  resultsConfig: TestingResultsConfig;
+  aiAssessment: TestingAiAssessmentInfo;
+  readinessSummary: TestingSummaryInfo;
+  attachments: TestingAttachment[];
+  reviewers: TestingReviewer[];
+  approvalDecision?: TestingApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+  auditTrail: TestingAuditEntry[];
+};
+
+// ---------------------------------------------------------------------------
+// Certification Readiness Module Types
+// ---------------------------------------------------------------------------
+
+export type CertificationStatus = "In Progress" | "In Review" | "Approved" | "Changes Requested" | "Archived";
+export type CertificationApprovalDecision = "Approved" | "Approved with Conditions" | "Revision Required" | "On Hold" | "Rejected" | "Pending";
+
+export type StandardRecord = {
+  id: string;
+  code: string; // e.g. IEC 61851-1
+  title: string; // e.g. Electric vehicle conductive charging system - General requirements
+  category: string; // e.g. Mandatory Standard
+  region: string; // e.g. Global / IEC
+  status: string; // e.g. Compliant, In Progress
+  gapAnalysis: string; // e.g. Satisfied (0 Gaps)
+};
+
+export type DocReadinessRecord = {
+  id: string;
+  docName: string; // e.g. Technical File
+  category: string; // e.g. Technical Documentation
+  status: string; // e.g. Uploaded, Under Review, Missing
+  owner: string;
+  expiryDate: string;
+  fileName: string;
+};
+
+export type LabReadinessRecord = {
+  id: string;
+  labName: string; // e.g. TÜV Rheinland
+  contactPerson: string; // e.g. Mr. Peter Klaus
+  scope: string; // e.g. EMC, Safety, Performance, Environmental
+  sampleSubmissionDate: string; // e.g. 25 Jun 2024
+  plannedCertificationDate: string; // e.g. 20 Aug 2024
+  status: string; // e.g. Scheduled, Booking Confirmed
+};
+
+export type ComplianceAssessmentConfig = {
+  nonConformitiesCount: number; // 2
+  criticalFindingsCount: number; // 1
+  correctiveActionsStatus: string; // View Actions
+  preventiveActionsStatus: string; // View Actions
+  capaStatus: string; // In Progress
+  complianceScore: number; // 84
+};
+
+export type AiComplianceAssessmentInfo = {
+  aiStandardsReview: string; // Completed
+  aiDocumentationReview: string; // Completed
+  aiRiskAssessment: string; // Low Risk
+  aiCertificationPrediction: string; // High Probability
+  aiImprovementSuggestions: string; // 3 Suggestions
+  aiReadinessScore: number; // 89
+};
+
+export type CertificationSummaryInfo = {
+  documentationScore: number; // 88
+  testingScore: number; // 90
+  complianceScore: number; // 84
+  laboratoryScore: number; // 85
+  aiScore: number; // 89
+  overallReadinessScore: number; // 88
+  certificationProbabilityPct: number; // 92%
+  recommendation: string; // Ready for Certification Submission
+};
+
+export type CertificationAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadedBy: string;
+  date: string;
+  url: string;
+};
+
+export type CertificationReviewer = {
+  role: string;
+  person: string;
+  avatar: string;
+  decision: CertificationApprovalDecision;
+  date: string;
+  comments: string;
+};
+
+export type CertificationAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar: string;
+  action: string;
+  details: string;
+  ipAddress: string;
+};
+
+export type CertificationFormInput = {
+  certificationProjectName: string;
+  certificationObjective: string;
+  targetMarket: string;
+  regulatoryAuthority: string;
+  priority: string;
+  recommendation: string;
+};
+
+export type CertificationReadinessRecord = {
+  id: string;
+  certificationReadinessId: string; // e.g. CR-2024-0041
+  formCode: string; // e.g. CRF-2024-25
+  certificationProjectName: string; // e.g. Smart EV Charger Certification
+  certificationVersion: string; // e.g. v1.2.0
+  workflowStatus: CertificationStatus;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  // Linked references
+  linkedProductId: string; // e.g. Smart EV Charger AC 7kW
+  linkedTestingId: string; // e.g. TV-2024-0075
+  complianceManagerName: string;
+  complianceManagerAvatar: string;
+  certificationCoordinatorName: string;
+  certificationCoordinatorAvatar: string;
+  targetMarkets: string[]; // ["India", "EU", "USA"]
+  regulatoryAuthorities: string[]; // ["BIS", "IEC", "CE", "FCC"]
+  developmentStage: string; // e.g. Prototype Validation
+  priority: string; // High
+
+  // Overview Data
+  productCategory: string; // e.g. EV Charger
+  certificationObjective: string;
+
+  // Scores & Configurations
+  documentationScore: number;
+  testingScore: number;
+  complianceScore: number;
+  laboratoryScore: number;
+  aiScore: number;
+  overallReadinessScore: number;
+  certificationProbabilityPct: number;
+
+  standardsList: StandardRecord[];
+  documentsList: DocReadinessRecord[];
+  labConfig: LabReadinessRecord;
+  complianceConfig: ComplianceAssessmentConfig;
+  aiAssessment: AiComplianceAssessmentInfo;
+  readinessSummary: CertificationSummaryInfo;
+  attachments: CertificationAttachment[];
+  reviewers: CertificationReviewer[];
+  approvalDecision?: CertificationApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+  auditTrail: CertificationAuditEntry[];
+};
+
+
+
+
+
+
+
+
+
+
 
 
 

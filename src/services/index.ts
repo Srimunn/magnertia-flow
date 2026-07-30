@@ -79,6 +79,8 @@ export * as embeddedDevelopmentService from "./embeddedDevelopmentService";
 export * as firmwareDevelopmentService from "./firmwareDevelopmentService";
 export * as softwareDevelopmentService from "./softwareDevelopmentService";
 export * as mobileDevelopmentService from "./mobileDevelopmentService";
+export * as uiUxDevelopmentService from "./uiUxDevelopmentService";
+export * as apiDevelopmentService from "./apiDevelopmentService";
 
 
 
