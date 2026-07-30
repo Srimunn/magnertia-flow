@@ -25,7 +25,7 @@ export const Route = createFileRoute(
   component: ProductStrategyRoadmapsPage,
 });
 
-export function ProductStrategyRoadmapsPage() {
+function ProductStrategyRoadmapsPage() {
   const navigate = useNavigate();
 
   const { data: record } = useQuery({

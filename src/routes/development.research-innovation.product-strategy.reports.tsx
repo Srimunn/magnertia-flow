@@ -34,7 +34,7 @@ function formatCurrency(val: number): string {
   }).format(val);
 }
 
-export function ProductStrategyReportsPage() {
+function ProductStrategyReportsPage() {
   const navigate = useNavigate();
 
   const { data: record } = useQuery({

@@ -35,7 +35,7 @@ function formatCurrency(val: number): string {
   }).format(val);
 }
 
-export function ProductStrategyPortfolioPage() {
+function ProductStrategyPortfolioPage() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [stageFilter, setStageFilter] = useState("all");
