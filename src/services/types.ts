@@ -10106,7 +10106,7 @@ export type UiUxDevelopmentRecord = {
   wireframesCount: number;
   interactivePrototypesCount: number;
   wireframeScreens: UiUxWireframeScreen[];
-  sitemapPages?: any[];
+  sitemapPages?: number | any[];
 
   // Design System & UI
   colorPaletteCount: number;
