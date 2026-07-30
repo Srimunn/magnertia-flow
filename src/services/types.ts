@@ -10097,7 +10097,8 @@ export type UiUxDevelopmentRecord = {
   customerFeedbackScore: number;
   competitorsAnalyzed: number;
   personas: UiUxUserPersona[];
-  painPoints?: string[];
+  painPoints?: (string | { id: string; issue: string; severity: string; category: string; impact: string })[];
+  competitors?: any[];
 
   // Information Architecture & UX
   informationArchitectureNodesCount: number;
@@ -10105,6 +10106,7 @@ export type UiUxDevelopmentRecord = {
   wireframesCount: number;
   interactivePrototypesCount: number;
   wireframeScreens: UiUxWireframeScreen[];
+  sitemapPages?: any[];
 
   // Design System & UI
   colorPaletteCount: number;

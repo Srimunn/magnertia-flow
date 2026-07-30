@@ -90,6 +90,8 @@ import type {
   UiUxWireframeScreen,
   UiUxAttachment,
   UiUxWcagAudit,
+  UiUxReviewer,
+  UiUxAuditEntry,
 } from "@/services/types";
 import { ResearchInnovationTabBar } from "@/components/erp/ResearchInnovationTabBar";
 import { UiUxDevelopmentTabBar, UI_UX_TABS, type UiUxDevelopmentTabId } from "@/components/erp/UiUxDevelopmentTabBar";
@@ -976,7 +978,7 @@ function UiUxDevelopmentNewPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="p-4 space-y-4">
-                    {record.userJourneys.map((j: { id: string; title: string; satisfactionScore: number; steps: string[]; keyTakeaway: string }) => (
+                    {record.userJourneys?.map((j: { id: string; title: string; satisfactionScore: number; steps: string[]; keyTakeaway: string }) => (
                       <div key={j.id} className="rounded-lg border p-3 space-y-2 bg-slate-50/40 dark:bg-slate-900">
                         <div className="flex justify-between items-center">
                           <span className="font-bold text-xs text-slate-900 dark:text-white">{j.title}</span>
