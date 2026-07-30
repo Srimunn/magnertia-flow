@@ -236,3 +236,71 @@ export function reportingDashboardOptions() {
     queryFn: () => loadFinancialReportingDashboard(DEFAULT_QUERY),
   });
 }
+
+/* ---------------------------------------------------------------------------
+   Research & Innovation module data sources — one list-fetch per module, key
+   matches the module's index route's own useQuery so cache is shared.
+   --------------------------------------------------------------------------- */
+import {
+  continuousInnovationService,
+  opportunityDiscoveryService,
+  designThinkingService,
+  problemValidationService,
+  innovationPortfolioService,
+  technologyScoutingService,
+  researchManagementService,
+  feasibilityStudyService,
+  pocService,
+  prototypeDevService,
+  experimentMgmtService,
+  trlAssessmentService,
+  commercializationService,
+  patentMgmtService,
+  ideaManagementService,
+} from "@/services";
+
+export function riIdeasOptions() {
+  return queryOptions({ queryKey: ["idea-management", "dashboard"] as const, queryFn: () => ideaManagementService.fetchDashboard() });
+}
+export function riOpportunitiesOptions() {
+  return queryOptions({ queryKey: ["opportunity-discovery", "list"] as const, queryFn: () => opportunityDiscoveryService.fetchOpportunities() });
+}
+export function riDesignOptions() {
+  return queryOptions({ queryKey: ["design-thinking", "list"] as const, queryFn: () => designThinkingService.fetchList() });
+}
+export function riValidationOptions() {
+  return queryOptions({ queryKey: ["problem-validation", "list"] as const, queryFn: () => problemValidationService.fetchList() });
+}
+export function riPortfolioOptions() {
+  return queryOptions({ queryKey: ["innovation-portfolio", "list"] as const, queryFn: () => innovationPortfolioService.fetchList() });
+}
+export function riScoutingOptions() {
+  return queryOptions({ queryKey: ["technology-scouting", "list"] as const, queryFn: () => technologyScoutingService.fetchList() });
+}
+export function riResearchOptions() {
+  return queryOptions({ queryKey: ["research-management", "list"] as const, queryFn: () => researchManagementService.fetchList() });
+}
+export function riFeasibilityOptions() {
+  return queryOptions({ queryKey: ["feasibility-study", "list"] as const, queryFn: () => feasibilityStudyService.fetchList() });
+}
+export function riPocOptions() {
+  return queryOptions({ queryKey: ["proof-of-concept", "list"] as const, queryFn: () => pocService.fetchList() });
+}
+export function riPrototypeOptions() {
+  return queryOptions({ queryKey: ["prototype-development", "list"] as const, queryFn: () => prototypeDevService.fetchList() });
+}
+export function riExperimentsOptions() {
+  return queryOptions({ queryKey: ["experiment-management", "list"] as const, queryFn: () => experimentMgmtService.fetchList() });
+}
+export function riTrlOptions() {
+  return queryOptions({ queryKey: ["trl-assessment", "list"] as const, queryFn: () => trlAssessmentService.fetchList() });
+}
+export function riCommercializationOptions() {
+  return queryOptions({ queryKey: ["commercialization-planning", "list"] as const, queryFn: () => commercializationService.fetchList() });
+}
+export function riInnovationOptions() {
+  return queryOptions({ queryKey: ["continuous-innovation", "list"] as const, queryFn: () => continuousInnovationService.fetchList() });
+}
+export function riPatentsOptions() {
+  return queryOptions({ queryKey: ["patent-management", "list"] as const, queryFn: () => patentMgmtService.fetchList() });
+}

@@ -3,10 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Plus, Gauge, CheckCircle2, Award, ArrowRight } from "lucide-react";
 import { AppShell } from "@/components/erp/AppShell";
+import { WidgetPage } from "@/widgets/components/WidgetPage";
 import {
   TrlAssessmentPageTabBar,
   TRL_STATUS_LABEL,
 } from "@/components/erp/TrlAssessmentTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatCard } from "@/components/erp/StatCard";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { DataTable, EmptyState } from "@/components/erp/DataTable";
@@ -69,7 +71,8 @@ function TrlRegisterPage() {
   return (
     <AppShell
       breadcrumb="Development > Research & Innovation Development > Technology Readiness Level (TRL) Assessment"
-      title="Technology Readiness Level (TRL) Assessment"
+      title="Technology Readiness Level"
+      description="Assess and advance technology readiness levels."
       topbarActions={
         <ErpButton
           variant="primary"
@@ -79,47 +82,11 @@ function TrlRegisterPage() {
           New TRL Assessment
         </ErpButton>
       }
+      tabs={<InnovationAreaTabs sub={<TrlAssessmentPageTabBar />} />}
     >
-      <div className="-mx-4 -mt-4 mb-4 flex flex-col gap-0">
-        <TrlAssessmentPageTabBar />
-      </div>
-
       <div className="space-y-6">
         {/* KPI Row */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard
-            label="Total Assessments"
-            value={String(kpis.total)}
-            neutralText="Active & completed records"
-            icon={<Gauge className="h-5 w-5" />}
-            iconBg="bg-primary/10"
-            iconColor="text-primary"
-          />
-          <StatCard
-            label="Under Assessment"
-            value={String(kpis.active)}
-            neutralText="In progress & review stages"
-            icon={<Gauge className="h-5 w-5" />}
-            iconBg="bg-amber-500/10"
-            iconColor="text-amber-600"
-          />
-          <StatCard
-            label="Approved TRLs"
-            value={String(kpis.approved)}
-            neutralText="Committed readiness levels"
-            icon={<CheckCircle2 className="h-5 w-5" />}
-            iconBg="bg-emerald-500/10"
-            iconColor="text-emerald-600"
-          />
-          <StatCard
-            label="Avg Readiness Score"
-            value={`${kpis.avgScore}/100`}
-            neutralText="Composite TRL maturity score"
-            icon={<Award className="h-5 w-5" />}
-            iconBg="bg-blue-500/10"
-            iconColor="text-blue-600"
-          />
-        </div>
+        <WidgetPage pageId="ri-trl" skeleton={<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => (<div key={i} className="h-24 animate-pulse rounded-xl bg-muted" />))}</div>} />
 
         {/* Filter Toolbar */}
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-card p-3 shadow-xs">
@@ -259,7 +226,7 @@ function TrlRegisterPage() {
           empty={
             <EmptyState
               title="No TRL Assessments Found"
-              description="Start a new Technology Readiness Level assessment to evaluate research, PoC, and prototype evidence."
+              description="Create a TRL assessment to gauge a technology's readiness level."
               action={
                 <ErpButton
                   variant="primary"

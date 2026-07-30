@@ -64,7 +64,32 @@ export * as pocService from "./pocService";
 export * as prototypeDevService from "./prototypeDevService";
 export * as experimentMgmtService from "./experimentMgmtService";
 export * as patentMgmtService from "./patentMgmtService";
+export * as continuousInnovationService from "./continuousInnovationService";
 export * as trlAssessmentService from "./trlAssessmentService";
 export * as commercializationService from "./commercializationService";
+export * as productStrategyService from "./productStrategyService";
+export * as productRoadmapService from "./productRoadmapService";
+export * as prdService from "./prdService";
+export * as productArchitectureService from "./productArchitectureService";
+export * as industrialDesignService from "./industrialDesignService";
+export * as mechanicalDesignService from "./mechanicalDesignService";
+export * as electricalDesignService from "./electricalDesignService";
+export * as electronicsDesignService from "./electronicsDesignService";
+export * as embeddedDevelopmentService from "./embeddedDevelopmentService";
+export * as firmwareDevelopmentService from "./firmwareDevelopmentService";
+export * as softwareDevelopmentService from "./softwareDevelopmentService";
+export * as mobileDevelopmentService from "./mobileDevelopmentService";
+
+
+
+
+
+
+
+
+
+
+
+
 
 

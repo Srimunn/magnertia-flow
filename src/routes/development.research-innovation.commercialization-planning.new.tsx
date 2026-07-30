@@ -35,6 +35,7 @@ import {
 } from "lucide-react";
 import { AppShell } from "@/components/erp/AppShell";
 import { CommercializationPageTabBar, COMMERCIALIZATION_STATUS_LABEL } from "@/components/erp/CommercializationTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { ErpButton } from "@/components/erp/Button";
 import { StarRating } from "@/components/erp/StarRating";
@@ -385,31 +386,31 @@ function CommercializationFormPage() {
     <AppShell
       breadcrumb="Development > Research & Innovation Development > Commercialization Planning > Commercialization Planning Form"
       title="Commercialization Planning"
+      description="Plan go-to-market, financials, and launch readiness."
       topbarActions={
         <div className="flex items-center gap-2">
           <ErpButton
             variant="outline"
             loading={saveMutation.isPending}
             onClick={() => saveMutation.mutate(form)}
+            aria-label="Save Draft"
+            title="Save Draft"
           >
-            <Save className="h-4 w-4 mr-1.5" />
-            Save Draft
+            <Save className="h-4 w-4" />
           </ErpButton>
           <ErpButton
             variant="primary"
             loading={submitMutation.isPending}
             onClick={() => submitMutation.mutate()}
+            aria-label="Submit for Review"
+            title="Submit for Review"
           >
-            <Send className="h-4 w-4 mr-1.5" />
-            Submit for Review
+            <Send className="h-4 w-4" />
           </ErpButton>
         </div>
       }
+      tabs={<InnovationAreaTabs sub={<CommercializationPageTabBar />} />}
     >
-      <div className="-mx-4 -mt-4 mb-4 flex flex-col gap-0">
-        <CommercializationPageTabBar />
-      </div>
-
       {/* Record Header Bar (Two Rows) */}
       <div className="mb-6 rounded-lg border border-border bg-card p-4 shadow-xs space-y-3">
         {/* Row 1 */}

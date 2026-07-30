@@ -32,6 +32,7 @@ import {
   TrlAssessmentPageTabBar,
   TRL_STATUS_LABEL,
 } from "@/components/erp/TrlAssessmentTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { StarRating } from "@/components/erp/StarRating";
 import { ErpButton } from "@/components/erp/Button";
@@ -518,7 +519,9 @@ function TrlAssessmentFormPage() {
     return (
       <AppShell
         breadcrumb="Development > Research & Innovation Development > Technology Readiness Level (TRL) Assessment"
-        title="Technology Readiness Level (TRL) Assessment"
+        title="Technology Readiness Level"
+      description="Assess and advance technology readiness levels."
+      tabs={<InnovationAreaTabs sub={<TrlAssessmentPageTabBar />} />}
       >
         <div className="flex h-64 items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -530,12 +533,10 @@ function TrlAssessmentFormPage() {
   return (
     <AppShell
       breadcrumb="Development > Research & Innovation Development > Technology Readiness Level (TRL) Assessment > TRL Assessment Form"
-      title="Technology Readiness Level (TRL) Assessment"
+      title="Technology Readiness Level"
+      description="Assess and advance technology readiness levels."
+      tabs={<InnovationAreaTabs sub={<TrlAssessmentPageTabBar />} />}
     >
-      <div className="-mx-4 -mt-4 mb-4 flex flex-col gap-0">
-        <TrlAssessmentPageTabBar />
-      </div>
-
       <div className="space-y-6">
         {/* =========================================================================
            RECORD HEADER BAR (TWO ROWS)
@@ -613,18 +614,20 @@ function TrlAssessmentFormPage() {
                 variant="secondary"
                 loading={saveMutation.isPending}
                 onClick={handleSubmitDraft}
+                aria-label="Save Draft"
+                title="Save Draft"
               >
-                <Save className="h-4 w-4 mr-1.5" />
-                Save Draft
+                <Save className="h-4 w-4" />
               </ErpButton>
 
               <ErpButton
                 variant="primary"
                 loading={submitMutation.isPending}
                 onClick={() => submitMutation.mutate()}
+                aria-label="Submit for Review"
+                title="Submit for Review"
               >
-                <Send className="h-4 w-4 mr-1.5" />
-                Submit for Review
+                <Send className="h-4 w-4" />
               </ErpButton>
 
               <DropdownMenu>

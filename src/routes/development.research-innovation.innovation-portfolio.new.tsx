@@ -39,6 +39,7 @@ import {
   PortfolioInnerTabs,
   PORTFOLIO_STATUS_LABEL,
 } from "@/components/erp/PortfolioTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { CardHeader } from "@/components/erp/CardHeader";
 import { StatCard } from "@/components/erp/StatCard";
 import { StatusBadge } from "@/components/erp/StatusBadge";
@@ -460,7 +461,7 @@ function PortfolioFormPage() {
       <AppShell
         title="Innovation Portfolio"
         breadcrumb="Research & Innovation Development"
-        tabs={<PortfolioPageTabBar />}
+        tabs={<InnovationAreaTabs sub={<PortfolioPageTabBar />} />}
       >
         <div className="space-y-4">
           <div className="h-24 animate-pulse rounded-xl bg-muted" />
@@ -474,15 +475,15 @@ function PortfolioFormPage() {
     <AppShell
       title="Innovation Portfolio"
       breadcrumb="Research & Innovation Development"
-      description="Innovation Portfolio Form"
-      tabs={<PortfolioPageTabBar />}
+      description="Balance and prioritize the innovation portfolio across projects."
+      tabs={<InnovationAreaTabs sub={<PortfolioPageTabBar />} />}
     >
       <div className="space-y-5">
         {/* ---------------------------- Record header ---------------------------- */}
         <div className="card-soft p-5">
           <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
             <div className="grid flex-1 gap-4 sm:grid-cols-3 xl:grid-cols-7">
-              <HeaderCell label="Portfolio ID" value={record?.portfolioId ?? "IP-—"} />
+              <HeaderCell label="Portfolio ID" value={record?.portfolioId ?? "—"} />
               <div className="xl:col-span-2">
                 <Field label="Portfolio Name" required>
                   <TextInput
@@ -875,7 +876,7 @@ function PortfolioFormPage() {
                         />
                         <Bar
                           dataKey="investment"
-                          fill="var(--primary)"
+                          fill="#8B5CF6"
                           radius={[4, 4, 0, 0]}
                           name="Investment"
                         />

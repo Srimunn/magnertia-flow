@@ -1432,9 +1432,9 @@ function FixedAssetsPage() {
                       <Line
                         type="monotone"
                         dataKey="depreciation"
-                        stroke="var(--primary)"
+                        stroke="#22C55E"
                         strokeWidth={2}
-                        dot={{ r: 2.5, fill: "var(--primary)" }}
+                        dot={{ r: 2.5, fill: "#22C55E" }}
                       />
                     </LineChart>
                   </ResponsiveContainer>

@@ -3,10 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Plus, Cpu, CheckCircle2, Gauge, Rocket } from "lucide-react";
 import { AppShell } from "@/components/erp/AppShell";
+import { WidgetPage } from "@/widgets/components/WidgetPage";
 import {
   PrototypeDevPageTabBar,
   PROTOTYPE_STATUS_LABEL,
 } from "@/components/erp/PrototypeDevTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatCard } from "@/components/erp/StatCard";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { DataTable, EmptyState } from "@/components/erp/DataTable";
@@ -87,8 +89,8 @@ function PrototypeRegisterPage() {
     <AppShell
       title="Prototype Development"
       breadcrumb="Research & Innovation Development"
-      description="The engineering-realization stage — turn a validated PoC into a manufacturable prototype."
-      tabs={<PrototypeDevPageTabBar />}
+      description="Engineer, manufacture, and test working prototypes."
+      tabs={<InnovationAreaTabs sub={<PrototypeDevPageTabBar />} />}
       topbarActions={newButton}
     >
       {listQuery.isLoading ? (
@@ -102,40 +104,7 @@ function PrototypeRegisterPage() {
         </div>
       ) : (
         <div className="space-y-5">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard
-              label="Prototypes"
-              value={kpis.total.toString()}
-              neutralText="All statuses"
-              icon={<Cpu className="h-5 w-5" />}
-              iconBg="bg-primary/10"
-              iconColor="text-primary"
-            />
-            <StatCard
-              label="In Progress"
-              value={kpis.inProgress.toString()}
-              neutralText="Design → review stages"
-              icon={<Gauge className="h-5 w-5" />}
-              iconBg="bg-[#3B82F6]/10"
-              iconColor="text-[#3B82F6]"
-            />
-            <StatCard
-              label="Approved"
-              value={kpis.approved.toString()}
-              neutralText="Advancing to validation"
-              icon={<CheckCircle2 className="h-5 w-5" />}
-              iconBg="bg-[#22C55E]/10"
-              iconColor="text-[#22C55E]"
-            />
-            <StatCard
-              label="Avg Prototype Score"
-              value={`${kpis.avgScore}/100`}
-              neutralText="AI-calculated"
-              icon={<Rocket className="h-5 w-5" />}
-              iconBg="bg-[#F59E0B]/10"
-              iconColor="text-[#F59E0B]"
-            />
-          </div>
+          <WidgetPage pageId="ri-prototype" skeleton={<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => (<div key={i} className="h-24 animate-pulse rounded-xl bg-muted" />))}</div>} />
 
           <div className="flex flex-wrap items-center gap-2">
             {FILTERS.map((f) => {

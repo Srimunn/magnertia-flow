@@ -3,10 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Plus, ClipboardCheck, CheckCircle2, Gauge, Rocket } from "lucide-react";
 import { AppShell } from "@/components/erp/AppShell";
+import { WidgetPage } from "@/widgets/components/WidgetPage";
 import {
   FeasibilityStudyPageTabBar,
   FEASIBILITY_STATUS_LABEL,
 } from "@/components/erp/FeasibilityStudyTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatCard } from "@/components/erp/StatCard";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { DataTable, EmptyState } from "@/components/erp/DataTable";
@@ -90,8 +92,8 @@ function FeasibilityRegisterPage() {
     <AppShell
       title="Feasibility Study"
       breadcrumb="Research & Innovation Development"
-      description="The investment-decision gate — technical, market, financial, operational, legal and AI assessment."
-      tabs={<FeasibilityStudyPageTabBar />}
+      description="Assess technical, market, financial, and operational feasibility."
+      tabs={<InnovationAreaTabs sub={<FeasibilityStudyPageTabBar />} />}
       topbarActions={newButton}
     >
       {listQuery.isLoading ? (
@@ -105,40 +107,7 @@ function FeasibilityRegisterPage() {
         </div>
       ) : (
         <div className="space-y-5">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard
-              label="Feasibility Studies"
-              value={kpis.total.toString()}
-              neutralText="All statuses"
-              icon={<ClipboardCheck className="h-5 w-5" />}
-              iconBg="bg-primary/10"
-              iconColor="text-primary"
-            />
-            <StatCard
-              label="In Assessment"
-              value={kpis.inReview.toString()}
-              neutralText="Stages & review"
-              icon={<Gauge className="h-5 w-5" />}
-              iconBg="bg-[#3B82F6]/10"
-              iconColor="text-[#3B82F6]"
-            />
-            <StatCard
-              label="Approved"
-              value={kpis.approved.toString()}
-              neutralText="Advancing to PoC"
-              icon={<CheckCircle2 className="h-5 w-5" />}
-              iconBg="bg-[#22C55E]/10"
-              iconColor="text-[#22C55E]"
-            />
-            <StatCard
-              label="Avg Feasibility Score"
-              value={`${kpis.avgScore}/100`}
-              neutralText="AI-calculated"
-              icon={<Rocket className="h-5 w-5" />}
-              iconBg="bg-[#F59E0B]/10"
-              iconColor="text-[#F59E0B]"
-            />
-          </div>
+          <WidgetPage pageId="ri-feasibility" skeleton={<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => (<div key={i} className="h-24 animate-pulse rounded-xl bg-muted" />))}</div>} />
 
           <div className="flex flex-wrap items-center gap-2">
             {FILTERS.map((f) => {

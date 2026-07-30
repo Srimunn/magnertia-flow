@@ -3,11 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Plus, Palette, CheckCircle2, Gauge, Layers } from "lucide-react";
 import { AppShell } from "@/components/erp/AppShell";
+import { WidgetPage } from "@/widgets/components/WidgetPage";
 import {
   DesignThinkingTabBar,
   DT_STATUS_LABEL,
   DT_STAGE_LABEL,
 } from "@/components/erp/DesignThinkingTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatCard } from "@/components/erp/StatCard";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { DataTable, EmptyState } from "@/components/erp/DataTable";
@@ -79,8 +81,8 @@ function DesignThinkingRegisterPage() {
     <AppShell
       title="Design Thinking"
       breadcrumb="Research & Innovation Development"
-      description="Empathize, define, ideate, prototype and test approved opportunities."
-      tabs={<DesignThinkingTabBar />}
+      description="Run design-thinking cycles from empathy through tested prototypes."
+      tabs={<InnovationAreaTabs sub={<DesignThinkingTabBar />} />}
       topbarActions={newButton}
     >
       {listQuery.isLoading ? (
@@ -94,40 +96,7 @@ function DesignThinkingRegisterPage() {
         </div>
       ) : (
         <div className="space-y-5">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard
-              label="Total Projects"
-              value={kpis.total.toString()}
-              neutralText="All stages"
-              icon={<Palette className="h-5 w-5" />}
-              iconBg="bg-primary/10"
-              iconColor="text-primary"
-            />
-            <StatCard
-              label="In Progress"
-              value={kpis.inProgress.toString()}
-              neutralText="Actively running"
-              icon={<Layers className="h-5 w-5" />}
-              iconBg="bg-[#3B82F6]/10"
-              iconColor="text-[#3B82F6]"
-            />
-            <StatCard
-              label="Approval Rate"
-              value={`${kpis.approvalRate}%`}
-              neutralText="Of decided projects"
-              icon={<CheckCircle2 className="h-5 w-5" />}
-              iconBg="bg-[#22C55E]/10"
-              iconColor="text-[#22C55E]"
-            />
-            <StatCard
-              label="Average Design Score"
-              value={`${kpis.avgScore}/10`}
-              neutralText="Calculated from stages"
-              icon={<Gauge className="h-5 w-5" />}
-              iconBg="bg-[#F59E0B]/10"
-              iconColor="text-[#F59E0B]"
-            />
-          </div>
+          <WidgetPage pageId="ri-design" skeleton={<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => (<div key={i} className="h-24 animate-pulse rounded-xl bg-muted" />))}</div>} />
 
           <div className="flex flex-wrap items-center gap-2">
             {FILTERS.map((f) => {

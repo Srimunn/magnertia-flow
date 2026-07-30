@@ -27,6 +27,7 @@ import {
   PrototypeDevPageTabBar,
   PROTOTYPE_STATUS_LABEL,
 } from "@/components/erp/PrototypeDevTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { StarRating } from "@/components/erp/StarRating";
 import { ErpButton } from "@/components/erp/Button";
@@ -353,14 +354,6 @@ function SectionCard(p: {
   return (
     <section className={cn("card-soft space-y-3 p-4", p.className)}>
       <h3 className="flex items-center gap-2 text-sm font-bold text-foreground">
-        <span
-          className={cn(
-            "flex h-5 w-5 items-center justify-center rounded-md text-[11px] font-bold",
-            p.accent ?? "bg-primary/10 text-primary",
-          )}
-        >
-          {p.n}
-        </span>
         {p.title}
       </h3>
       {p.children}
@@ -639,8 +632,8 @@ function PrototypeFormPage() {
       <AppShell
         title="Prototype Development"
         breadcrumb="Research & Innovation Development · Prototype Development"
-        description="Prototype Development Form"
-        tabs={<PrototypeDevPageTabBar />}
+        description="Engineer, manufacture, and test working prototypes."
+        tabs={<InnovationAreaTabs sub={<PrototypeDevPageTabBar />} />}
       >
         <div className="space-y-4">
           <div className="h-28 animate-pulse rounded-xl bg-muted" />
@@ -654,8 +647,8 @@ function PrototypeFormPage() {
     <AppShell
       title="Prototype Development"
       breadcrumb="Research & Innovation Development · Prototype Development"
-      description="Prototype Development Form"
-      tabs={<PrototypeDevPageTabBar />}
+      description="Engineer, manufacture, and test working prototypes."
+      tabs={<InnovationAreaTabs sub={<PrototypeDevPageTabBar />} />}
     >
       <div className="space-y-5">
         {/* ------------------------- Record header bar ------------------------- */}
@@ -771,13 +764,12 @@ function PrototypeFormPage() {
             </div>
             <div className="flex flex-wrap items-center gap-2">
               {editable && (
-                <ErpButton variant="outline" onClick={() => saveMut.mutate()} disabled={busy}>
+                <ErpButton variant="outline" onClick={() => saveMut.mutate()} disabled={busy} aria-label="Save Draft" title="Save Draft">
                   {saveMut.isPending ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
                     <Save className="h-4 w-4" />
                   )}
-                  {record ? "Save Draft" : "Create Prototype"}
                 </ErpButton>
               )}
               {record && editable && !allStagesDone && (
@@ -791,13 +783,12 @@ function PrototypeFormPage() {
                 </ErpButton>
               )}
               {record && editable && allStagesDone && (
-                <ErpButton onClick={() => submitMut.mutate()} disabled={busy}>
+                <ErpButton onClick={() => submitMut.mutate()} disabled={busy} aria-label="Submit for Review" title="Submit for Review">
                   {submitMut.isPending ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
                     <Send className="h-4 w-4" />
                   )}
-                  Submit for Review
                 </ErpButton>
               )}
               {record && status === "engineering_review" && (

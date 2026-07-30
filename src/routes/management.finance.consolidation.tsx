@@ -653,7 +653,7 @@ function ConsolidationPage() {
                             />
                             <Bar
                               dataKey="netProfit"
-                              fill="var(--primary)"
+                              fill="#22C55E"
                               radius={[4, 4, 0, 0]}
                               name="Net Profit"
                             />
@@ -859,7 +859,7 @@ function ConsolidationPage() {
                           paddingAngle={0}
                           stroke="none"
                         >
-                          <Cell fill="var(--primary)" />
+                          <Cell fill="#22C55E" />
                           <Cell fill="#E5E7EB" />
                         </Pie>
                       </PieChart>
@@ -965,7 +965,7 @@ function ConsolidationPage() {
                       <Line
                         type="monotone"
                         dataKey="value"
-                        stroke="var(--primary)"
+                        stroke="#22C55E"
                         strokeWidth={1.5}
                         dot={false}
                       />

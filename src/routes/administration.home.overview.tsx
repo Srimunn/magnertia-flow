@@ -245,7 +245,7 @@ function AdministrationOverviewPage() {
                       <Line
                         type="monotone"
                         dataKey="logins"
-                        stroke="var(--primary)"
+                        stroke="#22C55E"
                         strokeWidth={2}
                         dot={false}
                       />

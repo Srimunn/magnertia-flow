@@ -130,7 +130,7 @@ export const TrendComposedWidget = memo(function TrendComposedWidget() {
               }}
               formatter={(v: number) => formatCurrency(v, true)}
             />
-            <Bar dataKey="revenue" fill="var(--primary)" radius={[4, 4, 0, 0]} barSize={12} />
+            <Bar dataKey="revenue" fill="#22C55E" radius={[4, 4, 0, 0]} barSize={12} />
             <Bar dataKey="expenses" fill="#EF4444" radius={[4, 4, 0, 0]} barSize={12} />
             <Line
               type="monotone"

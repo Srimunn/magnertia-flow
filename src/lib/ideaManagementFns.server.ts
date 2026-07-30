@@ -766,15 +766,20 @@ export const reviewIdeaFn = createServerFn({ method: "POST" })
   });
 
 /* ============================== Dashboard =============================== */
+// Vibrant categorical palette used for donut / pie slices on the Ideas dashboard.
+// Mirrors src/lib/chartColors.ts (kept in sync manually because this is a server
+// module and the shared file is imported by client code).
 const CHART_COLORS = [
-  "#0a3c75",
-  "#3b82f6",
-  "#22c55e",
-  "#f59e0b",
-  "#ec4899",
-  "#7c5cff",
-  "#14b8a6",
-  "#ef4444",
+  "#F97316", // orange
+  "#22C55E", // green
+  "#8B5CF6", // violet
+  "#F59E0B", // amber
+  "#EF4444", // red
+  "#14B8A6", // teal
+  "#EC4899", // pink
+  "#14B8A6", // teal
+  "#F97316", // orange
+  "#84CC16", // lime
 ];
 
 export const getIdeaDashboardFn = createServerFn({ method: "GET" }).handler(async () => {

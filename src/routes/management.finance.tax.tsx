@@ -588,7 +588,7 @@ function TaxManagementPage() {
                               <Line
                                 type="monotone"
                                 dataKey="liability"
-                                stroke="var(--primary)"
+                                stroke="#22C55E"
                                 strokeWidth={2}
                                 dot={false}
                               />

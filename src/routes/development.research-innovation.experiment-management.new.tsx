@@ -41,6 +41,7 @@ import {
   ExperimentMgmtPageTabBar,
   EXPERIMENT_STATUS_LABEL,
 } from "@/components/erp/ExperimentMgmtTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { StarRating } from "@/components/erp/StarRating";
 import { ErpButton } from "@/components/erp/Button";
@@ -484,16 +485,8 @@ function SectionCard(p: {
   return (
     <section className={cn("card-soft space-y-3.5 p-4", p.className)}>
       <h3 className="flex items-center gap-2 text-sm font-bold text-foreground">
-        <span
-          className={cn(
-            "flex h-5 w-5 items-center justify-center rounded-md text-[11px] font-bold text-white shadow-xs",
-            p.accent ?? "bg-primary",
-          )}
-        >
-          {p.n}
-        </span>
         <span>
-          {p.n}. {p.title}
+          {p.title}
         </span>
       </h3>
       {p.children}
@@ -977,8 +970,8 @@ function ExperimentFormPage() {
       <AppShell
         title="Experiment Management"
         breadcrumb="Development > Research & Innovation Development > Experiment Management > Experiment Management Form"
-        description="Experiment Management Form"
-        tabs={<ExperimentMgmtPageTabBar />}
+        description="Design, run, and validate structured experiments."
+        tabs={<InnovationAreaTabs sub={<ExperimentMgmtPageTabBar />} />}
       >
         <div className="space-y-4">
           <div className="h-28 animate-pulse rounded-xl bg-muted" />
@@ -992,8 +985,8 @@ function ExperimentFormPage() {
     <AppShell
       title="Experiment Management"
       breadcrumb="Development > Research & Innovation Development > Experiment Management > Experiment Management Form"
-      description="Experiment Management Form"
-      tabs={<ExperimentMgmtPageTabBar />}
+      description="Design, run, and validate structured experiments."
+      tabs={<InnovationAreaTabs sub={<ExperimentMgmtPageTabBar />} />}
     >
       <div className="space-y-5">
         {/* ------------------------- Record header bar ------------------------- */}
@@ -1169,13 +1162,12 @@ function ExperimentFormPage() {
             </div>
             <div className="flex flex-wrap items-center gap-2">
               {editable && (
-                <ErpButton variant="outline" onClick={() => saveMut.mutate()} disabled={busy}>
+                <ErpButton variant="outline" onClick={() => saveMut.mutate()} disabled={busy} aria-label="Save Draft" title="Save Draft">
                   {saveMut.isPending ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
                     <Save className="h-4 w-4" />
                   )}
-                  {record ? "Save Draft" : "Save Draft"}
                 </ErpButton>
               )}
               {record && editable && !allStagesDone && (
@@ -1195,13 +1187,14 @@ function ExperimentFormPage() {
                     : toast.success("Submitted for review.")
                 }
                 disabled={busy}
+                aria-label="Submit for Review"
+                title="Submit for Review"
               >
                 {submitMut.isPending ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
                   <Send className="h-4 w-4" />
                 )}
-                Submit for Review
               </ErpButton>
               {record && status === "technical_review" && (
                 <ErpButton onClick={() => setReviewOpen(true)} disabled={busy}>

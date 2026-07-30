@@ -6028,3 +6028,2915 @@ export interface CommercializationLookups {
 }
 
 
+
+/* ===========================================================================
+   Continuous Innovation (Development → Research & Innovation Development)
+   ---------------------------------------------------------------------------
+   CYCLICAL: one record per improvement cycle, scoped to a Review Period and
+   ordered per product. A product accumulates many cycles over time; approval
+   spawns the next product release + roadmap entry, which seeds the following
+   cycle. Embeds the 4 stages (Opportunity ID → Planning → Implementation &
+   Monitoring → Executive Review), the 12 sections, the AI assessment, and
+   TWO distinct aggregates: Innovation Health (live gauge) and Overall
+   Innovation Score (summary) — sharing one AI Innovation Score value.
+   =========================================================================== */
+
+export type CIStatus =
+  | "draft"
+  | "opportunity_identification"
+  | "innovation_planning"
+  | "implementation_monitoring"
+  | "executive_review"
+  | "approved"
+  | "approved_with_improvements"
+  | "revision_required"
+  | "rejected"
+  | "archived";
+
+export type CIStage =
+  | "opportunity_identification"
+  | "innovation_planning"
+  | "implementation_monitoring"
+  | "executive_review";
+
+export interface CIStageState {
+  stage: CIStage;
+  status: "pending" | "in_progress" | "completed";
+  startedAt: string | null;
+  completedAt: string | null;
+}
+
+/** Section 1 — Innovation Overview. */
+export interface CIOverview {
+  innovationTheme: string;
+  improvementObjective: string;
+  currentProductVersion: string;
+  improvementCategory: string;
+  strategicAlignment: number; // 1..10 stars
+  businessPriority: string;
+  expectedBusinessOutcome: string;
+}
+
+/** Section 2 — Feedback & Opportunity Analysis. The two counts are DERIVED
+ *  from CRM/service context, not typed. */
+export interface CIFeedback {
+  feedbackRecordsAnalyzed: number; // derived
+  serviceTicketsAnalyzed: number; // derived
+  marketIntelligence: string;
+  competitorBenchmark: string;
+  emergingTechnologies: string;
+  improvementOpportunities: string;
+  // opportunityScore is computed
+}
+
+/** Section 3 — Innovation Planning. */
+export interface CIPlanning {
+  innovationType: string;
+  improvementScope: string;
+  targetKpis: string;
+  resourceRequirements: string;
+  estimatedBudget: number;
+  expectedTimeline: string;
+  targetReleaseVersion: string;
+}
+
+export interface CIMilestone {
+  id: string;
+  label: string;
+  targetDate: string;
+  completed: boolean;
+}
+
+/** Section 4 — Implementation Strategy. Milestones drive the Execution Score. */
+export interface CIImplementation {
+  developmentApproach: string;
+  responsibleTeam: string[];
+  milestones: CIMilestone[];
+  riskAssessment: string;
+  deploymentStrategy: string;
+  rolloutPlan: string;
+}
+
+/** Section 5 — Performance Measurement (period-scoped). */
+export interface CIPerformance {
+  productivityImprovement: number; // %
+  costReduction: number;
+  revenueGrowth: number;
+  customerSatisfaction: number; // 1..10 stars
+  productQualityImprovement: number;
+  sustainabilityImpact: number;
+  kpiAchievement: number; // %
+}
+
+/** Section 6 — Lessons Learned. */
+export interface CILessons {
+  successFactors: string;
+  challenges: string;
+  rootCauseAnalysis: string;
+  bestPractices: string;
+  knowledgeAssetsCreated: string;
+  futureRecommendations: string;
+}
+
+/** Section 7 — Innovation Portfolio. */
+export interface CIPortfolio {
+  portfolioCategory: string;
+  strategicValue: number; // 1..10 stars
+  technologyImpact: number;
+  businessImpact: number;
+  esgContribution: number;
+  portfolioPriority: string;
+  // innovationScore is computed
+}
+
+/** Section 8 — AI Continuous Innovation Assessment (computed; single source of
+ *  truth. AI Innovation Score === sidebar "AI Assessment" contributor). */
+export interface CIAIAssessment {
+  aiInnovationScore: number; // /100
+  customerInsight: string;
+  marketTrendAnalysis: string;
+  predictiveImprovement: string;
+  riskPrediction: string;
+  roadmapShortTerm: string;
+  roadmapMidTerm: string;
+  roadmapLongTerm: string;
+  estimatedBusinessValue: number;
+  generatedAt: string;
+}
+
+/** Section 9 — Innovation Summary (computed). Overall Innovation Score is a
+ *  DISTINCT aggregate from the sidebar Innovation Health. */
+export interface CISummary {
+  productImprovementScore: number; // /100
+  customerValueScore: number;
+  businessValueScore: number;
+  innovationMaturityScore: number;
+  overallInnovationScore: number;
+  recommendation: string;
+}
+
+/** Computed section-2 opportunity score + section-7 innovation score tiles. */
+export interface CIComputedScores {
+  opportunityScore: number; // /100 (section 2)
+  innovationScore: number; // /100 (section 7)
+}
+
+/** Sidebar Innovation Health — a live gauge distinct from Overall Innovation
+ *  Score. AI Assessment contributor === section 8 aiInnovationScore. */
+export interface CIHealth {
+  innovationHealthScore: number; // %
+  opportunityScore: number; // %
+  executionScore: number; // % (from milestone completion)
+  impactScore: number; // %
+  aiAssessment: number; // % === CIAIAssessment.aiInnovationScore
+}
+
+export interface CIAttachment {
+  id: string;
+  category: string;
+  filename: string;
+  fileType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  url: string;
+}
+
+/** Section 11 — Review & Approval TABLE row (not chips). */
+export interface CIReviewRow {
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Rejected";
+  status: "Approved" | "In Review" | "Pending";
+  date: string | null;
+}
+
+export type CIApprovalDecision =
+  | "Approved"
+  | "Approved with Improvements"
+  | "Revision Required"
+  | "Rejected";
+
+export interface CIAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  kind?: "audit" | "activity" | "change" | "workflow";
+  stage?: CIStage;
+  fromStatus?: CIStatus;
+  toStatus?: CIStatus;
+}
+
+/** Everything the form edits directly (computed fields excluded). */
+export interface CIFormInput {
+  innovationInitiative: string;
+  businessUnit: string;
+  innovationManager: string;
+  reviewPeriodStart: string;
+  reviewPeriodEnd: string;
+  linkedProductId?: string | null;
+  overview: CIOverview;
+  feedback: CIFeedback;
+  planning: CIPlanning;
+  implementation: CIImplementation;
+  performance: CIPerformance;
+  lessons: CILessons;
+  portfolio: CIPortfolio;
+  attachments: CIAttachment[];
+  recommendation: string;
+}
+
+export interface ContinuousInnovationRecord {
+  id: string;
+  cycleId: string; // INN-2026-0187
+  formCode: string; // INN-2026-25
+  status: CIStatus;
+  currentStage: CIStage;
+  currentStageLabel: string;
+  stages: CIStageState[];
+  version: number;
+  cycleNumber: number; // 1-based sequence within the product
+  innovationInitiative: string;
+  businessUnit: string;
+  innovationManager: string;
+  reviewPeriodStart: string;
+  reviewPeriodEnd: string;
+  // Linked records (resolved).
+  linkedProductId: string | null;
+  linkedProductCode: string | null;
+  linkedProductName: string | null;
+  linkedCommercializationPlanId: string | null;
+  linkedCommercializationPlanCode: string | null;
+  linkedCustomerFeedbackId: string | null;
+  linkedCustomerFeedbackCode: string | null;
+  linkedImprovementProjectId: string | null;
+  linkedImprovementProjectCode: string | null;
+  // Prior cycle in the product sequence (for navigation).
+  previousCycleId: string | null;
+  previousCycleCode: string | null;
+  overview: CIOverview;
+  feedback: CIFeedback;
+  planning: CIPlanning;
+  implementation: CIImplementation;
+  performance: CIPerformance;
+  lessons: CILessons;
+  portfolio: CIPortfolio;
+  computedScores: CIComputedScores;
+  aiAssessment: CIAIAssessment;
+  summary: CISummary;
+  health: CIHealth;
+  keyInsights: string[];
+  attachments: CIAttachment[];
+  reviewRows: CIReviewRow[];
+  approvalDecision: CIApprovalDecision | null;
+  reviewComments: string | null;
+  approvalDate: string | null;
+  nextReleaseId: string | null;
+  nextReleaseCode: string | null;
+  roadmapEntryId: string | null;
+  roadmapEntryCode: string | null;
+  createdBy: string;
+  createdAt: string;
+  lastModifiedBy: string;
+  updatedAt: string;
+  auditTrail: CIAuditEntry[];
+}
+
+export type CIListRow = {
+  id: string;
+  cycleId: string;
+  formCode: string;
+  innovationInitiative: string;
+  status: CIStatus;
+  innovationManager: string;
+  linkedProductName: string | null;
+  cycleNumber: number;
+  reviewPeriodStart: string;
+  reviewPeriodEnd: string;
+  overallInnovationScore: number;
+  innovationHealthScore: number;
+  updatedAt: string;
+};
+
+/** A product's approved-source-of-record for creating cycles. */
+export interface CIProductGlance {
+  id: string;
+  productCode: string;
+  productName: string;
+  currentVersion: string;
+  commercializationPlanId: string | null;
+  commercializationPlanCode: string | null;
+  customerFeedbackId: string | null;
+  customerFeedbackCode: string | null;
+  improvementProjectId: string | null;
+  improvementProjectCode: string | null;
+  feedbackRecords: number;
+  serviceTickets: number;
+  marketGrowthRate: number;
+  revenue: number;
+  businessUnit: string;
+}
+
+export interface CILookups {
+  innovationThemes: string[];
+  improvementCategories: string[];
+  businessPriorities: string[];
+  innovationTypes: string[];
+  improvementScopes: string[];
+  expectedTimelines: string[];
+  developmentApproaches: string[];
+  deploymentStrategies: string[];
+  portfolioCategories: string[];
+  portfolioPriorities: string[];
+  recommendations: string[];
+  approvalDecisions: string[];
+  innovationManagers: string[];
+  teamMembers: string[];
+  businessUnits: string[];
+  attachmentCategories: string[];
+  milestoneTemplates: string[];
+}
+
+/* ===========================================================================
+   Product Strategy — PS (Development → Strategic Planning Module)
+   ---------------------------------------------------------------------------
+   Strategic Planning module in Development, distinct from pipeline modules.
+   Manages the 4-stage Product Strategy lifecycle:
+     Stage 1: Strategic Vision
+     Stage 2: Market & Portfolio Strategy
+     Stage 3: Financial & Innovation Strategy
+     Stage 4: Executive Review (Decision: Approved / Revision Required / Additional Investigation / Rejected)
+
+   Upon 'Approved' decision:
+     - Auto-creates linked Product Roadmap (e.g. PRM-2024-0042)
+       and surfaces its ID.
+   =========================================================================== */
+
+export type ProductStrategyStage =
+  | "strategic_vision"
+  | "market_portfolio_strategy"
+  | "financial_innovation_strategy"
+  | "executive_review";
+
+export type ProductStrategyStatus =
+  | "draft"
+  | "strategic_vision"
+  | "market_portfolio_strategy"
+  | "financial_innovation_strategy"
+  | "executive_review"
+  | "approved"
+  | "revision_required"
+  | "additional_investigation"
+  | "rejected"
+  | "archived";
+
+export type ProductStrategyApprovalDecision =
+  | "approved"
+  | "revision_required"
+  | "additional_investigation"
+  | "rejected";
+
+export interface ProductStrategyStageInfo {
+  stage: ProductStrategyStage;
+  label: string;
+  completed: boolean;
+  active: boolean;
+  completedAt?: string;
+}
+
+export interface ProductStrategyFormInput {
+  // Header editable fields
+  strategyName: string;
+  linkedProductId: string;
+  linkedProductName: string;
+  linkedCommercializationId: string;
+  linkedCommercializationCode: string;
+  linkedBusinessPlanId: string;
+  linkedBusinessPlanCode: string;
+  strategyPeriodStart: string;
+  strategyPeriodEnd: string;
+  businessUnit: string;
+  productManagerId: string;
+  productManagerName: string;
+
+  // 1. Product Vision
+  productVision: string;
+  missionStatement: string;
+  strategicObjectives: string;
+  valueProposition: string;
+  targetCustomers: string[];
+
+  // 2. Market Strategy
+  marketSegments: string[];
+  customerPersonas: string;
+  customerJourney: string;
+
+  // 3. Product Portfolio Strategy
+  productCategory: string;
+  productLine: string;
+  growthPotential: number; // 1-5 stars
+  portfolioRole: string;
+  productLifecycleStage: string;
+  portfolioPriority: string;
+
+  // 4. Innovation Strategy
+  emergingTechnologies: string[];
+  aiBasedInnovations: string;
+  energyStrategy: string[];
+  esgAlignment: number; // 1-5 stars
+
+  // 5. Business Strategy
+  businessModel: string;
+  revenueModel: string;
+  keyPartnerships: string[];
+  competitivePositioning: number; // 1-5 stars
+  marketOpportunitySize: number; // TAM currency
+
+  // 6. Financial Strategy
+  investmentBudget3Y: number;
+  developmentCost: number;
+  revenueForecast: number;
+  grossMargin: number; // %
+  breakevenPeriodMonths: number;
+  roiYears: number;
+  pricingStrategy: string;
+
+  // 7. Risk & Compliance
+  technicalRisk: number; // 1-5 stars
+  marketRisk: number; // 1-5 stars
+  financialRisk: number; // 1-5 stars
+  regulatoryRisk: number; // 1-5 stars
+  cybersecurityRisk: number; // 1-5 stars
+  mitigationStrategy: string;
+  complianceStatus: string;
+  complianceComment: string;
+}
+
+export interface ProductStrategyAIAssessment {
+  aiMarketOpportunityScore: number; // /100
+  aiProductDifferentiationScore: number; // /100
+  aiRevenuePredictionScore: number; // /100
+  aiCompetitivePositionScore: number; // /100
+  aiStrategicRecommendations: string;
+  aiEmergingOpportunity: string;
+  aiRiskPrediction: string;
+  aiRecommendation: string;
+}
+
+export interface ProductStrategySidebarSummary {
+  overallScore: number; // /100
+  marketReadiness: number; // /100
+  innovationScore: number; // /100
+  financialScore: number; // /100
+  strategicScore: number; // /100
+}
+
+export interface ProductStrategyKeyMetrics {
+  tam: number;
+  projectedRevenue: number;
+  timeframe: string;
+  grossMargin: number;
+  expectedRoi: number;
+  breakevenMonths: number;
+  aiRecommendation: string;
+}
+
+export interface ProductStrategyAuditEntry {
+  id: string;
+  timestamp: string;
+  user: string;
+  action: string;
+  details: string;
+}
+
+export interface ProductStrategyRecord {
+  id: string;
+  strategyId: string; // e.g. PS-2024-0017
+  formCode: string; // e.g. PS-2024-08
+  strategyName: string;
+  status: ProductStrategyStatus;
+  currentStage: ProductStrategyStage;
+  currentStageLabel: string;
+
+  linkedProductId: string;
+  linkedProductName: string;
+  linkedCommercializationId: string;
+  linkedCommercializationCode: string;
+  linkedBusinessPlanId: string;
+  linkedBusinessPlanCode: string;
+
+  strategyPeriodStart: string;
+  strategyPeriodEnd: string;
+  businessUnit: string;
+  productManagerId: string;
+  productManagerName: string;
+  productManagerAvatar: string;
+
+  dateCreated: string;
+  lastModified: string;
+
+  stages: ProductStrategyStageInfo[];
+  input: ProductStrategyFormInput;
+  aiAssessment: ProductStrategyAIAssessment;
+  sidebarSummary: ProductStrategySidebarSummary;
+  keyMetrics: ProductStrategyKeyMetrics;
+
+  linkedProductRoadmapId?: string | null;
+  approvalDecision?: ProductStrategyApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+
+  auditTrail: ProductStrategyAuditEntry[];
+}
+
+/* ===========================================================================
+   Product Roadmap Types
+   =========================================================================== */
+
+export type ProductRoadmapStatus =
+  | "draft"
+  | "roadmap_planning"
+  | "resource_technology_planning"
+  | "risk_business_assessment"
+  | "executive_review"
+  | "approved"
+  | "approved_with_conditions"
+  | "revision_required"
+  | "rejected"
+  | "archived";
+
+export type ProductRoadmapStage =
+  | "roadmap_planning"
+  | "resource_technology_planning"
+  | "risk_business_assessment"
+  | "executive_review";
+
+export type ProductRoadmapApprovalDecision =
+  | "approved"
+  | "approved_with_conditions"
+  | "revision_required"
+  | "rejected";
+
+export interface ProductRoadmapStageInfo {
+  stage: ProductRoadmapStage;
+  label: string;
+  completed: boolean;
+  active: boolean;
+  completedAt?: string;
+}
+
+export interface ProductRoadmapReleaseItem {
+  id: string;
+  version: string;
+  releaseName: string;
+  targetDate: string;
+  startMonthIdx: number; // 0-11 for 2024 window
+  durationMonths: number;
+  status: "completed" | "in_progress" | "upcoming" | "planned";
+  priority: "P1 - Critical" | "P2 - High" | "P3 - Medium";
+  color: string;
+}
+
+export interface ProductRoadmapFeatureItem {
+  id: string;
+  featureName: string;
+  category: string;
+  valueStars: number; // 1-5
+  priority: "P1" | "P2" | "P3";
+  status: "in_progress" | "planned" | "under_review" | "completed";
+}
+
+export interface ProductRoadmapTechItem {
+  id: string;
+  initiative: string;
+  area: string;
+  readiness: "High" | "Medium" | "Low";
+  timeline: string;
+}
+
+export interface ProductRoadmapResourceBudgetItem {
+  year: string;
+  budgetPlanned: number;
+  budgetUtilized: number;
+  utilizationPct: number;
+}
+
+export interface ProductRoadmapMilestoneItem {
+  id: string;
+  milestoneName: string;
+  targetDate: string;
+  dependency: string;
+  status: "completed" | "in_progress" | "pending";
+}
+
+export interface ProductRoadmapRiskItem {
+  strategicRisk: number; // 1-5 stars
+  technicalRisk: number; // 1-5 stars
+  marketRisk: number; // 1-5 stars
+  financialRisk: number; // 1-5 stars
+  overallScore: number; // /100
+  mitigationStrategy: string;
+}
+
+export interface ProductRoadmapReviewerItem {
+  id: string;
+  role: string;
+  name: string;
+  decision: "Approved" | "Pending" | "Revision Required";
+  status: string;
+  date?: string;
+}
+
+export interface ProductRoadmapAttachmentItem {
+  id: string;
+  name: string;
+  size: string;
+  type: "pdf" | "pptx" | "xlsx" | "doc";
+  uploadedAt: string;
+}
+
+export interface ProductRoadmapAIInsights {
+  aiReleasePriorityScore: number; // /100
+  aiRevenueForecast: number;
+  aiRoadmapConfidenceScore: number; // /100
+  aiRecommendations: string[];
+}
+
+export interface ProductRoadmapSidebarSummary {
+  overallScore: number; // /100
+  strategicProgress: number; // /100
+  productReadiness: number; // /100
+  innovationProgress: number; // /100
+  budgetHealth: number; // /100
+}
+
+export interface ProductRoadmapBusinessImpact {
+  projectedRevenue: number;
+  revenueYoYDelta: string;
+  grossMarginPct: number;
+  marginYoYDelta: string;
+  marketSharePct: number;
+  marketShareYoYDelta: string;
+}
+
+export interface ProductRoadmapAuditEntry {
+  id: string;
+  timestamp: string;
+  user: string;
+  action: string;
+  details: string;
+}
+
+export interface ProductRoadmapFormInput {
+  roadmapName: string;
+  linkedStrategyId: string;
+  linkedStrategyName: string;
+  linkedProductId: string;
+  linkedProductName: string;
+  productLine: string;
+  businessUnit: string;
+  productManagerId: string;
+  productManagerName: string;
+  roadmapPeriodStart: string;
+  roadmapPeriodEnd: string;
+
+  // Panel 1: Vision Alignment (inherited)
+  productVision: string;
+  targetMarket: string[];
+  valueProposition: string;
+  strategicAlignmentScore: number; // /100
+
+  // Panel 2 & 3: Releases
+  releases: ProductRoadmapReleaseItem[];
+
+  // Panel 4: Top Features
+  features: ProductRoadmapFeatureItem[];
+
+  // Panel 5: Technology Roadmap
+  techInitiatives: ProductRoadmapTechItem[];
+
+  // Panel 6: Resource & Budget Metrics
+  devBudget: number;
+  rdBudget: number;
+  plannedInvestment: number;
+  budgetUtilizationPct: number;
+  resourceBudgetHistory: ProductRoadmapResourceBudgetItem[];
+
+  // Panel 7: Milestones & Dependencies
+  milestones: ProductRoadmapMilestoneItem[];
+
+  // Panel 8: Risk Management
+  risks: ProductRoadmapRiskItem;
+
+  // Panel 9: Attachments
+  attachments: ProductRoadmapAttachmentItem[];
+
+  // Panel 10: Review & Approval
+  reviewers: ProductRoadmapReviewerItem[];
+  approvalDecision: ProductRoadmapApprovalDecision | null;
+  reviewComments: string;
+  approvalDate: string;
+}
+
+export interface ProductRoadmapRecord {
+  id: string;
+  roadmapId: string; // e.g. PRM-2024-0017
+  formCode: string; // e.g. PRM-2024-08
+  roadmapName: string;
+  status: ProductRoadmapStatus;
+  currentStage: ProductRoadmapStage;
+  currentStageLabel: string;
+
+  linkedStrategyId: string;
+  linkedStrategyName: string;
+  linkedProductId: string;
+  linkedProductName: string;
+  productLine: string;
+  businessUnit: string;
+  productManagerId: string;
+  productManagerName: string;
+  productManagerAvatar: string;
+  roadmapPeriodStart: string;
+  roadmapPeriodEnd: string;
+
+  dateCreated: string;
+  lastModified: string;
+  version: string;
+
+  stages: ProductRoadmapStageInfo[];
+  input: ProductRoadmapFormInput;
+  aiInsights: ProductRoadmapAIInsights;
+  sidebarSummary: ProductRoadmapSidebarSummary;
+  businessImpact: ProductRoadmapBusinessImpact;
+
+  linkedReleasePlanId?: string | null;
+  approvalDecision?: ProductRoadmapApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+
+  auditTrail: ProductRoadmapAuditEntry[];
+}
+
+/* ===========================================================================
+   Product Requirements Document (PRD) Types
+   =========================================================================== */
+
+export type PrdStatus =
+  | "draft"
+  | "product_definition"
+  | "functional_ux_requirements"
+  | "technical_requirements"
+  | "executive_review"
+  | "approved"
+  | "approved_with_conditions"
+  | "revision_required"
+  | "rejected"
+  | "archived";
+
+export type PrdStage =
+  | "product_definition"
+  | "functional_ux_requirements"
+  | "technical_requirements"
+  | "executive_review";
+
+export type PrdApprovalDecision =
+  | "approved"
+  | "approved_with_conditions"
+  | "revision_required"
+  | "rejected";
+
+export interface PrdStageInfo {
+  stage: PrdStage;
+  label: string;
+  completed: boolean;
+  active: boolean;
+  completedAt?: string;
+}
+
+export interface PrdBusinessReqItem {
+  id: string;
+  title: string;
+  priority: "P1 - Critical" | "P2 - High" | "P3 - Medium";
+  status: "approved" | "under_review" | "draft";
+}
+
+export interface PrdFunctionalReqItem {
+  id: string;
+  featureStory: string;
+  priority: "P1" | "P2" | "P3";
+  status: "approved" | "under_review" | "draft";
+}
+
+export interface PrdMilestoneItem {
+  milestone: string;
+  plannedDate: string;
+  status: "completed" | "in_progress" | "pending";
+}
+
+export interface PrdRiskItem {
+  riskType: string;
+  riskLevel: "High" | "Medium" | "Low";
+  scoreStars: number; // 1-5
+}
+
+export interface PrdReviewerItem {
+  id: string;
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Revision Required";
+  status: string;
+  date?: string;
+}
+
+export interface PrdAttachmentItem {
+  id: string;
+  name: string;
+  size: string;
+  type: "pdf" | "zip" | "vsdx" | "xlsx" | "fig";
+  uploadedAt: string;
+}
+
+export interface PrdAIQualityScore {
+  overallAiQualityScore: number; // /100
+  requirementCompleteness: number; // /100
+  requirementConsistency: number; // /100
+  riskAssessment: number; // /100
+  scopeValidation: number; // /100
+  aiConfidenceScore: number; // /100
+  aiInsightsSummary: string;
+}
+
+export interface PrdReadinessSummary {
+  overallPrdScore: number; // /100
+  businessReadiness: number; // /100
+  functionalCompleteness: number; // /100
+  technicalReadiness: number; // /100
+  qualityReadiness: number; // /100
+}
+
+export interface PrdAuditEntry {
+  id: string;
+  timestamp: string;
+  user: string;
+  action: string;
+  details: string;
+}
+
+export interface PrdFormInput {
+  prdTitle: string;
+  prdVersion: string;
+  linkedProductId: string;
+  linkedProductName: string;
+  linkedRoadmapId: string;
+  linkedRoadmapName: string;
+  linkedReleaseId: string;
+  linkedReleaseName: string;
+  businessUnit: string;
+  productOwnerId: string;
+  productOwnerName: string;
+  plannedReleaseDate: string;
+
+  // Panel 1: Product Overview
+  productName: string;
+  productVision: string;
+  businessObjective: string;
+  problemStatement: string;
+  productScope: string;
+  outOfScope: string;
+  successCriteria: string;
+
+  // Panel 2: Quick Info
+  productLine: string;
+  category: string;
+  targetMarket: string;
+  primaryUsers: string;
+  lastUpdated: string;
+  nextReviewDate: string;
+
+  // Panels 6-9 Lists
+  businessRequirements: PrdBusinessReqItem[];
+  functionalRequirements: PrdFunctionalReqItem[];
+  milestones: PrdMilestoneItem[];
+  risks: PrdRiskItem[];
+
+  // Panel 10: Attachments
+  attachments: PrdAttachmentItem[];
+
+  // Panel 11: Reviewers & Approval
+  reviewers: PrdReviewerItem[];
+  approvalDecision: PrdApprovalDecision | null;
+  reviewComments: string;
+  approvalDate: string;
+}
+
+export interface PrdRecord {
+  id: string;
+  prdId: string; // e.g. PRD-2024-0017
+  formCode: string; // e.g. PRD-2024-08
+  prdTitle: string;
+  prdVersion: string;
+  status: PrdStatus;
+  currentStage: PrdStage;
+  currentStageLabel: string;
+  createdOn: string;
+
+  linkedProductId: string;
+  linkedProductName: string;
+  linkedRoadmapId: string;
+  linkedRoadmapName: string;
+  linkedReleaseId: string;
+  linkedReleaseName: string;
+
+  businessUnit: string;
+  productOwnerId: string;
+  productOwnerName: string;
+  productOwnerAvatar: string;
+  plannedReleaseDate: string;
+
+  dateCreated: string;
+  lastModified: string;
+  version: string;
+
+  stages: PrdStageInfo[];
+  input: PrdFormInput;
+  aiQuality: PrdAIQualityScore;
+  readinessSummary: PrdReadinessSummary;
+  keyHighlights: string[];
+
+  linkedSystemDesignId?: string | null;
+  approvalDecision?: PrdApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+
+  auditTrail: PrdAuditEntry[];
+}
+
+/* ===========================================================================
+   Product Architecture Types
+   =========================================================================== */
+
+export type ProductArchitectureStage =
+  | "draft"
+  | "architecture_definition"
+  | "hardware_software_architecture"
+  | "security_integration"
+  | "executive_review"
+  | "approved"
+  | "approved_with_conditions"
+  | "revision_required"
+  | "rejected"
+  | "archived";
+
+export type ProductArchitectureStatus =
+  | "Draft"
+  | "Architecture Definition"
+  | "HW & SW Architecture"
+  | "Security & Integration"
+  | "Under Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Archived";
+
+export type ProductArchitectureApprovalDecision =
+  | "approved"
+  | "approved_with_conditions"
+  | "revision_required"
+  | "rejected";
+
+export interface ProductArchitectureStageInfo {
+  stage: ProductArchitectureStage;
+  label: string;
+  completed: boolean;
+  active: boolean;
+  completedAt?: string;
+}
+
+export interface ProductArchitectureReviewerItem {
+  id: string;
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Revision Required" | "Rejected";
+  status: string;
+  date?: string;
+}
+
+export interface ProductArchitectureAttachmentItem {
+  id: string;
+  name: string;
+  size: string;
+  type: "png" | "pdf" | "zip" | "doc" | "vsdx";
+  uploadedAt: string;
+  url?: string;
+}
+
+export interface ProductArchitectureAIQualityScore {
+  aiOverallArchitectureScore: number; // /100
+  aiArchitectureQuality: number; // /100
+  aiScalabilityScore: number; // /100
+  aiSecurityAssessment: number; // /100
+  aiTechnologyRecommendation: string;
+  aiIntegrationAssessment: string;
+  aiRiskAnalysis: string;
+}
+
+export interface ProductArchitectureReadinessSummary {
+  overallArchitectureScore: number; // /100
+  functionalCoverage: number; // /100
+  technicalReadiness: number; // /100
+  securityReadiness: number; // /100
+  integrationReadiness: number; // /100
+  performanceScore: number; // /100
+}
+
+export interface ProductArchitectureAuditEntry {
+  id: string;
+  timestamp: string;
+  user: string;
+  action: string;
+  details: string;
+}
+
+export interface ProductArchitectureFormInput {
+  architectureName: string;
+  architectureVersion: string;
+  businessUnit: string;
+  systemArchitectId: string;
+  systemArchitectName: string;
+  systemArchitectAvatar?: string;
+
+  // Panel 1: Product Architecture Overview
+  productName: string;
+  architectureVision: string;
+  architectureObjective: string;
+  architectureScope: string;
+  designPrinciples: string[];
+  architectureStyle: string;
+  overallDiagramName: string;
+  overallDiagramSize: string;
+
+  // Panel 2: System Architecture
+  systemName: string;
+  systemComponents: string;
+  subsystems: string;
+  functionalBlocks: string;
+  externalInterfaces: string;
+  internalInterfaces: string;
+  architectureStatusBadge: string;
+  systemDiagramUrl: string;
+
+  // Panel 3: Hardware Architecture
+  hardwarePlatform: string;
+  processingUnit: string;
+  sensors: string[];
+  actuators: string[];
+  powerElectronics: string;
+  communicationInterfaces: string[];
+  hardwareConstraints: string;
+
+  // Panel 4: Software Architecture
+  softwarePlatform: string;
+  operatingSystem: string;
+  firmwareComponents: string;
+  middleware: string;
+  applicationModules: string;
+  apisAndServices: string;
+  softwareConstraints: string;
+
+  // Panel 5: Data & Communication Architecture
+  dataFlow: string;
+  dataSources: string;
+  databaseTechnology: string;
+  communicationProtocols: string[];
+  cloudIntegration: string;
+  edgeComputing: boolean;
+  dataSecurity: string;
+
+  // Panel 6: Integration & Interoperability
+  externalSystems: string;
+  erpIntegration: string;
+  apiGateway: string;
+  thirdPartyServices: string;
+  standardsCompliance: string[];
+  integrationRisks: string;
+  integrationStrategy: string;
+
+  // Panel 7: Security & Compliance Architecture
+  securityArchitecture: string;
+  authenticationMethod: string;
+  authorizationModel: string;
+  encryptionStandard: string;
+  regulatoryCompliance: string[];
+  cybersecurityControls: string;
+  securityRiskScore: number; // /100
+
+  // Panel 8: Scalability & Performance
+  expectedUsersDevices: string;
+  throughput: string;
+  latencyTarget: string;
+  availabilityTarget: string;
+  scalabilityStrategy: string;
+  disasterRecoveryPlan: string;
+  performanceScore: number; // /100
+
+  // Panel 9: AI Architecture Assessment
+  aiAssessment: ProductArchitectureAIQualityScore;
+
+  // Panel 10: Attachments
+  attachments: ProductArchitectureAttachmentItem[];
+
+  // Panel 11: Review & Approval
+  reviewers: ProductArchitectureReviewerItem[];
+  approvalDecision: ProductArchitectureApprovalDecision | null;
+  reviewComments: string;
+  approvalDate: string;
+}
+
+export interface ProductArchitectureRecord {
+  id: string;
+  architectureId: string; // e.g. PA-2024-0017
+  formCode: string; // e.g. PA-2024-25
+  architectureName: string;
+  architectureVersion: string;
+  status: ProductArchitectureStatus;
+  currentStage: ProductArchitectureStage;
+  currentStageLabel: string;
+  createdOn: string;
+
+  linkedPrdId: string; // e.g. PRD-2024-0017
+  linkedPrdTitle: string;
+  linkedProductId: string;
+  linkedProductName: string;
+  linkedRoadmapId: string;
+  linkedRoadmapName: string;
+
+  businessUnit: string;
+  systemArchitectId: string;
+  systemArchitectName: string;
+  systemArchitectAvatar: string;
+  lastUpdated: string;
+
+  dateCreated: string;
+  lastModified: string;
+  version: string;
+
+  stages: ProductArchitectureStageInfo[];
+  input: ProductArchitectureFormInput;
+  aiAssessment: ProductArchitectureAIQualityScore;
+  summary: ProductArchitectureReadinessSummary;
+  keyHighlights: string[];
+
+  linkedSystemDesignId?: string | null;
+  approvalDecision?: ProductArchitectureApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+
+  auditTrail: ProductArchitectureAuditEntry[];
+}
+
+/* ===========================================================================
+   Industrial Design Types
+   =========================================================================== */
+
+export type IndustrialDesignStage =
+  | "draft"
+  | "concept_design"
+  | "material_manufacturing_design"
+  | "prototype_validation"
+  | "executive_review"
+  | "approved"
+  | "approved_with_conditions"
+  | "revision_required"
+  | "rejected"
+  | "archived";
+
+export type IndustrialDesignStatus =
+  | "Draft"
+  | "Concept Design"
+  | "Material & Mfg Design"
+  | "Prototype Validation"
+  | "Under Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Archived";
+
+export type IndustrialDesignApprovalDecision =
+  | "approved"
+  | "approved_with_conditions"
+  | "revision_required"
+  | "rejected";
+
+export interface IndustrialDesignStageInfo {
+  stage: IndustrialDesignStage;
+  label: string;
+  completed: boolean;
+  active: boolean;
+  completedAt?: string;
+}
+
+export interface IndustrialDesignReviewerItem {
+  id: string;
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Revision Required" | "Rejected";
+  status: string;
+  date?: string;
+}
+
+export interface IndustrialDesignAttachmentItem {
+  id: string;
+  name: string;
+  size: string;
+  type: "pdf" | "step" | "png" | "zip" | "doc" | "xlsx";
+  uploadedAt: string;
+  url?: string;
+}
+
+export interface IndustrialDesignAIDesignScore {
+  aiOverallDesignScore: number; // /100
+  aiDesignQualityScore: number; // /100
+  aiErgonomicAssessment: string;
+  aiMaterialRecommendation: string;
+  aiManufacturingSuggestions: string;
+  aiSustainabilityAnalysis: string;
+  aiCostOptimization: string;
+}
+
+export interface IndustrialDesignReadinessSummary {
+  overallDesignScore: number; // /100
+  userExperience: number; // /100
+  manufacturability: number; // /100
+  sustainability: number; // /100
+  brandAlignment: number; // /100
+  overallDesign: number; // /100
+}
+
+export interface IndustrialDesignAuditEntry {
+  id: string;
+  timestamp: string;
+  user: string;
+  action: string;
+  details: string;
+}
+
+export interface IndustrialDesignFormInput {
+  designProjectName: string;
+  designVersion: string;
+  businessUnit: string;
+  industrialDesignerId: string;
+  industrialDesignerName: string;
+  industrialDesignerAvatar?: string;
+
+  // Panel 1: Design Overview
+  productName: string;
+  designObjective: string;
+  designVision: string;
+  productCategory: string;
+  targetUsers: string[];
+  designLanguage: string;
+  designStatus: string;
+  productRenderUrl: string;
+
+  // Panel 2: Form Factor & Ergonomics
+  formFactor: string;
+  dimensions: string;
+  weightTarget: string;
+  ergonomicConsiderations: string;
+  accessibilityFeatures: string;
+  humanFactorsAssessment: string;
+  ergonomicScore: number; // /100
+
+  // Panel 3: Aesthetics & Branding
+  productStyle: string;
+  colorPalette: string[];
+  surfaceFinish: string;
+  brandIdentityAlignment: string;
+  logoPlacement: string;
+  uiDisplayIntegration: string;
+  visualAppealScore: number; // /100
+
+  // Panel 4: Material Selection
+  primaryMaterial: string;
+  secondaryMaterials: string;
+  materialGrade: string;
+  sustainabilityRatingStars: number; // 1-5
+  recyclabilityPercent: number;
+  environmentalCompliance: string[];
+  materialCost: string;
+
+  // Panel 5: Manufacturing Considerations
+  manufacturingProcess: string[];
+  assemblyMethod: string;
+  dfmAssessment: string;
+  dfaAssessment: string;
+  toolingRequirements: string;
+  manufacturingConstraints: string;
+  manufacturabilityScore: number; // /100
+
+  // Panel 6: Prototype & Validation
+  prototypeType: string;
+  prototypeStatusBadge: string;
+  userTestingResults: string;
+  designValidation: string;
+  identifiedImprovements: string;
+  designIterationNumber: number;
+  validationScore: number; // /100
+
+  // Panel 7: Sustainability & Compliance
+  ecoDesignStrategy: string;
+  carbonFootprintEstimate: string;
+  energyEfficiencyStars: number; // 1-5
+  packagingDesign: string;
+  regulatoryStandards: string[];
+  sustainabilityNotes: string;
+  complianceScore: number; // /100
+
+  // Panel 8: AI Industrial Design Assessment
+  aiAssessment: IndustrialDesignAIDesignScore;
+
+  // Panel 9: Attachments
+  attachments: IndustrialDesignAttachmentItem[];
+
+  // Panel 10: Review & Approval
+  reviewers: IndustrialDesignReviewerItem[];
+  approvalDecision: IndustrialDesignApprovalDecision | null;
+  reviewComments: string;
+  approvalDate: string;
+}
+
+export interface IndustrialDesignRecord {
+  id: string;
+  designId: string; // e.g. ID-2024-0017
+  formCode: string; // e.g. IDF-2024-25
+  designProjectName: string;
+  designVersion: string;
+  status: IndustrialDesignStatus;
+  currentStage: IndustrialDesignStage;
+  currentStageLabel: string;
+  createdOn: string;
+
+  linkedArchitectureId: string; // e.g. PA-2024-0017
+  linkedArchitectureTitle: string;
+  linkedProductId: string;
+  linkedProductName: string;
+  linkedPrdId: string; // e.g. PRD-2024-0017
+  linkedPrdTitle: string;
+
+  businessUnit: string;
+  industrialDesignerId: string;
+  industrialDesignerName: string;
+  industrialDesignerAvatar: string;
+  lastUpdated: string;
+
+  dateCreated: string;
+  lastModified: string;
+  version: string;
+
+  stages: IndustrialDesignStageInfo[];
+  input: IndustrialDesignFormInput;
+  aiAssessment: IndustrialDesignAIDesignScore;
+  summary: IndustrialDesignReadinessSummary;
+  keyHighlights: string[];
+
+  linkedMechanicalDesignId?: string | null;
+  approvalDecision?: IndustrialDesignApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+
+  auditTrail: IndustrialDesignAuditEntry[];
+}
+
+/* ===========================================================================
+   Mechanical Design Module Interfaces
+   =========================================================================== */
+
+export type MechanicalDesignStatus =
+  | "Draft"
+  | "Under Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Archived";
+
+export type MechanicalDesignStage =
+  | "mechanical_engineering_design"
+  | "material_manufacturing_validation"
+  | "simulation_validation"
+  | "engineering_review";
+
+export type MechanicalDesignApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected";
+
+export interface MechanicalDesignStageInfo {
+  id: MechanicalDesignStage;
+  label: string;
+  stageNumber: number;
+  status: "completed" | "in_progress" | "pending";
+  description: string;
+}
+
+export interface MechanicalDesignTopPartItem {
+  id: string;
+  partNumber: string;
+  partName: string;
+  material: string;
+  process: string;
+  revision: string;
+  status: "Approved" | "In Progress" | "Under Review" | "Draft";
+}
+
+export interface MechanicalEngineeringAnalysisItem {
+  id: string;
+  name: string;
+  status: "Completed" | "In Progress" | "Pending";
+}
+
+export interface MechanicalDesignAttachmentItem {
+  id: string;
+  name: string;
+  typeIcon: string;
+  size: string;
+  category: string;
+  fileType: string;
+  url: string;
+  uploadedAt: string;
+}
+
+export interface MechanicalDesignReviewerItem {
+  id: string;
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Rejected" | "Revision Required";
+  status: string;
+  date: string | null;
+}
+
+export interface MechanicalDesignAIRecommendationItem {
+  id: string;
+  iconType: "material" | "dimension" | "rib" | "cost" | "general";
+  title: string;
+  description: string;
+  impactScore?: string;
+}
+
+export interface MechanicalDesignAIMechanicalScore {
+  aiOverallScore: number; // /100
+  aiDesignQuality: number; // /100
+  aiManufacturability: number; // /100
+  aiStructuralAssessment: number; // /100
+  aiCostOptimization: number; // /100
+}
+
+export interface MechanicalDesignReadinessSummary {
+  overallMechanicalDesignScore: number; // /100
+  structuralReadiness: number; // /100
+  manufacturability: number; // /100
+  reliability: number; // /100
+  simulation: number; // /100
+}
+
+export interface MechanicalDesignAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: MechanicalDesignStage;
+  status?: MechanicalDesignStatus;
+}
+
+export interface MechanicalDesignFormInput {
+  // Panel 1: Mechanical Design Overview
+  productName: string;
+  designObjective: string;
+  designScope: string;
+  designStandards: string[];
+  designMethodology: string;
+  productCategory: string;
+  designStatus: string;
+  productRenderUrl: string;
+
+  // Panel 2: Assembly Design
+  assemblyName: string;
+  assemblyNumber: string;
+  assemblyType: string;
+  parentAssembly: string;
+  numberOfComponents: number;
+  assemblyWeight: string;
+  assemblyStatus: string;
+  assemblyExplodedViewUrl: string;
+
+  // Panel 3: Part Design (Top Parts)
+  topParts: MechanicalDesignTopPartItem[];
+
+  // Panel 4: Mechanism Design
+  mechanismName: string;
+  motionType: string;
+  degreesOfFreedom: number;
+  actuationMethod: string;
+  transmissionType: string;
+  safetyMechanism: string;
+  reliabilityTarget: number; // e.g. 98.00%
+
+  // Panel 5: Material & Manufacturing
+  materialGrade: string;
+  materialStandard: string;
+  heatTreatment: string;
+  surfaceFinish: string;
+  toleranceClass: string;
+  gdtRequirement: string;
+  estManufacturingCost: string;
+
+  // Panel 6: Engineering Analysis
+  engineeringAnalyses: MechanicalEngineeringAnalysisItem[];
+  simulationStatus: string;
+  feaStressPlotUrl: string;
+
+  // Panel 7: Design Validation
+  designVerificationMethod: string;
+  prototypeValidation: string;
+  testResults: string;
+  designIssues: string;
+  correctiveActions: string;
+  validationScore: number; // /100
+  approvalStatusBadge: string;
+
+  // Panel 8: Attachments
+  attachments: MechanicalDesignAttachmentItem[];
+
+  // Panel 9: AI Recommendations
+  aiRecommendations: MechanicalDesignAIRecommendationItem[];
+
+  // Panel 10: Review & Approval
+  reviewers: MechanicalDesignReviewerItem[];
+  approvalDecision: MechanicalDesignApprovalDecision | null;
+  reviewComments: string;
+  approvalDate: string;
+}
+
+export interface MechanicalDesignRecord {
+  id: string;
+  designId: string; // e.g. MD-2024-0017
+  formCode: string; // e.g. MDF-2024-25
+  designProjectName: string;
+  designVersion: string;
+  status: MechanicalDesignStatus;
+  currentStage: MechanicalDesignStage;
+  currentStageLabel: string;
+  createdOn: string;
+
+  linkedIndustrialDesignId: string; // e.g. ID-2024-0012
+  linkedIndustrialDesignTitle: string;
+  linkedProductArchitectureId: string; // e.g. PA-2024-0017
+  linkedProductArchitectureTitle: string;
+  linkedPrdId: string; // e.g. PRD-2024-0017
+  linkedPrdTitle: string;
+  linkedProductId: string;
+  linkedProductName: string;
+
+  businessUnit: string;
+  mechanicalEngineerId: string;
+  mechanicalEngineerName: string;
+  mechanicalEngineerAvatar: string;
+  lastUpdated: string;
+
+  dateCreated: string;
+  lastModified: string;
+  version: string;
+
+  stages: MechanicalDesignStageInfo[];
+  input: MechanicalDesignFormInput;
+  aiAssessment: MechanicalDesignAIMechanicalScore;
+  summary: MechanicalDesignReadinessSummary;
+  keyHighlights: string[];
+
+  linkedPrototypeManufacturingId?: string | null;
+  approvalDecision?: MechanicalDesignApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+
+  auditTrail: MechanicalDesignAuditEntry[];
+}
+
+/* ===========================================================================
+   Electrical Design Module Interfaces
+   =========================================================================== */
+
+export type ElectricalDesignStatus =
+  | "Draft"
+  | "Under Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Archived";
+
+export type ElectricalDesignStage =
+  | "electrical_architecture"
+  | "circuit_pcb_design"
+  | "simulation_validation"
+  | "engineering_review";
+
+export type ElectricalDesignApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected";
+
+export interface ElectricalDesignStageInfo {
+  id: ElectricalDesignStage;
+  label: string;
+  stageNumber: number;
+  status: "completed" | "in_progress" | "pending";
+  description: string;
+}
+
+export interface ElectricalDesignSimulationItem {
+  id: string;
+  name: string;
+  status: "Completed" | "In Progress" | "Pending";
+}
+
+export interface ElectricalDesignAttachmentItem {
+  id: string;
+  name: string;
+  typeIcon: string;
+  size: string;
+  category: string;
+  fileType: string;
+  url: string;
+  uploadedAt: string;
+}
+
+export interface ElectricalDesignReviewerItem {
+  id: string;
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Rejected" | "Revision Required";
+  status: string;
+  date: string | null;
+}
+
+export interface ElectricalDesignAIElectricalScore {
+  aiOverallElectricalScore: number; // /100
+  aiDesignQualityScore: number; // /100
+  aiPowerOptimization: number; // /100
+  aiCircuitReview: number; // /100
+  aiThermalAssessment: number; // /100
+  aiEmcRecommendations: number; // /100
+  aiReliabilityPrediction: number; // /100
+}
+
+export interface ElectricalDesignReadinessSummary {
+  overallElectricalDesignScore: number; // /100
+  powerSystemReadiness: number; // /100
+  circuitReadiness: number; // /100
+  electricalSafetyScore: number; // /100
+  complianceScore: number; // /100
+  recommendation: string;
+}
+
+export interface ElectricalDesignAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: ElectricalDesignStage;
+  status?: ElectricalDesignStatus;
+}
+
+export interface ElectricalDesignFormInput {
+  // Panel 1: Electrical Design Overview
+  productName: string;
+  electricalDesignObjective: string;
+  designScope: string;
+  applicableStandards: string[];
+  designMethodology: string;
+  productCategory: string;
+  designStatus: string;
+  productRenderUrl: string;
+
+  // Panel 2: Electrical Architecture
+  electricalArchitectureName: string;
+  systemVoltage: string;
+  powerRating: string;
+  acDcConfiguration: string;
+  powerDistributionTopology: string;
+  electricalInterfaces: string;
+  architectureStatus: string;
+  architectureDiagramUrl: string;
+
+  // Panel 3: Power System Design
+  powerSource: string;
+  powerSupplyDesign: string;
+  converterType: string;
+  inverterSpecification: string;
+  transformerCoilSpecification: string;
+  powerEfficiencyTarget: string;
+  thermalLoad: string;
+
+  // Panel 4: Circuit & PCB Design
+  pcbName: string;
+  pcbRevision: string;
+  pcbLayerCount: number;
+  circuitCategory: string;
+  majorComponents: string;
+  connectorTypes: string[];
+  pcbStatus: string;
+  pcbBoardImageUrl: string;
+
+  // Panel 5: Wiring & Harness Design
+  harnessName: string;
+  cableType: string;
+  wireGauge: string;
+  connectorStandard: string;
+  routingDescription: string;
+  harnessLength: string;
+  harnessStatus: string;
+  harnessImageUrl: string;
+
+  // Panel 6: Protection & Safety
+  fuseSpecification: string;
+  circuitBreaker: string;
+  isolationMethod: string;
+  earthingMethod: string;
+  surgeProtection: string;
+  functionalSafetyStandard: string[];
+  electricalSafetyScore: number; // /100
+
+  // Panel 7: EMC / EMI & Compliance
+  emcStandard: string[];
+  emiMitigationStrategy: string;
+  shieldingMethod: string;
+  groundingStrategy: string;
+  complianceStatus: string;
+  testPlan: string;
+  complianceScore: number; // /100
+
+  // Panel 8: Simulation & Validation
+  simulations: ElectricalDesignSimulationItem[];
+  validationMethod: string;
+  validationStatus: string;
+  validationScore: number; // /100
+  thermalHeatmapUrl: string;
+
+  // Panel 9: AI Assessment (kept in sync)
+  aiAssessment: ElectricalDesignAIElectricalScore;
+
+  // Panel 10: Design Summary (kept in sync)
+  summary: ElectricalDesignReadinessSummary;
+
+  // Panel 11: Attachments
+  attachments: ElectricalDesignAttachmentItem[];
+
+  // Panel 12: Review & Approval
+  reviewers: ElectricalDesignReviewerItem[];
+  approvalDecision: ElectricalDesignApprovalDecision | null;
+  reviewComments: string;
+  approvalDate: string;
+}
+
+export interface ElectricalDesignRecord {
+  id: string;
+  designId: string; // e.g. ED-2024-0017
+  formCode: string; // e.g. EDF-2024-25
+  designProjectName: string;
+  designVersion: string;
+  status: ElectricalDesignStatus;
+  currentStage: ElectricalDesignStage;
+  currentStageLabel: string;
+  createdOn: string;
+
+  linkedMechanicalDesignId: string; // e.g. MD-2024-0017
+  linkedMechanicalDesignTitle: string;
+  linkedProductArchitectureId: string; // e.g. PA-2024-0017
+  linkedProductArchitectureTitle: string;
+  linkedPrdId: string; // e.g. PRD-2024-0017
+  linkedPrdTitle: string;
+  linkedProductId: string;
+  linkedProductName: string;
+
+  businessUnit: string;
+  electricalEngineerId: string;
+  electricalEngineerName: string;
+  electricalEngineerAvatar: string;
+  lastUpdated: string;
+
+  dateCreated: string;
+  lastModified: string;
+  version: string;
+
+  stages: ElectricalDesignStageInfo[];
+  input: ElectricalDesignFormInput;
+  aiAssessment: ElectricalDesignAIElectricalScore;
+  summary: ElectricalDesignReadinessSummary;
+  keyHighlights: string[];
+
+  linkedPrototypeManufacturingId?: string | null;
+  approvalDecision?: ElectricalDesignApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+
+  auditTrail: ElectricalDesignAuditEntry[];
+}
+
+/* ===========================================================================
+   Electronics Design Module Interfaces
+   =========================================================================== */
+
+export type ElectronicsDesignStatus =
+  | "Draft"
+  | "Under Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Archived";
+
+export type ElectronicsDesignStage =
+  | "electronic_system_architecture"
+  | "component_selection_circuit_design"
+  | "verification_simulation"
+  | "engineering_review";
+
+export type ElectronicsDesignApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected";
+
+export interface ElectronicsDesignStageInfo {
+  id: ElectronicsDesignStage;
+  label: string;
+  stageNumber: number;
+  status: "completed" | "in_progress" | "pending";
+  description: string;
+}
+
+export interface ElectronicsDesignVerificationItem {
+  id: string;
+  name: string;
+  status: "Completed" | "Passed" | "In Progress" | "Pending";
+}
+
+export interface ElectronicsDesignAttachmentItem {
+  id: string;
+  name: string;
+  typeIcon: string;
+  size: string;
+  category: string;
+  fileType: string;
+  url: string;
+  uploadedAt: string;
+}
+
+export interface ElectronicsDesignReviewerItem {
+  id: string;
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Rejected" | "Revision Required";
+  status: string;
+  date: string | null;
+}
+
+export interface ElectronicsDesignAIElectronicsScore {
+  aiOverallElectronicsScore: number; // /100
+  aiDesignQualityScore: number; // /100
+  aiComponentOptimization: number; // /100
+  aiCircuitReview: number; // /100
+  aiSignalIntegrityAnalysis: number; // /100
+  aiThermalRecommendations: number; // /100
+  aiReliabilityPrediction: number; // /100
+}
+
+export interface ElectronicsDesignReadinessSummary {
+  overallElectronicsDesignScore: number; // /100
+  architectureReadiness: number; // /100
+  circuitReadiness: number; // /100
+  hardwareInterfaceScore: number; // /100
+  reliabilityScore: number; // /100
+  recommendation: string;
+}
+
+export interface ElectronicsDesignAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: ElectronicsDesignStage;
+  status?: ElectronicsDesignStatus;
+}
+
+export interface ElectronicsDesignFormInput {
+  // Panel 1: Electronics Design Overview
+  productName: string;
+  electronicsDesignObjective: string;
+  designScope: string;
+  applicableStandards: string[];
+  designMethodology: string;
+  productCategory: string;
+  designStatus: string;
+  productRenderUrl: string;
+
+  // Panel 2: Electronic System Architecture
+  electronicSystemName: string;
+  functionalBlocks: string;
+  boardArchitecture: string;
+  signalInterfaces: string;
+  communicationInterfaces: string[];
+  powerDomains: string;
+  architectureStatus: string;
+  systemDiagramUrl: string;
+
+  // Panel 3: Component Selection
+  microcontrollerProcessor: string;
+  memoryDevices: string;
+  powerDevices: string;
+  passiveComponents: string;
+  sensors: string;
+  communicationModules: string;
+  componentLifecycleStatus: string;
+
+  // Panel 4: Circuit Design
+  circuitName: string;
+  circuitCategory: string;
+  inputVoltage: string;
+  outputVoltage: string;
+  operatingFrequency: string;
+  currentRating: string;
+  circuitStatus: string;
+  circuitSchematicUrl: string;
+
+  // Panel 5: PCB Design Preparation
+  pcbType: string;
+  estimatedLayerCount: number;
+  boardDimensions: string;
+  componentPlacementStrategy: string;
+  thermalManagementMethod: string;
+  highSpeedSignalDesign: string;
+  pcbStackupDiagramUrl: string;
+  pcbReadinessScore: number; // /100
+
+  // Panel 6: Embedded Hardware Interfaces
+  gpioInterfaces: string;
+  adcDacInterfaces: string;
+  pwmOutputs: string;
+  canInterfaceStatus: string;
+  ethernetInterfaceStatus: string;
+  busInterfaces: string[];
+  hardwareInterfaceStatus: string;
+  hardwareInterfaceScore: number; // /100
+
+  // Panel 7: Signal Integrity & Reliability
+  signalIntegrityAnalysis: string;
+  powerIntegrityAnalysis: string;
+  noiseReductionStrategy: string;
+  clockDistribution: string;
+  reliabilityTarget: string;
+  mtbfTarget: string;
+  reliabilityScore: number; // /100
+
+  // Panel 8: Design Verification & Testing
+  verifications: ElectronicsDesignVerificationItem[];
+  verificationScore: number; // /100
+  waveformPlotUrl: string;
+
+  // Panel 9: AI Assessment
+  aiAssessment: ElectronicsDesignAIElectronicsScore;
+
+  // Panel 10: Design Summary
+  summary: ElectronicsDesignReadinessSummary;
+
+  // Panel 11: Attachments
+  attachments: ElectronicsDesignAttachmentItem[];
+
+  // Panel 12: Review & Approval
+  reviewers: ElectronicsDesignReviewerItem[];
+  approvalDecision: ElectronicsDesignApprovalDecision | null;
+  reviewComments: string;
+  approvalDate: string;
+}
+
+export interface ElectronicsDesignRecord {
+  id: string;
+  designId: string; // e.g. EN-2024-0017
+  formCode: string; // e.g. EDF-2024-25
+  designProjectName: string;
+  designVersion: string;
+  status: ElectronicsDesignStatus;
+  currentStage: ElectronicsDesignStage;
+  currentStageLabel: string;
+  createdOn: string;
+
+  linkedElectricalDesignId: string; // e.g. ED-2024-0017
+  linkedElectricalDesignTitle: string;
+  linkedProductArchitectureId: string; // e.g. PA-2024-0017
+  linkedProductArchitectureTitle: string;
+  linkedPrdId: string; // e.g. PRD-2024-0017
+  linkedPrdTitle: string;
+  linkedProductId: string;
+  linkedProductName: string;
+
+  businessUnit: string;
+  electronicsEngineerId: string;
+  electronicsEngineerName: string;
+  electronicsEngineerAvatar: string;
+  lastUpdated: string;
+
+  dateCreated: string;
+  lastModified: string;
+  version: string;
+
+  stages: ElectronicsDesignStageInfo[];
+  input: ElectronicsDesignFormInput;
+  aiAssessment: ElectronicsDesignAIElectronicsScore;
+  summary: ElectronicsDesignReadinessSummary;
+  keyHighlights: string[];
+
+  linkedPcbLayoutId?: string | null;
+  approvalDecision?: ElectronicsDesignApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+
+  auditTrail: ElectronicsDesignAuditEntry[];
+}
+
+/* ===========================================================================
+   Embedded Systems Development Module Interfaces
+   =========================================================================== */
+
+export type EmbeddedDevelopmentStatus =
+  | "Draft"
+  | "Under Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Archived";
+
+export type EmbeddedDevelopmentStage =
+  | "platform_configuration"
+  | "firmware_development"
+  | "testing_validation"
+  | "engineering_review";
+
+export type EmbeddedDevelopmentApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected";
+
+export interface EmbeddedDevelopmentStageInfo {
+  id: EmbeddedDevelopmentStage;
+  label: string;
+  stageNumber: number;
+  status: "completed" | "in_progress" | "pending";
+  description: string;
+}
+
+export interface EmbeddedDevelopmentTestItem {
+  id: string;
+  name: string;
+  status: "Completed" | "Passed" | "In Progress" | "Pending";
+  details?: string;
+}
+
+export interface EmbeddedDevelopmentAttachmentItem {
+  id: string;
+  name: string;
+  typeIcon: string;
+  size: string;
+  category: string;
+  fileType: string;
+  url: string;
+  uploadedAt: string;
+}
+
+export interface EmbeddedDevelopmentReviewerItem {
+  id: string;
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Rejected" | "Revision Required";
+  status: string;
+  date: string | null;
+}
+
+export interface EmbeddedDevelopmentAIEmbeddedScore {
+  aiOverallEmbeddedScore: number; // /100
+  aiFirmwareQualityScore: number; // /100
+  aiCodeOptimization: number; // /100
+  aiMemoryOptimization: number; // /100
+  aiTimingAnalysis: number; // /100
+}
+
+export interface EmbeddedDevelopmentReadinessSummary {
+  overallEmbeddedScore: number; // /100
+  firmwareReadiness: number; // /100
+  hardwareCompatibility: number; // /100
+  performanceScore: number; // /100
+  securityScore: number; // /100
+  recommendation: string;
+}
+
+export interface EmbeddedDevelopmentAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: EmbeddedDevelopmentStage;
+  status?: EmbeddedDevelopmentStatus;
+}
+
+export interface EmbeddedDevelopmentFormInput {
+  // Panel 1: Embedded System Overview
+  productName: string;
+  embeddedSystemName: string;
+  developmentObjective: string;
+  firmwareScope: string;
+  applicableStandards: string[];
+  developmentMethodology: string;
+  developmentStatus: string;
+  hardwareBoardImageUrl: string;
+
+  // Panel 2: Hardware Platform
+  microcontrollerSoc: string;
+  cpuArchitecture: string;
+  clockFrequency: string;
+  flashMemory: string;
+  sram: string;
+  externalMemory: string;
+  hardwareStatus: string;
+  hardwarePlatformDiagramUrl: string;
+
+  // Panel 3: Firmware Architecture
+  firmwareArchitecture: string;
+  bootloader: string;
+  bsp: string;
+  deviceDrivers: string;
+  middlewareComponents: string;
+  applicationModules: string;
+  firmwareStatus: string;
+  layeredArchitectureDiagramUrl: string;
+
+  // Panel 4: RTOS & Task Management
+  rtosPlatform: string;
+  numberOfTasks: number;
+  schedulingMethod: string;
+  taskPriorities: string;
+  interruptManagement: string;
+  memoryManagement: string;
+  rtosStatus: string;
+  taskDistribution: {
+    high: number;
+    medium: number;
+    low: number;
+  };
+
+  // Panel 5: Communication Interfaces
+  interfacesList: { name: string; checked: boolean }[];
+  wirelessInterfaces: string[];
+
+  // Panel 6: Functional Modules
+  functionalModulesList: { name: string; checked: boolean }[];
+
+  // Panel 7: Cybersecurity & Functional Safety
+  secureBoot: string;
+  firmwareEncryption: string;
+  secureKeyStorage: string;
+  watchdogConfiguration: string;
+  functionalSafetyStandards: string[];
+  cybersecurityStandards: string[];
+  securityReadinessScore: number; // /100
+
+  // Panel 8: Firmware Testing & Validation
+  testItems: EmbeddedDevelopmentTestItem[];
+  codeCoverage: number; // %
+  testReportSummary: string;
+  validationScore: number; // /100
+
+  // Panel 9: AI Assessment
+  aiAssessment: EmbeddedDevelopmentAIEmbeddedScore;
+
+  // Panel 10: Development Summary
+  summary: EmbeddedDevelopmentReadinessSummary;
+
+  // Panel 11: Attachments
+  attachments: EmbeddedDevelopmentAttachmentItem[];
+
+  // Panel 12: Review & Approval
+  reviewers: EmbeddedDevelopmentReviewerItem[];
+  approvalDecision: EmbeddedDevelopmentApprovalDecision | null;
+  reviewComments: string;
+  approvalDate: string;
+}
+
+export interface EmbeddedDevelopmentRecord {
+  id: string;
+  developmentId: string; // e.g. EMD-2024-0017
+  formCode: string; // e.g. EMF-2024-25
+  developmentProjectName: string;
+  firmwareVersion: string;
+  status: EmbeddedDevelopmentStatus;
+  currentStage: EmbeddedDevelopmentStage;
+  currentStageLabel: string;
+  createdOn: string;
+
+  linkedElectronicsDesignId: string; // e.g. EN-2024-0017
+  linkedElectronicsDesignTitle: string;
+  linkedElectricalDesignId: string; // e.g. ED-2024-0017
+  linkedElectricalDesignTitle: string;
+  linkedProductArchitectureId: string; // e.g. PA-2024-0017
+  linkedProductArchitectureTitle: string;
+  linkedPrdId: string; // e.g. PRD-2024-0017
+  linkedPrdTitle: string;
+  linkedProductId: string;
+  linkedProductName: string;
+
+  businessUnit: string;
+  embeddedEngineerId: string;
+  embeddedEngineerName: string;
+  embeddedEngineerAvatar: string;
+  lastUpdated: string;
+
+  dateCreated: string;
+  lastModified: string;
+  version: string;
+
+  stages: EmbeddedDevelopmentStageInfo[];
+  input: EmbeddedDevelopmentFormInput;
+  aiAssessment: EmbeddedDevelopmentAIEmbeddedScore;
+  summary: EmbeddedDevelopmentReadinessSummary;
+  keyHighlights: string[];
+
+  linkedSystemIntegrationId?: string | null;
+  approvalDecision?: EmbeddedDevelopmentApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+
+  auditTrail: EmbeddedDevelopmentAuditEntry[];
+}
+
+/* ===========================================================================
+   Firmware Development Module Interfaces
+   =========================================================================== */
+
+export type FirmwareDevelopmentStatus =
+  | "Draft"
+  | "Under Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Archived";
+
+export type FirmwareDevelopmentStage =
+  | "firmware_architecture_implementation"
+  | "communication_security"
+  | "testing_release"
+  | "engineering_review";
+
+export type FirmwareDevelopmentApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected";
+
+export interface FirmwareDevelopmentStageInfo {
+  id: FirmwareDevelopmentStage;
+  label: string;
+  stageNumber: number;
+  status: "completed" | "in_progress" | "pending";
+  description: string;
+}
+
+export interface FirmwareModuleItem {
+  id: string;
+  name: string;
+  category: string;
+  owner: string;
+  status: "Completed" | "Passed" | "In Progress" | "Pending";
+  complexity: number; // /100
+}
+
+export interface FirmwareDevelopmentTestItem {
+  id: string;
+  name: string;
+  status: "Completed" | "Passed" | "In Progress" | "Pending";
+  details?: string;
+}
+
+export interface FirmwareDevelopmentAttachmentItem {
+  id: string;
+  name: string;
+  typeIcon: string;
+  size: string;
+  category: string;
+  fileType: string;
+  url: string;
+  uploadedAt: string;
+}
+
+export interface FirmwareDevelopmentReviewerItem {
+  id: string;
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Rejected" | "Revision Required";
+  status: string;
+  date: string | null;
+}
+
+export interface FirmwareDevelopmentAIFirmwareScore {
+  aiOverallFirmwareScore: number; // /100
+  aiCodeQualityScore: number; // /100
+  aiPerformanceOptimization: number; // /100
+  aiMemoryOptimization: number; // /100
+  aiSecurityAnalysis: number; // /100
+  aiBugPrediction: number; // /100
+  aiMaintainabilityScore: number; // /100
+}
+
+export interface FirmwareDevelopmentReadinessSummary {
+  overallFirmwareScore: number; // /100
+  firmwareReadiness: number; // /100
+  codeQuality: number; // /100
+  securityReadiness: number; // /100
+  testCoverage: number; // /100
+  recommendation: string;
+}
+
+export interface FirmwareDevelopmentAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: FirmwareDevelopmentStage;
+  status?: FirmwareDevelopmentStatus;
+}
+
+export interface FirmwareDevelopmentFormInput {
+  // Panel 1: Firmware Project Overview
+  productName: string;
+  firmwareName: string;
+  firmwareObjective: string;
+  developmentScope: string;
+  supportedHardware: string[];
+  programmingLanguage: string[];
+  developmentStatus: string;
+  mcuChipImageUrl: string;
+
+  // Panel 2: Firmware Architecture
+  firmwareArchitecture: string;
+  bootloaderVersion: string;
+  halVersion: string;
+  bspVersion: string;
+  middlewareStack: string;
+  applicationFramework: string;
+  architectureStatus: string;
+  layeredArchitectureDiagramUrl: string;
+
+  // Panel 3: Software Modules
+  modules: FirmwareModuleItem[];
+
+  // Panel 4: Communication Stack
+  communicationInterfacesList: { name: string; checked: boolean }[];
+  wirelessTags: string[];
+  protocolStackStatus: string;
+
+  // Panel 5: Diagnostics & Safety
+  selfTestFunctions: string;
+  dtcSupportCount: number;
+  faultHandling: string;
+  watchdogStrategy: string;
+  errorRecovery: string;
+  functionalSafetyText: string;
+  diagnosticReadinessScore: number; // /100
+
+  // Panel 6: Cybersecurity
+  secureBoot: string;
+  firmwareSigning: string;
+  secureOtaUpdate: string;
+  encryptionMethod: string;
+  authenticationMethod: string;
+  vulnerabilityAssessment: string;
+  securityScore: number; // /100
+
+  // Panel 7: Testing & QA
+  testItems: FirmwareDevelopmentTestItem[];
+  codeCoverage: number; // %
+  memoryLeakAnalysis: string;
+  testStatus: string;
+
+  // Panel 8: Release Management
+  releaseType: string;
+  buildNumber: string;
+  gitCommitReference: string;
+  releaseNotesUrl: string;
+  otaPackageName: string;
+  otaPackageSize: string;
+  releaseDate: string;
+  releaseStatus: string;
+
+  // Panel 9: AI Assessment
+  aiAssessment: FirmwareDevelopmentAIFirmwareScore;
+
+  // Panel 10: Firmware Summary
+  summary: FirmwareDevelopmentReadinessSummary;
+
+  // Panel 11: Attachments
+  attachments: FirmwareDevelopmentAttachmentItem[];
+
+  // Panel 12: Review & Approval
+  reviewers: FirmwareDevelopmentReviewerItem[];
+  approvalDecision: FirmwareDevelopmentApprovalDecision | null;
+  reviewComments: string;
+  approvalDate: string;
+}
+
+export interface FirmwareDevelopmentRecord {
+  id: string;
+  firmwareId: string; // e.g. FWD-2024-0017
+  formCode: string; // e.g. FWF-2024-25
+  firmwareProjectName: string;
+  firmwareVersion: string;
+  status: FirmwareDevelopmentStatus;
+  currentStage: FirmwareDevelopmentStage;
+  currentStageLabel: string;
+  createdOn: string;
+
+  linkedEmbeddedDevelopmentId: string; // e.g. EMD-2024-0017
+  linkedEmbeddedDevelopmentTitle: string;
+  linkedElectronicsDesignId: string; // e.g. EN-2024-0017
+  linkedElectronicsDesignTitle: string;
+  linkedProductArchitectureId: string; // e.g. PA-2024-0017
+  linkedProductArchitectureTitle: string;
+  linkedPrdId: string; // e.g. PRD-2024-0017
+  linkedPrdTitle: string;
+  linkedProductId: string;
+  linkedProductName: string;
+
+  businessUnit: string;
+  firmwareLeadId: string;
+  firmwareLeadName: string;
+  firmwareLeadAvatar: string;
+  lastUpdated: string;
+
+  dateCreated: string;
+  lastModified: string;
+  version: string;
+
+  stages: FirmwareDevelopmentStageInfo[];
+  input: FirmwareDevelopmentFormInput;
+  aiAssessment: FirmwareDevelopmentAIFirmwareScore;
+  summary: FirmwareDevelopmentReadinessSummary;
+  keyHighlights: string[];
+
+  linkedHardwareBringupId?: string | null;
+  approvalDecision?: FirmwareDevelopmentApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+
+  auditTrail: FirmwareDevelopmentAuditEntry[];
+}
+
+/* ===========================================================================
+   Software Development Module Interfaces
+   =========================================================================== */
+
+export type SoftwareDevelopmentStatus =
+  | "Draft"
+  | "Under Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Archived";
+
+export type SoftwareDevelopmentStage =
+  | "software_architecture_planning"
+  | "development_integration"
+  | "testing_deployment"
+  | "engineering_review";
+
+export type SoftwareDevelopmentApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected";
+
+export interface SoftwareDevelopmentStageInfo {
+  id: SoftwareDevelopmentStage;
+  label: string;
+  stageNumber: number;
+  status: "completed" | "in_progress" | "pending";
+  description: string;
+}
+
+export interface SoftwareDevelopmentTestItem {
+  id: string;
+  name: string;
+  status: "Completed" | "Passed" | "In Progress" | "Pending";
+  details?: string;
+}
+
+export interface SoftwareDevelopmentAttachmentItem {
+  id: string;
+  name: string;
+  typeIcon: string;
+  size: string;
+  category: string;
+  fileType: string;
+  url: string;
+  uploadedAt: string;
+}
+
+export interface SoftwareDevelopmentReviewerItem {
+  id: string;
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Rejected" | "Revision Required";
+  status: string;
+  date: string | null;
+}
+
+export interface SoftwareDevelopmentAISoftwareScore {
+  aiOverallSoftwareScore: number; // /100
+  aiCodeQualityScore: number; // /100
+  aiArchitectureAssessment: number; // /100
+  aiPerformanceOptimization: number; // /100
+  aiSecurityAssessment: number; // /100
+  aiMaintainabilityAnalysis: number; // /100
+  aiTechnicalDebtAnalysis: number; // /100
+}
+
+export interface SoftwareDevelopmentReadinessSummary {
+  overallSoftwareScore: number; // /100
+  developmentProgress: number; // /100
+  architectureReadiness: number; // /100
+  testingReadiness: number; // /100
+  deploymentReadiness: number; // /100
+  recommendation: string;
+}
+
+export interface SoftwareDevelopmentAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: SoftwareDevelopmentStage;
+  status?: SoftwareDevelopmentStatus;
+}
+
+export interface SoftwareDevelopmentFormInput {
+  // Panel 1: Software Project Overview
+  productName: string;
+  softwareName: string;
+  developmentObjective: string;
+  businessRequirements: string;
+  functionalRequirements: string;
+  nonFunctionalRequirements: string;
+  developmentStatus: string;
+  techStackImageUrl: string;
+
+  // Panel 2: Software Architecture
+  architectureStyle: string;
+  applicationArchitecture: string;
+  backendArchitecture: string;
+  frontendArchitecture: string;
+  microservicesCount: number;
+  middleware: string;
+  architectureStatus: string;
+  softwareArchitectureDiagramUrl: string;
+
+  // Panel 3: Technology Stack
+  frontendFramework: string;
+  backendFramework: string;
+  programmingLanguages: string[];
+  database: string;
+  cloudPlatform: string;
+  containerPlatform: string;
+  technologyReadinessScore: number; // /100
+
+  // Panel 4: API & Integration
+  apiTypesList: { name: string; checked: boolean }[];
+  apiGateway: string;
+  thirdPartyApis: string[];
+  erpIntegration: string;
+  apiStatus: string;
+
+  // Panel 5: Database Design
+  databaseType: string;
+  databaseSchemaLink: string;
+  masterTablesCount: number;
+  transactionTablesCount: number;
+  dataRetentionPolicy: string;
+  backupStrategy: string;
+  databaseReadinessScore: number; // /100
+
+  // Panel 6: DevOps & CI/CD
+  sourceCodeRepository: string;
+  branchStrategy: string;
+  cicdPlatform: string;
+  buildPipeline: string;
+  deploymentStrategy: string;
+  monitoringPlatform: string;
+  devOpsStatus: string;
+  pipelineStages: { id: string; name: string; status: "completed" | "in_progress" | "pending" }[];
+  environments: { name: string; active: boolean; badgeColor?: string }[];
+
+  // Panel 7: Security & Compliance
+  authenticationMethod: string;
+  authorizationModel: string;
+  encryptionStandard: string;
+  apiSecurity: string;
+  secureCodingStandard: string;
+  regulatoryComplianceTags: string[];
+  securityScore: number; // /100
+
+  // Panel 8: Testing & Quality Assurance
+  testItems: SoftwareDevelopmentTestItem[];
+  codeCoverage: number; // %
+
+  // Panel 9: AI Assessment
+  aiAssessment: SoftwareDevelopmentAISoftwareScore;
+
+  // Panel 10: Software Release Summary
+  summary: SoftwareDevelopmentReadinessSummary;
+
+  // Panel 11: Attachments
+  attachments: SoftwareDevelopmentAttachmentItem[];
+
+  // Panel 12: Review & Approval
+  reviewers: SoftwareDevelopmentReviewerItem[];
+  approvalDecision: SoftwareDevelopmentApprovalDecision | null;
+  reviewComments: string;
+  approvalDate: string;
+}
+
+export interface SoftwareDevelopmentRecord {
+  id: string;
+  softwareId: string; // e.g. SWD-2024-0017
+  formCode: string; // e.g. SWF-2024-25
+  softwareProjectName: string;
+  softwareVersion: string;
+  status: SoftwareDevelopmentStatus;
+  currentStage: SoftwareDevelopmentStage;
+  currentStageLabel: string;
+  createdOn: string;
+
+  linkedProductArchitectureId: string; // e.g. PA-2024-0017
+  linkedProductArchitectureTitle: string;
+  linkedPrdId: string; // e.g. PRD-2024-0017
+  linkedPrdTitle: string;
+  linkedProductRoadmapId: string; // e.g. RM-2024-0012
+  linkedProductRoadmapTitle: string;
+  linkedFirmwareDevelopmentId: string; // e.g. FWD-2024-0017
+  linkedFirmwareDevelopmentTitle: string;
+  linkedProductId: string;
+  linkedProductName: string;
+
+  businessUnit: string;
+  softwareArchitectId: string;
+  softwareArchitectName: string;
+  softwareArchitectAvatar: string;
+  lastUpdated: string;
+
+  dateCreated: string;
+  lastModified: string;
+  version: string;
+
+  stages: SoftwareDevelopmentStageInfo[];
+  input: SoftwareDevelopmentFormInput;
+  aiAssessment: SoftwareDevelopmentAISoftwareScore;
+  summary: SoftwareDevelopmentReadinessSummary;
+  keyHighlights: string[];
+
+  linkedSystemIntegrationId?: string | null;
+  approvalDecision?: SoftwareDevelopmentApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+
+  auditTrail: SoftwareDevelopmentAuditEntry[];
+}
+
+/* ===========================================================================
+   Mobile App Development Module Interfaces
+   =========================================================================== */
+
+export type MobileDevelopmentStatus =
+  | "Draft"
+  | "Under Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Archived";
+
+export type MobileDevelopmentStage =
+  | "mobile_architecture_uiux"
+  | "application_development"
+  | "testing_deployment"
+  | "review_release";
+
+export type MobileDevelopmentApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected";
+
+export interface MobileDevelopmentStageInfo {
+  id: MobileDevelopmentStage;
+  label: string;
+  stageNumber: number;
+  status: "completed" | "in_progress" | "pending";
+  description: string;
+}
+
+export interface MobileDevelopmentTestItem {
+  id: string;
+  name: string;
+  status: "Completed" | "Passed" | "In Progress" | "Pending" | "Ready";
+  details?: string;
+}
+
+export interface MobileDevelopmentAttachmentItem {
+  id: string;
+  name: string;
+  typeIcon: string;
+  size: string;
+  category: string;
+  fileType: string;
+  url: string;
+  uploadedAt: string;
+}
+
+export interface MobileDevelopmentReviewerItem {
+  id: string;
+  role: string;
+  person: string;
+  decision: "Approved" | "Pending" | "Rejected" | "Revision Required";
+  status: string;
+  date: string | null;
+}
+
+export interface MobileDevelopmentAIMobileScore {
+  aiOverallMobileScore: number; // /100
+  aiCodeQualityScore: number; // /100
+  aiUiReview: number; // /100
+  aiPerformanceAnalysis: number; // /100
+  aiSecurityReview: number; // /100
+  aiCrashPrediction: number; // /100
+  aiUxSuggestions: number; // /100
+}
+
+export interface MobileDevelopmentReadinessSummary {
+  overallMobileScore: number; // /100
+  developmentProgress: number; // /100
+  uiReadiness: number; // /100
+  performanceReadiness: number; // /100
+  storeReadiness: number; // /100
+  recommendation: string;
+}
+
+export interface MobileDevelopmentAuditEntry {
+  at: string;
+  actor: string;
+  event: string;
+  stage?: MobileDevelopmentStage;
+  status?: MobileDevelopmentStatus;
+}
+
+export interface MobileDevelopmentFormInput {
+  // Panel 1: Project Overview
+  productName: string;
+  mobileApplicationName: string;
+  projectObjective: string;
+  targetUsersTags: string[];
+  developmentStatus: string;
+  appMockupImageUrl: string;
+
+  // Panel 2: Architecture
+  architecturePattern: string;
+  mobileFramework: string;
+  platform: string[];
+  stateManagement: string;
+  navigationArchitecture: string;
+  offlineStrategy: string;
+  architectureStatus: string;
+  mobileArchitectureDiagramUrl: string;
+
+  // Panel 3: UI / UX Development
+  uiFramework: string;
+  designSystem: string;
+  responsiveDesign: string;
+  accessibilityCompliance: string;
+  themeSupport: string;
+  localizationSupport: string;
+  uiReadinessScore: number; // /100
+  uiScreensPreviewUrl: string;
+
+  // Panel 4: API & Backend Integration
+  apiIntegrationList: { name: string; checked: boolean }[];
+  integrationStatus: string;
+  totalApisIntegrated: number;
+  successfulCallsPct: string;
+  lastSync: string;
+
+  // Panel 5: Device Features
+  deviceCapabilitiesList: { name: string; checked: boolean }[];
+  deviceIntegrationScore: number; // /100
+
+  // Panel 6: Performance & Security
+  authenticationMethod: string;
+  dataEncryption: string;
+  offlineStorage: string;
+  apiSecurity: string;
+  performanceOptimization: string;
+  batteryOptimization: string;
+  securityScore: number; // /100
+
+  // Panel 7: Testing & Deployment
+  testItems: MobileDevelopmentTestItem[];
+  codeCoverage: number; // %
+
+  // Panel 8: App Store Release Management
+  androidPackageName: string;
+  androidPackageSize: string;
+  iosPackageName: string;
+  iosPackageSize: string;
+  googlePlayStatus: string;
+  appleAppStoreStatus: string;
+  versionCode: number;
+  releaseStatus: string;
+
+  // Panel 9: AI Assessment
+  aiAssessment: MobileDevelopmentAIMobileScore;
+
+  // Panel 10: Mobile Release Summary
+  summary: MobileDevelopmentReadinessSummary;
+
+  // Panel 11: Attachments
+  attachments: MobileDevelopmentAttachmentItem[];
+
+  // Panel 12: Review & Approval
+  reviewers: MobileDevelopmentReviewerItem[];
+  approvalDecision: MobileDevelopmentApprovalDecision | null;
+  reviewComments: string;
+  approvalDate: string;
+}
+
+export interface MobileDevelopmentRecord {
+  id: string;
+  mobileId: string; // e.g. MAD-2024-0017
+  formCode: string; // e.g. MAF-2024-25
+  mobileProjectName: string;
+  mobileAppVersion: string;
+  status: MobileDevelopmentStatus;
+  currentStage: MobileDevelopmentStage;
+  currentStageLabel: string;
+  createdOn: string;
+
+  linkedSoftwareDevelopmentId: string; // e.g. SWD-2024-0012
+  linkedSoftwareDevelopmentTitle: string;
+  linkedProductArchitectureId: string; // e.g. PA-2024-0011
+  linkedProductArchitectureTitle: string;
+  linkedPrdId: string; // e.g. PRD-2024-0009
+  linkedPrdTitle: string;
+  linkedProductRoadmapId: string; // e.g. RM-2024-0010
+  linkedProductRoadmapTitle: string;
+  linkedProductId: string;
+  linkedProductName: string;
+
+  businessUnit: string;
+  mobileArchitectId: string;
+  mobileArchitectName: string;
+  mobileArchitectAvatar: string;
+  lastUpdated: string;
+
+  dateCreated: string;
+  lastModified: string;
+  version: string;
+
+  stages: MobileDevelopmentStageInfo[];
+  input: MobileDevelopmentFormInput;
+  aiAssessment: MobileDevelopmentAIMobileScore;
+  summary: MobileDevelopmentReadinessSummary;
+  keyHighlights: string[];
+
+  linkedMobileOperationsId?: string | null;
+  approvalDecision?: MobileDevelopmentApprovalDecision | null;
+  approvalDate?: string | null;
+  reviewComments?: string | null;
+
+  auditTrail: MobileDevelopmentAuditEntry[];
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,28 +1,19 @@
-import { Link, useRouterState } from "@tanstack/react-router";
-import { cn } from "@/lib/utils";
 import type { CommercializationStatus } from "@/services/types";
+import { ModuleSubTabBar } from "@/components/erp/ModuleSubTabBar";
 
-const TAB_BASE =
-  "shrink-0 whitespace-nowrap border-b-2 border-transparent bg-transparent px-3 pb-3 pt-1 text-[13px] font-semibold text-muted-foreground shadow-none transition-all hover:text-foreground focus-visible:outline-none";
-const TAB_ACTIVE = "border-primary text-primary hover:text-primary font-bold";
+const BASE = "/development/research-innovation/commercialization-planning";
 
-/** The module-level page tab bar (Register vs. Planning Form). */
+/** The module-level Register/Form sub-tab bar. Delegates to the shared
+ *  ModuleSubTabBar so alignment, styling, and active-indicator stay identical
+ *  across every Research & Innovation module. */
 export function CommercializationPageTabBar() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const base = "/development/research-innovation/commercialization-planning";
-  const onForm = pathname.startsWith(`${base}/new`);
-  const tabs = [
-    { to: base, label: "Commercialization Register", active: !onForm },
-    { to: `${base}/new`, label: "Commercialization Planning Form", active: onForm },
-  ];
   return (
-    <div className="flex items-center gap-4 border-b border-border bg-white px-3 shadow-sm">
-      {tabs.map((tab) => (
-        <Link key={tab.to} to={tab.to} className={cn(TAB_BASE, tab.active && TAB_ACTIVE)}>
-          {tab.label}
-        </Link>
-      ))}
-    </div>
+    <ModuleSubTabBar
+      tabs={[
+        { to: BASE, label: "Commercialization Register", tooltip: "Commercialization Register", activeMatch: (p) => !p.startsWith(BASE + "/new") },
+        { to: BASE + "/new", label: "Commercialization Planning Form", tooltip: "Commercialization Planning Form" },
+      ]}
+    />
   );
 }
 

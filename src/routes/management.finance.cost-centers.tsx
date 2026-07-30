@@ -888,7 +888,7 @@ function CostCentersPage() {
                       <Line
                         type="monotone"
                         dataKey="budget"
-                        stroke="var(--primary)"
+                        stroke="#22C55E"
                         strokeWidth={2}
                         dot={false}
                         name="Budget"
@@ -896,7 +896,7 @@ function CostCentersPage() {
                       <Line
                         type="monotone"
                         dataKey="actual"
-                        stroke="#3B82F6"
+                        stroke="#F59E0B"
                         strokeWidth={2}
                         dot={false}
                         name="Actual"

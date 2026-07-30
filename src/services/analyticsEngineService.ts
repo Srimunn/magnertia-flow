@@ -214,11 +214,11 @@ export function generateAssetDistribution(query: DashboardQuery): Promise<AssetC
   return apiRequest(
     `/api/financial/analytics/fixed-assets/distribution?fy=${query.fiscalYear}`,
     () => [
-      { name: "Building", count: 348, percentage: 28, cost: 8020000.0, color: "#0A3C75" },
-      { name: "Machinery", count: 298, percentage: 24, cost: 6880000.0, color: "#336B9F" },
-      { name: "IT Equipment", count: 224, percentage: 18, cost: 5160000.0, color: "#729FC9" },
-      { name: "Vehicles", count: 149, percentage: 12, cost: 3440000.0, color: "#B2C9DF" },
-      { name: "Furniture", count: 100, percentage: 8, cost: 2290000.0, color: "#E2D9C5" },
+      { name: "Building", count: 348, percentage: 28, cost: 8020000.0, color: "#22C55E" },
+      { name: "Machinery", count: 298, percentage: 24, cost: 6880000.0, color: "#8B5CF6" },
+      { name: "IT Equipment", count: 224, percentage: 18, cost: 5160000.0, color: "#EC4899" },
+      { name: "Vehicles", count: 149, percentage: 12, cost: 3440000.0, color: "#14B8A6" },
+      { name: "Furniture", count: 100, percentage: 8, cost: 2290000.0, color: "#F97316" },
       { name: "Others", count: 126, percentage: 10, cost: 2850000.0, color: "#F59E0B" },
     ],
   );
@@ -322,8 +322,8 @@ export function generateReportsByCategory(
   return apiRequest(
     `/api/financial/analytics/reports/category-split?fy=${query.fiscalYear}`,
     () => [
-      { name: "Financial Statements", count: 9, percentage: 37.5, color: "#4F46E5" },
-      { name: "Management Reports", count: 6, percentage: 25.0, color: "#06B6D4" },
+      { name: "Financial Statements", count: 9, percentage: 37.5, color: "#8B5CF6" },
+      { name: "Management Reports", count: 6, percentage: 25.0, color: "#EC4899" },
       { name: "Cash Flow Reports", count: 4, percentage: 16.67, color: "#10B981" },
       { name: "Budget Reports", count: 3, percentage: 12.5, color: "#F59E0B" },
       { name: "Tax Reports", count: 2, percentage: 8.33, color: "#EF4444" },
@@ -380,8 +380,8 @@ export function generateTaxLiabilityByType(
   query: DashboardQuery,
 ): Promise<{ name: string; value: number; percentage: number; color: string }[]> {
   return apiRequest(`/api/financial/analytics/tax/type-split?fy=${query.fiscalYear}`, () => [
-    { name: "GST", value: 4250000, percentage: 33.09, color: "#4F46E5" },
-    { name: "Income Tax", value: 2900000, percentage: 22.56, color: "#3B82F6" },
+    { name: "GST", value: 4250000, percentage: 33.09, color: "#EC4899" },
+    { name: "Income Tax", value: 2900000, percentage: 22.56, color: "#14B8A6" },
     { name: "TDS - Salaries", value: 1250000, percentage: 9.73, color: "#10B981" },
     { name: "TDS - Contractors", value: 680000, percentage: 5.29, color: "#EF4444" },
     { name: "VAT", value: 980000, percentage: 7.63, color: "#F59E0B" },
@@ -440,8 +440,8 @@ export function generateCostCenterDepartmentSplit(
   return apiRequest(
     `/api/financial/analytics/cost-centers/dept-split?fy=${query.fiscalYear}`,
     () => [
-      { name: "Sales", value: 4983320, percentage: 26.55, color: "#4F46E5" },
-      { name: "IT", value: 3085600, percentage: 16.45, color: "#3B82F6" },
+      { name: "Sales", value: 4983320, percentage: 26.55, color: "#EC4899" },
+      { name: "IT", value: 3085600, percentage: 16.45, color: "#14B8A6" },
       { name: "Finance", value: 2320750, percentage: 12.37, color: "#10B981" },
       { name: "R&D", value: 2145790, percentage: 11.43, color: "#EF4444" },
       { name: "Marketing", value: 2010200, percentage: 10.72, color: "#F59E0B" },
@@ -541,8 +541,8 @@ export function generateSalesChannelProfitability(
   return apiRequest(
     `/api/financial/analytics/profitability/sales-channel?fy=${query.fiscalYear}`,
     () => [
-      { name: "Direct Sales", value: 4320000, percentage: 20.34, color: "#4F46E5" },
-      { name: "Distributors", value: 2910000, percentage: 17.89, color: "#3B82F6" },
+      { name: "Direct Sales", value: 4320000, percentage: 20.34, color: "#EC4899" },
+      { name: "Distributors", value: 2910000, percentage: 17.89, color: "#14B8A6" },
       { name: "Online Sales", value: 1630000, percentage: 18.17, color: "#10B981" },
       { name: "Retail Partners", value: 980000, percentage: 16.25, color: "#F59E0B" },
       { name: "Others", value: 480000, percentage: 15.32, color: "#8B5CF6" },
@@ -623,8 +623,8 @@ export function generateActivitiesByModule(
   query: DashboardQuery,
 ): Promise<{ name: string; value: number; percentage: number; color: string }[]> {
   return apiRequest(`/api/financial/analytics/audit/module-splits?fy=${query.fiscalYear}`, () => [
-    { name: "General Ledger", value: 2845, percentage: 22.82, color: "#4F46E5" },
-    { name: "Accounts Payable", value: 2150, percentage: 17.25, color: "#3B82F6" },
+    { name: "General Ledger", value: 2845, percentage: 22.82, color: "#EC4899" },
+    { name: "Accounts Payable", value: 2150, percentage: 17.25, color: "#14B8A6" },
     { name: "Accounts Receivable", value: 1988, percentage: 15.95, color: "#10B981" },
     { name: "Cash & Bank", value: 1512, percentage: 12.14, color: "#F59E0B" },
     { name: "Budgeting", value: 1124, percentage: 9.02, color: "#EF4444" },

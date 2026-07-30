@@ -88,6 +88,22 @@ export function useWidgetPreferences() {
 
   const prefs = query.data ?? EMPTY_PREFS;
 
+  /**
+   * Apply a reducer over the *current cached* doc and persist the returned
+   * patch (only the changed top-level fields). Reading from the cache — not a
+   * captured `prefs` snapshot — means rapid successive updates compose
+   * correctly instead of clobbering one another.
+   */
+  const update = useCallback(
+    (reducer: (current: WidgetPreferencesDoc) => WidgetPreferencesPatch) => {
+      const current = queryClient.getQueryData<WidgetPreferencesDoc>(PREFS_KEY) ?? EMPTY_PREFS;
+      const patch = reducer(current);
+      saveMutation.mutate(patch);
+      return patch;
+    },
+    [queryClient, saveMutation],
+  );
+
   return {
     prefs,
     /** False once placeholder data exists so first paint is instantaneous. */

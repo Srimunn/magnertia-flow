@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { AppShell } from "@/components/erp/AppShell";
 import { OpportunityTabBar, OPPORTUNITY_STATUS_LABEL } from "@/components/erp/OpportunityTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { ErpButton } from "@/components/erp/Button";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { StarRating } from "@/components/erp/StarRating";
@@ -580,9 +581,6 @@ function Section({
     <section id={id} className={cn("card-soft scroll-mt-24 p-5", className)}>
       <div className="mb-4 flex items-center justify-between gap-2">
         <h3 className="flex items-center gap-2 text-sm font-bold text-primary">
-          <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-primary/10 text-[11px] font-bold text-primary">
-            {n}
-          </span>
           {title}
         </h3>
         {right}
@@ -848,7 +846,7 @@ function OpportunityFormPage() {
       <AppShell
         title="Opportunity Discovery"
         breadcrumb="Research & Innovation Development"
-        tabs={<OpportunityTabBar />}
+        tabs={<InnovationAreaTabs sub={<OpportunityTabBar />} />}
       >
         <div className="space-y-4">
           <div className="h-24 animate-pulse rounded-xl bg-muted" />
@@ -862,8 +860,8 @@ function OpportunityFormPage() {
     <AppShell
       title="Opportunity Discovery"
       breadcrumb="Research & Innovation Development"
-      description="Opportunity Discovery Form"
-      tabs={<OpportunityTabBar />}
+      description="Discover and qualify innovation opportunities from validated ideas."
+      tabs={<InnovationAreaTabs sub={<OpportunityTabBar />} />}
     >
       <div className="space-y-5">
         {/* ---------------------------- Record header ---------------------------- */}
@@ -875,11 +873,8 @@ function OpportunityFormPage() {
                   <Compass className="h-5 w-5" />
                 </span>
                 <div>
-                  <div className="text-[11px] uppercase tracking-wider text-muted-foreground">
-                    Opportunity ID
-                  </div>
                   <div className="font-display text-lg font-bold text-foreground">
-                    {record?.opportunityCode ?? "OPP-—"}
+                    {record?.opportunityCode ?? "OPPORTUNITY"}
                   </div>
                 </div>
               </div>
@@ -926,16 +921,20 @@ function OpportunityFormPage() {
                 loading={busy === "draft"}
                 disabled={!editable}
                 onClick={doSave}
+                aria-label="Save Draft"
+                title="Save Draft"
               >
-                <Save className="h-4 w-4" /> Save Draft
+                <Save className="h-4 w-4" />
               </ErpButton>
               <ErpButton
                 size="sm"
                 loading={busy === "submit"}
                 disabled={!editable}
                 onClick={doSubmit}
+                aria-label="Submit for Review"
+                title="Submit for Review"
               >
-                <Send className="h-4 w-4" /> Submit for Review
+                <Send className="h-4 w-4" />
               </ErpButton>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

@@ -1,28 +1,24 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import type { ResearchStatus } from "@/services/types";
+import { ModuleSubTabBar } from "@/components/erp/ModuleSubTabBar";
 
 const TAB_BASE =
   "shrink-0 whitespace-nowrap border-b-2 border-transparent bg-transparent px-3 pb-3 pt-1 text-[13px] font-semibold text-muted-foreground shadow-none transition-all hover:text-foreground focus-visible:outline-none";
 const TAB_ACTIVE = "border-primary text-primary hover:text-primary font-bold";
 
-/** The module-level page tab bar (Register vs. Form). */
+const BASE = "/development/research-innovation/research-management";
+
+/** The module-level Register/Form sub-tab bar. Delegates to the shared
+ *  ModuleSubTabBar so alignment/styling stay identical across every R&I module. */
 export function ResearchMgmtPageTabBar() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const base = "/development/research-innovation/research-management";
-  const onForm = pathname.startsWith(`${base}/new`);
-  const tabs = [
-    { to: base, label: "Research Register", active: !onForm },
-    { to: `${base}/new`, label: "Research Management Form", active: onForm },
-  ];
   return (
-    <div className="flex items-center gap-4 border-b border-border bg-white px-3 shadow-sm">
-      {tabs.map((tab) => (
-        <Link key={tab.to} to={tab.to} className={cn(TAB_BASE, tab.active && TAB_ACTIVE)}>
-          {tab.label}
-        </Link>
-      ))}
-    </div>
+    <ModuleSubTabBar
+      tabs={[
+        { to: BASE, label: "Research Register", tooltip: "Research Management Register", activeMatch: (p) => !p.startsWith(BASE + "/new") },
+        { to: BASE + "/new", label: "Research Management Form", tooltip: "Research Management Form" },
+      ]}
+    />
   );
 }
 

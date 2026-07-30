@@ -27,7 +27,9 @@ import {
   Legend,
 } from "recharts";
 import { AppShell } from "@/components/erp/AppShell";
+import { WidgetPage } from "@/widgets/components/WidgetPage";
 import { IdeaTabBar } from "@/components/erp/IdeaTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { CardHeader } from "@/components/erp/CardHeader";
 import { StatCard } from "@/components/erp/StatCard";
 import { StatusBadge } from "@/components/erp/StatusBadge";
@@ -103,7 +105,7 @@ function IdeaDashboardPage() {
       title="Idea Management"
       breadcrumb="Research & Innovation Development"
       description="Capture, evaluate, and track ideas through the innovation pipeline."
-      tabs={<IdeaTabBar />}
+      tabs={<InnovationAreaTabs sub={<IdeaTabBar />} />}
       topbarActions={newIdeaButton}
     >
       {isLoading || !data ? (
@@ -118,72 +120,7 @@ function IdeaDashboardPage() {
       ) : (
         <div className="space-y-5">
           {/* KPI rows — manual & calculated metrics only (no AI-derived scores) */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard
-              label="Total Ideas Submitted"
-              value={data.kpis.totalIdeas.toString()}
-              neutralText={`${data.kpis.ideasThisMonth} this month`}
-              icon={<Lightbulb className="h-5 w-5" />}
-              iconBg="bg-primary/10"
-              iconColor="text-primary"
-            />
-            <StatCard
-              label="Approval Rate"
-              value={`${data.kpis.approvalRate}%`}
-              neutralText={`${data.kpis.rejectionRate}% rejected`}
-              icon={<CheckCircle2 className="h-5 w-5" />}
-              iconBg="bg-[#22C55E]/10"
-              iconColor="text-[#22C55E]"
-            />
-            <StatCard
-              label="Average Innovation Score"
-              value={`${data.kpis.averageInnovationScore}/100`}
-              neutralText="Calculated from ratings"
-              icon={<Gauge className="h-5 w-5" />}
-              iconBg="bg-[#3B82F6]/10"
-              iconColor="text-[#3B82F6]"
-            />
-            <StatCard
-              label="Estimated Revenue Pipeline"
-              value={formatCurrency(data.kpis.estimatedRevenuePipeline, true)}
-              neutralText="Sum of expected revenue"
-              icon={<TrendingUp className="h-5 w-5" />}
-              iconBg="bg-[#F59E0B]/10"
-              iconColor="text-[#F59E0B]"
-            />
-            <StatCard
-              label="Ideas This Month"
-              value={data.kpis.ideasThisMonth.toString()}
-              neutralText="Newly submitted"
-              icon={<CalendarPlus className="h-5 w-5" />}
-              iconBg="bg-primary/10"
-              iconColor="text-primary"
-            />
-            <StatCard
-              label="Patentable Ideas"
-              value={data.kpis.patentableIdeas.toString()}
-              neutralText="Flagged for IP review"
-              icon={<ShieldCheck className="h-5 w-5" />}
-              iconBg="bg-[#7C5CFF]/10"
-              iconColor="text-[#7C5CFF]"
-            />
-            <StatCard
-              label="Estimated Cost Savings"
-              value={formatCurrency(data.kpis.estimatedCostSavings, true)}
-              neutralText="Sum of cost savings"
-              icon={<PiggyBank className="h-5 w-5" />}
-              iconBg="bg-[#22C55E]/10"
-              iconColor="text-[#22C55E]"
-            />
-            <StatCard
-              label="Avg. Review Time"
-              value={`${data.kpis.averageReviewTimeDays} days`}
-              neutralText="Submit → decision"
-              icon={<Timer className="h-5 w-5" />}
-              iconBg="bg-[#3B82F6]/10"
-              iconColor="text-[#3B82F6]"
-            />
-          </div>
+          <WidgetPage pageId="ri-ideas" skeleton={<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => (<div key={i} className="h-24 animate-pulse rounded-xl bg-muted" />))}</div>} />
 
           <div className="grid gap-5 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_360px]">
             {/* Left — ideas register */}
@@ -195,7 +132,7 @@ function IdeaDashboardPage() {
               {data.rows.length === 0 ? (
                 <EmptyState
                   title="No ideas yet"
-                  description="Submit the first idea to start the innovation pipeline."
+                  description="Submit an idea to start it through the innovation pipeline."
                   action={newIdeaButton}
                 />
               ) : (
@@ -310,7 +247,7 @@ function IdeaDashboardPage() {
                       <Line
                         type="monotone"
                         dataKey="submitted"
-                        stroke="var(--primary)"
+                        stroke="#22C55E"
                         strokeWidth={2}
                         dot={false}
                       />

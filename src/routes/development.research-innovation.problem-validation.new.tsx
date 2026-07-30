@@ -36,6 +36,7 @@ import {
   PV_STATUS_LABEL,
   PV_STAGE_LABEL,
 } from "@/components/erp/ProblemValidationTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { ErpButton } from "@/components/erp/Button";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { StarRating } from "@/components/erp/StarRating";
@@ -438,7 +439,7 @@ function Section({
           >
             <Icon className="h-4 w-4" />
           </span>
-          {n}. {title}
+          {title}
         </h3>
         {right}
       </div>
@@ -694,7 +695,7 @@ function ProblemValidationFormPage() {
       <AppShell
         title="Problem Validation"
         breadcrumb="Research & Innovation Development"
-        tabs={<ProblemValidationTabBar />}
+        tabs={<InnovationAreaTabs sub={<ProblemValidationTabBar />} />}
       >
         <div className="space-y-4">
           <div className="h-24 animate-pulse rounded-xl bg-muted" />
@@ -708,18 +709,18 @@ function ProblemValidationFormPage() {
     <AppShell
       title="Problem Validation"
       breadcrumb="Research & Innovation Development"
-      description="Problem Validation Form"
-      tabs={<ProblemValidationTabBar />}
+      description="Validate problems against customer, market, technical, and business evidence."
+      tabs={<InnovationAreaTabs sub={<ProblemValidationTabBar />} />}
     >
       <div className="space-y-5">
         {/* ---------------------------- Record header ---------------------------- */}
         <div className="card-soft p-5">
           <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
             <div className="grid flex-1 gap-4 sm:grid-cols-3 xl:grid-cols-6">
-              <HeaderCell label="Form Code" value={record?.formCode ?? "PV-—"} />
+              <HeaderCell label="Form Code" value={record?.formCode ?? "—"} />
               <HeaderCell
                 label="Problem Validation ID"
-                value={record?.problemValidationId ?? "PV-—"}
+                value={record?.problemValidationId ?? "—"}
               />
               <DesignThinkingChip
                 label="Linked Design Thinking"
@@ -752,16 +753,20 @@ function ProblemValidationFormPage() {
                 loading={busy === "save"}
                 disabled={!editable}
                 onClick={doSave}
+                aria-label="Save Draft"
+                title="Save Draft"
               >
-                <Save className="h-4 w-4" /> Save Draft
+                <Save className="h-4 w-4" />
               </ErpButton>
               <ErpButton
                 size="sm"
                 loading={busy === "submit"}
                 disabled={!editable || !record}
                 onClick={doSubmit}
+                aria-label="Submit for Review"
+                title="Submit for Review"
               >
-                <Send className="h-4 w-4" /> Submit for Review
+                <Send className="h-4 w-4" />
               </ErpButton>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

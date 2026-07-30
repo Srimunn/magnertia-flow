@@ -38,6 +38,10 @@ let mockDbData: {
   ip_development: any[];
   patent_portfolio: any[];
   licensing_opportunities: any[];
+  continuous_innovation: any[];
+  product_releases: any[];
+  product_roadmap: any[];
+  ci_source_context: any[];
 } = {
   accounts: [],
   journals: [],
@@ -65,6 +69,10 @@ let mockDbData: {
   ip_development: [],
   patent_portfolio: [],
   licensing_opportunities: [],
+  continuous_innovation: [],
+  product_releases: [],
+  product_roadmap: [],
+  ci_source_context: [],
 };
 
 let mockDbLoaded = false;
@@ -129,7 +137,11 @@ type MockCollectionName =
   | "patents"
   | "ip_development"
   | "patent_portfolio"
-  | "licensing_opportunities";
+  | "licensing_opportunities"
+  | "continuous_innovation"
+  | "product_releases"
+  | "product_roadmap"
+  | "ci_source_context";
 
 class MockCollection {
   name: MockCollectionName;
@@ -327,6 +339,10 @@ let mockPatentsCollection: MockCollection | null = null;
 let mockIpDevelopmentCollection: MockCollection | null = null;
 let mockPatentPortfolioCollection: MockCollection | null = null;
 let mockLicensingOpportunitiesCollection: MockCollection | null = null;
+let mockContinuousInnovationCollection: MockCollection | null = null;
+let mockProductReleasesCollection: MockCollection | null = null;
+let mockProductRoadmapCollection: MockCollection | null = null;
+let mockCiSourceContextCollection: MockCollection | null = null;
 
 function initMockCollections() {
   mockAccountsCollection = new MockCollection("accounts");
@@ -355,6 +371,10 @@ function initMockCollections() {
   mockIpDevelopmentCollection = new MockCollection("ip_development");
   mockPatentPortfolioCollection = new MockCollection("patent_portfolio");
   mockLicensingOpportunitiesCollection = new MockCollection("licensing_opportunities");
+  mockContinuousInnovationCollection = new MockCollection("continuous_innovation");
+  mockProductReleasesCollection = new MockCollection("product_releases");
+  mockProductRoadmapCollection = new MockCollection("product_roadmap");
+  mockCiSourceContextCollection = new MockCollection("ci_source_context");
 }
 
 let connectionFailed = false;
@@ -606,6 +626,70 @@ export async function getExperimentProjectsCollection() {
   } catch (err) {
     if (!mockExperimentProjectsCollection) initMockCollections();
     return mockExperimentProjectsCollection as any;
+  }
+}
+
+/** Continuous Innovation — one document per improvement CYCLE (period-scoped,
+ *  ordered per product), embedding the 4 stages, 12 section shapes, AI
+ *  assessment, innovation summary + health aggregate, review table and audit
+ *  trail. A product accumulates many cycles over time. */
+export async function getContinuousInnovationCollection() {
+  if (checkUseMockDb() || connectionFailed) {
+    if (!mockContinuousInnovationCollection) initMockCollections();
+    return mockContinuousInnovationCollection as any;
+  }
+  try {
+    const database = await connectToDatabase();
+    return database.collection("continuous_innovation");
+  } catch (err) {
+    if (!mockContinuousInnovationCollection) initMockCollections();
+    return mockContinuousInnovationCollection as any;
+  }
+}
+
+/** Product Releases — the next release auto-created when a cycle is approved. */
+export async function getProductReleasesCollection() {
+  if (checkUseMockDb() || connectionFailed) {
+    if (!mockProductReleasesCollection) initMockCollections();
+    return mockProductReleasesCollection as any;
+  }
+  try {
+    const database = await connectToDatabase();
+    return database.collection("product_releases");
+  } catch (err) {
+    if (!mockProductReleasesCollection) initMockCollections();
+    return mockProductReleasesCollection as any;
+  }
+}
+
+/** Product Roadmap — roadmap entries updated on cycle approval. */
+export async function getProductRoadmapCollection() {
+  if (checkUseMockDb() || connectionFailed) {
+    if (!mockProductRoadmapCollection) initMockCollections();
+    return mockProductRoadmapCollection as any;
+  }
+  try {
+    const database = await connectToDatabase();
+    return database.collection("product_roadmap");
+  } catch (err) {
+    if (!mockProductRoadmapCollection) initMockCollections();
+    return mockProductRoadmapCollection as any;
+  }
+}
+
+/** CI Source Context — launch/CRM/product/market/finance rollup a cycle reads
+ *  on creation (analyzed feedback counts, product KPIs, market/finance data). */
+export async function getCiSourceContextCollection() {
+  if (checkUseMockDb() || connectionFailed) {
+    if (!mockCiSourceContextCollection) initMockCollections();
+    return mockCiSourceContextCollection as any;
+  }
+  try {
+    const database = await connectToDatabase();
+    return database.collection("ci_source_context");
+  } catch (err) {
+    if (!mockCiSourceContextCollection) initMockCollections();
+    return mockCiSourceContextCollection as any;
   }
 }
 

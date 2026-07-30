@@ -74,7 +74,7 @@ export const RevenueTrendWidget = memo(function RevenueTrendWidget() {
         }
       />
       <div className="mb-3 flex items-center gap-4 text-[12px] text-muted-foreground">
-        <LegendDot color="var(--primary)" label="Revenue" />
+        <LegendDot color="#22C55E" label="Revenue" />
         <LegendDot color="var(--chart-bar-expense)" label="Expenses" />
         <span className="inline-flex items-center gap-1.5">
           <svg width="14" height="6" viewBox="0 0 14 6">
@@ -116,7 +116,7 @@ export const RevenueTrendWidget = memo(function RevenueTrendWidget() {
               }}
               formatter={(v: number) => formatCurrency(v, true)}
             />
-            <Bar dataKey="revenue" fill="var(--primary)" radius={[4, 4, 0, 0]} barSize={14} />
+            <Bar dataKey="revenue" fill="#22C55E" radius={[4, 4, 0, 0]} barSize={14} />
             <Bar
               dataKey="expenses"
               fill="var(--chart-bar-expense)"

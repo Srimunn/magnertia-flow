@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AppShell } from "@/components/erp/AppShell";
+import { NotificationsBell } from "@/components/erp/NotificationsBell";
 import { Skeleton } from "@/components/ui/skeleton";
 import { WidgetPage } from "@/widgets/components/WidgetPage";
 
@@ -29,6 +30,7 @@ function Dashboard() {
       title="Financial Management Dashboard"
       breadcrumb="Financial Management"
       description="Get a real-time overview of your financial performance."
+      topbarActions={<NotificationsBell />}
     >
       <WidgetPage pageId="dashboard" skeleton={<DashboardSkeleton />} />
     </AppShell>

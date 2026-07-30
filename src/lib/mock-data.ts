@@ -77,9 +77,9 @@ export const cashFlowSummary = [
 export const netCashFlow = 4_980_000;
 
 export const expenseDistribution = [
-  { name: "Cost of Goods Sold", value: 35, color: "#4F46E5" },
-  { name: "Operating Expenses", value: 25, color: "#3B82F6" },
-  { name: "Employee Expenses", value: 20, color: "#10B981" },
+  { name: "Cost of Goods Sold", value: 35, color: "#EC4899" },
+  { name: "Operating Expenses", value: 25, color: "#8B5CF6" },
+  { name: "Employee Expenses", value: 20, color: "#22C55E" },
   { name: "Marketing & Sales", value: 10, color: "#F59E0B" },
   { name: "Other Expenses", value: 10, color: "#8B5CF6" },
 ];
@@ -87,22 +87,22 @@ export const expenseDistribution = [
 export const agingReceivable = {
   total: 7_650_000,
   buckets: [
-    { bucket: "0 - 30 Days", amount: 2_850_000, pct: 37.3, color: "#0A3C75" },
-    { bucket: "31 - 60 Days", amount: 1_900_000, pct: 24.8, color: "#336B9F" },
-    { bucket: "61 - 90 Days", amount: 1_350_000, pct: 17.6, color: "#729FC9" },
-    { bucket: "91 - 120 Days", amount: 850_000, pct: 11.1, color: "#B2C9DF" },
-    { bucket: "120+ Days", amount: 700_000, pct: 9.2, color: "#E2D9C5" },
+    { bucket: "0 - 30 Days", amount: 2_850_000, pct: 37.3, color: "#8B5CF6" },
+    { bucket: "31 - 60 Days", amount: 1_900_000, pct: 24.8, color: "#22C55E" },
+    { bucket: "61 - 90 Days", amount: 1_350_000, pct: 17.6, color: "#8B5CF6" },
+    { bucket: "91 - 120 Days", amount: 850_000, pct: 11.1, color: "#F59E0B" },
+    { bucket: "120+ Days", amount: 700_000, pct: 9.2, color: "#EF4444" },
   ],
 };
 
 export const agingPayable = {
   total: 5_420_000,
   buckets: [
-    { bucket: "0 - 30 Days", amount: 2_100_000, pct: 38.7, color: "#0A3C75" },
-    { bucket: "31 - 60 Days", amount: 1_500_000, pct: 27.7, color: "#336B9F" },
-    { bucket: "61 - 90 Days", amount: 1_000_000, pct: 18.5, color: "#729FC9" },
-    { bucket: "91 - 120 Days", amount: 550_000, pct: 10.1, color: "#B2C9DF" },
-    { bucket: "120+ Days", amount: 270_000, pct: 9.0, color: "#E2D9C5" },
+    { bucket: "0 - 30 Days", amount: 2_100_000, pct: 38.7, color: "#8B5CF6" },
+    { bucket: "31 - 60 Days", amount: 1_500_000, pct: 27.7, color: "#22C55E" },
+    { bucket: "61 - 90 Days", amount: 1_000_000, pct: 18.5, color: "#8B5CF6" },
+    { bucket: "91 - 120 Days", amount: 550_000, pct: 10.1, color: "#F59E0B" },
+    { bucket: "120+ Days", amount: 270_000, pct: 9.0, color: "#EF4444" },
   ],
 };
 
@@ -474,8 +474,8 @@ export const ledgerKpisRaw = {
 };
 
 export const accountDistribution = [
-  { name: "Assets", value: 48, color: "#0A3C75" },
-  { name: "Liabilities", value: 26, color: "#3B82F6" },
+  { name: "Assets", value: 48, color: "#8B5CF6" },
+  { name: "Liabilities", value: 26, color: "#8B5CF6" },
   { name: "Equity", value: 15, color: "#F59E0B" },
   { name: "Revenue", value: 7, color: "#22C55E" },
   { name: "Expenses", value: 4, color: "#9CA3AF" },
@@ -844,7 +844,7 @@ export const apAgingSummary = {
   total: 3_245_780,
   buckets: [
     { bucket: "0 - 30 Days", amount: 1_250_000, pct: 38.33, color: "#22C55E" },
-    { bucket: "31 - 60 Days", amount: 850_200, pct: 26.17, color: "#3B82F6" },
+    { bucket: "31 - 60 Days", amount: 850_200, pct: 26.17, color: "#8B5CF6" },
     { bucket: "61 - 90 Days", amount: 560_400, pct: 17.25, color: "#F59E0B" },
     { bucket: "91 - 120 Days", amount: 320_100, pct: 9.85, color: "#EF4444" },
     { bucket: "120+ Days", amount: 260_080, pct: 8.4, color: "#9CA3AF" },
@@ -1292,7 +1292,7 @@ export const arAgingSummary = {
   total: 4_130_000,
   buckets: [
     { bucket: "0 - 30 Days", amount: 1_840_000, pct: 44.68, color: "#22C55E" },
-    { bucket: "31 - 60 Days", amount: 1_020_000, pct: 24.75, color: "#3B82F6" },
+    { bucket: "31 - 60 Days", amount: 1_020_000, pct: 24.75, color: "#8B5CF6" },
     { bucket: "61 - 90 Days", amount: 640_250, pct: 15.54, color: "#F59E0B" },
     { bucket: "91 - 120 Days", amount: 352_100, pct: 8.54, color: "#EF4444" },
     { bucket: "120+ Days", amount: 258_430, pct: 6.26, color: "#9CA3AF" },
@@ -1717,10 +1717,10 @@ export const revenueTrend = revenueExpenseTrend.map((r) => ({
 }));
 
 export const revenueSources = [
-  { name: "Vehicle Sales", value: 14_200_000, color: "#0A3C75" },
-  { name: "Service & Maintenance", value: 4_850_000, color: "#336B9F" },
-  { name: "Charging Network", value: 3_620_000, color: "#729FC9" },
-  { name: "Accessories & Parts", value: 1_910_000, color: "#E2D9C5" },
+  { name: "Vehicle Sales", value: 14_200_000, color: "#8B5CF6" },
+  { name: "Service & Maintenance", value: 4_850_000, color: "#22C55E" },
+  { name: "Charging Network", value: 3_620_000, color: "#8B5CF6" },
+  { name: "Accessories & Parts", value: 1_910_000, color: "#EF4444" },
 ];
 
 export const revenueByStation = [
@@ -1735,11 +1735,11 @@ export const revenueByStation = [
 ];
 
 export const expenseCategories = [
-  { category: "Cost of Goods Sold", amount: 6_566_000, color: "#0A3C75" },
-  { category: "Operating Expenses", amount: 4_690_000, color: "#336B9F" },
-  { category: "Employee Expenses", amount: 3_752_000, color: "#729FC9" },
-  { category: "Marketing & Sales", amount: 1_876_000, color: "#B2C9DF" },
-  { category: "Other Expenses", amount: 1_876_000, color: "#E2D9C5" },
+  { category: "Cost of Goods Sold", amount: 6_566_000, color: "#8B5CF6" },
+  { category: "Operating Expenses", amount: 4_690_000, color: "#22C55E" },
+  { category: "Employee Expenses", amount: 3_752_000, color: "#8B5CF6" },
+  { category: "Marketing & Sales", amount: 1_876_000, color: "#F59E0B" },
+  { category: "Other Expenses", amount: 1_876_000, color: "#EF4444" },
 ];
 
 export const expenses = [
@@ -3431,9 +3431,9 @@ export const mockPerformanceTrend = [
 ];
 
 export const mockReportsCategoryDistribution = [
-  { name: "Financial Statements", count: 9, percentage: 37.5, color: "#4F46E5" },
-  { name: "Management Reports", count: 6, percentage: 25.0, color: "#06B6D4" },
-  { name: "Cash Flow Reports", count: 4, percentage: 16.67, color: "#10B981" },
+  { name: "Financial Statements", count: 9, percentage: 37.5, color: "#EC4899" },
+  { name: "Management Reports", count: 6, percentage: 25.0, color: "#14B8A6" },
+  { name: "Cash Flow Reports", count: 4, percentage: 16.67, color: "#22C55E" },
   { name: "Budget Reports", count: 3, percentage: 12.5, color: "#F59E0B" },
   { name: "Tax Reports", count: 2, percentage: 8.33, color: "#EF4444" },
   { name: "Custom Reports", count: 2, percentage: 8.33, color: "#8B5CF6" },
@@ -3642,9 +3642,9 @@ export const mockTaxTrend = [
 ];
 
 export const mockTaxTypeDistribution = [
-  { name: "GST", value: 4250000, percentage: 33.09, color: "#4F46E5" },
-  { name: "Income Tax", value: 2900000, percentage: 22.56, color: "#3B82F6" },
-  { name: "TDS - Salaries", value: 1250000, percentage: 9.73, color: "#10B981" },
+  { name: "GST", value: 4250000, percentage: 33.09, color: "#EC4899" },
+  { name: "Income Tax", value: 2900000, percentage: 22.56, color: "#8B5CF6" },
+  { name: "TDS - Salaries", value: 1250000, percentage: 9.73, color: "#22C55E" },
   { name: "TDS - Contractors", value: 680000, percentage: 5.29, color: "#EF4444" },
   { name: "VAT", value: 980000, percentage: 7.63, color: "#F59E0B" },
   { name: "Others", value: 2785760, percentage: 21.7, color: "#8B5CF6" },
@@ -3782,9 +3782,9 @@ export const mockCostCenterTrend = [
 ];
 
 export const mockCostCenterDepartmentSplits = [
-  { name: "Sales", value: 4983320, percentage: 26.55, color: "#4F46E5" },
-  { name: "IT", value: 3085600, percentage: 16.45, color: "#3B82F6" },
-  { name: "Finance", value: 2320750, percentage: 12.37, color: "#10B981" },
+  { name: "Sales", value: 4983320, percentage: 26.55, color: "#EC4899" },
+  { name: "IT", value: 3085600, percentage: 16.45, color: "#8B5CF6" },
+  { name: "Finance", value: 2320750, percentage: 12.37, color: "#22C55E" },
   { name: "R&D", value: 2145790, percentage: 11.43, color: "#EF4444" },
   { name: "Marketing", value: 2010200, percentage: 10.72, color: "#F59E0B" },
   { name: "Others", value: 4219770, percentage: 22.48, color: "#8B5CF6" },
@@ -3968,9 +3968,9 @@ export const mockProfitabilityRegions = [
 ];
 
 export const mockProfitabilitySalesChannels = [
-  { name: "Direct Sales", value: 4320000, percentage: 20.34, color: "#4F46E5" },
-  { name: "Distributors", value: 2910000, percentage: 17.89, color: "#3B82F6" },
-  { name: "Online Sales", value: 1630000, percentage: 18.17, color: "#10B981" },
+  { name: "Direct Sales", value: 4320000, percentage: 20.34, color: "#EC4899" },
+  { name: "Distributors", value: 2910000, percentage: 17.89, color: "#8B5CF6" },
+  { name: "Online Sales", value: 1630000, percentage: 18.17, color: "#22C55E" },
   { name: "Retail Partners", value: 980000, percentage: 16.25, color: "#F59E0B" },
   { name: "Others", value: 480000, percentage: 15.32, color: "#8B5CF6" },
 ];
@@ -4442,9 +4442,9 @@ export const mockActivityTrend = [
 ];
 
 export const mockModuleSplits = [
-  { name: "General Ledger", value: 2845, percentage: 22.82, color: "#4F46E5" },
-  { name: "Accounts Payable", value: 2150, percentage: 17.25, color: "#3B82F6" },
-  { name: "Accounts Receivable", value: 1988, percentage: 15.95, color: "#10B981" },
+  { name: "General Ledger", value: 2845, percentage: 22.82, color: "#EC4899" },
+  { name: "Accounts Payable", value: 2150, percentage: 17.25, color: "#8B5CF6" },
+  { name: "Accounts Receivable", value: 1988, percentage: 15.95, color: "#22C55E" },
   { name: "Cash & Bank", value: 1512, percentage: 12.14, color: "#F59E0B" },
   { name: "Budgeting", value: 1124, percentage: 9.02, color: "#EF4444" },
   { name: "Tax Management", value: 824, percentage: 6.62, color: "#8B5CF6" },
@@ -4860,9 +4860,9 @@ export const mockUserActivityTrend = [
 ];
 
 export const mockUsersByDepartment = [
-  { name: "Engineering", value: 42, color: "#4F46E5" },
-  { name: "Sales", value: 15, color: "#3B82F6" },
-  { name: "Finance", value: 18, color: "#10B981" },
+  { name: "Engineering", value: 42, color: "#EC4899" },
+  { name: "Sales", value: 15, color: "#8B5CF6" },
+  { name: "Finance", value: 18, color: "#22C55E" },
   { name: "Customer Support", value: 9, color: "#F59E0B" },
   { name: "Human Resources", value: 7, color: "#8B5CF6" },
 ];
@@ -5079,9 +5079,9 @@ export const mockComplianceStatusBreakdown = [
 ];
 
 export const mockComplianceFrameworkBreakdown = [
-  { name: "GDPR", value: 1, color: "#4F46E5" },
-  { name: "SOX", value: 1, color: "#3B82F6" },
-  { name: "ISO 27001", value: 2, color: "#10B981" },
+  { name: "GDPR", value: 1, color: "#EC4899" },
+  { name: "SOX", value: 1, color: "#8B5CF6" },
+  { name: "ISO 27001", value: 2, color: "#22C55E" },
   { name: "Labor Law", value: 2, color: "#F59E0B" },
   { name: "Environmental", value: 1, color: "#8B5CF6" },
 ];
@@ -5367,7 +5367,7 @@ export const mockProductionTrend = [
 ];
 
 export const mockWorkOrdersByStatus = [
-  { name: "Planned", value: 1, color: "#3B82F6" },
+  { name: "Planned", value: 1, color: "#8B5CF6" },
   { name: "In Progress", value: 2, color: "#F59E0B" },
   { name: "Completed", value: 3, color: "#22C55E" },
   { name: "On Hold", value: 1, color: "#9CA3AF" },
@@ -5567,7 +5567,7 @@ export const mockConversionRateTrend = [
 ];
 
 export const mockOpportunitiesByStage = [
-  { name: "Prospecting", value: 2, color: "#3B82F6" },
+  { name: "Prospecting", value: 2, color: "#8B5CF6" },
   { name: "Qualification", value: 1, color: "#8B5CF6" },
   { name: "Proposal", value: 1, color: "#F59E0B" },
   { name: "Negotiation", value: 1, color: "#F59E0B" },
@@ -5576,7 +5576,7 @@ export const mockOpportunitiesByStage = [
 ];
 
 export const mockLeadStatusBreakdown = [
-  { name: "New", value: 2, color: "#3B82F6" },
+  { name: "New", value: 2, color: "#8B5CF6" },
   { name: "Contacted", value: 2, color: "#F59E0B" },
   { name: "Qualified", value: 1, color: "#8B5CF6" },
   { name: "Converted", value: 2, color: "#22C55E" },
@@ -5722,9 +5722,9 @@ export const mockGrantsAppliedTrend = [
 ];
 
 export const mockApplicationsByScheme = [
-  { name: "FAME II Subsidy", value: 2, color: "#4F46E5" },
-  { name: "State EV Manufacturing Incentive", value: 2, color: "#3B82F6" },
-  { name: "PLI Scheme for Auto Components", value: 2, color: "#10B981" },
+  { name: "FAME II Subsidy", value: 2, color: "#EC4899" },
+  { name: "State EV Manufacturing Incentive", value: 2, color: "#8B5CF6" },
+  { name: "PLI Scheme for Auto Components", value: 2, color: "#22C55E" },
   { name: "Green Energy Infrastructure Grant", value: 1, color: "#F59E0B" },
 ];
 

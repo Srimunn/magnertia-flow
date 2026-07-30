@@ -643,7 +643,7 @@ function AuditTrailPage() {
                       <Line
                         type="monotone"
                         dataKey="value"
-                        stroke="var(--primary)"
+                        stroke="#22C55E"
                         strokeWidth={2}
                         dot={false}
                         name="Activity Count"

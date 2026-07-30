@@ -33,6 +33,7 @@ import {
   DT_STATUS_LABEL,
   DT_STAGE_LABEL,
 } from "@/components/erp/DesignThinkingTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { ErpButton } from "@/components/erp/Button";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { StarRating } from "@/components/erp/StarRating";
@@ -406,14 +407,6 @@ function Section({
     <section className={cn("card-soft p-5", locked && "opacity-60", className)}>
       <div className="mb-4 flex items-start justify-between gap-2">
         <div className="flex items-center gap-2.5">
-          <span
-            className={cn(
-              "grid h-7 w-7 shrink-0 place-items-center rounded-full text-[11px] font-bold",
-              stage ? STAGE_ACCENT[stage] : "bg-primary/10 text-primary",
-            )}
-          >
-            {n}
-          </span>
           <div>
             <h3 className="text-sm font-bold text-foreground">{title}</h3>
             {sub && <p className="text-[11px] text-muted-foreground">{sub}</p>}
@@ -659,7 +652,7 @@ function DesignThinkingFormPage() {
       <AppShell
         title="Design Thinking"
         breadcrumb="Research & Innovation Development"
-        tabs={<DesignThinkingTabBar />}
+        tabs={<InnovationAreaTabs sub={<DesignThinkingTabBar />} />}
       >
         <div className="space-y-4">
           <div className="h-24 animate-pulse rounded-xl bg-muted" />
@@ -676,16 +669,16 @@ function DesignThinkingFormPage() {
     <AppShell
       title="Design Thinking"
       breadcrumb="Research & Innovation Development"
-      description="Design Thinking Form"
-      tabs={<DesignThinkingTabBar />}
+      description="Run design-thinking cycles from empathy through tested prototypes."
+      tabs={<InnovationAreaTabs sub={<DesignThinkingTabBar />} />}
     >
       <div className="space-y-5">
         {/* ---------------------------- Record header ---------------------------- */}
         <div className="card-soft p-5">
           <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
             <div className="grid flex-1 gap-4 sm:grid-cols-3 xl:grid-cols-6">
-              <HeaderCell label="Form Code" value={record?.formCode ?? "DT-—"} />
-              <HeaderCell label="Design Thinking ID" value={record?.designThinkingId ?? "DT-—"} />
+              <HeaderCell label="Form Code" value={record?.formCode ?? "—"} />
+              <HeaderCell label="Design Thinking ID" value={record?.designThinkingId ?? "—"} />
               <div>
                 <div className="text-[11px] uppercase tracking-wider text-muted-foreground">
                   Project
@@ -764,16 +757,20 @@ function DesignThinkingFormPage() {
                 loading={busy === "save"}
                 disabled={!editable}
                 onClick={doSave}
+                aria-label="Save Draft"
+                title="Save Draft"
               >
-                <Save className="h-4 w-4" /> Save Draft
+                <Save className="h-4 w-4" />
               </ErpButton>
               <ErpButton
                 size="sm"
                 loading={busy === "submit"}
                 disabled={!editable || !record}
                 onClick={doSubmit}
+                aria-label="Submit for Review"
+                title="Submit for Review"
               >
-                <Send className="h-4 w-4" /> Submit for Review
+                <Send className="h-4 w-4" />
               </ErpButton>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -1207,7 +1204,7 @@ function DesignThinkingFormPage() {
             {/* 4 — Prototype */}
             <Section
               n={4}
-              title="Prototype"
+              title="Prototype Development"
               sub="Prototype Planning"
               stage="prototype"
               locked={stageLocked("prototype")}

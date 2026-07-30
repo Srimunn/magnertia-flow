@@ -31,6 +31,7 @@ import {
   RESEARCH_TAB_LABEL,
   type ResearchTab,
 } from "@/components/erp/ResearchMgmtTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { StarRating } from "@/components/erp/StarRating";
 import { ErpButton } from "@/components/erp/Button";
@@ -436,9 +437,6 @@ function SectionCard(p: { n: number; title: string; children: ReactNode; classNa
   return (
     <section className={cn("card-soft space-y-3 p-4", p.className)}>
       <h3 className="flex items-center gap-2 text-sm font-bold text-foreground">
-        <span className="flex h-5 w-5 items-center justify-center rounded-md bg-primary/10 text-[11px] font-bold text-primary">
-          {p.n}
-        </span>
         {p.title}
       </h3>
       {p.children}
@@ -780,8 +778,8 @@ function ResearchFormPage() {
       <AppShell
         title="Research Management"
         breadcrumb="Research & Innovation Development · Research Management"
-        description="Research Management Form"
-        tabs={<ResearchMgmtPageTabBar />}
+        description="Plan, execute, and review applied research projects."
+        tabs={<InnovationAreaTabs sub={<ResearchMgmtPageTabBar />} />}
       >
         <div className="space-y-4">
           <div className="h-24 animate-pulse rounded-xl bg-muted" />
@@ -796,8 +794,8 @@ function ResearchFormPage() {
     <AppShell
       title="Research Management"
       breadcrumb="Research & Innovation Development · Research Management"
-      description="Research Management Form"
-      tabs={<ResearchMgmtPageTabBar />}
+      description="Plan, execute, and review applied research projects."
+      tabs={<InnovationAreaTabs sub={<ResearchMgmtPageTabBar />} />}
     >
       <div className="space-y-5">
         {/* ------------------------- Record header bar ------------------------- */}
@@ -902,13 +900,12 @@ function ResearchFormPage() {
             </div>
             <div className="flex flex-wrap items-center gap-2">
               {editable && (
-                <ErpButton variant="outline" onClick={() => saveMut.mutate()} disabled={busy}>
+                <ErpButton variant="outline" onClick={() => saveMut.mutate()} disabled={busy} aria-label="Save Draft" title="Save Draft">
                   {saveMut.isPending ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
                     <Save className="h-4 w-4" />
                   )}
-                  {record ? "Save Draft" : "Create Research Project"}
                 </ErpButton>
               )}
               {record && editable && !allStagesDone && (
@@ -922,13 +919,12 @@ function ResearchFormPage() {
                 </ErpButton>
               )}
               {record && editable && allStagesDone && (
-                <ErpButton onClick={() => submitMut.mutate()} disabled={busy}>
+                <ErpButton onClick={() => submitMut.mutate()} disabled={busy} aria-label="Submit for Review" title="Submit for Review">
                   {submitMut.isPending ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
                     <Send className="h-4 w-4" />
                   )}
-                  Submit for Review
                 </ErpButton>
               )}
               {record && status === "under_review" && (
@@ -1391,7 +1387,7 @@ function ResearchFormPage() {
                 )}
               </SectionCard>
 
-              <SectionCard n={9} title="Commercialization">
+              <SectionCard n={9} title="Commercialization Planning">
                 <div className="grid grid-cols-2 gap-3">
                   <Field label="Market Size">
                     <NumberInput

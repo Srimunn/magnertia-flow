@@ -3,10 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Plus, Radar, CheckCircle2, Eye, Gauge } from "lucide-react";
 import { AppShell } from "@/components/erp/AppShell";
+import { WidgetPage } from "@/widgets/components/WidgetPage";
 import {
   TechScoutingPageTabBar,
   TECH_SCOUTING_STATUS_LABEL,
 } from "@/components/erp/TechScoutingTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatCard } from "@/components/erp/StatCard";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { DataTable, EmptyState } from "@/components/erp/DataTable";
@@ -80,8 +82,8 @@ function TechScoutingRegisterPage() {
     <AppShell
       title="Technology Scouting"
       breadcrumb="Research & Innovation Development"
-      description="Discover, evaluate and monitor emerging technologies for strategic R&D."
-      tabs={<TechScoutingPageTabBar />}
+      description="Scout, assess, and track emerging technologies."
+      tabs={<InnovationAreaTabs sub={<TechScoutingPageTabBar />} />}
       topbarActions={newButton}
     >
       {listQuery.isLoading ? (
@@ -95,40 +97,7 @@ function TechScoutingRegisterPage() {
         </div>
       ) : (
         <div className="space-y-5">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard
-              label="Technologies Scouted"
-              value={kpis.total.toString()}
-              neutralText="All statuses"
-              icon={<Radar className="h-5 w-5" />}
-              iconBg="bg-primary/10"
-              iconColor="text-primary"
-            />
-            <StatCard
-              label="Approved"
-              value={kpis.approved.toString()}
-              neutralText="In Innovation Portfolio"
-              icon={<CheckCircle2 className="h-5 w-5" />}
-              iconBg="bg-[#22C55E]/10"
-              iconColor="text-[#22C55E]"
-            />
-            <StatCard
-              label="On Watchlist"
-              value={kpis.watchlist.toString()}
-              neutralText="Continuous monitoring"
-              icon={<Eye className="h-5 w-5" />}
-              iconBg="bg-[#3B82F6]/10"
-              iconColor="text-[#3B82F6]"
-            />
-            <StatCard
-              label="Average Technology Score"
-              value={`${kpis.avgScore}/100`}
-              neutralText="AI-calculated"
-              icon={<Gauge className="h-5 w-5" />}
-              iconBg="bg-[#F59E0B]/10"
-              iconColor="text-[#F59E0B]"
-            />
-          </div>
+          <WidgetPage pageId="ri-scouting" skeleton={<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => (<div key={i} className="h-24 animate-pulse rounded-xl bg-muted" />))}</div>} />
 
           <div className="flex flex-wrap items-center gap-2">
             {FILTERS.map((f) => {

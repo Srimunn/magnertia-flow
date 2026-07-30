@@ -588,7 +588,7 @@ function ProfitabilityAnalysisPage() {
                         yAxisId="left"
                         type="monotone"
                         dataKey="netProfit"
-                        stroke="var(--primary)"
+                        stroke="#22C55E"
                         strokeWidth={2}
                         dot={false}
                         name="Net Profit"
@@ -645,7 +645,7 @@ function ProfitabilityAnalysisPage() {
                         }}
                         formatter={(v: number) => [`${v}%`, "Net Margin"]}
                       />
-                      <Bar dataKey="netMargin" fill="var(--primary)" radius={[0, 4, 4, 0]} />
+                      <Bar dataKey="netMargin" fill="#22C55E" radius={[0, 4, 4, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>

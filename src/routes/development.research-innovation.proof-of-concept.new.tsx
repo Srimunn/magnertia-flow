@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { AppShell } from "@/components/erp/AppShell";
 import { PocPageTabBar, POC_STATUS_LABEL } from "@/components/erp/PocTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { StarRating } from "@/components/erp/StarRating";
 import { ErpButton } from "@/components/erp/Button";
@@ -333,14 +334,6 @@ function SectionCard(p: {
   return (
     <section className={cn("card-soft space-y-3 p-4", p.className)}>
       <h3 className="flex items-center gap-2 text-sm font-bold text-foreground">
-        <span
-          className={cn(
-            "flex h-5 w-5 items-center justify-center rounded-md text-[11px] font-bold",
-            p.accent ?? "bg-primary/10 text-primary",
-          )}
-        >
-          {p.n}
-        </span>
         {p.title}
       </h3>
       {p.children}
@@ -612,10 +605,10 @@ function PocFormPage() {
   if (id && recordQuery.isLoading) {
     return (
       <AppShell
-        title="Proof of Concept (PoC)"
+        title="Proof of Concept"
         breadcrumb="Research & Innovation Development · Proof of Concept (PoC)"
-        description="PoC Form"
-        tabs={<PocPageTabBar />}
+        description="Build and validate proofs of concept before prototyping."
+        tabs={<InnovationAreaTabs sub={<PocPageTabBar />} />}
       >
         <div className="space-y-4">
           <div className="h-28 animate-pulse rounded-xl bg-muted" />
@@ -627,10 +620,10 @@ function PocFormPage() {
 
   return (
     <AppShell
-      title="Proof of Concept (PoC)"
+      title="Proof of Concept"
       breadcrumb="Research & Innovation Development · Proof of Concept (PoC)"
-      description="PoC Form"
-      tabs={<PocPageTabBar />}
+      description="Build and validate proofs of concept before prototyping."
+      tabs={<InnovationAreaTabs sub={<PocPageTabBar />} />}
     >
       <div className="space-y-5">
         {/* ------------------------- Record header bar ------------------------- */}
@@ -735,13 +728,12 @@ function PocFormPage() {
             </div>
             <div className="flex flex-wrap items-center gap-2">
               {editable && (
-                <ErpButton variant="outline" onClick={() => saveMut.mutate()} disabled={busy}>
+                <ErpButton variant="outline" onClick={() => saveMut.mutate()} disabled={busy} aria-label="Save Draft" title="Save Draft">
                   {saveMut.isPending ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
                     <Save className="h-4 w-4" />
                   )}
-                  {record ? "Save Draft" : "Create PoC Project"}
                 </ErpButton>
               )}
               {record && editable && !allStagesDone && (
@@ -755,13 +747,12 @@ function PocFormPage() {
                 </ErpButton>
               )}
               {record && editable && allStagesDone && (
-                <ErpButton onClick={() => submitMut.mutate()} disabled={busy}>
+                <ErpButton onClick={() => submitMut.mutate()} disabled={busy} aria-label="Submit for Review" title="Submit for Review">
                   {submitMut.isPending ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
                     <Send className="h-4 w-4" />
                   )}
-                  Submit for Review
                 </ErpButton>
               )}
               {record && status === "final_review" && (

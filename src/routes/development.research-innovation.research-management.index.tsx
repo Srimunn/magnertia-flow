@@ -3,7 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Plus, Microscope, CheckCircle2, Activity, Gauge } from "lucide-react";
 import { AppShell } from "@/components/erp/AppShell";
+import { WidgetPage } from "@/widgets/components/WidgetPage";
 import { ResearchMgmtPageTabBar, RESEARCH_STATUS_LABEL } from "@/components/erp/ResearchMgmtTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatCard } from "@/components/erp/StatCard";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { DataTable, EmptyState } from "@/components/erp/DataTable";
@@ -79,8 +81,8 @@ function ResearchRegisterPage() {
     <AppShell
       title="Research Management"
       breadcrumb="Research & Innovation Development"
-      description="The R&D execution engine — from research proposal to publications, patents and commercialization."
-      tabs={<ResearchMgmtPageTabBar />}
+      description="Plan, execute, and review applied research projects."
+      tabs={<InnovationAreaTabs sub={<ResearchMgmtPageTabBar />} />}
       topbarActions={newButton}
     >
       {listQuery.isLoading ? (
@@ -94,40 +96,7 @@ function ResearchRegisterPage() {
         </div>
       ) : (
         <div className="space-y-5">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard
-              label="Research Projects"
-              value={kpis.total.toString()}
-              neutralText="All statuses"
-              icon={<Microscope className="h-5 w-5" />}
-              iconBg="bg-primary/10"
-              iconColor="text-primary"
-            />
-            <StatCard
-              label="Active"
-              value={kpis.active.toString()}
-              neutralText="In the pipeline"
-              icon={<Activity className="h-5 w-5" />}
-              iconBg="bg-[#3B82F6]/10"
-              iconColor="text-[#3B82F6]"
-            />
-            <StatCard
-              label="Approved"
-              value={kpis.approved.toString()}
-              neutralText="Advancing to feasibility"
-              icon={<CheckCircle2 className="h-5 w-5" />}
-              iconBg="bg-[#22C55E]/10"
-              iconColor="text-[#22C55E]"
-            />
-            <StatCard
-              label="Avg Research Impact"
-              value={`${kpis.avgImpact}/10`}
-              neutralText="AI-calculated"
-              icon={<Gauge className="h-5 w-5" />}
-              iconBg="bg-[#F59E0B]/10"
-              iconColor="text-[#F59E0B]"
-            />
-          </div>
+          <WidgetPage pageId="ri-research" skeleton={<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => (<div key={i} className="h-24 animate-pulse rounded-xl bg-muted" />))}</div>} />
 
           <div className="flex flex-wrap items-center gap-2">
             {FILTERS.map((f) => {

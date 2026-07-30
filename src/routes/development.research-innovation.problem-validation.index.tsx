@@ -3,11 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Plus, ShieldCheck, CheckCircle2, Gauge, Layers } from "lucide-react";
 import { AppShell } from "@/components/erp/AppShell";
+import { WidgetPage } from "@/widgets/components/WidgetPage";
 import {
   ProblemValidationTabBar,
   PV_STATUS_LABEL,
   PV_STAGE_LABEL,
 } from "@/components/erp/ProblemValidationTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatCard } from "@/components/erp/StatCard";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { DataTable, EmptyState } from "@/components/erp/DataTable";
@@ -97,8 +99,8 @@ function ProblemValidationRegisterPage() {
     <AppShell
       title="Problem Validation"
       breadcrumb="Research & Innovation Development"
-      description="Verify problems are real, significant and worth solving before feasibility."
-      tabs={<ProblemValidationTabBar />}
+      description="Validate problems against customer, market, technical, and business evidence."
+      tabs={<InnovationAreaTabs sub={<ProblemValidationTabBar />} />}
       topbarActions={newButton}
     >
       {listQuery.isLoading ? (
@@ -112,40 +114,7 @@ function ProblemValidationRegisterPage() {
         </div>
       ) : (
         <div className="space-y-5">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard
-              label="Total Records"
-              value={kpis.total.toString()}
-              neutralText="All stages"
-              icon={<ShieldCheck className="h-5 w-5" />}
-              iconBg="bg-primary/10"
-              iconColor="text-primary"
-            />
-            <StatCard
-              label="In Progress"
-              value={kpis.inProgress.toString()}
-              neutralText="Actively validating"
-              icon={<Layers className="h-5 w-5" />}
-              iconBg="bg-[#3B82F6]/10"
-              iconColor="text-[#3B82F6]"
-            />
-            <StatCard
-              label="Validation Rate"
-              value={`${kpis.validationRate}%`}
-              neutralText="Of decided records"
-              icon={<CheckCircle2 className="h-5 w-5" />}
-              iconBg="bg-[#22C55E]/10"
-              iconColor="text-[#22C55E]"
-            />
-            <StatCard
-              label="Average Score"
-              value={`${kpis.avgScore}/100`}
-              neutralText="Calculated from stages"
-              icon={<Gauge className="h-5 w-5" />}
-              iconBg="bg-[#F59E0B]/10"
-              iconColor="text-[#F59E0B]"
-            />
-          </div>
+          <WidgetPage pageId="ri-validation" skeleton={<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => (<div key={i} className="h-24 animate-pulse rounded-xl bg-muted" />))}</div>} />
 
           <div className="flex flex-wrap items-center gap-2">
             {FILTERS.map((f) => {

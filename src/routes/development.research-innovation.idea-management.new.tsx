@@ -29,6 +29,7 @@ import {
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { AppShell } from "@/components/erp/AppShell";
 import { IdeaTabBar } from "@/components/erp/IdeaTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { ErpButton } from "@/components/erp/Button";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { StarRating } from "@/components/erp/StarRating";
@@ -632,29 +633,13 @@ function Section({
   className?: string;
   right?: ReactNode;
 }) {
-  const [open, setOpen] = useState(true);
   return (
     <div className={cn("card-soft p-5", className)}>
       <div className="flex items-center justify-between gap-2">
-        <button
-          type="button"
-          onClick={() => setOpen((o) => !o)}
-          className="flex items-center gap-2 text-left"
-        >
-          <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-primary/10 text-[11px] font-bold text-primary">
-            {n}
-          </span>
-          <h3 className="text-sm font-bold text-foreground">{title}</h3>
-          <ChevronDown
-            className={cn(
-              "h-4 w-4 text-muted-foreground transition-transform",
-              !open && "-rotate-90",
-            )}
-          />
-        </button>
+        <h3 className="text-sm font-bold text-foreground">{title}</h3>
         {right}
       </div>
-      {open && <div className="mt-4">{children}</div>}
+      <div className="mt-4">{children}</div>
     </div>
   );
 }
@@ -885,9 +870,9 @@ function IdeaSubmissionPage() {
   if (isEdit && !seeded && editQuery.isLoading) {
     return (
       <AppShell
-        title="Idea Submission Form"
+        title="Idea Management"
         breadcrumb="Research & Innovation Development"
-        tabs={<IdeaTabBar />}
+        tabs={<InnovationAreaTabs sub={<IdeaTabBar />} />}
       >
         <div className="space-y-4">
           <div className="h-20 animate-pulse rounded-xl bg-muted" />
@@ -899,11 +884,11 @@ function IdeaSubmissionPage() {
 
   const headerActions = (
     <div className="flex items-center gap-2">
-      <ErpButton variant="outline" size="sm" loading={busy === "draft"} onClick={doSave}>
-        <Save className="h-4 w-4" /> Save Draft
+      <ErpButton variant="outline" size="sm" loading={busy === "draft"} onClick={doSave} aria-label="Save Draft" title="Save Draft">
+        <Save className="h-4 w-4" />
       </ErpButton>
-      <ErpButton size="sm" loading={busy === "submit"} onClick={doSubmit}>
-        <Send className="h-4 w-4" /> Submit Idea
+      <ErpButton size="sm" loading={busy === "submit"} onClick={doSubmit} aria-label="Submit Idea" title="Submit Idea">
+        <Send className="h-4 w-4" />
       </ErpButton>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -933,8 +918,8 @@ function IdeaSubmissionPage() {
     <AppShell
       title="Idea Management"
       breadcrumb="Research & Innovation Development"
-      description="Idea Submission Form · IDM-001"
-      tabs={<IdeaTabBar />}
+      description="Capture, evaluate, and track ideas through the innovation pipeline."
+      tabs={<InnovationAreaTabs sub={<IdeaTabBar />} />}
     >
       <div className="space-y-5">
         {/* Idea header bar */}
@@ -942,10 +927,7 @@ function IdeaSubmissionPage() {
           <div className="flex items-center gap-6">
             <div className="shrink-0">
               <div className="font-display text-xl font-bold text-foreground">
-                {editRecord?.ideaCode ?? "IDM-—"}
-              </div>
-              <div className="text-[11px] uppercase tracking-wider text-muted-foreground">
-                Idea ID
+                {editRecord?.ideaCode ?? "IDEA"}
               </div>
             </div>
             <StageStepper status={status} />

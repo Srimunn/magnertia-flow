@@ -35,6 +35,8 @@ import {
 } from "recharts";
 import { toast } from "sonner";
 import { AppShell } from "@/components/erp/AppShell";
+import { ReportBuilder } from "@/components/erp/reports/ReportBuilder";
+import { FINANCE_REPORT_CONFIG } from "@/components/erp/reports/finance.config";
 import { WidgetBand } from "@/widgets/components/WidgetBand";
 import { FinanceTabBar } from "@/components/erp/FinanceTabBar";
 import { ErpButton } from "@/components/erp/Button";
@@ -334,6 +336,9 @@ function ReportsPage() {
         </div>
       ) : (
         <div className="space-y-5">
+          {/* Ad-hoc Report Builder — shared with R&I via reports/ReportBuilder. */}
+          <ReportBuilder config={FINANCE_REPORT_CONFIG} />
+
           {/* KPI Header Grid */}
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             <StatCard
@@ -963,7 +968,7 @@ function ReportsPage() {
                     <span className="h-1.5 w-1.5 rounded-full bg-[#22C55E]" /> Gross Profit
                   </span>
                   <span className="inline-flex items-center gap-1">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#3B82F6]" /> Net Income
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B]" /> Net Income
                   </span>
                 </div>
 
@@ -1000,7 +1005,7 @@ function ReportsPage() {
                       <Line
                         type="monotone"
                         dataKey="revenue"
-                        stroke="var(--primary)"
+                        stroke="#22C55E"
                         strokeWidth={2}
                         dot={false}
                       />
@@ -1014,7 +1019,7 @@ function ReportsPage() {
                       <Line
                         type="monotone"
                         dataKey="netIncome"
-                        stroke="#3B82F6"
+                        stroke="#F59E0B"
                         strokeWidth={2}
                         dot={false}
                       />

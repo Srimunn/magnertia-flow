@@ -6,7 +6,6 @@ import {
   Package,
   Building2,
   Settings,
-  Bell,
   Menu,
   X,
   RefreshCw,
@@ -22,12 +21,16 @@ import {
   Star,
   Lightbulb,
   FlaskConical,
+  Zap,
   Compass,
   Palette,
   ShieldCheck,
   Briefcase,
   Radar,
   Microscope,
+  Terminal,
+  Code,
+  Smartphone,
   ClipboardCheck,
   Beaker,
   Cpu,
@@ -35,6 +38,10 @@ import {
   Gauge,
   ScrollText,
   Stamp,
+  Repeat,
+  Target,
+  Map,
+  Box,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { company, mockUsers } from "@/lib/mock-data";
@@ -109,6 +116,135 @@ const NAV_GROUPS: GroupItem[] = [
     label: "Administration",
     icon: Building2,
     children: [
+      // Sibling groups are alphabetized (Development before Management).
+      {
+        kind: "group",
+        label: "Development",
+        icon: Package,
+        children: [
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/product-strategy/overview",
+            matchPrefix: "/development/research-innovation/product-strategy",
+            label: "Product Strategy",
+            icon: Target,
+            subItems: [
+              { to: "/development/research-innovation/product-strategy/overview", label: "Overview" },
+              { to: "/development/research-innovation/product-strategy/new", label: "Strategy Form" },
+              { to: "/development/research-innovation/product-strategy/portfolio", label: "Strategy Portfolio" },
+              { to: "/development/research-innovation/product-strategy/roadmaps", label: "Product Roadmaps" },
+              { to: "/development/research-innovation/product-strategy/reports", label: "Strategy Reports" },
+            ],
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/product-roadmap/new",
+            matchPrefix: "/development/research-innovation/product-roadmap",
+            label: "Product Roadmap",
+            icon: Map,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/prd/new",
+            matchPrefix: "/development/research-innovation/prd",
+            label: "Product Requirements (PRD)",
+            icon: ClipboardCheck,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/product-architecture/new",
+            matchPrefix: "/development/research-innovation/product-architecture",
+            label: "Product Architecture",
+            icon: Cpu,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/industrial-design/new",
+            matchPrefix: "/development/research-innovation/industrial-design",
+            label: "Industrial Design",
+            icon: Palette,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/mechanical-design/new",
+            matchPrefix: "/development/research-innovation/mechanical-design",
+            label: "Mechanical Design",
+            icon: Box,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/electrical-design/new",
+            matchPrefix: "/development/research-innovation/electrical-design",
+            label: "Electrical Design",
+            icon: Zap,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/electronics-design/new",
+            matchPrefix: "/development/research-innovation/electronics-design",
+            label: "Electronics Design",
+            icon: Cpu,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/embedded-systems-development/new",
+            matchPrefix: "/development/research-innovation/embedded-systems-development",
+            label: "Embedded Systems Development",
+            icon: Microscope,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/firmware-development/new",
+            matchPrefix: "/development/research-innovation/firmware-development",
+            label: "Firmware Development",
+            icon: Terminal,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/software-development/new",
+            matchPrefix: "/development/research-innovation/software-development",
+            label: "Software Development",
+            icon: Code,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/mobile-app-development/new",
+            matchPrefix: "/development/research-innovation/mobile-app-development",
+            label: "Mobile App Development",
+            icon: Smartphone,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/overview",
+            matchPrefix: "/development/research-innovation",
+            label: "Research & Innovation",
+            icon: FlaskConical,
+            subItems: [
+              // Overview pinned first (default landing tab); the rest are A→Z.
+              { to: "/development/research-innovation/overview", label: "Overview" },
+              { to: "/development/research-innovation/commercialization-planning", label: "Commercialization" },
+              { to: "/development/research-innovation/design-thinking", label: "Design" },
+              { to: "/development/research-innovation/experiment-management", label: "Experiments" },
+              { to: "/development/research-innovation/feasibility-study", label: "Feasibility" },
+              { to: "/development/research-innovation/idea-management", label: "Ideas" },
+              { to: "/development/research-innovation/continuous-innovation", label: "Innovation" },
+              { to: "/development/research-innovation/industrial-design/new", label: "Industrial Design" },
+              { to: "/development/research-innovation/opportunity-discovery", label: "Opportunities" },
+              { to: "/development/ip-development/patent-management", label: "Patents" },
+              { to: "/development/research-innovation/proof-of-concept", label: "PoC" },
+              { to: "/development/research-innovation/innovation-portfolio", label: "Portfolio" },
+              { to: "/development/research-innovation/product-architecture/new", label: "Product Architecture" },
+              { to: "/development/research-innovation/product-strategy/overview", label: "Product Strategy" },
+              { to: "/development/research-innovation/prototype-development", label: "Prototype" },
+              { to: "/development/research-innovation/reports", label: "Reports" },
+              { to: "/development/research-innovation/research-management", label: "Research" },
+              { to: "/development/research-innovation/technology-scouting", label: "Scouting" },
+              { to: "/development/research-innovation/trl-assessment", label: "TRL" },
+              { to: "/development/research-innovation/problem-validation", label: "Validation" },
+            ],
+          },
+        ],
+      },
       {
         kind: "group",
         label: "Management",
@@ -120,16 +256,9 @@ const NAV_GROUPS: GroupItem[] = [
             matchPrefix: "/management/finance",
             label: "Finance",
             icon: Landmark,
-            badge: 2,
-            badgeType: "warning",
             subItems: [
               { to: "/management/finance/overview", label: "Overview" },
-              {
-                to: "/management/finance/payables",
-                label: "Accounts Payable",
-                badge: 7,
-                badgeType: "primary",
-              },
+              { to: "/management/finance/payables", label: "Accounts Payable" },
               { to: "/management/finance/receivables", label: "Accounts Receivable" },
               { to: "/management/finance/audit", label: "Audit Trail" },
               { to: "/management/finance/budgeting", label: "Budgeting" },
@@ -142,125 +271,6 @@ const NAV_GROUPS: GroupItem[] = [
               { to: "/management/finance/profitability", label: "Profitability" },
               { to: "/management/finance/setup", label: "Setup & Integrations" },
               { to: "/management/finance/tax", label: "Tax Management" },
-            ],
-          },
-        ],
-      },
-      {
-        kind: "group",
-        label: "Development",
-        icon: Package,
-        children: [
-          {
-            kind: "group",
-            label: "Research & Innovation Development",
-            icon: FlaskConical,
-            children: [
-              {
-                kind: "leaf",
-                to: "/development/research-innovation/idea-management",
-                matchPrefix: "/development/research-innovation/idea-management",
-                label: "Idea Management",
-                icon: Lightbulb,
-              },
-              {
-                kind: "leaf",
-                to: "/development/research-innovation/opportunity-discovery",
-                matchPrefix: "/development/research-innovation/opportunity-discovery",
-                label: "Opportunity Discovery",
-                icon: Compass,
-              },
-              {
-                kind: "leaf",
-                to: "/development/research-innovation/design-thinking",
-                matchPrefix: "/development/research-innovation/design-thinking",
-                label: "Design Thinking",
-                icon: Palette,
-              },
-              {
-                kind: "leaf",
-                to: "/development/research-innovation/problem-validation",
-                matchPrefix: "/development/research-innovation/problem-validation",
-                label: "Problem Validation",
-                icon: ShieldCheck,
-              },
-              {
-                kind: "leaf",
-                to: "/development/research-innovation/innovation-portfolio",
-                matchPrefix: "/development/research-innovation/innovation-portfolio",
-                label: "Innovation Portfolio",
-                icon: Briefcase,
-              },
-              {
-                kind: "leaf",
-                to: "/development/research-innovation/technology-scouting",
-                matchPrefix: "/development/research-innovation/technology-scouting",
-                label: "Technology Scouting",
-                icon: Radar,
-              },
-              {
-                kind: "leaf",
-                to: "/development/research-innovation/research-management",
-                matchPrefix: "/development/research-innovation/research-management",
-                label: "Research Management",
-                icon: Microscope,
-              },
-              {
-                kind: "leaf",
-                to: "/development/research-innovation/feasibility-study",
-                matchPrefix: "/development/research-innovation/feasibility-study",
-                label: "Feasibility Study",
-                icon: ClipboardCheck,
-              },
-              {
-                kind: "leaf",
-                to: "/development/research-innovation/proof-of-concept",
-                matchPrefix: "/development/research-innovation/proof-of-concept",
-                label: "Proof of Concept (PoC)",
-                icon: Beaker,
-              },
-              {
-                kind: "leaf",
-                to: "/development/research-innovation/prototype-development",
-                matchPrefix: "/development/research-innovation/prototype-development",
-                label: "Prototype Development",
-                icon: Cpu,
-              },
-              {
-                kind: "leaf",
-                to: "/development/research-innovation/experiment-management",
-                matchPrefix: "/development/research-innovation/experiment-management",
-                label: "Experiment Management",
-                icon: TestTubes,
-              },
-              {
-                kind: "leaf",
-                to: "/development/research-innovation/trl-assessment",
-                matchPrefix: "/development/research-innovation/trl-assessment",
-                label: "TRL Assessment",
-                icon: Gauge,
-              },
-              {
-                kind: "leaf",
-                to: "/development/research-innovation/commercialization-planning",
-                matchPrefix: "/development/research-innovation/commercialization-planning",
-                label: "Commercialization Planning",
-                icon: Briefcase,
-              },
-            ],
-          },
-          {
-            kind: "group",
-            label: "IP Development",
-            icon: ScrollText,
-            children: [
-              {
-                kind: "leaf",
-                to: "/development/ip-development/patent-management",
-                matchPrefix: "/development/ip-development/patent-management",
-                label: "Patent Management",
-                icon: Stamp,
-              },
             ],
           },
         ],
@@ -283,11 +293,12 @@ function Brand({ isCollapsed }: { isCollapsed: boolean }) {
       </div>
       <span
         className={cn(
-          "font-display text-[20px] font-bold tracking-tight text-white leading-none transition-all duration-250 ease-in-out origin-left truncate",
+          "font-display text-[20px] font-bold tracking-tight leading-none transition-all duration-250 ease-in-out origin-left truncate",
           isCollapsed ? "w-0 opacity-0 scale-95 ml-0" : "w-auto opacity-100 scale-100",
         )}
       >
-        Magnertia
+        <span className="text-primary">Magnertia</span>{" "}
+        <span className="font-semibold text-slate-400">Suite</span>
       </span>
     </Link>
   );
@@ -1185,13 +1196,6 @@ function Topbar({
           </button>
         </div>
 
-        <button
-          className="relative ml-auto shrink-0 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground md:hidden"
-          aria-label="Notifications"
-        >
-          <Bell className="h-5 w-5" />
-          <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-destructive ring-2 ring-background" />
-        </button>
       </div>
 
       <div className="mt-2 hidden justify-end text-[11px] text-muted-foreground md:flex">
@@ -1251,14 +1255,14 @@ export function AppShell({
         >
           <div
             className={cn(
-              "border-b border-white/10 px-4 py-4 flex items-center transition-all duration-250 ease-in-out",
+              "bg-white border-b border-black/10 px-4 py-4 flex items-center transition-all duration-250 ease-in-out",
               isCollapsed ? "flex-col gap-3 justify-center" : "flex-row justify-between",
             )}
           >
             <Brand isCollapsed={isCollapsed} />
             <button
               onClick={toggleCollapsed}
-              className="hidden lg:flex text-white/50 hover:text-white rounded-lg p-1.5 hover:bg-white/10 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+              className="hidden lg:flex text-slate-400 hover:text-primary rounded-lg p-1.5 hover:bg-black/5 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
               aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
             >
               {isCollapsed ? (
@@ -1276,7 +1280,7 @@ export function AppShell({
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-white/40" />
                 <input
                   type="text"
-                  placeholder="Search navigation..."
+                  placeholder="Search..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full rounded-lg bg-white/5 pl-9 pr-3 py-2 text-xs text-white placeholder-white/30 border border-white/10 focus:outline-none focus:border-white/20 focus:bg-white/10 transition-colors"
@@ -1301,7 +1305,7 @@ export function AppShell({
                       localStorage.setItem("magnertia_sidebar_expanded", "true");
                       setTimeout(() => {
                         const input = document.querySelector(
-                          'input[placeholder="Search navigation..."]',
+                          'input[placeholder="Search..."]',
                         );
                         if (input) (input as HTMLInputElement).focus();
                       }, 100);
@@ -1332,11 +1336,11 @@ export function AppShell({
               onClick={() => setMobileOpen(false)}
             />
             <aside className="fixed inset-y-0 left-0 z-50 flex w-[280px] flex-col bg-sidebar shadow-2xl lg:hidden animate-in slide-in-from-left duration-200 border-r border-white/5">
-              <div className="flex items-center justify-between border-b border-white/10 px-5 pt-5 pb-3">
+              <div className="flex items-center justify-between bg-white border-b border-black/10 px-5 pt-5 pb-3">
                 <Brand isCollapsed={false} />
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-lg p-2 text-white/50 hover:bg-white/10 cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                  className="rounded-lg p-2 text-slate-400 hover:text-primary hover:bg-black/5 cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
                   aria-label="Close menu"
                 >
                   <X className="h-5 w-5" />

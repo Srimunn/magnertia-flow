@@ -1,5 +1,6 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
+import { ModuleSubTabBar } from "@/components/erp/ModuleSubTabBar";
 
 const TAB_BASE =
   "shrink-0 whitespace-nowrap border-b-2 border-transparent bg-transparent px-3 pb-3 pt-1 text-[13px] font-semibold text-muted-foreground shadow-none transition-all hover:text-foreground focus-visible:outline-none";
@@ -49,25 +50,17 @@ export function PortfolioInnerTabs({ active, id }: { active: PortfolioTab; id?: 
   );
 }
 
-/** The module-level page tab bar (Register vs. Form) — matches the pattern
- *  used by Idea Management / Opportunity Discovery / Design Thinking / Problem
- *  Validation for the outer AppShell `tabs` slot. */
+/** The module-level Register/Form sub-tab bar. Delegates to the shared
+ *  ModuleSubTabBar so alignment/styling stay identical across every R&I module. */
 export function PortfolioPageTabBar() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const base = "/development/research-innovation/innovation-portfolio";
-  const onForm = pathname.startsWith(`${base}/new`);
-  const tabs = [
-    { to: base, label: "Portfolio Register", active: !onForm },
-    { to: `${base}/new`, label: "Innovation Portfolio Form", active: onForm },
-  ];
   return (
-    <div className="flex items-center gap-4 border-b border-border bg-white px-3 shadow-sm">
-      {tabs.map((tab) => (
-        <Link key={tab.to} to={tab.to} className={cn(TAB_BASE, tab.active && TAB_ACTIVE)}>
-          {tab.label}
-        </Link>
-      ))}
-    </div>
+    <ModuleSubTabBar
+      tabs={[
+        { to: base, label: "Portfolio Register", tooltip: "Innovation Portfolio Register", activeMatch: (p) => !p.startsWith(base + "/new") },
+        { to: base + "/new", label: "Innovation Portfolio Form", tooltip: "Innovation Portfolio Form" },
+      ]}
+    />
   );
 }
 

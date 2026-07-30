@@ -2,6 +2,7 @@ import type { WidgetDefinition, WidgetRole } from "./types";
 import { DASHBOARD_WIDGETS } from "./content/dashboard";
 import { OVERVIEW_WIDGETS } from "./content/overview";
 import { FINANCE_KPI_WIDGETS } from "./content/finance/kpis";
+import { RI_KPI_WIDGETS } from "./content/ri/kpis";
 
 /* ===========================================================================
    Widget registry
@@ -17,6 +18,7 @@ const ALL_DEFINITIONS: WidgetDefinition[] = [
   ...DASHBOARD_WIDGETS,
   ...OVERVIEW_WIDGETS,
   ...FINANCE_KPI_WIDGETS,
+  ...RI_KPI_WIDGETS,
   // Future modules append here: ...INVENTORY_WIDGETS, ...FLEET_WIDGETS, ...
 ];
 

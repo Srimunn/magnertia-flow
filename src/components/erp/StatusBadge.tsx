@@ -20,6 +20,16 @@ const TONES: Record<string, string> = {
   maintenance: "bg-warning/15 text-[oklch(0.45_0.15_75)] ring-warning/25",
   "due soon": "bg-warning/15 text-[oklch(0.45_0.15_75)] ring-warning/25",
   "pending review": "bg-warning/15 text-[oklch(0.45_0.15_75)] ring-warning/25",
+  "revision_required": "bg-warning/15 text-[oklch(0.45_0.15_75)] ring-warning/25",
+  "additional_investigation": "bg-[#3B82F6]/10 text-[#3B82F6] ring-[#3B82F6]/20",
+  "additional investigation": "bg-[#3B82F6]/10 text-[#3B82F6] ring-[#3B82F6]/20",
+  "strategic_vision": "bg-[#3B82F6]/10 text-[#3B82F6] ring-[#3B82F6]/20",
+  "strategic vision": "bg-[#3B82F6]/10 text-[#3B82F6] ring-[#3B82F6]/20",
+  "market_portfolio_strategy": "bg-[#3B82F6]/10 text-[#3B82F6] ring-[#3B82F6]/20",
+  "market & portfolio strategy": "bg-[#3B82F6]/10 text-[#3B82F6] ring-[#3B82F6]/20",
+  "financial_innovation_strategy": "bg-[#3B82F6]/10 text-[#3B82F6] ring-[#3B82F6]/20",
+  "financial & innovation strategy": "bg-[#3B82F6]/10 text-[#3B82F6] ring-[#3B82F6]/20",
+  "executive_review": "bg-warning/15 text-[oklch(0.45_0.15_75)] ring-warning/25",
   "on hold": "bg-warning/15 text-[oklch(0.45_0.15_75)] ring-warning/25",
   contacted: "bg-warning/15 text-[oklch(0.45_0.15_75)] ring-warning/25",
   qualified: "bg-warning/15 text-[oklch(0.45_0.15_75)] ring-warning/25",
@@ -124,6 +134,11 @@ const TONES: Record<string, string> = {
   abandoned: "bg-muted text-muted-foreground ring-border",
   upcoming: "bg-[#3B82F6]/10 text-[#3B82F6] ring-[#3B82F6]/20",
   due: "bg-warning/15 text-[oklch(0.45_0.15_75)] ring-warning/25",
+  // Continuous Innovation cycle stages
+  "opportunity identification": "bg-[#3B82F6]/10 text-[#3B82F6] ring-[#3B82F6]/20",
+  "innovation planning": "bg-[#3B82F6]/10 text-[#3B82F6] ring-[#3B82F6]/20",
+  "implementation & monitoring": "bg-[#3B82F6]/10 text-[#3B82F6] ring-[#3B82F6]/20",
+  "approved with improvements": "bg-accent/15 text-accent-foreground ring-accent/25",
 };
 
 export function StatusBadge({ status }: { status: string }) {

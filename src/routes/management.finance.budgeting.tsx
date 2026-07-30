@@ -1160,7 +1160,7 @@ function BudgetingPage() {
                     <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Budget
                   </span>
                   <span className="inline-flex items-center gap-1">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#3B82F6]" /> Actual
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B]" /> Actual
                   </span>
                   <span className="inline-flex items-center gap-1">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#22C55E]" /> Forecast
@@ -1200,14 +1200,14 @@ function BudgetingPage() {
                       <Line
                         type="monotone"
                         dataKey="budget"
-                        stroke="var(--primary)"
+                        stroke="#22C55E"
                         strokeWidth={2}
                         dot={false}
                       />
                       <Line
                         type="monotone"
                         dataKey="actual"
-                        stroke="#3B82F6"
+                        stroke="#F59E0B"
                         strokeWidth={2}
                         dot={false}
                       />

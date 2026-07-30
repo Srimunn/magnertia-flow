@@ -616,8 +616,8 @@ function ReceivablesTrendCard({ trend }: { trend: ReceivableTrendPoint[] }) {
       <div className="mb-3 flex items-center gap-4 text-[12px] text-muted-foreground">
         <span className="inline-flex items-center gap-1.5">
           <svg width="14" height="6" viewBox="0 0 14 6">
-            <line x1="0" y1="3" x2="14" y2="3" stroke="var(--primary)" strokeWidth="2" />
-            <circle cx="7" cy="3" r="2.2" fill="var(--primary)" />
+            <line x1="0" y1="3" x2="14" y2="3" stroke="#22C55E" strokeWidth="2" />
+            <circle cx="7" cy="3" r="2.2" fill="#22C55E" />
           </svg>
           Total Receivables
         </span>
@@ -659,9 +659,9 @@ function ReceivablesTrendCard({ trend }: { trend: ReceivableTrendPoint[] }) {
             <Line
               type="monotone"
               dataKey="totalReceivables"
-              stroke="var(--primary)"
+              stroke="#22C55E"
               strokeWidth={2}
-              dot={{ r: 3, fill: "var(--primary)", strokeWidth: 0 }}
+              dot={{ r: 3, fill: "#22C55E", strokeWidth: 0 }}
             />
             <Line
               type="monotone"

@@ -3,7 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Plus, Beaker, CheckCircle2, Gauge, Rocket } from "lucide-react";
 import { AppShell } from "@/components/erp/AppShell";
+import { WidgetPage } from "@/widgets/components/WidgetPage";
 import { PocPageTabBar, POC_STATUS_LABEL } from "@/components/erp/PocTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatCard } from "@/components/erp/StatCard";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { DataTable, EmptyState } from "@/components/erp/DataTable";
@@ -83,10 +85,10 @@ function PocRegisterPage() {
 
   return (
     <AppShell
-      title="Proof of Concept (PoC)"
+      title="Proof of Concept"
       breadcrumb="Research & Innovation Development"
-      description="The technical-validation gateway — experimentally verify a concept before prototype development."
-      tabs={<PocPageTabBar />}
+      description="Build and validate proofs of concept before prototyping."
+      tabs={<InnovationAreaTabs sub={<PocPageTabBar />} />}
       topbarActions={newButton}
     >
       {listQuery.isLoading ? (
@@ -100,40 +102,7 @@ function PocRegisterPage() {
         </div>
       ) : (
         <div className="space-y-5">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard
-              label="PoC Projects"
-              value={kpis.total.toString()}
-              neutralText="All statuses"
-              icon={<Beaker className="h-5 w-5" />}
-              iconBg="bg-primary/10"
-              iconColor="text-primary"
-            />
-            <StatCard
-              label="In Progress"
-              value={kpis.inProgress.toString()}
-              neutralText="Build & test stages"
-              icon={<Gauge className="h-5 w-5" />}
-              iconBg="bg-[#3B82F6]/10"
-              iconColor="text-[#3B82F6]"
-            />
-            <StatCard
-              label="Approved"
-              value={kpis.approved.toString()}
-              neutralText="Advancing to prototype"
-              icon={<CheckCircle2 className="h-5 w-5" />}
-              iconBg="bg-[#22C55E]/10"
-              iconColor="text-[#22C55E]"
-            />
-            <StatCard
-              label="Avg PoC Score"
-              value={`${kpis.avgScore}/100`}
-              neutralText="AI-calculated"
-              icon={<Rocket className="h-5 w-5" />}
-              iconBg="bg-[#F59E0B]/10"
-              iconColor="text-[#F59E0B]"
-            />
-          </div>
+          <WidgetPage pageId="ri-poc" skeleton={<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => (<div key={i} className="h-24 animate-pulse rounded-xl bg-muted" />))}</div>} />
 
           <div className="flex flex-wrap items-center gap-2">
             {FILTERS.map((f) => {

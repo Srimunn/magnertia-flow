@@ -3,7 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Plus, Compass, CheckCircle2, Gauge, TrendingUp } from "lucide-react";
 import { AppShell } from "@/components/erp/AppShell";
+import { WidgetPage } from "@/widgets/components/WidgetPage";
 import { OpportunityTabBar, OPPORTUNITY_STATUS_LABEL } from "@/components/erp/OpportunityTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatCard } from "@/components/erp/StatCard";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { DataTable, EmptyState } from "@/components/erp/DataTable";
@@ -92,8 +94,8 @@ function OpportunityRegisterPage() {
     <AppShell
       title="Opportunity Discovery"
       breadcrumb="Research & Innovation Development"
-      description="Qualify validated ideas into business and technology opportunities."
-      tabs={<OpportunityTabBar />}
+      description="Discover and qualify innovation opportunities from validated ideas."
+      tabs={<InnovationAreaTabs sub={<OpportunityTabBar />} />}
       topbarActions={newButton}
     >
       {listQuery.isLoading ? (
@@ -107,40 +109,7 @@ function OpportunityRegisterPage() {
         </div>
       ) : (
         <div className="space-y-5">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard
-              label="Total Opportunities"
-              value={kpis.total.toString()}
-              neutralText="All stages"
-              icon={<Compass className="h-5 w-5" />}
-              iconBg="bg-primary/10"
-              iconColor="text-primary"
-            />
-            <StatCard
-              label="Approval Rate"
-              value={`${kpis.approvalRate}%`}
-              neutralText="Of decided opportunities"
-              icon={<CheckCircle2 className="h-5 w-5" />}
-              iconBg="bg-[#22C55E]/10"
-              iconColor="text-[#22C55E]"
-            />
-            <StatCard
-              label="Average Opportunity Score"
-              value={`${kpis.avgScore}/100`}
-              neutralText="Calculated from fields"
-              icon={<Gauge className="h-5 w-5" />}
-              iconBg="bg-[#3B82F6]/10"
-              iconColor="text-[#3B82F6]"
-            />
-            <StatCard
-              label="Revenue Opportunity"
-              value={formatCurrency(kpis.revenue, true)}
-              neutralText="Sum across register"
-              icon={<TrendingUp className="h-5 w-5" />}
-              iconBg="bg-[#F59E0B]/10"
-              iconColor="text-[#F59E0B]"
-            />
-          </div>
+          <WidgetPage pageId="ri-opportunities" skeleton={<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => (<div key={i} className="h-24 animate-pulse rounded-xl bg-muted" />))}</div>} />
 
           {/* Status filters */}
           <div className="flex flex-wrap items-center gap-2">

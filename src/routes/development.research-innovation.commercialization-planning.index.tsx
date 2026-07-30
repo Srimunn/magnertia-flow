@@ -3,10 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Plus, Briefcase, CheckCircle2, TrendingUp, ArrowRight, DollarSign } from "lucide-react";
 import { AppShell } from "@/components/erp/AppShell";
+import { WidgetPage } from "@/widgets/components/WidgetPage";
 import {
   CommercializationPageTabBar,
   COMMERCIALIZATION_STATUS_LABEL,
 } from "@/components/erp/CommercializationTabBar";
+import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { StatCard } from "@/components/erp/StatCard";
 import { StatusBadge } from "@/components/erp/StatusBadge";
 import { DataTable, EmptyState } from "@/components/erp/DataTable";
@@ -79,6 +81,7 @@ function CommercializationRegisterPage() {
     <AppShell
       breadcrumb="Development > Research & Innovation Development > Commercialization Planning"
       title="Commercialization Planning"
+      description="Plan go-to-market, financials, and launch readiness."
       topbarActions={
         <ErpButton
           variant="primary"
@@ -88,47 +91,11 @@ function CommercializationRegisterPage() {
           New Commercialization Plan
         </ErpButton>
       }
+      tabs={<InnovationAreaTabs sub={<CommercializationPageTabBar />} />}
     >
-      <div className="-mx-4 -mt-4 mb-4 flex flex-col gap-0">
-        <CommercializationPageTabBar />
-      </div>
-
       <div className="space-y-6">
         {/* KPI Row */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard
-            label="Total Plans"
-            value={String(kpis.total)}
-            neutralText="Commercialization proposals"
-            icon={<Briefcase className="h-5 w-5" />}
-            iconBg="bg-primary/10"
-            iconColor="text-primary"
-          />
-          <StatCard
-            label="Under Planning"
-            value={String(kpis.active)}
-            neutralText="Active planning & review"
-            icon={<TrendingUp className="h-5 w-5" />}
-            iconBg="bg-amber-500/10"
-            iconColor="text-amber-600"
-          />
-          <StatCard
-            label="Approved Plans"
-            value={String(kpis.approved)}
-            neutralText="Ready for product launch"
-            icon={<CheckCircle2 className="h-5 w-5" />}
-            iconBg="bg-emerald-500/10"
-            iconColor="text-emerald-600"
-          />
-          <StatCard
-            label="Avg Launch Readiness"
-            value={`${kpis.avgReadiness}/100`}
-            neutralText="Composite commercial readiness"
-            icon={<DollarSign className="h-5 w-5" />}
-            iconBg="bg-blue-500/10"
-            iconColor="text-blue-600"
-          />
-        </div>
+        <WidgetPage pageId="ri-commercialization" skeleton={<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => (<div key={i} className="h-24 animate-pulse rounded-xl bg-muted" />))}</div>} />
 
         {/* Filter Toolbar */}
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-card p-3 shadow-xs">
@@ -265,7 +232,7 @@ function CommercializationRegisterPage() {
           empty={
             <EmptyState
               title="No Commercialization Plans Found"
-              description="Start a new Commercialization Plan to define product readiness, market strategy, supply chain, and financial ROI."
+              description="Create a commercialization plan to take a validated innovation to market."
               action={
                 <ErpButton
                   variant="primary"

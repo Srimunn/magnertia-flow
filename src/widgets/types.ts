@@ -36,7 +36,8 @@ export type WidgetCategory =
   | "receivables"
   | "payables"
   | "ledger"
-  | "assets";
+  | "assets"
+  | "innovation";
 
 /**
  * Simulated roles for access control. There is no auth system yet — identity is
@@ -60,7 +61,24 @@ export type WidgetPageId =
   | "finance-tax"
   | "finance-reports"
   | "finance-assets"
-  | "finance-audit";
+  | "finance-audit"
+  // Research & Innovation module dashboards (see src/widgets/content/ri/kpis.tsx).
+  | "ri-overview"
+  | "ri-ideas"
+  | "ri-opportunities"
+  | "ri-design"
+  | "ri-validation"
+  | "ri-portfolio"
+  | "ri-scouting"
+  | "ri-research"
+  | "ri-feasibility"
+  | "ri-poc"
+  | "ri-prototype"
+  | "ri-experiments"
+  | "ri-trl"
+  | "ri-commercialization"
+  | "ri-innovation"
+  | "ri-patents";
 
 /** Grid spans per breakpoint tier, expressed in that tier's column count. */
 export type WidgetSpan = {
