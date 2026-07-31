@@ -1070,7 +1070,7 @@ function UiUxDevelopmentNewPage() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {(record.wireframes ?? record.wireframeScreens)
+                  {((record.wireframes || record.wireframeScreens) ?? [])
                     .filter((wf: UiUxWireframeScreen) => wireframeFilter === "All" || (wf.type ?? wf.screenType) === wireframeFilter)
                     .map((wf: UiUxWireframeScreen) => (
                       <Card key={wf.id} className="border-border/80 shadow-xs group overflow-hidden hover:shadow-md transition-all">
@@ -1162,7 +1162,7 @@ function UiUxDevelopmentNewPage() {
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-border/60">
-                          {record.wcagAudits.map((item: UiUxWcagAudit) => (
+                          {(record.wcagAudits ?? []).map((item: UiUxWcagAudit) => (
                             <tr key={item.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
                               <td className="p-2.5 font-bold text-slate-900 dark:text-white">{item.criteria ?? item.criterion}</td>
                               <td className="p-2.5"><Badge variant="outline" className="text-[10px]">{item.wcagLevel ?? item.level}</Badge></td>

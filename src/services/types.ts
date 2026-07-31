@@ -10101,37 +10101,70 @@ export type UiUxDevelopmentRecord = {
   competitors?: any[];
 
   // Information Architecture & UX
-  informationArchitectureNodesCount: number;
-  userFlowsCount: number;
-  wireframesCount: number;
-  interactivePrototypesCount: number;
-  wireframeScreens: UiUxWireframeScreen[];
+  informationArchitectureNodesCount?: number;
+  userFlowsCount?: number;
+  wireframesCount?: number;
+  interactivePrototypesCount?: number;
+  wireframeScreens?: UiUxWireframeScreen[];
   sitemapPages?: number | any[];
+  navigationStructure?: string;
+  screenHierarchyLevels?: number;
+  contentStructure?: string;
+  navigationPattern?: string;
+  lowFiCount?: number;
+  hiFiCount?: number;
+  screenFlowsCount?: number;
+  taskFlowsCount?: number;
+  wireframeStatus?: string;
 
   // Design System & UI
-  colorPaletteCount: number;
-  typographyStylesCount: number;
-  reusableComponentsCount: number;
-  designTokensCount: number;
-  figmaLibrarySynced: boolean;
-  figmaLibraryVersion: string;
+  colorPaletteCount?: number;
+  typographyStylesCount?: number;
+  reusableComponentsCount?: number;
+  designTokensCount?: number;
+  figmaLibrarySynced?: boolean;
+  figmaLibraryVersion?: string;
 
   // Accessibility & Usability
-  wcagComplianceLevel: string;
-  wcagPassRatePct: number;
-  usabilityScore: number;
-  accessibilityAuditsCount: number;
-  wcagAudits: UiUxWcagAudit[];
+  wcagComplianceLevel?: string;
+  wcagPassRatePct?: number;
+  usabilityScore?: number;
+  accessibilityAuditsCount?: number;
+  wcagAudits?: UiUxWcagAudit[];
+
+  typographyFont?: string;
+  iconLibraryName?: string;
+  componentCount?: number;
+  brandComplianceStatus?: string;
+  accessibilityStandard?: string;
+  keyboardNavStatus?: string;
+  screenReaderStatus?: string;
+  responsiveDesignStatus?: string;
+  darkModeStatus?: string;
+  localizationLanguages?: string[];
+  interactivePrototypeAvailable?: boolean;
+  prototypeTool?: string;
+  usabilityTestingStatus?: string;
+  abTestingStatus?: string;
+  validationReportStatus?: string;
+  prototypeStatus?: string;
+  prototypeEmbedUrl?: string;
+  designSpecificationStatus?: string;
+  designTokensStatus?: string;
+  uiAssetsStatus?: string;
+  componentLibraryStatus?: string;
+  cssStyleGuideStatus?: string;
+  aiImprovementSuggestionsCount?: number;
 
   // Handoff & Dev Readiness
-  handoffStatus: string;
-  assetExportFormat: string[];
-  componentSpecsDocumented: boolean;
+  handoffStatus?: string;
+  assetExportFormat?: string[];
+  componentSpecsDocumented?: boolean;
 
   // AI Design Assessment
-  aiDesignReview: string;
-  aiAccessibilityCheck: string;
-  aiUsabilityPrediction: string;
+  aiDesignReview?: string;
+  aiAccessibilityCheck?: string;
+  aiUsabilityPrediction?: string;
 
   // Scores & Helper Properties
   researchReadinessScore: number;
@@ -10155,7 +10188,7 @@ export type UiUxDevelopmentRecord = {
   aiSuggestions?: string[];
   recommendation?: string;
   userJourneys?: { id: string; title: string; satisfactionScore: number; steps: string[]; keyTakeaway: string }[];
-  wireframes?: UiUxWireframeScreen[];
+  wireframes?: UiUxWireframeScreen[] | any[];
 
   attachments: UiUxAttachment[];
   reviewers: UiUxReviewer[];
@@ -10530,6 +10563,731 @@ export type CertificationReadinessRecord = {
   reviewComments?: string | null;
   auditTrail: CertificationAuditEntry[];
 };
+
+// ---------------------------------------------------------------------------
+// Product Documentation module
+// ---------------------------------------------------------------------------
+
+export type ProductDocumentationStatus =
+  | "Draft"
+  | "Documentation Preparation"
+  | "Version Control & Review"
+  | "In Progress"
+  | "In Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Archived";
+
+export type ProductDocumentationApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Pending";
+
+export type ProductDocFileItem = {
+  id: string;
+  name: string;
+  size: string;
+  version: string;
+  uploadDate?: string;
+  type?: string;
+  sourceModule?: string;
+  status?: string;
+};
+
+export type ProductDocReviewer = {
+  id: string;
+  role: string;
+  person: string;
+  avatar?: string;
+  decision: ProductDocumentationApprovalDecision;
+  date: string;
+  comments: string;
+};
+
+export type ProductDocAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadDate: string;
+  category?: string;
+};
+
+export type ProductDocAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar?: string;
+  action: string;
+  details: string;
+  ipAddress?: string;
+};
+
+export type ProductDocumentationFormInput = {
+  documentationProject: string;
+  productName: string;
+  productCategory: string;
+  documentTitle: string;
+  documentType: string;
+  businessPurpose: string;
+  documentVersion: string;
+  revisionNumber: string;
+  ecr: string;
+  eco: string;
+  effectiveDate: string;
+  changeStatus: string;
+  revisionSummary: string;
+  approvalDecision: ProductDocumentationApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+  recommendation: string;
+};
+
+export type ProductDocumentationRecord = {
+  id: string;
+  documentationId: string;
+  formCode: string;
+  documentationProject: string;
+  documentationVersion: string;
+  workflowStatus: ProductDocumentationStatus;
+  stage: 1 | 2 | 3;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  linkedProduct: { id: string; name: string };
+  linkedCertification: { id: string; code: string };
+  documentOwner: { name: string; avatar: string; email: string };
+  documentationEngineer: { name: string; avatar: string; email: string };
+  qualityManager: { name: string; avatar: string; email: string };
+  developmentStage: string;
+  confidentialityLevel: "Confidential" | "Restricted" | "Internal" | "Public";
+
+  productName: string;
+  productCategory: string;
+  documentTitle: string;
+  documentType: string;
+  businessPurpose: string;
+
+  engineeringDocs: ProductDocFileItem[];
+  engineeringScore: number;
+
+  manufacturingDocs: ProductDocFileItem[];
+  manufacturingScore: number;
+
+  qualityComplianceDocs: ProductDocFileItem[];
+  qualityComplianceScore: number;
+
+  customerDocs: ProductDocFileItem[];
+  customerScore: number;
+
+  revisionNumber: string;
+  ecr: string;
+  eco: string;
+  effectiveDate: string;
+  changeStatus: string;
+  revisionSummary: string;
+  versionControlScore: number;
+
+  aiCompletenessReview: string;
+  aiMissingDocumentAnalysis: string;
+  aiCrossReferenceValidation: string;
+  aiDocumentConsistencyReview: string;
+  aiImprovementSuggestions: string;
+  aiDocumentationScore: number;
+
+  overallDocumentationScore: number;
+  recommendation: string;
+
+  attachments: ProductDocAttachment[];
+
+  reviewers: ProductDocReviewer[];
+  approvalDecision: ProductDocumentationApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStageLabel: string;
+  auditTrail: ProductDocAuditEntry[];
+};
+
+// ---------------------------------------------------------------------------
+// Product Release Management module
+// ---------------------------------------------------------------------------
+
+export type ProductReleaseStatus =
+  | "Draft"
+  | "Release Readiness Assessment"
+  | "Deployment Planning"
+  | "In Progress"
+  | "In Review"
+  | "Executive Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Archived";
+
+export type ProductReleaseApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Pending";
+
+export type ProductReleaseChecklistItem = {
+  id: string;
+  label: string;
+  completed: boolean;
+  sourceStream?: string;
+  details?: string;
+};
+
+export type ProductReleaseReviewer = {
+  id: string;
+  role: string;
+  person: string;
+  avatar?: string;
+  decision: ProductReleaseApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Completed" | "Pending" | "In Progress";
+};
+
+export type ProductReleaseAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadDate: string;
+  category?: string;
+};
+
+export type ProductReleaseAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar?: string;
+  action: string;
+  details: string;
+  ipAddress?: string;
+};
+
+export type ProductReleaseMilestone = {
+  id: string;
+  title: string;
+  date: string;
+  completed: boolean;
+  stageNumber: number;
+};
+
+export type ProductReleaseFormInput = {
+  releaseProjectName: string;
+  productName: string;
+  productCategory: string;
+  releaseName: string;
+  releaseVersion: string;
+  releaseType: string;
+  releaseObjective: string;
+  targetMarkets: string[];
+  plannedReleaseDate: string;
+  releasePriority: "High" | "Medium" | "Low" | "Critical";
+  releaseChannels: string[];
+  deploymentRegions: string[];
+  distributionPartner: string;
+  inventoryAvailable: number;
+  rolloutStrategy: string;
+  productPricing: string;
+  approvalDecision: ProductReleaseApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+  recommendation: string;
+};
+
+export type ProductReleaseRecord = {
+  id: string;
+  releaseId: string;
+  formCode: string;
+  releaseProjectName: string;
+  releaseVersion: string;
+  workflowStatus: ProductReleaseStatus;
+  stage: 1 | 2 | 3;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  linkedProduct: { id: string; name: string };
+  linkedDocumentation: { id: string; code: string };
+  releaseManager: { name: string; avatar: string; email: string };
+  plannedReleaseDate: string;
+  releaseType: string;
+  releasePriority: "High" | "Medium" | "Low" | "Critical";
+
+  productName: string;
+  productCategory: string;
+  releaseName: string;
+  releaseObjective: string;
+  targetMarkets: string[];
+
+  engineeringChecklist: ProductReleaseChecklistItem[];
+  engineeringScore: number;
+
+  manufacturingChecklist: ProductReleaseChecklistItem[];
+  manufacturingScore: number;
+
+  commercialChecklist: ProductReleaseChecklistItem[];
+  productPricing: string;
+  commercialScore: number;
+
+  releaseChannels: string[];
+  deploymentRegions: string[];
+  distributionPartner: string;
+  inventoryAvailable: number;
+  inventoryUnits: string;
+  rolloutStrategy: string;
+  deploymentScore: number;
+
+  openRisksCount: number;
+  criticalRisksCount: number;
+  capaClosed: boolean;
+  regulatoryApproval: boolean;
+  warrantyPolicyApproved: boolean;
+  riskScore: number;
+
+  aiReleaseReadinessReview: string;
+  aiDeploymentRiskAnalysis: string;
+  aiCommercialReadiness: string;
+  aiLaunchRecommendation: string;
+  aiImprovementSuggestions: string;
+  aiReleaseScore: number;
+
+  overallReleaseScore: number;
+  recommendation: string;
+
+  attachments: ProductReleaseAttachment[];
+
+  reviewers: ProductReleaseReviewer[];
+  approvalDecision: ProductReleaseApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  commercialDate: string;
+  workflowStageLabel: string;
+
+  releaseTimeline: ProductReleaseMilestone[];
+  auditTrail: ProductReleaseAuditEntry[];
+};
+
+// ---------------------------------------------------------------------------
+// Product Lifecycle Management (PLM) module
+// ---------------------------------------------------------------------------
+
+export type PlmStatus =
+  | "Draft"
+  | "Product Configuration Management"
+  | "Lifecycle Assessment"
+  | "Engineering Change Management"
+  | "In Progress"
+  | "In Review"
+  | "Executive Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "End-of-Life Approved"
+  | "End-of-Life"
+  | "Retired"
+  | "Rejected"
+  | "Archived";
+
+export type PlmApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "End-of-Life Approved"
+  | "Rejected"
+  | "Pending";
+
+export type PlmChecklistItem = {
+  id: string;
+  label: string;
+  completed: boolean;
+  sourceStream?: string;
+  details?: string;
+};
+
+export type PlmReviewer = {
+  id: string;
+  role: string;
+  person: string;
+  avatar?: string;
+  decision: PlmApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Completed" | "Pending" | "In Progress";
+};
+
+export type PlmAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadDate: string;
+  category?: string;
+};
+
+export type PlmAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar?: string;
+  action: string;
+  details: string;
+  ipAddress?: string;
+};
+
+export type PlmMilestone = {
+  id: string;
+  title: string;
+  date: string;
+  completed: boolean;
+  stageNumber: number;
+};
+
+export type PlmStageProgressItem = {
+  id: string;
+  name: string;
+  status: "Completed" | "In Progress" | "Pending";
+  stageNumber: number;
+};
+
+export type PlmFormInput = {
+  plmProjectName: string;
+  productName: string;
+  productCategory: string;
+  productFamily: string;
+  productVersion: string;
+  businessUnit: string;
+  productDescription: string;
+  productPriority: "High" | "Medium" | "Low" | "Critical";
+  productConfigurationId: string;
+  bomVersion: string;
+  hardwareVersion: string;
+  firmwareVersion: string;
+  softwareVersion: string;
+  configurationBaseline: string;
+  ecrNumber: string;
+  ecoNumber: string;
+  revisionNumber: string;
+  productChangeSummary: string;
+  obsolescenceRisk: "Low" | "Medium" | "High" | "Critical";
+  endOfLifePlan: string;
+  approvalDecision: PlmApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+  recommendation: string;
+};
+
+export type PlmRecord = {
+  id: string;
+  plmId: string;
+  formCode: string;
+  plmProjectName: string;
+  productVersion: string;
+  workflowStatus: PlmStatus;
+  stage: 1 | 2 | 3 | 4;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  linkedProduct: { id: string; name: string };
+  productOwner: { name: string; avatar: string; email: string };
+  lifecycleManager: { name: string; avatar: string; email: string };
+  businessUnit: string;
+  productCategory: string;
+  productFamily: string;
+  productPriority: "High" | "Medium" | "Low" | "Critical";
+
+  productName: string;
+  lifecycleStage: string;
+  productStatus: string;
+  productDescription: string;
+
+  productConfigurationId: string;
+  bomVersion: string;
+  hardwareVersion: string;
+  firmwareVersion: string;
+  softwareVersion: string;
+  configurationBaseline: string;
+  configurationScore: number;
+
+  engineeringChecklist: PlmChecklistItem[];
+  engineeringScore: number;
+
+  manufacturingChecklist: PlmChecklistItem[];
+  manufacturingScore: number;
+
+  serviceChecklist: PlmChecklistItem[];
+  serviceScore: number;
+
+  ecrNumber: string;
+  ecoNumber: string;
+  revisionNumber: string;
+  productChangeSummary: string;
+  obsolescenceRisk: "Low" | "Medium" | "High" | "Critical";
+  endOfLifePlan: string;
+  riskScore: number;
+
+  aiProductHealthAnalysis: string;
+  aiLifecyclePrediction: string;
+  aiObsolescencePrediction: string;
+  aiReliabilityForecast: string;
+  aiImprovementSuggestions: string;
+  aiLifecycleScore: number;
+
+  overallProductHealthScore: number;
+  recommendation: string;
+
+  attachments: PlmAttachment[];
+
+  reviewers: PlmReviewer[];
+  approvalDecision: PlmApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStageLabel: string;
+
+  stageProgress: PlmStageProgressItem[];
+  lifecycleTimeline: PlmMilestone[];
+  auditTrail: PlmAuditEntry[];
+};
+
+// ---------------------------------------------------------------------------
+// IoT Development module
+// ---------------------------------------------------------------------------
+
+export type IotStatus =
+  | "Draft"
+  | "Device & Connectivity Design"
+  | "Device Registration & Integration"
+  | "Telemetry & Analytics"
+  | "In Progress"
+  | "In Review"
+  | "Review & Production Deployment"
+  | "Production"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Archived";
+
+export type IotApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected"
+  | "Pending";
+
+export type IotChecklistItem = {
+  id: string;
+  label: string;
+  completed: boolean;
+  sourceStream?: string;
+  details?: string;
+};
+
+export type IotReviewer = {
+  id: string;
+  role: string;
+  person: string;
+  avatar?: string;
+  decision: IotApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Completed" | "Pending" | "In Progress";
+};
+
+export type IotAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadDate: string;
+  category?: string;
+};
+
+export type IotAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar?: string;
+  action: string;
+  details: string;
+  ipAddress?: string;
+};
+
+export type IotMilestone = {
+  id: string;
+  title: string;
+  date: string;
+  completed: boolean;
+  stageNumber: number;
+};
+
+export type IotFormInput = {
+  iotProjectName: string;
+  businessObjective: string;
+  iotUseCase: string;
+  deploymentEnvironment: string;
+  targetDevices: string[];
+  businessOutcome: string;
+  developmentStatus: string;
+  deviceType: string;
+  controllerPlatform: string;
+  sensors: string[];
+  actuators: string[];
+  gatewayType: string;
+  deviceFirmwareVersion: string;
+  communicationProtocols: string[];
+  networkTechnology: string;
+  messagingProtocol: string;
+  cloudConnectivity: boolean;
+  edgeComputingEnabled: boolean;
+  offlineSynchronization: boolean;
+  dataStoragePlatform: string;
+  dataRetentionPolicy: string;
+  deviceIdentity: string;
+  encryptionStandard: string;
+  secureBoot: boolean;
+  certificateManagement: string;
+  complianceStandards: string[];
+  deploymentStrategy: string;
+  monitoringPlatform: string;
+  alertManagement: string;
+  operationalStatus: string;
+  approvalDecision: IotApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+  recommendation: string;
+};
+
+export type IotRecord = {
+  id: string;
+  iotDevelopmentId: string;
+  formCode: string;
+  iotProjectName: string;
+  solutionVersion: string;
+  workflowStatus: IotStatus;
+  stage: 1 | 2 | 3 | 4;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  linkedProduct: { id: string; name: string };
+  linkedEmbeddedDev: { id: string; code: string };
+  linkedCloudDev: { id: string; code: string };
+  linkedAiDev: { id: string; code: string };
+  linkedApiDev: { id: string; code: string };
+  iotArchitect: { name: string; avatar: string; email: string };
+
+  businessObjective: string;
+  iotUseCase: string;
+  deploymentEnvironment: string;
+  targetDevices: string[];
+  businessOutcome: string;
+  developmentStatus: string;
+
+  deviceType: string;
+  controllerPlatform: string;
+  sensors: string[];
+  actuators: string[];
+  gatewayType: string;
+  deviceFirmwareVersion: string;
+  hardwareScore: number;
+
+  communicationProtocols: string[];
+  networkTechnology: string;
+  messagingProtocol: string;
+  cloudConnectivity: boolean;
+  edgeComputingEnabled: boolean;
+  offlineSynchronization: boolean;
+  connectivityScore: number;
+
+  deviceMgmtChecklist: IotChecklistItem[];
+  deviceMgmtScore: number;
+
+  dataCollectionChecklist: IotChecklistItem[];
+  dataStoragePlatform: string;
+  dataRetentionPolicy: string;
+  analyticsScore: number;
+
+  deviceIdentity: string;
+  encryptionStandard: string;
+  secureBoot: boolean;
+  certificateManagement: string;
+  complianceStandards: string[];
+  vulnerabilityAssessment: string;
+  securityScore: number;
+
+  integrationChecklist: IotChecklistItem[];
+  integrationScore: number;
+
+  deploymentStrategy: string;
+  edgeDeployment: boolean;
+  cloudDeployment: boolean;
+  monitoringPlatform: string;
+  alertManagement: string;
+  operationalStatus: string;
+  deploymentScore: number;
+
+  aiConnectivityScore: number;
+  aiSecurityAssessment: number;
+  aiPerformanceAnalysis: number;
+  aiPredictiveMaintenance: number;
+  aiDeviceHealthReview: number;
+  aiOptimizationSuggestions: string;
+  aiOverallIotScore: number;
+
+  overallIotSolutionScore: number;
+  recommendation: string;
+
+  attachments: IotAttachment[];
+
+  reviewers: IotReviewer[];
+  approvalDecision: IotApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStageLabel: string;
+
+  iotTimeline: IotMilestone[];
+  auditTrail: IotAuditEntry[];
+};
+
+
+
+
 
 
 

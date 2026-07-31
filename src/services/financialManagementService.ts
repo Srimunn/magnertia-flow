@@ -56,27 +56,31 @@ export async function loadDashboardData(query: DashboardQuery): Promise<Dashboar
       expenseService.calculateTotalExpenses(query).catch(() => 27290520),
       cashBankService.fetchCashBalance(query).catch(() => ({ cashBalance: 12543200 })),
       generalLedgerService.calculateNetProfit(query).catch(() => 9262220),
-      analyticsEngineService.calculateCurrentRatio(query).catch(() => 2.45),
+      analyticsEngineService.calculateCurrentRatio(query).catch(() => ({ currentRatio: 2.45, currentRatioPY: 2.10 })),
     ]);
 
     // -- [Revenue Analytics] / [Cash Flow Summary] / [Expense Distribution] --
     const [revenueExpenseTrend, cashFlowSummary, expenseDistribution] = await Promise.all([
       analyticsEngineService.generateRevenueExpenseTrend(query).catch(() => []),
-      analyticsEngineService.generateCashFlowSummary(query).catch(() => ({ inflow: 8945320, outflow: 6781240, netFlow: 2164080 })),
+      analyticsEngineService.generateCashFlowSummary(query).catch(() => ({ lines: [], netCashFlow: 2164080 })),
       analyticsEngineService.generateExpenseDistribution(query).catch(() => []),
     ]);
 
     // -- [Receivable Aging] / [Payable Aging] / [Recent Transactions] --
     const [receivableAging, payableAging, recentTransactions] = await Promise.all([
-      accountsReceivableService.fetchOutstandingReceivables(query).catch(() => []),
-      accountsPayableService.fetchOutstandingPayables(query).catch(() => []),
+      accountsReceivableService.fetchOutstandingReceivables(query).catch(() => ({ total: 0, buckets: [] })),
+      accountsPayableService.fetchOutstandingPayables(query).catch(() => ({ total: 0, buckets: [] })),
       generalLedgerService.fetchLatestTransactions(query).catch(() => []),
     ]);
 
     // -- Calculate Financial Insights (final sequential step) --
     const financialInsights = await analyticsEngineService.calculateFinancialInsights(query).catch(() => ({
-      healthScore: 92,
-      recommendations: ["Cash flow is healthy.", "Working capital ratio is strong."],
+      grossMargin: { label: "Gross Margin", value: "45%", deltaLabel: "+2.5%", direction: "up" as const, tone: "positive" as const },
+      operatingMargin: { label: "Operating Margin", value: "25%", deltaLabel: "+1.2%", direction: "up" as const, tone: "positive" as const },
+      expenseRatio: { label: "Expense Ratio", value: "55%", deltaLabel: "-0.8%", direction: "down" as const, tone: "positive" as const },
+      dso: { label: "DSO", value: "30 Days", deltaLabel: "-2 Days", direction: "down" as const, tone: "positive" as const },
+      dpo: { label: "DPO", value: "45 Days", deltaLabel: "+3 Days", direction: "up" as const, tone: "positive" as const },
+      cashConversionCycle: { label: "Cash Conversion Cycle", value: "15 Days", deltaLabel: "-1 Day", direction: "down" as const, tone: "positive" as const },
     }));
 
     return {
@@ -98,24 +102,22 @@ export async function loadDashboardData(query: DashboardQuery): Promise<Dashboar
     return {
       totalRevenue: 48753920,
       totalExpenses: 27290520,
-      cashPosition: { cashBalance: 12543200, bankBalance: 0, totalLiquidity: 12543200 },
+      cashPosition: { cashBalance: 12543200 },
       netProfit: 9262220,
-      currentRatio: { currentAssets: 24500000, currentLiabilities: 10000000, ratio: 2.45 },
+      currentRatio: { currentRatio: 2.45, currentRatioPY: 2.10 },
       revenueExpenseTrend: [],
-      cashFlowSummary: { inflow: 8945320, outflow: 6781240, netFlow: 2164080, lines: [], netCashFlow: 2164080 },
+      cashFlowSummary: { lines: [], netCashFlow: 2164080 },
       expenseDistribution: [],
       receivableAging: { total: 0, buckets: [] },
       payableAging: { total: 0, buckets: [] },
       recentTransactions: [],
       financialInsights: {
-        grossMargin: 45,
-        operatingMargin: 25,
-        expenseRatio: 55,
-        dso: 30,
-        dpo: 45,
-        ccc: 15,
-        healthScore: 92,
-        recommendations: ["Cash flow is healthy."],
+        grossMargin: { label: "Gross Margin", value: "45%", deltaLabel: "+2.5%", direction: "up", tone: "positive" },
+        operatingMargin: { label: "Operating Margin", value: "25%", deltaLabel: "+1.2%", direction: "up", tone: "positive" },
+        expenseRatio: { label: "Expense Ratio", value: "55%", deltaLabel: "-0.8%", direction: "down", tone: "positive" },
+        dso: { label: "DSO", value: "30 Days", deltaLabel: "-2 Days", direction: "down", tone: "positive" },
+        dpo: { label: "DPO", value: "45 Days", deltaLabel: "+3 Days", direction: "up", tone: "positive" },
+        cashConversionCycle: { label: "Cash Conversion Cycle", value: "15 Days", deltaLabel: "-1 Day", direction: "down", tone: "positive" },
       },
     };
   }

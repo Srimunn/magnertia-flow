@@ -37,12 +37,15 @@ import {
   TestTubes,
   Gauge,
   ScrollText,
+  FileText,
+  Rocket,
   Stamp,
   Repeat,
   Target,
   Map,
   Box,
   Cloud,
+  Wifi,
   Activity,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -224,6 +227,13 @@ const NAV_GROUPS: GroupItem[] = [
           },
           {
             kind: "leaf",
+            to: "/development/research-innovation/iot-development/new",
+            matchPrefix: "/development/research-innovation/iot-development",
+            label: "IoT Development",
+            icon: Wifi,
+          },
+          {
+            kind: "leaf",
             to: "/development/research-innovation/ui-ux-development/new",
             matchPrefix: "/development/research-innovation/ui-ux-development",
             label: "UI/UX Development",
@@ -249,6 +259,27 @@ const NAV_GROUPS: GroupItem[] = [
             matchPrefix: "/development/research-innovation/certification-readiness",
             label: "Certification Readiness",
             icon: Stamp,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/product-documentation/new",
+            matchPrefix: "/development/research-innovation/product-documentation",
+            label: "Product Documentation",
+            icon: FileText,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/product-release-management/new",
+            matchPrefix: "/development/research-innovation/product-release-management",
+            label: "Product Release Management",
+            icon: Rocket,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/product-lifecycle-management/new",
+            matchPrefix: "/development/research-innovation/product-lifecycle-management",
+            label: "Product Lifecycle Management",
+            icon: Repeat,
           },
           {
             kind: "leaf",

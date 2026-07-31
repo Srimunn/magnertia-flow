@@ -21,6 +21,10 @@ const TAB_ACTIVE = "border-primary text-primary hover:text-primary font-bold";
 export const RESEARCH_INNOVATION_TABS: { to: string; label: string; full: string }[] = [
   { to: "/development/research-innovation/overview", label: "Overview", full: "Research & Innovation Overview" },
   { to: "/development/research-innovation/certification-readiness/new", label: "Certification", full: "Certification Readiness" },
+  { to: "/development/research-innovation/product-documentation/new", label: "Documentation", full: "Product Documentation" },
+  { to: "/development/research-innovation/product-release-management/new", label: "Release", full: "Product Release Management" },
+  { to: "/development/research-innovation/product-lifecycle-management/new", label: "PLM", full: "Product Lifecycle Management (PLM)" },
+  { to: "/development/research-innovation/iot-development/new", label: "IoT", full: "IoT Development" },
   { to: "/development/research-innovation/testing-validation/new", label: "Testing", full: "Testing & Validation" },
   { to: "/development/research-innovation/simulation-analysis/new", label: "Simulation", full: "Simulation & Analysis" },
   { to: "/development/research-innovation/cybersecurity-engineering/new", label: "Cybersecurity", full: "Cybersecurity Engineering" },
@@ -52,6 +56,10 @@ export const RESEARCH_INNOVATION_TABS: { to: string; label: string; full: string
  *  fall back to DEFAULT_MODULE_META if an entry is missing. */
 export const MODULE_META: Record<string, { description: string; recordLabel: string }> = {
   "certification-readiness": { description: "Evaluate product certification readiness, standards compliance, gap analysis, and regulatory approvals.", recordLabel: "CERTIFICATION READINESS" },
+  "product-documentation": { description: "Collect, version, review, and release multi-stream product documentation packages for release readiness.", recordLabel: "PRODUCT DOCUMENTATION" },
+  "product-release-management": { description: "Release gate verifying readiness across engineering, manufacturing, commercial, quality, and authorizing launch.", recordLabel: "PRODUCT RELEASE" },
+  "product-lifecycle-management": { description: "Product digital thread managing product baseline from configuration through ECR/ECO to end-of-life.", recordLabel: "PRODUCT LIFECYCLE" },
+  "iot-development": { description: "Build connected-device solutions, gateways, MQTT telemetry pipelines, and digital twin analytics.", recordLabel: "IOT DEVELOPMENT" },
   "testing-validation": { description: "Manage end-to-end product verification, laboratory testing, regulatory compliance, and validation.", recordLabel: "TESTING & VALIDATION" },
   "simulation-analysis": { description: "Execute multi-physics FEA/CFD CAE simulations, mesh validation, and digital twin correlation.", recordLabel: "SIMULATION" },
   "cybersecurity-engineering": { description: "Govern secure-by-design threat modeling, Zero Trust, IAM, and DevSecOps compliance.", recordLabel: "CYBERSECURITY" },
