@@ -15,7 +15,7 @@ import type {
   ChecklistItem,
   RegulatoryDocument,
   BomRecord,
-  RoutingRecord,
+  LegacyRoutingRecord,
   WorkOrderRecord,
   QcInspectionEntry,
   LeadRecord,
@@ -5135,7 +5135,7 @@ export const mockBomRecords: BomRecord[] = [
   },
 ];
 
-export const mockRoutingRecords: RoutingRecord[] = [
+export const mockRoutingRecords: LegacyRoutingRecord[] = [
   {
     id: "RT-001",
     productName: "EV Charging Station - Model A",

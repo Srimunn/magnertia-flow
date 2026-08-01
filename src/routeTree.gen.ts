@@ -40,54 +40,76 @@ import { Route as AdministrationHomeOverviewRouteImport } from './routes/adminis
 import { Route as AdministrationHomeDepartmentsRouteImport } from './routes/administration.home.departments'
 import { Route as AdministrationHomeCompaniesRouteImport } from './routes/administration.home.companies'
 import { Route as AdministrationHomeBranchesRouteImport } from './routes/administration.home.branches'
+import { Route as DevelopmentResearchInnovationWorkInstructionDevelopmentIndexRouteImport } from './routes/development.research-innovation.work-instruction-development.index'
 import { Route as DevelopmentResearchInnovationUiUxDevelopmentIndexRouteImport } from './routes/development.research-innovation.ui-ux-development.index'
 import { Route as DevelopmentResearchInnovationTrlAssessmentIndexRouteImport } from './routes/development.research-innovation.trl-assessment.index'
+import { Route as DevelopmentResearchInnovationToolingDevelopmentIndexRouteImport } from './routes/development.research-innovation.tooling-development.index'
 import { Route as DevelopmentResearchInnovationTestingValidationIndexRouteImport } from './routes/development.research-innovation.testing-validation.index'
 import { Route as DevelopmentResearchInnovationTechnologyScoutingIndexRouteImport } from './routes/development.research-innovation.technology-scouting.index'
+import { Route as DevelopmentResearchInnovationSopDevelopmentIndexRouteImport } from './routes/development.research-innovation.sop-development.index'
 import { Route as DevelopmentResearchInnovationSoftwareDevelopmentIndexRouteImport } from './routes/development.research-innovation.software-development.index'
 import { Route as DevelopmentResearchInnovationSimulationAnalysisIndexRouteImport } from './routes/development.research-innovation.simulation-analysis.index'
+import { Route as DevelopmentResearchInnovationRoutingDevelopmentIndexRouteImport } from './routes/development.research-innovation.routing-development.index'
 import { Route as DevelopmentResearchInnovationResearchManagementIndexRouteImport } from './routes/development.research-innovation.research-management.index'
+import { Route as DevelopmentResearchInnovationQualityPlanningApqpIndexRouteImport } from './routes/development.research-innovation.quality-planning-apqp.index'
 import { Route as DevelopmentResearchInnovationPrototypeDevelopmentIndexRouteImport } from './routes/development.research-innovation.prototype-development.index'
 import { Route as DevelopmentResearchInnovationProofOfConceptIndexRouteImport } from './routes/development.research-innovation.proof-of-concept.index'
+import { Route as DevelopmentResearchInnovationProductionEngineeringIndexRouteImport } from './routes/development.research-innovation.production-engineering.index'
 import { Route as DevelopmentResearchInnovationProductStrategyIndexRouteImport } from './routes/development.research-innovation.product-strategy.index'
 import { Route as DevelopmentResearchInnovationProductRoadmapIndexRouteImport } from './routes/development.research-innovation.product-roadmap.index'
 import { Route as DevelopmentResearchInnovationProductReleaseManagementIndexRouteImport } from './routes/development.research-innovation.product-release-management.index'
 import { Route as DevelopmentResearchInnovationProductLifecycleManagementIndexRouteImport } from './routes/development.research-innovation.product-lifecycle-management.index'
 import { Route as DevelopmentResearchInnovationProductDocumentationIndexRouteImport } from './routes/development.research-innovation.product-documentation.index'
 import { Route as DevelopmentResearchInnovationProductArchitectureIndexRouteImport } from './routes/development.research-innovation.product-architecture.index'
+import { Route as DevelopmentResearchInnovationProcessValidationIndexRouteImport } from './routes/development.research-innovation.process-validation.index'
 import { Route as DevelopmentResearchInnovationProblemValidationIndexRouteImport } from './routes/development.research-innovation.problem-validation.index'
 import { Route as DevelopmentResearchInnovationPrdIndexRouteImport } from './routes/development.research-innovation.prd.index'
+import { Route as DevelopmentResearchInnovationPilotProductionIndexRouteImport } from './routes/development.research-innovation.pilot-production.index'
+import { Route as DevelopmentResearchInnovationPfmeaDevelopmentIndexRouteImport } from './routes/development.research-innovation.pfmea-development.index'
 import { Route as DevelopmentResearchInnovationOpportunityDiscoveryIndexRouteImport } from './routes/development.research-innovation.opportunity-discovery.index'
 import { Route as DevelopmentResearchInnovationMobileAppDevelopmentIndexRouteImport } from './routes/development.research-innovation.mobile-app-development.index'
 import { Route as DevelopmentResearchInnovationMechanicalDesignIndexRouteImport } from './routes/development.research-innovation.mechanical-design.index'
+import { Route as DevelopmentResearchInnovationJigDevelopmentIndexRouteImport } from './routes/development.research-innovation.jig-development.index'
 import { Route as DevelopmentResearchInnovationIotDevelopmentIndexRouteImport } from './routes/development.research-innovation.iot-development.index'
 import { Route as DevelopmentResearchInnovationInnovationPortfolioIndexRouteImport } from './routes/development.research-innovation.innovation-portfolio.index'
 import { Route as DevelopmentResearchInnovationIndustrialDesignIndexRouteImport } from './routes/development.research-innovation.industrial-design.index'
 import { Route as DevelopmentResearchInnovationIdeaManagementIndexRouteImport } from './routes/development.research-innovation.idea-management.index'
+import { Route as DevelopmentResearchInnovationFixtureDevelopmentIndexRouteImport } from './routes/development.research-innovation.fixture-development.index'
 import { Route as DevelopmentResearchInnovationFirmwareDevelopmentIndexRouteImport } from './routes/development.research-innovation.firmware-development.index'
 import { Route as DevelopmentResearchInnovationFeasibilityStudyIndexRouteImport } from './routes/development.research-innovation.feasibility-study.index'
+import { Route as DevelopmentResearchInnovationFactoryLayoutDesignIndexRouteImport } from './routes/development.research-innovation.factory-layout-design.index'
 import { Route as DevelopmentResearchInnovationExperimentManagementIndexRouteImport } from './routes/development.research-innovation.experiment-management.index'
 import { Route as DevelopmentResearchInnovationEmbeddedSystemsDevelopmentIndexRouteImport } from './routes/development.research-innovation.embedded-systems-development.index'
 import { Route as DevelopmentResearchInnovationElectronicsDesignIndexRouteImport } from './routes/development.research-innovation.electronics-design.index'
 import { Route as DevelopmentResearchInnovationElectricalDesignIndexRouteImport } from './routes/development.research-innovation.electrical-design.index'
 import { Route as DevelopmentResearchInnovationDesignThinkingIndexRouteImport } from './routes/development.research-innovation.design-thinking.index'
 import { Route as DevelopmentResearchInnovationCybersecurityEngineeringIndexRouteImport } from './routes/development.research-innovation.cybersecurity-engineering.index'
+import { Route as DevelopmentResearchInnovationControlPlanIndexRouteImport } from './routes/development.research-innovation.control-plan.index'
 import { Route as DevelopmentResearchInnovationContinuousInnovationIndexRouteImport } from './routes/development.research-innovation.continuous-innovation.index'
 import { Route as DevelopmentResearchInnovationCommercializationPlanningIndexRouteImport } from './routes/development.research-innovation.commercialization-planning.index'
 import { Route as DevelopmentResearchInnovationCloudPlatformDevelopmentIndexRouteImport } from './routes/development.research-innovation.cloud-platform-development.index'
 import { Route as DevelopmentResearchInnovationCertificationReadinessIndexRouteImport } from './routes/development.research-innovation.certification-readiness.index'
+import { Route as DevelopmentResearchInnovationCapacityPlanningIndexRouteImport } from './routes/development.research-innovation.capacity-planning.index'
+import { Route as DevelopmentResearchInnovationBomEngineeringIndexRouteImport } from './routes/development.research-innovation.bom-engineering.index'
+import { Route as DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRouteImport } from './routes/development.research-innovation.assembly-line-development.index'
 import { Route as DevelopmentResearchInnovationApiDevelopmentIndexRouteImport } from './routes/development.research-innovation.api-development.index'
 import { Route as DevelopmentResearchInnovationAiModelDevelopmentIndexRouteImport } from './routes/development.research-innovation.ai-model-development.index'
 import { Route as DevelopmentIpDevelopmentPatentManagementIndexRouteImport } from './routes/development.ip-development.patent-management.index'
+import { Route as DevelopmentResearchInnovationWorkInstructionDevelopmentNewRouteImport } from './routes/development.research-innovation.work-instruction-development.new'
 import { Route as DevelopmentResearchInnovationUiUxDevelopmentNewRouteImport } from './routes/development.research-innovation.ui-ux-development.new'
 import { Route as DevelopmentResearchInnovationTrlAssessmentNewRouteImport } from './routes/development.research-innovation.trl-assessment.new'
+import { Route as DevelopmentResearchInnovationToolingDevelopmentNewRouteImport } from './routes/development.research-innovation.tooling-development.new'
 import { Route as DevelopmentResearchInnovationTestingValidationNewRouteImport } from './routes/development.research-innovation.testing-validation.new'
 import { Route as DevelopmentResearchInnovationTechnologyScoutingNewRouteImport } from './routes/development.research-innovation.technology-scouting.new'
+import { Route as DevelopmentResearchInnovationSopDevelopmentNewRouteImport } from './routes/development.research-innovation.sop-development.new'
 import { Route as DevelopmentResearchInnovationSoftwareDevelopmentNewRouteImport } from './routes/development.research-innovation.software-development.new'
 import { Route as DevelopmentResearchInnovationSimulationAnalysisNewRouteImport } from './routes/development.research-innovation.simulation-analysis.new'
+import { Route as DevelopmentResearchInnovationRoutingDevelopmentNewRouteImport } from './routes/development.research-innovation.routing-development.new'
 import { Route as DevelopmentResearchInnovationResearchManagementNewRouteImport } from './routes/development.research-innovation.research-management.new'
+import { Route as DevelopmentResearchInnovationQualityPlanningApqpNewRouteImport } from './routes/development.research-innovation.quality-planning-apqp.new'
 import { Route as DevelopmentResearchInnovationPrototypeDevelopmentNewRouteImport } from './routes/development.research-innovation.prototype-development.new'
 import { Route as DevelopmentResearchInnovationProofOfConceptNewRouteImport } from './routes/development.research-innovation.proof-of-concept.new'
+import { Route as DevelopmentResearchInnovationProductionEngineeringNewRouteImport } from './routes/development.research-innovation.production-engineering.new'
 import { Route as DevelopmentResearchInnovationProductStrategyRoadmapsRouteImport } from './routes/development.research-innovation.product-strategy.roadmaps'
 import { Route as DevelopmentResearchInnovationProductStrategyReportsRouteImport } from './routes/development.research-innovation.product-strategy.reports'
 import { Route as DevelopmentResearchInnovationProductStrategyPortfolioRouteImport } from './routes/development.research-innovation.product-strategy.portfolio'
@@ -98,28 +120,38 @@ import { Route as DevelopmentResearchInnovationProductReleaseManagementNewRouteI
 import { Route as DevelopmentResearchInnovationProductLifecycleManagementNewRouteImport } from './routes/development.research-innovation.product-lifecycle-management.new'
 import { Route as DevelopmentResearchInnovationProductDocumentationNewRouteImport } from './routes/development.research-innovation.product-documentation.new'
 import { Route as DevelopmentResearchInnovationProductArchitectureNewRouteImport } from './routes/development.research-innovation.product-architecture.new'
+import { Route as DevelopmentResearchInnovationProcessValidationNewRouteImport } from './routes/development.research-innovation.process-validation.new'
 import { Route as DevelopmentResearchInnovationProblemValidationNewRouteImport } from './routes/development.research-innovation.problem-validation.new'
 import { Route as DevelopmentResearchInnovationPrdNewRouteImport } from './routes/development.research-innovation.prd.new'
+import { Route as DevelopmentResearchInnovationPilotProductionNewRouteImport } from './routes/development.research-innovation.pilot-production.new'
+import { Route as DevelopmentResearchInnovationPfmeaDevelopmentNewRouteImport } from './routes/development.research-innovation.pfmea-development.new'
 import { Route as DevelopmentResearchInnovationOpportunityDiscoveryNewRouteImport } from './routes/development.research-innovation.opportunity-discovery.new'
 import { Route as DevelopmentResearchInnovationMobileAppDevelopmentNewRouteImport } from './routes/development.research-innovation.mobile-app-development.new'
 import { Route as DevelopmentResearchInnovationMechanicalDesignNewRouteImport } from './routes/development.research-innovation.mechanical-design.new'
+import { Route as DevelopmentResearchInnovationJigDevelopmentNewRouteImport } from './routes/development.research-innovation.jig-development.new'
 import { Route as DevelopmentResearchInnovationIotDevelopmentNewRouteImport } from './routes/development.research-innovation.iot-development.new'
 import { Route as DevelopmentResearchInnovationInnovationPortfolioNewRouteImport } from './routes/development.research-innovation.innovation-portfolio.new'
 import { Route as DevelopmentResearchInnovationIndustrialDesignNewRouteImport } from './routes/development.research-innovation.industrial-design.new'
 import { Route as DevelopmentResearchInnovationIdeaManagementNewRouteImport } from './routes/development.research-innovation.idea-management.new'
 import { Route as DevelopmentResearchInnovationIdeaManagementIdeaIdRouteImport } from './routes/development.research-innovation.idea-management.$ideaId'
+import { Route as DevelopmentResearchInnovationFixtureDevelopmentNewRouteImport } from './routes/development.research-innovation.fixture-development.new'
 import { Route as DevelopmentResearchInnovationFirmwareDevelopmentNewRouteImport } from './routes/development.research-innovation.firmware-development.new'
 import { Route as DevelopmentResearchInnovationFeasibilityStudyNewRouteImport } from './routes/development.research-innovation.feasibility-study.new'
+import { Route as DevelopmentResearchInnovationFactoryLayoutDesignNewRouteImport } from './routes/development.research-innovation.factory-layout-design.new'
 import { Route as DevelopmentResearchInnovationExperimentManagementNewRouteImport } from './routes/development.research-innovation.experiment-management.new'
 import { Route as DevelopmentResearchInnovationEmbeddedSystemsDevelopmentNewRouteImport } from './routes/development.research-innovation.embedded-systems-development.new'
 import { Route as DevelopmentResearchInnovationElectronicsDesignNewRouteImport } from './routes/development.research-innovation.electronics-design.new'
 import { Route as DevelopmentResearchInnovationElectricalDesignNewRouteImport } from './routes/development.research-innovation.electrical-design.new'
 import { Route as DevelopmentResearchInnovationDesignThinkingNewRouteImport } from './routes/development.research-innovation.design-thinking.new'
 import { Route as DevelopmentResearchInnovationCybersecurityEngineeringNewRouteImport } from './routes/development.research-innovation.cybersecurity-engineering.new'
+import { Route as DevelopmentResearchInnovationControlPlanNewRouteImport } from './routes/development.research-innovation.control-plan.new'
 import { Route as DevelopmentResearchInnovationContinuousInnovationNewRouteImport } from './routes/development.research-innovation.continuous-innovation.new'
 import { Route as DevelopmentResearchInnovationCommercializationPlanningNewRouteImport } from './routes/development.research-innovation.commercialization-planning.new'
 import { Route as DevelopmentResearchInnovationCloudPlatformDevelopmentNewRouteImport } from './routes/development.research-innovation.cloud-platform-development.new'
 import { Route as DevelopmentResearchInnovationCertificationReadinessNewRouteImport } from './routes/development.research-innovation.certification-readiness.new'
+import { Route as DevelopmentResearchInnovationCapacityPlanningNewRouteImport } from './routes/development.research-innovation.capacity-planning.new'
+import { Route as DevelopmentResearchInnovationBomEngineeringNewRouteImport } from './routes/development.research-innovation.bom-engineering.new'
+import { Route as DevelopmentResearchInnovationAssemblyLineDevelopmentNewRouteImport } from './routes/development.research-innovation.assembly-line-development.new'
 import { Route as DevelopmentResearchInnovationApiDevelopmentNewRouteImport } from './routes/development.research-innovation.api-development.new'
 import { Route as DevelopmentResearchInnovationAiModelDevelopmentNewRouteImport } from './routes/development.research-innovation.ai-model-development.new'
 import { Route as DevelopmentIpDevelopmentPatentManagementNewRouteImport } from './routes/development.ip-development.patent-management.new'
@@ -294,6 +326,14 @@ const AdministrationHomeBranchesRoute =
     path: '/administration/home/branches',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationWorkInstructionDevelopmentIndexRoute =
+  DevelopmentResearchInnovationWorkInstructionDevelopmentIndexRouteImport.update(
+    {
+      id: '/development/research-innovation/work-instruction-development/',
+      path: '/development/research-innovation/work-instruction-development/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
 const DevelopmentResearchInnovationUiUxDevelopmentIndexRoute =
   DevelopmentResearchInnovationUiUxDevelopmentIndexRouteImport.update({
     id: '/development/research-innovation/ui-ux-development/',
@@ -304,6 +344,12 @@ const DevelopmentResearchInnovationTrlAssessmentIndexRoute =
   DevelopmentResearchInnovationTrlAssessmentIndexRouteImport.update({
     id: '/development/research-innovation/trl-assessment/',
     path: '/development/research-innovation/trl-assessment/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationToolingDevelopmentIndexRoute =
+  DevelopmentResearchInnovationToolingDevelopmentIndexRouteImport.update({
+    id: '/development/research-innovation/tooling-development/',
+    path: '/development/research-innovation/tooling-development/',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationTestingValidationIndexRoute =
@@ -318,6 +364,12 @@ const DevelopmentResearchInnovationTechnologyScoutingIndexRoute =
     path: '/development/research-innovation/technology-scouting/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationSopDevelopmentIndexRoute =
+  DevelopmentResearchInnovationSopDevelopmentIndexRouteImport.update({
+    id: '/development/research-innovation/sop-development/',
+    path: '/development/research-innovation/sop-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute =
   DevelopmentResearchInnovationSoftwareDevelopmentIndexRouteImport.update({
     id: '/development/research-innovation/software-development/',
@@ -330,10 +382,22 @@ const DevelopmentResearchInnovationSimulationAnalysisIndexRoute =
     path: '/development/research-innovation/simulation-analysis/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationRoutingDevelopmentIndexRoute =
+  DevelopmentResearchInnovationRoutingDevelopmentIndexRouteImport.update({
+    id: '/development/research-innovation/routing-development/',
+    path: '/development/research-innovation/routing-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationResearchManagementIndexRoute =
   DevelopmentResearchInnovationResearchManagementIndexRouteImport.update({
     id: '/development/research-innovation/research-management/',
     path: '/development/research-innovation/research-management/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationQualityPlanningApqpIndexRoute =
+  DevelopmentResearchInnovationQualityPlanningApqpIndexRouteImport.update({
+    id: '/development/research-innovation/quality-planning-apqp/',
+    path: '/development/research-innovation/quality-planning-apqp/',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute =
@@ -346,6 +410,12 @@ const DevelopmentResearchInnovationProofOfConceptIndexRoute =
   DevelopmentResearchInnovationProofOfConceptIndexRouteImport.update({
     id: '/development/research-innovation/proof-of-concept/',
     path: '/development/research-innovation/proof-of-concept/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationProductionEngineeringIndexRoute =
+  DevelopmentResearchInnovationProductionEngineeringIndexRouteImport.update({
+    id: '/development/research-innovation/production-engineering/',
+    path: '/development/research-innovation/production-engineering/',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationProductStrategyIndexRoute =
@@ -386,6 +456,12 @@ const DevelopmentResearchInnovationProductArchitectureIndexRoute =
     path: '/development/research-innovation/product-architecture/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationProcessValidationIndexRoute =
+  DevelopmentResearchInnovationProcessValidationIndexRouteImport.update({
+    id: '/development/research-innovation/process-validation/',
+    path: '/development/research-innovation/process-validation/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationProblemValidationIndexRoute =
   DevelopmentResearchInnovationProblemValidationIndexRouteImport.update({
     id: '/development/research-innovation/problem-validation/',
@@ -396,6 +472,18 @@ const DevelopmentResearchInnovationPrdIndexRoute =
   DevelopmentResearchInnovationPrdIndexRouteImport.update({
     id: '/development/research-innovation/prd/',
     path: '/development/research-innovation/prd/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationPilotProductionIndexRoute =
+  DevelopmentResearchInnovationPilotProductionIndexRouteImport.update({
+    id: '/development/research-innovation/pilot-production/',
+    path: '/development/research-innovation/pilot-production/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationPfmeaDevelopmentIndexRoute =
+  DevelopmentResearchInnovationPfmeaDevelopmentIndexRouteImport.update({
+    id: '/development/research-innovation/pfmea-development/',
+    path: '/development/research-innovation/pfmea-development/',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute =
@@ -414,6 +502,12 @@ const DevelopmentResearchInnovationMechanicalDesignIndexRoute =
   DevelopmentResearchInnovationMechanicalDesignIndexRouteImport.update({
     id: '/development/research-innovation/mechanical-design/',
     path: '/development/research-innovation/mechanical-design/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationJigDevelopmentIndexRoute =
+  DevelopmentResearchInnovationJigDevelopmentIndexRouteImport.update({
+    id: '/development/research-innovation/jig-development/',
+    path: '/development/research-innovation/jig-development/',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationIotDevelopmentIndexRoute =
@@ -440,6 +534,12 @@ const DevelopmentResearchInnovationIdeaManagementIndexRoute =
     path: '/development/research-innovation/idea-management/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationFixtureDevelopmentIndexRoute =
+  DevelopmentResearchInnovationFixtureDevelopmentIndexRouteImport.update({
+    id: '/development/research-innovation/fixture-development/',
+    path: '/development/research-innovation/fixture-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationFirmwareDevelopmentIndexRoute =
   DevelopmentResearchInnovationFirmwareDevelopmentIndexRouteImport.update({
     id: '/development/research-innovation/firmware-development/',
@@ -450,6 +550,12 @@ const DevelopmentResearchInnovationFeasibilityStudyIndexRoute =
   DevelopmentResearchInnovationFeasibilityStudyIndexRouteImport.update({
     id: '/development/research-innovation/feasibility-study/',
     path: '/development/research-innovation/feasibility-study/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationFactoryLayoutDesignIndexRoute =
+  DevelopmentResearchInnovationFactoryLayoutDesignIndexRouteImport.update({
+    id: '/development/research-innovation/factory-layout-design/',
+    path: '/development/research-innovation/factory-layout-design/',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationExperimentManagementIndexRoute =
@@ -490,6 +596,12 @@ const DevelopmentResearchInnovationCybersecurityEngineeringIndexRoute =
     path: '/development/research-innovation/cybersecurity-engineering/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationControlPlanIndexRoute =
+  DevelopmentResearchInnovationControlPlanIndexRouteImport.update({
+    id: '/development/research-innovation/control-plan/',
+    path: '/development/research-innovation/control-plan/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationContinuousInnovationIndexRoute =
   DevelopmentResearchInnovationContinuousInnovationIndexRouteImport.update({
     id: '/development/research-innovation/continuous-innovation/',
@@ -516,6 +628,24 @@ const DevelopmentResearchInnovationCertificationReadinessIndexRoute =
     path: '/development/research-innovation/certification-readiness/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationCapacityPlanningIndexRoute =
+  DevelopmentResearchInnovationCapacityPlanningIndexRouteImport.update({
+    id: '/development/research-innovation/capacity-planning/',
+    path: '/development/research-innovation/capacity-planning/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationBomEngineeringIndexRoute =
+  DevelopmentResearchInnovationBomEngineeringIndexRouteImport.update({
+    id: '/development/research-innovation/bom-engineering/',
+    path: '/development/research-innovation/bom-engineering/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRoute =
+  DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRouteImport.update({
+    id: '/development/research-innovation/assembly-line-development/',
+    path: '/development/research-innovation/assembly-line-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationApiDevelopmentIndexRoute =
   DevelopmentResearchInnovationApiDevelopmentIndexRouteImport.update({
     id: '/development/research-innovation/api-development/',
@@ -534,6 +664,12 @@ const DevelopmentIpDevelopmentPatentManagementIndexRoute =
     path: '/development/ip-development/patent-management/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute =
+  DevelopmentResearchInnovationWorkInstructionDevelopmentNewRouteImport.update({
+    id: '/development/research-innovation/work-instruction-development/new',
+    path: '/development/research-innovation/work-instruction-development/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationUiUxDevelopmentNewRoute =
   DevelopmentResearchInnovationUiUxDevelopmentNewRouteImport.update({
     id: '/development/research-innovation/ui-ux-development/new',
@@ -544,6 +680,12 @@ const DevelopmentResearchInnovationTrlAssessmentNewRoute =
   DevelopmentResearchInnovationTrlAssessmentNewRouteImport.update({
     id: '/development/research-innovation/trl-assessment/new',
     path: '/development/research-innovation/trl-assessment/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationToolingDevelopmentNewRoute =
+  DevelopmentResearchInnovationToolingDevelopmentNewRouteImport.update({
+    id: '/development/research-innovation/tooling-development/new',
+    path: '/development/research-innovation/tooling-development/new',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationTestingValidationNewRoute =
@@ -558,6 +700,12 @@ const DevelopmentResearchInnovationTechnologyScoutingNewRoute =
     path: '/development/research-innovation/technology-scouting/new',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationSopDevelopmentNewRoute =
+  DevelopmentResearchInnovationSopDevelopmentNewRouteImport.update({
+    id: '/development/research-innovation/sop-development/new',
+    path: '/development/research-innovation/sop-development/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationSoftwareDevelopmentNewRoute =
   DevelopmentResearchInnovationSoftwareDevelopmentNewRouteImport.update({
     id: '/development/research-innovation/software-development/new',
@@ -570,10 +718,22 @@ const DevelopmentResearchInnovationSimulationAnalysisNewRoute =
     path: '/development/research-innovation/simulation-analysis/new',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationRoutingDevelopmentNewRoute =
+  DevelopmentResearchInnovationRoutingDevelopmentNewRouteImport.update({
+    id: '/development/research-innovation/routing-development/new',
+    path: '/development/research-innovation/routing-development/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationResearchManagementNewRoute =
   DevelopmentResearchInnovationResearchManagementNewRouteImport.update({
     id: '/development/research-innovation/research-management/new',
     path: '/development/research-innovation/research-management/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationQualityPlanningApqpNewRoute =
+  DevelopmentResearchInnovationQualityPlanningApqpNewRouteImport.update({
+    id: '/development/research-innovation/quality-planning-apqp/new',
+    path: '/development/research-innovation/quality-planning-apqp/new',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationPrototypeDevelopmentNewRoute =
@@ -586,6 +746,12 @@ const DevelopmentResearchInnovationProofOfConceptNewRoute =
   DevelopmentResearchInnovationProofOfConceptNewRouteImport.update({
     id: '/development/research-innovation/proof-of-concept/new',
     path: '/development/research-innovation/proof-of-concept/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationProductionEngineeringNewRoute =
+  DevelopmentResearchInnovationProductionEngineeringNewRouteImport.update({
+    id: '/development/research-innovation/production-engineering/new',
+    path: '/development/research-innovation/production-engineering/new',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationProductStrategyRoadmapsRoute =
@@ -648,6 +814,12 @@ const DevelopmentResearchInnovationProductArchitectureNewRoute =
     path: '/development/research-innovation/product-architecture/new',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationProcessValidationNewRoute =
+  DevelopmentResearchInnovationProcessValidationNewRouteImport.update({
+    id: '/development/research-innovation/process-validation/new',
+    path: '/development/research-innovation/process-validation/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationProblemValidationNewRoute =
   DevelopmentResearchInnovationProblemValidationNewRouteImport.update({
     id: '/development/research-innovation/problem-validation/new',
@@ -658,6 +830,18 @@ const DevelopmentResearchInnovationPrdNewRoute =
   DevelopmentResearchInnovationPrdNewRouteImport.update({
     id: '/development/research-innovation/prd/new',
     path: '/development/research-innovation/prd/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationPilotProductionNewRoute =
+  DevelopmentResearchInnovationPilotProductionNewRouteImport.update({
+    id: '/development/research-innovation/pilot-production/new',
+    path: '/development/research-innovation/pilot-production/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationPfmeaDevelopmentNewRoute =
+  DevelopmentResearchInnovationPfmeaDevelopmentNewRouteImport.update({
+    id: '/development/research-innovation/pfmea-development/new',
+    path: '/development/research-innovation/pfmea-development/new',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationOpportunityDiscoveryNewRoute =
@@ -676,6 +860,12 @@ const DevelopmentResearchInnovationMechanicalDesignNewRoute =
   DevelopmentResearchInnovationMechanicalDesignNewRouteImport.update({
     id: '/development/research-innovation/mechanical-design/new',
     path: '/development/research-innovation/mechanical-design/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationJigDevelopmentNewRoute =
+  DevelopmentResearchInnovationJigDevelopmentNewRouteImport.update({
+    id: '/development/research-innovation/jig-development/new',
+    path: '/development/research-innovation/jig-development/new',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationIotDevelopmentNewRoute =
@@ -708,6 +898,12 @@ const DevelopmentResearchInnovationIdeaManagementIdeaIdRoute =
     path: '/development/research-innovation/idea-management/$ideaId',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationFixtureDevelopmentNewRoute =
+  DevelopmentResearchInnovationFixtureDevelopmentNewRouteImport.update({
+    id: '/development/research-innovation/fixture-development/new',
+    path: '/development/research-innovation/fixture-development/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationFirmwareDevelopmentNewRoute =
   DevelopmentResearchInnovationFirmwareDevelopmentNewRouteImport.update({
     id: '/development/research-innovation/firmware-development/new',
@@ -718,6 +914,12 @@ const DevelopmentResearchInnovationFeasibilityStudyNewRoute =
   DevelopmentResearchInnovationFeasibilityStudyNewRouteImport.update({
     id: '/development/research-innovation/feasibility-study/new',
     path: '/development/research-innovation/feasibility-study/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationFactoryLayoutDesignNewRoute =
+  DevelopmentResearchInnovationFactoryLayoutDesignNewRouteImport.update({
+    id: '/development/research-innovation/factory-layout-design/new',
+    path: '/development/research-innovation/factory-layout-design/new',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationExperimentManagementNewRoute =
@@ -756,6 +958,12 @@ const DevelopmentResearchInnovationCybersecurityEngineeringNewRoute =
     path: '/development/research-innovation/cybersecurity-engineering/new',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationControlPlanNewRoute =
+  DevelopmentResearchInnovationControlPlanNewRouteImport.update({
+    id: '/development/research-innovation/control-plan/new',
+    path: '/development/research-innovation/control-plan/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationContinuousInnovationNewRoute =
   DevelopmentResearchInnovationContinuousInnovationNewRouteImport.update({
     id: '/development/research-innovation/continuous-innovation/new',
@@ -778,6 +986,24 @@ const DevelopmentResearchInnovationCertificationReadinessNewRoute =
   DevelopmentResearchInnovationCertificationReadinessNewRouteImport.update({
     id: '/development/research-innovation/certification-readiness/new',
     path: '/development/research-innovation/certification-readiness/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationCapacityPlanningNewRoute =
+  DevelopmentResearchInnovationCapacityPlanningNewRouteImport.update({
+    id: '/development/research-innovation/capacity-planning/new',
+    path: '/development/research-innovation/capacity-planning/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationBomEngineeringNewRoute =
+  DevelopmentResearchInnovationBomEngineeringNewRouteImport.update({
+    id: '/development/research-innovation/bom-engineering/new',
+    path: '/development/research-innovation/bom-engineering/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationAssemblyLineDevelopmentNewRoute =
+  DevelopmentResearchInnovationAssemblyLineDevelopmentNewRouteImport.update({
+    id: '/development/research-innovation/assembly-line-development/new',
+    path: '/development/research-innovation/assembly-line-development/new',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationApiDevelopmentNewRoute =
@@ -834,28 +1060,38 @@ export interface FileRoutesByFullPath {
   '/development/ip-development/patent-management/new': typeof DevelopmentIpDevelopmentPatentManagementNewRoute
   '/development/research-innovation/ai-model-development/new': typeof DevelopmentResearchInnovationAiModelDevelopmentNewRoute
   '/development/research-innovation/api-development/new': typeof DevelopmentResearchInnovationApiDevelopmentNewRoute
+  '/development/research-innovation/assembly-line-development/new': typeof DevelopmentResearchInnovationAssemblyLineDevelopmentNewRoute
+  '/development/research-innovation/bom-engineering/new': typeof DevelopmentResearchInnovationBomEngineeringNewRoute
+  '/development/research-innovation/capacity-planning/new': typeof DevelopmentResearchInnovationCapacityPlanningNewRoute
   '/development/research-innovation/certification-readiness/new': typeof DevelopmentResearchInnovationCertificationReadinessNewRoute
   '/development/research-innovation/cloud-platform-development/new': typeof DevelopmentResearchInnovationCloudPlatformDevelopmentNewRoute
   '/development/research-innovation/commercialization-planning/new': typeof DevelopmentResearchInnovationCommercializationPlanningNewRoute
   '/development/research-innovation/continuous-innovation/new': typeof DevelopmentResearchInnovationContinuousInnovationNewRoute
+  '/development/research-innovation/control-plan/new': typeof DevelopmentResearchInnovationControlPlanNewRoute
   '/development/research-innovation/cybersecurity-engineering/new': typeof DevelopmentResearchInnovationCybersecurityEngineeringNewRoute
   '/development/research-innovation/design-thinking/new': typeof DevelopmentResearchInnovationDesignThinkingNewRoute
   '/development/research-innovation/electrical-design/new': typeof DevelopmentResearchInnovationElectricalDesignNewRoute
   '/development/research-innovation/electronics-design/new': typeof DevelopmentResearchInnovationElectronicsDesignNewRoute
   '/development/research-innovation/embedded-systems-development/new': typeof DevelopmentResearchInnovationEmbeddedSystemsDevelopmentNewRoute
   '/development/research-innovation/experiment-management/new': typeof DevelopmentResearchInnovationExperimentManagementNewRoute
+  '/development/research-innovation/factory-layout-design/new': typeof DevelopmentResearchInnovationFactoryLayoutDesignNewRoute
   '/development/research-innovation/feasibility-study/new': typeof DevelopmentResearchInnovationFeasibilityStudyNewRoute
   '/development/research-innovation/firmware-development/new': typeof DevelopmentResearchInnovationFirmwareDevelopmentNewRoute
+  '/development/research-innovation/fixture-development/new': typeof DevelopmentResearchInnovationFixtureDevelopmentNewRoute
   '/development/research-innovation/idea-management/$ideaId': typeof DevelopmentResearchInnovationIdeaManagementIdeaIdRoute
   '/development/research-innovation/idea-management/new': typeof DevelopmentResearchInnovationIdeaManagementNewRoute
   '/development/research-innovation/industrial-design/new': typeof DevelopmentResearchInnovationIndustrialDesignNewRoute
   '/development/research-innovation/innovation-portfolio/new': typeof DevelopmentResearchInnovationInnovationPortfolioNewRoute
   '/development/research-innovation/iot-development/new': typeof DevelopmentResearchInnovationIotDevelopmentNewRoute
+  '/development/research-innovation/jig-development/new': typeof DevelopmentResearchInnovationJigDevelopmentNewRoute
   '/development/research-innovation/mechanical-design/new': typeof DevelopmentResearchInnovationMechanicalDesignNewRoute
   '/development/research-innovation/mobile-app-development/new': typeof DevelopmentResearchInnovationMobileAppDevelopmentNewRoute
   '/development/research-innovation/opportunity-discovery/new': typeof DevelopmentResearchInnovationOpportunityDiscoveryNewRoute
+  '/development/research-innovation/pfmea-development/new': typeof DevelopmentResearchInnovationPfmeaDevelopmentNewRoute
+  '/development/research-innovation/pilot-production/new': typeof DevelopmentResearchInnovationPilotProductionNewRoute
   '/development/research-innovation/prd/new': typeof DevelopmentResearchInnovationPrdNewRoute
   '/development/research-innovation/problem-validation/new': typeof DevelopmentResearchInnovationProblemValidationNewRoute
+  '/development/research-innovation/process-validation/new': typeof DevelopmentResearchInnovationProcessValidationNewRoute
   '/development/research-innovation/product-architecture/new': typeof DevelopmentResearchInnovationProductArchitectureNewRoute
   '/development/research-innovation/product-documentation/new': typeof DevelopmentResearchInnovationProductDocumentationNewRoute
   '/development/research-innovation/product-lifecycle-management/new': typeof DevelopmentResearchInnovationProductLifecycleManagementNewRoute
@@ -866,54 +1102,76 @@ export interface FileRoutesByFullPath {
   '/development/research-innovation/product-strategy/portfolio': typeof DevelopmentResearchInnovationProductStrategyPortfolioRoute
   '/development/research-innovation/product-strategy/reports': typeof DevelopmentResearchInnovationProductStrategyReportsRoute
   '/development/research-innovation/product-strategy/roadmaps': typeof DevelopmentResearchInnovationProductStrategyRoadmapsRoute
+  '/development/research-innovation/production-engineering/new': typeof DevelopmentResearchInnovationProductionEngineeringNewRoute
   '/development/research-innovation/proof-of-concept/new': typeof DevelopmentResearchInnovationProofOfConceptNewRoute
   '/development/research-innovation/prototype-development/new': typeof DevelopmentResearchInnovationPrototypeDevelopmentNewRoute
+  '/development/research-innovation/quality-planning-apqp/new': typeof DevelopmentResearchInnovationQualityPlanningApqpNewRoute
   '/development/research-innovation/research-management/new': typeof DevelopmentResearchInnovationResearchManagementNewRoute
+  '/development/research-innovation/routing-development/new': typeof DevelopmentResearchInnovationRoutingDevelopmentNewRoute
   '/development/research-innovation/simulation-analysis/new': typeof DevelopmentResearchInnovationSimulationAnalysisNewRoute
   '/development/research-innovation/software-development/new': typeof DevelopmentResearchInnovationSoftwareDevelopmentNewRoute
+  '/development/research-innovation/sop-development/new': typeof DevelopmentResearchInnovationSopDevelopmentNewRoute
   '/development/research-innovation/technology-scouting/new': typeof DevelopmentResearchInnovationTechnologyScoutingNewRoute
   '/development/research-innovation/testing-validation/new': typeof DevelopmentResearchInnovationTestingValidationNewRoute
+  '/development/research-innovation/tooling-development/new': typeof DevelopmentResearchInnovationToolingDevelopmentNewRoute
   '/development/research-innovation/trl-assessment/new': typeof DevelopmentResearchInnovationTrlAssessmentNewRoute
   '/development/research-innovation/ui-ux-development/new': typeof DevelopmentResearchInnovationUiUxDevelopmentNewRoute
+  '/development/research-innovation/work-instruction-development/new': typeof DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute
   '/development/ip-development/patent-management/': typeof DevelopmentIpDevelopmentPatentManagementIndexRoute
   '/development/research-innovation/ai-model-development/': typeof DevelopmentResearchInnovationAiModelDevelopmentIndexRoute
   '/development/research-innovation/api-development/': typeof DevelopmentResearchInnovationApiDevelopmentIndexRoute
+  '/development/research-innovation/assembly-line-development/': typeof DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRoute
+  '/development/research-innovation/bom-engineering/': typeof DevelopmentResearchInnovationBomEngineeringIndexRoute
+  '/development/research-innovation/capacity-planning/': typeof DevelopmentResearchInnovationCapacityPlanningIndexRoute
   '/development/research-innovation/certification-readiness/': typeof DevelopmentResearchInnovationCertificationReadinessIndexRoute
   '/development/research-innovation/cloud-platform-development/': typeof DevelopmentResearchInnovationCloudPlatformDevelopmentIndexRoute
   '/development/research-innovation/commercialization-planning/': typeof DevelopmentResearchInnovationCommercializationPlanningIndexRoute
   '/development/research-innovation/continuous-innovation/': typeof DevelopmentResearchInnovationContinuousInnovationIndexRoute
+  '/development/research-innovation/control-plan/': typeof DevelopmentResearchInnovationControlPlanIndexRoute
   '/development/research-innovation/cybersecurity-engineering/': typeof DevelopmentResearchInnovationCybersecurityEngineeringIndexRoute
   '/development/research-innovation/design-thinking/': typeof DevelopmentResearchInnovationDesignThinkingIndexRoute
   '/development/research-innovation/electrical-design/': typeof DevelopmentResearchInnovationElectricalDesignIndexRoute
   '/development/research-innovation/electronics-design/': typeof DevelopmentResearchInnovationElectronicsDesignIndexRoute
   '/development/research-innovation/embedded-systems-development/': typeof DevelopmentResearchInnovationEmbeddedSystemsDevelopmentIndexRoute
   '/development/research-innovation/experiment-management/': typeof DevelopmentResearchInnovationExperimentManagementIndexRoute
+  '/development/research-innovation/factory-layout-design/': typeof DevelopmentResearchInnovationFactoryLayoutDesignIndexRoute
   '/development/research-innovation/feasibility-study/': typeof DevelopmentResearchInnovationFeasibilityStudyIndexRoute
   '/development/research-innovation/firmware-development/': typeof DevelopmentResearchInnovationFirmwareDevelopmentIndexRoute
+  '/development/research-innovation/fixture-development/': typeof DevelopmentResearchInnovationFixtureDevelopmentIndexRoute
   '/development/research-innovation/idea-management/': typeof DevelopmentResearchInnovationIdeaManagementIndexRoute
   '/development/research-innovation/industrial-design/': typeof DevelopmentResearchInnovationIndustrialDesignIndexRoute
   '/development/research-innovation/innovation-portfolio/': typeof DevelopmentResearchInnovationInnovationPortfolioIndexRoute
   '/development/research-innovation/iot-development/': typeof DevelopmentResearchInnovationIotDevelopmentIndexRoute
+  '/development/research-innovation/jig-development/': typeof DevelopmentResearchInnovationJigDevelopmentIndexRoute
   '/development/research-innovation/mechanical-design/': typeof DevelopmentResearchInnovationMechanicalDesignIndexRoute
   '/development/research-innovation/mobile-app-development/': typeof DevelopmentResearchInnovationMobileAppDevelopmentIndexRoute
   '/development/research-innovation/opportunity-discovery/': typeof DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute
+  '/development/research-innovation/pfmea-development/': typeof DevelopmentResearchInnovationPfmeaDevelopmentIndexRoute
+  '/development/research-innovation/pilot-production/': typeof DevelopmentResearchInnovationPilotProductionIndexRoute
   '/development/research-innovation/prd/': typeof DevelopmentResearchInnovationPrdIndexRoute
   '/development/research-innovation/problem-validation/': typeof DevelopmentResearchInnovationProblemValidationIndexRoute
+  '/development/research-innovation/process-validation/': typeof DevelopmentResearchInnovationProcessValidationIndexRoute
   '/development/research-innovation/product-architecture/': typeof DevelopmentResearchInnovationProductArchitectureIndexRoute
   '/development/research-innovation/product-documentation/': typeof DevelopmentResearchInnovationProductDocumentationIndexRoute
   '/development/research-innovation/product-lifecycle-management/': typeof DevelopmentResearchInnovationProductLifecycleManagementIndexRoute
   '/development/research-innovation/product-release-management/': typeof DevelopmentResearchInnovationProductReleaseManagementIndexRoute
   '/development/research-innovation/product-roadmap/': typeof DevelopmentResearchInnovationProductRoadmapIndexRoute
   '/development/research-innovation/product-strategy/': typeof DevelopmentResearchInnovationProductStrategyIndexRoute
+  '/development/research-innovation/production-engineering/': typeof DevelopmentResearchInnovationProductionEngineeringIndexRoute
   '/development/research-innovation/proof-of-concept/': typeof DevelopmentResearchInnovationProofOfConceptIndexRoute
   '/development/research-innovation/prototype-development/': typeof DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute
+  '/development/research-innovation/quality-planning-apqp/': typeof DevelopmentResearchInnovationQualityPlanningApqpIndexRoute
   '/development/research-innovation/research-management/': typeof DevelopmentResearchInnovationResearchManagementIndexRoute
+  '/development/research-innovation/routing-development/': typeof DevelopmentResearchInnovationRoutingDevelopmentIndexRoute
   '/development/research-innovation/simulation-analysis/': typeof DevelopmentResearchInnovationSimulationAnalysisIndexRoute
   '/development/research-innovation/software-development/': typeof DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute
+  '/development/research-innovation/sop-development/': typeof DevelopmentResearchInnovationSopDevelopmentIndexRoute
   '/development/research-innovation/technology-scouting/': typeof DevelopmentResearchInnovationTechnologyScoutingIndexRoute
   '/development/research-innovation/testing-validation/': typeof DevelopmentResearchInnovationTestingValidationIndexRoute
+  '/development/research-innovation/tooling-development/': typeof DevelopmentResearchInnovationToolingDevelopmentIndexRoute
   '/development/research-innovation/trl-assessment/': typeof DevelopmentResearchInnovationTrlAssessmentIndexRoute
   '/development/research-innovation/ui-ux-development/': typeof DevelopmentResearchInnovationUiUxDevelopmentIndexRoute
+  '/development/research-innovation/work-instruction-development/': typeof DevelopmentResearchInnovationWorkInstructionDevelopmentIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -950,28 +1208,38 @@ export interface FileRoutesByTo {
   '/development/ip-development/patent-management/new': typeof DevelopmentIpDevelopmentPatentManagementNewRoute
   '/development/research-innovation/ai-model-development/new': typeof DevelopmentResearchInnovationAiModelDevelopmentNewRoute
   '/development/research-innovation/api-development/new': typeof DevelopmentResearchInnovationApiDevelopmentNewRoute
+  '/development/research-innovation/assembly-line-development/new': typeof DevelopmentResearchInnovationAssemblyLineDevelopmentNewRoute
+  '/development/research-innovation/bom-engineering/new': typeof DevelopmentResearchInnovationBomEngineeringNewRoute
+  '/development/research-innovation/capacity-planning/new': typeof DevelopmentResearchInnovationCapacityPlanningNewRoute
   '/development/research-innovation/certification-readiness/new': typeof DevelopmentResearchInnovationCertificationReadinessNewRoute
   '/development/research-innovation/cloud-platform-development/new': typeof DevelopmentResearchInnovationCloudPlatformDevelopmentNewRoute
   '/development/research-innovation/commercialization-planning/new': typeof DevelopmentResearchInnovationCommercializationPlanningNewRoute
   '/development/research-innovation/continuous-innovation/new': typeof DevelopmentResearchInnovationContinuousInnovationNewRoute
+  '/development/research-innovation/control-plan/new': typeof DevelopmentResearchInnovationControlPlanNewRoute
   '/development/research-innovation/cybersecurity-engineering/new': typeof DevelopmentResearchInnovationCybersecurityEngineeringNewRoute
   '/development/research-innovation/design-thinking/new': typeof DevelopmentResearchInnovationDesignThinkingNewRoute
   '/development/research-innovation/electrical-design/new': typeof DevelopmentResearchInnovationElectricalDesignNewRoute
   '/development/research-innovation/electronics-design/new': typeof DevelopmentResearchInnovationElectronicsDesignNewRoute
   '/development/research-innovation/embedded-systems-development/new': typeof DevelopmentResearchInnovationEmbeddedSystemsDevelopmentNewRoute
   '/development/research-innovation/experiment-management/new': typeof DevelopmentResearchInnovationExperimentManagementNewRoute
+  '/development/research-innovation/factory-layout-design/new': typeof DevelopmentResearchInnovationFactoryLayoutDesignNewRoute
   '/development/research-innovation/feasibility-study/new': typeof DevelopmentResearchInnovationFeasibilityStudyNewRoute
   '/development/research-innovation/firmware-development/new': typeof DevelopmentResearchInnovationFirmwareDevelopmentNewRoute
+  '/development/research-innovation/fixture-development/new': typeof DevelopmentResearchInnovationFixtureDevelopmentNewRoute
   '/development/research-innovation/idea-management/$ideaId': typeof DevelopmentResearchInnovationIdeaManagementIdeaIdRoute
   '/development/research-innovation/idea-management/new': typeof DevelopmentResearchInnovationIdeaManagementNewRoute
   '/development/research-innovation/industrial-design/new': typeof DevelopmentResearchInnovationIndustrialDesignNewRoute
   '/development/research-innovation/innovation-portfolio/new': typeof DevelopmentResearchInnovationInnovationPortfolioNewRoute
   '/development/research-innovation/iot-development/new': typeof DevelopmentResearchInnovationIotDevelopmentNewRoute
+  '/development/research-innovation/jig-development/new': typeof DevelopmentResearchInnovationJigDevelopmentNewRoute
   '/development/research-innovation/mechanical-design/new': typeof DevelopmentResearchInnovationMechanicalDesignNewRoute
   '/development/research-innovation/mobile-app-development/new': typeof DevelopmentResearchInnovationMobileAppDevelopmentNewRoute
   '/development/research-innovation/opportunity-discovery/new': typeof DevelopmentResearchInnovationOpportunityDiscoveryNewRoute
+  '/development/research-innovation/pfmea-development/new': typeof DevelopmentResearchInnovationPfmeaDevelopmentNewRoute
+  '/development/research-innovation/pilot-production/new': typeof DevelopmentResearchInnovationPilotProductionNewRoute
   '/development/research-innovation/prd/new': typeof DevelopmentResearchInnovationPrdNewRoute
   '/development/research-innovation/problem-validation/new': typeof DevelopmentResearchInnovationProblemValidationNewRoute
+  '/development/research-innovation/process-validation/new': typeof DevelopmentResearchInnovationProcessValidationNewRoute
   '/development/research-innovation/product-architecture/new': typeof DevelopmentResearchInnovationProductArchitectureNewRoute
   '/development/research-innovation/product-documentation/new': typeof DevelopmentResearchInnovationProductDocumentationNewRoute
   '/development/research-innovation/product-lifecycle-management/new': typeof DevelopmentResearchInnovationProductLifecycleManagementNewRoute
@@ -982,54 +1250,76 @@ export interface FileRoutesByTo {
   '/development/research-innovation/product-strategy/portfolio': typeof DevelopmentResearchInnovationProductStrategyPortfolioRoute
   '/development/research-innovation/product-strategy/reports': typeof DevelopmentResearchInnovationProductStrategyReportsRoute
   '/development/research-innovation/product-strategy/roadmaps': typeof DevelopmentResearchInnovationProductStrategyRoadmapsRoute
+  '/development/research-innovation/production-engineering/new': typeof DevelopmentResearchInnovationProductionEngineeringNewRoute
   '/development/research-innovation/proof-of-concept/new': typeof DevelopmentResearchInnovationProofOfConceptNewRoute
   '/development/research-innovation/prototype-development/new': typeof DevelopmentResearchInnovationPrototypeDevelopmentNewRoute
+  '/development/research-innovation/quality-planning-apqp/new': typeof DevelopmentResearchInnovationQualityPlanningApqpNewRoute
   '/development/research-innovation/research-management/new': typeof DevelopmentResearchInnovationResearchManagementNewRoute
+  '/development/research-innovation/routing-development/new': typeof DevelopmentResearchInnovationRoutingDevelopmentNewRoute
   '/development/research-innovation/simulation-analysis/new': typeof DevelopmentResearchInnovationSimulationAnalysisNewRoute
   '/development/research-innovation/software-development/new': typeof DevelopmentResearchInnovationSoftwareDevelopmentNewRoute
+  '/development/research-innovation/sop-development/new': typeof DevelopmentResearchInnovationSopDevelopmentNewRoute
   '/development/research-innovation/technology-scouting/new': typeof DevelopmentResearchInnovationTechnologyScoutingNewRoute
   '/development/research-innovation/testing-validation/new': typeof DevelopmentResearchInnovationTestingValidationNewRoute
+  '/development/research-innovation/tooling-development/new': typeof DevelopmentResearchInnovationToolingDevelopmentNewRoute
   '/development/research-innovation/trl-assessment/new': typeof DevelopmentResearchInnovationTrlAssessmentNewRoute
   '/development/research-innovation/ui-ux-development/new': typeof DevelopmentResearchInnovationUiUxDevelopmentNewRoute
+  '/development/research-innovation/work-instruction-development/new': typeof DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute
   '/development/ip-development/patent-management': typeof DevelopmentIpDevelopmentPatentManagementIndexRoute
   '/development/research-innovation/ai-model-development': typeof DevelopmentResearchInnovationAiModelDevelopmentIndexRoute
   '/development/research-innovation/api-development': typeof DevelopmentResearchInnovationApiDevelopmentIndexRoute
+  '/development/research-innovation/assembly-line-development': typeof DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRoute
+  '/development/research-innovation/bom-engineering': typeof DevelopmentResearchInnovationBomEngineeringIndexRoute
+  '/development/research-innovation/capacity-planning': typeof DevelopmentResearchInnovationCapacityPlanningIndexRoute
   '/development/research-innovation/certification-readiness': typeof DevelopmentResearchInnovationCertificationReadinessIndexRoute
   '/development/research-innovation/cloud-platform-development': typeof DevelopmentResearchInnovationCloudPlatformDevelopmentIndexRoute
   '/development/research-innovation/commercialization-planning': typeof DevelopmentResearchInnovationCommercializationPlanningIndexRoute
   '/development/research-innovation/continuous-innovation': typeof DevelopmentResearchInnovationContinuousInnovationIndexRoute
+  '/development/research-innovation/control-plan': typeof DevelopmentResearchInnovationControlPlanIndexRoute
   '/development/research-innovation/cybersecurity-engineering': typeof DevelopmentResearchInnovationCybersecurityEngineeringIndexRoute
   '/development/research-innovation/design-thinking': typeof DevelopmentResearchInnovationDesignThinkingIndexRoute
   '/development/research-innovation/electrical-design': typeof DevelopmentResearchInnovationElectricalDesignIndexRoute
   '/development/research-innovation/electronics-design': typeof DevelopmentResearchInnovationElectronicsDesignIndexRoute
   '/development/research-innovation/embedded-systems-development': typeof DevelopmentResearchInnovationEmbeddedSystemsDevelopmentIndexRoute
   '/development/research-innovation/experiment-management': typeof DevelopmentResearchInnovationExperimentManagementIndexRoute
+  '/development/research-innovation/factory-layout-design': typeof DevelopmentResearchInnovationFactoryLayoutDesignIndexRoute
   '/development/research-innovation/feasibility-study': typeof DevelopmentResearchInnovationFeasibilityStudyIndexRoute
   '/development/research-innovation/firmware-development': typeof DevelopmentResearchInnovationFirmwareDevelopmentIndexRoute
+  '/development/research-innovation/fixture-development': typeof DevelopmentResearchInnovationFixtureDevelopmentIndexRoute
   '/development/research-innovation/idea-management': typeof DevelopmentResearchInnovationIdeaManagementIndexRoute
   '/development/research-innovation/industrial-design': typeof DevelopmentResearchInnovationIndustrialDesignIndexRoute
   '/development/research-innovation/innovation-portfolio': typeof DevelopmentResearchInnovationInnovationPortfolioIndexRoute
   '/development/research-innovation/iot-development': typeof DevelopmentResearchInnovationIotDevelopmentIndexRoute
+  '/development/research-innovation/jig-development': typeof DevelopmentResearchInnovationJigDevelopmentIndexRoute
   '/development/research-innovation/mechanical-design': typeof DevelopmentResearchInnovationMechanicalDesignIndexRoute
   '/development/research-innovation/mobile-app-development': typeof DevelopmentResearchInnovationMobileAppDevelopmentIndexRoute
   '/development/research-innovation/opportunity-discovery': typeof DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute
+  '/development/research-innovation/pfmea-development': typeof DevelopmentResearchInnovationPfmeaDevelopmentIndexRoute
+  '/development/research-innovation/pilot-production': typeof DevelopmentResearchInnovationPilotProductionIndexRoute
   '/development/research-innovation/prd': typeof DevelopmentResearchInnovationPrdIndexRoute
   '/development/research-innovation/problem-validation': typeof DevelopmentResearchInnovationProblemValidationIndexRoute
+  '/development/research-innovation/process-validation': typeof DevelopmentResearchInnovationProcessValidationIndexRoute
   '/development/research-innovation/product-architecture': typeof DevelopmentResearchInnovationProductArchitectureIndexRoute
   '/development/research-innovation/product-documentation': typeof DevelopmentResearchInnovationProductDocumentationIndexRoute
   '/development/research-innovation/product-lifecycle-management': typeof DevelopmentResearchInnovationProductLifecycleManagementIndexRoute
   '/development/research-innovation/product-release-management': typeof DevelopmentResearchInnovationProductReleaseManagementIndexRoute
   '/development/research-innovation/product-roadmap': typeof DevelopmentResearchInnovationProductRoadmapIndexRoute
   '/development/research-innovation/product-strategy': typeof DevelopmentResearchInnovationProductStrategyIndexRoute
+  '/development/research-innovation/production-engineering': typeof DevelopmentResearchInnovationProductionEngineeringIndexRoute
   '/development/research-innovation/proof-of-concept': typeof DevelopmentResearchInnovationProofOfConceptIndexRoute
   '/development/research-innovation/prototype-development': typeof DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute
+  '/development/research-innovation/quality-planning-apqp': typeof DevelopmentResearchInnovationQualityPlanningApqpIndexRoute
   '/development/research-innovation/research-management': typeof DevelopmentResearchInnovationResearchManagementIndexRoute
+  '/development/research-innovation/routing-development': typeof DevelopmentResearchInnovationRoutingDevelopmentIndexRoute
   '/development/research-innovation/simulation-analysis': typeof DevelopmentResearchInnovationSimulationAnalysisIndexRoute
   '/development/research-innovation/software-development': typeof DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute
+  '/development/research-innovation/sop-development': typeof DevelopmentResearchInnovationSopDevelopmentIndexRoute
   '/development/research-innovation/technology-scouting': typeof DevelopmentResearchInnovationTechnologyScoutingIndexRoute
   '/development/research-innovation/testing-validation': typeof DevelopmentResearchInnovationTestingValidationIndexRoute
+  '/development/research-innovation/tooling-development': typeof DevelopmentResearchInnovationToolingDevelopmentIndexRoute
   '/development/research-innovation/trl-assessment': typeof DevelopmentResearchInnovationTrlAssessmentIndexRoute
   '/development/research-innovation/ui-ux-development': typeof DevelopmentResearchInnovationUiUxDevelopmentIndexRoute
+  '/development/research-innovation/work-instruction-development': typeof DevelopmentResearchInnovationWorkInstructionDevelopmentIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -1067,28 +1357,38 @@ export interface FileRoutesById {
   '/development/ip-development/patent-management/new': typeof DevelopmentIpDevelopmentPatentManagementNewRoute
   '/development/research-innovation/ai-model-development/new': typeof DevelopmentResearchInnovationAiModelDevelopmentNewRoute
   '/development/research-innovation/api-development/new': typeof DevelopmentResearchInnovationApiDevelopmentNewRoute
+  '/development/research-innovation/assembly-line-development/new': typeof DevelopmentResearchInnovationAssemblyLineDevelopmentNewRoute
+  '/development/research-innovation/bom-engineering/new': typeof DevelopmentResearchInnovationBomEngineeringNewRoute
+  '/development/research-innovation/capacity-planning/new': typeof DevelopmentResearchInnovationCapacityPlanningNewRoute
   '/development/research-innovation/certification-readiness/new': typeof DevelopmentResearchInnovationCertificationReadinessNewRoute
   '/development/research-innovation/cloud-platform-development/new': typeof DevelopmentResearchInnovationCloudPlatformDevelopmentNewRoute
   '/development/research-innovation/commercialization-planning/new': typeof DevelopmentResearchInnovationCommercializationPlanningNewRoute
   '/development/research-innovation/continuous-innovation/new': typeof DevelopmentResearchInnovationContinuousInnovationNewRoute
+  '/development/research-innovation/control-plan/new': typeof DevelopmentResearchInnovationControlPlanNewRoute
   '/development/research-innovation/cybersecurity-engineering/new': typeof DevelopmentResearchInnovationCybersecurityEngineeringNewRoute
   '/development/research-innovation/design-thinking/new': typeof DevelopmentResearchInnovationDesignThinkingNewRoute
   '/development/research-innovation/electrical-design/new': typeof DevelopmentResearchInnovationElectricalDesignNewRoute
   '/development/research-innovation/electronics-design/new': typeof DevelopmentResearchInnovationElectronicsDesignNewRoute
   '/development/research-innovation/embedded-systems-development/new': typeof DevelopmentResearchInnovationEmbeddedSystemsDevelopmentNewRoute
   '/development/research-innovation/experiment-management/new': typeof DevelopmentResearchInnovationExperimentManagementNewRoute
+  '/development/research-innovation/factory-layout-design/new': typeof DevelopmentResearchInnovationFactoryLayoutDesignNewRoute
   '/development/research-innovation/feasibility-study/new': typeof DevelopmentResearchInnovationFeasibilityStudyNewRoute
   '/development/research-innovation/firmware-development/new': typeof DevelopmentResearchInnovationFirmwareDevelopmentNewRoute
+  '/development/research-innovation/fixture-development/new': typeof DevelopmentResearchInnovationFixtureDevelopmentNewRoute
   '/development/research-innovation/idea-management/$ideaId': typeof DevelopmentResearchInnovationIdeaManagementIdeaIdRoute
   '/development/research-innovation/idea-management/new': typeof DevelopmentResearchInnovationIdeaManagementNewRoute
   '/development/research-innovation/industrial-design/new': typeof DevelopmentResearchInnovationIndustrialDesignNewRoute
   '/development/research-innovation/innovation-portfolio/new': typeof DevelopmentResearchInnovationInnovationPortfolioNewRoute
   '/development/research-innovation/iot-development/new': typeof DevelopmentResearchInnovationIotDevelopmentNewRoute
+  '/development/research-innovation/jig-development/new': typeof DevelopmentResearchInnovationJigDevelopmentNewRoute
   '/development/research-innovation/mechanical-design/new': typeof DevelopmentResearchInnovationMechanicalDesignNewRoute
   '/development/research-innovation/mobile-app-development/new': typeof DevelopmentResearchInnovationMobileAppDevelopmentNewRoute
   '/development/research-innovation/opportunity-discovery/new': typeof DevelopmentResearchInnovationOpportunityDiscoveryNewRoute
+  '/development/research-innovation/pfmea-development/new': typeof DevelopmentResearchInnovationPfmeaDevelopmentNewRoute
+  '/development/research-innovation/pilot-production/new': typeof DevelopmentResearchInnovationPilotProductionNewRoute
   '/development/research-innovation/prd/new': typeof DevelopmentResearchInnovationPrdNewRoute
   '/development/research-innovation/problem-validation/new': typeof DevelopmentResearchInnovationProblemValidationNewRoute
+  '/development/research-innovation/process-validation/new': typeof DevelopmentResearchInnovationProcessValidationNewRoute
   '/development/research-innovation/product-architecture/new': typeof DevelopmentResearchInnovationProductArchitectureNewRoute
   '/development/research-innovation/product-documentation/new': typeof DevelopmentResearchInnovationProductDocumentationNewRoute
   '/development/research-innovation/product-lifecycle-management/new': typeof DevelopmentResearchInnovationProductLifecycleManagementNewRoute
@@ -1099,54 +1399,76 @@ export interface FileRoutesById {
   '/development/research-innovation/product-strategy/portfolio': typeof DevelopmentResearchInnovationProductStrategyPortfolioRoute
   '/development/research-innovation/product-strategy/reports': typeof DevelopmentResearchInnovationProductStrategyReportsRoute
   '/development/research-innovation/product-strategy/roadmaps': typeof DevelopmentResearchInnovationProductStrategyRoadmapsRoute
+  '/development/research-innovation/production-engineering/new': typeof DevelopmentResearchInnovationProductionEngineeringNewRoute
   '/development/research-innovation/proof-of-concept/new': typeof DevelopmentResearchInnovationProofOfConceptNewRoute
   '/development/research-innovation/prototype-development/new': typeof DevelopmentResearchInnovationPrototypeDevelopmentNewRoute
+  '/development/research-innovation/quality-planning-apqp/new': typeof DevelopmentResearchInnovationQualityPlanningApqpNewRoute
   '/development/research-innovation/research-management/new': typeof DevelopmentResearchInnovationResearchManagementNewRoute
+  '/development/research-innovation/routing-development/new': typeof DevelopmentResearchInnovationRoutingDevelopmentNewRoute
   '/development/research-innovation/simulation-analysis/new': typeof DevelopmentResearchInnovationSimulationAnalysisNewRoute
   '/development/research-innovation/software-development/new': typeof DevelopmentResearchInnovationSoftwareDevelopmentNewRoute
+  '/development/research-innovation/sop-development/new': typeof DevelopmentResearchInnovationSopDevelopmentNewRoute
   '/development/research-innovation/technology-scouting/new': typeof DevelopmentResearchInnovationTechnologyScoutingNewRoute
   '/development/research-innovation/testing-validation/new': typeof DevelopmentResearchInnovationTestingValidationNewRoute
+  '/development/research-innovation/tooling-development/new': typeof DevelopmentResearchInnovationToolingDevelopmentNewRoute
   '/development/research-innovation/trl-assessment/new': typeof DevelopmentResearchInnovationTrlAssessmentNewRoute
   '/development/research-innovation/ui-ux-development/new': typeof DevelopmentResearchInnovationUiUxDevelopmentNewRoute
+  '/development/research-innovation/work-instruction-development/new': typeof DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute
   '/development/ip-development/patent-management/': typeof DevelopmentIpDevelopmentPatentManagementIndexRoute
   '/development/research-innovation/ai-model-development/': typeof DevelopmentResearchInnovationAiModelDevelopmentIndexRoute
   '/development/research-innovation/api-development/': typeof DevelopmentResearchInnovationApiDevelopmentIndexRoute
+  '/development/research-innovation/assembly-line-development/': typeof DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRoute
+  '/development/research-innovation/bom-engineering/': typeof DevelopmentResearchInnovationBomEngineeringIndexRoute
+  '/development/research-innovation/capacity-planning/': typeof DevelopmentResearchInnovationCapacityPlanningIndexRoute
   '/development/research-innovation/certification-readiness/': typeof DevelopmentResearchInnovationCertificationReadinessIndexRoute
   '/development/research-innovation/cloud-platform-development/': typeof DevelopmentResearchInnovationCloudPlatformDevelopmentIndexRoute
   '/development/research-innovation/commercialization-planning/': typeof DevelopmentResearchInnovationCommercializationPlanningIndexRoute
   '/development/research-innovation/continuous-innovation/': typeof DevelopmentResearchInnovationContinuousInnovationIndexRoute
+  '/development/research-innovation/control-plan/': typeof DevelopmentResearchInnovationControlPlanIndexRoute
   '/development/research-innovation/cybersecurity-engineering/': typeof DevelopmentResearchInnovationCybersecurityEngineeringIndexRoute
   '/development/research-innovation/design-thinking/': typeof DevelopmentResearchInnovationDesignThinkingIndexRoute
   '/development/research-innovation/electrical-design/': typeof DevelopmentResearchInnovationElectricalDesignIndexRoute
   '/development/research-innovation/electronics-design/': typeof DevelopmentResearchInnovationElectronicsDesignIndexRoute
   '/development/research-innovation/embedded-systems-development/': typeof DevelopmentResearchInnovationEmbeddedSystemsDevelopmentIndexRoute
   '/development/research-innovation/experiment-management/': typeof DevelopmentResearchInnovationExperimentManagementIndexRoute
+  '/development/research-innovation/factory-layout-design/': typeof DevelopmentResearchInnovationFactoryLayoutDesignIndexRoute
   '/development/research-innovation/feasibility-study/': typeof DevelopmentResearchInnovationFeasibilityStudyIndexRoute
   '/development/research-innovation/firmware-development/': typeof DevelopmentResearchInnovationFirmwareDevelopmentIndexRoute
+  '/development/research-innovation/fixture-development/': typeof DevelopmentResearchInnovationFixtureDevelopmentIndexRoute
   '/development/research-innovation/idea-management/': typeof DevelopmentResearchInnovationIdeaManagementIndexRoute
   '/development/research-innovation/industrial-design/': typeof DevelopmentResearchInnovationIndustrialDesignIndexRoute
   '/development/research-innovation/innovation-portfolio/': typeof DevelopmentResearchInnovationInnovationPortfolioIndexRoute
   '/development/research-innovation/iot-development/': typeof DevelopmentResearchInnovationIotDevelopmentIndexRoute
+  '/development/research-innovation/jig-development/': typeof DevelopmentResearchInnovationJigDevelopmentIndexRoute
   '/development/research-innovation/mechanical-design/': typeof DevelopmentResearchInnovationMechanicalDesignIndexRoute
   '/development/research-innovation/mobile-app-development/': typeof DevelopmentResearchInnovationMobileAppDevelopmentIndexRoute
   '/development/research-innovation/opportunity-discovery/': typeof DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute
+  '/development/research-innovation/pfmea-development/': typeof DevelopmentResearchInnovationPfmeaDevelopmentIndexRoute
+  '/development/research-innovation/pilot-production/': typeof DevelopmentResearchInnovationPilotProductionIndexRoute
   '/development/research-innovation/prd/': typeof DevelopmentResearchInnovationPrdIndexRoute
   '/development/research-innovation/problem-validation/': typeof DevelopmentResearchInnovationProblemValidationIndexRoute
+  '/development/research-innovation/process-validation/': typeof DevelopmentResearchInnovationProcessValidationIndexRoute
   '/development/research-innovation/product-architecture/': typeof DevelopmentResearchInnovationProductArchitectureIndexRoute
   '/development/research-innovation/product-documentation/': typeof DevelopmentResearchInnovationProductDocumentationIndexRoute
   '/development/research-innovation/product-lifecycle-management/': typeof DevelopmentResearchInnovationProductLifecycleManagementIndexRoute
   '/development/research-innovation/product-release-management/': typeof DevelopmentResearchInnovationProductReleaseManagementIndexRoute
   '/development/research-innovation/product-roadmap/': typeof DevelopmentResearchInnovationProductRoadmapIndexRoute
   '/development/research-innovation/product-strategy/': typeof DevelopmentResearchInnovationProductStrategyIndexRoute
+  '/development/research-innovation/production-engineering/': typeof DevelopmentResearchInnovationProductionEngineeringIndexRoute
   '/development/research-innovation/proof-of-concept/': typeof DevelopmentResearchInnovationProofOfConceptIndexRoute
   '/development/research-innovation/prototype-development/': typeof DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute
+  '/development/research-innovation/quality-planning-apqp/': typeof DevelopmentResearchInnovationQualityPlanningApqpIndexRoute
   '/development/research-innovation/research-management/': typeof DevelopmentResearchInnovationResearchManagementIndexRoute
+  '/development/research-innovation/routing-development/': typeof DevelopmentResearchInnovationRoutingDevelopmentIndexRoute
   '/development/research-innovation/simulation-analysis/': typeof DevelopmentResearchInnovationSimulationAnalysisIndexRoute
   '/development/research-innovation/software-development/': typeof DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute
+  '/development/research-innovation/sop-development/': typeof DevelopmentResearchInnovationSopDevelopmentIndexRoute
   '/development/research-innovation/technology-scouting/': typeof DevelopmentResearchInnovationTechnologyScoutingIndexRoute
   '/development/research-innovation/testing-validation/': typeof DevelopmentResearchInnovationTestingValidationIndexRoute
+  '/development/research-innovation/tooling-development/': typeof DevelopmentResearchInnovationToolingDevelopmentIndexRoute
   '/development/research-innovation/trl-assessment/': typeof DevelopmentResearchInnovationTrlAssessmentIndexRoute
   '/development/research-innovation/ui-ux-development/': typeof DevelopmentResearchInnovationUiUxDevelopmentIndexRoute
+  '/development/research-innovation/work-instruction-development/': typeof DevelopmentResearchInnovationWorkInstructionDevelopmentIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -1185,28 +1507,38 @@ export interface FileRouteTypes {
     | '/development/ip-development/patent-management/new'
     | '/development/research-innovation/ai-model-development/new'
     | '/development/research-innovation/api-development/new'
+    | '/development/research-innovation/assembly-line-development/new'
+    | '/development/research-innovation/bom-engineering/new'
+    | '/development/research-innovation/capacity-planning/new'
     | '/development/research-innovation/certification-readiness/new'
     | '/development/research-innovation/cloud-platform-development/new'
     | '/development/research-innovation/commercialization-planning/new'
     | '/development/research-innovation/continuous-innovation/new'
+    | '/development/research-innovation/control-plan/new'
     | '/development/research-innovation/cybersecurity-engineering/new'
     | '/development/research-innovation/design-thinking/new'
     | '/development/research-innovation/electrical-design/new'
     | '/development/research-innovation/electronics-design/new'
     | '/development/research-innovation/embedded-systems-development/new'
     | '/development/research-innovation/experiment-management/new'
+    | '/development/research-innovation/factory-layout-design/new'
     | '/development/research-innovation/feasibility-study/new'
     | '/development/research-innovation/firmware-development/new'
+    | '/development/research-innovation/fixture-development/new'
     | '/development/research-innovation/idea-management/$ideaId'
     | '/development/research-innovation/idea-management/new'
     | '/development/research-innovation/industrial-design/new'
     | '/development/research-innovation/innovation-portfolio/new'
     | '/development/research-innovation/iot-development/new'
+    | '/development/research-innovation/jig-development/new'
     | '/development/research-innovation/mechanical-design/new'
     | '/development/research-innovation/mobile-app-development/new'
     | '/development/research-innovation/opportunity-discovery/new'
+    | '/development/research-innovation/pfmea-development/new'
+    | '/development/research-innovation/pilot-production/new'
     | '/development/research-innovation/prd/new'
     | '/development/research-innovation/problem-validation/new'
+    | '/development/research-innovation/process-validation/new'
     | '/development/research-innovation/product-architecture/new'
     | '/development/research-innovation/product-documentation/new'
     | '/development/research-innovation/product-lifecycle-management/new'
@@ -1217,54 +1549,76 @@ export interface FileRouteTypes {
     | '/development/research-innovation/product-strategy/portfolio'
     | '/development/research-innovation/product-strategy/reports'
     | '/development/research-innovation/product-strategy/roadmaps'
+    | '/development/research-innovation/production-engineering/new'
     | '/development/research-innovation/proof-of-concept/new'
     | '/development/research-innovation/prototype-development/new'
+    | '/development/research-innovation/quality-planning-apqp/new'
     | '/development/research-innovation/research-management/new'
+    | '/development/research-innovation/routing-development/new'
     | '/development/research-innovation/simulation-analysis/new'
     | '/development/research-innovation/software-development/new'
+    | '/development/research-innovation/sop-development/new'
     | '/development/research-innovation/technology-scouting/new'
     | '/development/research-innovation/testing-validation/new'
+    | '/development/research-innovation/tooling-development/new'
     | '/development/research-innovation/trl-assessment/new'
     | '/development/research-innovation/ui-ux-development/new'
+    | '/development/research-innovation/work-instruction-development/new'
     | '/development/ip-development/patent-management/'
     | '/development/research-innovation/ai-model-development/'
     | '/development/research-innovation/api-development/'
+    | '/development/research-innovation/assembly-line-development/'
+    | '/development/research-innovation/bom-engineering/'
+    | '/development/research-innovation/capacity-planning/'
     | '/development/research-innovation/certification-readiness/'
     | '/development/research-innovation/cloud-platform-development/'
     | '/development/research-innovation/commercialization-planning/'
     | '/development/research-innovation/continuous-innovation/'
+    | '/development/research-innovation/control-plan/'
     | '/development/research-innovation/cybersecurity-engineering/'
     | '/development/research-innovation/design-thinking/'
     | '/development/research-innovation/electrical-design/'
     | '/development/research-innovation/electronics-design/'
     | '/development/research-innovation/embedded-systems-development/'
     | '/development/research-innovation/experiment-management/'
+    | '/development/research-innovation/factory-layout-design/'
     | '/development/research-innovation/feasibility-study/'
     | '/development/research-innovation/firmware-development/'
+    | '/development/research-innovation/fixture-development/'
     | '/development/research-innovation/idea-management/'
     | '/development/research-innovation/industrial-design/'
     | '/development/research-innovation/innovation-portfolio/'
     | '/development/research-innovation/iot-development/'
+    | '/development/research-innovation/jig-development/'
     | '/development/research-innovation/mechanical-design/'
     | '/development/research-innovation/mobile-app-development/'
     | '/development/research-innovation/opportunity-discovery/'
+    | '/development/research-innovation/pfmea-development/'
+    | '/development/research-innovation/pilot-production/'
     | '/development/research-innovation/prd/'
     | '/development/research-innovation/problem-validation/'
+    | '/development/research-innovation/process-validation/'
     | '/development/research-innovation/product-architecture/'
     | '/development/research-innovation/product-documentation/'
     | '/development/research-innovation/product-lifecycle-management/'
     | '/development/research-innovation/product-release-management/'
     | '/development/research-innovation/product-roadmap/'
     | '/development/research-innovation/product-strategy/'
+    | '/development/research-innovation/production-engineering/'
     | '/development/research-innovation/proof-of-concept/'
     | '/development/research-innovation/prototype-development/'
+    | '/development/research-innovation/quality-planning-apqp/'
     | '/development/research-innovation/research-management/'
+    | '/development/research-innovation/routing-development/'
     | '/development/research-innovation/simulation-analysis/'
     | '/development/research-innovation/software-development/'
+    | '/development/research-innovation/sop-development/'
     | '/development/research-innovation/technology-scouting/'
     | '/development/research-innovation/testing-validation/'
+    | '/development/research-innovation/tooling-development/'
     | '/development/research-innovation/trl-assessment/'
     | '/development/research-innovation/ui-ux-development/'
+    | '/development/research-innovation/work-instruction-development/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1301,28 +1655,38 @@ export interface FileRouteTypes {
     | '/development/ip-development/patent-management/new'
     | '/development/research-innovation/ai-model-development/new'
     | '/development/research-innovation/api-development/new'
+    | '/development/research-innovation/assembly-line-development/new'
+    | '/development/research-innovation/bom-engineering/new'
+    | '/development/research-innovation/capacity-planning/new'
     | '/development/research-innovation/certification-readiness/new'
     | '/development/research-innovation/cloud-platform-development/new'
     | '/development/research-innovation/commercialization-planning/new'
     | '/development/research-innovation/continuous-innovation/new'
+    | '/development/research-innovation/control-plan/new'
     | '/development/research-innovation/cybersecurity-engineering/new'
     | '/development/research-innovation/design-thinking/new'
     | '/development/research-innovation/electrical-design/new'
     | '/development/research-innovation/electronics-design/new'
     | '/development/research-innovation/embedded-systems-development/new'
     | '/development/research-innovation/experiment-management/new'
+    | '/development/research-innovation/factory-layout-design/new'
     | '/development/research-innovation/feasibility-study/new'
     | '/development/research-innovation/firmware-development/new'
+    | '/development/research-innovation/fixture-development/new'
     | '/development/research-innovation/idea-management/$ideaId'
     | '/development/research-innovation/idea-management/new'
     | '/development/research-innovation/industrial-design/new'
     | '/development/research-innovation/innovation-portfolio/new'
     | '/development/research-innovation/iot-development/new'
+    | '/development/research-innovation/jig-development/new'
     | '/development/research-innovation/mechanical-design/new'
     | '/development/research-innovation/mobile-app-development/new'
     | '/development/research-innovation/opportunity-discovery/new'
+    | '/development/research-innovation/pfmea-development/new'
+    | '/development/research-innovation/pilot-production/new'
     | '/development/research-innovation/prd/new'
     | '/development/research-innovation/problem-validation/new'
+    | '/development/research-innovation/process-validation/new'
     | '/development/research-innovation/product-architecture/new'
     | '/development/research-innovation/product-documentation/new'
     | '/development/research-innovation/product-lifecycle-management/new'
@@ -1333,54 +1697,76 @@ export interface FileRouteTypes {
     | '/development/research-innovation/product-strategy/portfolio'
     | '/development/research-innovation/product-strategy/reports'
     | '/development/research-innovation/product-strategy/roadmaps'
+    | '/development/research-innovation/production-engineering/new'
     | '/development/research-innovation/proof-of-concept/new'
     | '/development/research-innovation/prototype-development/new'
+    | '/development/research-innovation/quality-planning-apqp/new'
     | '/development/research-innovation/research-management/new'
+    | '/development/research-innovation/routing-development/new'
     | '/development/research-innovation/simulation-analysis/new'
     | '/development/research-innovation/software-development/new'
+    | '/development/research-innovation/sop-development/new'
     | '/development/research-innovation/technology-scouting/new'
     | '/development/research-innovation/testing-validation/new'
+    | '/development/research-innovation/tooling-development/new'
     | '/development/research-innovation/trl-assessment/new'
     | '/development/research-innovation/ui-ux-development/new'
+    | '/development/research-innovation/work-instruction-development/new'
     | '/development/ip-development/patent-management'
     | '/development/research-innovation/ai-model-development'
     | '/development/research-innovation/api-development'
+    | '/development/research-innovation/assembly-line-development'
+    | '/development/research-innovation/bom-engineering'
+    | '/development/research-innovation/capacity-planning'
     | '/development/research-innovation/certification-readiness'
     | '/development/research-innovation/cloud-platform-development'
     | '/development/research-innovation/commercialization-planning'
     | '/development/research-innovation/continuous-innovation'
+    | '/development/research-innovation/control-plan'
     | '/development/research-innovation/cybersecurity-engineering'
     | '/development/research-innovation/design-thinking'
     | '/development/research-innovation/electrical-design'
     | '/development/research-innovation/electronics-design'
     | '/development/research-innovation/embedded-systems-development'
     | '/development/research-innovation/experiment-management'
+    | '/development/research-innovation/factory-layout-design'
     | '/development/research-innovation/feasibility-study'
     | '/development/research-innovation/firmware-development'
+    | '/development/research-innovation/fixture-development'
     | '/development/research-innovation/idea-management'
     | '/development/research-innovation/industrial-design'
     | '/development/research-innovation/innovation-portfolio'
     | '/development/research-innovation/iot-development'
+    | '/development/research-innovation/jig-development'
     | '/development/research-innovation/mechanical-design'
     | '/development/research-innovation/mobile-app-development'
     | '/development/research-innovation/opportunity-discovery'
+    | '/development/research-innovation/pfmea-development'
+    | '/development/research-innovation/pilot-production'
     | '/development/research-innovation/prd'
     | '/development/research-innovation/problem-validation'
+    | '/development/research-innovation/process-validation'
     | '/development/research-innovation/product-architecture'
     | '/development/research-innovation/product-documentation'
     | '/development/research-innovation/product-lifecycle-management'
     | '/development/research-innovation/product-release-management'
     | '/development/research-innovation/product-roadmap'
     | '/development/research-innovation/product-strategy'
+    | '/development/research-innovation/production-engineering'
     | '/development/research-innovation/proof-of-concept'
     | '/development/research-innovation/prototype-development'
+    | '/development/research-innovation/quality-planning-apqp'
     | '/development/research-innovation/research-management'
+    | '/development/research-innovation/routing-development'
     | '/development/research-innovation/simulation-analysis'
     | '/development/research-innovation/software-development'
+    | '/development/research-innovation/sop-development'
     | '/development/research-innovation/technology-scouting'
     | '/development/research-innovation/testing-validation'
+    | '/development/research-innovation/tooling-development'
     | '/development/research-innovation/trl-assessment'
     | '/development/research-innovation/ui-ux-development'
+    | '/development/research-innovation/work-instruction-development'
   id:
     | '__root__'
     | '/'
@@ -1417,28 +1803,38 @@ export interface FileRouteTypes {
     | '/development/ip-development/patent-management/new'
     | '/development/research-innovation/ai-model-development/new'
     | '/development/research-innovation/api-development/new'
+    | '/development/research-innovation/assembly-line-development/new'
+    | '/development/research-innovation/bom-engineering/new'
+    | '/development/research-innovation/capacity-planning/new'
     | '/development/research-innovation/certification-readiness/new'
     | '/development/research-innovation/cloud-platform-development/new'
     | '/development/research-innovation/commercialization-planning/new'
     | '/development/research-innovation/continuous-innovation/new'
+    | '/development/research-innovation/control-plan/new'
     | '/development/research-innovation/cybersecurity-engineering/new'
     | '/development/research-innovation/design-thinking/new'
     | '/development/research-innovation/electrical-design/new'
     | '/development/research-innovation/electronics-design/new'
     | '/development/research-innovation/embedded-systems-development/new'
     | '/development/research-innovation/experiment-management/new'
+    | '/development/research-innovation/factory-layout-design/new'
     | '/development/research-innovation/feasibility-study/new'
     | '/development/research-innovation/firmware-development/new'
+    | '/development/research-innovation/fixture-development/new'
     | '/development/research-innovation/idea-management/$ideaId'
     | '/development/research-innovation/idea-management/new'
     | '/development/research-innovation/industrial-design/new'
     | '/development/research-innovation/innovation-portfolio/new'
     | '/development/research-innovation/iot-development/new'
+    | '/development/research-innovation/jig-development/new'
     | '/development/research-innovation/mechanical-design/new'
     | '/development/research-innovation/mobile-app-development/new'
     | '/development/research-innovation/opportunity-discovery/new'
+    | '/development/research-innovation/pfmea-development/new'
+    | '/development/research-innovation/pilot-production/new'
     | '/development/research-innovation/prd/new'
     | '/development/research-innovation/problem-validation/new'
+    | '/development/research-innovation/process-validation/new'
     | '/development/research-innovation/product-architecture/new'
     | '/development/research-innovation/product-documentation/new'
     | '/development/research-innovation/product-lifecycle-management/new'
@@ -1449,54 +1845,76 @@ export interface FileRouteTypes {
     | '/development/research-innovation/product-strategy/portfolio'
     | '/development/research-innovation/product-strategy/reports'
     | '/development/research-innovation/product-strategy/roadmaps'
+    | '/development/research-innovation/production-engineering/new'
     | '/development/research-innovation/proof-of-concept/new'
     | '/development/research-innovation/prototype-development/new'
+    | '/development/research-innovation/quality-planning-apqp/new'
     | '/development/research-innovation/research-management/new'
+    | '/development/research-innovation/routing-development/new'
     | '/development/research-innovation/simulation-analysis/new'
     | '/development/research-innovation/software-development/new'
+    | '/development/research-innovation/sop-development/new'
     | '/development/research-innovation/technology-scouting/new'
     | '/development/research-innovation/testing-validation/new'
+    | '/development/research-innovation/tooling-development/new'
     | '/development/research-innovation/trl-assessment/new'
     | '/development/research-innovation/ui-ux-development/new'
+    | '/development/research-innovation/work-instruction-development/new'
     | '/development/ip-development/patent-management/'
     | '/development/research-innovation/ai-model-development/'
     | '/development/research-innovation/api-development/'
+    | '/development/research-innovation/assembly-line-development/'
+    | '/development/research-innovation/bom-engineering/'
+    | '/development/research-innovation/capacity-planning/'
     | '/development/research-innovation/certification-readiness/'
     | '/development/research-innovation/cloud-platform-development/'
     | '/development/research-innovation/commercialization-planning/'
     | '/development/research-innovation/continuous-innovation/'
+    | '/development/research-innovation/control-plan/'
     | '/development/research-innovation/cybersecurity-engineering/'
     | '/development/research-innovation/design-thinking/'
     | '/development/research-innovation/electrical-design/'
     | '/development/research-innovation/electronics-design/'
     | '/development/research-innovation/embedded-systems-development/'
     | '/development/research-innovation/experiment-management/'
+    | '/development/research-innovation/factory-layout-design/'
     | '/development/research-innovation/feasibility-study/'
     | '/development/research-innovation/firmware-development/'
+    | '/development/research-innovation/fixture-development/'
     | '/development/research-innovation/idea-management/'
     | '/development/research-innovation/industrial-design/'
     | '/development/research-innovation/innovation-portfolio/'
     | '/development/research-innovation/iot-development/'
+    | '/development/research-innovation/jig-development/'
     | '/development/research-innovation/mechanical-design/'
     | '/development/research-innovation/mobile-app-development/'
     | '/development/research-innovation/opportunity-discovery/'
+    | '/development/research-innovation/pfmea-development/'
+    | '/development/research-innovation/pilot-production/'
     | '/development/research-innovation/prd/'
     | '/development/research-innovation/problem-validation/'
+    | '/development/research-innovation/process-validation/'
     | '/development/research-innovation/product-architecture/'
     | '/development/research-innovation/product-documentation/'
     | '/development/research-innovation/product-lifecycle-management/'
     | '/development/research-innovation/product-release-management/'
     | '/development/research-innovation/product-roadmap/'
     | '/development/research-innovation/product-strategy/'
+    | '/development/research-innovation/production-engineering/'
     | '/development/research-innovation/proof-of-concept/'
     | '/development/research-innovation/prototype-development/'
+    | '/development/research-innovation/quality-planning-apqp/'
     | '/development/research-innovation/research-management/'
+    | '/development/research-innovation/routing-development/'
     | '/development/research-innovation/simulation-analysis/'
     | '/development/research-innovation/software-development/'
+    | '/development/research-innovation/sop-development/'
     | '/development/research-innovation/technology-scouting/'
     | '/development/research-innovation/testing-validation/'
+    | '/development/research-innovation/tooling-development/'
     | '/development/research-innovation/trl-assessment/'
     | '/development/research-innovation/ui-ux-development/'
+    | '/development/research-innovation/work-instruction-development/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1534,28 +1952,38 @@ export interface RootRouteChildren {
   DevelopmentIpDevelopmentPatentManagementNewRoute: typeof DevelopmentIpDevelopmentPatentManagementNewRoute
   DevelopmentResearchInnovationAiModelDevelopmentNewRoute: typeof DevelopmentResearchInnovationAiModelDevelopmentNewRoute
   DevelopmentResearchInnovationApiDevelopmentNewRoute: typeof DevelopmentResearchInnovationApiDevelopmentNewRoute
+  DevelopmentResearchInnovationAssemblyLineDevelopmentNewRoute: typeof DevelopmentResearchInnovationAssemblyLineDevelopmentNewRoute
+  DevelopmentResearchInnovationBomEngineeringNewRoute: typeof DevelopmentResearchInnovationBomEngineeringNewRoute
+  DevelopmentResearchInnovationCapacityPlanningNewRoute: typeof DevelopmentResearchInnovationCapacityPlanningNewRoute
   DevelopmentResearchInnovationCertificationReadinessNewRoute: typeof DevelopmentResearchInnovationCertificationReadinessNewRoute
   DevelopmentResearchInnovationCloudPlatformDevelopmentNewRoute: typeof DevelopmentResearchInnovationCloudPlatformDevelopmentNewRoute
   DevelopmentResearchInnovationCommercializationPlanningNewRoute: typeof DevelopmentResearchInnovationCommercializationPlanningNewRoute
   DevelopmentResearchInnovationContinuousInnovationNewRoute: typeof DevelopmentResearchInnovationContinuousInnovationNewRoute
+  DevelopmentResearchInnovationControlPlanNewRoute: typeof DevelopmentResearchInnovationControlPlanNewRoute
   DevelopmentResearchInnovationCybersecurityEngineeringNewRoute: typeof DevelopmentResearchInnovationCybersecurityEngineeringNewRoute
   DevelopmentResearchInnovationDesignThinkingNewRoute: typeof DevelopmentResearchInnovationDesignThinkingNewRoute
   DevelopmentResearchInnovationElectricalDesignNewRoute: typeof DevelopmentResearchInnovationElectricalDesignNewRoute
   DevelopmentResearchInnovationElectronicsDesignNewRoute: typeof DevelopmentResearchInnovationElectronicsDesignNewRoute
   DevelopmentResearchInnovationEmbeddedSystemsDevelopmentNewRoute: typeof DevelopmentResearchInnovationEmbeddedSystemsDevelopmentNewRoute
   DevelopmentResearchInnovationExperimentManagementNewRoute: typeof DevelopmentResearchInnovationExperimentManagementNewRoute
+  DevelopmentResearchInnovationFactoryLayoutDesignNewRoute: typeof DevelopmentResearchInnovationFactoryLayoutDesignNewRoute
   DevelopmentResearchInnovationFeasibilityStudyNewRoute: typeof DevelopmentResearchInnovationFeasibilityStudyNewRoute
   DevelopmentResearchInnovationFirmwareDevelopmentNewRoute: typeof DevelopmentResearchInnovationFirmwareDevelopmentNewRoute
+  DevelopmentResearchInnovationFixtureDevelopmentNewRoute: typeof DevelopmentResearchInnovationFixtureDevelopmentNewRoute
   DevelopmentResearchInnovationIdeaManagementIdeaIdRoute: typeof DevelopmentResearchInnovationIdeaManagementIdeaIdRoute
   DevelopmentResearchInnovationIdeaManagementNewRoute: typeof DevelopmentResearchInnovationIdeaManagementNewRoute
   DevelopmentResearchInnovationIndustrialDesignNewRoute: typeof DevelopmentResearchInnovationIndustrialDesignNewRoute
   DevelopmentResearchInnovationInnovationPortfolioNewRoute: typeof DevelopmentResearchInnovationInnovationPortfolioNewRoute
   DevelopmentResearchInnovationIotDevelopmentNewRoute: typeof DevelopmentResearchInnovationIotDevelopmentNewRoute
+  DevelopmentResearchInnovationJigDevelopmentNewRoute: typeof DevelopmentResearchInnovationJigDevelopmentNewRoute
   DevelopmentResearchInnovationMechanicalDesignNewRoute: typeof DevelopmentResearchInnovationMechanicalDesignNewRoute
   DevelopmentResearchInnovationMobileAppDevelopmentNewRoute: typeof DevelopmentResearchInnovationMobileAppDevelopmentNewRoute
   DevelopmentResearchInnovationOpportunityDiscoveryNewRoute: typeof DevelopmentResearchInnovationOpportunityDiscoveryNewRoute
+  DevelopmentResearchInnovationPfmeaDevelopmentNewRoute: typeof DevelopmentResearchInnovationPfmeaDevelopmentNewRoute
+  DevelopmentResearchInnovationPilotProductionNewRoute: typeof DevelopmentResearchInnovationPilotProductionNewRoute
   DevelopmentResearchInnovationPrdNewRoute: typeof DevelopmentResearchInnovationPrdNewRoute
   DevelopmentResearchInnovationProblemValidationNewRoute: typeof DevelopmentResearchInnovationProblemValidationNewRoute
+  DevelopmentResearchInnovationProcessValidationNewRoute: typeof DevelopmentResearchInnovationProcessValidationNewRoute
   DevelopmentResearchInnovationProductArchitectureNewRoute: typeof DevelopmentResearchInnovationProductArchitectureNewRoute
   DevelopmentResearchInnovationProductDocumentationNewRoute: typeof DevelopmentResearchInnovationProductDocumentationNewRoute
   DevelopmentResearchInnovationProductLifecycleManagementNewRoute: typeof DevelopmentResearchInnovationProductLifecycleManagementNewRoute
@@ -1566,54 +1994,76 @@ export interface RootRouteChildren {
   DevelopmentResearchInnovationProductStrategyPortfolioRoute: typeof DevelopmentResearchInnovationProductStrategyPortfolioRoute
   DevelopmentResearchInnovationProductStrategyReportsRoute: typeof DevelopmentResearchInnovationProductStrategyReportsRoute
   DevelopmentResearchInnovationProductStrategyRoadmapsRoute: typeof DevelopmentResearchInnovationProductStrategyRoadmapsRoute
+  DevelopmentResearchInnovationProductionEngineeringNewRoute: typeof DevelopmentResearchInnovationProductionEngineeringNewRoute
   DevelopmentResearchInnovationProofOfConceptNewRoute: typeof DevelopmentResearchInnovationProofOfConceptNewRoute
   DevelopmentResearchInnovationPrototypeDevelopmentNewRoute: typeof DevelopmentResearchInnovationPrototypeDevelopmentNewRoute
+  DevelopmentResearchInnovationQualityPlanningApqpNewRoute: typeof DevelopmentResearchInnovationQualityPlanningApqpNewRoute
   DevelopmentResearchInnovationResearchManagementNewRoute: typeof DevelopmentResearchInnovationResearchManagementNewRoute
+  DevelopmentResearchInnovationRoutingDevelopmentNewRoute: typeof DevelopmentResearchInnovationRoutingDevelopmentNewRoute
   DevelopmentResearchInnovationSimulationAnalysisNewRoute: typeof DevelopmentResearchInnovationSimulationAnalysisNewRoute
   DevelopmentResearchInnovationSoftwareDevelopmentNewRoute: typeof DevelopmentResearchInnovationSoftwareDevelopmentNewRoute
+  DevelopmentResearchInnovationSopDevelopmentNewRoute: typeof DevelopmentResearchInnovationSopDevelopmentNewRoute
   DevelopmentResearchInnovationTechnologyScoutingNewRoute: typeof DevelopmentResearchInnovationTechnologyScoutingNewRoute
   DevelopmentResearchInnovationTestingValidationNewRoute: typeof DevelopmentResearchInnovationTestingValidationNewRoute
+  DevelopmentResearchInnovationToolingDevelopmentNewRoute: typeof DevelopmentResearchInnovationToolingDevelopmentNewRoute
   DevelopmentResearchInnovationTrlAssessmentNewRoute: typeof DevelopmentResearchInnovationTrlAssessmentNewRoute
   DevelopmentResearchInnovationUiUxDevelopmentNewRoute: typeof DevelopmentResearchInnovationUiUxDevelopmentNewRoute
+  DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute: typeof DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute
   DevelopmentIpDevelopmentPatentManagementIndexRoute: typeof DevelopmentIpDevelopmentPatentManagementIndexRoute
   DevelopmentResearchInnovationAiModelDevelopmentIndexRoute: typeof DevelopmentResearchInnovationAiModelDevelopmentIndexRoute
   DevelopmentResearchInnovationApiDevelopmentIndexRoute: typeof DevelopmentResearchInnovationApiDevelopmentIndexRoute
+  DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRoute: typeof DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRoute
+  DevelopmentResearchInnovationBomEngineeringIndexRoute: typeof DevelopmentResearchInnovationBomEngineeringIndexRoute
+  DevelopmentResearchInnovationCapacityPlanningIndexRoute: typeof DevelopmentResearchInnovationCapacityPlanningIndexRoute
   DevelopmentResearchInnovationCertificationReadinessIndexRoute: typeof DevelopmentResearchInnovationCertificationReadinessIndexRoute
   DevelopmentResearchInnovationCloudPlatformDevelopmentIndexRoute: typeof DevelopmentResearchInnovationCloudPlatformDevelopmentIndexRoute
   DevelopmentResearchInnovationCommercializationPlanningIndexRoute: typeof DevelopmentResearchInnovationCommercializationPlanningIndexRoute
   DevelopmentResearchInnovationContinuousInnovationIndexRoute: typeof DevelopmentResearchInnovationContinuousInnovationIndexRoute
+  DevelopmentResearchInnovationControlPlanIndexRoute: typeof DevelopmentResearchInnovationControlPlanIndexRoute
   DevelopmentResearchInnovationCybersecurityEngineeringIndexRoute: typeof DevelopmentResearchInnovationCybersecurityEngineeringIndexRoute
   DevelopmentResearchInnovationDesignThinkingIndexRoute: typeof DevelopmentResearchInnovationDesignThinkingIndexRoute
   DevelopmentResearchInnovationElectricalDesignIndexRoute: typeof DevelopmentResearchInnovationElectricalDesignIndexRoute
   DevelopmentResearchInnovationElectronicsDesignIndexRoute: typeof DevelopmentResearchInnovationElectronicsDesignIndexRoute
   DevelopmentResearchInnovationEmbeddedSystemsDevelopmentIndexRoute: typeof DevelopmentResearchInnovationEmbeddedSystemsDevelopmentIndexRoute
   DevelopmentResearchInnovationExperimentManagementIndexRoute: typeof DevelopmentResearchInnovationExperimentManagementIndexRoute
+  DevelopmentResearchInnovationFactoryLayoutDesignIndexRoute: typeof DevelopmentResearchInnovationFactoryLayoutDesignIndexRoute
   DevelopmentResearchInnovationFeasibilityStudyIndexRoute: typeof DevelopmentResearchInnovationFeasibilityStudyIndexRoute
   DevelopmentResearchInnovationFirmwareDevelopmentIndexRoute: typeof DevelopmentResearchInnovationFirmwareDevelopmentIndexRoute
+  DevelopmentResearchInnovationFixtureDevelopmentIndexRoute: typeof DevelopmentResearchInnovationFixtureDevelopmentIndexRoute
   DevelopmentResearchInnovationIdeaManagementIndexRoute: typeof DevelopmentResearchInnovationIdeaManagementIndexRoute
   DevelopmentResearchInnovationIndustrialDesignIndexRoute: typeof DevelopmentResearchInnovationIndustrialDesignIndexRoute
   DevelopmentResearchInnovationInnovationPortfolioIndexRoute: typeof DevelopmentResearchInnovationInnovationPortfolioIndexRoute
   DevelopmentResearchInnovationIotDevelopmentIndexRoute: typeof DevelopmentResearchInnovationIotDevelopmentIndexRoute
+  DevelopmentResearchInnovationJigDevelopmentIndexRoute: typeof DevelopmentResearchInnovationJigDevelopmentIndexRoute
   DevelopmentResearchInnovationMechanicalDesignIndexRoute: typeof DevelopmentResearchInnovationMechanicalDesignIndexRoute
   DevelopmentResearchInnovationMobileAppDevelopmentIndexRoute: typeof DevelopmentResearchInnovationMobileAppDevelopmentIndexRoute
   DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute: typeof DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute
+  DevelopmentResearchInnovationPfmeaDevelopmentIndexRoute: typeof DevelopmentResearchInnovationPfmeaDevelopmentIndexRoute
+  DevelopmentResearchInnovationPilotProductionIndexRoute: typeof DevelopmentResearchInnovationPilotProductionIndexRoute
   DevelopmentResearchInnovationPrdIndexRoute: typeof DevelopmentResearchInnovationPrdIndexRoute
   DevelopmentResearchInnovationProblemValidationIndexRoute: typeof DevelopmentResearchInnovationProblemValidationIndexRoute
+  DevelopmentResearchInnovationProcessValidationIndexRoute: typeof DevelopmentResearchInnovationProcessValidationIndexRoute
   DevelopmentResearchInnovationProductArchitectureIndexRoute: typeof DevelopmentResearchInnovationProductArchitectureIndexRoute
   DevelopmentResearchInnovationProductDocumentationIndexRoute: typeof DevelopmentResearchInnovationProductDocumentationIndexRoute
   DevelopmentResearchInnovationProductLifecycleManagementIndexRoute: typeof DevelopmentResearchInnovationProductLifecycleManagementIndexRoute
   DevelopmentResearchInnovationProductReleaseManagementIndexRoute: typeof DevelopmentResearchInnovationProductReleaseManagementIndexRoute
   DevelopmentResearchInnovationProductRoadmapIndexRoute: typeof DevelopmentResearchInnovationProductRoadmapIndexRoute
   DevelopmentResearchInnovationProductStrategyIndexRoute: typeof DevelopmentResearchInnovationProductStrategyIndexRoute
+  DevelopmentResearchInnovationProductionEngineeringIndexRoute: typeof DevelopmentResearchInnovationProductionEngineeringIndexRoute
   DevelopmentResearchInnovationProofOfConceptIndexRoute: typeof DevelopmentResearchInnovationProofOfConceptIndexRoute
   DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute: typeof DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute
+  DevelopmentResearchInnovationQualityPlanningApqpIndexRoute: typeof DevelopmentResearchInnovationQualityPlanningApqpIndexRoute
   DevelopmentResearchInnovationResearchManagementIndexRoute: typeof DevelopmentResearchInnovationResearchManagementIndexRoute
+  DevelopmentResearchInnovationRoutingDevelopmentIndexRoute: typeof DevelopmentResearchInnovationRoutingDevelopmentIndexRoute
   DevelopmentResearchInnovationSimulationAnalysisIndexRoute: typeof DevelopmentResearchInnovationSimulationAnalysisIndexRoute
   DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute: typeof DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute
+  DevelopmentResearchInnovationSopDevelopmentIndexRoute: typeof DevelopmentResearchInnovationSopDevelopmentIndexRoute
   DevelopmentResearchInnovationTechnologyScoutingIndexRoute: typeof DevelopmentResearchInnovationTechnologyScoutingIndexRoute
   DevelopmentResearchInnovationTestingValidationIndexRoute: typeof DevelopmentResearchInnovationTestingValidationIndexRoute
+  DevelopmentResearchInnovationToolingDevelopmentIndexRoute: typeof DevelopmentResearchInnovationToolingDevelopmentIndexRoute
   DevelopmentResearchInnovationTrlAssessmentIndexRoute: typeof DevelopmentResearchInnovationTrlAssessmentIndexRoute
   DevelopmentResearchInnovationUiUxDevelopmentIndexRoute: typeof DevelopmentResearchInnovationUiUxDevelopmentIndexRoute
+  DevelopmentResearchInnovationWorkInstructionDevelopmentIndexRoute: typeof DevelopmentResearchInnovationWorkInstructionDevelopmentIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1835,6 +2285,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdministrationHomeBranchesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/work-instruction-development/': {
+      id: '/development/research-innovation/work-instruction-development/'
+      path: '/development/research-innovation/work-instruction-development'
+      fullPath: '/development/research-innovation/work-instruction-development/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationWorkInstructionDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/ui-ux-development/': {
       id: '/development/research-innovation/ui-ux-development/'
       path: '/development/research-innovation/ui-ux-development'
@@ -1847,6 +2304,13 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/trl-assessment'
       fullPath: '/development/research-innovation/trl-assessment/'
       preLoaderRoute: typeof DevelopmentResearchInnovationTrlAssessmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/tooling-development/': {
+      id: '/development/research-innovation/tooling-development/'
+      path: '/development/research-innovation/tooling-development'
+      fullPath: '/development/research-innovation/tooling-development/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationToolingDevelopmentIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/testing-validation/': {
@@ -1863,6 +2327,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationTechnologyScoutingIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/sop-development/': {
+      id: '/development/research-innovation/sop-development/'
+      path: '/development/research-innovation/sop-development'
+      fullPath: '/development/research-innovation/sop-development/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationSopDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/software-development/': {
       id: '/development/research-innovation/software-development/'
       path: '/development/research-innovation/software-development'
@@ -1877,11 +2348,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationSimulationAnalysisIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/routing-development/': {
+      id: '/development/research-innovation/routing-development/'
+      path: '/development/research-innovation/routing-development'
+      fullPath: '/development/research-innovation/routing-development/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationRoutingDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/research-management/': {
       id: '/development/research-innovation/research-management/'
       path: '/development/research-innovation/research-management'
       fullPath: '/development/research-innovation/research-management/'
       preLoaderRoute: typeof DevelopmentResearchInnovationResearchManagementIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/quality-planning-apqp/': {
+      id: '/development/research-innovation/quality-planning-apqp/'
+      path: '/development/research-innovation/quality-planning-apqp'
+      fullPath: '/development/research-innovation/quality-planning-apqp/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationQualityPlanningApqpIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/prototype-development/': {
@@ -1896,6 +2381,13 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/proof-of-concept'
       fullPath: '/development/research-innovation/proof-of-concept/'
       preLoaderRoute: typeof DevelopmentResearchInnovationProofOfConceptIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/production-engineering/': {
+      id: '/development/research-innovation/production-engineering/'
+      path: '/development/research-innovation/production-engineering'
+      fullPath: '/development/research-innovation/production-engineering/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationProductionEngineeringIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/product-strategy/': {
@@ -1940,6 +2432,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationProductArchitectureIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/process-validation/': {
+      id: '/development/research-innovation/process-validation/'
+      path: '/development/research-innovation/process-validation'
+      fullPath: '/development/research-innovation/process-validation/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationProcessValidationIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/problem-validation/': {
       id: '/development/research-innovation/problem-validation/'
       path: '/development/research-innovation/problem-validation'
@@ -1952,6 +2451,20 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/prd'
       fullPath: '/development/research-innovation/prd/'
       preLoaderRoute: typeof DevelopmentResearchInnovationPrdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/pilot-production/': {
+      id: '/development/research-innovation/pilot-production/'
+      path: '/development/research-innovation/pilot-production'
+      fullPath: '/development/research-innovation/pilot-production/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationPilotProductionIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/pfmea-development/': {
+      id: '/development/research-innovation/pfmea-development/'
+      path: '/development/research-innovation/pfmea-development'
+      fullPath: '/development/research-innovation/pfmea-development/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationPfmeaDevelopmentIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/opportunity-discovery/': {
@@ -1973,6 +2486,13 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/mechanical-design'
       fullPath: '/development/research-innovation/mechanical-design/'
       preLoaderRoute: typeof DevelopmentResearchInnovationMechanicalDesignIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/jig-development/': {
+      id: '/development/research-innovation/jig-development/'
+      path: '/development/research-innovation/jig-development'
+      fullPath: '/development/research-innovation/jig-development/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationJigDevelopmentIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/iot-development/': {
@@ -2003,6 +2523,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationIdeaManagementIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/fixture-development/': {
+      id: '/development/research-innovation/fixture-development/'
+      path: '/development/research-innovation/fixture-development'
+      fullPath: '/development/research-innovation/fixture-development/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationFixtureDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/firmware-development/': {
       id: '/development/research-innovation/firmware-development/'
       path: '/development/research-innovation/firmware-development'
@@ -2015,6 +2542,13 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/feasibility-study'
       fullPath: '/development/research-innovation/feasibility-study/'
       preLoaderRoute: typeof DevelopmentResearchInnovationFeasibilityStudyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/factory-layout-design/': {
+      id: '/development/research-innovation/factory-layout-design/'
+      path: '/development/research-innovation/factory-layout-design'
+      fullPath: '/development/research-innovation/factory-layout-design/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationFactoryLayoutDesignIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/experiment-management/': {
@@ -2059,6 +2593,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationCybersecurityEngineeringIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/control-plan/': {
+      id: '/development/research-innovation/control-plan/'
+      path: '/development/research-innovation/control-plan'
+      fullPath: '/development/research-innovation/control-plan/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationControlPlanIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/continuous-innovation/': {
       id: '/development/research-innovation/continuous-innovation/'
       path: '/development/research-innovation/continuous-innovation'
@@ -2087,6 +2628,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationCertificationReadinessIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/capacity-planning/': {
+      id: '/development/research-innovation/capacity-planning/'
+      path: '/development/research-innovation/capacity-planning'
+      fullPath: '/development/research-innovation/capacity-planning/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationCapacityPlanningIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/bom-engineering/': {
+      id: '/development/research-innovation/bom-engineering/'
+      path: '/development/research-innovation/bom-engineering'
+      fullPath: '/development/research-innovation/bom-engineering/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationBomEngineeringIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/assembly-line-development/': {
+      id: '/development/research-innovation/assembly-line-development/'
+      path: '/development/research-innovation/assembly-line-development'
+      fullPath: '/development/research-innovation/assembly-line-development/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/api-development/': {
       id: '/development/research-innovation/api-development/'
       path: '/development/research-innovation/api-development'
@@ -2108,6 +2670,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentIpDevelopmentPatentManagementIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/work-instruction-development/new': {
+      id: '/development/research-innovation/work-instruction-development/new'
+      path: '/development/research-innovation/work-instruction-development/new'
+      fullPath: '/development/research-innovation/work-instruction-development/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationWorkInstructionDevelopmentNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/ui-ux-development/new': {
       id: '/development/research-innovation/ui-ux-development/new'
       path: '/development/research-innovation/ui-ux-development/new'
@@ -2120,6 +2689,13 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/trl-assessment/new'
       fullPath: '/development/research-innovation/trl-assessment/new'
       preLoaderRoute: typeof DevelopmentResearchInnovationTrlAssessmentNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/tooling-development/new': {
+      id: '/development/research-innovation/tooling-development/new'
+      path: '/development/research-innovation/tooling-development/new'
+      fullPath: '/development/research-innovation/tooling-development/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationToolingDevelopmentNewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/testing-validation/new': {
@@ -2136,6 +2712,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationTechnologyScoutingNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/sop-development/new': {
+      id: '/development/research-innovation/sop-development/new'
+      path: '/development/research-innovation/sop-development/new'
+      fullPath: '/development/research-innovation/sop-development/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationSopDevelopmentNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/software-development/new': {
       id: '/development/research-innovation/software-development/new'
       path: '/development/research-innovation/software-development/new'
@@ -2150,11 +2733,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationSimulationAnalysisNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/routing-development/new': {
+      id: '/development/research-innovation/routing-development/new'
+      path: '/development/research-innovation/routing-development/new'
+      fullPath: '/development/research-innovation/routing-development/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationRoutingDevelopmentNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/research-management/new': {
       id: '/development/research-innovation/research-management/new'
       path: '/development/research-innovation/research-management/new'
       fullPath: '/development/research-innovation/research-management/new'
       preLoaderRoute: typeof DevelopmentResearchInnovationResearchManagementNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/quality-planning-apqp/new': {
+      id: '/development/research-innovation/quality-planning-apqp/new'
+      path: '/development/research-innovation/quality-planning-apqp/new'
+      fullPath: '/development/research-innovation/quality-planning-apqp/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationQualityPlanningApqpNewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/prototype-development/new': {
@@ -2169,6 +2766,13 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/proof-of-concept/new'
       fullPath: '/development/research-innovation/proof-of-concept/new'
       preLoaderRoute: typeof DevelopmentResearchInnovationProofOfConceptNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/production-engineering/new': {
+      id: '/development/research-innovation/production-engineering/new'
+      path: '/development/research-innovation/production-engineering/new'
+      fullPath: '/development/research-innovation/production-engineering/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationProductionEngineeringNewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/product-strategy/roadmaps': {
@@ -2241,6 +2845,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationProductArchitectureNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/process-validation/new': {
+      id: '/development/research-innovation/process-validation/new'
+      path: '/development/research-innovation/process-validation/new'
+      fullPath: '/development/research-innovation/process-validation/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationProcessValidationNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/problem-validation/new': {
       id: '/development/research-innovation/problem-validation/new'
       path: '/development/research-innovation/problem-validation/new'
@@ -2253,6 +2864,20 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/prd/new'
       fullPath: '/development/research-innovation/prd/new'
       preLoaderRoute: typeof DevelopmentResearchInnovationPrdNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/pilot-production/new': {
+      id: '/development/research-innovation/pilot-production/new'
+      path: '/development/research-innovation/pilot-production/new'
+      fullPath: '/development/research-innovation/pilot-production/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationPilotProductionNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/pfmea-development/new': {
+      id: '/development/research-innovation/pfmea-development/new'
+      path: '/development/research-innovation/pfmea-development/new'
+      fullPath: '/development/research-innovation/pfmea-development/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationPfmeaDevelopmentNewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/opportunity-discovery/new': {
@@ -2274,6 +2899,13 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/mechanical-design/new'
       fullPath: '/development/research-innovation/mechanical-design/new'
       preLoaderRoute: typeof DevelopmentResearchInnovationMechanicalDesignNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/jig-development/new': {
+      id: '/development/research-innovation/jig-development/new'
+      path: '/development/research-innovation/jig-development/new'
+      fullPath: '/development/research-innovation/jig-development/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationJigDevelopmentNewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/iot-development/new': {
@@ -2311,6 +2943,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationIdeaManagementIdeaIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/fixture-development/new': {
+      id: '/development/research-innovation/fixture-development/new'
+      path: '/development/research-innovation/fixture-development/new'
+      fullPath: '/development/research-innovation/fixture-development/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationFixtureDevelopmentNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/firmware-development/new': {
       id: '/development/research-innovation/firmware-development/new'
       path: '/development/research-innovation/firmware-development/new'
@@ -2323,6 +2962,13 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/feasibility-study/new'
       fullPath: '/development/research-innovation/feasibility-study/new'
       preLoaderRoute: typeof DevelopmentResearchInnovationFeasibilityStudyNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/factory-layout-design/new': {
+      id: '/development/research-innovation/factory-layout-design/new'
+      path: '/development/research-innovation/factory-layout-design/new'
+      fullPath: '/development/research-innovation/factory-layout-design/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationFactoryLayoutDesignNewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/experiment-management/new': {
@@ -2367,6 +3013,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationCybersecurityEngineeringNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/control-plan/new': {
+      id: '/development/research-innovation/control-plan/new'
+      path: '/development/research-innovation/control-plan/new'
+      fullPath: '/development/research-innovation/control-plan/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationControlPlanNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/continuous-innovation/new': {
       id: '/development/research-innovation/continuous-innovation/new'
       path: '/development/research-innovation/continuous-innovation/new'
@@ -2393,6 +3046,27 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/certification-readiness/new'
       fullPath: '/development/research-innovation/certification-readiness/new'
       preLoaderRoute: typeof DevelopmentResearchInnovationCertificationReadinessNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/capacity-planning/new': {
+      id: '/development/research-innovation/capacity-planning/new'
+      path: '/development/research-innovation/capacity-planning/new'
+      fullPath: '/development/research-innovation/capacity-planning/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationCapacityPlanningNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/bom-engineering/new': {
+      id: '/development/research-innovation/bom-engineering/new'
+      path: '/development/research-innovation/bom-engineering/new'
+      fullPath: '/development/research-innovation/bom-engineering/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationBomEngineeringNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/assembly-line-development/new': {
+      id: '/development/research-innovation/assembly-line-development/new'
+      path: '/development/research-innovation/assembly-line-development/new'
+      fullPath: '/development/research-innovation/assembly-line-development/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationAssemblyLineDevelopmentNewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/api-development/new': {
@@ -2459,6 +3133,12 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationAiModelDevelopmentNewRoute,
   DevelopmentResearchInnovationApiDevelopmentNewRoute:
     DevelopmentResearchInnovationApiDevelopmentNewRoute,
+  DevelopmentResearchInnovationAssemblyLineDevelopmentNewRoute:
+    DevelopmentResearchInnovationAssemblyLineDevelopmentNewRoute,
+  DevelopmentResearchInnovationBomEngineeringNewRoute:
+    DevelopmentResearchInnovationBomEngineeringNewRoute,
+  DevelopmentResearchInnovationCapacityPlanningNewRoute:
+    DevelopmentResearchInnovationCapacityPlanningNewRoute,
   DevelopmentResearchInnovationCertificationReadinessNewRoute:
     DevelopmentResearchInnovationCertificationReadinessNewRoute,
   DevelopmentResearchInnovationCloudPlatformDevelopmentNewRoute:
@@ -2467,6 +3147,8 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationCommercializationPlanningNewRoute,
   DevelopmentResearchInnovationContinuousInnovationNewRoute:
     DevelopmentResearchInnovationContinuousInnovationNewRoute,
+  DevelopmentResearchInnovationControlPlanNewRoute:
+    DevelopmentResearchInnovationControlPlanNewRoute,
   DevelopmentResearchInnovationCybersecurityEngineeringNewRoute:
     DevelopmentResearchInnovationCybersecurityEngineeringNewRoute,
   DevelopmentResearchInnovationDesignThinkingNewRoute:
@@ -2479,10 +3161,14 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationEmbeddedSystemsDevelopmentNewRoute,
   DevelopmentResearchInnovationExperimentManagementNewRoute:
     DevelopmentResearchInnovationExperimentManagementNewRoute,
+  DevelopmentResearchInnovationFactoryLayoutDesignNewRoute:
+    DevelopmentResearchInnovationFactoryLayoutDesignNewRoute,
   DevelopmentResearchInnovationFeasibilityStudyNewRoute:
     DevelopmentResearchInnovationFeasibilityStudyNewRoute,
   DevelopmentResearchInnovationFirmwareDevelopmentNewRoute:
     DevelopmentResearchInnovationFirmwareDevelopmentNewRoute,
+  DevelopmentResearchInnovationFixtureDevelopmentNewRoute:
+    DevelopmentResearchInnovationFixtureDevelopmentNewRoute,
   DevelopmentResearchInnovationIdeaManagementIdeaIdRoute:
     DevelopmentResearchInnovationIdeaManagementIdeaIdRoute,
   DevelopmentResearchInnovationIdeaManagementNewRoute:
@@ -2493,16 +3179,24 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationInnovationPortfolioNewRoute,
   DevelopmentResearchInnovationIotDevelopmentNewRoute:
     DevelopmentResearchInnovationIotDevelopmentNewRoute,
+  DevelopmentResearchInnovationJigDevelopmentNewRoute:
+    DevelopmentResearchInnovationJigDevelopmentNewRoute,
   DevelopmentResearchInnovationMechanicalDesignNewRoute:
     DevelopmentResearchInnovationMechanicalDesignNewRoute,
   DevelopmentResearchInnovationMobileAppDevelopmentNewRoute:
     DevelopmentResearchInnovationMobileAppDevelopmentNewRoute,
   DevelopmentResearchInnovationOpportunityDiscoveryNewRoute:
     DevelopmentResearchInnovationOpportunityDiscoveryNewRoute,
+  DevelopmentResearchInnovationPfmeaDevelopmentNewRoute:
+    DevelopmentResearchInnovationPfmeaDevelopmentNewRoute,
+  DevelopmentResearchInnovationPilotProductionNewRoute:
+    DevelopmentResearchInnovationPilotProductionNewRoute,
   DevelopmentResearchInnovationPrdNewRoute:
     DevelopmentResearchInnovationPrdNewRoute,
   DevelopmentResearchInnovationProblemValidationNewRoute:
     DevelopmentResearchInnovationProblemValidationNewRoute,
+  DevelopmentResearchInnovationProcessValidationNewRoute:
+    DevelopmentResearchInnovationProcessValidationNewRoute,
   DevelopmentResearchInnovationProductArchitectureNewRoute:
     DevelopmentResearchInnovationProductArchitectureNewRoute,
   DevelopmentResearchInnovationProductDocumentationNewRoute:
@@ -2523,30 +3217,48 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationProductStrategyReportsRoute,
   DevelopmentResearchInnovationProductStrategyRoadmapsRoute:
     DevelopmentResearchInnovationProductStrategyRoadmapsRoute,
+  DevelopmentResearchInnovationProductionEngineeringNewRoute:
+    DevelopmentResearchInnovationProductionEngineeringNewRoute,
   DevelopmentResearchInnovationProofOfConceptNewRoute:
     DevelopmentResearchInnovationProofOfConceptNewRoute,
   DevelopmentResearchInnovationPrototypeDevelopmentNewRoute:
     DevelopmentResearchInnovationPrototypeDevelopmentNewRoute,
+  DevelopmentResearchInnovationQualityPlanningApqpNewRoute:
+    DevelopmentResearchInnovationQualityPlanningApqpNewRoute,
   DevelopmentResearchInnovationResearchManagementNewRoute:
     DevelopmentResearchInnovationResearchManagementNewRoute,
+  DevelopmentResearchInnovationRoutingDevelopmentNewRoute:
+    DevelopmentResearchInnovationRoutingDevelopmentNewRoute,
   DevelopmentResearchInnovationSimulationAnalysisNewRoute:
     DevelopmentResearchInnovationSimulationAnalysisNewRoute,
   DevelopmentResearchInnovationSoftwareDevelopmentNewRoute:
     DevelopmentResearchInnovationSoftwareDevelopmentNewRoute,
+  DevelopmentResearchInnovationSopDevelopmentNewRoute:
+    DevelopmentResearchInnovationSopDevelopmentNewRoute,
   DevelopmentResearchInnovationTechnologyScoutingNewRoute:
     DevelopmentResearchInnovationTechnologyScoutingNewRoute,
   DevelopmentResearchInnovationTestingValidationNewRoute:
     DevelopmentResearchInnovationTestingValidationNewRoute,
+  DevelopmentResearchInnovationToolingDevelopmentNewRoute:
+    DevelopmentResearchInnovationToolingDevelopmentNewRoute,
   DevelopmentResearchInnovationTrlAssessmentNewRoute:
     DevelopmentResearchInnovationTrlAssessmentNewRoute,
   DevelopmentResearchInnovationUiUxDevelopmentNewRoute:
     DevelopmentResearchInnovationUiUxDevelopmentNewRoute,
+  DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute:
+    DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute,
   DevelopmentIpDevelopmentPatentManagementIndexRoute:
     DevelopmentIpDevelopmentPatentManagementIndexRoute,
   DevelopmentResearchInnovationAiModelDevelopmentIndexRoute:
     DevelopmentResearchInnovationAiModelDevelopmentIndexRoute,
   DevelopmentResearchInnovationApiDevelopmentIndexRoute:
     DevelopmentResearchInnovationApiDevelopmentIndexRoute,
+  DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRoute:
+    DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRoute,
+  DevelopmentResearchInnovationBomEngineeringIndexRoute:
+    DevelopmentResearchInnovationBomEngineeringIndexRoute,
+  DevelopmentResearchInnovationCapacityPlanningIndexRoute:
+    DevelopmentResearchInnovationCapacityPlanningIndexRoute,
   DevelopmentResearchInnovationCertificationReadinessIndexRoute:
     DevelopmentResearchInnovationCertificationReadinessIndexRoute,
   DevelopmentResearchInnovationCloudPlatformDevelopmentIndexRoute:
@@ -2555,6 +3267,8 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationCommercializationPlanningIndexRoute,
   DevelopmentResearchInnovationContinuousInnovationIndexRoute:
     DevelopmentResearchInnovationContinuousInnovationIndexRoute,
+  DevelopmentResearchInnovationControlPlanIndexRoute:
+    DevelopmentResearchInnovationControlPlanIndexRoute,
   DevelopmentResearchInnovationCybersecurityEngineeringIndexRoute:
     DevelopmentResearchInnovationCybersecurityEngineeringIndexRoute,
   DevelopmentResearchInnovationDesignThinkingIndexRoute:
@@ -2567,10 +3281,14 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationEmbeddedSystemsDevelopmentIndexRoute,
   DevelopmentResearchInnovationExperimentManagementIndexRoute:
     DevelopmentResearchInnovationExperimentManagementIndexRoute,
+  DevelopmentResearchInnovationFactoryLayoutDesignIndexRoute:
+    DevelopmentResearchInnovationFactoryLayoutDesignIndexRoute,
   DevelopmentResearchInnovationFeasibilityStudyIndexRoute:
     DevelopmentResearchInnovationFeasibilityStudyIndexRoute,
   DevelopmentResearchInnovationFirmwareDevelopmentIndexRoute:
     DevelopmentResearchInnovationFirmwareDevelopmentIndexRoute,
+  DevelopmentResearchInnovationFixtureDevelopmentIndexRoute:
+    DevelopmentResearchInnovationFixtureDevelopmentIndexRoute,
   DevelopmentResearchInnovationIdeaManagementIndexRoute:
     DevelopmentResearchInnovationIdeaManagementIndexRoute,
   DevelopmentResearchInnovationIndustrialDesignIndexRoute:
@@ -2579,16 +3297,24 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationInnovationPortfolioIndexRoute,
   DevelopmentResearchInnovationIotDevelopmentIndexRoute:
     DevelopmentResearchInnovationIotDevelopmentIndexRoute,
+  DevelopmentResearchInnovationJigDevelopmentIndexRoute:
+    DevelopmentResearchInnovationJigDevelopmentIndexRoute,
   DevelopmentResearchInnovationMechanicalDesignIndexRoute:
     DevelopmentResearchInnovationMechanicalDesignIndexRoute,
   DevelopmentResearchInnovationMobileAppDevelopmentIndexRoute:
     DevelopmentResearchInnovationMobileAppDevelopmentIndexRoute,
   DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute:
     DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute,
+  DevelopmentResearchInnovationPfmeaDevelopmentIndexRoute:
+    DevelopmentResearchInnovationPfmeaDevelopmentIndexRoute,
+  DevelopmentResearchInnovationPilotProductionIndexRoute:
+    DevelopmentResearchInnovationPilotProductionIndexRoute,
   DevelopmentResearchInnovationPrdIndexRoute:
     DevelopmentResearchInnovationPrdIndexRoute,
   DevelopmentResearchInnovationProblemValidationIndexRoute:
     DevelopmentResearchInnovationProblemValidationIndexRoute,
+  DevelopmentResearchInnovationProcessValidationIndexRoute:
+    DevelopmentResearchInnovationProcessValidationIndexRoute,
   DevelopmentResearchInnovationProductArchitectureIndexRoute:
     DevelopmentResearchInnovationProductArchitectureIndexRoute,
   DevelopmentResearchInnovationProductDocumentationIndexRoute:
@@ -2601,24 +3327,36 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationProductRoadmapIndexRoute,
   DevelopmentResearchInnovationProductStrategyIndexRoute:
     DevelopmentResearchInnovationProductStrategyIndexRoute,
+  DevelopmentResearchInnovationProductionEngineeringIndexRoute:
+    DevelopmentResearchInnovationProductionEngineeringIndexRoute,
   DevelopmentResearchInnovationProofOfConceptIndexRoute:
     DevelopmentResearchInnovationProofOfConceptIndexRoute,
   DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute:
     DevelopmentResearchInnovationPrototypeDevelopmentIndexRoute,
+  DevelopmentResearchInnovationQualityPlanningApqpIndexRoute:
+    DevelopmentResearchInnovationQualityPlanningApqpIndexRoute,
   DevelopmentResearchInnovationResearchManagementIndexRoute:
     DevelopmentResearchInnovationResearchManagementIndexRoute,
+  DevelopmentResearchInnovationRoutingDevelopmentIndexRoute:
+    DevelopmentResearchInnovationRoutingDevelopmentIndexRoute,
   DevelopmentResearchInnovationSimulationAnalysisIndexRoute:
     DevelopmentResearchInnovationSimulationAnalysisIndexRoute,
   DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute:
     DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute,
+  DevelopmentResearchInnovationSopDevelopmentIndexRoute:
+    DevelopmentResearchInnovationSopDevelopmentIndexRoute,
   DevelopmentResearchInnovationTechnologyScoutingIndexRoute:
     DevelopmentResearchInnovationTechnologyScoutingIndexRoute,
   DevelopmentResearchInnovationTestingValidationIndexRoute:
     DevelopmentResearchInnovationTestingValidationIndexRoute,
+  DevelopmentResearchInnovationToolingDevelopmentIndexRoute:
+    DevelopmentResearchInnovationToolingDevelopmentIndexRoute,
   DevelopmentResearchInnovationTrlAssessmentIndexRoute:
     DevelopmentResearchInnovationTrlAssessmentIndexRoute,
   DevelopmentResearchInnovationUiUxDevelopmentIndexRoute:
     DevelopmentResearchInnovationUiUxDevelopmentIndexRoute,
+  DevelopmentResearchInnovationWorkInstructionDevelopmentIndexRoute:
+    DevelopmentResearchInnovationWorkInstructionDevelopmentIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

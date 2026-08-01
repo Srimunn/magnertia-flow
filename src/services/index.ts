@@ -81,6 +81,42 @@ export * as softwareDevelopmentService from "./softwareDevelopmentService";
 export * as mobileDevelopmentService from "./mobileDevelopmentService";
 export * as uiUxDevelopmentService from "./uiUxDevelopmentService";
 export * as apiDevelopmentService from "./apiDevelopmentService";
+export * as iotDevelopmentService from "./iotDevelopmentService";
+export * as plmService from "./plmService";
+export * as productDocumentationService from "./productDocumentationService";
+export * as productReleaseService from "./productReleaseService";
+export * as pilotProductionService from "./pilotProductionService";
+export * as productionEngineeringService from "./productionEngineeringService";
+export * as assemblyLineDevelopmentService from "./assemblyLineDevelopmentService";
+export * as fixtureDevelopmentService from "./fixtureDevelopmentService";
+export * as toolingDevelopmentService from "./toolingDevelopmentService";
+export * as jigDevelopmentService from "./jigDevelopmentService";
+export * as aiAssessmentService from "./aiAssessmentService";
+export * as factoryLayoutDesignService from "./factoryLayoutDesignService";
+export * as aiFactoryAssessmentService from "./aiFactoryAssessmentService";
+export * as digitalTwinService from "./digitalTwinService";
+export * as capacityPlanningService from "./capacityPlanningService";
+export * as capacityAiService from "./capacityAiService";
+export * as capacitySimulationService from "./capacitySimulationService";
+export * as capacityWorkflowService from "./capacityWorkflowService";
+export * as capacityExportService from "./capacityExportService";
+export * as workInstructionDevelopmentService from "./workInstructionDevelopmentService";
+export * as workInstructionAiService from "./workInstructionAiService";
+export * as workInstructionExportService from "./workInstructionExportService";
+export * as sopDevelopmentService from "./sopDevelopmentService";
+export * as sopAiService from "./sopAiService";
+export * as sopExportService from "./sopExportService";
+
+
+
+
+
+
+
+
+
+
+
 
 
 

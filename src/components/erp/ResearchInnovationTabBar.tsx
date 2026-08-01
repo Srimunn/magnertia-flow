@@ -47,8 +47,29 @@ export const RESEARCH_INNOVATION_TABS: { to: string; label: string; full: string
   { to: "/development/research-innovation/continuous-innovation", label: "Innovation", full: "Continuous Innovation" },
   { to: "/development/ip-development/patent-management", label: "Patents", full: "Patent Management" },
   { to: "/development/research-innovation/ui-ux-development/new", label: "UI/UX", full: "UI/UX Development" },
+  { to: "/development/research-innovation/pilot-production/new", label: "Process Dev", full: "Process Development" },
+  { to: "/development/research-innovation/production-engineering/new", label: "Production Eng", full: "Production Engineering" },
+  { to: "/development/research-innovation/assembly-line-development/new", label: "Assembly Line", full: "Assembly Line Development" },
+  { to: "/development/research-innovation/fixture-development/new", label: "Fixture Dev", full: "Fixture Development" },
+  { to: "/development/research-innovation/tooling-development/new", label: "Tooling Dev", full: "Tooling Development" },
+  { to: "/development/research-innovation/jig-development/new", label: "Jig Dev", full: "Jig Development" },
+  { to: "/development/research-innovation/factory-layout-design/new", label: "Factory Layout", full: "Factory Layout Design" },
+  { to: "/development/research-innovation/capacity-planning/new", label: "Capacity Plan", full: "Capacity Planning" },
+  { to: "/development/research-innovation/work-instruction-development/new", label: "Work Instruction", full: "Work Instruction Development" },
+  { to: "/development/research-innovation/sop-development/new", label: "SOP Dev", full: "SOP Development" },
+  { to: "/development/research-innovation/bom-engineering/new", label: "BOM Eng", full: "BOM Engineering" },
+  { to: "/development/research-innovation/routing-development/new", label: "Routing Dev", full: "Routing Development" },
+  { to: "/development/research-innovation/quality-planning-apqp/new", label: "APQP Quality", full: "Quality Planning (APQP)" },
+  { to: "/development/research-innovation/pfmea-development/new", label: "PFMEA Dev", full: "PFMEA Development" },
+  { to: "/development/research-innovation/control-plan/new", label: "Control Plan", full: "Control Plan Development" },
+  { to: "/development/research-innovation/process-validation/new", label: "Process Validation", full: "Process Validation" },
   { to: "/development/research-innovation/api-development/new", label: "API", full: "API Development" },
-  { to: "/development/research-innovation/reports", label: "Reports", full: "Research & Innovation Reports" },
+
+
+
+
+
+  { to: "/development/research-innovation/reports", label: "Reports", full: "Research & Innovation Reports" }
 ];
 
 /** Per-module metadata — the single source of truth for the header subtitle
@@ -67,6 +88,11 @@ export const MODULE_META: Record<string, { description: string; recordLabel: str
   "ai-model-development": { description: "Develop, train, evaluate, govern, and deploy enterprise AI models.", recordLabel: "AI MODEL" },
   "api-development": { description: "Design, secure, test, deploy and monitor enterprise APIs.", recordLabel: "API" },
   "ui-ux-development": { description: "Design, validate, and hand off enterprise UI/UX design systems and wireframes.", recordLabel: "UI/UX" },
+  "pilot-production": { description: "Govern enterprise process engineering, validation, standardization, resource capacity, and AI-assisted process optimization.", recordLabel: "PROCESS DEVELOPMENT" },
+  "production-engineering": { description: "Govern mass production process design, workstation allocation, pilot runs, PFMEA, OEE Targets, and AI optimization.", recordLabel: "PRODUCTION ENGINEERING" },
+  "assembly-line-development": { description: "Govern assembly line layout design, workstations planning, takt time line balancing, automation level, OEE targets, and AI quality checks.", recordLabel: "ASSEMBLY LINE DEVELOPMENT" },
+  "fixture-development": { description: "Govern fixture design drawings, bill of materials locator designs, clamp designs, safety inspections, commissioning logs, and wear predictions.", recordLabel: "FIXTURE DEVELOPMENT" },
+  "tooling-development": { description: "Govern tooling design drawings, bill of materials, process engineering, validation runs, calibration schedules, and wear predictions.", recordLabel: "TOOLING DEVELOPMENT" },
   "idea-management": { description: "Capture, evaluate, and track ideas through the innovation pipeline.", recordLabel: "IDEA" },
   "opportunity-discovery": { description: "Discover and qualify innovation opportunities from validated ideas.", recordLabel: "OPPORTUNITY" },
   "design-thinking": { description: "Run design-thinking cycles from empathy through tested prototypes.", recordLabel: "DESIGN" },

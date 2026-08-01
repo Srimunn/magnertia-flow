@@ -1702,7 +1702,7 @@ export type NewBomInput = {
   version: string;
 };
 
-export type RoutingRecord = {
+export type LegacyRoutingRecord = {
   id: string;
   productName: string;
   productCode: string;
@@ -11275,15 +11275,3406 @@ export type IotRecord = {
   reviewComments: string;
   approvalDate: string;
 
+  createdBy?: string;
+  createdDate?: string;
+  lastModifiedBy?: string;
+  lastModifiedDate?: string;
+  workflowStageLabel?: string;
+  iotTimeline?: IotMilestone[];
+  auditTrail: any[];
+};
+
+
+// ---------------------------------------------------------------------------
+// Production Engineering module
+// ---------------------------------------------------------------------------
+
+export type ProductionEngineeringStatus =
+  | "Draft"
+  | "Process Design"
+  | "Validation"
+  | "In Progress"
+  | "In Review"
+  | "Approved"
+  | "Changes Requested"
+  | "Rejected"
+  | "Archived";
+
+export type ProductionEngineeringApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Changes Requested"
+  | "Rejected"
+  | "Pending";
+
+export type ProductionEngineeringChecklistItem = {
+  id: string;
+  label: string;
+  completed: boolean;
+  sourceStream?: string;
+  details?: string;
+};
+
+export type ProductionEngineeringReviewer = {
+  id: string;
+  role: string;
+  person: string;
+  avatar?: string;
+  decision: ProductionEngineeringApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Completed" | "Pending" | "In Progress";
+};
+
+export type ProductionEngineeringAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadDate: string;
+  category?: string;
+};
+
+export type ProductionEngineeringAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar?: string;
+  action: string;
+  details: string;
+  ipAddress?: string;
+};
+
+export type ProductionEngineeringMilestone = {
+  id: string;
+  title: string;
+  date: string;
+  completed: boolean;
+  stageNumber: number;
+};
+
+export type ProductionEngineeringKpiTrendPoint = {
+  period: string;
+  cycleTime: number;
+  oee: number;
+  yieldRate: number;
+  defectRate: number;
+  throughput: number;
+};
+
+export type ProductionEngineeringFormInput = {
+  projectName: string;
+  productName: string;
+  manufacturingPlant: string;
+  productionLine: string;
+  manufacturingProcess: string;
+  productionObjective: string;
+  developmentStage: string;
+  productionPriority: "High" | "Medium" | "Low" | "Critical";
+  businessReadiness: number;
+  
+  // Design variables
+  routingSheet: string;
+  operationSequence: string;
+  workstationLayout: string;
+  processParameters: string;
+  standardCycleTime: number;
+  layoutPreview: string;
+  versionControl: string;
+  designReadinessScore: number;
+  
+  // Resource variables
+  machinesRequired: string;
+  toolingRequired: string;
+  fixturesRequired: string;
+  workforceRequirement: string;
+  utilityRequirements: string;
+  productionCapacity: number;
+  equipmentAvailability: string;
+  capacityPlanning: string;
+  resourceAllocation: string;
+  resourceReadinessScore: number;
+  
+  // Validation variables
+  pilotProduction: string;
+  trialRun: string;
+  firstArticleInspection: string;
+  processCapability: number;
+  lineBalancing: string;
+  validationRemarks: string;
+  correctiveActions: string;
+  validationScore: number;
+  
+  // Quality & Safety variables
+  controlPlan: string;
+  pfmea: string;
+  riskAssessment: string;
+  safetyAssessment: string;
+  pokaYoke: string;
+  qualityGates: string;
+  inspectionPlans: string;
+  complianceStatus: string;
+  qualityScore: number;
+  
+  // Performance variables
+  plannedOutput: number;
+  oeeTarget: number;
+  yieldTarget: number;
+  scrapTarget: number;
+  throughputTarget: number;
+  cycleTime: number;
+  downtimeAnalysis: string;
+  performanceScore: number;
+  
+  // AI variables
+  aiBottleneckAnalysis: string;
+  aiCapacityOptimization: string;
+  aiPredictiveMaintenance: string;
+  aiLineBalancingRecommendations: string;
+  aiProductionRiskPrediction: string;
+  aiQualityPrediction: string;
+  aiThroughputOptimization: string;
+  aiEngineeringScore: number;
+
+  approvalDecision: ProductionEngineeringApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+  recommendation: string;
+};
+
+export type ProductionEngineeringRecord = {
+  id: string;
+  productionEngineeringId: string;
+  formCode: string;
+  projectName: string;
+  productionVersion: string;
+  workflowStatus: ProductionEngineeringStatus;
+  stage: 1 | 2 | 3 | 4 | 5 | 6;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  linkedProduct: { id: string; name: string };
+  linkedProcessDevelopment: { id: string; code: string };
+  productionEngineer: { name: string; avatar: string; email: string };
+  manufacturingPlant: string;
+  productionLine: string;
+  nextReviewDate: string;
+
+  productName: string;
+  manufacturingProcess: string;
+  productionObjective: string;
+  developmentStage: string;
+  productionPriority: "High" | "Medium" | "Low" | "Critical";
+  businessReadiness: number;
+
+  // Section 2: Design
+  routingSheet: string;
+  operationSequence: string;
+  workstationLayout: string;
+  processParameters: string;
+  standardCycleTime: number;
+  layoutPreview: string;
+  versionControl: string;
+  designReadinessScore: number;
+
+  // Section 3: Resources
+  machinesRequired: string;
+  toolingRequired: string;
+  fixturesRequired: string;
+  workforceRequirement: string;
+  utilityRequirements: string;
+  productionCapacity: number;
+  equipmentAvailability: string;
+  capacityPlanning: string;
+  resourceAllocation: string;
+  resourceReadinessScore: number;
+
+  // Section 4: Validation
+  pilotProduction: string;
+  trialRun: string;
+  firstArticleInspection: string;
+  processCapability: number;
+  lineBalancing: string;
+  validationRemarks: string;
+  correctiveActions: string;
+  validationChecklist: ProductionEngineeringChecklistItem[];
+  validationScore: number;
+
+  // Section 5: Quality & Safety
+  controlPlan: string;
+  pfmea: string;
+  riskAssessment: string;
+  safetyAssessment: string;
+  pokaYoke: string;
+  qualityGates: string;
+  inspectionPlans: string;
+  complianceStatus: string;
+  qualityScore: number;
+
+  // Section 6: Performance
+  plannedOutput: number;
+  oeeTarget: number;
+  yieldTarget: number;
+  scrapTarget: number;
+  throughputTarget: number;
+  cycleTime: number;
+  downtimeAnalysis: string;
+  performanceScore: number;
+  kpiTrend: ProductionEngineeringKpiTrendPoint[];
+
+  // Section 7: AI Assessment
+  aiBottleneckAnalysis: string;
+  aiCapacityOptimization: string;
+  aiPredictiveMaintenance: string;
+  aiLineBalancingRecommendations: string;
+  aiProductionRiskPrediction: string;
+  aiQualityPrediction: string;
+  aiThroughputOptimization: string;
+  aiEngineeringScore: number;
+
+  overallProductionReadiness: number;
+  recommendation: string;
+
+  attachments: ProductionEngineeringAttachment[];
+
+  reviewers: ProductionEngineeringReviewer[];
+  approvalDecision: ProductionEngineeringApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
   createdBy: string;
   createdDate: string;
   lastModifiedBy: string;
   lastModifiedDate: string;
   workflowStageLabel: string;
 
-  iotTimeline: IotMilestone[];
-  auditTrail: IotAuditEntry[];
+  timeline: ProductionEngineeringMilestone[];
+  auditTrail: ProductionEngineeringAuditEntry[];
 };
+
+// ---------------------------------------------------------------------------
+// Assembly Line Development module
+// ---------------------------------------------------------------------------
+
+export type AssemblyLineStatus =
+  | "Draft"
+  | "Layout Design"
+  | "Workstations Planning"
+  | "Line Balancing"
+  | "Validation"
+  | "In Progress"
+  | "In Review"
+  | "Approved"
+  | "Changes Requested"
+  | "Rejected"
+  | "Archived";
+
+export type AssemblyLineApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Changes Requested"
+  | "Rejected"
+  | "Pending";
+
+export type AssemblyLineChecklistItem = {
+  id: string;
+  label: string;
+  completed: boolean;
+  sourceStream?: string;
+  details?: string;
+};
+
+export type AssemblyLineReviewer = {
+  id: string;
+  role: string;
+  person: string;
+  avatar?: string;
+  decision: AssemblyLineApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Completed" | "Pending" | "In Progress";
+};
+
+export type AssemblyLineAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadDate: string;
+  category?: string;
+};
+
+export type AssemblyLineAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar?: string;
+  action: string;
+  details: string;
+  ipAddress?: string;
+};
+
+export type AssemblyLineMilestone = {
+  id: string;
+  title: string;
+  date: string;
+  completed: boolean;
+  stageNumber: number;
+};
+
+export type AssemblyLineKpiTrendPoint = {
+  period: string;
+  oee: number;
+  yieldRate: number;
+  defectRate: number;
+  throughput: number;
+};
+
+export type AssemblyLineFormInput = {
+  projectName: string;
+  plantName: string;
+  productionLine: string;
+  productFamily: string;
+  assemblyLineType: string;
+  productionObjective: string;
+  developmentStage: string;
+  priority: "High" | "Medium" | "Low" | "Critical";
+  
+  // Design variables
+  factoryLayout: string;
+  assemblyLineLayout: string;
+  workstationLayoutFile: string;
+  materialFlowDiagram: string;
+  lineConfiguration: string;
+  numberOfWorkstations: number;
+  layoutDesignScore: number;
+  
+  // Workstation variables
+  workstationList: string;
+  workInstructions: string;
+  cycleTimePerStation: number;
+  operatorRequirement: number;
+  machineAllocation: string[];
+  ergonomicAssessment: string;
+  workstationReadinessScore: number;
+  
+  // Line Balancing variables
+  taktTime: number;
+  lineBalancingCompleted: boolean;
+  bottleneckAnalysis: string;
+  pilotLineRun: boolean;
+  throughputValidation: boolean;
+  validationRemarks: string;
+  validationScore: number;
+  
+  // Automation & Quality variables
+  automationLevel: string;
+  robotStations: number;
+  visionInspection: boolean;
+  pokaYoke: boolean;
+  inlineTesting: boolean;
+  qualityGates: string;
+  automationScore: number;
+  
+  // Performance variables
+  plannedOutput: number;
+  lineCapacity: number;
+  oeeTarget: number;
+  yieldTarget: number;
+  scrapTarget: number;
+  overallEfficiency: number;
+  performanceScore: number;
+  
+  // AI variables
+  aiLineOptimization: string;
+  aiBottleneckPrediction: string;
+  aiResourceUtilization: string;
+  aiMaintenanceSuggestions: string;
+  aiProductivityRecommendations: string;
+  aiReadinessScore: number;
+
+  approvalDecision: AssemblyLineApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+  recommendation: string;
+};
+
+export type AssemblyLineRecord = {
+  id: string;
+  assemblyLineId: string;
+  formCode: string;
+  projectName: string;
+  assemblyLineVersion: string;
+  workflowStatus: AssemblyLineStatus;
+  stage: 1 | 2 | 3 | 4 | 5 | 6;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  linkedProduct: { id: string; name: string };
+  linkedProductionEngineering: { id: string; code: string };
+  assemblyLineEngineer: { name: string; avatar: string; email: string };
+  manufacturingPlant: string;
+  productionLine: string;
+  nextReviewDate: string;
+
+  productFamily: string;
+  assemblyLineType: string;
+  productionObjective: string;
+  developmentStage: string;
+  priority: "High" | "Medium" | "Low" | "Critical";
+
+  // Section 2: Design
+  factoryLayout: string;
+  assemblyLineLayout: string;
+  workstationLayoutFile: string;
+  materialFlowDiagram: string;
+  lineConfiguration: string;
+  numberOfWorkstations: number;
+  layoutDesignScore: number;
+
+  // Section 3: Workstations
+  workstationList: string;
+  workInstructions: string;
+  cycleTimePerStation: number;
+  operatorRequirement: number;
+  machineAllocation: string[];
+  ergonomicAssessment: string;
+  workstationReadinessScore: number;
+
+  // Section 4: Balancing
+  taktTime: number;
+  lineBalancingCompleted: boolean;
+  bottleneckAnalysis: string;
+  pilotLineRun: boolean;
+  throughputValidation: boolean;
+  validationRemarks: string;
+  validationChecklist: AssemblyLineChecklistItem[];
+  validationScore: number;
+
+  // Section 5: Automation & Quality
+  automationLevel: string;
+  robotStations: number;
+  visionInspection: boolean;
+  pokaYoke: boolean;
+  inlineTesting: boolean;
+  qualityGates: string;
+  automationScore: number;
+
+  // Section 6: Performance
+  plannedOutput: number;
+  lineCapacity: number;
+  oeeTarget: number;
+  yieldTarget: number;
+  scrapTarget: number;
+  overallEfficiency: number;
+  performanceScore: number;
+  kpiTrend: AssemblyLineKpiTrendPoint[];
+
+  // Section 7: AI Assessment
+  aiLineOptimization: string;
+  aiBottleneckPrediction: string;
+  aiResourceUtilization: string;
+  aiMaintenanceSuggestions: string;
+  aiProductivityRecommendations: string;
+  aiReadinessScore: number;
+
+  overallAssemblyReadiness: number;
+  recommendation: string;
+
+  attachments: AssemblyLineAttachment[];
+
+  reviewers: AssemblyLineReviewer[];
+  approvalDecision: AssemblyLineApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStageLabel: string;
+
+  timeline: AssemblyLineMilestone[];
+  auditTrail: AssemblyLineAuditEntry[];
+};
+
+// ---------------------------------------------------------------------------
+// Fixture Development module
+// ---------------------------------------------------------------------------
+
+export type FixtureStatus =
+  | "Draft"
+  | "Fixture Concept"
+  | "CAD Design"
+  | "Manufacturing Planning"
+  | "Fixture Manufacturing"
+  | "Trial Validation"
+  | "Installation"
+  | "Commissioning"
+  | "AI Optimization"
+  | "Engineering Review"
+  | "Executive Review"
+  | "Production Release"
+  | "Completed"
+  | "In Progress";
+
+export type FixtureApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Changes Requested"
+  | "Rejected"
+  | "Pending";
+
+export type FixtureChecklistItem = {
+  id: string;
+  label: string;
+  completed: boolean;
+  notes?: string;
+};
+
+export type FixtureReviewer = {
+  id: string;
+  role: string;
+  person: string;
+  avatar?: string;
+  decision: FixtureApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Completed" | "Pending" | "In Progress";
+};
+
+export type FixtureAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadDate: string;
+  category?: string;
+};
+
+export type FixtureAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar?: string;
+  action: string;
+  details: string;
+  ipAddress?: string;
+};
+
+export type FixtureMilestone = {
+  id: string;
+  title: string;
+  date: string;
+  completed: boolean;
+  stageNumber: number;
+};
+
+export type FixtureKpiTrendPoint = {
+  period: string;
+  fixtureLifeCount: number;
+  cycles: number;
+  downtimeHours: number;
+  positioningAccuracy: number;
+};
+
+export type FixtureFormInput = {
+  projectName: string;
+  fixtureName: string;
+  fixtureCategory: string;
+  manufacturingPlant: string;
+  productionLine: string;
+  productFamily: string;
+  workstation: string;
+  fixturePurpose: string;
+  developmentStage: string;
+  priority: "High" | "Medium" | "Low" | "Critical";
+  
+  // Section 2: Design
+  cadModel: string;
+  assemblyDrawing: string;
+  detailDrawings: string;
+  bom: string;
+  locatorDesign: string;
+  clampDesign: string;
+  materialSpecification: string;
+  surfaceFinish: string;
+  designReviewScore: number;
+  
+  // Section 3: Manufacturing
+  manufacturingProcess: string;
+  cncProgram: string;
+  machineAllocation: string[];
+  materialRequirements: string;
+  heatTreatment: boolean;
+  surfaceTreatment: string;
+  manufacturingLeadTime: number;
+  manufacturingReadinessScore: number;
+  
+  // Section 4: Validation
+  trialFixture: boolean;
+  dimensionalInspection: boolean;
+  positioningAccuracy: number;
+  repeatabilityTest: number;
+  ergonomicValidation: boolean;
+  safetyValidation: boolean;
+  validationRemarks: string;
+  validationScore: number;
+  
+  // Section 5: Installation & Commissioning
+  installationCompleted: boolean;
+  lineIntegration: boolean;
+  operatorTraining: boolean;
+  maintenancePlan: string;
+  calibrationSchedule: string;
+  commissioningApproval: boolean;
+  commissioningScore: number;
+  
+  // Section 6: Performance
+  fixtureLife: number;
+  productionCycles: number;
+  downtime: number;
+  positioningAccuracyPerformance: number;
+  preventiveMaintenanceFrequency: number;
+  oeeContribution: number;
+  performanceScore: number;
+  
+  // Section 7: AI Assessment
+  aiFixtureOptimization: string;
+  aiWearPrediction: string;
+  aiFailurePrediction: string;
+  aiMaintenanceRecommendation: string;
+  aiCostOptimization: string;
+  aiEngineeringScore: number;
+
+  approvalDecision: FixtureApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+  recommendation: string;
+};
+
+export type FixtureRecord = {
+  id: string;
+  fixtureId: string;
+  formCode: string;
+  projectName: string;
+  fixtureVersion: string;
+  workflowStatus: FixtureStatus;
+  stage: number;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  linkedProduct: { id: string; name: string };
+  linkedAssemblyLine: { id: string; code: string };
+  fixtureDesignEngineer: { name: string; avatar: string; email: string };
+  fixtureNumber: string;
+  manufacturingPlant: string;
+  productionLine: string;
+  nextReviewDate: string;
+
+  fixtureName: string;
+  fixtureCategory: string;
+  productFamily: string;
+  workstation: string;
+  fixturePurpose: string;
+  developmentStage: string;
+  priority: "High" | "Medium" | "Low" | "Critical";
+  riskLevel: "Low" | "Medium" | "High";
+  healthIndex: number;
+
+  // Section 2: Design
+  cadModel: string;
+  assemblyDrawing: string;
+  detailDrawings: string;
+  bom: string;
+  locatorDesign: string;
+  clampDesign: string;
+  materialSpecification: string;
+  surfaceFinish: string;
+  designReviewScore: number;
+
+  // Section 3: Manufacturing
+  manufacturingProcess: string;
+  cncProgram: string;
+  machineAllocation: string[];
+  materialRequirements: string;
+  heatTreatment: boolean;
+  surfaceTreatment: string;
+  manufacturingLeadTime: number;
+  manufacturingReadinessScore: number;
+
+  // Section 4: Validation
+  trialFixture: boolean;
+  dimensionalInspection: boolean;
+  positioningAccuracy: number;
+  repeatabilityTest: number;
+  ergonomicValidation: boolean;
+  safetyValidation: boolean;
+  validationRemarks: string;
+  validationScore: number;
+
+  // Section 5: Installation & Commissioning
+  installationCompleted: boolean;
+  lineIntegration: boolean;
+  operatorTraining: boolean;
+  maintenancePlan: string;
+  calibrationSchedule: string;
+  commissioningApproval: boolean;
+  readinessChecklist: FixtureChecklistItem[];
+  commissioningScore: number;
+
+  // Section 6: Performance
+  fixtureLife: number;
+  productionCycles: number;
+  downtime: number;
+  positioningAccuracyPerformance: number;
+  preventiveMaintenanceFrequency: number;
+  oeeContribution: number;
+  performanceScore: number;
+  kpiTrend: FixtureKpiTrendPoint[];
+
+  // Section 7: AI Assessment
+  aiFixtureOptimization: string;
+  aiWearPrediction: string;
+  aiFailurePrediction: string;
+  aiMaintenanceRecommendation: string;
+  aiCostOptimization: string;
+  aiEngineeringScore: number;
+
+  overallFixtureReadiness: number;
+  recommendation: string;
+
+  attachments: FixtureAttachment[];
+
+  reviewers: FixtureReviewer[];
+  approvalDecision: FixtureApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStageLabel: string;
+
+  timeline: FixtureMilestone[];
+  auditTrail: FixtureAuditEntry[];
+};
+
+// ---------------------------------------------------------------------------
+// Tooling Development module
+// ---------------------------------------------------------------------------
+
+export type ToolingStatus =
+  | "Draft"
+  | "Tool Concept"
+  | "CAD Design"
+  | "Manufacturing Planning"
+  | "Trial Tool"
+  | "Validation"
+  | "Installation"
+  | "AI Assessment"
+  | "Engineering Review"
+  | "Executive Review"
+  | "Production Release"
+  | "Completed"
+  | "In Progress";
+
+export type ToolingApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Changes Requested"
+  | "Rejected"
+  | "Pending";
+
+export type ToolingChecklistItem = {
+  id: string;
+  label: string;
+  completed: boolean;
+  notes?: string;
+};
+
+export type ToolingReviewer = {
+  id: string;
+  role: string;
+  person: string;
+  avatar?: string;
+  decision: ToolingApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Completed" | "Pending" | "In Progress";
+};
+
+export type ToolingAttachment = {
+  id: string;
+  name: string;
+  size: string;
+  type: string;
+  uploadDate: string;
+  category?: string;
+};
+
+export type ToolingAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar?: string;
+  action: string;
+  details: string;
+  ipAddress?: string;
+};
+
+export type ToolingMilestone = {
+  id: string;
+  title: string;
+  date: string;
+  completed: boolean;
+  stageNumber: number;
+};
+
+export type ToolingKpiTrendPoint = {
+  period: string;
+  toolLifeCount: number;
+  cycleTime: number;
+  downtimeHours: number;
+  mtbf: number;
+};
+
+export type ToolingFormInput = {
+  projectName: string;
+  toolName: string;
+  toolNumber: string;
+  toolCategory: string;
+  manufacturingPlant: string;
+  productionLine: string;
+  productFamily: string;
+  purpose: string;
+  developmentStage: string;
+  priority: "High" | "Medium" | "Low" | "Critical";
+  
+  // Section 2: Design
+  assemblyDrawing: string;
+  detailDrawings: string;
+  bom: string;
+  materialSpecification: string;
+  surfaceFinish: string;
+  designReviewScore: number;
+  
+  // Section 3: Planning
+  manufacturingProcess: string;
+  machineAllocation: string[];
+  materialRequirements: string;
+  heatTreatment: boolean;
+  surfaceCoating: string;
+  manufacturingLeadTime: number;
+  manufacturingReadinessScore: number;
+  
+  // Section 4: Validation
+  trialToolCompleted: boolean;
+  dimensionalInspection: boolean;
+  functionalValidation: boolean;
+  toolAccuracy: number;
+  repeatability: number;
+  validationRemarks: string;
+  validationScore: number;
+  
+  // Section 5: Readiness
+  installationCompleted: boolean;
+  operatorTraining: boolean;
+  marginPlan?: string;
+  maintenancePlan?: string;
+  sparePartsList: string;
+  calibrationSchedule: string;
+  productionRelease: boolean;
+  readinessScore: number;
+  
+  // Section 6: Performance
+  toolLife: number;
+  cycleTime: number;
+  productionCycles?: number;
+  downtime: number;
+  mtbf: number;
+  mttr: number;
+  oeeContribution: number;
+  performanceScore: number;
+  
+  // Section 7: AI
+  aiWearPrediction: string;
+  aiMaintenanceRecommendation: string;
+  aiToolOptimization: string;
+  aiCostOptimization: string;
+  aiFailurePrediction: string;
+  aiEngineeringScore: number;
+
+  approvalDecision: ToolingApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+  recommendation: string;
+};
+
+export type ToolingRecord = {
+  id: string;
+  toolingId: string;
+  formCode: string;
+  projectName: string;
+  toolVersion: string;
+  workflowStatus: ToolingStatus;
+  stage: number;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  linkedProduct: { id: string; name: string };
+  linkedAssemblyLine: { id: string; code: string };
+  toolDesignEngineer: { name: string; avatar: string; email: string };
+  manufacturingPlant: string;
+  productionLine: string;
+  nextReviewDate: string;
+
+  toolName: string;
+  toolNumber: string;
+  toolCategory: string;
+  productFamily: string;
+  purpose: string;
+  developmentStage: string;
+  priority: "High" | "Medium" | "Low" | "Critical";
+  riskLevel: "Low" | "Medium" | "High";
+  healthIndex: number;
+
+  // Section 2: Design
+  assemblyDrawing: string;
+  detailDrawings: string;
+  bom: string;
+  materialSpecification: string;
+  surfaceFinish: string;
+  designReviewScore: number;
+
+  // Section 3: Planning
+  manufacturingProcess: string;
+  machineAllocation: string[];
+  materialRequirements: string;
+  heatTreatment: boolean;
+  surfaceCoating: string;
+  manufacturingLeadTime: number;
+  manufacturingReadinessScore: number;
+
+  // Section 4: Validation
+  trialToolCompleted: boolean;
+  dimensionalInspection: boolean;
+  functionalValidation: boolean;
+  toolAccuracy: number;
+  repeatability: number;
+  validationRemarks: string;
+  validationScore: number;
+
+  // Section 5: Readiness
+  installationCompleted: boolean;
+  operatorTraining: boolean;
+  maintenancePlan: string;
+  sparePartsList: string;
+  calibrationSchedule: string;
+  productionRelease: boolean;
+  readinessChecklist: ToolingChecklistItem[];
+  readinessScore: number;
+
+  // Section 6: Performance
+  toolLife: number;
+  cycleTime: number;
+  productionCycles: number;
+  downtime: number;
+  mtbf: number;
+  mttr: number;
+  oeeContribution: number;
+  performanceScore: number;
+  kpiTrend: ToolingKpiTrendPoint[];
+
+  // Section 7: AI
+  aiWearPrediction: string;
+  aiMaintenanceRecommendation: string;
+  aiToolOptimization: string;
+  aiCostOptimization: string;
+  aiFailurePrediction: string;
+  aiEngineeringScore: number;
+
+  overallToolReadiness: number;
+  recommendation: string;
+
+  attachments: ToolingAttachment[];
+
+  reviewers: ToolingReviewer[];
+  approvalDecision: ToolingApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStageLabel: string;
+
+  timeline: ToolingMilestone[];
+  auditTrail: ToolingAuditEntry[];
+};
+
+/* ===========================================================================
+   Jig Development — Module Types
+   =========================================================================== */
+
+export type JigWorkflowStatus =
+  | "Draft"
+  | "In Progress"
+  | "Under Review"
+  | "Revision Required"
+  | "Approved"
+  | "Production Release";
+
+export type JigCategory =
+  | "Drilling Jig"
+  | "Welding Jig"
+  | "Tapping Jig"
+  | "Reaming Jig"
+  | "Boring Jig"
+  | "Milling Jig"
+  | "Inspection Jig"
+  | "Assembly Jig"
+  | "Robotic Jig"
+  | "Modular Jig"
+  | "Special Purpose Jig";
+
+export type JigProcess =
+  | "CNC Milling"
+  | "CNC Drilling"
+  | "CNC Turning"
+  | "Grinding"
+  | "EDM"
+  | "Wire Cut EDM"
+  | "Heat Treatment"
+  | "Surface Coating"
+  | "Precision Assembly"
+  | "Calibration";
+
+export type JigDevelopmentStage =
+  | "Jig Concept"
+  | "CAD Design"
+  | "Manufacturing"
+  | "Assembly"
+  | "Trial Validation"
+  | "Installation"
+  | "Commissioning"
+  | "Production Release";
+
+export type JigPriority = "Low" | "Medium" | "High" | "Critical";
+
+export type JigApprovalDecision =
+  | "Pending"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected";
+
+export type JigAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string;
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+  downloadUrl?: string;
+};
+
+export type JigReviewer = {
+  role: string;
+  person: string;
+  decision: JigApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Approved" | "Pending" | "Revision Required" | "Rejected";
+};
+
+export type JigAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  action: string;
+  description: string;
+  prevStatus?: string;
+  newStatus?: string;
+};
+
+export type JigMilestone = {
+  label: string;
+  date: string;
+  status: "Completed" | "In Progress" | "Pending";
+};
+
+export type JigAiAssessmentResult = {
+  feasibilityIndex: number;
+  manufacturabilityIndex: number;
+  toleranceStackRisk: string;
+  costOptimizationNotes: string;
+  complianceCheckPassed: boolean;
+  toolPathOptimization: string;
+  wearPrediction: string;
+  failurePrediction: string;
+  maintenanceRecommendation: string;
+  costOptimizationPercentage: number;
+  aiEngineeringScore: number;
+};
+
+export type JigRecord = {
+  id: string;
+  jigId: string;
+  formCode: string;
+  projectName: string;
+  jigVersion: string;
+  workflowStatus: JigWorkflowStatus;
+  stage: number;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  linkedProduct?: { id: string; name: string };
+  linkedProcess?: { id: string; name: string };
+  jigDesignEngineer?: { name: string; avatar?: string; email?: string };
+  jigNumber: string;
+  manufacturingPlant: string;
+  productionLine: string;
+  nextReviewDate: string;
+
+  // Section 1: Overview
+  jigName: string;
+  jigCategory: JigCategory;
+  productFamily: string;
+  workstation: string;
+  jigPurpose: string;
+  developmentStage: JigDevelopmentStage;
+  priority: JigPriority;
+  riskLevel: string;
+  healthIndex: number;
+
+  // Section 2: Design
+  cadModel: string;
+  assemblyDrawing: string;
+  detailDrawings: string;
+  bom: string;
+  bushDesign: string;
+  locatorDesign: string;
+  clampDesign: string;
+  materialSpecification: string;
+  surfaceFinish: string;
+  designReviewScore: number;
+
+  // Section 3: Manufacturing
+  manufacturingProcess: string;
+  cncProgram: string;
+  machineAllocation: string[];
+  materialRequirements: string;
+  heatTreatment: boolean;
+  surfaceTreatment: string;
+  manufacturingLeadTime: number; // Days
+  manufacturingReadinessScore: number;
+
+  // Section 4: Validation
+  trialJigCompleted: boolean;
+  dimensionalInspection: boolean;
+  toolGuidanceAccuracy: number; // mm
+  repeatabilityTest: number; // mm
+  processCapabilityCp: number;
+  processCapabilityCpk: number;
+  safetyValidation: boolean;
+  validationRemarks: string;
+  validationScore: number;
+
+  // Section 5: Commissioning
+  installationCompleted: boolean;
+  processIntegration: boolean;
+  operatorTraining: boolean;
+  maintenancePlan: string;
+  calibrationSchedule: string;
+  productionApproval: boolean;
+  commissioningScore: number;
+
+  // Section 6: Performance
+  jigLifeCycles: number;
+  productionCycles: number;
+  toolWearPercentage: number;
+  downtimeHoursPerMonth: number;
+  mtbfHours: number;
+  mttrHours: number;
+  oeeContribution: number;
+  performanceScore: number;
+
+  // Section 7: AI Assessment
+  aiToolPathOptimization: string;
+  aiWearPrediction: string;
+  aiFailurePrediction: string;
+  aiMaintenanceRecommendation: string;
+  aiCostOptimization: string;
+  aiEngineeringScore: number;
+
+  overallJigReadiness: number;
+  recommendation: string;
+
+  attachments: JigAttachment[];
+  reviewers: JigReviewer[];
+  approvalDecision: JigApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStageLabel: string;
+
+  timeline: JigMilestone[];
+  auditTrail: JigAuditEntry[];
+};
+
+export type JigFormInput = Partial<JigRecord>;
+
+/* ===========================================================================
+   Factory Layout Design — Module Types
+   =========================================================================== */
+
+export type PlantType =
+  | "Greenfield Factory"
+  | "Brownfield Factory"
+  | "Assembly Plant"
+  | "Manufacturing Plant"
+  | "Electronics Factory"
+  | "Automotive Factory"
+  | "Warehouse & Distribution Centre"
+  | "Smart Factory";
+
+export type IndustrySegment =
+  | "Electric Vehicles"
+  | "Automotive"
+  | "Electronics"
+  | "Renewable Energy"
+  | "Industrial Equipment"
+  | "Aerospace"
+  | "Medical Devices"
+  | "Consumer Products";
+
+export type FactoryDevelopmentStage =
+  | "Site Planning"
+  | "Concept Layout"
+  | "Detailed Layout"
+  | "Simulation"
+  | "Validation"
+  | "Construction"
+  | "Commissioning"
+  | "Operational Handover";
+
+export type FactoryPriority = "Low" | "Medium" | "High" | "Critical";
+
+export type FactoryApprovalDecision =
+  | "Pending"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected";
+
+export type FactoryAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string;
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+  downloadUrl?: string;
+};
+
+export type FactoryReviewer = {
+  role: string;
+  person: string;
+  decision: FactoryApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Approved" | "Pending" | "Revision Required" | "Rejected";
+};
+
+export type FactoryAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  action: string;
+  description: string;
+  prevStatus?: string;
+  newStatus?: string;
+};
+
+export type FactoryMilestone = {
+  label: string;
+  date: string;
+  status: "Completed" | "In Progress" | "Pending";
+};
+
+export type FactoryAiAssessmentResult = {
+  layoutOptimization: string;
+  bottleneckPrediction: string;
+  materialFlowOptimization: string;
+  capacityExpansionRec: string;
+  safetyImprovementRec: string;
+  aiFactoryScore: number;
+};
+
+export type DigitalTwinSimulationResult = {
+  id: string;
+  simulationType: string;
+  status: "Completed" | "In Progress" | "Failed";
+  resultSummary: string;
+  passed: boolean;
+  runDate: string;
+};
+
+export type FactoryLayoutRecord = {
+  id: string;
+  layoutId: string;
+  formCode: string;
+  projectName: string;
+  layoutVersion: string;
+  workflowStatus: string;
+  stage: number;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  plantName: string;
+  facilityLocation: string;
+  engineerName: string;
+  engineerAvatar?: string;
+  totalLandArea: number; // m²
+  builtUpArea: number; // m²
+  productionCapacity: number; // units/year
+  nextReviewDate: string;
+
+  // Section 1: Overview
+  factoryName: string;
+  plantType: PlantType;
+  industrySegment: IndustrySegment;
+  factoryObjective: string;
+  developmentStage: FactoryDevelopmentStage;
+  priority: FactoryPriority;
+
+  // Section 2: Layout Planning
+  masterLayoutDrawing: string;
+  shopFloorLayout: string;
+  productionLineLayout: string;
+  utilityLayout: string;
+  materialFlowDiagram: string;
+  equipmentLayout: string;
+  warehouseLayout: string;
+  officeLayout: string;
+  layoutPlanningScore: number;
+
+  // Section 3: Infrastructure
+  productionAreas: string[];
+  assemblyAreas: string[];
+  warehouseCapacityM2: number;
+  loadingUnloadingBays: number;
+  utilitySystems: string[];
+  maintenanceWorkshop: boolean;
+  infrastructureScore: number;
+
+  // Section 4: Logistics
+  rawMaterialFlow: string;
+  wipFlow: string;
+  finishedGoodsFlow: string;
+  forkliftRoutes: string;
+  agvAmrRoutes: string;
+  materialHandlingEq: string[];
+  logisticsScore: number;
+
+  // Section 5: Utilities & Safety
+  electricalLayout: string;
+  compressedAirLayout: string;
+  waterLayout: string;
+  fireSafetyLayout: string;
+  emergencyExitPlan: string;
+  ehsCompliance: boolean;
+  utilitySafetyScore: number;
+
+  // Section 6: Performance
+  spaceUtilization: number; // %
+  materialTravelDistance: number; // km/day
+  throughputUnitsPerYear: number;
+  warehouseEfficiency: number; // %
+  energyEfficiency: number; // %
+  equipmentAccessibility: number; // %
+  factoryEfficiencyScore: number;
+
+  // Section 7: AI Assessment
+  aiLayoutOptimization: string;
+  aiBottleneckPrediction: string;
+  aiMaterialFlowOptimization: string;
+  aiCapacityExpansionRec: string;
+  aiSafetyImprovementRec: string;
+  aiFactoryScore: number;
+
+  overallFactoryReadiness: number;
+  recommendation: string;
+
+  attachments: FactoryAttachment[];
+  reviewers: FactoryReviewer[];
+  approvalDecision: FactoryApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStageLabel: string;
+
+  timeline: FactoryMilestone[];
+  auditTrail: FactoryAuditEntry[];
+  simulations: DigitalTwinSimulationResult[];
+};
+
+export type FactoryLayoutFormInput = Partial<FactoryLayoutRecord>;
+
+/* ===========================================================================
+   Capacity Planning — Module Types
+   =========================================================================== */
+
+export type CapacityApprovalDecision =
+  | "Pending"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected";
+
+export type CapacityAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string;
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+  downloadUrl?: string;
+};
+
+export type CapacityReviewer = {
+  role: string;
+  person: string;
+  decision: CapacityApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Approved" | "Pending" | "Revision Required" | "Rejected";
+};
+
+export type CapacityAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  action: string;
+  description: string;
+  prevStatus?: string;
+  newStatus?: string;
+};
+
+export type CapacityMilestone = {
+  label: string;
+  date: string;
+  status: "Completed" | "In Progress" | "Pending";
+};
+
+export type BottleneckItem = {
+  id: string;
+  workstation: string;
+  equipment: string;
+  constraint: string;
+  impact: "High" | "Medium" | "Low";
+  rootCause?: string;
+  improvementActions?: string;
+  estimatedGain?: string;
+};
+
+export type CapacityAiAssessmentResult = {
+  demandForecastInsight: string;
+  capacityOptimization: string;
+  bottleneckPrediction: string;
+  expansionRecommendation: string;
+  workforceOptimization: string;
+  aiCapacityScore: number;
+};
+
+export type CapacitySimulationResult = {
+  id: string;
+  scenarioName: string;
+  simulationScore: number;
+  expansionRequirement: string;
+  passed: boolean;
+  runDate: string;
+};
+
+export type CapacityPlanningRecord = {
+  id: string;
+  planningId: string;
+  formCode: string;
+  projectName: string;
+  planningVersion: string;
+  workflowStatus: string;
+  stage: number;
+  createdOn: string;
+  dateCreated: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  plantName: string;
+  businessUnit: string;
+  engineerName: string;
+  engineerAvatar?: string;
+  planningPeriod: string;
+  developmentStage: string;
+  nextReviewDate: string;
+
+  // Key KPI Numbers
+  demandForecastUnits: number;
+  plannedProductionUnits: number;
+  capacityUtilization: number; // %
+  oeePercentage: number; // %
+  bottleneckCount: number;
+
+  // Section 2: Assessment
+  availableMachineHours: number;
+  availableLabourHours: number;
+  productionLineCapacity: number;
+  workstationCapacity: number;
+  equipmentUtilization: number;
+  assessmentScore: number;
+
+  // Section 3: Resource Planning
+  allocatedMachines: number;
+  totalMachines: number;
+  allocatedWorkforce: number;
+  totalWorkforce: number;
+  materialAvailability: number; // %
+  toolAvailability: number; // %
+  utilityAvailability: number; // %
+  shiftPattern: string;
+  resourceScore: number;
+
+  // Section 4: Bottlenecks
+  bottlenecks: BottleneckItem[];
+  bottleneckScore: number;
+
+  // Section 5: Simulation
+  digitalTwinEnabled: boolean;
+  activeScenario: string;
+  simulationScore: number;
+
+  // Section 6: Performance
+  lineEfficiency: number;
+  deliveryPerformance: number;
+  costPerUnit: number;
+  performanceScore: number;
+
+  // Section 7: AI Capacity Assessment
+  aiDemandForecastInsight: string;
+  aiCapacityOptimization: string;
+  aiBottleneckPrediction: string;
+  aiExpansionRecommendation: string;
+  aiWorkforceOptimization: string;
+  aiCapacityScore: number;
+
+  overallCapacityReadiness: number;
+  recommendation: string;
+
+  attachments: CapacityAttachment[];
+  reviewers: CapacityReviewer[];
+  approvalDecision: CapacityApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStageLabel: string;
+
+  timeline: CapacityMilestone[];
+  auditTrail: CapacityAuditEntry[];
+  simulations: CapacitySimulationResult[];
+};
+
+export type CapacityFormInput = Partial<CapacityPlanningRecord>;
+
+/* ===========================================================================
+   Work Instruction Development — Module Types
+   =========================================================================== */
+
+export type WorkInstructionApprovalDecision =
+  | "Pending"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected";
+
+export type WorkInstructionAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string;
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+  downloadUrl?: string;
+};
+
+export type WorkInstructionReviewer = {
+  role: string;
+  person: string;
+  decision: WorkInstructionApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Approved" | "Pending" | "Revision Required" | "Rejected";
+};
+
+export type WorkInstructionAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  action: string;
+  description: string;
+  prevStatus?: string;
+  newStatus?: string;
+};
+
+export type WorkInstructionMilestone = {
+  label: string;
+  date: string;
+  status: "Completed" | "In Progress" | "Pending";
+};
+
+export type WorkInstructionStepItem = {
+  id: string;
+  stepNumber: number;
+  instruction: string;
+  visualReferenceUrl?: string;
+  keyPoints: string;
+  timeSeconds: number;
+  safetyNotes?: string;
+  qualityChecks?: string;
+  requiredTools?: string;
+  requiredMaterials?: string;
+};
+
+export type WorkInstructionAiAssessmentResult = {
+  instructionReview: string;
+  riskAssessment: string;
+  processOptimization: string;
+  knowledgeGapAnalysis: string;
+  trainingRecommendation: string;
+  aiDocumentationScore: number;
+};
+
+export type WorkInstructionRecord = {
+  id: string;
+  instructionId: string;
+  formCode: string;
+  title: string;
+  documentNumber: string;
+  revision: string;
+  workflowStatus: string;
+  stage: number;
+  createdOn: string;
+  dateCreated: string;
+  effectiveDate: string;
+  nextReviewDate: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  plantName: string;
+  department: string;
+  processOwner: string;
+  processOwnerAvatar?: string;
+  workstation: string;
+  productionLine: string;
+  productFamily: string;
+  productModel: string;
+  processName: string;
+  operationNumber: string;
+  operationDescription: string;
+  instructionCategory: string;
+  priority: "Low" | "Medium" | "High" | "Critical";
+
+  totalCycleTimeSec: number;
+  overallReadinessScore: number;
+  qualityScore: number;
+  safetyScore: number;
+  competencyScore: number;
+  aiDocumentationScore: number;
+  recommendation: string;
+
+  // Section 2: Step-by-Step Instructions
+  steps: WorkInstructionStepItem[];
+
+  // Section 3: Tools & Materials
+  requiredTools: string[];
+  fixturesJigs: string[];
+  measuringInstruments: string[];
+  materials: string[];
+  ppeRequirements: string[];
+
+  // Section 4: Quality Requirements
+  inspectionPoints: string[];
+  acceptanceCriteria: string;
+  qualityChecklist: string[];
+
+  // Section 5: Safety & Compliance
+  hazardsIdentified: number;
+  lockoutTagoutRequired: boolean;
+  ergonomicAssessment: string;
+  regulatoryCompliance: boolean;
+
+  // Section 6: Training & Competency
+  trainingRequired: boolean;
+  skillLevel: string;
+  authorizedOperators: number;
+  certificationRequired: boolean;
+
+  // Section 7: AI Assessment
+  aiInstructionReview: string;
+  aiRiskAssessment: string;
+  aiProcessOptimization: string;
+  aiKnowledgeGapAnalysis: string;
+  aiTrainingRecommendation: string;
+
+  attachments: WorkInstructionAttachment[];
+  reviewers: WorkInstructionReviewer[];
+  approvalDecision: WorkInstructionApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStageLabel: string;
+
+  timeline: WorkInstructionMilestone[];
+  auditTrail: WorkInstructionAuditEntry[];
+};
+
+export type WorkInstructionFormInput = Partial<WorkInstructionRecord>;
+
+/* ===========================================================================
+   SOP Development — Module Types
+   =========================================================================== */
+
+export type SopApprovalDecision =
+  | "Pending"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected";
+
+export type SopAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string;
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+  downloadUrl?: string;
+};
+
+export type SopReviewer = {
+  role: string;
+  person: string;
+  decision: SopApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Approved" | "Pending" | "Revision Required" | "Rejected";
+};
+
+export type SopAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  action: string;
+  description: string;
+  prevStatus?: string;
+  newStatus?: string;
+};
+
+export type SopMilestone = {
+  label: string;
+  date: string;
+  status: "Completed" | "In Progress" | "Pending";
+};
+
+export type SopStepItem = {
+  id: string;
+  stepNumber: number;
+  description: string;
+  responsibleRole: string;
+  durationMins: number;
+  requiredDocuments?: string;
+  notes?: string;
+  safetyCheck?: string;
+  qualityCheck?: string;
+};
+
+export type SopResourceItem = {
+  id: string;
+  category: "Required Equipment" | "Required Tools" | "Software Systems" | "Forms & Templates" | "Input Documents" | "Output Documents";
+  name: string;
+  itemCount: number;
+  status: "Verified" | "Pending Verification";
+};
+
+export type SopAiAssessmentResult = {
+  aiSopReview: string;
+  aiComplianceAnalysis: string;
+  aiProcessOptimization: string;
+  aiRiskPrediction: string;
+  aiRevisionRecommendation: string;
+  aiDocumentationScore: number;
+};
+
+export type SopRecord = {
+  id: string;
+  sopId: string;
+  formCode: string;
+  title: string;
+  sopNumber: string;
+  revision: string;
+  workflowStatus: string;
+  stage: number;
+  createdOn: string;
+  dateCreated: string;
+  effectiveDate: string;
+  nextReviewDate: string;
+  lastModified: string;
+  lastUpdated: string;
+
+  department: string;
+  processOwner: string;
+  processOwnerAvatar?: string;
+  sopCategory: string;
+  businessFunction: string;
+  processName: string;
+  processObjective: string;
+  scope: string;
+  applicability: string;
+  triggerEvent: string;
+  expectedOutput: string;
+  priority: "Low" | "Medium" | "High" | "Critical";
+
+  totalDurationMins: number;
+  overallReadinessScore: number;
+  procedureReadinessScore: number;
+  complianceScore: number;
+  riskScore: number;
+  trainingScore: number;
+  aiDocumentationScore: number;
+  recommendation: string;
+
+  // Section 2: Procedure Definition (12 steps)
+  steps: SopStepItem[];
+
+  // Section 3: Resources & Requirements
+  resources: SopResourceItem[];
+
+  // Section 4: Quality & Compliance
+  applicableStandards: string[];
+  regulatoryRequirements: string[];
+  internalPolicies: string[];
+  auditRequirements: string[];
+  complianceChecklist: string[];
+
+  // Section 5: Risk & Safety
+  riskLevel: "Low" | "Medium" | "High" | "Critical";
+  riskAssessmentReport: string;
+  ehsRequirements: string[];
+  emergencyProcedure: string;
+
+  // Section 6: Training & Implementation
+  trainingRequired: boolean;
+  trainingMaterial: string;
+  targetAudience: string;
+  competencyRequirement: string;
+  implementationDate: string;
+  effectivenessVerification: boolean;
+
+  // Section 7: AI Assessment
+  aiSopReview: string;
+  aiComplianceAnalysis: string;
+  aiProcessOptimization: string;
+  aiRiskPrediction: string;
+  aiRevisionRecommendation: string;
+
+  attachments: SopAttachment[];
+  reviewers: SopReviewer[];
+  approvalDecision: SopApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStageLabel: string;
+
+  timeline: SopMilestone[];
+  auditTrail: SopAuditEntry[];
+};
+
+export type SopFormInput = Partial<SopRecord>;
+
+/* ===========================================================================
+   BOM Engineering (MAICW Classification) — Module Types
+   =========================================================================== */
+
+export type BomType =
+  | "Engineering BOM (EBOM)"
+  | "Manufacturing BOM (MBOM)"
+  | "Service BOM (SBOM)"
+  | "Sales BOM"
+  | "Configurable BOM"
+  | "Phantom BOM";
+
+export type BomItemCategory =
+  | "Raw Material"
+  | "Purchased Part"
+  | "Fabricated Part"
+  | "Sub-Assembly"
+  | "Assembly"
+  | "Fastener"
+  | "Electronic Component"
+  | "Packaging Material"
+  | "Consumable";
+
+export type BomMaterialGrade =
+  | "Mild Steel"
+  | "Stainless Steel"
+  | "Aluminium"
+  | "Copper"
+  | "Brass"
+  | "Plastic"
+  | "Rubber"
+  | "Composite"
+  | "PCB"
+  | "Electronic";
+
+export type BomManufacturingProcess =
+  | "Machining"
+  | "Fabrication"
+  | "Injection Moulding"
+  | "Casting"
+  | "Sheet Metal"
+  | "PCB Assembly"
+  | "Wire Harness"
+  | "Final Assembly"
+  | "Testing";
+
+export type BomMakeBuyDecision = "Make" | "Buy" | "Outsource" | "Hybrid";
+
+export type BomLifecycleStage =
+  | "Prototype"
+  | "Engineering Validation"
+  | "Design Validation"
+  | "Pilot Production"
+  | "Mass Production"
+  | "Service"
+  | "Obsolete";
+
+export type BomRecommendation =
+  | "Approve BOM"
+  | "Update Components"
+  | "Optimize Cost"
+  | "Review Supply Risk"
+  | "Validate Manufacturing"
+  | "Release for Production";
+
+export type BomApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected";
+
+export type BomPriority = "Low" | "Medium" | "High" | "Critical";
+
+export type BomItemNode = {
+  id: string;
+  partNumber: string;
+  description: string;
+  level: number;
+  quantity: number;
+  uom: string;
+  itemCategory: BomItemCategory;
+  makeBuy: BomMakeBuyDecision;
+  unitCost: number;
+  totalCost: number;
+  leadTimeDays: number;
+  status: "Approved" | "Pending" | "In Review" | "Draft" | "Rejected";
+  referenceDesignator?: string;
+  alternatePart?: string;
+  completenessScore?: number;
+  materialGrade?: BomMaterialGrade;
+  materialSpecification?: string;
+  manufacturer?: string;
+  approvedVendor?: string;
+  rohsReachCompliant?: boolean;
+  criticalComponent?: boolean;
+  children?: BomItemNode[];
+};
+
+export type BomReviewer = {
+  role: string;
+  person: string;
+  decision: BomApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Approved" | "Pending" | "Revision Required" | "Rejected";
+};
+
+export type BomAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string;
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+  downloadUrl?: string;
+};
+
+export type BomAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  action: string;
+  description: string;
+  stage?: string;
+};
+
+export type BomAiInsights = {
+  duplicateDetection: string;
+  costOptimization: string;
+  alternateRecommendation: string;
+  supplyRiskPrediction: string;
+  designImprovement: string;
+  healthScore: number;
+};
+
+export type BomComplianceItem = {
+  standard: string;
+  status: "Compliant" | "Non-Compliant" | "Pending Review";
+  details: string;
+};
+
+export type BomEngineeringRecord = {
+  id: string;
+  bomId: string;
+  formCode: string;
+  bomName: string;
+  bomNumber: string;
+  product: string;
+  productRevision: string;
+  bomType: BomType;
+  processOwner: string;
+  workflowStatus: "Draft" | "In Review" | "Approved" | "Revision Required" | "Rejected";
+
+  // BOM Overview
+  productFamily: string;
+  productModel: string;
+  productVariant: string;
+  assemblyLevel: number;
+  parentAssembly: string;
+  bomDescription: string;
+  lifecycleStage: BomLifecycleStage;
+  priority: BomPriority;
+
+  // Scores
+  completenessScore: number;
+  materialAvailabilityScore: number;
+  manufacturingReadinessScore: number;
+  qualityReadinessScore: number;
+  costScore: number;
+  overallReadinessScore: number;
+
+  // Components Structure
+  totalItemsCount: number;
+  items: BomItemNode[];
+
+  // Material & Component Details
+  materialGrade: BomMaterialGrade;
+  materialSpecification: string;
+  manufacturer: string;
+  approvedVendor: string;
+  leadTimeDays: number;
+  rohsReachCompliant: boolean;
+
+  // Manufacturing Readiness
+  manufacturingProcess: BomManufacturingProcess;
+  makeBuyDecision: BomMakeBuyDecision;
+  assemblySequenceFile?: string;
+  toolingRequirements: string[];
+  workInstructionRef: string;
+  manufacturingNotes: string;
+
+  // Quality & Compliance
+  criticalComponents: string[];
+  inspectionRequirement: string;
+  regulatoryStandards: string[];
+  traceabilityRequired: boolean;
+  complianceChecklist: BomComplianceItem[];
+
+  // Cost Engineering
+  materialCost: number;
+  manufacturingCost: number;
+  purchasedComponentCost: number;
+  totalBomCost: number;
+  targetCost: number;
+  costVariance: number;
+
+  // AI Assessment
+  aiInsights: BomAiInsights;
+
+  // Recommendations & Approvals
+  recommendation: BomRecommendation;
+  approvalDecision: BomApprovalDecision;
+  reviewers: BomReviewer[];
+  attachments: BomAttachment[];
+
+  // System Information
+  createdBy: string;
+  createdDate: string;
+  effectiveDate: string;
+  nextReviewDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStage: string;
+  version: number;
+  distribution: string[];
+  auditTrail: BomAuditEntry[];
+};
+
+export type BomFormInput = Partial<BomEngineeringRecord>;
+
+/* ===========================================================================
+   Routing Development (MAICW Classification) — Module Types
+   =========================================================================== */
+
+export type ProductionType =
+  | "Prototype"
+  | "Pilot Production"
+  | "Batch Production"
+  | "Mass Production"
+  | "Engineer-to-Order (ETO)"
+  | "Make-to-Order (MTO)"
+  | "Make-to-Stock (MTS)";
+
+export type OperatorSkillLevel =
+  | "Beginner"
+  | "Intermediate"
+  | "Skilled"
+  | "Expert"
+  | "Certified";
+
+export type RoutingLifecycleStage =
+  | "Process Planning"
+  | "Routing Development"
+  | "Validation"
+  | "Pilot Production"
+  | "Mass Production"
+  | "Obsolete";
+
+export type RoutingRecommendation =
+  | "Approve Routing"
+  | "Update Operation Sequence"
+  | "Optimize Cycle Time"
+  | "Improve Resource Allocation"
+  | "Validate Manufacturing"
+  | "Release for Production";
+
+export type RoutingApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected";
+
+export type RoutingPriority = "Low" | "Medium" | "High" | "Critical";
+
+export type RoutingOperation = {
+  id: string;
+  seq: number;
+  operationNo: string;
+  operationName: string;
+  workCentre: string;
+  machine: string;
+  setupTimeMins: number;
+  cycleTimeMins: number;
+  labourCount: number;
+  status: "Active" | "Pending" | "In Review" | "Draft";
+  description?: string;
+  inspectionPoint?: boolean;
+  spcRequired?: boolean;
+  criticalOp?: boolean;
+};
+
+export type RoutingReviewer = {
+  role: string;
+  person: string;
+  decision: RoutingApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Approved" | "Pending" | "Revision Required" | "Rejected";
+};
+
+export type RoutingAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string;
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+  downloadUrl?: string;
+};
+
+export type RoutingAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  action: string;
+  description: string;
+  stage?: string;
+};
+
+export type RoutingAiAssessment = {
+  healthScore: number;
+  routingOptimization: string;
+  bottleneckPrediction: string;
+  cycleTimeOptimization: string;
+  resourceOptimization: string;
+  productionRecommendation: string;
+};
+
+export type RoutingRecord = {
+  id: string;
+  routingId: string;
+  formCode: string;
+  routingName: string;
+  routingNumber: string;
+  product: string;
+  productRevision: string;
+  processOwner: string;
+  routingVersion: string;
+  workflowStatus: "Draft" | "In Review" | "Approved" | "Revision Required" | "Rejected";
+
+  // Routing Overview
+  productFamily: string;
+  productModel: string;
+  manufacturingPlant: string;
+  productionLine: string;
+  routingDescription: string;
+  lifecycleStage: RoutingLifecycleStage;
+  productionType: ProductionType;
+  priority: RoutingPriority;
+
+  // Scores
+  routingReadinessScore: number;
+  resourceReadinessScore: number;
+  manufacturingReadinessScore: number;
+  qualityScore: number;
+  costScore: number;
+  overallReadinessScore: number;
+
+  // Operations Routing
+  totalOperationsCount: number;
+  totalSetupTimeMins: number;
+  totalCycleTimeMins: number;
+  totalLabourCount: number;
+  operations: RoutingOperation[];
+
+  // Resource Allocation
+  requiredMachinesCount: number;
+  requiredToolsCount: number;
+  requiredFixturesCount: number;
+  requiredJigsCount: number;
+  requiredMachines: string[];
+  requiredTools: string[];
+  requiredFixtures: string[];
+  requiredJigs: string[];
+  operatorSkillLevel: OperatorSkillLevel;
+  capacityRequirementUnitsPerDay: number;
+  resourceAvailability: boolean;
+
+  // Manufacturing Validation
+  bomReference: string;
+  workInstructionRef: string;
+  sopRef: string;
+  inspectionPlanRef: string;
+  processValidationStatus: boolean;
+  validationNotes: string;
+
+  // Quality & Compliance
+  criticalOperations: string[];
+  inspectionPointsCount: number;
+  inspectionPointsNotes: string;
+  spcRequired: boolean;
+  traceabilityRequired: boolean;
+  regulatoryStandards: string[];
+  qualityChecklistFile: string;
+
+  // Production Cost Analysis
+  machineCost: number;
+  labourCost: number;
+  toolingCost: number;
+  overheadCost: number;
+  totalRoutingCost: number;
+  targetCost: number;
+  costVariance: number;
+
+  // AI Routing Assessment
+  aiAssessment: RoutingAiAssessment;
+
+  // Recommendations & Approvals
+  recommendation: RoutingRecommendation;
+  approvalDecision: RoutingApprovalDecision;
+  reviewers: RoutingReviewer[];
+  attachments: RoutingAttachment[];
+
+  // System Information
+  createdBy: string;
+  createdDate: string;
+  effectiveDate: string;
+  nextReviewDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStage: string;
+  version: number;
+  auditTrail: RoutingAuditEntry[];
+};
+
+export type RoutingFormInput = Partial<RoutingRecord>;
+
+/* ===========================================================================
+   Quality Planning (APQP) — MAICW Classification Types
+   =========================================================================== */
+
+export type ApqpPhase =
+  | "Phase 1 – Plan & Define Program"
+  | "Phase 2 – Product Design & Development"
+  | "Phase 3 – Process Design & Development"
+  | "Phase 4 – Product & Process Validation"
+  | "Phase 5 – Feedback, Assessment & Corrective Action";
+
+export type ApqpProgramStatus =
+  | "Not Started"
+  | "Planning"
+  | "In Progress"
+  | "Pilot"
+  | "Validation"
+  | "Production Release"
+  | "Completed"
+  | "On Hold";
+
+export type ApqpPpapStatus =
+  | "Not Started"
+  | "In Preparation"
+  | "Submitted"
+  | "Customer Approved"
+  | "Conditionally Approved"
+  | "Rejected";
+
+export type ApqpRecommendation =
+  | "Approve APQP"
+  | "Update Design"
+  | "Improve Process Capability"
+  | "Complete Validation"
+  | "Mitigate Risks"
+  | "Release for Production";
+
+export type ApqpApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected";
+
+export type ApqpPriority = "Low" | "Medium" | "High" | "Critical";
+
+export type ApqpDeliverable = {
+  phaseNumber: number;
+  phaseName: string;
+  keyDeliverables: string;
+  owner: string;
+  targetDate: string;
+  status: "Completed" | "In Progress" | "Pending" | "On Hold";
+  completionPercentage: number;
+};
+
+export type ApqpMilestone = {
+  id: string;
+  title: string;
+  targetDate: string;
+  status: "Completed" | "In Progress" | "Pending";
+};
+
+export type ApqpActivityLog = {
+  id: string;
+  timestamp: string;
+  user: string;
+  action: string;
+  description: string;
+  timeAgo: string;
+};
+
+export type ApqpAiAssessment = {
+  healthScore: number;
+  riskPrediction: string;
+  qualityTrendAnalysis: string;
+  defectPrediction: string;
+  processOptimization: string;
+  supplierRiskAnalysis: string;
+};
+
+export type ApqpReviewer = {
+  role: string;
+  person: string;
+  decision: ApqpApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Approved" | "Pending" | "Revision Required" | "Rejected";
+};
+
+export type ApqpAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string;
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+  downloadUrl?: string;
+};
+
+export type ApqpRecord = {
+  id: string;
+  apqpId: string;
+  formCode: string;
+  apqpProjectName: string;
+  apqpNumber: string;
+  product: string;
+  productRevision: string;
+  customer: string;
+  apqpPhase: ApqpPhase;
+  projectManager: string;
+  workflowStatus: "Draft" | "In Progress" | "In Review" | "Approved" | "Revision Required" | "Rejected";
+
+  // Project Overview
+  productFamily: string;
+  productModel: string;
+  projectScope: string;
+  customerRequirements: string;
+  targetSopDate: string;
+  programStatus: ApqpProgramStatus;
+  priority: ApqpPriority;
+  overallApqpScore: number;
+
+  // Phase Planning
+  phase1Completed: boolean;
+  phase2Completed: boolean;
+  phase3Completed: boolean;
+  phase4Completed: boolean;
+  phase5Completed: boolean;
+  phaseOwner: string;
+  phaseCompletionPercentage: number;
+  phaseReadinessScore: number;
+  deliverables: ApqpDeliverable[];
+
+  // Design & Process Inputs
+  dfmeaRef: string;
+  pfmeaRef: string;
+  controlPlanRef: string;
+  bomRef: string;
+  routingRef: string;
+  processFlowDiagramFile: string;
+  engineeringSpecsFile: string;
+  designReadinessScore: number;
+
+  // Manufacturing & Validation
+  prototypeBuildStatus: boolean;
+  pilotBuildStatus: boolean;
+  processCapabilityCpk: number;
+  msaStatus: boolean;
+  productionTrialStatus: boolean;
+  ppapStatus: ApqpPpapStatus;
+  validationReadinessScore: number;
+
+  // Supplier Quality Management
+  approvedSupplier: string;
+  supplierApqpStatus: "Approved" | "In Progress" | "Pending";
+  supplierPpapStatus: ApqpPpapStatus;
+  supplierAuditScore: number;
+  incomingQualityPlanFile: string;
+  supplierRisks: string;
+
+  // Quality Risk Assessment
+  highRiskCharacteristics: string;
+  criticalControlPoints: string;
+  openRisks: string;
+  correctiveActions: string;
+  preventiveActions: string;
+  lessonsLearned: string;
+  riskReadinessScore: number;
+  costReadinessScore: number;
+
+  // AI Quality Assessment
+  aiAssessment: ApqpAiAssessment;
+
+  // APQP Summary
+  designScore: number;
+  validationScore: number;
+  supplierQualityScore: number;
+  riskScore: number;
+  apqpHealthScore: number;
+  overallProjectReadiness: number;
+  recommendation: ApqpRecommendation;
+
+  // Review & Approvals
+  approvalDecision: ApqpApprovalDecision;
+  reviewers: ApqpReviewer[];
+  attachments: ApqpAttachment[];
+
+  // System Information
+  createdBy: string;
+  createdDate: string;
+  effectiveDate: string;
+  nextReviewDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStage: string;
+  version: number;
+  distribution: string[];
+  auditTrail: { id: string; timestamp: string; user: string; action: string; description: string; stage?: string }[];
+  upcomingMilestones: ApqpMilestone[];
+  recentActivities: ApqpActivityLog[];
+};
+
+export type ApqpFormInput = Partial<ApqpRecord>;
+
+/* ===========================================================================
+   PFMEA Development (MAICW Classification) — Module Types
+   =========================================================================== */
+
+export type ActionPriority = "High (H)" | "Medium (M)" | "Low (L)" | "H" | "M" | "L";
+
+export type PfmeaActionStatus =
+  | "Open"
+  | "In Progress"
+  | "Completed"
+  | "Verified"
+  | "Closed";
+
+export type PfmeaLifecycleStage =
+  | "Planning"
+  | "Process Design"
+  | "Risk Analysis"
+  | "Validation"
+  | "Pilot Production"
+  | "Production Release"
+  | "Continuous Improvement";
+
+export type PfmeaRecommendation =
+  | "Approve PFMEA"
+  | "Update Process Controls"
+  | "Reduce Process Risk"
+  | "Complete Validation"
+  | "Implement Corrective Actions"
+  | "Release for Production";
+
+export type PfmeaApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected";
+
+export type PfmeaPriority = "Low" | "Medium" | "High" | "Critical";
+
+export type PfmeaFailureMode = {
+  id: string;
+  stepNo: number;
+  processStep: string;
+  potentialFailureMode: string;
+  severity: number; // S
+  potentialEffect: string;
+  occurrence: number; // O
+  potentialCause: string;
+  currentControls: string;
+  detection: number; // D
+  actionPriority: ActionPriority; // AP
+  rpnBefore: number; // S * O * D
+  rpnAfter: number;
+  status: "Open" | "In Progress" | "Completed" | "Verified";
+};
+
+export type PfmeaAction = {
+  id: string;
+  action: string;
+  responsible: string;
+  targetDate: string;
+  status: "Open" | "In Progress" | "Completed" | "Verified";
+  rpnAfter: number;
+  failureModeId?: string;
+};
+
+export type PfmeaAiAssessment = {
+  healthScore: number;
+  failurePrediction: string;
+  riskPatternAnalysis: string;
+  correctiveActionSuggestions: string;
+  processOptimization: string;
+  preventiveRecommendations: string;
+};
+
+export type PfmeaReviewer = {
+  role: string;
+  person: string;
+  decision: PfmeaApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Approved" | "Pending" | "Revision Required" | "Rejected";
+};
+
+export type PfmeaAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string;
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+  downloadUrl?: string;
+};
+
+export type PfmeaRecord = {
+  id: string;
+  pfmeaId: string;
+  formCode: string;
+  pfmeaTitle: string;
+  pfmeaNumber: string;
+  pfmeaVersion: string;
+  product: string;
+  productRevision: string;
+  manufacturingProcess: string;
+  processOwner: string;
+  apqpRef: string;
+  workflowStatus: "Draft" | "In Progress" | "In Review" | "Approved" | "Revision Required" | "Rejected";
+
+  // PFMEA Overview
+  productFamily: string;
+  productionLine: string;
+  workCentre: string;
+  processFlowRef: string;
+  routingRef: string;
+  projectScope: string;
+  lifecycleStage: PfmeaLifecycleStage;
+  priority: PfmeaPriority;
+
+  // Scores & Key Stats
+  functionReadinessScore: number;
+  validationScore: number;
+  aiHealthScore: number;
+  openHighRiskItems: number;
+  overallPfmeaReadinessScore: number;
+  topRpnBefore: number;
+  topRpnAfter: number;
+
+  // Failure Analysis List (8 Failure Modes)
+  failureModes: PfmeaFailureMode[];
+
+  // Recommended Actions (Top 5 Actions)
+  recommendedActions: PfmeaAction[];
+
+  // Manufacturing Validation
+  processValidationStatus: boolean;
+  pilotProductionStatus: boolean;
+  capacityCpk: number;
+  msaRef: string;
+  controlPlanRef: string;
+  validationNotes: string;
+
+  // AI Risk Assessment
+  aiAssessment: PfmeaAiAssessment;
+
+  // PFMEA Summary
+  recommendation: PfmeaRecommendation;
+
+  // Review & Approvals
+  approvalDecision: PfmeaApprovalDecision;
+  reviewers: PfmeaReviewer[];
+  attachments: PfmeaAttachment[];
+
+  // System Information
+  createdBy: string;
+  createdDate: string;
+  effectiveDate: string;
+  nextReviewDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStage: string;
+  version: number;
+  distribution: string[];
+  auditTrail: { id: string; timestamp: string; user: string; action: string; description: string; stage?: string }[];
+};
+
+export type PfmeaFormInput = Partial<PfmeaRecord>;
+
+/* ===========================================================================
+   Control Plan Development (MAICW Classification) — Module Types
+   =========================================================================== */
+
+export type ControlPlanType =
+  | "Prototype"
+  | "Pre-Launch"
+  | "Production"
+  | "Safe Launch"
+  | "Service";
+
+export type ControlMethod =
+  | "Visual Inspection"
+  | "Dimensional Inspection"
+  | "Functional Test"
+  | "SPC Monitoring"
+  | "100% Inspection"
+  | "Sampling Inspection"
+  | "Automated Inspection";
+
+export type InspectionFrequency =
+  | "Every Part"
+  | "Hourly"
+  | "Every Shift"
+  | "Daily"
+  | "Weekly"
+  | "Lot-wise"
+  | "First-Off & Last-Off";
+
+export type ControlPlanLifecycleStage =
+  | "Planning"
+  | "Process Development"
+  | "Validation"
+  | "Pilot Production"
+  | "Production Release"
+  | "Continuous Improvement";
+
+export type ControlPlanRecommendation =
+  | "Approve Control Plan"
+  | "Improve Process Controls"
+  | "Increase Inspection Frequency"
+  | "Complete Validation"
+  | "Update PFMEA"
+  | "Release for Production";
+
+export type ControlPlanApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected";
+
+export type ControlPlanPriority = "Low" | "Medium" | "High" | "Critical";
+
+export type ControlPlanCharacteristic = {
+  id: string;
+  stepNo: number;
+  operationNo: string;
+  processStep: string;
+  productCharacteristic: string;
+  processCharacteristic: string;
+  specialCharacteristics: string; // e.g. "SC-01"
+  specification: string;
+  controlMethod: ControlMethod;
+  readinessScore: number;
+};
+
+export type ControlPlanSummaryRow = {
+  id: string;
+  stepNo: number;
+  operationNo: string;
+  characteristic: string;
+  specification: string;
+  controlMethod: ControlMethod;
+  inspectionMethod: string;
+  frequency: InspectionFrequency;
+  sampleSize: string;
+  controlDevice: string;
+  responsePlan: string;
+  responsible: string;
+};
+
+export type ControlPlanAiAssessment = {
+  healthScore: number;
+  riskPrediction: string;
+  processOptimization: string;
+  inspectionOptimization: string;
+  defectPrediction: string;
+  preventiveRecommendation: string;
+};
+
+export type ControlPlanReviewer = {
+  role: string;
+  person: string;
+  decision: ControlPlanApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Approved" | "Pending" | "Revision Required" | "Rejected";
+};
+
+export type ControlPlanAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string;
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+  downloadUrl?: string;
+};
+
+export type ControlPlanRecord = {
+  id: string;
+  controlPlanId: string;
+  formCode: string;
+  controlPlanTitle: string;
+  controlPlanNumber: string;
+  version: number;
+  workflowStatus: "Draft" | "In Progress" | "In Review" | "Approved" | "Revision Required" | "Rejected";
+
+  // Form Information
+  product: string;
+  productRevision: string;
+  manufacturingProcess: string;
+  apqpRef: string;
+  pfmeaRef: string;
+  processOwner: string;
+
+  // Control Plan Overview
+  productFamily: string;
+  productModel: string;
+  productionLine: string;
+  workCentre: string;
+  processFlowRef: string;
+  routingRef: string;
+  controlPlanType: ControlPlanType;
+  lifecycleStage: ControlPlanLifecycleStage;
+  priority: ControlPlanPriority;
+
+  // Readiness Scores (5 Rings)
+  characteristicReadinessScore: number;
+  inspectionReadinessScore: number;
+  processControlScore: number;
+  validationScore: number;
+  aiHealthScore: number;
+  overallControlPlanReadinessScore: number;
+
+  // 8 Process & Product Characteristics
+  characteristics: ControlPlanCharacteristic[];
+
+  // Inspection & Monitoring Plan
+  inspectionMethod: string;
+  measuringEquipment: string;
+  sampleSize: number;
+  inspectionFrequency: InspectionFrequency;
+  msaRef: string;
+  spcRequired: boolean;
+  reactionPlan: string;
+
+  // Process Control
+  workInstructionRef: string;
+  sopRef: string;
+  controlDevice: string;
+  errorProofingPokaYoke: boolean;
+  preventiveMaintenanceRequired: boolean;
+  processValidationStatus: boolean;
+
+  // Quality Verification
+  incomingInspection: boolean;
+  inProcessInspection: boolean;
+  finalInspection: boolean;
+  controlPlanAudit: string;
+  processCapabilityCpk: string; // e.g. "1.67 / 1.45"
+  ppapRef: string;
+
+  // Control Plan Summary Table (Top 4 operations)
+  summaryRows: ControlPlanSummaryRow[];
+
+  // AI Assessment
+  aiAssessment: ControlPlanAiAssessment;
+
+  // Summary & Recommendation
+  recommendation: ControlPlanRecommendation;
+
+  // Review & Approvals (7 Roles)
+  approvalDecision: ControlPlanApprovalDecision;
+  reviewers: ControlPlanReviewer[];
+
+  // Attachments (9 Files)
+  attachments: ControlPlanAttachment[];
+
+  // System Information
+  createdBy: string;
+  createdDate: string;
+  effectiveDate: string;
+  nextReviewDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStage: string;
+  distribution: string[];
+  auditTrail: { id: string; timestamp: string; user: string; action: string; description: string; stage?: string }[];
+};
+
+export type ControlPlanFormInput = Partial<ControlPlanRecord>;
+
+/* ===========================================================================
+   Process Validation (MAICW Classification) — Module Types
+   =========================================================================== */
+
+export type ValidationType =
+  | "Installation Qualification (IQ)"
+  | "Operational Qualification (OQ)"
+  | "Performance Qualification (PQ)"
+  | "Pilot Production Validation"
+  | "Safe Launch Validation"
+  | "Production Validation"
+  | "Revalidation";
+
+export type ValidationMethod =
+  | "Trial Run"
+  | "Process Capability Study"
+  | "DOE Validation"
+  | "Statistical Validation"
+  | "Functional Validation"
+  | "Production Simulation";
+
+export type CapabilityStatus =
+  | "Excellent"
+  | "Capable"
+  | "Acceptable"
+  | "Marginal"
+  | "Not Capable";
+
+export type ValidationStatus =
+  | "Planned"
+  | "In Progress"
+  | "Under Review"
+  | "Completed"
+  | "Approved"
+  | "Revalidation Required";
+
+export type ValidationRecommendation =
+  | "Approve Process"
+  | "Improve Process Capability"
+  | "Update Control Plan"
+  | "Revise PFMEA"
+  | "Perform Revalidation"
+  | "Release for Production";
+
+export type ValidationApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected";
+
+export type ValidationPriority = "Low" | "Medium" | "High" | "Critical";
+
+export type ValidationTrialRunSummary = {
+  totalPartsProduced: number;
+  conformingParts: number;
+  nonConformingParts: number;
+  currentFpy: number; // percentage
+  defectRate: number; // percentage
+};
+
+export type ValidationDefectItem = {
+  category: string;
+  count: number;
+  percentage: number;
+  color: string;
+};
+
+export type ValidationTeamMember = {
+  name: string;
+  role: string;
+  avatar?: string;
+};
+
+export type ValidationAiAssessment = {
+  healthScore: number;
+  capabilityAnalysis: string;
+  processStabilityPrediction: string;
+  defectPrediction: string;
+  optimizationSuggestions: string;
+  preventiveRecommendations: string;
+};
+
+export type ValidationReviewer = {
+  role: string;
+  person: string;
+  decision: ValidationApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Approved" | "Pending" | "Revision Required" | "Rejected";
+};
+
+export type ValidationAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string;
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+  downloadUrl?: string;
+};
+
+export type ProcessValidationRecord = {
+  id: string;
+  validationId: string;
+  formCode: string;
+  validationTitle: string;
+  validationNumber: string;
+  version: number;
+  workflowStatus: "Draft" | "In Progress" | "In Review" | "Approved" | "Revision Required" | "Rejected";
+
+  // Form Information
+  product: string;
+  productRevision: string;
+  manufacturingProcess: string;
+  productionLine: string;
+  apqpRef: string;
+  controlPlanRef: string;
+  processOwner: string;
+
+  // Validation Overview
+  validationType: ValidationType;
+  validationScope: string;
+  validationObjective: string;
+  processOwnerName: string;
+  validationTeam: ValidationTeamMember[];
+  location: string;
+  lifecycleStage: string;
+  priority: ValidationPriority;
+
+  // Manufacturing Process Information
+  processFlowRef: string;
+  routingRef: string;
+  processStep: string;
+  workCentre: string;
+  machineEquipment: string;
+  toolingRef: string;
+  workInstructionRef: string;
+  sopRef: string;
+
+  // Validation Plan
+  validationProtocolFile: string;
+  validationMethod: ValidationMethod;
+  acceptanceCriteria: string;
+  sampleSize: number;
+  trialRunQuantity: number;
+  startDate: string;
+  endDate: string;
+  validationStatus: ValidationStatus;
+  trialRunSummary: ValidationTrialRunSummary;
+  defectDistribution: ValidationDefectItem[];
+
+  // Process Capability Verification
+  cp: number;
+  cpk: number;
+  processStability: "Good" | "Acceptable" | "Unstable";
+  spcStatus: boolean;
+  msaRef: string;
+  gaugeRrrResult: "Acceptable" | "Marginal" | "Unacceptable";
+  capabilityStatus: CapabilityStatus;
+  capabilityScore: number;
+
+  // Quality Verification
+  incomingInspection: boolean;
+  inProcessInspection: boolean;
+  finalInspection: boolean;
+  defectRate: number; // percentage
+  fpy: number; // percentage
+  scrapRate: number; // percentage
+  reworkRate: number; // percentage
+  validationScore: number;
+
+  // Equipment & Production Readiness
+  machineQualification: "Qualified" | "In Progress" | "Pending";
+  toolQualification: "Qualified" | "In Progress" | "Pending";
+  preventiveMaintenanceStatus: boolean;
+  operatorQualification: "Qualified" | "In Progress" | "Pending";
+  trainingStatus: boolean;
+  safetyVerification: boolean;
+  productionReadinessScore: number;
+
+  // AI Assessment
+  aiAssessment: ValidationAiAssessment;
+
+  // Validation Summary & Recommendation
+  recommendation: ValidationRecommendation;
+  overallValidationReadiness: number;
+
+  // Review & Approvals (7 Roles)
+  approvalDecision: ValidationApprovalDecision;
+  reviewers: ValidationReviewer[];
+
+  // Attachments (9 Files)
+  attachments: ValidationAttachment[];
+
+  // System Information
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStage: string;
+  auditTrail: { id: string; timestamp: string; user: string; action: string; description: string; stage?: string }[];
+};
+
+export type ProcessValidationFormInput = Partial<ProcessValidationRecord>;
+
+/* ===========================================================================
+   Pilot Production (MAICW Classification) — Module Types
+   =========================================================================== */
+
+export type PilotProductionStatus =
+  | "Planned"
+  | "Material Preparation"
+  | "Machine Setup"
+  | "Running"
+  | "Paused"
+  | "Completed"
+  | "Cancelled";
+
+export type PilotLifecycleStage =
+  | "Planning"
+  | "Trial Production"
+  | "Pilot Production"
+  | "Production Validation"
+  | "PPAP Submission"
+  | "Production Release";
+
+export type PilotRecommendation =
+  | "Approve Pilot Production"
+  | "Improve Process Capability"
+  | "Update Control Plan"
+  | "Revise PFMEA"
+  | "Perform Additional Pilot Run"
+  | "Release for Mass Production";
+
+export type PilotApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Additional Pilot Required"
+  | "On Hold"
+  | "Rejected";
+
+export type PilotPriority = "Low" | "Medium" | "High" | "Critical";
+
+export type PilotTeamMember = {
+  name: string;
+  role: string;
+  avatar?: string;
+};
+
+export type PilotAiAssessment = {
+  healthScore: number;
+  productivityAnalysis: string;
+  qualityPrediction: string;
+  bottleneckDetection: string;
+  downtimeAnalysis: string;
+  optimizationRecommendations: string;
+};
+
+export type PilotReviewer = {
+  role: string;
+  person: string;
+  decision: PilotApprovalDecision;
+  date: string;
+  comments: string;
+  status: "Approved" | "Pending" | "Revision Required" | "Rejected";
+};
+
+export type PilotAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string;
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+  downloadUrl?: string;
+};
+
+export type PilotProductionRecord = {
+  id: string;
+  pilotId: string;
+  formCode: string;
+  pilotTitle: string;
+  pilotNumber: string;
+  version: number;
+  workflowStatus: "Draft" | "In Progress" | "In Review" | "Approved" | "Revision Required" | "Rejected";
+
+  // Form Information
+  product: string;
+  productRevision: string;
+  manufacturingProcess: string;
+  productionLine: string;
+  processValidationRef: string;
+  processOwner: string;
+  createdDate: string;
+  lastUpdated: string;
+
+  // Pilot Production Overview
+  objective: string;
+  scope: string;
+  location: string;
+  pilotTeam: PilotTeamMember[];
+  processOwnerName: string;
+  startDate: string;
+  endDate: string;
+  lifecycleStage: PilotLifecycleStage;
+  priority: PilotPriority;
+
+  // Production Planning
+  productionOrder: string;
+  plannedQuantity: number;
+  actualQuantity: number;
+  bomRef: string;
+  routingRef: string;
+  materialAvailability: boolean;
+  machineAllocation: string;
+  operatorAssignment: string;
+
+  // Production Execution
+  executionStart: string;
+  executionEnd: string;
+  productionStatus: PilotProductionStatus;
+  machineUtilization: number; // percentage
+  cycleTime: number; // minutes
+  throughput: number; // units/hr
+  downtime: number; // hours
+  oee: number; // percentage
+
+  // Quality Verification
+  incomingInspection: boolean;
+  inProcessInspection: boolean;
+  finalInspection: boolean;
+  defectRate: number; // percentage
+  fpy: number; // percentage
+  scrapRate: number; // percentage
+  reworkRate: number; // percentage
+  qualityScore: number;
+
+  // Process Performance
+  cp: number;
+  cpk: number;
+  spcStatus: boolean;
+  msaStatus: "Acceptable" | "Marginal" | "Unacceptable";
+  processStability: "Good" | "Acceptable" | "Unstable";
+  controlPlanCompliance: "Compliant" | "Non-Compliant";
+  performanceScore: number;
+  trendHistory: { date: string; score: number }[];
+
+  // Production Readiness
+  equipmentReadiness: boolean;
+  toolingReadiness: boolean;
+  operatorReadiness: boolean;
+  materialReadiness: boolean;
+  safetyReadiness: boolean;
+  documentationComplete: boolean;
+  productionReadinessScore: number;
+
+  // AI Assessment
+  aiAssessment: PilotAiAssessment;
+
+  // Pilot Production Summary & Recommendation
+  productionScore: number;
+  processPerformanceScore: number;
+  readinessScore: number;
+  aiHealthScore: number;
+  overallPilotReadiness: number;
+  recommendation: PilotRecommendation;
+
+  // Review & Approvals (7 Roles)
+  approvalDecision: PilotApprovalDecision;
+  reviewers: PilotReviewer[];
+
+  // Attachments (9 Files)
+  attachments: PilotAttachment[];
+
+  // System Information
+  createdBy: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStage: string;
+  auditTrail: { id: string; timestamp: string; user: string; action: string; description: string; stage?: string }[];
+};
+
+export type PilotProductionFormInput = Partial<PilotProductionRecord>;
+
+
+
+
+
+
+
+
+
+
 
 
 

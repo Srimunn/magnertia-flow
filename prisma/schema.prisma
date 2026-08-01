@@ -114,3 +114,799 @@ model ApprovalStep {
   status       ApprovalStepStatus @default(Pending)
   date         DateTime?
 }
+
+// ==========================================
+// Jig Development Module Models
+// ==========================================
+
+enum JigWorkflowStatus {
+  Draft
+  InProgress
+  UnderReview
+  RevisionRequired
+  Approved
+  ProductionRelease
+}
+
+enum JigPriority {
+  Low
+  Medium
+  High
+  Critical
+}
+
+enum JigCategory {
+  DrillingJig
+  WeldingJig
+  TappingJig
+  ReamingJig
+  BoringJig
+  MillingJig
+  InspectionJig
+  AssemblyJig
+  RoboticJig
+  ModularJig
+  SpecialPurposeJig
+}
+
+enum JigDecision {
+  Pending
+  Approved
+  ApprovedWithConditions
+  RevisionRequired
+  OnHold
+  Rejected
+}
+
+model JigDevelopment {
+  id               String            @id @default(cuid())
+  jigId            String            @unique
+  formCode         String
+  projectName      String
+  jigVersion       String            @default("v1.0.0")
+  workflowStatus   JigWorkflowStatus @default(Draft)
+  stage            Int               @default(1)
+  createdOn        DateTime          @default(now())
+  dateCreated      DateTime          @default(now())
+  lastModified     DateTime          @updatedAt
+  lastUpdated      DateTime          @updatedAt
+  
+  linkedProductId  String?
+  linkedProductName String?
+  linkedProcessId  String?
+  linkedProcessName String?
+  
+  engineerName     String
+  engineerEmail    String?
+  engineerAvatar   String?
+  jigNumber        String
+  manufacturingPlant String
+  productionLine   String?
+  workstation      String?
+  nextReviewDate   DateTime?
+
+  jigName          String
+  jigCategory      JigCategory
+  productFamily    String?
+  jigPurpose       String
+  developmentStage String            @default("Jig Concept")
+  priority         JigPriority       @default(Medium)
+  riskLevel        String            @default("Low")
+  healthIndex      Int               @default(100)
+
+  // Design Specs
+  cadModel               String?
+  assemblyDrawing        String?
+  detailDrawings         String?
+  bom                    String?
+  locatorDesign          String?
+  clampDesign            String?
+  materialSpecification  String?
+  surfaceFinish          String?
+  designReviewScore      Int               @default(0)
+
+  // Manufacturing
+  manufacturingProcess   String?
+  cncProgram             String?
+  machineAllocation      String?           // comma separated or JSON string
+  materialRequirements   String?
+  heatTreatment          Boolean           @default(false)
+  surfaceTreatment       String?
+  manufacturingLeadTime  Int               @default(0)
+  manufacturingReadinessScore Int          @default(0)
+
+  // Validation
+  trialJig               Boolean           @default(false)
+  dimensionalInspection  Boolean           @default(false)
+  positioningAccuracy    Float             @default(0.0)
+  repeatabilityTest      Float             @default(0.0)
+  processCapabilityCp    Float             @default(0.0)
+  processCapabilityCpk   Float             @default(0.0)
+  safetyValidation       Boolean           @default(false)
+  validationRemarks      String?
+  validationScore        Int               @default(0)
+
+  // Installation & Commissioning
+  installationCompleted  Boolean           @default(false)
+  processIntegration     Boolean           @default(false)
+  operatorTraining       Boolean           @default(false)
+  maintenancePlan        String?
+  calibrationSchedule    String?
+  productionApproval     Boolean           @default(false)
+  commissioningScore     Int               @default(0)
+
+  // Performance
+  jigLifeCycles          Int               @default(500000)
+  productionCycles       Int               @default(0)
+  toolWearPercentage     Float             @default(0.0)
+  downtimeHoursPerMonth  Float             @default(0.0)
+  mtbfHours              Int               @default(720)
+  mttrHours              Float             @default(1.0)
+  oeeContribution        Float             @default(0.0)
+  performanceScore       Int               @default(0)
+
+  // Derived Overall Score & Recommendation
+  aiEngineeringScore     Int               @default(0)
+  overallReadinessScore  Int               @default(0)
+  recommendation         String            @default("Approve for Production")
+
+  attachments            JigAttachment[]
+  approvals              JigApprovalStep[]
+  activities             JigActivityLog[]
+  aiAssessment           JigAiAssessment?
+
+  createdAt              DateTime          @default(now())
+  updatedAt              DateTime          @updatedAt
+}
+
+model JigAttachment {
+  id           String         @id @default(cuid())
+  jigId        String
+  jig          JigDevelopment @relation(fields: [jigId], references: [id], onDelete: Cascade)
+  fileName     String
+  fileType     String
+  documentType String
+  version      String         @default("v1.0")
+  uploadedBy   String
+  uploadedDate DateTime       @default(now())
+  fileSize     String
+  status       String         @default("Active")
+  downloadUrl  String?
+  createdAt    DateTime       @default(now())
+}
+
+model JigApprovalStep {
+  id           String         @id @default(cuid())
+  jigId        String
+  jig          JigDevelopment @relation(fields: [jigId], references: [id], onDelete: Cascade)
+  role         String
+  person       String
+  decision     JigDecision    @default(Pending)
+  date         DateTime?
+  comments     String?
+  status       String         @default("Pending")
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model JigActivityLog {
+  id           String         @id @default(cuid())
+  jigId        String
+  jig          JigDevelopment @relation(fields: [jigId], references: [id], onDelete: Cascade)
+  user         String
+  action       String
+  description  String
+  prevStatus   String?
+  newStatus    String?
+  timestamp    DateTime       @default(now())
+}
+
+model JigAiAssessment {
+  id                       String         @id @default(cuid())
+  jigId                    String         @unique
+  jig                      JigDevelopment @relation(fields: [jigId], references: [id], onDelete: Cascade)
+  feasibilityIndex         Int            @default(88)
+  manufacturabilityIndex   Int            @default(85)
+  toleranceStackRisk       String         @default("Low Risk")
+  costOptimizationNotes    String
+  complianceCheckPassed    Boolean        @default(true)
+  toolPathOptimization     String
+  wearPrediction           String
+  failurePrediction        String
+  maintenanceRecommendation String
+  costOptimizationPercentage Int          @default(7)
+  aiEngineeringScore       Int            @default(89)
+  createdAt                DateTime       @default(now())
+  updatedAt                DateTime       @updatedAt
+}
+
+// ==========================================
+// Factory Layout Design Module Models
+// ==========================================
+
+model FactoryLayout {
+  id                    String              @id @default(cuid())
+  layoutId              String              @unique
+  formCode              String
+  projectName           String
+  layoutVersion         String              @default("v1.2.0")
+  workflowStatus        String              @default("In Progress")
+  stage                 Int                 @default(3)
+  createdOn             DateTime            @default(now())
+  dateCreated           DateTime            @default(now())
+  lastModified          DateTime            @updatedAt
+  lastUpdated           DateTime            @updatedAt
+
+  plantName             String
+  facilityLocation      String
+  engineerName          String
+  totalLandArea         Float               @default(120000.0)
+  builtUpArea           Float               @default(45000.0)
+  productionCapacity    Int                 @default(250000)
+  nextReviewDate        DateTime?
+
+  factoryName           String
+  plantType             String              @default("Greenfield Factory")
+  industrySegment       String              @default("Electric Vehicles")
+  factoryObjective      String
+  developmentStage      String              @default("Detailed Layout")
+  priority              String              @default("High")
+
+  // Layout Planning Scores & Files
+  layoutPlanningScore   Int                 @default(88)
+  masterLayoutDrawing   String?
+  shopFloorLayout       String?
+  productionLineLayout  String?
+  utilityLayout         String?
+  materialFlowDiagram   String?
+  equipmentLayout       String?
+  warehouseLayout       String?
+  officeLayout          String?
+
+  // Infrastructure
+  infrastructureScore   Int                 @default(86)
+  productionAreas       String?             // comma-separated
+  assemblyAreas         String?             // comma-separated
+  warehouseCapacityM2   Float               @default(8500.0)
+  loadingUnloadingBays  Int                 @default(6)
+  utilitySystems        String?             // comma-separated
+  maintenanceWorkshop   Boolean             @default(true)
+
+  // Material Flow & Logistics
+  logisticsScore        Int                 @default(85)
+  rawMaterialFlow       String?
+  wipFlow               String?
+  finishedGoodsFlow     String?
+  forkliftRoutes        String?
+  agvAmrRoutes          String?
+  materialHandlingEq    String?             // comma-separated
+
+  // Utilities & Safety
+  utilitySafetyScore    Int                 @default(88)
+  electricalLayout      String?
+  compressedAirLayout   String?
+  waterLayout           String?
+  fireSafetyLayout      String?
+  emergencyExitPlan     String?
+  ehsCompliance         Boolean             @default(true)
+
+  // Factory Performance
+  factoryEfficiencyScore Int                @default(87)
+  spaceUtilization      Float               @default(78.0)
+  materialTravelDistance Float              @default(1.62)
+  throughputUnitsPerYear Int                @default(250000)
+  warehouseEfficiency   Float               @default(92.0)
+  energyEfficiency      Float               @default(86.0)
+  equipmentAccessibility Float              @default(90.0)
+
+  // Overall Score & Recommendation
+  aiFactoryScore        Int                 @default(89)
+  overallReadinessScore Int                 @default(87)
+  recommendation        String              @default("Approve Factory Layout")
+
+  attachments           FactoryAttachment[]
+  approvals             FactoryApprovalStep[]
+  activities            FactoryActivityLog[]
+  aiAssessment          FactoryAiAssessment?
+  simulations           FactorySimulation[]
+
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+}
+
+model FactoryAttachment {
+  id           String        @id @default(cuid())
+  layoutId     String
+  layout       FactoryLayout @relation(fields: [layoutId], references: [id], onDelete: Cascade)
+  fileName     String
+  fileType     String
+  documentType String
+  version      String        @default("v1.0")
+  uploadedBy   String
+  uploadedDate DateTime      @default(now())
+  fileSize     String
+  status       String        @default("Active")
+  downloadUrl  String?
+  createdAt    DateTime      @default(now())
+}
+
+model FactoryApprovalStep {
+  id           String        @id @default(cuid())
+  layoutId     String
+  layout       FactoryLayout @relation(fields: [layoutId], references: [id], onDelete: Cascade)
+  role         String
+  person       String
+  decision     String        @default("Pending")
+  date         DateTime?
+  comments     String?
+  status       String        @default("Pending")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model FactoryActivityLog {
+  id           String        @id @default(cuid())
+  layoutId     String
+  layout       FactoryLayout @relation(fields: [layoutId], references: [id], onDelete: Cascade)
+  user         String
+  action       String
+  description  String
+  prevStatus   String?
+  newStatus    String?
+  timestamp    DateTime      @default(now())
+}
+
+model FactoryAiAssessment {
+  id                            String        @id @default(cuid())
+  layoutId                      String        @unique
+  layout                        FactoryLayout @relation(fields: [layoutId], references: [id], onDelete: Cascade)
+  layoutOptimization            String
+  bottleneckPrediction          String
+  materialFlowOptimization      String
+  capacityExpansionRec          String
+  safetyImprovementRec          String
+  aiFactoryScore                Int           @default(89)
+  createdAt                     DateTime      @default(now())
+  updatedAt                     DateTime      @updatedAt
+}
+
+model FactorySimulation {
+  id           String        @id @default(cuid())
+  layoutId     String
+  layout       FactoryLayout @relation(fields: [layoutId], references: [id], onDelete: Cascade)
+  simulationType String      // Material Flow, Capacity, Emergency Evacuation
+  status       String        @default("Completed")
+  resultSummary String
+  passed       Boolean       @default(true)
+  runDate      DateTime      @default(now())
+}
+
+// ==========================================
+// Capacity Planning Module Models
+// ==========================================
+
+model CapacityPlanning {
+  id                      String               @id @default(cuid())
+  planningId              String               @unique
+  formCode                String
+  projectName             String
+  planningVersion         String               @default("v1.2.0")
+  workflowStatus          String               @default("In Progress")
+  stage                   Int                  @default(2)
+  createdOn               DateTime             @default(now())
+  dateCreated             DateTime             @default(now())
+  lastModified            DateTime             @updatedAt
+  lastUpdated             DateTime             @updatedAt
+
+  plantName               String
+  businessUnit            String
+  engineerName            String
+  planningPeriod          String               @default("Jul 2024 - Jun 2025")
+  developmentStage        String               @default("Capacity Assessment")
+  nextReviewDate          DateTime?
+
+  demandForecastUnits     Int                  @default(120000)
+  plannedProductionUnits Int                  @default(118000)
+  capacityUtilization     Float                @default(78.0)
+  oeePercentage           Float                @default(82.0)
+  bottleneckCount         Int                  @default(2)
+
+  // Scores
+  assessmentScore         Int                  @default(88)
+  resourceScore           Int                  @default(86)
+  bottleneckScore         Int                  @default(85)
+  simulationScore         Int                  @default(86)
+  performanceScore        Int                  @default(84)
+  aiCapacityScore         Int                  @default(88)
+  overallReadinessScore   Int                  @default(87)
+  recommendation          String               @default("Approve Capacity Plan")
+
+  attachments             CapacityAttachment[]
+  approvals               CapacityApprovalStep[]
+  activities              CapacityActivityLog[]
+  aiAssessment            CapacityAiAssessment?
+  simulations             CapacitySimulation[]
+  bottlenecks             BottleneckAnalysis[]
+
+  createdAt               DateTime             @default(now())
+  updatedAt               DateTime             @updatedAt
+}
+
+model CapacityAttachment {
+  id           String           @id @default(cuid())
+  planningId   String
+  planning     CapacityPlanning @relation(fields: [planningId], references: [id], onDelete: Cascade)
+  fileName     String
+  fileType     String
+  documentType String
+  version      String           @default("v1.0")
+  uploadedBy   String
+  uploadedDate DateTime         @default(now())
+  fileSize     String
+  status       String           @default("Active")
+  downloadUrl  String?
+  createdAt    DateTime         @default(now())
+}
+
+model CapacityApprovalStep {
+  id           String           @id @default(cuid())
+  planningId   String
+  planning     CapacityPlanning @relation(fields: [planningId], references: [id], onDelete: Cascade)
+  role         String
+  person       String
+  decision     String           @default("Pending")
+  date         DateTime?
+  comments     String?
+  status       String           @default("Pending")
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+}
+
+model CapacityActivityLog {
+  id           String           @id @default(cuid())
+  planningId   String
+  planning     CapacityPlanning @relation(fields: [planningId], references: [id], onDelete: Cascade)
+  user         String
+  action       String
+  description  String
+  prevStatus   String?
+  newStatus    String?
+  timestamp    DateTime         @default(now())
+}
+
+model CapacityAiAssessment {
+  id                      String           @id @default(cuid())
+  planningId              String           @unique
+  planning                CapacityPlanning @relation(fields: [planningId], references: [id], onDelete: Cascade)
+  demandForecastInsight   String
+  capacityOptimization    String
+  bottleneckPrediction    String
+  expansionRecommendation String
+  workforceOptimization   String
+  aiCapacityScore         Int              @default(88)
+  createdAt               DateTime         @default(now())
+  updatedAt               DateTime         @updatedAt
+}
+
+model CapacitySimulation {
+  id                      String           @id @default(cuid())
+  planningId              String
+  planning                CapacityPlanning @relation(fields: [planningId], references: [id], onDelete: Cascade)
+  scenarioName            String
+  simulationScore         Int              @default(86)
+  expansionRequirement    String
+  passed                  Boolean          @default(true)
+  runDate                 DateTime         @default(now())
+}
+
+model BottleneckAnalysis {
+  id                      String           @id @default(cuid())
+  planningId              String
+  planning                CapacityPlanning @relation(fields: [planningId], references: [id], onDelete: Cascade)
+  workstation             String
+  equipment               String
+  constraint              String
+  impact                  String           @default("High")
+  rootCause               String?
+  improvementActions      String?
+  estimatedGain           String?
+  createdAt               DateTime         @default(now())
+}
+
+// ==========================================
+// Work Instruction Development Module Models
+// ==========================================
+
+model WorkInstruction {
+  id                      String                         @id @default(cuid())
+  instructionId          String                         @unique
+  formCode                String
+  title                   String
+  documentNumber          String                         @default("WI-MAG-ACCU-001")
+  revision                String                         @default("2.0")
+  workflowStatus          String                         @default("In Review")
+  stage                   Int                            @default(2)
+  createdOn               DateTime                       @default(now())
+  dateCreated             DateTime                       @default(now())
+  effectiveDate           DateTime?
+  nextReviewDate          DateTime?
+  lastModified            DateTime                       @updatedAt
+  lastUpdated             DateTime                       @updatedAt
+
+  plantName               String
+  department              String
+  processOwner            String
+  workstation             String                         @default("WS-ACCU-01")
+  productionLine          String                         @default("Line-ACCU-01")
+  productFamily           String                         @default("AC Charger")
+  productModel            String                         @default("ACCU-7KW V1.0")
+  processName             String                         @default("Control Unit Assembly")
+  operationNumber         String                         @default("OP-20")
+  operationDescription    String
+  instructionCategory     String                         @default("Assembly")
+  priority                String                         @default("High")
+
+  totalCycleTimeSec       Int                            @default(230)
+  overallReadinessScore   Int                            @default(87)
+  qualityScore            Int                            @default(85)
+  safetyScore             Int                            @default(90)
+  competencyScore         Int                            @default(84)
+  aiDocumentationScore    Int                            @default(88)
+  recommendation          String                         @default("Approve Work Instruction")
+
+  steps                   WorkInstructionStep[]
+  attachments             WorkInstructionAttachment[]
+  approvals               WorkInstructionApprovalStep[]
+  activities              WorkInstructionActivityLog[]
+  aiAssessment            WorkInstructionAiAssessment?
+
+  createdAt               DateTime                       @default(now())
+  updatedAt               DateTime                       @updatedAt
+}
+
+model WorkInstructionStep {
+  id                      String          @id @default(cuid())
+  workInstructionId       String
+  workInstruction         WorkInstruction @relation(fields: [workInstructionId], references: [id], onDelete: Cascade)
+  stepNumber              Int
+  instruction             String
+  visualReferenceUrl      String?
+  keyPoints               String
+  timeSeconds             Int             @default(30)
+  safetyNotes             String?
+  qualityChecks           String?
+  requiredTools           String?
+  requiredMaterials       String?
+  createdAt               DateTime        @default(now())
+  updatedAt               DateTime        @updatedAt
+}
+
+model WorkInstructionAttachment {
+  id                      String          @id @default(cuid())
+  workInstructionId       String
+  workInstruction         WorkInstruction @relation(fields: [workInstructionId], references: [id], onDelete: Cascade)
+  fileName                String
+  fileType                String
+  documentType            String
+  version                 String          @default("v1.0")
+  uploadedBy              String
+  uploadedDate            DateTime        @default(now())
+  fileSize                String
+  status                  String          @default("Active")
+  downloadUrl             String?
+  createdAt               DateTime        @default(now())
+}
+
+model WorkInstructionApprovalStep {
+  id                      String          @id @default(cuid())
+  workInstructionId       String
+  workInstruction         WorkInstruction @relation(fields: [workInstructionId], references: [id], onDelete: Cascade)
+  role                    String
+  person                  String
+  decision                String          @default("Pending")
+  date                    DateTime?
+  comments                String?
+  status                  String          @default("Pending")
+  createdAt               DateTime        @default(now())
+  updatedAt               DateTime        @updatedAt
+}
+
+model WorkInstructionActivityLog {
+  id                      String          @id @default(cuid())
+  workInstructionId       String
+  workInstruction         WorkInstruction @relation(fields: [workInstructionId], references: [id], onDelete: Cascade)
+  user                    String
+  action                  String
+  description             String
+  prevStatus              String?
+  newStatus               String?
+  timestamp               DateTime        @default(now())
+}
+
+model WorkInstructionAiAssessment {
+  id                      String          @id @default(cuid())
+  workInstructionId       String          @unique
+  workInstruction         WorkInstruction @relation(fields: [workInstructionId], references: [id], onDelete: Cascade)
+  instructionReview       String
+  riskAssessment          String
+  processOptimization     String
+  knowledgeGapAnalysis    String
+  trainingRecommendation  String
+  aiDocumentationScore    Int             @default(88)
+  createdAt               DateTime        @default(now())
+  updatedAt               DateTime        @updatedAt
+}
+
+// ==========================================
+// SOP Development Module Models
+// ==========================================
+
+model SopRecord {
+  id                      String                    @id @default(cuid())
+  sopId                   String                    @unique
+  formCode                String
+  title                   String
+  sopNumber               String                    @default("SOP-MFG-001")
+  revision                String                    @default("2.0")
+  workflowStatus          String                    @default("In Review")
+  stage                   Int                       @default(2)
+  createdOn               DateTime                  @default(now())
+  dateCreated             DateTime                  @default(now())
+  effectiveDate           DateTime?
+  nextReviewDate          DateTime?
+  lastModified            DateTime                  @updatedAt
+  lastUpdated             DateTime                  @updatedAt
+
+  department              String
+  processOwner            String
+  sopCategory             String                    @default("Manufacturing")
+  businessFunction        String                    @default("Manufacturing Operations")
+  processName             String                    @default("Production Process Control")
+  processObjective        String
+  scope                   String
+  applicability           String
+  triggerEvent            String
+  expectedOutput          String
+  priority                String                    @default("High")
+
+  totalDurationMins       Int                       @default(45)
+  overallReadinessScore   Int                       @default(87)
+  procedureReadinessScore Int                       @default(85)
+  complianceScore         Int                       @default(90)
+  riskScore               Int                       @default(82)
+  trainingScore           Int                       @default(88)
+  aiDocumentationScore    Int                       @default(91)
+  recommendation          String                    @default("Publish & Release SOP")
+
+  steps                   SopProcedureStep[]
+  resources               SopResourceRequirement[]
+  compliance              SopComplianceRequirement?
+  risk                    SopRiskAssessment?
+  training                SopTrainingRequirement?
+  attachments             SopAttachment[]
+  approvals               SopApprovalStep[]
+  activities              SopActivityLog[]
+  aiAssessment            SopAiAssessment?
+
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+}
+
+model SopProcedureStep {
+  id                      String          @id @default(cuid())
+  sopRecordId             String
+  sopRecord               SopRecord       @relation(fields: [sopRecordId], references: [id], onDelete: Cascade)
+  stepNumber              Int
+  description             String
+  responsibleRole         String
+  durationMins            Int             @default(5)
+  requiredDocuments       String?
+  notes                   String?
+  safetyCheck             String?
+  qualityCheck            String?
+  createdAt               DateTime        @default(now())
+  updatedAt               DateTime        @updatedAt
+}
+
+model SopResourceRequirement {
+  id                      String          @id @default(cuid())
+  sopRecordId             String
+  sopRecord               SopRecord       @relation(fields: [sopRecordId], references: [id], onDelete: Cascade)
+  category                String
+  name                    String
+  itemCount               Int             @default(1)
+  verified                Boolean         @default(true)
+  status                  String          @default("Verified")
+}
+
+model SopComplianceRequirement {
+  id                      String          @id @default(cuid())
+  sopRecordId             String          @unique
+  sopRecord               SopRecord       @relation(fields: [sopRecordId], references: [id], onDelete: Cascade)
+  applicableStandards     String          @default("ISO 9001:2015, ISO 14001:2015")
+  regulatoryRequirements  String          @default("Factories Act, OSHA, BIS")
+  internalPolicies        String          @default("Quality Policy, EHS Policy")
+  auditRequirements       String          @default("Internal Audit, Customer Audit")
+  complianceScore         Int             @default(90)
+}
+
+model SopRiskAssessment {
+  id                      String          @id @default(cuid())
+  sopRecordId             String          @unique
+  sopRecord               SopRecord       @relation(fields: [sopRecordId], references: [id], onDelete: Cascade)
+  riskLevel               String          @default("Medium")
+  ehsRequirements         String
+  emergencyProcedure      String
+  riskReadinessScore      Int             @default(82)
+}
+
+model SopTrainingRequirement {
+  id                      String          @id @default(cuid())
+  sopRecordId             String          @unique
+  sopRecord               SopRecord       @relation(fields: [sopRecordId], references: [id], onDelete: Cascade)
+  trainingRequired        Boolean         @default(true)
+  targetAudience          String
+  competencyRequirement   String
+  trainingReadinessScore  Int             @default(88)
+}
+
+model SopAttachment {
+  id                      String          @id @default(cuid())
+  sopRecordId             String
+  sopRecord               SopRecord       @relation(fields: [sopRecordId], references: [id], onDelete: Cascade)
+  fileName                String
+  fileType                String
+  documentType            String
+  version                 String          @default("v2.0")
+  uploadedBy              String
+  uploadedDate            DateTime        @default(now())
+  fileSize                String
+  status                  String          @default("Active")
+  downloadUrl             String?
+  createdAt               DateTime        @default(now())
+}
+
+model SopApprovalStep {
+  id                      String          @id @default(cuid())
+  sopRecordId             String
+  sopRecord               SopRecord       @relation(fields: [sopRecordId], references: [id], onDelete: Cascade)
+  role                    String
+  person                  String
+  decision                String          @default("Pending")
+  date                    DateTime?
+  comments                String?
+  status                  String          @default("Pending")
+  createdAt               DateTime        @default(now())
+  updatedAt               DateTime        @updatedAt
+}
+
+model SopActivityLog {
+  id                      String          @id @default(cuid())
+  sopRecordId             String
+  sopRecord               SopRecord       @relation(fields: [sopRecordId], references: [id], onDelete: Cascade)
+  user                    String
+  action                  String
+  description             String
+  prevStatus              String?
+  newStatus               String?
+  timestamp               DateTime        @default(now())
+}
+
+model SopAiAssessment {
+  id                      String          @id @default(cuid())
+  sopRecordId             String          @unique
+  sopRecord               SopRecord       @relation(fields: [sopRecordId], references: [id], onDelete: Cascade)
+  aiSopReview             String
+  aiComplianceAnalysis    String
+  aiProcessOptimization   String
+  aiRiskPrediction        String
+  aiRevisionRecommendation String
+  aiDocumentationScore    Int             @default(91)
+  createdAt               DateTime        @default(now())
+  updatedAt               DateTime        @updatedAt
+}
+
+
+
+
+

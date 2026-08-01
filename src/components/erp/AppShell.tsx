@@ -25,6 +25,7 @@ import {
   Compass,
   Palette,
   ShieldCheck,
+  ShieldAlert,
   Briefcase,
   Radar,
   Microscope,
@@ -32,12 +33,14 @@ import {
   Code,
   Smartphone,
   ClipboardCheck,
+  CheckSquare,
   Beaker,
   Cpu,
   TestTubes,
   Gauge,
   ScrollText,
   FileText,
+  FileCheck,
   Rocket,
   Stamp,
   Repeat,
@@ -47,6 +50,9 @@ import {
   Cloud,
   Wifi,
   Activity,
+  BookOpen,
+  FolderTree,
+  GitCommit,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { company, mockUsers } from "@/lib/mock-data";
@@ -239,6 +245,130 @@ const NAV_GROUPS: GroupItem[] = [
             label: "UI/UX Development",
             icon: Palette,
           },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/pilot-production/new",
+            matchPrefix: "/development/research-innovation/pilot-production",
+            label: "Process Development",
+            icon: Repeat,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/production-engineering/new",
+            matchPrefix: "/development/research-innovation/production-engineering",
+            label: "Production Engineering",
+            icon: Settings,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/assembly-line-development/new",
+            matchPrefix: "/development/research-innovation/assembly-line-development",
+            label: "Assembly Line Development",
+            icon: Cpu,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/fixture-development/new",
+            matchPrefix: "/development/research-innovation/fixture-development",
+            label: "Fixture Development",
+            icon: Box,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/tooling-development/new",
+            matchPrefix: "/development/research-innovation/tooling-development",
+            label: "Tooling Development",
+            icon: Settings,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/jig-development/new",
+            matchPrefix: "/development/research-innovation/jig-development",
+            label: "Jig Development",
+            icon: Settings,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/factory-layout-design/new",
+            matchPrefix: "/development/research-innovation/factory-layout-design",
+            label: "Factory Layout Design",
+            icon: LayoutDashboard,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/capacity-planning/new",
+            matchPrefix: "/development/research-innovation/capacity-planning",
+            label: "Capacity Planning",
+            icon: Gauge,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/work-instruction-development/new",
+            matchPrefix: "/development/research-innovation/work-instruction-development",
+            label: "Work Instruction Development",
+            icon: FileText,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/sop-development/new",
+            matchPrefix: "/development/research-innovation/sop-development",
+            label: "SOP Development",
+            icon: BookOpen,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/bom-engineering/new",
+            matchPrefix: "/development/research-innovation/bom-engineering",
+            label: "BOM Engineering",
+            icon: FolderTree,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/routing-development/new",
+            matchPrefix: "/development/research-innovation/routing-development",
+            label: "Routing Development",
+            icon: GitCommit,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/quality-planning-apqp/new",
+            matchPrefix: "/development/research-innovation/quality-planning-apqp",
+            label: "Quality Planning (APQP)",
+            icon: ShieldCheck,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/pfmea-development/new",
+            matchPrefix: "/development/research-innovation/pfmea-development",
+            label: "PFMEA Development",
+            icon: ShieldAlert,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/control-plan/new",
+            matchPrefix: "/development/research-innovation/control-plan",
+            label: "Control Plan Development",
+            icon: FileCheck,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/process-validation/new",
+            matchPrefix: "/development/research-innovation/process-validation",
+            label: "Process Validation",
+            icon: CheckSquare,
+          },
+
+
+
+
+
+
+
+
+
+
+
+
           {
             kind: "leaf",
             to: "/development/research-innovation/simulation-analysis/new",
