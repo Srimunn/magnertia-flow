@@ -106,6 +106,10 @@ export * as workInstructionExportService from "./workInstructionExportService";
 export * as sopDevelopmentService from "./sopDevelopmentService";
 export * as sopAiService from "./sopAiService";
 export * as sopExportService from "./sopExportService";
+export * as smartFactoryDevelopmentService from "./smartFactoryDevelopmentService";
+export * as manufacturingExcellenceService from "./manufacturingExcellenceService";
+
+
 
 
 

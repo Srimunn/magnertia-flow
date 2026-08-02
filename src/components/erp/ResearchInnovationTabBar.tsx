@@ -63,6 +63,8 @@ export const RESEARCH_INNOVATION_TABS: { to: string; label: string; full: string
   { to: "/development/research-innovation/pfmea-development/new", label: "PFMEA Dev", full: "PFMEA Development" },
   { to: "/development/research-innovation/control-plan/new", label: "Control Plan", full: "Control Plan Development" },
   { to: "/development/research-innovation/process-validation/new", label: "Process Validation", full: "Process Validation" },
+  { to: "/development/research-innovation/smart-factory-development/new", label: "Smart Factory", full: "Smart Factory Development" },
+  { to: "/development/research-innovation/manufacturing-excellence/new", label: "Excellence", full: "Manufacturing Excellence" },
   { to: "/development/research-innovation/api-development/new", label: "API", full: "API Development" },
 
 
@@ -107,6 +109,8 @@ export const MODULE_META: Record<string, { description: string; recordLabel: str
   "trl-assessment": { description: "Assess and advance technology readiness levels.", recordLabel: "TRL" },
   "commercialization-planning": { description: "Plan go-to-market, financials, and launch readiness.", recordLabel: "COMMERCIALIZATION" },
   "continuous-innovation": { description: "Drive continuous, period-over-period product improvement.", recordLabel: "INNOVATION" },
+  "smart-factory-development": { description: "Govern planning, architecture, integration, automation, AI analytics, and Industry 4.0 smart factory deployment.", recordLabel: "SMART FACTORY" },
+  "manufacturing-excellence": { description: "Govern continuous improvement, operational excellence, productivity, quality, cost, sustainability, and AI performance benchmarking.", recordLabel: "EXCELLENCE" },
   "patent-management": { description: "Manage patent filing, prosecution, grant, and portfolio.", recordLabel: "PATENT" },
 };
 export const DEFAULT_MODULE_META = { description: "Manage records through the innovation pipeline.", recordLabel: "RECORD" };

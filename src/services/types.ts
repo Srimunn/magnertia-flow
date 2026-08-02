@@ -14666,6 +14666,418 @@ export type PilotProductionRecord = {
 
 export type PilotProductionFormInput = Partial<PilotProductionRecord>;
 
+// ---------------------------------------------------------------------------
+// Smart Factory Development module (MAICW Classification)
+// ---------------------------------------------------------------------------
+
+export type SmartFactoryLevel =
+  | "Digital Factory"
+  | "Connected Factory"
+  | "Intelligent Factory"
+  | "Autonomous Factory"
+  | "Lights-Out Factory";
+
+export type Industry40Maturity =
+  | "Initial"
+  | "Managed"
+  | "Connected"
+  | "Intelligent"
+  | "Autonomous";
+
+export type CloudPlatformOption =
+  | "AWS IoT"
+  | "Microsoft Azure IoT"
+  | "Google Cloud"
+  | "Siemens Insights Hub"
+  | "PTC ThingWorx"
+  | "Private Cloud";
+
+export type SmartFactoryProjectStatus =
+  | "Concept"
+  | "Assessment"
+  | "Design"
+  | "Development"
+  | "Integration"
+  | "Pilot"
+  | "Validation"
+  | "Commissioning"
+  | "Operational"
+  | "Closed";
+
+export type SmartFactoryRecommendation =
+  | "Approve Smart Factory Deployment"
+  | "Improve Digital Infrastructure"
+  | "Increase Automation Coverage"
+  | "Enhance AI Integration"
+  | "Strengthen Cybersecurity"
+  | "Release to Full Production";
+
+export type SmartFactoryApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected"
+  | "Pending";
+
+export type SmartFactoryWorkflowStatus =
+  | "In Progress"
+  | "Under Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected";
+
+export type SmartFactoryReviewer = {
+  id: string;
+  role: string;
+  person: string;
+  avatar?: string;
+  decision: SmartFactoryApprovalDecision;
+  date: string;
+  comments: string;
+};
+
+export type SmartFactoryAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string;
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+};
+
+export type SmartFactoryAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar?: string;
+  action: string;
+  details: string;
+};
+
+export type SmartFactoryDevelopmentRecord = {
+  // Form Information (Header)
+  id: string;
+  smartFactoryProjectId: string;
+  formCode: string;
+  smartFactoryProjectTitle: string;
+  projectNumber: string;
+  manufacturingPlant: string;
+  factoryZone: string;
+  projectManager: string;
+  workflowStatus: SmartFactoryWorkflowStatus;
+  version: number;
+  startDate: string;
+  targetGoLive: string;
+
+  // Section 1: Smart Factory Overview
+  factoryVision: string;
+  businessObjectives: string;
+  smartFactoryLevel: SmartFactoryLevel;
+  industry40Maturity: Industry40Maturity;
+  projectScope: string;
+  expectedBusinessBenefits: string;
+  priority: "Low" | "Medium" | "High" | "Critical";
+  projectStatus: SmartFactoryProjectStatus;
+
+  // Section 2: Digital Infrastructure
+  networkArchitectureFile: string;
+  industrialEthernet: boolean;
+  wifi5gConnectivity: boolean;
+  edgeComputingPlatform: string;
+  cloudPlatform: CloudPlatformOption;
+  dataCenterArchitectureFile: string;
+  cybersecurityArchitectureFile: string;
+  infrastructureReadinessScore: number;
+
+  // Section 3: Smart Manufacturing Systems
+  mesIntegration: boolean;
+  erpIntegration: boolean;
+  plcIntegration: boolean;
+  scadaIntegration: boolean;
+  roboticsIntegration: boolean;
+  iiotDeviceIntegration: boolean;
+  digitalTwinAvailable: boolean;
+  integrationScore: number;
+
+  // Section 4: AI & Analytics
+  aiProductionOptimization: string;
+  predictiveMaintenanceText: string;
+  aiQualityInspection: string;
+  demandForecastingText: string;
+  energyOptimizationText: string;
+  aiDecisionSupport: string;
+  aiReadinessScore: number;
+
+  // Section 5: Production Automation
+  autonomousProductionLine: boolean;
+  agvAmrDeployment: boolean;
+  robotCellIntegration: boolean;
+  machineVisionIntegration: boolean;
+  smartSensorsInstalled: boolean;
+  autonomousMaterialHandling: boolean;
+  automationScore: number;
+
+  // Section 6: Smart Operations
+  realTimeMonitoring: boolean;
+  digitalDashboards: boolean;
+  predictiveAlerts: boolean;
+  oeeMonitoring: boolean;
+  energyMonitoring: boolean;
+  assetMonitoring: boolean;
+  operationalScore: number;
+
+  // Section 7: Validation & Readiness
+  factoryAcceptanceTest: boolean;
+  siteAcceptanceTest: boolean;
+  cybersecurityValidation: boolean;
+  digitalTwinValidation: boolean;
+  aiValidation: boolean;
+  productionReadiness: boolean;
+  validationScore: number;
+
+  // Section 8: Smart Factory Summary
+  overallSmartFactoryReadiness: number;
+  recommendation: SmartFactoryRecommendation;
+
+  // Section 9: Attachments
+  attachments: SmartFactoryAttachment[];
+
+  // Section 10: Review & Approval (10 Roles)
+  smartFactoryEngineer: string;
+  automationManager: string;
+  roboticsManager: string;
+  itInfrastructureManager: string;
+  productionManager: string;
+  qualityManager: string;
+  plantHead: string;
+  cto: string;
+  coo: string;
+  ceo: string;
+  reviewers: SmartFactoryReviewer[];
+  approvalDecision: SmartFactoryApprovalDecision;
+  reviewComments: string;
+  approvalDate: string;
+
+  // Section 11: System Information
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  workflowStage: string;
+  auditTrail: SmartFactoryAuditEntry[];
+};
+
+export type SmartFactoryFormInput = Partial<SmartFactoryDevelopmentRecord>;
+
+// ---------------------------------------------------------------------------
+// Manufacturing Excellence module (MAICW Classification)
+// ---------------------------------------------------------------------------
+
+export type InitiativeCategory =
+  | "Operational Excellence"
+  | "Lean Transformation"
+  | "Six Sigma"
+  | "Kaizen"
+  | "TPM"
+  | "Smart Manufacturing"
+  | "Industry 4.0"
+  | "Energy Excellence"
+  | "Sustainability"
+  | "Digital Transformation";
+
+export type InitiativeStatus =
+  | "Proposed"
+  | "Assessment"
+  | "Planning"
+  | "Implementation"
+  | "Monitoring"
+  | "Validation"
+  | "Completed"
+  | "Closed";
+
+export type CapaStatus =
+  | "Open"
+  | "In Progress"
+  | "Verified"
+  | "Closed"
+  | "Overdue";
+
+export type ExcellenceRecommendation =
+  | "Approve Excellence Initiative"
+  | "Improve Operational Performance"
+  | "Expand Lean Implementation"
+  | "Increase Automation Coverage"
+  | "Enhance AI Analytics"
+  | "Strengthen ESG Performance"
+  | "Continue Continuous Improvement";
+
+export type ExcellenceApprovalDecision =
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "On Hold"
+  | "Rejected"
+  | "Pending";
+
+export type ExcellenceWorkflowStatus =
+  | "In Progress"
+  | "Under Review"
+  | "Approved"
+  | "Approved with Conditions"
+  | "Revision Required"
+  | "Rejected";
+
+export type ExcellenceReviewer = {
+  id: string;
+  role: string;
+  person: string;
+  avatar?: string;
+  decision: ExcellenceApprovalDecision;
+  date: string;
+  comments: string;
+};
+
+export type ExcellenceAttachment = {
+  id: string;
+  fileName: string;
+  fileType: string;
+  documentType: string; // MAICW required slot
+  version: string;
+  uploadedBy: string;
+  uploadedDate: string;
+  fileSize: string;
+  status: "Active" | "Archived";
+};
+
+export type ExcellenceAuditEntry = {
+  id: string;
+  timestamp: string;
+  user: string;
+  avatar?: string;
+  action: string;
+  details: string;
+};
+
+export type ManufacturingExcellenceRecord = {
+  // Form Information (Header)
+  id: string;
+  manufacturingExcellenceId: string; // Auto Number (A) e.g. MEX-2024-00045
+  formCode: string; // Text (A) e.g. MEXF-2024-25
+  initiativeTitle: string; // Text (M) e.g. OEE Improvement & Cost Optimization Initiative
+  initiativeNumber: string; // Text (M) e.g. MEX-INIT-24-001
+  manufacturingPlant: string; // Lookup (I) e.g. Plant-01
+  businessUnit: string; // Lookup (I) e.g. EVSE Manufacturing
+  processOwner: string; // Lookup (I) e.g. Rahul Sharma
+  workflowStatus: ExcellenceWorkflowStatus; // Workflow (W)
+  version: number; // Number (A) e.g. 1.0
+  startDate: string;
+  targetCompletion: string;
+
+  // Section 1: Excellence Initiative Overview
+  initiativeCategory: InitiativeCategory; // Dropdown (M)
+  businessObjective: string; // Long Text (M)
+  currentPerformance: string; // Long Text (M)
+  targetPerformance: string; // Long Text (M)
+  improvementStrategy: string; // Long Text (M)
+  expectedBusinessBenefits: string; // Long Text (M)
+  priority: "Low" | "Medium" | "High" | "Critical"; // Dropdown (M)
+  initiativeStatus: InitiativeStatus; // Dropdown (W)
+
+  // Section 2: Operational Excellence Assessment
+  oeePercentage: number; // Percentage (C) e.g. 72.65
+  productivityIndex: number; // Score (C) e.g. 78
+  qualityPerformance: number; // Score (C) e.g. 83
+  deliveryPerformance: number; // Score (C) e.g. 80
+  costEfficiency: number; // Score (C) e.g. 75
+  safetyPerformance: number; // Score (C) e.g. 90
+  sustainabilityAssessmentScore: number; // Score (C) e.g. 82
+  operationalExcellenceScore: number; // Score (C) e.g. 86
+
+  // Section 3: Continuous Improvement Programs
+  leanManufacturing: boolean; // Checkbox (W)
+  sixSigmaProject: boolean; // Checkbox (W)
+  kaizenInitiative: boolean; // Checkbox (W)
+  tpmProgram: boolean; // Checkbox (W)
+  fiveSImplementation: boolean; // Checkbox (W)
+  valueStreamMapping: boolean; // Checkbox (W)
+  standardWork: boolean; // Checkbox (W)
+  improvementScore: number; // Score (C) e.g. 85
+
+  // Section 4: Smart Manufacturing Excellence
+  smartFactoryIntegration: boolean; // Checkbox (W)
+  aiManufacturingAnalytics: boolean; // Checkbox (W)
+  roboticsOptimization: boolean; // Checkbox (W)
+  iiotConnectivity: boolean; // Checkbox (W)
+  digitalTwin: boolean; // Checkbox (W)
+  predictiveMaintenance: boolean; // Checkbox (W)
+  energyOptimization: boolean; // Checkbox (W)
+  digitalExcellenceScore: number; // Score (A) e.g. 84
+
+  // Section 5: Quality & Compliance
+  customerPpm: number; // Decimal (C) e.g. 850
+  firstPassYield: number; // Percentage (C) e.g. 96.40
+  processCapabilityCpk: string; // Decimal (C) e.g. "1.67 / 1.89"
+  capaStatus: CapaStatus; // Dropdown (W)
+  auditCompliance: number; // Percentage (C) e.g. 94.50
+  regulatoryCompliance: boolean; // Checkbox (W)
+  qualityExcellenceScore: number; // Score (C) e.g. 88
+
+  // Section 6: Sustainability & ESG
+  energyConsumption: number; // Decimal (C) e.g. 1.24 (MWh/Unit)
+  carbonEmissions: number; // Decimal (C) e.g. 0.68 (tCO2e/Unit)
+  waterConsumption: number; // Decimal (C) e.g. 2.35 (kL/Unit)
+  wasteReduction: number; // Percentage (C) e.g. 18.60
+  recyclingRate: number; // Percentage (C) e.g. 72.30
+  esgCompliance: boolean; // Checkbox (W)
+  sustainabilityScore: number; // Score (C) e.g. 82
+
+  // Section 7: AI Excellence Assessment
+  aiPerformanceInsights: string; // Long Text (A)
+  productivityForecast: string; // Long Text (A)
+  predictiveQuality: string; // Long Text (A)
+  costOptimizationText: string; // Long Text (A)
+  riskPredictionText: string; // Long Text (A)
+  aiRecommendations: string; // Long Text (A)
+  aiExcellenceScore: number; // Score (A) e.g. 89
+
+  // Section 8: Manufacturing Excellence Summary
+  overallManufacturingExcellenceScore: number; // Score (C) e.g. 87
+  recommendation: ExcellenceRecommendation; // Dropdown (W)
+
+  // Section 9: Attachments
+  attachments: ExcellenceAttachment[]; // File (M)
+
+  // Section 10: Review & Approval (9 Roles)
+  manufacturingExcellenceManager: string; // Lookup (W)
+  productionManager: string; // Lookup (W)
+  qualityManager: string; // Lookup (W)
+  maintenanceManager: string; // Lookup (W)
+  operationsManager: string; // Lookup (W)
+  plantHead: string; // Lookup (W)
+  coo: string; // Lookup (W)
+  cto: string; // Lookup (W)
+  ceo: string; // Lookup (W)
+  reviewers: ExcellenceReviewer[];
+  approvalDecision: ExcellenceApprovalDecision; // Dropdown (W)
+  reviewComments: string; // Long Text (W)
+  approvalDate: string; // Date (W)
+
+  // Section 11: System Information
+  createdBy: string; // Lookup (I)
+  createdDate: string; // DateTime (A)
+  lastModifiedBy: string; // Lookup (I)
+  lastModifiedDate: string; // DateTime (A)
+  workflowStage: string; // Dropdown (W)
+  auditTrail: ExcellenceAuditEntry[]; // System Log (A)
+};
+
+export type ExcellenceFormInput = Partial<ManufacturingExcellenceRecord>;
+
 
 
 
