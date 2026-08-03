@@ -1,12 +1,20 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { AppShell } from "@/components/erp/AppShell";
+import { ProductRoadmapFormPage } from "@/routes/development.research-innovation.product-roadmap.new";
+import { ProductDevelopmentTabBar } from "@/components/erp/ProductDevelopmentTabBar";
 
-export const Route = createFileRoute("/development/product-development/product-roadmap/")({
-  component: () => {
-    const navigate = useNavigate();
-    useEffect(() => {
-      navigate({ to: "/development/research-innovation/product-roadmap/new" });
-    }, [navigate]);
-    return null;
-  },
+export const Route = createFileRoute(
+  "/development/product-development/product-roadmap/"
+)({
+  component: ProductDevelopmentRoadmap,
 });
+
+function ProductDevelopmentRoadmap() {
+  return (
+    <ProductRoadmapFormPage
+      breadcrumb="Development > Product Development"
+      tabs={<ProductDevelopmentTabBar />}
+    />
+  );
+}
+

@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState, useMemo } from "react";
 import { toast } from "sonner";
+import { AppShell } from "@/components/erp/AppShell";
 import {
   Rocket,
   Download,
@@ -66,7 +67,7 @@ import type {
   ProductReleaseChecklistItem,
   ProductReleaseAttachment,
 } from "@/services/types";
-import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
+import { ResearchInnovationTabBar } from "@/components/erp/ResearchInnovationTabBar";
 import {
   ProductReleaseTabBar,
   type ProductReleaseTabId,
@@ -91,6 +92,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import { Progress } from "@/components/ui/progress";
 
 export const Route = createFileRoute(
   "/development/research-innovation/product-release-management/new"
@@ -98,11 +100,10 @@ export const Route = createFileRoute(
   component: ProductReleasePage,
 });
 
-/* Helper component for SVG Circular Gauge */
 function CircularScoreGauge({
   score,
-  size = 72,
-  strokeWidth = 6,
+  size = 60,
+  strokeWidth = 5,
   label,
   sublabel,
   color = "#10B981",
@@ -175,7 +176,128 @@ function getFileIcon(type?: string, name?: string) {
   return <FileText className="h-4 w-4 text-blue-500 shrink-0" />;
 }
 
-function ProductReleasePage() {
+const DEFAULT_PRODUCT_RELEASE_RECORD: ProductReleaseRecord = {
+  id: "rel-rec-0053",
+  releaseId: "REL-2024-0053",
+  formCode: "RLF-2024-25",
+  releaseProjectName: "Smart EV Charger Launch",
+  releaseVersion: "v1.2.0",
+  workflowStatus: "In Progress",
+  stage: 2,
+  createdOn: "18 Jun 2024 10:15 AM",
+  dateCreated: "2024-06-18T10:15:00Z",
+  lastModified: "2024-06-19T11:20:00Z",
+  lastUpdated: "19 Jun 2024 11:20 AM",
+
+  linkedProduct: { id: "PRD-EV-7KW", name: "Smart EV Charger AC 7kW" },
+  linkedDocumentation: { id: "DOC-2024-0087", code: "DOC-2024-0087" },
+  releaseManager: {
+    name: "Rahul Sharma",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+    email: "rahul.sharma@magnertia.com",
+  },
+  plannedReleaseDate: "30 Jun 2024",
+  releaseType: "Production Release",
+  releasePriority: "High",
+
+  productName: "Smart EV Charger AC 7kW",
+  productCategory: "AC EV Charger",
+  releaseName: "Smart EV Charger v1.2 Launch",
+  releaseObjective: "Official launch of Smart EV Charger AC 7kW v1.2 in India and select global markets.",
+  targetMarkets: ["India", "EU", "USA", "MEA"],
+
+  engineeringChecklist: [
+    { id: "eng-1", label: "Engineering Approved", completed: true, sourceStream: "Engineering" },
+    { id: "eng-2", label: "Design Freeze Completed", completed: true, sourceStream: "Product Architecture" },
+    { id: "eng-3", label: "Prototype Approved", completed: true, sourceStream: "Prototype Development" },
+    { id: "eng-4", label: "Testing Completed", completed: true, sourceStream: "Testing & Validation" },
+    { id: "eng-5", label: "Certification Completed", completed: true, sourceStream: "Certification Readiness" },
+    { id: "eng-6", label: "Documentation Completed", completed: true, sourceStream: "Product Documentation" },
+  ],
+  engineeringScore: 92,
+
+  manufacturingChecklist: [
+    { id: "mfg-1", label: "Manufacturing SOP Approved", completed: true, sourceStream: "Manufacturing" },
+    { id: "mfg-2", label: "Production Line Ready", completed: true, sourceStream: "Industrialization" },
+    { id: "mfg-3", label: "BOM Released", completed: true, sourceStream: "PLM & Engineering" },
+    { id: "mfg-4", label: "Tooling Approved", completed: true, sourceStream: "Tooling & Fixtures" },
+    { id: "mfg-5", label: "Supplier Readiness", completed: true, sourceStream: "Supply Chain" },
+    { id: "mfg-6", label: "Packaging Approved", completed: true, sourceStream: "Packaging & Logistics" },
+  ],
+  manufacturingScore: 90,
+
+  commercialChecklist: [
+    { id: "com-1", label: "Product Pricing (₹ 23,999.00)", completed: true, sourceStream: "Finance & Sales" },
+    { id: "com-2", label: "Sales Kit Available", completed: true, sourceStream: "Sales & Marketing" },
+    { id: "com-3", label: "Marketing Material Ready", completed: true, sourceStream: "Marketing" },
+    { id: "com-4", label: "Website Updated", completed: true, sourceStream: "Digital Marketing" },
+    { id: "com-5", label: "Dealer Training Completed", completed: true, sourceStream: "Channel Operations" },
+    { id: "com-6", label: "Customer Support Ready", completed: true, sourceStream: "Customer Success" },
+  ],
+  productPricing: "₹ 23,999.00",
+  commercialScore: 88,
+
+  releaseChannels: ["Direct Sales", "Dealer Network", "E-Commerce"],
+  deploymentRegions: ["India", "EU", "USA"],
+  distributionPartner: "EV Distributors Pvt. Ltd.",
+  inventoryAvailable: 2450,
+  inventoryUnits: "Units",
+  rolloutStrategy: "Phased Rollout",
+  deploymentScore: 89,
+
+  openRisksCount: 3,
+  criticalRisksCount: 1,
+  capaClosed: true,
+  regulatoryApproval: true,
+  warrantyPolicyApproved: true,
+  riskScore: 80,
+
+  aiReleaseReadinessReview: "Good",
+  aiDeploymentRiskAnalysis: "Low",
+  aiCommercialReadiness: "High",
+  aiLaunchRecommendation: "Proceed with Launch",
+  aiImprovementSuggestions: "2 Suggestions available for supply buffer.",
+  aiReleaseScore: 91,
+
+  overallReleaseScore: 88,
+  recommendation: "Ready for Product Launch",
+
+  attachments: [
+    { id: "att-1", name: "release_checklist_v1.2.pdf", size: "1.2 MB", type: "pdf", uploadDate: "18 Jun 2024", category: "Checklist" },
+    { id: "att-2", name: "documentation_package.zip", size: "24.5 MB", type: "zip", uploadDate: "18 Jun 2024", category: "Documentation" },
+  ],
+
+  reviewers: [
+    { id: "rev-1", role: "Release Manager", person: "Rahul Sharma", decision: "Approved", date: "18 Jun 2024", comments: "All good", status: "Completed", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" },
+    { id: "rev-2", role: "Engineering Manager", person: "Nisha Verma", decision: "Approved", date: "18 Jun 2024", comments: "Engineering complete", status: "Completed", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80" },
+  ],
+  approvalDecision: "Approved",
+  reviewComments: "All departments are aligned. Proceed with product launch.",
+  approvalDate: "19 Jun 2024",
+
+  createdBy: "Rahul Sharma",
+  createdDate: "18 Jun 2024 10:15 AM",
+  lastModifiedBy: "Rahul Sharma",
+  lastModifiedDate: "19 Jun 2024 11:20 AM",
+  commercialDate: "19 Jun 2024 11:20 AM",
+  workflowStageLabel: "Executive Review",
+
+  releaseTimeline: [
+    { id: "ms-1", title: "Release Project Created", date: "18 Jun 2024 10:15 AM", completed: true, stageNumber: 1 },
+    { id: "ms-2", title: "Engineering Review", date: "18 Jun 2024 02:30 PM", completed: true, stageNumber: 1 },
+  ],
+  auditTrail: [
+    { id: "aud-1", timestamp: "18 Jun 2024 10:15 AM", user: "Rahul Sharma", action: "Record Created", details: "Product Release Management project REL-2024-0053 created.", ipAddress: "192.168.1.42" },
+  ],
+};
+
+export function ProductReleasePage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -224,8 +346,7 @@ function ProductReleasePage() {
   });
 
   const rec = useMemo(() => {
-    if (!record) return null;
-    return record;
+    return record ?? DEFAULT_PRODUCT_RELEASE_RECORD;
   }, [record]);
 
   // Mutations
@@ -286,14 +407,21 @@ function ProductReleasePage() {
     },
   });
 
-  if (isLoading || !rec) {
+  if (isLoading && !record) {
     return (
-      <div className="flex h-96 w-full items-center justify-center p-8">
-        <div className="flex flex-col items-center gap-3">
-          <RefreshCw className="h-8 w-8 animate-spin text-blue-600" />
-          <p className="text-sm font-medium text-muted-foreground">Loading Product Release Management record...</p>
+      <AppShell
+        title="Product Release Management"
+        breadcrumb={breadcrumb ?? "Development > Product Development"}
+        description="Govern release gates, ECO sign-offs, production deployment checklists, and release notes."
+        tabs={tabs ?? <ResearchInnovationTabBar />}
+      >
+        <div className="flex h-96 w-full items-center justify-center p-8">
+          <div className="flex flex-col items-center gap-3">
+            <RefreshCw className="h-8 w-8 animate-spin text-blue-600" />
+            <p className="text-sm font-medium text-muted-foreground">Loading Product Release Management record...</p>
+          </div>
         </div>
-      </div>
+      </AppShell>
     );
   }
 
@@ -328,32 +456,23 @@ function ProductReleasePage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 pb-16">
-      {/* 1. Global Innovation Tab Bar */}
-      <InnovationAreaTabs />
-
-      {/* 2. Page Header & Breadcrumbs */}
-      <div className="border-b border-border bg-white dark:bg-slate-900 px-6 py-3 shadow-xs">
-        <div className="flex flex-col gap-1">
-          <nav className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <span>Development</span>
-            <ChevronRight className="h-3 w-3" />
-            <span>Product Development</span>
-            <ChevronRight className="h-3 w-3" />
-            <span>Product Release Management</span>
-            <ChevronRight className="h-3 w-3" />
-            <span className="font-medium text-foreground">Product Release Management Form</span>
-          </nav>
-          <div className="flex items-center justify-between mt-1">
-            <div className="flex items-center gap-3">
-              <h1 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2">
-                Product Release Management
-                <Rocket className="h-5 w-5 text-blue-600" />
-              </h1>
-              <Badge variant="outline" className="bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300 border-blue-200 font-semibold">
-                Release Gate Module
-              </Badge>
-            </div>
+    <AppShell
+      title="Product Release Management"
+      breadcrumb={breadcrumb}
+      description="Govern release gates, ECO sign-offs, production deployment checklists, and release notes."
+      tabs={tabs}
+    >
+      <div className="space-y-6 pb-16">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2">
+              Product Release Management
+              <Rocket className="h-5 w-5 text-blue-600" />
+            </h1>
+            <Badge variant="outline" className="bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300 border-blue-200 font-semibold">
+              Release Gate Module
+            </Badge>
+          </div>
             <div className="flex items-center gap-2">
               <Button
                 variant="outline"
@@ -366,8 +485,6 @@ function ProductReleasePage() {
               </Button>
             </div>
           </div>
-        </div>
-      </div>
 
       {/* 3. Record Header Bar (2 Rows) */}
       <div className="mx-auto max-w-[1600px] px-4 pt-4">
@@ -658,24 +775,7 @@ function ProductReleasePage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left Main Content Column */}
           <div className="lg:col-span-9 space-y-6">
-            {activeTab !== "overview" ? (
-              <Card className="border-border bg-white dark:bg-slate-900 p-8 text-center shadow-xs">
-                <CardContent className="flex flex-col items-center justify-center gap-4 py-12">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-600">
-                    <Rocket className="h-8 w-8" />
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white capitalize">
-                    {activeTab.replace("_", " ")} Section View
-                  </h3>
-                  <p className="max-w-md text-sm text-muted-foreground">
-                    This section view is aggregated under the <strong>Overview tab</strong> single-source-of-truth dashboard. Click below to return to the interactive Overview panel.
-                  </p>
-                  <Button onClick={() => setActiveTab("overview")} className="bg-blue-600 text-white">
-                    Return to Overview Tab
-                  </Button>
-                </CardContent>
-              </Card>
-            ) : (
+            {activeTab === "overview" && (
               <>
                 {/* ------------------------------------------------------------- */}
                 {/* PANEL 1: Release Overview */}
@@ -823,7 +923,11 @@ function ProductReleasePage() {
                     </div>
                   </CardContent>
                 </Card>
+              </>
+            )}
 
+            {(activeTab === "overview" || activeTab === "readiness") && (
+              <>
                 {/* Grid for Engineering & Manufacturing Readiness Cards (Panels 2 & 3) */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* ------------------------------------------------------------- */}
@@ -942,7 +1046,11 @@ function ProductReleasePage() {
                     </div>
                   </Card>
                 </div>
+              </>
+            )}
 
+            {(activeTab === "overview" || activeTab === "readiness" || activeTab === "deployment") && (
+              <>
                 {/* Grid for Commercial Readiness & Deployment Cards (Panels 4 & 5) */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* ------------------------------------------------------------- */}
@@ -1083,450 +1191,462 @@ function ProductReleasePage() {
                     </div>
                   </Card>
                 </div>
+              </>
+            )}
 
                 {/* ------------------------------------------------------------- */}
                 {/* PANEL 6: Risk & Compliance Review */}
                 {/* ------------------------------------------------------------- */}
-                <Card className="border-border bg-white dark:bg-slate-900 shadow-xs">
-                  <CardHeader className="pb-3 border-b border-border/60">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
-                          6
-                        </div>
-                        <CardTitle className="text-base font-bold">Risk & Compliance Review</CardTitle>
-                      </div>
-                      <Badge variant="outline" className="bg-amber-50 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 text-xs font-mono font-bold">
-                        1 Critical Risk Monitored
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="pt-4">
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-                      <div className="md:col-span-9 grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
-                        <div className="p-3 rounded-lg border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
-                          <span className="text-muted-foreground block font-medium">Open Risks</span>
-                          <span className="text-lg font-bold text-slate-800 dark:text-slate-200">{rec.openRisksCount}</span>
-                        </div>
-
-                        <div className="p-3 rounded-lg border border-amber-200 dark:border-amber-900/60 bg-amber-50/40 dark:bg-amber-950/20">
-                          <span className="text-amber-900 dark:text-amber-300 block font-medium">Critical Risks</span>
-                          <span className="text-lg font-bold text-amber-700 dark:text-amber-400">{rec.criticalRisksCount}</span>
-                        </div>
-
-                        <div className="p-3 rounded-lg border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 flex items-center justify-between">
-                          <div>
-                            <span className="text-muted-foreground block font-medium">CAPA Closed</span>
-                            <span className="font-bold text-emerald-600 dark:text-emerald-400">Yes</span>
+                {(activeTab === "overview" || activeTab === "risk_compliance") && (
+                  <Card className="border-border bg-white dark:bg-slate-900 shadow-xs">
+                    <CardHeader className="pb-3 border-b border-border/60">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
+                            6
                           </div>
-                          <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+                          <CardTitle className="text-base font-bold">Risk & Compliance Review</CardTitle>
                         </div>
-
-                        <div className="p-3 rounded-lg border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 flex items-center justify-between">
-                          <div>
-                            <span className="text-muted-foreground block font-medium">Regulatory Approval</span>
-                            <span className="font-bold text-emerald-600 dark:text-emerald-400">Yes</span>
+                        <Badge variant="outline" className="bg-amber-50 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 text-xs font-mono font-bold">
+                          1 Critical Risk Monitored
+                        </Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-4">
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+                        <div className="md:col-span-9 grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+                          <div className="p-3 rounded-lg border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                            <span className="text-muted-foreground block font-medium">Open Risks</span>
+                            <span className="text-lg font-bold text-slate-800 dark:text-slate-200">{rec.openRisksCount}</span>
                           </div>
-                          <CheckCircle2 className="h-5 w-5 text-emerald-500" />
-                        </div>
 
-                        <div className="p-3 rounded-lg border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 flex items-center justify-between">
-                          <div>
-                            <span className="text-muted-foreground block font-medium">Warranty Policy Approved</span>
-                            <span className="font-bold text-emerald-600 dark:text-emerald-400">Yes</span>
+                          <div className="p-3 rounded-lg border border-amber-200 dark:border-amber-900/60 bg-amber-50/40 dark:bg-amber-950/20">
+                            <span className="text-amber-900 dark:text-amber-300 block font-medium">Critical Risks</span>
+                            <span className="text-lg font-bold text-amber-700 dark:text-amber-400">{rec.criticalRisksCount}</span>
                           </div>
-                          <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+
+                          <div className="p-3 rounded-lg border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 flex items-center justify-between">
+                            <div>
+                              <span className="text-muted-foreground block font-medium">CAPA Closed</span>
+                              <span className="font-bold text-emerald-600 dark:text-emerald-400">Yes</span>
+                            </div>
+                            <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+                          </div>
+
+                          <div className="p-3 rounded-lg border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 flex items-center justify-between">
+                            <div>
+                              <span className="text-muted-foreground block font-medium">Regulatory Approval</span>
+                              <span className="font-bold text-emerald-600 dark:text-emerald-400">Yes</span>
+                            </div>
+                            <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+                          </div>
+
+                          <div className="p-3 rounded-lg border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 flex items-center justify-between">
+                            <div>
+                              <span className="text-muted-foreground block font-medium">Warranty Policy Approved</span>
+                              <span className="font-bold text-emerald-600 dark:text-emerald-400">Yes</span>
+                            </div>
+                            <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+                          </div>
+
+                          <div className="p-3 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50/40 dark:bg-blue-950/20 flex flex-col justify-between">
+                            <span className="text-muted-foreground block font-medium">Release Risk Assessment</span>
+                            <button
+                              type="button"
+                              onClick={() => toast.info("Opening Risk Assessment Report...")}
+                              className="inline-flex items-center gap-1 font-bold text-blue-600 hover:text-blue-700 text-xs mt-1 cursor-pointer"
+                            >
+                              View Report <ExternalLink className="h-3 w-3" />
+                            </button>
+                          </div>
                         </div>
 
-                        <div className="p-3 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50/40 dark:bg-blue-950/20 flex flex-col justify-between">
-                          <span className="text-muted-foreground block font-medium">Release Risk Assessment</span>
-                          <button
-                            type="button"
-                            onClick={() => toast.info("Opening Risk Assessment Report...")}
-                            className="inline-flex items-center gap-1 font-bold text-blue-600 hover:text-blue-700 text-xs mt-1 cursor-pointer"
-                          >
-                            View Report <ExternalLink className="h-3 w-3" />
-                          </button>
+                        {/* Score Badge Card */}
+                        <div className="md:col-span-3 flex flex-col items-center justify-center rounded-xl bg-amber-50/50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/60 p-4 text-center">
+                          <span className="text-xs font-bold text-amber-900 dark:text-amber-300 mb-2">Risk Readiness Score</span>
+                          <div className="flex items-center gap-1 bg-amber-100 dark:bg-amber-950 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-300 px-4 py-2 rounded-lg font-bold text-xl">
+                            <span>{rec.riskScore}</span>
+                            <span className="text-xs font-normal opacity-80">/100</span>
+                          </div>
+                          <p className="text-[11px] text-amber-800 dark:text-amber-300 mt-2">1 minor supply buffer risk monitored.</p>
                         </div>
                       </div>
-
-                      {/* Score Badge Card */}
-                      <div className="md:col-span-3 flex flex-col items-center justify-center rounded-xl bg-amber-50/50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/60 p-4 text-center">
-                        <span className="text-xs font-bold text-amber-900 dark:text-amber-300 mb-2">Risk Readiness Score</span>
-                        <div className="flex items-center gap-1 bg-amber-100 dark:bg-amber-950 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-300 px-4 py-2 rounded-lg font-bold text-xl">
-                          <span>{rec.riskScore}</span>
-                          <span className="text-xs font-normal opacity-80">/100</span>
-                        </div>
-                        <p className="text-[11px] text-amber-800 dark:text-amber-300 mt-2">1 minor supply buffer risk monitored.</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                )}
 
                 {/* ------------------------------------------------------------- */}
                 {/* PANEL 7: AI Release Assessment */}
                 {/* ------------------------------------------------------------- */}
-                <Card className="border-border bg-white dark:bg-slate-900 shadow-xs">
-                  <CardHeader className="pb-3 border-b border-border/60">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
-                          7
+                {(activeTab === "overview" || activeTab === "ai_assessment") && (
+                  <Card className="border-border bg-white dark:bg-slate-900 shadow-xs">
+                    <CardHeader className="pb-3 border-b border-border/60">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
+                            7
+                          </div>
+                          <CardTitle className="text-base font-bold">AI Release Assessment</CardTitle>
                         </div>
-                        <CardTitle className="text-base font-bold">AI Release Assessment</CardTitle>
+                        <Badge className="bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300 gap-1 border-purple-200 font-semibold">
+                          <Sparkles className="h-3 w-3 text-purple-600" />
+                          AI Agent Generated
+                        </Badge>
                       </div>
-                      <Badge className="bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300 gap-1 border-purple-200 font-semibold">
-                        <Sparkles className="h-3 w-3 text-purple-600" />
-                        AI Agent Generated
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="pt-4">
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-                      <div className="md:col-span-9 space-y-2.5 text-xs">
-                        <div className="flex items-center justify-between rounded-lg border border-slate-200/80 dark:border-slate-800 p-2.5 bg-slate-50/50 dark:bg-slate-800/40">
-                          <span className="font-semibold text-slate-700 dark:text-slate-300 w-1/3">
-                            AI Release Readiness Review
-                          </span>
-                          <span className="text-slate-600 dark:text-slate-400 font-medium flex-1">
-                            {rec.aiReleaseReadinessReview}
-                          </span>
-                          <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 ml-2" />
+                    </CardHeader>
+                    <CardContent className="pt-4">
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+                        <div className="md:col-span-9 space-y-2.5 text-xs">
+                          <div className="flex items-center justify-between rounded-lg border border-slate-200/80 dark:border-slate-800 p-2.5 bg-slate-50/50 dark:bg-slate-800/40">
+                            <span className="font-semibold text-slate-700 dark:text-slate-300 w-1/3">
+                              AI Release Readiness Review
+                            </span>
+                            <span className="text-slate-600 dark:text-slate-400 font-medium flex-1">
+                              {rec.aiReleaseReadinessReview}
+                            </span>
+                            <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 ml-2" />
+                          </div>
+
+                          <div className="flex items-center justify-between rounded-lg border border-slate-200/80 dark:border-slate-800 p-2.5 bg-slate-50/50 dark:bg-slate-800/40">
+                            <span className="font-semibold text-slate-700 dark:text-slate-300 w-1/3">
+                              AI Deployment Risk Analysis
+                            </span>
+                            <span className="text-slate-600 dark:text-slate-400 font-medium flex-1">
+                              {rec.aiDeploymentRiskAnalysis}
+                            </span>
+                            <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 ml-2" />
+                          </div>
+
+                          <div className="flex items-center justify-between rounded-lg border border-slate-200/80 dark:border-slate-800 p-2.5 bg-slate-50/50 dark:bg-slate-800/40">
+                            <span className="font-semibold text-slate-700 dark:text-slate-300 w-1/3">
+                              AI Commercial Readiness
+                            </span>
+                            <span className="text-slate-600 dark:text-slate-400 font-medium flex-1">
+                              {rec.aiCommercialReadiness}
+                            </span>
+                            <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 ml-2" />
+                          </div>
+
+                          <div className="flex items-center justify-between rounded-lg border border-emerald-200/80 dark:border-emerald-900/40 p-2.5 bg-emerald-50/40 dark:bg-emerald-950/20">
+                            <span className="font-semibold text-emerald-900 dark:text-emerald-300 w-1/3">
+                              AI Launch Recommendation
+                            </span>
+                            <span className="text-emerald-800 dark:text-emerald-200 font-bold flex-1">
+                              {rec.aiLaunchRecommendation}
+                            </span>
+                            <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 ml-2" />
+                          </div>
+
+                          <div className="flex items-center justify-between rounded-lg border border-purple-200/80 dark:border-purple-900/40 p-2.5 bg-purple-50/40 dark:bg-purple-950/20">
+                            <span className="font-semibold text-purple-900 dark:text-purple-300 w-1/3">
+                              AI Improvement Suggestions
+                            </span>
+                            <span className="text-purple-800 dark:text-purple-200 font-medium flex-1">
+                              {rec.aiImprovementSuggestions}
+                            </span>
+                            <Sparkles className="h-4 w-4 text-purple-600 shrink-0 ml-2" />
+                          </div>
                         </div>
 
-                        <div className="flex items-center justify-between rounded-lg border border-slate-200/80 dark:border-slate-800 p-2.5 bg-slate-50/50 dark:bg-slate-800/40">
-                          <span className="font-semibold text-slate-700 dark:text-slate-300 w-1/3">
-                            AI Deployment Risk Analysis
-                          </span>
-                          <span className="text-slate-600 dark:text-slate-400 font-medium flex-1">
-                            {rec.aiDeploymentRiskAnalysis}
-                          </span>
-                          <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 ml-2" />
-                        </div>
-
-                        <div className="flex items-center justify-between rounded-lg border border-slate-200/80 dark:border-slate-800 p-2.5 bg-slate-50/50 dark:bg-slate-800/40">
-                          <span className="font-semibold text-slate-700 dark:text-slate-300 w-1/3">
-                            AI Commercial Readiness
-                          </span>
-                          <span className="text-slate-600 dark:text-slate-400 font-medium flex-1">
-                            {rec.aiCommercialReadiness}
-                          </span>
-                          <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 ml-2" />
-                        </div>
-
-                        <div className="flex items-center justify-between rounded-lg border border-emerald-200/80 dark:border-emerald-900/40 p-2.5 bg-emerald-50/40 dark:bg-emerald-950/20">
-                          <span className="font-semibold text-emerald-900 dark:text-emerald-300 w-1/3">
-                            AI Launch Recommendation
-                          </span>
-                          <span className="text-emerald-800 dark:text-emerald-200 font-bold flex-1">
-                            {rec.aiLaunchRecommendation}
-                          </span>
-                          <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 ml-2" />
-                        </div>
-
-                        <div className="flex items-center justify-between rounded-lg border border-purple-200/80 dark:border-purple-900/40 p-2.5 bg-purple-50/40 dark:bg-purple-950/20">
-                          <span className="font-semibold text-purple-900 dark:text-purple-300 w-1/3">
-                            AI Improvement Suggestions
-                          </span>
-                          <span className="text-purple-800 dark:text-purple-200 font-medium flex-1">
-                            {rec.aiImprovementSuggestions}
-                          </span>
-                          <Sparkles className="h-4 w-4 text-purple-600 shrink-0 ml-2" />
+                        {/* AI Graphic Icon Card */}
+                        <div className="md:col-span-3 flex flex-col items-center justify-center rounded-xl bg-gradient-to-b from-purple-50 to-blue-50 dark:from-slate-800 dark:to-slate-900 border border-purple-200/60 dark:border-slate-700 p-4 text-center">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white font-bold shadow-sm mb-2">
+                            AI
+                          </div>
+                          <span className="text-xs font-bold text-slate-700 dark:text-slate-300">AI Release Score</span>
+                          <div className="mt-2 flex items-center gap-1 bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 px-3 py-1.5 rounded-lg font-bold text-lg">
+                            <span>{rec.aiReleaseScore}</span>
+                            <span className="text-xs font-normal opacity-80">/100</span>
+                          </div>
                         </div>
                       </div>
-
-                      {/* AI Graphic Icon Card */}
-                      <div className="md:col-span-3 flex flex-col items-center justify-center rounded-xl bg-gradient-to-b from-purple-50 to-blue-50 dark:from-slate-800 dark:to-slate-900 border border-purple-200/60 dark:border-slate-700 p-4 text-center">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white font-bold shadow-sm mb-2">
-                          AI
-                        </div>
-                        <span className="text-xs font-bold text-slate-700 dark:text-slate-300">AI Release Score</span>
-                        <div className="mt-2 flex items-center gap-1 bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 px-3 py-1.5 rounded-lg font-bold text-lg">
-                          <span>{rec.aiReleaseScore}</span>
-                          <span className="text-xs font-normal opacity-80">/100</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                )}
 
                 {/* ------------------------------------------------------------- */}
                 {/* PANEL 8: Release Summary */}
                 {/* ------------------------------------------------------------- */}
-                <Card className="border-border bg-white dark:bg-slate-900 shadow-xs">
-                  <CardHeader className="pb-3 border-b border-border/60">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
-                          8
+                {(activeTab === "overview" || activeTab === "summary") && (
+                  <Card className="border-border bg-white dark:bg-slate-900 shadow-xs">
+                    <CardHeader className="pb-3 border-b border-border/60">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
+                            8
+                          </div>
+                          <CardTitle className="text-base font-bold">Release Summary</CardTitle>
                         </div>
-                        <CardTitle className="text-base font-bold">Release Summary</CardTitle>
+                        <Badge variant="outline" className="text-xs bg-slate-50 dark:bg-slate-800 font-semibold">
+                          Single Source of Truth Gauges
+                        </Badge>
                       </div>
-                      <Badge variant="outline" className="text-xs bg-slate-50 dark:bg-slate-800 font-semibold">
-                        Single Source of Truth Gauges
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="pt-6 pb-6">
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 items-center justify-items-center">
-                      <CircularScoreGauge
-                        score={rec.engineeringScore}
-                        label="Engineering Score"
-                        color="#10B981"
-                      />
-                      <CircularScoreGauge
-                        score={rec.manufacturingScore}
-                        label="Manufacturing Score"
-                        color="#10B981"
-                      />
-                      <CircularScoreGauge
-                        score={rec.commercialScore}
-                        label="Commercial Score"
-                        color="#10B981"
-                      />
-                      <CircularScoreGauge
-                        score={rec.riskScore}
-                        label="Risk Score"
-                        color="#F59E0B"
-                      />
-                      {/* Overall Release Score — Larger Gauge */}
-                      <div className="col-span-2 sm:col-span-1 flex flex-col items-center">
+                    </CardHeader>
+                    <CardContent className="pt-6 pb-6">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 items-center justify-items-center">
                         <CircularScoreGauge
-                          score={rec.overallReleaseScore}
-                          size={96}
-                          strokeWidth={8}
-                          label="Overall Release Score"
-                          color="#059669"
+                          score={rec.engineeringScore}
+                          label="Engineering Score"
+                          color="#10B981"
                         />
+                        <CircularScoreGauge
+                          score={rec.manufacturingScore}
+                          label="Manufacturing Score"
+                          color="#10B981"
+                        />
+                        <CircularScoreGauge
+                          score={rec.commercialScore}
+                          label="Commercial Score"
+                          color="#10B981"
+                        />
+                        <CircularScoreGauge
+                          score={rec.riskScore}
+                          label="Risk Score"
+                          color="#F59E0B"
+                        />
+                        {/* Overall Release Score — Larger Gauge */}
+                        <div className="col-span-2 sm:col-span-1 flex flex-col items-center">
+                          <CircularScoreGauge
+                            score={rec.overallReleaseScore}
+                            size={96}
+                            strokeWidth={8}
+                            label="Overall Release Score"
+                            color="#059669"
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="mt-6 pt-4 border-t border-border/60 flex flex-wrap items-center justify-between gap-4">
-                      <div className="flex items-center gap-2 text-xs">
-                        <span className="font-bold text-slate-700 dark:text-slate-300">Recommendation:</span>
-                        <select
-                          value={formData.recommendation || rec.recommendation}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, recommendation: e.target.value }))}
-                          className="h-8 rounded-md border border-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-3 text-xs font-bold text-emerald-800 dark:text-emerald-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
-                        >
-                          <option value="Ready for Product Launch">Ready for Product Launch</option>
-                          <option value="Requires Minor Updates">Requires Minor Updates</option>
-                          <option value="Pending Board Decision">Pending Board Decision</option>
-                          <option value="Not Recommended">Not Recommended</option>
-                        </select>
-                      </div>
+                      <div className="mt-6 pt-4 border-t border-border/60 flex flex-wrap items-center justify-between gap-4">
+                        <div className="flex items-center gap-2 text-xs">
+                          <span className="font-bold text-slate-700 dark:text-slate-300">Recommendation:</span>
+                          <select
+                            value={formData.recommendation || rec.recommendation}
+                            onChange={(e) => setFormData((prev) => ({ ...prev, recommendation: e.target.value }))}
+                            className="h-8 rounded-md border border-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-3 text-xs font-bold text-emerald-800 dark:text-emerald-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                          >
+                            <option value="Ready for Product Launch">Ready for Product Launch</option>
+                            <option value="Requires Minor Updates">Requires Minor Updates</option>
+                            <option value="Pending Board Decision">Pending Board Decision</option>
+                            <option value="Not Recommended">Not Recommended</option>
+                          </select>
+                        </div>
 
-                      <div className="text-xs text-muted-foreground">
-                        All 6 readiness & compliance streams converged. Product launch authorized.
+                        <div className="text-xs text-muted-foreground">
+                          All 6 readiness & compliance streams converged. Product launch authorized.
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                )}
 
                 {/* ------------------------------------------------------------- */}
                 {/* PANEL 9: Attachments */}
                 {/* ------------------------------------------------------------- */}
-                <Card className="border-border bg-white dark:bg-slate-900 shadow-xs">
-                  <CardHeader className="pb-3 border-b border-border/60">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
-                          9
-                        </div>
-                        <CardTitle className="text-base font-bold">Attachments</CardTitle>
-                      </div>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setShowUploadDialog(true)}
-                        className="gap-1.5 text-xs"
-                      >
-                        <Upload className="h-3.5 w-3.5 text-blue-600" />
-                        Upload Attachment
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="pt-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-                      {rec.attachments.map((att) => (
-                        <div
-                          key={att.id}
-                          className="flex items-center justify-between rounded-lg border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 p-2.5 transition-hover hover:bg-slate-100/60 dark:hover:bg-slate-800/80"
-                        >
-                          <div className="flex items-center gap-2 min-w-0 pr-2">
-                            {getFileIcon(att.type, att.name)}
-                            <div className="truncate">
-                              <p className="font-semibold text-slate-800 dark:text-slate-200 truncate" title={att.name}>
-                                {att.name}
-                              </p>
-                              <p className="text-[10px] text-muted-foreground">{att.size}</p>
-                            </div>
+                {(activeTab === "overview" || activeTab === "attachments") && (
+                  <Card className="border-border bg-white dark:bg-slate-900 shadow-xs">
+                    <CardHeader className="pb-3 border-b border-border/60">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
+                            9
                           </div>
-                          <button
-                            type="button"
-                            onClick={() => toast.success(`Downloading ${att.name}`)}
-                            className="p-1 text-slate-500 hover:text-blue-600 transition-colors shrink-0 cursor-pointer"
-                            title="Download Attachment"
-                          >
-                            <Download className="h-3.5 w-3.5" />
-                          </button>
+                          <CardTitle className="text-base font-bold">Attachments</CardTitle>
                         </div>
-                      ))}
-                    </div>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setShowUploadDialog(true)}
+                          className="gap-1.5 text-xs"
+                        >
+                          <Upload className="h-3.5 w-3.5 text-blue-600" />
+                          Upload Attachment
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                        {rec.attachments.map((att) => (
+                          <div
+                            key={att.id}
+                            className="flex items-center justify-between rounded-lg border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 p-2.5 transition-hover hover:bg-slate-100/60 dark:hover:bg-slate-800/80"
+                          >
+                            <div className="flex items-center gap-2 min-w-0 pr-2">
+                              {getFileIcon(att.type, att.name)}
+                              <div className="truncate">
+                                <p className="font-semibold text-slate-800 dark:text-slate-200 truncate" title={att.name}>
+                                  {att.name}
+                                </p>
+                                <p className="text-[10px] text-muted-foreground">{att.size}</p>
+                              </div>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => toast.success(`Downloading ${att.name}`)}
+                              className="p-1 text-slate-500 hover:text-blue-600 transition-colors shrink-0 cursor-pointer"
+                              title="Download Attachment"
+                            >
+                              <Download className="h-3.5 w-3.5" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
 
-                    <div className="mt-4 pt-3 border-t border-border/60 text-right">
-                      <button
-                        type="button"
-                        onClick={() => setShowUploadDialog(true)}
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-700 cursor-pointer"
-                      >
-                        View All Attachments (8) <ChevronRight className="h-3.5 w-3.5" />
-                      </button>
-                    </div>
-                  </CardContent>
-                </Card>
+                      <div className="mt-4 pt-3 border-t border-border/60 text-right">
+                        <button
+                          type="button"
+                          onClick={() => setShowUploadDialog(true)}
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-700 cursor-pointer"
+                        >
+                          View All Attachments (8) <ChevronRight className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
 
                 {/* ------------------------------------------------------------- */}
                 {/* PANEL 10: Review & Approval */}
                 {/* ------------------------------------------------------------- */}
-                <Card className="border-border bg-white dark:bg-slate-900 shadow-xs">
-                  <CardHeader className="pb-3 border-b border-border/60">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
-                          10
+                {(activeTab === "overview" || activeTab === "review_approval") && (
+                  <>
+                    <Card className="border-border bg-white dark:bg-slate-900 shadow-xs">
+                    <CardHeader className="pb-3 border-b border-border/60">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
+                            10
+                          </div>
+                          <CardTitle className="text-base font-bold">Review & Approval</CardTitle>
                         </div>
-                        <CardTitle className="text-base font-bold">Review & Approval</CardTitle>
+                        <Badge className="bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs font-semibold border-emerald-200">
+                          Executive Review Board
+                        </Badge>
                       </div>
-                      <Badge className="bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs font-semibold border-emerald-200">
-                        Executive Review Board
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="pt-4 space-y-6">
-                    {/* Reviewers Table */}
-                    <div className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-800">
-                      <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-100/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 font-bold border-b border-slate-200 dark:border-slate-800">
-                          <tr>
-                            <th className="p-2.5">Role</th>
-                            <th className="p-2.5">Person</th>
-                            <th className="p-2.5">Decision</th>
-                            <th className="p-2.5">Date</th>
-                            <th className="p-2.5">Comments</th>
-                            <th className="p-2.5 text-center">Status</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
-                          {rec.reviewers.map((rev) => (
-                            <tr key={rev.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
-                              <td className="p-2.5 font-semibold text-slate-800 dark:text-slate-200">{rev.role}</td>
-                              <td className="p-2.5">
-                                <div className="flex items-center gap-1.5">
-                                  {rev.avatar && (
-                                    <img src={rev.avatar} alt={rev.person} className="h-5 w-5 rounded-full object-cover" />
-                                  )}
-                                  <span className="font-medium text-slate-700 dark:text-slate-300">{rev.person}</span>
-                                </div>
-                              </td>
-                              <td className="p-2.5">
-                                {rev.decision === "Approved" ? (
-                                  <span className="inline-flex items-center rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 px-2 py-0.5 text-[10px] font-bold">
-                                    Approved
-                                  </span>
-                                ) : rev.decision === "Pending" ? (
-                                  <span className="inline-flex items-center rounded-full bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-slate-300 px-2 py-0.5 text-[10px] font-medium">
-                                    Pending
-                                  </span>
-                                ) : (
-                                  <span className="inline-flex items-center rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 px-2 py-0.5 text-[10px] font-bold">
-                                    {rev.decision}
-                                  </span>
-                                )}
-                              </td>
-                              <td className="p-2.5 text-slate-500">{rev.date}</td>
-                              <td className="p-2.5 text-slate-600 dark:text-slate-400 font-mono text-[11px]">{rev.comments}</td>
-                              <td className="p-2.5 text-center">
-                                {rev.status === "Completed" ? (
-                                  <CheckCircle2 className="h-4 w-4 text-emerald-500 inline-block" />
-                                ) : (
-                                  <Clock className="h-4 w-4 text-slate-400 inline-block" />
-                                )}
-                              </td>
+                    </CardHeader>
+                    <CardContent className="pt-4 space-y-6">
+                      {/* Reviewers Table */}
+                      <div className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-800">
+                        <table className="w-full text-left text-xs">
+                          <thead className="bg-slate-100/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 font-bold border-b border-slate-200 dark:border-slate-800">
+                            <tr>
+                              <th className="p-2.5">Role</th>
+                              <th className="p-2.5">Person</th>
+                              <th className="p-2.5">Decision</th>
+                              <th className="p-2.5">Date</th>
+                              <th className="p-2.5">Comments</th>
+                              <th className="p-2.5 text-center">Status</th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-
-                    {/* Board Decision Controls */}
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 text-xs pt-2">
-                      <div className="md:col-span-4">
-                        <label className="font-semibold text-slate-700 dark:text-slate-300 mb-1 block">
-                          Approval Decision <span className="text-red-500">*</span>
-                        </label>
-                        <select
-                          value={formData.approvalDecision || rec.approvalDecision}
-                          onChange={(e) =>
-                            setFormData((prev) => ({
-                              ...prev,
-                              approvalDecision: e.target.value as ProductReleaseApprovalDecision,
-                            }))
-                          }
-                          className="h-9 w-full rounded-md border border-input bg-background px-3 text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                        >
-                          <option value="Approved">Approved</option>
-                          <option value="Approved with Conditions">Approved with Conditions</option>
-                          <option value="Revision Required">Revision Required</option>
-                          <option value="Rejected">Rejected</option>
-                        </select>
+                          </thead>
+                          <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
+                            {rec.reviewers.map((rev) => (
+                              <tr key={rev.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
+                                <td className="p-2.5 font-semibold text-slate-800 dark:text-slate-200">{rev.role}</td>
+                                <td className="p-2.5">
+                                  <div className="flex items-center gap-1.5">
+                                    {rev.avatar && (
+                                      <img src={rev.avatar} alt={rev.person} className="h-5 w-5 rounded-full object-cover" />
+                                    )}
+                                    <span className="font-medium text-slate-700 dark:text-slate-300">{rev.person}</span>
+                                  </div>
+                                </td>
+                                <td className="p-2.5">
+                                  {rev.decision === "Approved" ? (
+                                    <span className="inline-flex items-center rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 px-2 py-0.5 text-[10px] font-bold">
+                                      Approved
+                                    </span>
+                                  ) : rev.decision === "Pending" ? (
+                                    <span className="inline-flex items-center rounded-full bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-slate-300 px-2 py-0.5 text-[10px] font-medium">
+                                      Pending
+                                    </span>
+                                  ) : (
+                                    <span className="inline-flex items-center rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 px-2 py-0.5 text-[10px] font-bold">
+                                      {rev.decision}
+                                    </span>
+                                  )}
+                                </td>
+                                <td className="p-2.5 text-slate-500">{rev.date}</td>
+                                <td className="p-2.5 text-slate-600 dark:text-slate-400 font-mono text-[11px]">{rev.comments}</td>
+                                <td className="p-2.5 text-center">
+                                  {rev.status === "Completed" ? (
+                                    <CheckCircle2 className="h-4 w-4 text-emerald-500 inline-block" />
+                                  ) : (
+                                    <Clock className="h-4 w-4 text-slate-400 inline-block" />
+                                  )}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
                       </div>
 
-                      <div className="md:col-span-5">
-                        <div className="flex justify-between items-center mb-1">
-                          <label className="font-semibold text-slate-700 dark:text-slate-300">
-                            Review Comments <span className="text-red-500">*</span>
+                      {/* Board Decision Controls */}
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 text-xs pt-2">
+                        <div className="md:col-span-4">
+                          <label className="font-semibold text-slate-700 dark:text-slate-300 mb-1 block">
+                            Approval Decision <span className="text-red-500">*</span>
                           </label>
-                          <span className="text-[10px] text-muted-foreground font-mono">
-                            {(formData.reviewComments || rec.reviewComments || "").length}/2000
-                          </span>
+                          <select
+                            value={formData.approvalDecision || rec.approvalDecision}
+                            onChange={(e) =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                approvalDecision: e.target.value as ProductReleaseApprovalDecision,
+                              }))
+                            }
+                            className="h-9 w-full rounded-md border border-input bg-background px-3 text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                          >
+                            <option value="Approved">Approved</option>
+                            <option value="Approved with Conditions">Approved with Conditions</option>
+                            <option value="Revision Required">Revision Required</option>
+                            <option value="Rejected">Rejected</option>
+                          </select>
                         </div>
-                        <Textarea
-                          rows={2}
-                          maxLength={2000}
-                          value={formData.reviewComments || rec.reviewComments}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, reviewComments: e.target.value }))}
-                          className="text-xs resize-none"
-                        />
-                      </div>
 
-                      <div className="md:col-span-3">
-                        <label className="font-semibold text-slate-700 dark:text-slate-300 mb-1 block">
-                          Approval Date <span className="text-red-500">*</span>
-                        </label>
-                        <Input
-                          type="text"
-                          value={formData.approvalDate || rec.approvalDate}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, approvalDate: e.target.value }))}
-                          className="h-9 text-xs"
-                        />
-                        <Button
-                          className="w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white text-xs h-8 font-bold"
-                          onClick={() =>
-                            reviewMutation.mutate({
-                              id: rec.id,
-                              decision: formData.approvalDecision || rec.approvalDecision,
-                              comments: formData.reviewComments || rec.reviewComments,
-                            })
-                          }
-                          disabled={reviewMutation.isPending}
-                        >
-                          Authorize Launch
-                        </Button>
+                        <div className="md:col-span-5">
+                          <div className="flex justify-between items-center mb-1">
+                            <label className="font-semibold text-slate-700 dark:text-slate-300">
+                              Review Comments <span className="text-red-500">*</span>
+                            </label>
+                            <span className="text-[10px] text-muted-foreground font-mono">
+                              {(formData.reviewComments || rec.reviewComments || "").length}/2000
+                            </span>
+                          </div>
+                          <Textarea
+                            rows={2}
+                            maxLength={2000}
+                            value={formData.reviewComments || rec.reviewComments}
+                            onChange={(e) => setFormData((prev) => ({ ...prev, reviewComments: e.target.value }))}
+                            className="text-xs resize-none"
+                          />
+                        </div>
+
+                        <div className="md:col-span-3">
+                          <label className="font-semibold text-slate-700 dark:text-slate-300 mb-1 block">
+                            Approval Date <span className="text-red-500">*</span>
+                          </label>
+                          <Input
+                            type="text"
+                            value={formData.approvalDate || rec.approvalDate}
+                            onChange={(e) => setFormData((prev) => ({ ...prev, approvalDate: e.target.value }))}
+                            className="h-9 text-xs"
+                          />
+                          <Button
+                            className="w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white text-xs h-8 font-bold"
+                            onClick={() =>
+                              reviewMutation.mutate({
+                                id: rec.id,
+                                decision: formData.approvalDecision || rec.approvalDecision,
+                                comments: formData.reviewComments || rec.reviewComments,
+                              })
+                            }
+                            disabled={reviewMutation.isPending}
+                          >
+                            Authorize Launch
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
 
                 {/* ------------------------------------------------------------- */}
                 {/* PANEL 11: System Information */}
@@ -2026,5 +2146,6 @@ function ProductReleasePage() {
         </DialogContent>
       </Dialog>
     </div>
-  );
+  </AppShell>
+);
 }

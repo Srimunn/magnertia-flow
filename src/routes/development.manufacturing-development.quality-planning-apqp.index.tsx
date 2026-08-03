@@ -1,10 +1,12 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { ApqpQualityPlanningPage } from "@/routes/development.research-innovation.quality-planning-apqp.new";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 
 export const Route = createFileRoute("/development/manufacturing-development/quality-planning-apqp/")({
-  component: () => {
-    const navigate = useNavigate();
-    useEffect(() => { navigate({ to: "/development/research-innovation/quality-planning-apqp/new" }); }, [navigate]);
-    return null;
-  },
+  component: () => (
+    <ApqpQualityPlanningPage
+      breadcrumb="Development > Manufacturing Development"
+      tabs={<ManufacturingDevelopmentTabBar />}
+    />
+  ),
 });

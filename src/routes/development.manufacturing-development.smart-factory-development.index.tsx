@@ -1,10 +1,12 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { SmartFactoryDevelopmentPage } from "@/routes/development.research-innovation.smart-factory-development.new";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 
 export const Route = createFileRoute("/development/manufacturing-development/smart-factory-development/")({
-  component: () => {
-    const navigate = useNavigate();
-    useEffect(() => { navigate({ to: "/development/research-innovation/smart-factory-development/new" }); }, [navigate]);
-    return null;
-  },
+  component: () => (
+    <SmartFactoryDevelopmentPage
+      breadcrumb="Development > Manufacturing Development"
+      tabs={<ManufacturingDevelopmentTabBar />}
+    />
+  ),
 });

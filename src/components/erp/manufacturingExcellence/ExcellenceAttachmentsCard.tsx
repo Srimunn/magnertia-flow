@@ -61,7 +61,7 @@ export const ExcellenceAttachmentsCard: React.FC<ExcellenceAttachmentsCardProps>
           <div className="flex items-center gap-2">
             <Paperclip className="h-4 w-4 text-primary" />
             <CardTitle className="text-base font-bold text-foreground">
-              9. Attachments ({record.attachments.length} files)
+              9. Attachments ({(record?.attachments || []).length} files)
             </CardTitle>
           </div>
           <Button size="sm" onClick={handleSimulatedUpload} className="gap-1.5 text-xs font-semibold">
@@ -74,7 +74,7 @@ export const ExcellenceAttachmentsCard: React.FC<ExcellenceAttachmentsCardProps>
         {/* Required Document Slots Status Bar */}
         <div className="mb-4 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
           {REQUIRED_ATTACHMENT_SLOTS.map((slot) => {
-            const uploaded = record.attachments.find((a) => a.documentType === slot);
+            const uploaded = (record?.attachments || []).find((a) => a.documentType === slot);
             return (
               <div
                 key={slot}
@@ -100,7 +100,7 @@ export const ExcellenceAttachmentsCard: React.FC<ExcellenceAttachmentsCardProps>
 
         {/* Uploaded Documents Grid */}
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
-          {record.attachments.map((att) => (
+          {(record?.attachments || []).map((att) => (
             <div
               key={att.id}
               className="flex flex-col justify-between rounded-xl border border-border bg-card p-3 shadow-2xs transition-shadow hover:shadow-xs"

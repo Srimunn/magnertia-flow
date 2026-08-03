@@ -14,6 +14,7 @@ import {
   getRecommendationSuggestion,
   formatIndianCurrency,
 } from "@/lib/lean-manufacturing/scoring";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 
 export const Route = createFileRoute("/manufacturing-development/lean-manufacturing/")({
   head: () => ({
@@ -22,7 +23,13 @@ export const Route = createFileRoute("/manufacturing-development/lean-manufactur
   component: LeanManufacturingListPage,
 });
 
-function LeanManufacturingListPage() {
+export function LeanManufacturingListPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs = <ManufacturingDevelopmentTabBar />,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
@@ -60,8 +67,9 @@ function LeanManufacturingListPage() {
   return (
     <AppShell
       title="Lean Manufacturing"
-      breadcrumb="Development → Manufacturing Development"
-      description="Continuous improvement projects, 8 Wastes identification, Process Analysis, Kaizen Action Plans, and Standard Work releases."
+      breadcrumb={breadcrumb}
+      description="Drive kaizen initiatives, value stream mapping, 5S audits, waste reduction, and continuous flow."
+      tabs={tabs}
     >
       <div className="p-6 space-y-6">
         {/* Header Strip */}

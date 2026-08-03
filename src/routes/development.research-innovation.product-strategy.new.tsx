@@ -175,7 +175,13 @@ function CircularScoreGauge({ score }: { score: number }) {
   );
 }
 
-function ProductStrategyFormPage() {
+export function ProductStrategyFormPage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -324,9 +330,10 @@ function ProductStrategyFormPage() {
 
   return (
     <AppShell
-      title="Product Strategy Form"
-      breadcrumb="Development > Product Strategy"
-      tabs={<ProductStrategyTabBar />}
+      title="Product Strategy"
+      breadcrumb={breadcrumb}
+      description="Formulate executive product strategy, market positioning, financial ROI, and strategic investment roadmap."
+      tabs={tabs}
     >
       <div className="space-y-6 pb-12">
         {/* ========================================================================= */}

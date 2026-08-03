@@ -137,7 +137,13 @@ function CircularScoreGauge({
   );
 }
 
-function ProductArchitectureFormPage() {
+export function ProductArchitectureFormPage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -254,28 +260,13 @@ function ProductArchitectureFormPage() {
   const highlights = record.keyHighlights;
 
   return (
-    <AppShell>
-      <div className="flex flex-col min-h-screen bg-slate-50/50 pb-12">
-        {/* ===========================================================================
-            1. PAGE HEADER & BREADCRUMB
-            =========================================================================== */}
-        <div className="border-b border-border bg-white px-6 py-3 shadow-2xs">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
-            <span>Development</span>
-            <ChevronRight className="h-3 w-3" />
-            <span>Research & Innovation Development</span>
-            <ChevronRight className="h-3 w-3" />
-            <span>Product Architecture</span>
-            <ChevronRight className="h-3 w-3" />
-            <span className="font-medium text-foreground">
-              Architecture Form
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">
-              <Cpu className="h-6 w-6 text-primary" />
-              Product Architecture
-            </h1>
+    <AppShell
+      title="Product Architecture"
+      breadcrumb={breadcrumb}
+      description="Architect multi-layer system boundaries, hardware interfaces, software stack, and module partitioning."
+      tabs={tabs}
+    >
+      <div className="space-y-6 pb-12">
             <div className="flex items-center gap-2">
               <ErpButton
                 variant="outline"
@@ -286,8 +277,6 @@ function ProductArchitectureFormPage() {
                 Compare Versions
               </ErpButton>
             </div>
-          </div>
-        </div>
 
         {/* ===========================================================================
             2. RECORD HEADER BAR (TWO ROWS)

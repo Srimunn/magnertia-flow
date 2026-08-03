@@ -1,10 +1,12 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { FixtureDevelopmentNewPage } from "@/routes/development.research-innovation.fixture-development.new";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 
 export const Route = createFileRoute("/development/manufacturing-development/fixture-development/")({
-  component: () => {
-    const navigate = useNavigate();
-    useEffect(() => { navigate({ to: "/development/research-innovation/fixture-development/new" }); }, [navigate]);
-    return null;
-  },
+  component: () => (
+    <FixtureDevelopmentNewPage
+      breadcrumb="Development > Manufacturing Development"
+      tabs={<ManufacturingDevelopmentTabBar />}
+    />
+  ),
 });

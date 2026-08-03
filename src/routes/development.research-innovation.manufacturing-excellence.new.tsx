@@ -8,6 +8,7 @@ import { manufacturingExcellenceService } from "@/services";
 import type { ManufacturingExcellenceRecord } from "@/services/types";
 import { AppShell } from "@/components/erp/AppShell";
 import { ResearchInnovationTabBar } from "@/components/erp/ResearchInnovationTabBar";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 import { ManufacturingExcellenceTabBar, type ExcellenceTabId } from "@/components/erp/ManufacturingExcellenceTabBar";
 import { ExcellenceHeader } from "@/components/erp/manufacturingExcellence/ExcellenceHeader";
 import { ExcellenceTopBadges } from "@/components/erp/manufacturingExcellence/ExcellenceTopBadges";
@@ -38,7 +39,120 @@ export const Route = createFileRoute(
   component: ManufacturingExcellencePage,
 });
 
-function ManufacturingExcellencePage() {
+const DEFAULT_EXCELLENCE_RECORD: ManufacturingExcellenceRecord = {
+  id: "mex-rec-2024-00045",
+  manufacturingExcellenceId: "MEX-2024-00045",
+  formCode: "MEXF-2024-25",
+  initiativeTitle: "OEE Improvement & Cost Optimization Initiative",
+  initiativeNumber: "MEX-INIT-24-001",
+  version: 1.0,
+  workflowStatus: "In Progress",
+  startDate: "05 May 2024",
+  targetCompletion: "30 Nov 2024",
+
+  manufacturingPlant: "Plant-01",
+  businessUnit: "EVSE Manufacturing",
+  processOwner: "Rahul Sharma",
+
+  initiativeCategory: "Operational Excellence",
+  businessObjective: "Improve overall equipment effectiveness, reduce production cost and enhance quality.",
+  currentPerformance: "OEE 72%, High downtime, Defects 1.8%, High energy cost.",
+  targetPerformance: "OEE 85%, Downtime < 5%, Defects < 0.5%, Cost reduction 12%.",
+  improvementStrategy: "Lean, TPM, AI analytics, predictive maintenance and automation.",
+  expectedBusinessBenefits: "Higher productivity, lower cost, better quality and sustainability.",
+  priority: "High",
+  initiativeStatus: "Implementation",
+
+  oeePercentage: 72.65,
+  productivityIndex: 78,
+  qualityPerformance: 83,
+  deliveryPerformance: 80,
+  costEfficiency: 75,
+  safetyPerformance: 90,
+  sustainabilityAssessmentScore: 82,
+  operationalExcellenceScore: 86,
+
+  leanManufacturing: true,
+  sixSigmaProject: true,
+  kaizenInitiative: true,
+  tpmProgram: true,
+  fiveSImplementation: true,
+  valueStreamMapping: true,
+  standardWork: true,
+  improvementScore: 85,
+
+  smartFactoryIntegration: true,
+  aiManufacturingAnalytics: true,
+  roboticsOptimization: true,
+  iiotConnectivity: true,
+  digitalTwin: true,
+  predictiveMaintenance: true,
+  energyOptimization: true,
+  digitalExcellenceScore: 88,
+
+  customerPpm: 120,
+  firstPassYield: 96.40,
+  processCapabilityCpk: "1.67",
+  capaStatus: "In Progress",
+  auditCompliance: 94.50,
+  regulatoryCompliance: true,
+  qualityExcellenceScore: 89,
+
+  energyConsumption: 1.24,
+  carbonEmissions: 0.68,
+  waterConsumption: 2.35,
+  wasteReduction: 18.60,
+  recyclingRate: 72.30,
+  esgCompliance: true,
+  sustainabilityScore: 91,
+
+  aiPerformanceInsights: "OEE optimization potential +12.35%",
+  productivityForecast: "Positive trend expected in Q3",
+  predictiveQuality: "First Pass Yield target 98.50% achievable",
+  costOptimizationText: "Projected annual savings: ₹ 18.75 Lakhs",
+  riskPredictionText: "Soldering temperature variance risk identified",
+  aiRecommendations: "Expand TPM autonomous maintenance to Line-02",
+  aiExcellenceScore: 93,
+
+  overallManufacturingExcellenceScore: 89,
+  recommendation: "Approve Excellence Initiative",
+
+  attachments: [],
+  manufacturingExcellenceManager: "Vikram Singh",
+  productionManager: "Rahul Sharma",
+  qualityManager: "Sneha Iyer",
+  maintenanceManager: "Amit Patel",
+  operationsManager: "Rohan Varma",
+  plantHead: "Karan Mehta",
+  coo: "Ananya Roy",
+  cto: "Devraj Nair",
+  ceo: "Siddharth Rao",
+  reviewers: [
+    { id: "rev-1", role: "Plant Head", person: "Karan Mehta", decision: "Approved", date: "10 May 2024" },
+    { id: "rev-2", role: "Quality Manager", person: "Sneha Iyer", decision: "Approved", date: "12 May 2024" },
+    { id: "rev-3", role: "Operations Manager", person: "Rohan Varma", decision: "Approved", date: "15 May 2024" },
+  ],
+  approvalDecision: "Approved",
+  reviewComments: "Approved with condition to monitor soldering variance monthly.",
+  approvalDate: "15 May 2024",
+
+  createdBy: "Rahul Sharma",
+  createdDate: "05 May 2024",
+  lastModifiedBy: "Sneha Iyer",
+  lastModifiedDate: "17 Jun 2024",
+  workflowStage: "Board Approval",
+  auditTrail: [
+    { id: "aud-1", timestamp: "05 May 2024 10:30 AM", user: "Rahul Sharma", action: "Initiative Created", details: "Initial draft created." },
+  ],
+};
+
+export function ManufacturingExcellencePage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<ExcellenceTabId>("overview");
   const [isNewDialogOpen, setIsNewDialogOpen] = useState(false);
@@ -50,6 +164,7 @@ function ManufacturingExcellencePage() {
     queryKey: ["excellenceRecord"],
     queryFn: () => manufacturingExcellenceService.fetchRecord(),
   });
+  const safeRecord = record ?? DEFAULT_EXCELLENCE_RECORD;
 
   // Save Draft Mutation
   const saveDraftMutation = useMutation({
@@ -97,19 +212,21 @@ function ManufacturingExcellencePage() {
     return (
       <AppShell
         title="Manufacturing Excellence"
-        breadcrumb="Development → Manufacturing Development → Manufacturing Excellence"
-        description="Govern continuous improvement, operational excellence, productivity, quality optimization, cost reduction, sustainability, and AI performance benchmarking."
-        tabs={<ResearchInnovationTabBar />}
+        breadcrumb={breadcrumb ?? "Development > Manufacturing Development"}
+        tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
       >
-        <div className="flex h-[70vh] w-full flex-col items-center justify-center gap-4">
-          <RefreshCw className="h-8 w-8 animate-spin text-primary" />
-          <p className="text-sm font-medium text-muted-foreground">Loading Manufacturing Excellence Module...</p>
+        <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
+          Loading Manufacturing Excellence Master Record...
         </div>
       </AppShell>
     );
   }
 
   const handleFieldChange = (field: keyof ManufacturingExcellenceRecord, value: any) => {
+    if (!record) {
+      toast.error("Cannot update field: record not loaded.");
+      return;
+    }
     queryClient.setQueryData(["excellenceRecord"], {
       ...record,
       [field]: value,
@@ -117,10 +234,18 @@ function ManufacturingExcellencePage() {
   };
 
   const handleSaveDraft = () => {
+    if (!record) {
+      toast.error("Cannot save draft: record not loaded.");
+      return;
+    }
     saveDraftMutation.mutate(record);
   };
 
   const handleSubmitForApproval = () => {
+    if (!record) {
+      toast.error("Cannot submit for approval: record not loaded.");
+      return;
+    }
     submitReviewMutation.mutate();
   };
 
@@ -129,6 +254,10 @@ function ManufacturingExcellencePage() {
   };
 
   const handleCreateNewInitiative = (newInit: any) => {
+    if (!record) {
+      toast.error("Cannot create initiative: record not loaded.");
+      return;
+    }
     const created: ManufacturingExcellenceRecord = {
       ...record,
       id: `mex-rec-${Date.now()}`,
@@ -158,6 +287,10 @@ function ManufacturingExcellencePage() {
     size: number;
     documentType: string;
   }) => {
+    if (!record) {
+      toast.error("Cannot upload attachment: record not loaded.");
+      return;
+    }
     const newAtt = await manufacturingExcellenceService.uploadAttachment(fileInfo);
     const updated = {
       ...record,
@@ -179,14 +312,14 @@ function ManufacturingExcellencePage() {
   return (
     <AppShell
       title="Manufacturing Excellence"
-      breadcrumb="Development → Manufacturing Development → Manufacturing Excellence"
+      breadcrumb={breadcrumb ?? "Development > Manufacturing Development"}
       description="Govern continuous improvement, operational excellence, productivity, quality optimization, cost reduction, sustainability, and AI performance benchmarking."
-      tabs={<ResearchInnovationTabBar />}
+      tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
     >
       <div className="flex flex-col gap-5 p-4 sm:p-6">
         {/* Header Bar */}
         <ExcellenceHeader
-          record={record}
+          record={safeRecord}
           onSaveDraft={handleSaveDraft}
           onSubmitForApproval={handleSubmitForApproval}
           onPreview={handlePreview}
@@ -195,10 +328,10 @@ function ManufacturingExcellencePage() {
         />
 
         {/* Top Score Gauge Cards */}
-        <ExcellenceTopBadges record={record} />
+        <ExcellenceTopBadges record={safeRecord} />
 
         {/* Workflow Process Stepper */}
-        <ExcellenceWorkflowStepper currentStage={record.workflowStage} />
+        <ExcellenceWorkflowStepper currentStage={safeRecord.workflowStage} />
 
         {/* Sub-Tab Bar Navigation */}
         <ManufacturingExcellenceTabBar activeTab={activeTab} onTabChange={setActiveTab} />
@@ -209,76 +342,76 @@ function ManufacturingExcellencePage() {
           <div className="flex flex-col gap-6 lg:col-span-8">
             {(activeTab === "overview" || activeTab === "summary") && (
               <ExcellenceOverviewCard
-                record={record}
+                record={safeRecord}
                 onChange={handleFieldChange}
               />
             )}
 
             {(activeTab === "assessment" || activeTab === "summary") && (
               <ExcellenceAssessmentCard
-                record={record}
+                record={safeRecord}
                 onChange={handleFieldChange}
               />
             )}
 
             {(activeTab === "programs" || activeTab === "summary") && (
               <ExcellenceProgramsCard
-                record={record}
+                record={safeRecord}
                 onChange={handleFieldChange}
               />
             )}
 
             {(activeTab === "smart" || activeTab === "summary") && (
               <ExcellenceSmartCard
-                record={record}
+                record={safeRecord}
                 onChange={handleFieldChange}
               />
             )}
 
             {(activeTab === "quality" || activeTab === "summary") && (
               <ExcellenceQualityCard
-                record={record}
+                record={safeRecord}
                 onChange={handleFieldChange}
               />
             )}
 
             {(activeTab === "sustainability" || activeTab === "summary") && (
               <ExcellenceSustainabilityCard
-                record={record}
+                record={safeRecord}
                 onChange={handleFieldChange}
               />
             )}
 
             {(activeTab === "ai" || activeTab === "summary") && (
               <ExcellenceAiCard
-                record={record}
+                record={safeRecord}
                 onChange={handleFieldChange}
               />
             )}
 
             {activeTab === "summary" && (
               <ExcellenceSummaryCard
-                record={record}
+                record={safeRecord}
                 onChange={handleFieldChange}
               />
             )}
 
             {(activeTab === "summary" || activeTab === "overview") && (
               <ExcellenceAttachmentsCard
-                record={record}
+                record={safeRecord}
                 onUploadAttachment={handleUploadAttachment}
               />
             )}
 
             {(activeTab === "review" || activeTab === "summary") && (
               <ExcellenceReviewApprovalCard
-                record={record}
+                record={safeRecord}
                 onDecisionChange={handleReviewDecision}
               />
             )}
 
             {(activeTab === "history" || activeTab === "summary") && (
-              <ExcellenceSystemInfoCard record={record} />
+              <ExcellenceSystemInfoCard record={safeRecord} />
             )}
           </div>
 
@@ -289,12 +422,12 @@ function ManufacturingExcellencePage() {
             />
 
             <ExcellenceKpiSnapshotCard
-              record={record}
+              record={safeRecord}
               onViewDashboard={() => setIsKpiModalOpen(true)}
             />
 
             <ExcellenceSummaryCard
-              record={record}
+              record={safeRecord}
               onChange={handleFieldChange}
             />
           </div>
@@ -376,19 +509,19 @@ function ManufacturingExcellencePage() {
             <div className="grid grid-cols-3 gap-3">
               <div className="rounded-lg border border-border bg-card p-3 text-center">
                 <span className="font-bold text-muted-foreground">Current OEE</span>
-                <div className="my-1 text-2xl font-black text-blue-600">{record.oeePercentage}%</div>
+                <div className="my-1 text-2xl font-black text-blue-600">{safeRecord.oeePercentage}%</div>
                 <span className="text-[10px] text-emerald-600 font-semibold">+4.2% MoM</span>
               </div>
 
               <div className="rounded-lg border border-border bg-card p-3 text-center">
                 <span className="font-bold text-muted-foreground">First Pass Yield</span>
-                <div className="my-1 text-2xl font-black text-emerald-600">{record.firstPassYield}%</div>
+                <div className="my-1 text-2xl font-black text-emerald-600">{safeRecord.firstPassYield}%</div>
                 <span className="text-[10px] text-emerald-600 font-semibold">+1.8% MoM</span>
               </div>
 
               <div className="rounded-lg border border-border bg-card p-3 text-center">
                 <span className="font-bold text-muted-foreground">Customer PPM</span>
-                <div className="my-1 text-2xl font-black text-rose-600">{record.customerPpm}</div>
+                <div className="my-1 text-2xl font-black text-rose-600">{safeRecord.customerPpm}</div>
                 <span className="text-[10px] text-emerald-600 font-semibold">-120 PPM MoM</span>
               </div>
             </div>

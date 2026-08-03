@@ -109,7 +109,13 @@ export const Route = createFileRoute(
   component: CloudPlatformDevelopmentNewPage,
 });
 
-function CloudPlatformDevelopmentNewPage() {
+export function CloudPlatformDevelopmentNewPage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -194,16 +200,9 @@ function CloudPlatformDevelopmentNewPage() {
   if (isLoading || !record) {
     return (
       <AppShell
-        tabs={
-          <InnovationAreaTabs
-            sub={
-              <CloudPlatformDevelopmentTabBar
-                activeTab={activeTab}
-                onTabChange={setActiveTab}
-              />
-            }
-          />
-        }
+        title="Cloud Platform Development"
+        breadcrumb={breadcrumb}
+        tabs={tabs}
       >
         <div className="p-8 space-y-6">
           <div className="h-12 bg-slate-200 dark:bg-slate-800 rounded-lg animate-pulse" />
@@ -219,42 +218,18 @@ function CloudPlatformDevelopmentNewPage() {
 
   return (
     <AppShell
-      tabs={
-        <InnovationAreaTabs
-          sub={
-            <CloudPlatformDevelopmentTabBar
-              activeTab={activeTab}
-              onTabChange={setActiveTab}
-            />
-          }
-        />
-      }
+      title="Cloud Platform Development"
+      breadcrumb={breadcrumb}
+      description="Architect multi-region cloud infrastructure, Kubernetes clusters, microservices, and serverless compute."
+      tabs={tabs}
     >
-      <div className="flex flex-col min-h-screen bg-slate-50/50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 pb-16">
-        {/* =========================================================================
-            1. BREADCRUMBS & TOP HEADER BAR
-            ========================================================================= */}
-        <div className="bg-white dark:bg-slate-900 border-b border-border/80 px-6 py-3.5 shadow-xs sticky top-0 z-30 transition-colors">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 max-w-7xl mx-auto">
-            {/* Breadcrumbs & Project Titles */}
-            <div className="space-y-1">
-              <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-                <span className="hover:text-foreground cursor-pointer">Development</span>
-                <ChevronRight className="h-3.5 w-3.5" />
-                <span className="hover:text-foreground cursor-pointer">Product Development</span>
-                <ChevronRight className="h-3.5 w-3.5" />
-                <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                  Cloud Platform Development
-                </span>
-                <ChevronRight className="h-3.5 w-3.5" />
-                <span className="text-foreground">Cloud Platform Development Form</span>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3">
-                <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-                  <Cloud className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                  {record.cloudProjectName}
-                </h1>
+      <div className="space-y-6 pb-16">
+        <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center gap-3">
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+              <Cloud className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+              {record.cloudProjectName}
+            </h1>
                 <Badge
                   variant="outline"
                   className="bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-mono text-xs"
@@ -381,7 +356,6 @@ function CloudPlatformDevelopmentNewPage() {
               </span>
             </div>
           </div>
-        </div>
 
         {/* =========================================================================
             2. MAIN CONTENT AREA (LAYOUT: LEFT CONTENT + RIGHT SIDEBAR)
@@ -1684,7 +1658,6 @@ function CloudPlatformDevelopmentNewPage() {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-      </div>
     </AppShell>
   );
 }

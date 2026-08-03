@@ -7,7 +7,7 @@ export const MOCK_ROBOTICS_RECORD_35: RoboticsIntegration = {
   roboticsProjectTitle: "Robotic Welding Cell Integration",
   projectNumber: "RW-INT-24-001",
   version: "1.0",
-  workflowStatus: "In Progress",
+  workflowStatus: "In Progress" as any,
 
   automationDevelopmentId: "APD-2024-00045",
 

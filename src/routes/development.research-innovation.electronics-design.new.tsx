@@ -185,7 +185,13 @@ function CircularScoreGauge({
 /* ===========================================================================
    Main Electronics Design Form Page
    =========================================================================== */
-function ElectronicsDesignFormPage() {
+export function ElectronicsDesignFormPage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<ElectronicsDesignTabId>("overview");
@@ -286,32 +292,14 @@ function ElectronicsDesignFormPage() {
   };
 
   return (
-    <AppShell>
-      <div className="min-h-screen bg-slate-50/60 pb-16">
-        {/* ===========================================================================
-            1. PAGE HEADER & BREADCRUMB
-            =========================================================================== */}
-        <div className="bg-white border-b border-border px-6 py-3 shadow-2xs">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
-                <span>Development</span>
-                <ChevronRight className="h-3 w-3 text-slate-400" />
-                <span>Product Development</span>
-                <ChevronRight className="h-3 w-3 text-slate-400" />
-                <span className="font-medium text-foreground">
-                  Electronics Design
-                </span>
-                <ChevronRight className="h-3 w-3 text-slate-400" />
-                <span className="font-semibold text-primary">
-                  Electronics Design Form
-                </span>
-              </div>
-              <h1 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2">
-                <Cpu className="h-6 w-6 text-primary" />
-                Electronics Design
-              </h1>
-            </div>
+    <AppShell
+      title="Electronics Design"
+      breadcrumb={breadcrumb}
+      description="Develop PCB circuit schematics, layout routing, signal integrity, and component BOMs."
+      tabs={tabs}
+    >
+      <div className="space-y-6 pb-16">
+        <div className="flex items-center justify-between">
 
             <div className="flex items-center gap-3">
               <ErpButton
@@ -336,7 +324,6 @@ function ElectronicsDesignFormPage() {
               </ErpButton>
             </div>
           </div>
-        </div>
 
         {/* ===========================================================================
             2. WORKFLOW STAGE STEPPER (Sequence Diagram driven 4 Stages)

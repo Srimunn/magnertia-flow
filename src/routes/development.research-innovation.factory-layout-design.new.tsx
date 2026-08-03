@@ -47,7 +47,15 @@ export const Route = createFileRoute(
   component: FactoryLayoutDesignNewPage,
 });
 
-function FactoryLayoutDesignNewPage() {
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
+
+export function FactoryLayoutDesignNewPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<FactoryLayoutTabId>("overview");
 
@@ -92,9 +100,10 @@ function FactoryLayoutDesignNewPage() {
     return (
       <AppShell
         title="Factory Layout Design"
-        breadcrumb="Development > Manufacturing Development > Factory Layout Design"
+        breadcrumb={breadcrumb}
+        tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
       >
-        <div className="p-8 text-center text-muted-foreground animate-pulse">
+        <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
           Loading Factory Layout Design module data...
         </div>
       </AppShell>
@@ -106,12 +115,11 @@ function FactoryLayoutDesignNewPage() {
   return (
     <AppShell
       title="Factory Layout Design"
-      breadcrumb="Development > Manufacturing Development > Factory Layout Design"
+      breadcrumb={breadcrumb}
       description="CAD layout blueprints, material logistics flow, utility planning, digital twin simulation & EHS compliance."
+      tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
     >
       <div className="space-y-4">
-
-        <ResearchInnovationTabBar />
 
         <FactoryLayoutHeader
           record={currentRecordData as FactoryLayoutRecord}

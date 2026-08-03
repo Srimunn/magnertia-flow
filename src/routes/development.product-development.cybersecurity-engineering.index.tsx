@@ -1,10 +1,13 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { CybersecurityEngineeringNewPage } from "@/routes/development.research-innovation.cybersecurity-engineering.new";
+import { ProductDevelopmentTabBar } from "@/components/erp/ProductDevelopmentTabBar";
 
 export const Route = createFileRoute("/development/product-development/cybersecurity-engineering/")({
-  component: () => {
-    const navigate = useNavigate();
-    useEffect(() => { navigate({ to: "/development/research-innovation/cybersecurity-engineering/new" }); }, [navigate]);
-    return null;
-  },
+  component: () => (
+    <CybersecurityEngineeringNewPage
+      breadcrumb="Development > Product Development"
+      tabs={<ProductDevelopmentTabBar />}
+    />
+  ),
 });
+

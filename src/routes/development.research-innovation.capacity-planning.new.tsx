@@ -36,7 +36,15 @@ export const Route = createFileRoute(
   component: CapacityPlanningNewPage,
 });
 
-function CapacityPlanningNewPage() {
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
+
+export function CapacityPlanningNewPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<CapacityPlanningTabId>("overview");
 
@@ -61,7 +69,7 @@ function CapacityPlanningNewPage() {
       capacityPlanningService.saveDraft(input, record?.id),
     onSuccess: (updated) => {
       queryClient.setQueryData(["capacity-planning", "current"], updated);
-      toast.success("Capacity draft saved successfully!");
+      toast.success("Draft saved successfully!");
     },
   });
 
@@ -81,10 +89,11 @@ function CapacityPlanningNewPage() {
     return (
       <AppShell
         title="Capacity Planning"
-        breadcrumb="Development > Manufacturing Development > Capacity Planning"
+        breadcrumb={breadcrumb}
+        tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
       >
-        <div className="p-8 text-center text-muted-foreground animate-pulse">
-          Loading Capacity Planning module data...
+        <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
+          Loading Capacity Planning Master Record...
         </div>
       </AppShell>
     );
@@ -95,12 +104,11 @@ function CapacityPlanningNewPage() {
   return (
     <AppShell
       title="Capacity Planning"
-      breadcrumb="Development > Manufacturing Development > Capacity Planning"
-      description="Production volume forecast, available machine/labor hours, bottleneck identification, digital twin simulation & OEE telemetry."
+      breadcrumb={breadcrumb}
+      description="Calculate machine hours, shift availability, bottleneck constraints, line balancing, and throughput analysis."
+      tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
     >
       <div className="space-y-4">
-
-        <ResearchInnovationTabBar />
 
         <CapacityPlanningHeader
           record={currentRecordData as CapacityPlanningRecord}

@@ -7,7 +7,7 @@ export const MOCK_LEAN_RECORD_123: LeanManufacturing = {
   leanProjectTitle: "Reduce Changeover Time in Assembly Line",
   leanProjectNumber: "LM-ENCL-LN02-001",
   version: "1.0",
-  workflowStatus: "In Progress",
+  workflowStatus: "In Progress" as any,
 
   // Metadata Row (no parent record chip)
   plant: "Plant-01",

@@ -12,7 +12,7 @@ export const mdWidgets: WidgetDefinition[] = [
     iconBg: "bg-blue-500/10",
     iconColor: "text-blue-500",
     options: () => ({ queryKey: ["md", "active-projects"], queryFn: async () => ({ value: 15, statusText: "+2 this quarter" }) }),
-    map: (data: any) => ({ value: String(data?.value ?? 15), delta: { value: "+2 this quarter", isPositive: true } }),
+    map: (data: any) => ({ value: String(data?.value ?? 15), delta: { label: "+2 this quarter", direction: "up", tone: "positive" } }),
   }),
   makeStatCardWidget({
     id: "kpi.md.in-pilot",
@@ -23,7 +23,7 @@ export const mdWidgets: WidgetDefinition[] = [
     iconBg: "bg-amber-500/10",
     iconColor: "text-amber-500",
     options: () => ({ queryKey: ["md", "in-pilot"], queryFn: async () => ({ value: 5, statusText: "Average yield 98.2%" }) }),
-    map: (data: any) => ({ value: String(data?.value ?? 5), delta: { value: "Average yield 98.2%", isPositive: true } }),
+    map: (data: any) => ({ value: String(data?.value ?? 5), delta: { label: "Average yield 98.2%", direction: "up", tone: "positive" } }),
   }),
   makeStatCardWidget({
     id: "kpi.md.ready-ppap",
@@ -34,7 +34,7 @@ export const mdWidgets: WidgetDefinition[] = [
     iconBg: "bg-purple-500/10",
     iconColor: "text-purple-500",
     options: () => ({ queryKey: ["md", "ready-ppap"], queryFn: async () => ({ value: 3, statusText: "Level 3 submission" }) }),
-    map: (data: any) => ({ value: String(data?.value ?? 3), delta: { value: "Level 3 submission", isPositive: true } }),
+    map: (data: any) => ({ value: String(data?.value ?? 3), delta: { label: "Level 3 submission", direction: "up", tone: "positive" } }),
   }),
   makeStatCardWidget({
     id: "kpi.md.mass-production",
@@ -45,7 +45,7 @@ export const mdWidgets: WidgetDefinition[] = [
     iconBg: "bg-emerald-500/10",
     iconColor: "text-emerald-500",
     options: () => ({ queryKey: ["md", "mass-production"], queryFn: async () => ({ value: 28, statusText: "OEE 89.4%" }) }),
-    map: (data: any) => ({ value: String(data?.value ?? 28), delta: { value: "OEE 89.4%", isPositive: true } }),
+    map: (data: any) => ({ value: String(data?.value ?? 28), delta: { label: "OEE 89.4%", direction: "up", tone: "positive" } }),
   }),
   makeStatCardWidget({
     id: "kpi.md.overall-readiness",
@@ -56,6 +56,6 @@ export const mdWidgets: WidgetDefinition[] = [
     iconBg: "bg-teal-500/10",
     iconColor: "text-teal-500",
     options: () => ({ queryKey: ["md", "overall-readiness"], queryFn: async () => ({ value: "92%", statusText: "Target MRL 8+" }) }),
-    map: (data: any) => ({ value: String(data?.value ?? "92%"), delta: { value: "Target MRL 8+", isPositive: true } }),
+    map: (data: any) => ({ value: String(data?.value ?? "92%"), delta: { label: "Target MRL 8+", direction: "up", tone: "positive" } }),
   }),
 ];

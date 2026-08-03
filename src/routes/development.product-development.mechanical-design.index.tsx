@@ -1,10 +1,13 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { MechanicalDesignFormPage } from "@/routes/development.research-innovation.mechanical-design.new";
+import { ProductDevelopmentTabBar } from "@/components/erp/ProductDevelopmentTabBar";
 
 export const Route = createFileRoute("/development/product-development/mechanical-design/")({
-  component: () => {
-    const navigate = useNavigate();
-    useEffect(() => { navigate({ to: "/development/research-innovation/mechanical-design/new" }); }, [navigate]);
-    return null;
-  },
+  component: () => (
+    <MechanicalDesignFormPage
+      breadcrumb="Development > Product Development"
+      tabs={<ProductDevelopmentTabBar />}
+    />
+  ),
 });
+

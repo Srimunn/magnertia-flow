@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 import {
   Save,
   Send,
@@ -70,7 +71,13 @@ export const Route = createFileRoute(
   component: ToolingDevelopmentNewPage,
 });
 
-function ToolingDevelopmentNewPage() {
+export function ToolingDevelopmentNewPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
 
   // Tab State & Settings
@@ -122,7 +129,7 @@ function ToolingDevelopmentNewPage() {
       toolingDevelopmentService.reviewDecision(args),
     onSuccess: (updated) => {
       queryClient.setQueryData(["toolingRecord"], updated);
-      toast.success(`Decision recorded: ${reviewDecision}`, { description: "Tooling workflow stage updated." });
+      toast.success(`Decision submitted: ${reviewDecision}`, { description: "Tooling workflow status updated." });
     },
   });
 
@@ -130,13 +137,11 @@ function ToolingDevelopmentNewPage() {
     return (
       <AppShell
         title="Tooling Development"
-        breadcrumb="Development"
-        description="Govern tooling design drawings, bill of materials, process engineering, validation runs, calibration schedules, and wear predictions."
-        tabs={<ResearchInnovationTabBar />}
+        breadcrumb={breadcrumb}
+        tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
       >
-        <div className="flex h-[70vh] w-full flex-col items-center justify-center gap-4">
-          <RefreshCw className="h-8 w-8 animate-spin text-primary" />
-          <p className="text-sm font-medium text-muted-foreground">Loading Tooling Development Module...</p>
+        <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
+          Loading Tooling Development Master Record...
         </div>
       </AppShell>
     );
@@ -250,9 +255,9 @@ function ToolingDevelopmentNewPage() {
   return (
     <AppShell
       title="Tooling Development"
-      breadcrumb="Development"
-      description="Govern tooling design drawings, bill of materials, process engineering, validation runs, calibration schedules, and wear predictions."
-      tabs={<ResearchInnovationTabBar />}
+      breadcrumb={breadcrumb}
+      description="Design molds, dies, cutting tools, stamping tooling, and tool maintenance schedules."
+      tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
     >
       <div className="min-h-screen bg-slate-50/60 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 antialiased pb-16">
         

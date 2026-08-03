@@ -31,7 +31,13 @@ export const Route = createFileRoute(
   component: ApqpQualityPlanningPage,
 });
 
-function ApqpQualityPlanningPage() {
+export function ApqpQualityPlanningPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<ApqpTabType>("overview");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -63,7 +69,8 @@ function ApqpQualityPlanningPage() {
     return (
       <AppShell
         title="Quality Planning (APQP)"
-        breadcrumb="Development > Manufacturing Development > Quality Planning (APQP)"
+        breadcrumb={breadcrumb}
+        tabs={tabs}
       >
         <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
           Loading Quality Planning (APQP) Master Record...
@@ -75,7 +82,9 @@ function ApqpQualityPlanningPage() {
   return (
     <AppShell
       title="Quality Planning (APQP)"
-      breadcrumb="Development > Manufacturing Development > Quality Planning (APQP)"
+      breadcrumb={breadcrumb}
+      description="Advanced Product Quality Planning gates, feasibility commits, and product quality timing plans."
+      tabs={tabs}
     >
       <div className="space-y-0 min-h-screen bg-background text-foreground">
         {/* Top Header Bar */}

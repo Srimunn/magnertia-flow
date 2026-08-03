@@ -1,10 +1,12 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { MassProductionReadinessListPage } from "@/routes/manufacturing-development.mass-production-readiness.index";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 
 export const Route = createFileRoute("/development/manufacturing-development/mass-production-readiness/")({
-  component: () => {
-    const navigate = useNavigate();
-    useEffect(() => { navigate({ to: "/manufacturing-development/mass-production-readiness" }); }, [navigate]);
-    return null;
-  },
+  component: () => (
+    <MassProductionReadinessListPage
+      breadcrumb="Development > Manufacturing Development"
+      tabs={<ManufacturingDevelopmentTabBar />}
+    />
+  ),
 });

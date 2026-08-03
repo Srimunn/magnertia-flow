@@ -32,7 +32,13 @@ export const Route = createFileRoute(
   component: ProcessValidationPage,
 });
 
-function ProcessValidationPage() {
+export function ProcessValidationPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<ProcessValidationTabType>("overview");
   const [isLogTrialModalOpen, setIsLogTrialModalOpen] = useState(false);
@@ -72,8 +78,9 @@ function ProcessValidationPage() {
   if (isLoading || !record) {
     return (
       <AppShell
-        title="Process Validation"
-        breadcrumb="Development > Manufacturing Development > Process Validation"
+        title="Process Validation & PPAP"
+        breadcrumb={breadcrumb}
+        tabs={tabs}
       >
         <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
           Loading Manufacturing Process Validation Record...
@@ -84,8 +91,10 @@ function ProcessValidationPage() {
 
   return (
     <AppShell
-      title="Process Validation"
-      breadcrumb="Development > Manufacturing Development > Process Validation"
+      title="Process Validation & PPAP"
+      breadcrumb={breadcrumb}
+      description="Execute Production Part Approval Process (PPAP) submissions, dimensional reports, and customer approvals."
+      tabs={tabs}
     >
       <div className="space-y-0 min-h-screen bg-background text-foreground">
         {/* Top Header Bar */}

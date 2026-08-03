@@ -206,7 +206,13 @@ function CircularScoreGauge({
 /* ===========================================================================
    Main Mobile App Development Form Page
    =========================================================================== */
-function MobileDevelopmentFormPage() {
+export function MobileDevelopmentFormPage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<MobileDevelopmentTabId>("overview");
@@ -289,7 +295,11 @@ function MobileDevelopmentFormPage() {
 
   if (isLoading || !record || !formInput) {
     return (
-      <AppShell>
+      <AppShell
+        title="Mobile App Development"
+        breadcrumb={breadcrumb}
+        tabs={tabs}
+      >
         <div className="flex h-[80vh] items-center justify-center">
           <div className="flex flex-col items-center gap-3">
             <div className="h-9 w-9 animate-spin rounded-full border-4 border-primary border-t-transparent" />
@@ -307,55 +317,35 @@ function MobileDevelopmentFormPage() {
   };
 
   return (
-    <AppShell>
-      <div className="min-h-screen bg-slate-50/60 pb-16">
-        {/* ===========================================================================
-            1. PAGE HEADER & BREADCRUMB
-            =========================================================================== */}
-        <div className="bg-white border-b border-border px-6 py-3 shadow-2xs">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
-                <span>Development</span>
-                <ChevronRight className="h-3 w-3 text-slate-400" />
-                <span>Product Development</span>
-                <ChevronRight className="h-3 w-3 text-slate-400" />
-                <span className="font-medium text-foreground">
-                  Mobile App Development
-                </span>
-                <ChevronRight className="h-3 w-3 text-slate-400" />
-                <span className="font-semibold text-primary">
-                  Mobile App Development Form
-                </span>
-              </div>
-              <h1 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2">
-                <Smartphone className="h-6 w-6 text-primary" />
-                Mobile App Development
-              </h1>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <ErpButton
-                variant="outline"
-                size="sm"
-                onClick={() =>
-                  toast.info("Navigating to Mobile App Repository...")
-                }
-              >
-                <Database className="h-3.5 w-3.5 mr-1.5" />
-                Browse Records
-              </ErpButton>
-              <ErpButton
-                variant="primary"
-                size="sm"
-                onClick={() => {
-                  toast.success("Created new Mobile App Development Draft MAF-2024-26");
-                }}
-              >
-                <Plus className="h-3.5 w-3.5 mr-1.5" />
-                New Mobile Project
-              </ErpButton>
-            </div>
+    <AppShell
+      title="Mobile App Development"
+      breadcrumb={breadcrumb}
+      description="Engineer native and cross-platform mobile applications, Bluetooth LE sync, and offline storage."
+      tabs={tabs}
+    >
+      <div className="space-y-6 pb-16">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <ErpButton
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                toast.info("Navigating to Mobile App Repository...")
+              }
+            >
+              <Database className="h-3.5 w-3.5 mr-1.5" />
+              Browse Records
+            </ErpButton>
+            <ErpButton
+              variant="primary"
+              size="sm"
+              onClick={() => {
+                toast.success("Created new Mobile App Development Draft MAF-2024-26");
+              }}
+            >
+              <Plus className="h-3.5 w-3.5 mr-1.5" />
+              New Mobile Project
+            </ErpButton>
           </div>
         </div>
 

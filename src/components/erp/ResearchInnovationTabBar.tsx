@@ -2,22 +2,20 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { RESEARCH_INNOVATION_NAV_ORDER } from "./navConfig";
 
 /* ===========================================================================
-   Research & Innovation — area-level tab bar (Finance-style).
-   One tab per module, short label + full-name tooltip/aria-label. Mirrors
-   FinanceTabBar exactly (scroll + chevron overflow + wheel-to-scroll). The
-   whole innovation area is a single tabbed screen, like Management > Finance.
+   Research & Innovation — area-level tab bar.
+   One tab per module, short label + full-name tooltip/aria-label.
+   Mirrors ManufacturingDevelopmentTabBar (auto scroll + chevrons + theme support).
    =========================================================================== */
 
 const TAB_BASE =
   "shrink-0 whitespace-nowrap border-b-2 border-transparent bg-transparent px-3 pb-3 pt-1 text-[13px] font-semibold text-muted-foreground shadow-none transition-all hover:text-foreground focus-visible:outline-none";
 const TAB_ACTIVE = "border-primary text-primary hover:text-primary font-bold";
 
-/** Module registry — short label (visible) + full name (tooltip / a11y). Patent
- *  keeps its existing /ip-development URL; everything else is under
- *  /development/research-innovation. Shared so the sidebar + Overview stay in
- *  sync with this one source of truth. */
+/** Module registry — short label (visible) + full name (tooltip / a11y). Shared
+ *  so the sidebar + Overview stay in sync with this one source of truth. */
 export const RESEARCH_INNOVATION_TABS: { to: string; label: string; full: string }[] = [
   { to: "/development/research-innovation/overview", label: "Overview", full: "Research & Innovation Overview" },
   { to: "/development/research-innovation/certification-readiness/new", label: "Certification", full: "Certification Readiness" },
@@ -66,17 +64,10 @@ export const RESEARCH_INNOVATION_TABS: { to: string; label: string; full: string
   { to: "/development/research-innovation/smart-factory-development/new", label: "Smart Factory", full: "Smart Factory Development" },
   { to: "/development/research-innovation/manufacturing-excellence/new", label: "Excellence", full: "Manufacturing Excellence" },
   { to: "/development/research-innovation/api-development/new", label: "API", full: "API Development" },
-
-
-
-
-
-  { to: "/development/research-innovation/reports", label: "Reports", full: "Research & Innovation Reports" }
+  { to: "/development/research-innovation/reports", label: "Reports", full: "Research & Innovation Reports" },
 ];
 
-/** Per-module metadata — the single source of truth for the header subtitle
- *  description and the record-type badge word. Keyed by route slug. New modules
- *  fall back to DEFAULT_MODULE_META if an entry is missing. */
+/** Per-module metadata — single source of truth for header descriptions. */
 export const MODULE_META: Record<string, { description: string; recordLabel: string }> = {
   "certification-readiness": { description: "Evaluate product certification readiness, standards compliance, gap analysis, and regulatory approvals.", recordLabel: "CERTIFICATION READINESS" },
   "product-documentation": { description: "Collect, version, review, and release multi-stream product documentation packages for release readiness.", recordLabel: "PRODUCT DOCUMENTATION" },
@@ -134,7 +125,7 @@ export function ResearchInnovationTabBar() {
     const container = scrollContainerRef.current;
     if (container) {
       checkScroll();
-      container.addEventListener("scroll", checkScroll);
+      container.addEventListener("scroll", checkScroll, { passive: true });
       const observer = new ResizeObserver(() => checkScroll());
       observer.observe(container);
       return () => {
@@ -144,47 +135,67 @@ export function ResearchInnovationTabBar() {
     }
   }, []);
 
+  // Smoothly scroll active tab to center whenever route/pathname changes
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      const activeEl = container.querySelector('[data-active="true"]');
+      if (activeEl) {
+        activeEl.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+      setTimeout(checkScroll, 350);
+    }
+  }, [pathname]);
+
   const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     const container = scrollContainerRef.current;
     if (container) {
       const { scrollWidth, clientWidth } = container;
       if (scrollWidth > clientWidth) {
-        e.preventDefault();
         container.scrollLeft += e.deltaY;
       }
     }
   };
 
-  const scrollBy = (amount: number) => {
-    scrollContainerRef.current?.scrollBy({ left: amount, behavior: "smooth" });
+  const scrollLeft = () => {
+    scrollContainerRef.current?.scrollBy({ left: -200, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollContainerRef.current?.scrollBy({ left: 200, behavior: "smooth" });
   };
 
   return (
-    <div className="relative flex items-center border-b border-border bg-white px-2 shadow-sm">
+    <div className="sticky-tab-bar relative border-b border-border/80 bg-background/95 backdrop-blur">
       {showLeftBtn && (
         <button
-          onClick={() => scrollBy(-200)}
-          className="absolute left-0 z-10 flex h-full w-8 items-center justify-center bg-gradient-to-r from-white via-white to-transparent text-muted-foreground hover:text-foreground"
-          aria-label="Scroll left"
+          type="button"
+          onClick={scrollLeft}
+          className="absolute left-0 top-0 z-10 flex h-full w-8 items-center justify-center bg-gradient-to-r from-background via-background/90 to-transparent text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
+          aria-label="Scroll tabs left"
         >
-          <ChevronLeft className="h-5 w-5 bg-white rounded-full border border-border shadow-md" />
+          <ChevronLeft className="h-4 w-4" />
         </button>
       )}
 
       <div
         ref={scrollContainerRef}
         onWheel={handleWheel}
-        className="flex w-full gap-4 overflow-x-auto scroll-smooth py-2 px-1 [&::-webkit-scrollbar]:hidden"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        className="no-scrollbar flex items-center gap-1 overflow-x-auto px-2 pt-2 scroll-smooth"
       >
         {RESEARCH_INNOVATION_TABS.map((tab) => {
-          const active = pathname.startsWith(tab.to);
+          const active = pathname === tab.to || (tab.to !== "/development/research-innovation/overview" && pathname.startsWith(tab.to));
           return (
             <Link
               key={tab.to}
               to={tab.to}
               title={tab.full}
               aria-label={tab.full}
+              data-active={active ? "true" : "false"}
               className={cn(TAB_BASE, active && TAB_ACTIVE)}
             >
               {tab.label}
@@ -195,25 +206,18 @@ export function ResearchInnovationTabBar() {
 
       {showRightBtn && (
         <button
-          onClick={() => scrollBy(200)}
-          className="absolute right-0 z-10 flex h-full w-8 items-center justify-end bg-gradient-to-l from-white via-white to-transparent text-muted-foreground hover:text-foreground"
-          aria-label="Scroll right"
+          type="button"
+          onClick={scrollRight}
+          className="absolute right-0 top-0 z-10 flex h-full w-8 items-center justify-center bg-gradient-to-l from-background via-background/90 to-transparent text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
+          aria-label="Scroll tabs right"
         >
-          <ChevronRight className="h-5 w-5 bg-white rounded-full border border-border shadow-md" />
+          <ChevronRight className="h-4 w-4" />
         </button>
       )}
     </div>
   );
 }
 
-/** Two-level tab region: the area-level module bar on top, the module's own
- *  Register/Form sub-bar beneath it. Passed into AppShell's `tabs` slot so the
- *  pattern is defined once and inherited by every module page. */
 export function InnovationAreaTabs({ sub }: { sub?: ReactNode }) {
-  return (
-    <div>
-      <ResearchInnovationTabBar />
-      {sub}
-    </div>
-  );
+  return <ResearchInnovationTabBar />;
 }

@@ -38,7 +38,7 @@ export const ExcellenceSystemInfoCard: React.FC<ExcellenceSystemInfoCardProps> =
             </CardTitle>
           </div>
           <Badge variant="outline" className="text-xs font-bold">
-            v{record.version.toFixed(1)}
+            v{(record?.version ?? 1).toFixed(1)}
           </Badge>
         </div>
       </CardHeader>
@@ -50,7 +50,7 @@ export const ExcellenceSystemInfoCard: React.FC<ExcellenceSystemInfoCardProps> =
               Created By
               <MaicwBadge type="I" tooltip="Information Lookup" />
             </span>
-            <span className="font-bold text-foreground">{record.createdBy}</span>
+            <span className="font-bold text-foreground">{record?.createdBy}</span>
           </div>
 
           <div className="flex flex-col gap-1 rounded-lg border border-border/60 bg-muted/20 p-2.5">
@@ -58,7 +58,7 @@ export const ExcellenceSystemInfoCard: React.FC<ExcellenceSystemInfoCardProps> =
               Created Date
               <MaicwBadge type="A" tooltip="Auto-generated Timestamp" />
             </span>
-            <span className="font-bold text-foreground">{record.createdDate}</span>
+            <span className="font-bold text-foreground">{record?.createdDate}</span>
           </div>
 
           <div className="flex flex-col gap-1 rounded-lg border border-border/60 bg-muted/20 p-2.5">
@@ -66,7 +66,7 @@ export const ExcellenceSystemInfoCard: React.FC<ExcellenceSystemInfoCardProps> =
               Last Modified By
               <MaicwBadge type="I" tooltip="Information Lookup" />
             </span>
-            <span className="font-bold text-foreground">{record.lastModifiedBy}</span>
+            <span className="font-bold text-foreground">{record?.lastModifiedBy}</span>
           </div>
 
           <div className="flex flex-col gap-1 rounded-lg border border-border/60 bg-muted/20 p-2.5">
@@ -74,7 +74,7 @@ export const ExcellenceSystemInfoCard: React.FC<ExcellenceSystemInfoCardProps> =
               Last Modified Date
               <MaicwBadge type="A" tooltip="Auto-generated Timestamp" />
             </span>
-            <span className="font-bold text-foreground">{record.lastModifiedDate}</span>
+            <span className="font-bold text-foreground">{record?.lastModifiedDate}</span>
           </div>
 
           <div className="flex flex-col gap-1 rounded-lg border border-border/60 bg-muted/20 p-2.5">
@@ -82,7 +82,7 @@ export const ExcellenceSystemInfoCard: React.FC<ExcellenceSystemInfoCardProps> =
               Workflow Stage
               <MaicwBadge type="W" tooltip="Workflow Dropdown" />
             </span>
-            <span className="font-bold text-primary">{record.workflowStage}</span>
+            <span className="font-bold text-primary">{record?.workflowStage}</span>
           </div>
 
           <div className="flex flex-col gap-1 rounded-lg border border-border/60 bg-muted/20 p-2.5">
@@ -90,7 +90,7 @@ export const ExcellenceSystemInfoCard: React.FC<ExcellenceSystemInfoCardProps> =
               Version
               <MaicwBadge type="A" tooltip="Auto-incremented" />
             </span>
-            <span className="font-bold text-foreground">v{record.version.toFixed(1)}</span>
+            <span className="font-bold text-foreground">v{(record?.version ?? 1).toFixed(1)}</span>
           </div>
         </div>
 
@@ -100,7 +100,7 @@ export const ExcellenceSystemInfoCard: React.FC<ExcellenceSystemInfoCardProps> =
             Audit Trail & Activity Log
           </h4>
           <div className="divide-y divide-border/60 rounded-lg border border-border">
-            {record.auditTrail.map((log) => (
+            {(record?.auditTrail || []).map((log) => (
               <div key={log.id} className="flex items-start justify-between gap-4 p-3 text-xs">
                 <div className="flex items-start gap-2.5">
                   <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">

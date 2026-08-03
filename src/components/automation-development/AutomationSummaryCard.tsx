@@ -108,7 +108,7 @@ export const AutomationSummaryCard: React.FC<AutomationSummaryCardProps> = ({
             <option value="Reject Project">Reject Project</option>
           </select>
           <span className="text-[10px] text-muted-foreground italic block">
-            AI Suggestion: <line-through className="line-through">{computedSuggestion}</line-through> (Executive Guidance Only)
+            AI Suggestion: <span className="line-through">{computedSuggestion}</span> (Executive Guidance Only)
           </span>
         </div>
       </div>

@@ -47,7 +47,7 @@ export const BomEngineeringTabBar: React.FC<BomEngineeringTabBarProps> = ({
   ];
 
   return (
-    <div className="bg-card border-b border-border px-4 overflow-x-auto scrollbar-none">
+    <div className="sticky top-[56px] z-20 bg-background/95 backdrop-blur-md border-b border-border/80 px-4 overflow-x-auto scrollbar-none shadow-xs transition-colors">
       <div className="flex items-center gap-1 min-w-max">
         {tabs.map((t) => {
           const Icon = t.icon;

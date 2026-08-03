@@ -112,7 +112,13 @@ export const Route = createFileRoute(
   component: AiModelDevelopmentNewPage,
 });
 
-function AiModelDevelopmentNewPage() {
+export function AiModelDevelopmentNewPage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -273,16 +279,9 @@ function AiModelDevelopmentNewPage() {
   if (isLoading || !record) {
     return (
       <AppShell
-        tabs={
-          <InnovationAreaTabs
-            sub={
-              <AiModelDevelopmentTabBar
-                activeTab={activeTab}
-                onTabChange={setActiveTab}
-              />
-            }
-          />
-        }
+        title="AI Model Development"
+        breadcrumb={breadcrumb}
+        tabs={tabs}
       >
         <div className="p-8 space-y-6">
           <div className="h-12 bg-slate-200 dark:bg-slate-800 rounded-lg animate-pulse" />
@@ -298,61 +297,37 @@ function AiModelDevelopmentNewPage() {
 
   return (
     <AppShell
-      tabs={
-        <InnovationAreaTabs
-          sub={
-            <AiModelDevelopmentTabBar
-              activeTab={activeTab}
-              onTabChange={setActiveTab}
-            />
-          }
-        />
-      }
+      title="AI Model Development"
+      breadcrumb={breadcrumb}
+      description="Train neural network architectures, LLM fine-tuning, MLflow model registries, and ONNX deployment."
+      tabs={tabs}
     >
-      <div className="flex flex-col min-h-screen bg-slate-50/50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 pb-16">
-        {/* =========================================================================
-            1. BREADCRUMBS & TOP HEADER BAR
-            ========================================================================= */}
-        <div className="bg-white dark:bg-slate-900 border-b border-border/80 px-6 py-3.5 shadow-xs sticky top-0 z-30 transition-colors">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 max-w-7xl mx-auto">
-            {/* Breadcrumb & Project Metadata */}
-            <div className="space-y-1">
-              <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-                <span className="hover:text-foreground cursor-pointer">Development</span>
-                <ChevronRight className="h-3.5 w-3.5" />
-                <span className="hover:text-foreground cursor-pointer">Product Development</span>
-                <ChevronRight className="h-3.5 w-3.5" />
-                <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                  AI Model Development
-                </span>
-                <ChevronRight className="h-3.5 w-3.5" />
-                <span className="text-foreground">AI Model Development Form</span>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3">
-                <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-                  <Brain className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                  {record.aiProjectName}
-                </h1>
-                <Badge
-                  variant="outline"
-                  className="bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-mono text-xs"
-                >
-                  {record.modelVersion}
-                </Badge>
-                <Badge
-                  className={
-                    record.workflowStatus === "Approved"
-                      ? "bg-emerald-600 text-white"
-                      : record.workflowStatus === "In Review"
-                      ? "bg-amber-500 text-white"
-                      : "bg-blue-600 text-white"
-                  }
-                >
-                  {record.workflowStatus}
-                </Badge>
-              </div>
-            </div>
+      <div className="space-y-6 pb-16">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-3">
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+              <Brain className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+              {record.aiProjectName}
+            </h1>
+            <Badge
+              variant="outline"
+              className="bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-mono text-xs"
+            >
+              {record.modelVersion}
+            </Badge>
+            <Badge
+              className={
+                record.workflowStatus === "Approved"
+                  ? "bg-emerald-600 text-white"
+                  : record.workflowStatus === "In Review"
+                  ? "bg-amber-500 text-white"
+                  : "bg-blue-600 text-white"
+              }
+            >
+              {record.workflowStatus}
+            </Badge>
+          </div>
+        </div>
 
             {/* Header Actions */}
             <div className="flex items-center gap-2.5 shrink-0">
@@ -455,12 +430,9 @@ function AiModelDevelopmentNewPage() {
             </div>
             <div className="flex flex-col">
               <span className="text-muted-foreground">Created / Updated</span>
-              <span className="font-medium text-foreground">
-                {record.createdOn}
-              </span>
+              <span className="font-medium text-foreground">{record.createdOn}</span>
             </div>
           </div>
-        </div>
 
         {/* =========================================================================
             2. MAIN CONTENT AREA (LAYOUT: LEFT CONTENT + RIGHT SIDEBAR)
@@ -2123,7 +2095,6 @@ function AiModelDevelopmentNewPage() {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-      </div>
     </AppShell>
   );
 }

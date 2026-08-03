@@ -7,7 +7,7 @@ export const MOCK_AUTOMATION_RECORD_45: AutomationDevelopment = {
   automationProjectTitle: "Automated Battery Assembly & Testing Cell",
   projectNumber: "AP-BA-24-001",
   version: "1.0",
-  workflowStatus: "In Progress",
+  workflowStatus: "In Progress" as any,
 
   // Metadata Row
   productProcess: "Battery Assembly",

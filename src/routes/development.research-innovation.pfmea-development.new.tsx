@@ -31,7 +31,13 @@ export const Route = createFileRoute(
   component: PfmeaDevelopmentPage,
 });
 
-function PfmeaDevelopmentPage() {
+export function PfmeaDevelopmentPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<PfmeaTabType>("overview");
   const [isAddFmModalOpen, setIsAddFmModalOpen] = useState(false);
@@ -63,7 +69,7 @@ function PfmeaDevelopmentPage() {
     mutationFn: addFailureMode,
     onSuccess: (updated) => {
       queryClient.setQueryData(["pfmea-development-record"], updated);
-      toast.success("New process failure mode added with auto RPN calculation!");
+      toast.success("New failure mode added successfully!");
     },
     onError: (err: any) => toast.error(`Failed to add failure mode: ${err.message}`),
   });
@@ -72,10 +78,11 @@ function PfmeaDevelopmentPage() {
     return (
       <AppShell
         title="PFMEA Development"
-        breadcrumb="Development > Manufacturing Development > PFMEA Development"
+        breadcrumb={breadcrumb}
+        tabs={tabs}
       >
         <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
-          Loading Process Failure Mode & Effects Analysis (PFMEA) Record...
+          Loading Process Failure Mode and Effects Analysis Record...
         </div>
       </AppShell>
     );
@@ -84,7 +91,9 @@ function PfmeaDevelopmentPage() {
   return (
     <AppShell
       title="PFMEA Development"
-      breadcrumb="Development > Manufacturing Development > PFMEA Development"
+      breadcrumb={breadcrumb}
+      description="Identify process failure modes, severity/occurrence/detection scoring, and risk mitigation actions."
+      tabs={tabs}
     >
       <div className="space-y-0 min-h-screen bg-background text-foreground">
         {/* Top Header Bar */}

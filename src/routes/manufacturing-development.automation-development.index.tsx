@@ -14,6 +14,8 @@ import {
   formatINR,
 } from "@/lib/automation-development/scoring";
 
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
+
 export const Route = createFileRoute("/manufacturing-development/automation-development/")({
   head: () => ({
     meta: [{ title: "Automation Development · Magnertia ERP" }],
@@ -21,7 +23,13 @@ export const Route = createFileRoute("/manufacturing-development/automation-deve
   component: AutomationDevelopmentListPage,
 });
 
-function AutomationDevelopmentListPage() {
+export function AutomationDevelopmentListPage({
+  breadcrumb = "Development → Manufacturing Development",
+  tabs = <ManufacturingDevelopmentTabBar />,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
@@ -59,8 +67,9 @@ function AutomationDevelopmentListPage() {
   return (
     <AppShell
       title="Automation Development"
-      breadcrumb="Development → Manufacturing Development"
+      breadcrumb={breadcrumb}
       description="Engineering, integration, and validation of automated production cells (PLC + HMI + SCADA + Robot + Machine Vision + IIoT)."
+      tabs={tabs}
     >
       <div className="p-6 space-y-6">
         {/* Header Strip */}

@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState, useMemo } from "react";
 import { toast } from "sonner";
+import { AppShell } from "@/components/erp/AppShell";
 import {
   Repeat,
   Download,
@@ -69,7 +70,7 @@ import type {
   PlmChecklistItem,
   PlmAttachment,
 } from "@/services/types";
-import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
+import { ResearchInnovationTabBar } from "@/components/erp/ResearchInnovationTabBar";
 import { PlmTabBar, type PlmTabId } from "@/components/erp/PlmTabBar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -172,7 +173,13 @@ function getFileIcon(type?: string, name?: string) {
   return <FileText className="h-4 w-4 text-blue-500 shrink-0" />;
 }
 
-function PlmPage() {
+export function PlmPage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -292,12 +299,18 @@ function PlmPage() {
 
   if (isLoading || !rec) {
     return (
-      <div className="flex h-96 w-full items-center justify-center p-8">
-        <div className="flex flex-col items-center gap-3">
-          <RefreshCw className="h-8 w-8 animate-spin text-blue-600" />
-          <p className="text-sm font-medium text-muted-foreground">Loading Product Lifecycle Management record...</p>
+      <AppShell
+        title="Product Lifecycle Management (PLM)"
+        breadcrumb={breadcrumb}
+        tabs={tabs ?? <ResearchInnovationTabBar />}
+      >
+        <div className="flex h-96 w-full items-center justify-center p-8">
+          <div className="flex flex-col items-center gap-3">
+            <RefreshCw className="h-8 w-8 animate-spin text-blue-600" />
+            <p className="text-sm font-medium text-muted-foreground">Loading Product Lifecycle Management record...</p>
+          </div>
         </div>
-      </div>
+      </AppShell>
     );
   }
 
@@ -326,32 +339,23 @@ function PlmPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 pb-16">
-      {/* 1. Global Innovation Tab Bar */}
-      <InnovationAreaTabs />
-
-      {/* 2. Page Header & Breadcrumbs */}
-      <div className="border-b border-border bg-white dark:bg-slate-900 px-6 py-3 shadow-xs">
-        <div className="flex flex-col gap-1">
-          <nav className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <span>Development</span>
-            <ChevronRight className="h-3 w-3" />
-            <span>Product Development</span>
-            <ChevronRight className="h-3 w-3" />
-            <span>Product Lifecycle Management</span>
-            <ChevronRight className="h-3 w-3" />
-            <span className="font-medium text-foreground">PLM Form</span>
-          </nav>
-          <div className="flex items-center justify-between mt-1">
-            <div className="flex items-center gap-3">
-              <h1 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2">
-                Product Lifecycle Management (PLM)
-                <Repeat className="h-5 w-5 text-blue-600" />
-              </h1>
-              <Badge variant="outline" className="bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300 border-blue-200 font-semibold">
-                Product Digital Thread
-              </Badge>
-            </div>
+    <AppShell
+      title="Product Lifecycle Management (PLM)"
+      breadcrumb={breadcrumb}
+      description="Manage digital thread traceability, ECO/ECN change control, BOM revisions, and End-of-Life sunsetting."
+      tabs={tabs ?? <ResearchInnovationTabBar />}
+    >
+      <div className="space-y-6 pb-16">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2">
+              Product Lifecycle Management (PLM)
+              <Repeat className="h-5 w-5 text-blue-600" />
+            </h1>
+            <Badge variant="outline" className="bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300 border-blue-200 font-semibold">
+              Digital Thread Control
+            </Badge>
+          </div>
             <div className="flex items-center gap-2">
               <Button
                 variant="outline"
@@ -364,8 +368,6 @@ function PlmPage() {
               </Button>
             </div>
           </div>
-        </div>
-      </div>
 
       {/* 3. Record Header Bar (2 Rows matching screenshot 2_24.png) */}
       <div className="mx-auto max-w-[1600px] px-4 pt-4">
@@ -2025,5 +2027,6 @@ function PlmPage() {
         </DialogContent>
       </Dialog>
     </div>
-  );
+  </AppShell>
+);
 }

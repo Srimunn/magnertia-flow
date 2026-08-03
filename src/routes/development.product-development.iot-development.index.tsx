@@ -1,10 +1,13 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { IotPage } from "@/routes/development.research-innovation.iot-development.new";
+import { ProductDevelopmentTabBar } from "@/components/erp/ProductDevelopmentTabBar";
 
 export const Route = createFileRoute("/development/product-development/iot-development/")({
-  component: () => {
-    const navigate = useNavigate();
-    useEffect(() => { navigate({ to: "/development/research-innovation/iot-development/new" }); }, [navigate]);
-    return null;
-  },
+  component: () => (
+    <IotPage
+      breadcrumb="Development > Product Development"
+      tabs={<ProductDevelopmentTabBar />}
+    />
+  ),
 });
+

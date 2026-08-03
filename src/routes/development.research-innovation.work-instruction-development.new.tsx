@@ -7,6 +7,7 @@ import { toast } from "sonner";
 
 import { AppShell } from "@/components/erp/AppShell";
 import { ResearchInnovationTabBar } from "@/components/erp/ResearchInnovationTabBar";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 
 import {
   WorkInstructionTabBar,
@@ -36,7 +37,13 @@ export const Route = createFileRoute(
   component: WorkInstructionDevelopmentNewPage,
 });
 
-function WorkInstructionDevelopmentNewPage() {
+export function WorkInstructionDevelopmentNewPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<WorkInstructionTabId>("overview");
 
@@ -61,7 +68,7 @@ function WorkInstructionDevelopmentNewPage() {
       workInstructionDevelopmentService.saveDraft(input, record?.id),
     onSuccess: (updated) => {
       queryClient.setQueryData(["work-instruction", "current"], updated);
-      toast.success("Work Instruction draft saved successfully!");
+      toast.success("Draft saved successfully!");
     },
   });
 
@@ -69,22 +76,23 @@ function WorkInstructionDevelopmentNewPage() {
     mutationFn: () => workInstructionDevelopmentService.submitForReview(record?.id),
     onSuccess: (updated) => {
       queryClient.setQueryData(["work-instruction", "current"], updated);
-      toast.success("Submitted for approval!");
+      toast.success("Submitted for review!");
     },
   });
 
   const handleExportReport = () => {
-    toast.success("Generating complete Work Instruction PDF document...");
+    toast.success("Generating complete Work Instruction engineering PDF report...");
   };
 
   if (isLoading || !record) {
     return (
       <AppShell
         title="Work Instruction Development"
-        breadcrumb="Development > Manufacturing Development > Work Instruction Development"
+        breadcrumb={breadcrumb}
+        tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
       >
-        <div className="p-8 text-center text-muted-foreground animate-pulse">
-          Loading Work Instruction Development module data...
+        <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
+          Loading Work Instruction Master Record...
         </div>
       </AppShell>
     );
@@ -95,12 +103,11 @@ function WorkInstructionDevelopmentNewPage() {
   return (
     <AppShell
       title="Work Instruction Development"
-      breadcrumb="Development > Manufacturing Development > Work Instruction Development"
+      breadcrumb={breadcrumb}
       description="Author, review and control shop floor assembly work instructions with step sequencing, visual guides, quality checkpoints & AI risk validation."
+      tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
     >
       <div className="space-y-4">
-
-        <ResearchInnovationTabBar />
 
         <WorkInstructionHeader
           record={currentRecordData as WorkInstructionRecord}

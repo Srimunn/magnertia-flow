@@ -5,6 +5,7 @@ import { Plus, Search, Filter, Eye, RefreshCw, ChevronRight, ArrowUpRight, Cpu }
 import { roboticsIntegrationService } from "@/services/roboticsIntegrationService";
 import type { RoboticsIntegration } from "@/lib/robotics-integration/types";
 import { AppShell } from "@/components/erp/AppShell";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 import {
   calculateOverallRoboticsReadiness,
   calculateCellReadinessScore,
@@ -22,7 +23,13 @@ export const Route = createFileRoute("/manufacturing-development/robotics-integr
   component: RoboticsIntegrationListPage,
 });
 
-function RoboticsIntegrationListPage() {
+export function RoboticsIntegrationListPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs = <ManufacturingDevelopmentTabBar />,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
@@ -60,8 +67,9 @@ function RoboticsIntegrationListPage() {
   return (
     <AppShell
       title="Robotics Integration"
-      breadcrumb="Development → Manufacturing Development"
-      description="Robot cell layout, kinematics, motion sequencing, path optimization, collision detection, and physical cell deployment."
+      breadcrumb={breadcrumb}
+      description="Program robotic arms, end-effectors, vision systems, safety interlocks, and cell integration."
+      tabs={tabs}
     >
       <div className="p-6 space-y-6">
         {/* Header Strip */}

@@ -119,7 +119,7 @@ export const MassProductionSummaryCard: React.FC<MassProductionSummaryCardProps>
             </span>
             {isOverridden && (
               <span className="text-[10px] text-muted-foreground italic text-center">
-                Computed: <line-through className="line-through">{computedRec}</line-through> (Executive Override)
+                Computed: <span className="line-through">{computedRec}</span> (Executive Override)
               </span>
             )}
           </div>

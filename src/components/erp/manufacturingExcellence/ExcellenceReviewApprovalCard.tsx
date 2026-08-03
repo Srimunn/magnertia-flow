@@ -71,14 +71,14 @@ export const ExcellenceReviewApprovalCard: React.FC<ExcellenceReviewApprovalCard
           </div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-muted-foreground">Decision:</span>
-            {getDecisionBadge(record.approvalDecision)}
+            {getDecisionBadge(record?.approvalDecision ?? "Pending")}
           </div>
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-6 pt-4">
         {/* 9-Role Reviewers Grid */}
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          {record.reviewers.map((rev) => (
+          {(record?.reviewers || []).map((rev) => (
             <div
               key={rev.id}
               className="flex flex-col justify-between rounded-xl border border-border/70 bg-card p-3 shadow-2xs transition-shadow hover:shadow-xs"

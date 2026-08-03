@@ -83,7 +83,7 @@ export function ProductDevelopmentTabBar() {
     const container = scrollContainerRef.current;
     if (container) {
       checkScroll();
-      container.addEventListener("scroll", checkScroll);
+      container.addEventListener("scroll", checkScroll, { passive: true });
       const observer = new ResizeObserver(() => checkScroll());
       observer.observe(container);
       return () => {
@@ -92,6 +92,22 @@ export function ProductDevelopmentTabBar() {
       };
     }
   }, []);
+
+  // Smoothly scroll active tab to center whenever route/pathname changes
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      const activeEl = container.querySelector('[data-active="true"]');
+      if (activeEl) {
+        activeEl.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+      setTimeout(checkScroll, 350);
+    }
+  }, [pathname]);
 
   const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     const container = scrollContainerRef.current;
@@ -112,12 +128,12 @@ export function ProductDevelopmentTabBar() {
   };
 
   return (
-    <div className="relative border-b border-border/80 bg-background/95 backdrop-blur">
+    <div className="sticky-tab-bar relative border-b border-border/80 bg-background/95 backdrop-blur">
       {showLeftBtn && (
         <button
           type="button"
           onClick={scrollLeft}
-          className="absolute left-0 top-0 z-10 flex h-full w-8 items-center justify-center bg-gradient-to-r from-background via-background/90 to-transparent text-muted-foreground transition-colors hover:text-foreground"
+          className="absolute left-0 top-0 z-10 flex h-full w-8 items-center justify-center bg-gradient-to-r from-background via-background/90 to-transparent text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
           aria-label="Scroll tabs left"
         >
           <ChevronLeft className="h-4 w-4" />
@@ -137,6 +153,7 @@ export function ProductDevelopmentTabBar() {
               to={tab.to}
               title={tab.full}
               aria-label={tab.full}
+              data-active={isActive ? "true" : "false"}
               className={cn(TAB_BASE, isActive && TAB_ACTIVE)}
             >
               {tab.label}

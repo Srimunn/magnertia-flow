@@ -7,6 +7,7 @@ import { toast } from "sonner";
 
 import { AppShell } from "@/components/erp/AppShell";
 import { ResearchInnovationTabBar } from "@/components/erp/ResearchInnovationTabBar";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 
 import {
   SopTabBar,
@@ -35,7 +36,13 @@ export const Route = createFileRoute(
   component: SopDevelopmentNewPage,
 });
 
-function SopDevelopmentNewPage() {
+export function SopDevelopmentNewPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<SopTabId>("overview");
 
@@ -80,9 +87,10 @@ function SopDevelopmentNewPage() {
     return (
       <AppShell
         title="SOP Development"
-        breadcrumb="Development > Manufacturing Development > SOP Development"
+        breadcrumb={breadcrumb}
+        tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
       >
-        <div className="p-8 text-center text-muted-foreground animate-pulse">
+        <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
           Loading Standard Operating Procedure (SOP) module data...
         </div>
       </AppShell>
@@ -94,11 +102,11 @@ function SopDevelopmentNewPage() {
   return (
     <AppShell
       title="SOP Development"
-      breadcrumb="Development > Manufacturing Development > SOP Development"
+      breadcrumb={breadcrumb}
       description="Author, review, control & distribute Standard Operating Procedures across manufacturing operations with interactive process flow diagrams & ISO compliance audits."
+      tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
     >
       <div className="space-y-4">
-        <ResearchInnovationTabBar />
 
         <SopHeader
           record={currentRecordData as SopRecord}

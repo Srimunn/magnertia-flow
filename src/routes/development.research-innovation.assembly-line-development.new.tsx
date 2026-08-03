@@ -103,7 +103,15 @@ export const Route = createFileRoute(
   component: AssemblyLineDevelopmentNewPage,
 });
 
-function AssemblyLineDevelopmentNewPage() {
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
+
+export function AssemblyLineDevelopmentNewPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -270,9 +278,9 @@ function AssemblyLineDevelopmentNewPage() {
   return (
     <AppShell
       title="Assembly Line Development"
-      breadcrumb="Development"
-      description="Govern assembly line layout design, workstations planning, takt time line balancing, automation level, OEE targets, and AI quality checks."
-      tabs={<ResearchInnovationTabBar />}
+      breadcrumb={breadcrumb}
+      description="Balance assembly lines, takt time distribution, ergonomic workstations, and automated line feeds."
+      tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
     >
       <div className="min-h-screen bg-slate-50/60 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 antialiased pb-16">
         

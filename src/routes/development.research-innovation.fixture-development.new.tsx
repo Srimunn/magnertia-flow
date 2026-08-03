@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState, useMemo, useEffect } from "react";
 import { toast } from "sonner";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 import {
   Save,
   Send,
@@ -102,7 +103,13 @@ export const Route = createFileRoute(
   component: FixtureDevelopmentNewPage,
 });
 
-function FixtureDevelopmentNewPage() {
+export function FixtureDevelopmentNewPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -120,6 +127,10 @@ function FixtureDevelopmentNewPage() {
   // 3D Model rotation/zoom simulation states
   const [zoomLevel, setZoomLevel] = useState(100);
   const [rotationAngle, setRotationAngle] = useState(0);
+
+  // 3D Model rotation/zoom simulation states
+  const [modelRotation, setModelRotation] = useState(0);
+  const [modelZoom, setModelZoom] = useState(100);
 
   // Approval Decision Form
   const [reviewDecision, setReviewDecision] = useState<FixtureApprovalDecision>("Approved");
@@ -164,13 +175,11 @@ function FixtureDevelopmentNewPage() {
     return (
       <AppShell
         title="Fixture Development"
-        breadcrumb="Development"
-        description="Govern fixture design drawings, bill of materials locator designs, clamp designs, safety inspections, commissioning logs, and wear predictions."
-        tabs={<ResearchInnovationTabBar />}
+        breadcrumb={breadcrumb}
+        tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
       >
-        <div className="flex h-[70vh] w-full flex-col items-center justify-center gap-4">
-          <RefreshCw className="h-8 w-8 animate-spin text-primary" />
-          <p className="text-sm font-medium text-muted-foreground">Loading Fixture Development Module...</p>
+        <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
+          Loading Fixture Development Master Record...
         </div>
       </AppShell>
     );
@@ -290,9 +299,9 @@ function FixtureDevelopmentNewPage() {
   return (
     <AppShell
       title="Fixture Development"
-      breadcrumb="Development"
-      description="Govern fixture design drawings, bill of materials locator designs, clamp designs, safety inspections, commissioning logs, and wear predictions."
-      tabs={<ResearchInnovationTabBar />}
+      breadcrumb={breadcrumb}
+      description="Engineer custom clamping fixtures, locating pins, welding jigs, and holding apparatus."
+      tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
     >
       <div className="min-h-screen bg-slate-50/60 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 antialiased pb-16">
         

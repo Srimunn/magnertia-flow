@@ -3,6 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { AppShell } from "@/components/erp/AppShell";
+import { ResearchInnovationTabBar } from "@/components/erp/ResearchInnovationTabBar";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 import { BomEngineeringHeader } from "@/components/erp/bom-engineering/BomEngineeringHeader";
 import { BomScoresHeader } from "@/components/erp/bom-engineering/BomScoresHeader";
 import { BomEngineeringTabBar, type BomTabType } from "@/components/erp/bom-engineering/BomEngineeringTabBar";
@@ -33,7 +35,13 @@ export const Route = createFileRoute(
   component: BomEngineeringPage,
 });
 
-function BomEngineeringPage() {
+export function BomEngineeringPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<BomTabType>("overview");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -74,7 +82,8 @@ function BomEngineeringPage() {
     return (
       <AppShell
         title="BOM Engineering"
-        breadcrumb="Development > Manufacturing Development > BOM Engineering"
+        breadcrumb={breadcrumb}
+        tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
       >
         <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
           Loading BOM Engineering Master Record...
@@ -86,7 +95,9 @@ function BomEngineeringPage() {
   return (
     <AppShell
       title="BOM Engineering"
-      breadcrumb="Development > Manufacturing Development > BOM Engineering"
+      breadcrumb={breadcrumb}
+      description="Manage manufacturing bill of materials (MBOM), Phantom BOMs, component structures, effectivity dates, and alternate parts."
+      tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
     >
       <div className="space-y-0 min-h-screen bg-background text-foreground">
         {/* Top Header Bar */}

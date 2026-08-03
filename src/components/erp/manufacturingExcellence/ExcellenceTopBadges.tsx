@@ -7,10 +7,11 @@ interface ExcellenceTopBadgesProps {
 }
 
 export const ExcellenceTopBadges: React.FC<ExcellenceTopBadgesProps> = ({ record }) => {
-  const renderGaugeRing = (value: number, color: string) => {
+  const renderGaugeRing = (value: number = 0, color: string) => {
+    const safeValue = typeof value === "number" && !isNaN(value) ? value : 0;
     const radius = 18;
     const circumference = 2 * Math.PI * radius;
-    const strokeDashoffset = circumference - (value / 100) * circumference;
+    const strokeDashoffset = circumference - (safeValue / 100) * circumference;
 
     return (
       <div className="relative flex h-11 w-11 items-center justify-center">
@@ -37,12 +38,12 @@ export const ExcellenceTopBadges: React.FC<ExcellenceTopBadgesProps> = ({ record
             className="transition-all duration-700 ease-out"
           />
         </svg>
-        <span className="absolute text-[10px] font-extrabold text-foreground">{value}</span>
+        <span className="absolute text-[10px] font-extrabold text-foreground">{safeValue}</span>
       </div>
     );
   };
 
-  const getScoreRating = (val: number) => {
+  const getScoreRating = (val: number = 0) => {
     if (val >= 90) return { text: "Excellent", color: "text-emerald-600 dark:text-emerald-400" };
     if (val >= 80) return { text: "Very Good", color: "text-blue-600 dark:text-blue-400" };
     if (val >= 70) return { text: "Good", color: "text-indigo-600 dark:text-indigo-400" };

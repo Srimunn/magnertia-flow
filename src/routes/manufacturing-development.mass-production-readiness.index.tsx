@@ -6,6 +6,7 @@ import { massProductionReadinessService } from "@/services/massProductionReadine
 import type { MassProductionReadiness } from "@/lib/mass-production-readiness/types";
 import { AppShell } from "@/components/erp/AppShell";
 import { calculateOverallMassProductionReadiness, calculateRecommendation, getScoreBand } from "@/lib/mass-production-readiness/scoring";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 
 export const Route = createFileRoute("/manufacturing-development/mass-production-readiness/")({
   head: () => ({
@@ -14,7 +15,13 @@ export const Route = createFileRoute("/manufacturing-development/mass-production
   component: MassProductionReadinessListPage,
 });
 
-function MassProductionReadinessListPage() {
+export function MassProductionReadinessListPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs = <ManufacturingDevelopmentTabBar />,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
@@ -52,8 +59,9 @@ function MassProductionReadinessListPage() {
   return (
     <AppShell
       title="Mass Production Readiness"
-      breadcrumb="Development → Manufacturing Development"
-      description="Executive go/no-go readiness records authorizing Start of Production (SOP)."
+      breadcrumb={breadcrumb}
+      description="Verify ramp-up readiness, supplier capability, line staffing, tooling capacity, and sign-off for full rate."
+      tabs={tabs}
     >
       <div className="p-6 space-y-6">
         {/* Header Strip */}

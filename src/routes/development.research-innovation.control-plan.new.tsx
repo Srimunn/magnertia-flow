@@ -31,7 +31,13 @@ export const Route = createFileRoute(
   component: ControlPlanDevelopmentPage,
 });
 
-function ControlPlanDevelopmentPage() {
+export function ControlPlanDevelopmentPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<ControlPlanTabType>("overview");
   const [isAddCharModalOpen, setIsAddCharModalOpen] = useState(false);
@@ -72,7 +78,8 @@ function ControlPlanDevelopmentPage() {
     return (
       <AppShell
         title="Control Plan Development"
-        breadcrumb="Development > Manufacturing Development > Control Plan Development"
+        breadcrumb={breadcrumb}
+        tabs={tabs}
       >
         <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
           Loading Manufacturing Process Control Plan Record...
@@ -84,7 +91,9 @@ function ControlPlanDevelopmentPage() {
   return (
     <AppShell
       title="Control Plan Development"
-      breadcrumb="Development > Manufacturing Development > Control Plan Development"
+      breadcrumb={breadcrumb}
+      description="Establish process control points, inspection criteria, sampling frequencies, and reaction plans."
+      tabs={tabs}
     >
       <div className="space-y-0 min-h-screen bg-background text-foreground">
         {/* Top Header Bar */}

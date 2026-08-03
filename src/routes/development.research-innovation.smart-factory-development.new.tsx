@@ -8,6 +8,7 @@ import { smartFactoryDevelopmentService } from "@/services";
 import type { SmartFactoryDevelopmentRecord } from "@/services/types";
 import { AppShell } from "@/components/erp/AppShell";
 import { ResearchInnovationTabBar } from "@/components/erp/ResearchInnovationTabBar";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 import { SmartFactoryTabBar, type SmartFactoryTabId } from "@/components/erp/SmartFactoryTabBar";
 import { SmartFactoryHeader } from "@/components/erp/smartFactory/SmartFactoryHeader";
 import { SmartFactoryTopBadges } from "@/components/erp/smartFactory/SmartFactoryTopBadges";
@@ -37,7 +38,13 @@ export const Route = createFileRoute(
   component: SmartFactoryDevelopmentPage,
 });
 
-function SmartFactoryDevelopmentPage() {
+export function SmartFactoryDevelopmentPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<SmartFactoryTabId>("overview");
@@ -50,43 +57,39 @@ function SmartFactoryDevelopmentPage() {
     queryFn: () => smartFactoryDevelopmentService.fetchRecord(),
   });
 
-  // Save Draft Mutation
+  // Mutations
   const saveDraftMutation = useMutation({
     mutationFn: (input: Partial<SmartFactoryDevelopmentRecord>) =>
       smartFactoryDevelopmentService.saveDraft(input),
     onSuccess: (updated) => {
       queryClient.setQueryData(["smartFactoryRecord"], updated);
-      toast.success("Draft saved successfully!", {
-        description: "Smart Factory parameters and scores updated.",
-      });
-    },
-    onError: (err: any) => {
-      toast.error("Failed to save draft", {
-        description: err?.message || "An error occurred while saving.",
+      toast.success("Draft Saved Successfully!", {
+        description: "Smart Factory Development project parameters updated.",
       });
     },
   });
 
-  // Submit for Review Mutation
   const submitReviewMutation = useMutation({
     mutationFn: () => smartFactoryDevelopmentService.submitForReview(),
     onSuccess: (updated) => {
       queryClient.setQueryData(["smartFactoryRecord"], updated);
       toast.success("Submitted for Executive Board Review!", {
-        description: "Review notifications sent to all 10 authorization roles.",
+        description: "Stakeholders and plant directors notified.",
       });
     },
   });
 
-  // Review Decision Mutation
   const reviewDecisionMutation = useMutation({
-    mutationFn: (args: {
+    mutationFn: ({
+      decision,
+      comments,
+    }: {
       decision: "Approved" | "Approved with Conditions" | "Revision Required" | "Rejected";
-      comments: string;
-    }) => smartFactoryDevelopmentService.reviewDecision(args),
+      comments?: string;
+    }) => smartFactoryDevelopmentService.reviewDecision({ decision, comments: comments || "" }),
     onSuccess: (updated) => {
       queryClient.setQueryData(["smartFactoryRecord"], updated);
-      toast.success("Executive Review Decision Recorded!", {
+      toast.success("Review Decision Recorded!", {
         description: `Status updated to ${updated.workflowStatus}.`,
       });
     },
@@ -96,13 +99,11 @@ function SmartFactoryDevelopmentPage() {
     return (
       <AppShell
         title="Smart Factory Development"
-        breadcrumb="Development → Manufacturing Development → Smart Factory Development"
-        description="Govern Industry 4.0 transformation through IIoT, Cyber-Physical Systems, Digital Twins, AI, Robotics, MES, ERP, PLCs, and Edge Computing."
-        tabs={<ResearchInnovationTabBar />}
+        breadcrumb={breadcrumb}
+        tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
       >
-        <div className="flex h-[70vh] w-full flex-col items-center justify-center gap-4">
-          <RefreshCw className="h-8 w-8 animate-spin text-primary" />
-          <p className="text-sm font-medium text-muted-foreground">Loading Smart Factory Development Module...</p>
+        <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
+          Loading Smart Factory Development Master Record...
         </div>
       </AppShell>
     );
@@ -124,7 +125,9 @@ function SmartFactoryDevelopmentPage() {
   };
 
   const handlePreview = () => {
-    toast.info("Generating Smart Factory Transformation Report (PDF)...");
+    toast.info("Generating Smart Factory Blueprint PDF Preview...", {
+      description: "Compiling IoT node topology and Industry 4.0 architecture.",
+    });
   };
 
   const handleCreateNewProject = (newProj: any) => {
@@ -179,9 +182,9 @@ function SmartFactoryDevelopmentPage() {
   return (
     <AppShell
       title="Smart Factory Development"
-      breadcrumb="Development → Manufacturing Development → Smart Factory Development"
-      description="Govern Industry 4.0 transformation through IIoT, Cyber-Physical Systems, Digital Twins, AI, Robotics, MES, ERP, PLCs, and Edge Computing."
-      tabs={<ResearchInnovationTabBar />}
+      breadcrumb={breadcrumb}
+      description="Govern Industry 4.0 transformation through IIoT, Cyber-Physical Systems, Digital Twins, AI, and MES."
+      tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
     >
       <div className="flex flex-col gap-5 p-4 sm:p-6">
         {/* Header Bar */}

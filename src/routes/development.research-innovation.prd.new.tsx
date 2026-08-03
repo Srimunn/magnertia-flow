@@ -91,7 +91,13 @@ function CircularScoreGauge({ score, label = "PRD SCORE" }: { score: number; lab
   );
 }
 
-function PrdFormPage() {
+export function PrdFormPage({
+  breadcrumb = "Development > Research & Innovation",
+  tabs = <PrdTabBar />,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -191,7 +197,8 @@ function PrdFormPage() {
     return (
       <AppShell
         title="Product Requirements Document (PRD)"
-        breadcrumb="Development > Research & Innovation Development > Product Requirements Document (PRD) > PRD Form"
+        breadcrumb={breadcrumb}
+        tabs={tabs}
       >
         <div className="flex items-center justify-center h-96">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -215,8 +222,9 @@ function PrdFormPage() {
   return (
     <AppShell
       title="Product Requirements Document (PRD)"
-      breadcrumb="Development > Research & Innovation Development > Product Requirements Document (PRD) > PRD Form"
-      tabs={<PrdTabBar activeTab={activeTab} onTabChange={setActiveTab} />}
+      breadcrumb={breadcrumb}
+      description="Define detailed product requirements, target specifications, compliance criteria, and acceptance gates."
+      tabs={tabs}
     >
       <div className="space-y-6 pb-12">
         {/* ========================================================================= */}

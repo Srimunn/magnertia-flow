@@ -27,6 +27,7 @@ import {
 
 import { AppShell } from "@/components/erp/AppShell";
 import { ResearchInnovationTabBar } from "@/components/erp/ResearchInnovationTabBar";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 
 import {
   JigDevelopmentTabBar,
@@ -59,7 +60,13 @@ export const Route = createFileRoute(
   component: JigDevelopmentNewPage,
 });
 
-function JigDevelopmentNewPage() {
+export function JigDevelopmentNewPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<JigDevelopmentTabId>("overview");
 
@@ -106,9 +113,13 @@ function JigDevelopmentNewPage() {
 
   if (isLoading || !record) {
     return (
-      <AppShell title="Jig Development" breadcrumb="Development > Manufacturing Development > Jig Development">
-        <div className="p-8 text-center text-muted-foreground animate-pulse">
-          Loading Jig Development module data...
+      <AppShell
+        title="Jig Development"
+        breadcrumb={breadcrumb}
+        tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
+      >
+        <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
+          Loading Jig Development Master Record...
         </div>
       </AppShell>
     );
@@ -119,8 +130,9 @@ function JigDevelopmentNewPage() {
   return (
     <AppShell
       title="Jig Development"
-      breadcrumb="Development > Manufacturing Development > Jig Development"
-      description="Design, validation, manufacturing & lifecycle tracking for high-precision manufacturing jigs."
+      breadcrumb={breadcrumb}
+      description="Fabricate precision drilling, alignment, soldering, and testing jigs for shop floor operations."
+      tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
     >
       <div className="space-y-4">
 

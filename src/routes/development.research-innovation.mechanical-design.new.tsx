@@ -181,7 +181,13 @@ function CircularScoreGauge({
 /* ===========================================================================
    Main Mechanical Design Form Page
    =========================================================================== */
-function MechanicalDesignFormPage() {
+export function MechanicalDesignFormPage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<MechanicalDesignTabId>("overview");
@@ -316,33 +322,14 @@ function MechanicalDesignFormPage() {
   };
 
   return (
-    <AppShell>
-      <div className="min-h-screen bg-slate-50/60 pb-16">
-        {/* ===========================================================================
-            1. PAGE HEADER & BREADCRUMB
-            =========================================================================== */}
-        <div className="bg-white border-b border-border px-6 py-3 shadow-2xs">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
-                <span>Development</span>
-                <ChevronRight className="h-3 w-3 text-slate-400" />
-                <span>Product Development</span>
-                <ChevronRight className="h-3 w-3 text-slate-400" />
-                <span className="font-medium text-foreground">
-                  Mechanical Design
-                </span>
-                <ChevronRight className="h-3 w-3 text-slate-400" />
-                <span className="font-semibold text-primary">
-                  Mechanical Design Form
-                </span>
-              </div>
-              <h1 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2">
-                <Box className="h-6 w-6 text-primary" />
-                Mechanical Design
-              </h1>
-            </div>
-
+    <AppShell
+      title="Mechanical Design"
+      breadcrumb={breadcrumb}
+      description="Engineer 3D mechanical assemblies, structural components, tolerance stack-ups, and thermal enclosures."
+      tabs={tabs}
+    >
+      <div className="space-y-6 pb-16">
+        <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <ErpButton
                 variant="outline"
@@ -366,7 +353,6 @@ function MechanicalDesignFormPage() {
               </ErpButton>
             </div>
           </div>
-        </div>
 
         {/* ===========================================================================
             2. WORKFLOW STAGE STEPPER (Sequence Diagram driven 4 Stages)

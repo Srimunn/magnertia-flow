@@ -96,7 +96,13 @@ export const Route = createFileRoute(
   component: TestingValidationNewPage,
 });
 
-function TestingValidationNewPage() {
+export function TestingValidationNewPage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<TestingTabKey>("overview");
   const [reviewDecision, setReviewDecision] = useState<TestingApprovalDecision>("Approved with Conditions");
@@ -209,32 +215,12 @@ function TestingValidationNewPage() {
 
   return (
     <AppShell
-      tabs={
-        <InnovationAreaTabs
-          sub={
-            <TestingValidationTabBar
-              activeTab={activeTab}
-              onTabChange={setActiveTab}
-            />
-          }
-        />
-      }
+      title="Testing & Validation"
+      breadcrumb={breadcrumb}
+      description="Validate test protocols, HALT/HASS stress testing, EMC compliance, and defect tracking."
+      tabs={tabs}
     >
-      <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 pb-12 font-sans text-slate-900 dark:text-slate-100">
-        <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 pt-4 space-y-5">
-        {/* ====================================================================
-           1. BREADCRUMBS & MODULE HEADER BAR
-           ==================================================================== */}
-        <div className="space-y-3">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <span>Development</span>
-            <ChevronRight className="h-3 w-3" />
-            <span>Product Development</span>
-            <ChevronRight className="h-3 w-3" />
-            <span>Testing & Validation</span>
-            <ChevronRight className="h-3 w-3" />
-            <span className="font-semibold text-foreground">Testing & Validation Form</span>
-          </div>
+      <div className="space-y-6 pb-12 font-sans text-slate-900 dark:text-slate-100">
 
           {/* Form Metadata Control Card */}
           <Card className="border-border/80 shadow-xs bg-white dark:bg-slate-900">
@@ -1144,7 +1130,6 @@ function TestingValidationNewPage() {
             </Card>
           </div>
         </div>
-      </div>
 
       {/* ====================================================================
          MODALS & DIALOGS
@@ -1220,7 +1205,6 @@ function TestingValidationNewPage() {
           </form>
         </DialogContent>
       </Dialog>
-    </div>
     </AppShell>
   );
 }

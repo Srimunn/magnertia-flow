@@ -54,7 +54,7 @@ export const ManufacturingExcellenceTabBar: React.FC<ManufacturingExcellenceTabB
   onTabChange,
 }) => {
   return (
-    <div className="flex items-center gap-1 overflow-x-auto border-b border-border bg-card/60 px-4 py-2 text-xs scrollbar-none">
+    <div className="sticky top-[56px] z-20 flex items-center gap-1 overflow-x-auto border-b border-border/80 bg-background/95 backdrop-blur-md px-4 py-2 text-xs scrollbar-none shadow-xs transition-colors">
       {TABS.map((tab) => {
         const Icon = tab.icon;
         const isActive = activeTab === tab.id;

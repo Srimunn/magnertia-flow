@@ -185,7 +185,13 @@ function CircularScoreGauge({
 /* ===========================================================================
    Main Electrical Design Form Page
    =========================================================================== */
-function ElectricalDesignFormPage() {
+export function ElectricalDesignFormPage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<ElectricalDesignTabId>("overview");
@@ -286,32 +292,14 @@ function ElectricalDesignFormPage() {
   };
 
   return (
-    <AppShell>
-      <div className="min-h-screen bg-slate-50/60 pb-16">
-        {/* ===========================================================================
-            1. PAGE HEADER & BREADCRUMB
-            =========================================================================== */}
-        <div className="bg-white border-b border-border px-6 py-3 shadow-2xs">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
-                <span>Development</span>
-                <ChevronRight className="h-3 w-3 text-slate-400" />
-                <span>Product Development</span>
-                <ChevronRight className="h-3 w-3 text-slate-400" />
-                <span className="font-medium text-foreground">
-                  Electrical Design
-                </span>
-                <ChevronRight className="h-3 w-3 text-slate-400" />
-                <span className="font-semibold text-primary">
-                  Electrical Design Form
-                </span>
-              </div>
-              <h1 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2">
-                <Zap className="h-6 w-6 text-primary" />
-                Electrical Design
-              </h1>
-            </div>
+    <AppShell
+      title="Electrical Design"
+      breadcrumb={breadcrumb}
+      description="Design high-voltage power distribution, schematics, cable harnesses, and power quality analysis."
+      tabs={tabs}
+    >
+      <div className="space-y-6 pb-16">
+        <div className="flex items-center justify-between">
 
             <div className="flex items-center gap-3">
               <ErpButton
@@ -336,7 +324,6 @@ function ElectricalDesignFormPage() {
               </ErpButton>
             </div>
           </div>
-        </div>
 
         {/* ===========================================================================
             2. WORKFLOW STAGE STEPPER (Sequence Diagram driven 4 Stages)

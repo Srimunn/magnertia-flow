@@ -99,7 +99,13 @@ export const Route = createFileRoute(
   component: ApiDevelopmentNewPage,
 });
 
-function ApiDevelopmentNewPage() {
+export function ApiDevelopmentNewPage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<ApiDevelopmentTabId>("overview");
   const [isSkeleton, setIsSkeleton] = useState(false);
@@ -220,30 +226,15 @@ function ApiDevelopmentNewPage() {
   return (
     <AppShell
       title="API Development"
-      breadcrumb="Development"
-      description="Design, secure, test, deploy and monitor enterprise APIs."
-      tabs={<ResearchInnovationTabBar />}
+      breadcrumb={breadcrumb}
+      description="Design RESTful & GraphQL endpoints, OpenAPI specs, rate-limiting policies, and gateway routes."
+      tabs={tabs}
     >
       <div className="min-h-screen bg-slate-50/60 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 antialiased pb-16">
-        {/* Main Container */}
         <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8 pt-3 space-y-4">
-          {/* ====================================================================
-             1. PROJECT HEADER & METADATA BAR (Enterprise Header)
-             ==================================================================== */}
           <div className="rounded-xl border border-border/80 bg-white dark:bg-slate-900 shadow-xs p-4 sm:p-5 transition-all">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-              {/* Left: Breadcrumbs & Primary Titles */}
               <div className="space-y-1.5">
-                <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground">
-                  <span className="hover:text-foreground cursor-pointer">Development</span>
-                  <span>/</span>
-                  <span className="hover:text-foreground cursor-pointer">Product Development</span>
-                  <span>/</span>
-                  <span className="hover:text-foreground cursor-pointer">API Development</span>
-                  <span>/</span>
-                  <span className="text-primary font-semibold">API Development Form</span>
-                </div>
-
                 <div className="flex flex-wrap items-center gap-3">
                   <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">
                     <Cloud className="h-6 w-6 text-primary shrink-0" />

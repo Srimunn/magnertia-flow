@@ -1,12 +1,18 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { AppShell } from "@/components/erp/AppShell";
+import { ProductStrategyFormPage } from "@/routes/development.research-innovation.product-strategy.new";
+import { ProductDevelopmentTabBar } from "@/components/erp/ProductDevelopmentTabBar";
 
 export const Route = createFileRoute("/development/product-development/product-strategy/")({
-  component: () => {
-    const navigate = useNavigate();
-    useEffect(() => {
-      navigate({ to: "/development/research-innovation/product-strategy/overview" });
-    }, [navigate]);
-    return null;
-  },
+  component: ProductDevelopmentStrategy,
 });
+
+function ProductDevelopmentStrategy() {
+  return (
+    <ProductStrategyFormPage
+      breadcrumb="Development > Product Development"
+      tabs={<ProductDevelopmentTabBar />}
+    />
+  );
+}
+

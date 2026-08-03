@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState, useMemo, useEffect } from "react";
 import { toast } from "sonner";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 import {
   Save,
   Send,
@@ -103,7 +104,13 @@ export const Route = createFileRoute(
   component: ProductionEngineeringNewPage,
 });
 
-function ProductionEngineeringNewPage() {
+export function ProductionEngineeringNewPage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -288,10 +295,10 @@ function ProductionEngineeringNewPage() {
 
   return (
     <AppShell
-      title="Production Engineering"
-      breadcrumb="Development"
+      title="Process Engineering & Validation"
+      breadcrumb={breadcrumb}
       description="Govern mass production process design, workstation allocation, pilot runs, PFMEA, OEE Targets, and AI optimization."
-      tabs={<ResearchInnovationTabBar />}
+      tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
     >
       <div className="min-h-screen bg-slate-50/60 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 antialiased pb-16">
         
@@ -304,15 +311,8 @@ function ProductionEngineeringNewPage() {
           <div className="rounded-xl border border-border/80 bg-white dark:bg-slate-900 shadow-xs p-4 sm:p-5 transition-all">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               
-              {/* Left: Breadcrumbs & Primary Titles */}
+              {/* Left: Primary Titles */}
               <div className="space-y-1.5">
-                <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground">
-                  <span className="hover:text-foreground cursor-pointer">Development</span>
-                  <span>/</span>
-                  <span className="hover:text-foreground cursor-pointer">Process Development</span>
-                  <span>/</span>
-                  <span className="text-primary font-semibold">Production Engineering Form</span>
-                </div>
 
                 <div className="flex flex-wrap items-center gap-3">
                   <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">

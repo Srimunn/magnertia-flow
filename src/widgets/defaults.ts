@@ -247,6 +247,8 @@ export const PAGE_META: Record<WidgetPageId, { label: string; route: string }> =
   "ri-commercialization": { label: "Commercialization", route: "/development/research-innovation/commercialization-planning" },
   "ri-innovation": { label: "Innovation", route: "/development/research-innovation/continuous-innovation" },
   "ri-patents": { label: "Patents", route: "/development/ip-development/patent-management" },
+  "pd-overview": { label: "Product Development Overview", route: "/development/product-development/overview" },
+  "md-overview": { label: "Manufacturing Development Overview", route: "/development/manufacturing-development/overview" },
 };
 
 /**

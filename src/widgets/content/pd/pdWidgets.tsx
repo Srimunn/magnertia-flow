@@ -12,7 +12,7 @@ export const pdWidgets: WidgetDefinition[] = [
     iconBg: "bg-blue-500/10",
     iconColor: "text-blue-500",
     options: () => ({ queryKey: ["pd", "active-projects"], queryFn: async () => ({ value: 18, statusText: "+3 this month" }) }),
-    map: (data: any) => ({ value: String(data?.value ?? 18), delta: { value: "+3 this month", isPositive: true } }),
+    map: (data: any) => ({ value: String(data?.value ?? 18), delta: { label: "+3 this month", direction: "up", tone: "positive" } }),
   }),
   makeStatCardWidget({
     id: "kpi.pd.in-development",
@@ -23,7 +23,7 @@ export const pdWidgets: WidgetDefinition[] = [
     iconBg: "bg-purple-500/10",
     iconColor: "text-purple-500",
     options: () => ({ queryKey: ["pd", "in-development"], queryFn: async () => ({ value: 12, statusText: "On schedule" }) }),
-    map: (data: any) => ({ value: String(data?.value ?? 12), delta: { value: "On schedule", isPositive: true } }),
+    map: (data: any) => ({ value: String(data?.value ?? 12), delta: { label: "On schedule", direction: "up", tone: "positive" } }),
   }),
   makeStatCardWidget({
     id: "kpi.pd.ready-release",
@@ -34,7 +34,7 @@ export const pdWidgets: WidgetDefinition[] = [
     iconBg: "bg-emerald-500/10",
     iconColor: "text-emerald-500",
     options: () => ({ queryKey: ["pd", "ready-release"], queryFn: async () => ({ value: 4, statusText: "1 pending review" }) }),
-    map: (data: any) => ({ value: String(data?.value ?? 4), delta: { value: "1 pending review", isPositive: true } }),
+    map: (data: any) => ({ value: String(data?.value ?? 4), delta: { label: "1 pending review", direction: "up", tone: "positive" } }),
   }),
   makeStatCardWidget({
     id: "kpi.pd.active-lifecycle",
@@ -45,7 +45,7 @@ export const pdWidgets: WidgetDefinition[] = [
     iconBg: "bg-amber-500/10",
     iconColor: "text-amber-500",
     options: () => ({ queryKey: ["pd", "active-lifecycle"], queryFn: async () => ({ value: 34, statusText: "ECR/ECO active" }) }),
-    map: (data: any) => ({ value: String(data?.value ?? 34), delta: { value: "ECR/ECO active", isPositive: true } }),
+    map: (data: any) => ({ value: String(data?.value ?? 34), delta: { label: "ECR/ECO active", direction: "up", tone: "positive" } }),
   }),
   makeStatCardWidget({
     id: "kpi.pd.overall-health",
@@ -56,6 +56,6 @@ export const pdWidgets: WidgetDefinition[] = [
     iconBg: "bg-teal-500/10",
     iconColor: "text-teal-500",
     options: () => ({ queryKey: ["pd", "overall-health"], queryFn: async () => ({ value: "94%", statusText: "Optimal quality" }) }),
-    map: (data: any) => ({ value: String(data?.value ?? "94%"), delta: { value: "Optimal quality", isPositive: true } }),
+    map: (data: any) => ({ value: String(data?.value ?? "94%"), delta: { label: "Optimal quality", direction: "up", tone: "positive" } }),
   }),
 ];

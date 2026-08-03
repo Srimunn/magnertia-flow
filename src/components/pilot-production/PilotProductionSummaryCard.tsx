@@ -118,7 +118,7 @@ export const PilotProductionSummaryCard: React.FC<PilotProductionSummaryCardProp
             </span>
             {isOverridden && (
               <span className="text-[10px] text-muted-foreground italic text-center">
-                Computed: <line-through className="line-through">{computedRecommendation}</line-through> (Reviewer Override)
+                Computed: <span className="line-through">{computedRecommendation}</span> (Reviewer Override)
               </span>
             )}
           </div>

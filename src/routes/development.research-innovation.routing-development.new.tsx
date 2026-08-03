@@ -3,6 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { AppShell } from "@/components/erp/AppShell";
+import { ResearchInnovationTabBar } from "@/components/erp/ResearchInnovationTabBar";
+import { ManufacturingDevelopmentTabBar } from "@/components/erp/ManufacturingDevelopmentTabBar";
 import { RoutingHeader } from "@/components/erp/routing-development/RoutingHeader";
 import { RoutingScoresHeader } from "@/components/erp/routing-development/RoutingScoresHeader";
 import { RoutingTabBar, type RoutingTabType } from "@/components/erp/routing-development/RoutingTabBar";
@@ -33,7 +35,13 @@ export const Route = createFileRoute(
   component: RoutingDevelopmentPage,
 });
 
-function RoutingDevelopmentPage() {
+export function RoutingDevelopmentPage({
+  breadcrumb = "Development > Manufacturing Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<RoutingTabType>("overview");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -74,7 +82,8 @@ function RoutingDevelopmentPage() {
     return (
       <AppShell
         title="Routing Development"
-        breadcrumb="Development > Manufacturing Development > Routing Development"
+        breadcrumb={breadcrumb}
+        tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
       >
         <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
           Loading Routing Development Master Record...
@@ -86,7 +95,9 @@ function RoutingDevelopmentPage() {
   return (
     <AppShell
       title="Routing Development"
-      breadcrumb="Development > Manufacturing Development > Routing Development"
+      breadcrumb={breadcrumb}
+      description="Define manufacturing operations, work center assignments, setup times, run times, and scrap factors."
+      tabs={tabs ?? <ManufacturingDevelopmentTabBar />}
     >
       <div className="space-y-0 min-h-screen bg-background text-foreground">
         {/* Top Header Bar */}

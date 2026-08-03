@@ -77,7 +77,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
+import { ResearchInnovationTabBar } from "@/components/erp/ResearchInnovationTabBar";
 import { AppShell } from "@/components/erp/AppShell";
 import {
   CertificationReadinessTabBar,
@@ -101,71 +101,202 @@ export const Route = createFileRoute(
   component: CertificationReadinessNewPage,
 });
 
-function CertificationReadinessNewPage() {
+const DEFAULT_CERTIFICATION_RECORD: CertificationReadinessRecord = {
+  id: "cr-rec-0041",
+  certificationReadinessId: "CR-2024-0041",
+  formCode: "CRF-2024-25",
+  certificationProjectName: "Smart EV Charger Certification",
+  certificationVersion: "v1.2.0",
+  workflowStatus: "In Progress",
+  createdOn: "18 Jun 2024 10:15 AM",
+  dateCreated: "2024-06-18T10:15:00Z",
+  lastModified: "2024-06-20T16:25:00Z",
+  lastUpdated: "20 Jun 2024 04:25 PM",
+
+  linkedProductId: "Smart EV Charger AC 7kW",
+  linkedTestingId: "TV-2024-0075",
+  complianceManagerName: "Rahul Sharma",
+  complianceManagerAvatar:
+    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+  certificationCoordinatorName: "Ananya Iyer",
+  certificationCoordinatorAvatar:
+    "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
+  targetMarkets: ["India", "EU", "USA"],
+  regulatoryAuthorities: ["BIS", "IEC", "CE", "FCC"],
+  developmentStage: "Prototype Validation",
+  priority: "High",
+
+  productCategory: "EV Charger",
+  certificationObjective: "Obtain mandatory certifications for global market launch.",
+
+  documentationScore: 88,
+  testingScore: 90,
+  complianceScore: 84,
+  laboratoryScore: 85,
+  aiScore: 89,
+  overallReadinessScore: 88,
+  certificationProbabilityPct: 92,
+
+  standardsList: [
+    {
+      id: "std1",
+      code: "IEC 61851-1",
+      title: "Electric vehicle conductive charging system - General requirements",
+      category: "Mandatory Standard",
+      region: "Global / IEC",
+      status: "Compliant",
+      gapAnalysis: "Satisfied (0 Gaps)",
+    },
+    {
+      id: "std2",
+      code: "IEC 62196-2",
+      title: "Plugs, socket-outlets, vehicle connectors and vehicle inlets",
+      category: "Mandatory Standard",
+      region: "Global / IEC",
+      status: "Compliant",
+      gapAnalysis: "Satisfied (0 Gaps)",
+    },
+  ],
+
+  documentsList: [
+    {
+      id: "doc1",
+      docName: "Technical File",
+      category: "Technical Documentation",
+      status: "Uploaded",
+      owner: "Rahul Sharma",
+      expiryDate: "31 Dec 2026",
+      fileName: "technical_file_v1.2.pdf",
+    },
+  ],
+
+  labConfig: {
+    id: "lab1",
+    labName: "TÜV Rheinland",
+    contactPerson: "Mr. Peter Klaus",
+    scope: "EMC, Safety, Performance, Environmental",
+    sampleSubmissionDate: "25 Jun 2024",
+    plannedCertificationDate: "20 Aug 2024",
+    status: "Scheduled",
+  },
+
+  complianceConfig: {
+    nonConformitiesCount: 2,
+    criticalFindingsCount: 1,
+    correctiveActionsStatus: "View Actions",
+    preventiveActionsStatus: "View Actions",
+    capaStatus: "In Progress",
+    complianceScore: 84,
+  },
+
+  aiAssessment: {
+    aiStandardsReview: "Completed",
+    aiDocumentationReview: "Completed",
+    aiRiskAssessment: "Low Risk",
+    aiCertificationPrediction: "High Probability",
+    aiImprovementSuggestions: "3 Suggestions",
+    aiReadinessScore: 89,
+  },
+
+  readinessSummary: {
+    documentationScore: 88,
+    testingScore: 90,
+    complianceScore: 84,
+    laboratoryScore: 85,
+    aiScore: 89,
+    overallReadinessScore: 88,
+    certificationProbabilityPct: 92,
+    recommendation: "Ready for Certification Submission",
+  },
+
+  attachments: [],
+  reviewers: [],
+  auditTrail: [],
+};
+
+export function CertificationReadinessNewPage({
+  breadcrumb = "Development > Product Development",
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<CertificationTabKey>("overview");
-  const [reviewDecision, setReviewDecision] = useState<CertificationApprovalDecision>("Approved with Conditions");
-  const [reviewCommentInput, setReviewCommentInput] = useState(
-    "Please close the remaining CAPAs and update the risk assessment before final submission."
-  );
+  const [selectedStandard, setSelectedStandard] = useState<StandardRecord | null>(null);
+  const [selectedDoc, setSelectedDoc] = useState<DocReadinessRecord | null>(null);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
+
+  // Form State for Approval Decision
+  const [reviewDecision, setReviewDecision] = useState<CertificationApprovalDecision>("Approved");
+  const [reviewCommentInput, setReviewCommentInput] = useState("");
 
   // Modals state
   const [isGapModalOpen, setIsGapModalOpen] = useState(false);
   const [isLabModalOpen, setIsLabModalOpen] = useState(false);
   const [isCapaModalOpen, setIsCapaModalOpen] = useState(false);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
-  const [selectedStandard, setSelectedStandard] = useState<StandardRecord | null>(null);
 
-  // Query record
+  // Data Fetching
   const { data: record, isLoading } = useQuery<CertificationReadinessRecord>({
-    queryKey: ["certificationReadinessRecord"],
-    queryFn: certificationReadinessService.fetchRecord,
+    queryKey: ["certificationRecord"],
+    queryFn: () => certificationReadinessService.fetchRecord(),
   });
+  const safeRecord = record ?? DEFAULT_CERTIFICATION_RECORD;
 
   // Save Draft Mutation
   const saveDraftMutation = useMutation({
-    mutationFn: (input: Partial<CertificationFormInput>) => certificationReadinessService.saveDraft(input),
+    mutationFn: (input: Partial<CertificationFormInput>) =>
+      certificationReadinessService.saveDraft(input),
     onSuccess: (updated) => {
-      queryClient.setQueryData(["certificationReadinessRecord"], updated);
-      toast.success("Draft saved successfully.");
+      queryClient.setQueryData(["certificationRecord"], updated);
+      toast.success("Draft saved successfully!", {
+        description: "Certification readiness parameters updated.",
+      });
+    },
+    onError: (err: any) => {
+      toast.error("Failed to save draft", {
+        description: err?.message || "An error occurred while saving.",
+      });
     },
   });
 
-  // Submit Mutation
-  const submitMutation = useMutation({
-    mutationFn: () => certificationReadinessService.submitForReview(),
+  // Submit for Review Mutation
+  const submitReviewMutation = useMutation({
+    mutationFn: (id?: string) => certificationReadinessService.submitForReview(id),
     onSuccess: (updated) => {
-      queryClient.setQueryData(["certificationReadinessRecord"], updated);
-      toast.success("Certification Readiness record submitted for review.");
+      queryClient.setQueryData(["certificationRecord"], updated);
+      toast.success("Submitted for Executive Board Review!", {
+        description: "Regulatory affairs and quality assurance leads notified.",
+      });
     },
   });
 
   // Review Decision Mutation
-  const reviewMutation = useMutation({
-    mutationFn: (args: { id: string; decision: CertificationApprovalDecision; comments?: string }) =>
-      certificationReadinessService.reviewDecision(args),
+  const reviewDecisionMutation = useMutation({
+    mutationFn: (args: {
+      id: string;
+      decision: CertificationApprovalDecision;
+      comments?: string;
+    }) => certificationReadinessService.reviewDecision(args),
     onSuccess: (updated) => {
-      queryClient.setQueryData(["certificationReadinessRecord"], updated);
-      toast.success(`Review decision submitted: ${updated.approvalDecision}`);
+      queryClient.setQueryData(["certificationRecord"], updated);
+      toast.success(`Decision recorded: ${reviewDecision}`, {
+        description: "Certification workflow status updated.",
+      });
     },
   });
 
-  if (isLoading || !record) {
+  if (isLoading && !record) {
     return (
       <AppShell
-        tabs={
-          <InnovationAreaTabs
-            sub={
-              <CertificationReadinessTabBar
-                activeTab={activeTab}
-                onTabChange={setActiveTab}
-              />
-            }
-          />
-        }
+        title="Certification Readiness"
+        breadcrumb={breadcrumb}
+        tabs={tabs ?? <ResearchInnovationTabBar />}
       >
-        <div className="flex h-96 items-center justify-center p-8 text-sm text-muted-foreground">
-          <RotateCw className="h-6 w-6 animate-spin mr-2 text-primary" /> Loading Certification Readiness Workspace...
+        <div className="p-8 text-center text-muted-foreground animate-pulse font-semibold">
+          Loading Certification Readiness Master Record...
         </div>
       </AppShell>
     );
@@ -173,25 +304,30 @@ function CertificationReadinessNewPage() {
 
   const handleSaveDraft = () => {
     saveDraftMutation.mutate({
-      certificationProjectName: record.certificationProjectName,
-      certificationObjective: record.certificationObjective,
-      targetMarket: record.targetMarkets.join(", "),
-      regulatoryAuthority: record.regulatoryAuthorities.join(", "),
-      priority: record.priority,
-      recommendation: record.readinessSummary.recommendation,
+      certificationProjectName: safeRecord.certificationProjectName,
+      targetMarkets: safeRecord.targetMarkets,
+      regulatoryAuthorities: safeRecord.regulatoryAuthorities,
+      standards: safeRecord.standards,
+      documentationReadiness: safeRecord.documentationReadiness,
+      testingComplianceScore: safeRecord.testingComplianceScore,
+      gapAnalysisScore: safeRecord.gapAnalysisScore,
+      aiAssessmentScore: safeRecord.aiAssessmentScore,
+      overallReadinessScore: safeRecord.overallReadinessScore,
+      approvalDecision: safeRecord.approvalDecision,
+      reviewComments: safeRecord.reviewComments,
+    });
+  };
+
+  const handleSubmitDecision = () => {
+    reviewDecisionMutation.mutate({
+      id: safeRecord.id,
+      decision: reviewDecision,
+      comments: reviewCommentInput || undefined,
     });
   };
 
   const handleSubmitReview = () => {
-    submitMutation.mutate();
-  };
-
-  const handleSubmitDecision = () => {
-    reviewMutation.mutate({
-      id: record.id,
-      decision: reviewDecision,
-      comments: reviewCommentInput,
-    });
+    submitReviewMutation.mutate(safeRecord.id);
   };
 
   const chartData = [
@@ -204,32 +340,12 @@ function CertificationReadinessNewPage() {
 
   return (
     <AppShell
-      tabs={
-        <InnovationAreaTabs
-          sub={
-            <CertificationReadinessTabBar
-              activeTab={activeTab}
-              onTabChange={setActiveTab}
-            />
-          }
-        />
-      }
+      title="Certification Readiness"
+      breadcrumb={breadcrumb}
+      description="Track ISO, CE, FCC, UL, and regulatory compliance certification readiness matrix."
+      tabs={tabs ?? <ResearchInnovationTabBar />}
     >
-      <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 pb-12 font-sans text-slate-900 dark:text-slate-100">
-        <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 pt-4 space-y-5">
-          {/* ====================================================================
-             1. BREADCRUMBS & MODULE HEADER BAR
-             ==================================================================== */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <span>Development</span>
-              <ChevronRight className="h-3 w-3" />
-              <span>Product Development</span>
-              <ChevronRight className="h-3 w-3" />
-              <span>Certification Readiness</span>
-              <ChevronRight className="h-3 w-3" />
-              <span className="font-semibold text-foreground">Certification Readiness Form</span>
-            </div>
+      <div className="space-y-6 pb-12 font-sans text-slate-900 dark:text-slate-100">
 
             {/* Form Metadata Control Card */}
             <Card className="border-border/80 shadow-xs bg-white dark:bg-slate-900">
@@ -242,26 +358,26 @@ function CertificationReadinessNewPage() {
                     <div>
                       <div className="flex items-center gap-2 flex-wrap">
                         <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
-                          {record.certificationProjectName}
+                          {safeRecord.certificationProjectName}
                         </h1>
                         <Badge variant="outline" className="font-mono text-xs border-primary/30 text-primary">
-                          {record.certificationVersion}
+                          {safeRecord.certificationVersion}
                         </Badge>
                         <Badge
                           className={
-                            record.workflowStatus === "Approved"
+                            safeRecord.workflowStatus === "Approved"
                               ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300"
-                              : record.workflowStatus === "In Review"
+                              : safeRecord.workflowStatus === "In Review"
                               ? "bg-amber-500/15 text-amber-700 dark:text-amber-300"
                               : "bg-blue-500/15 text-blue-700 dark:text-blue-300"
                           }
                         >
-                          {record.workflowStatus}
+                          {safeRecord.workflowStatus}
                         </Badge>
                       </div>
                       <p className="text-xs text-muted-foreground mt-0.5">
-                        ID: <span className="font-semibold">{record.certificationReadinessId}</span> | Form Code:{" "}
-                        <span className="font-semibold">{record.formCode}</span> | Created: {record.createdOn}
+                        ID: <span className="font-semibold">{safeRecord.certificationReadinessId}</span> | Form Code:{" "}
+                        <span className="font-semibold">{safeRecord.formCode}</span> | Created: {safeRecord.createdOn}
                       </p>
                     </div>
                   </div>
@@ -279,7 +395,7 @@ function CertificationReadinessNewPage() {
                     <Button
                       size="sm"
                       onClick={handleSubmitReview}
-                      disabled={submitMutation.isPending}
+                      disabled={submitReviewMutation.isPending}
                       className="h-8 text-xs font-semibold gap-1.5 bg-primary text-white hover:bg-primary/90"
                     >
                       <Send className="h-3.5 w-3.5" /> Submit for Review
@@ -310,37 +426,37 @@ function CertificationReadinessNewPage() {
                   <div>
                     <span className="text-muted-foreground block text-[10px]">Linked Product</span>
                     <span className="font-bold text-slate-900 dark:text-white truncate block">
-                      {record.linkedProductId}
+                      {safeRecord.linkedProductId}
                     </span>
                   </div>
                   <div>
                     <span className="text-muted-foreground block text-[10px]">Linked Testing & Validation</span>
                     <span className="font-semibold text-primary font-mono text-[11px]">
-                      {record.linkedTestingId}
+                      {safeRecord.linkedTestingId}
                     </span>
                   </div>
                   <div>
                     <span className="text-muted-foreground block text-[10px]">Compliance Manager</span>
                     <span className="font-medium text-slate-800 dark:text-slate-200">
-                      {record.complianceManagerName}
+                      {safeRecord.complianceManagerName}
                     </span>
                   </div>
                   <div>
                     <span className="text-muted-foreground block text-[10px]">Certification Coordinator</span>
                     <span className="font-medium text-slate-800 dark:text-slate-200">
-                      {record.certificationCoordinatorName}
+                      {safeRecord.certificationCoordinatorName}
                     </span>
                   </div>
                   <div>
                     <span className="text-muted-foreground block text-[10px]">Target Market</span>
                     <span className="font-semibold text-emerald-600">
-                      {record.targetMarkets.join(", ")}
+                      {(safeRecord.targetMarkets || []).join(", ")}
                     </span>
                   </div>
                   <div>
                     <span className="text-muted-foreground block text-[10px]">Regulatory Authority</span>
                     <span className="font-semibold text-purple-600 dark:text-purple-400">
-                      {record.regulatoryAuthorities.join(", ")}
+                      {(safeRecord.regulatoryAuthorities || []).join(", ")}
                     </span>
                   </div>
                 </div>
@@ -368,18 +484,18 @@ function CertificationReadinessNewPage() {
                           Certification Project Overview
                         </CardTitle>
                         <Badge variant="outline" className="text-[10px]">
-                          Priority: {record.priority}
+                          Priority: {safeRecord.priority}
                         </Badge>
                       </CardHeader>
                       <CardContent className="p-3.5 text-xs space-y-2">
                         <div className="flex justify-between">
                           <span className="text-muted-foreground text-[10px]">Product Category:</span>
-                          <span className="font-bold text-slate-900 dark:text-white">{record.productCategory}</span>
+                          <span className="font-bold text-slate-900 dark:text-white">{safeRecord.productCategory}</span>
                         </div>
                         <div>
                           <span className="text-muted-foreground text-[10px] block">Target Market:</span>
                           <div className="flex gap-1 mt-0.5">
-                            {record.targetMarkets.map((m) => (
+                            {(safeRecord.targetMarkets || []).map((m) => (
                               <Badge key={m} variant="secondary" className="text-[9px] px-1.5 py-0">
                                 {m}
                               </Badge>
@@ -389,12 +505,12 @@ function CertificationReadinessNewPage() {
                         <div>
                           <span className="text-muted-foreground text-[10px] block">Certification Objective:</span>
                           <p className="text-slate-600 dark:text-slate-300 line-clamp-2 text-[11px]">
-                            {record.certificationObjective}
+                            {safeRecord.certificationObjective}
                           </p>
                         </div>
                         <div className="flex justify-between text-[11px] pt-1">
                           <span className="text-muted-foreground">Authorities:</span>
-                          <span className="font-bold text-purple-600">{record.regulatoryAuthorities.join(", ")}</span>
+                          <span className="font-bold text-purple-600">{(safeRecord.regulatoryAuthorities || []).join(", ")}</span>
                         </div>
                       </CardContent>
                     </Card>
@@ -444,11 +560,11 @@ function CertificationReadinessNewPage() {
                           Documentation Readiness
                         </CardTitle>
                         <Badge className="bg-emerald-500/15 text-emerald-700 text-[10px] font-bold">
-                          Score: {record.documentationScore}/100
+                          Score: {safeRecord.documentationScore}/100
                         </Badge>
                       </CardHeader>
                       <CardContent className="p-3.5 text-xs space-y-1.5">
-                        {record.documentsList.slice(0, 4).map((doc) => (
+                        {(safeRecord.documentsList || []).slice(0, 4).map((doc) => (
                           <div key={doc.id} className="flex justify-between text-[11px]">
                             <span className="text-muted-foreground truncate max-w-[120px]">{doc.docName}:</span>
                             <span className="font-bold text-emerald-600 flex items-center gap-1">
@@ -469,7 +585,7 @@ function CertificationReadinessNewPage() {
                           Testing & Validation Readiness
                         </CardTitle>
                         <Badge className="bg-emerald-500/15 text-emerald-700 text-[10px] font-bold">
-                          Score: {record.testingScore}/100
+                          Score: {safeRecord.testingScore}/100
                         </Badge>
                       </CardHeader>
                       <CardContent className="p-3.5 text-xs space-y-1.5">
@@ -502,25 +618,25 @@ function CertificationReadinessNewPage() {
                           Certification Laboratory Management
                         </CardTitle>
                         <Badge className="bg-emerald-500/15 text-emerald-700 text-[10px] font-bold">
-                          Score: {record.laboratoryScore}/100
+                          Score: {safeRecord.laboratoryScore}/100
                         </Badge>
                       </CardHeader>
                       <CardContent className="p-3.5 text-xs space-y-1.5">
                         <div className="flex justify-between text-[11px]">
                           <span className="text-muted-foreground">Lab Name:</span>
-                          <span className="font-bold text-slate-900 dark:text-white">{record.labConfig.labName}</span>
+                          <span className="font-bold text-slate-900 dark:text-white">{safeRecord.labConfig?.labName}</span>
                         </div>
                         <div className="flex justify-between text-[11px]">
                           <span className="text-muted-foreground">Contact Person:</span>
-                          <span className="font-semibold">{record.labConfig.contactPerson}</span>
+                          <span className="font-semibold">{safeRecord.labConfig?.contactPerson}</span>
                         </div>
                         <div className="flex justify-between text-[11px]">
                           <span className="text-muted-foreground">Submission Date:</span>
-                          <span className="font-semibold text-primary">{record.labConfig.sampleSubmissionDate}</span>
+                          <span className="font-semibold text-primary">{safeRecord.labConfig?.sampleSubmissionDate}</span>
                         </div>
                         <div className="flex justify-between text-[11px]">
                           <span className="text-muted-foreground">Status:</span>
-                          <Badge className="bg-blue-500/15 text-blue-700 text-[9px]">{record.labConfig.status}</Badge>
+                          <Badge className="bg-blue-500/15 text-blue-700 text-[9px]">{safeRecord.labConfig?.status}</Badge>
                         </div>
                       </CardContent>
                     </Card>
@@ -535,21 +651,21 @@ function CertificationReadinessNewPage() {
                           Compliance Assessment
                         </CardTitle>
                         <Badge className="bg-amber-500/15 text-amber-700 text-[10px] font-bold">
-                          Score: {record.complianceScore}/100
+                          Score: {safeRecord.complianceScore}/100
                         </Badge>
                       </CardHeader>
                       <CardContent className="p-3.5 text-xs space-y-1.5">
                         <div className="flex justify-between text-[11px]">
                           <span className="text-muted-foreground">Non-Conformities:</span>
-                          <span className="font-bold text-amber-600">{record.complianceConfig.nonConformitiesCount}</span>
+                          <span className="font-bold text-amber-600">{safeRecord.complianceConfig?.nonConformitiesCount}</span>
                         </div>
                         <div className="flex justify-between text-[11px]">
                           <span className="text-muted-foreground">Critical Findings:</span>
-                          <span className="font-bold text-rose-600">{record.complianceConfig.criticalFindingsCount}</span>
+                          <span className="font-bold text-rose-600">{safeRecord.complianceConfig?.criticalFindingsCount}</span>
                         </div>
                         <div className="flex justify-between text-[11px]">
                           <span className="text-muted-foreground">CAPA Status:</span>
-                          <Badge className="bg-amber-500/15 text-amber-700 text-[9px]">{record.complianceConfig.capaStatus}</Badge>
+                          <Badge className="bg-amber-500/15 text-amber-700 text-[9px]">{safeRecord.complianceConfig?.capaStatus}</Badge>
                         </div>
                       </CardContent>
                     </Card>
@@ -564,21 +680,21 @@ function CertificationReadinessNewPage() {
                           AI Compliance Assessment
                         </CardTitle>
                         <Badge variant="outline" className="text-[10px] text-purple-600 font-bold border-purple-300">
-                          AI Score: {record.aiAssessment.aiReadinessScore}/100
+                          AI Score: {safeRecord.aiAssessment?.aiReadinessScore}/100
                         </Badge>
                       </CardHeader>
                       <CardContent className="p-3.5 text-xs space-y-1.5">
                         <div className="flex justify-between text-[11px]">
                           <span className="text-muted-foreground">Standards Review:</span>
-                          <span className="font-bold text-emerald-600">{record.aiAssessment.aiStandardsReview}</span>
+                          <span className="font-bold text-emerald-600">{safeRecord.aiAssessment?.aiStandardsReview}</span>
                         </div>
                         <div className="flex justify-between text-[11px]">
                           <span className="text-muted-foreground">Risk Assessment:</span>
-                          <span className="font-bold text-emerald-600">{record.aiAssessment.aiRiskAssessment}</span>
+                          <span className="font-bold text-emerald-600">{safeRecord.aiAssessment?.aiRiskAssessment}</span>
                         </div>
                         <div className="flex justify-between text-[11px]">
                           <span className="text-muted-foreground">Prediction:</span>
-                          <span className="font-bold text-purple-600">{record.aiAssessment.aiCertificationPrediction}</span>
+                          <span className="font-bold text-purple-600">{safeRecord.aiAssessment?.aiCertificationPrediction}</span>
                         </div>
                       </CardContent>
                     </Card>
@@ -593,7 +709,7 @@ function CertificationReadinessNewPage() {
                           Certification Summary & Probability
                         </CardTitle>
                         <Badge className="bg-primary text-white text-[10px] font-bold">
-                          Overall: {record.overallReadinessScore}/100
+                          Overall: {safeRecord.overallReadinessScore}/100
                         </Badge>
                       </CardHeader>
                       <CardContent className="p-3.5 text-xs space-y-2">
@@ -602,14 +718,14 @@ function CertificationReadinessNewPage() {
                             Certification Success Probability:
                           </span>
                           <span className="text-lg font-black text-emerald-600 dark:text-emerald-400">
-                            {record.certificationProbabilityPct}%
+                            {safeRecord.certificationProbabilityPct}%
                           </span>
                         </div>
-                        <Progress value={record.certificationProbabilityPct} className="h-2" />
+                        <Progress value={safeRecord.certificationProbabilityPct} className="h-2" />
                         <div className="flex justify-between items-center pt-1">
                           <span className="text-muted-foreground text-[10px]">Recommendation:</span>
                           <span className="font-bold text-primary text-[11px]">
-                            {record.readinessSummary.recommendation}
+                            {safeRecord.readinessSummary?.recommendation}
                           </span>
                         </div>
                       </CardContent>
@@ -624,7 +740,7 @@ function CertificationReadinessNewPage() {
                   <Card className="border-border/80 shadow-xs">
                     <CardHeader className="p-4 pb-2 border-b flex flex-row items-center justify-between">
                       <CardTitle className="text-sm font-bold flex items-center gap-2">
-                        <Scale className="h-4 w-4 text-primary" /> Applicable Standards Matrix ({record.standardsList.length})
+                        <Scale className="h-4 w-4 text-primary" /> Applicable Standards Matrix ({(safeRecord.standardsList || []).length})
                       </CardTitle>
                       <Button size="sm" onClick={() => setIsGapModalOpen(true)} className="h-8 text-xs bg-primary text-white">
                         + Perform Gap Analysis
@@ -643,7 +759,7 @@ function CertificationReadinessNewPage() {
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-border/60">
-                            {record.standardsList.map((std) => (
+                            {(safeRecord.standardsList || []).map((std) => (
                               <tr key={std.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
                                 <td className="p-2.5 font-mono font-bold text-primary">{std.code}</td>
                                 <td className="p-2.5 font-semibold text-slate-900 dark:text-white max-w-xs truncate">{std.title}</td>
@@ -666,9 +782,9 @@ function CertificationReadinessNewPage() {
                   <Card className="border-border/80 shadow-xs">
                     <CardHeader className="p-4 pb-2 border-b flex flex-row items-center justify-between">
                       <CardTitle className="text-sm font-bold flex items-center gap-2">
-                        <FileText className="h-4 w-4 text-primary" /> Required Technical Files & Declarations ({record.documentsList.length})
+                        <FileText className="h-4 w-4 text-primary" /> Required Technical Files & Declarations ({(safeRecord.documentsList || []).length})
                       </CardTitle>
-                      <Badge className="bg-emerald-500/15 text-emerald-700">Doc Score: {record.documentationScore}/100</Badge>
+                      <Badge className="bg-emerald-500/15 text-emerald-700">Doc Score: {safeRecord.documentationScore}/100</Badge>
                     </CardHeader>
                     <CardContent className="p-4 space-y-3">
                       <div className="rounded-lg border overflow-hidden">
@@ -684,7 +800,7 @@ function CertificationReadinessNewPage() {
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-border/60">
-                            {record.documentsList.map((doc) => (
+                            {(safeRecord.documentsList || []).map((doc) => (
                               <tr key={doc.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
                                 <td className="p-2.5 font-bold text-slate-900 dark:text-white flex items-center gap-2">
                                   <FileText className="h-4 w-4 text-primary" /> {doc.docName}
@@ -716,7 +832,7 @@ function CertificationReadinessNewPage() {
                       <CardTitle className="text-sm font-bold flex items-center gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary" /> Upstream Testing & Validation Traceability
                       </CardTitle>
-                      <Badge className="bg-emerald-500/15 text-emerald-700">Testing Score: {record.testingScore}/100</Badge>
+                      <Badge className="bg-emerald-500/15 text-emerald-700">Testing Score: {safeRecord.testingScore}/100</Badge>
                     </CardHeader>
                     <CardContent className="p-4 space-y-3">
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -757,27 +873,27 @@ function CertificationReadinessNewPage() {
                       <div className="rounded-lg border p-4 bg-white dark:bg-slate-900 space-y-3">
                         <div className="flex justify-between items-center border-b pb-2">
                           <div>
-                            <h3 className="font-bold text-base text-slate-900 dark:text-white">{record.labConfig.labName}</h3>
+                            <h3 className="font-bold text-base text-slate-900 dark:text-white">{safeRecord.labConfig?.labName}</h3>
                             <p className="text-xs text-muted-foreground">Authorized Regulatory Testing Body</p>
                           </div>
-                          <Badge className="bg-blue-500/15 text-blue-700 font-bold">{record.labConfig.status}</Badge>
+                          <Badge className="bg-blue-500/15 text-blue-700 font-bold">{safeRecord.labConfig?.status}</Badge>
                         </div>
                         <div className="grid grid-cols-2 gap-3 text-xs">
                           <div>
                             <span className="text-muted-foreground block text-[10px]">Contact Person:</span>
-                            <span className="font-semibold text-slate-800 dark:text-slate-200">{record.labConfig.contactPerson}</span>
+                            <span className="font-semibold text-slate-800 dark:text-slate-200">{safeRecord.labConfig?.contactPerson}</span>
                           </div>
                           <div>
                             <span className="text-muted-foreground block text-[10px]">Testing Scope:</span>
-                            <span className="font-semibold text-slate-800 dark:text-slate-200">{record.labConfig.scope}</span>
+                            <span className="font-semibold text-slate-800 dark:text-slate-200">{safeRecord.labConfig?.scope}</span>
                           </div>
                           <div>
                             <span className="text-muted-foreground block text-[10px]">Sample Submission:</span>
-                            <span className="font-bold text-primary">{record.labConfig.sampleSubmissionDate}</span>
+                            <span className="font-bold text-primary">{safeRecord.labConfig?.sampleSubmissionDate}</span>
                           </div>
                           <div>
                             <span className="text-muted-foreground block text-[10px]">Target Certification Date:</span>
-                            <span className="font-bold text-emerald-600">{record.labConfig.plannedCertificationDate}</span>
+                            <span className="font-bold text-emerald-600">{safeRecord.labConfig?.plannedCertificationDate}</span>
                           </div>
                         </div>
                       </div>
@@ -792,7 +908,7 @@ function CertificationReadinessNewPage() {
                   <Card className="border-border/80 shadow-xs">
                     <CardHeader className="p-4 pb-2 border-b flex flex-row items-center justify-between">
                       <CardTitle className="text-sm font-bold flex items-center gap-2">
-                        <AlertTriangle className="h-4 w-4 text-amber-600" /> Non-Conformities & Open CAPAs ({record.complianceConfig.nonConformitiesCount})
+                        <AlertTriangle className="h-4 w-4 text-amber-600" /> Non-Conformities & Open CAPAs ({safeRecord.complianceConfig?.nonConformitiesCount})
                       </CardTitle>
                       <Button size="sm" onClick={() => setIsCapaModalOpen(true)} className="h-8 text-xs bg-amber-600 text-white hover:bg-amber-700">
                         + Manage CAPA
@@ -850,10 +966,10 @@ function CertificationReadinessNewPage() {
                     <CardContent className="p-4 space-y-4">
                       <div className="space-y-3">
                         {[
-                          { label: "Documentation Score", score: record.documentationScore },
-                          { label: "Testing Score", score: record.testingScore },
-                          { label: "Compliance Score", score: record.complianceScore },
-                          { label: "Laboratory Score", score: record.laboratoryScore },
+                          { label: "Documentation Score", score: safeRecord.documentationScore },
+                          { label: "Testing Score", score: safeRecord.testingScore },
+                          { label: "Compliance Score", score: safeRecord.complianceScore },
+                          { label: "Laboratory Score", score: safeRecord.laboratoryScore },
                         ].map((item) => (
                           <div key={item.label} className="space-y-1">
                             <div className="flex justify-between text-xs font-semibold">
@@ -875,7 +991,7 @@ function CertificationReadinessNewPage() {
                   <Card className="border-border/80 shadow-xs">
                     <CardHeader className="p-4 pb-2 border-b flex flex-row items-center justify-between">
                       <CardTitle className="text-sm font-bold flex items-center gap-2">
-                        <Paperclip className="h-4 w-4 text-primary" /> Certification Package Assets ({record.attachments.length})
+                        <Paperclip className="h-4 w-4 text-primary" /> Certification Package Assets ({(safeRecord.attachments || []).length})
                       </CardTitle>
                       <Button size="sm" onClick={() => setIsUploadOpen(true)} className="h-8 text-xs bg-primary text-white">
                         + Upload File
@@ -894,7 +1010,7 @@ function CertificationReadinessNewPage() {
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-border/60">
-                            {record.attachments.map((att) => (
+                            {(safeRecord.attachments || []).map((att) => (
                               <tr key={att.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
                                 <td className="p-2.5 font-bold text-slate-900 dark:text-white flex items-center gap-2">
                                   <FileText className="h-4 w-4 text-primary" /> {att.name}
@@ -956,7 +1072,7 @@ function CertificationReadinessNewPage() {
                         />
                       </div>
 
-                      <Button onClick={handleSubmitDecision} disabled={reviewMutation.isPending} className="bg-primary text-white text-xs">
+                      <Button onClick={handleSubmitDecision} disabled={reviewDecisionMutation.isPending} className="bg-primary text-white text-xs">
                         Submit Decision
                       </Button>
                     </CardContent>
@@ -973,7 +1089,7 @@ function CertificationReadinessNewPage() {
                     </CardHeader>
                     <CardContent className="p-4 space-y-3">
                       <div className="space-y-2">
-                        {record.auditTrail.map((aud) => (
+                        {(safeRecord.auditTrail || []).map((aud) => (
                           <div key={aud.id} className="rounded-lg border p-3 text-xs flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/40">
                             <div>
                               <span className="font-bold text-slate-900 dark:text-white block">{aud.action}</span>
@@ -1007,7 +1123,7 @@ function CertificationReadinessNewPage() {
                 <CardContent className="p-5 text-center space-y-4">
                   <div className="relative mx-auto flex h-28 w-28 items-center justify-center rounded-full bg-primary/10 border-4 border-primary/20 p-2">
                     <div>
-                      <span className="text-3xl font-black text-primary dark:text-blue-400">{record.overallReadinessScore}</span>
+                      <span className="text-3xl font-black text-primary dark:text-blue-400">{safeRecord.overallReadinessScore}</span>
                       <span className="block text-[10px] font-bold text-muted-foreground">/ 100</span>
                     </div>
                   </div>
@@ -1015,23 +1131,23 @@ function CertificationReadinessNewPage() {
                   <div className="space-y-2 text-left text-xs border-t pt-3">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Documentation</span>
-                      <span className="font-bold text-slate-900 dark:text-white">{record.documentationScore}</span>
+                      <span className="font-bold text-slate-900 dark:text-white">{safeRecord.documentationScore}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Testing</span>
-                      <span className="font-bold text-slate-900 dark:text-white">{record.testingScore}</span>
+                      <span className="font-bold text-slate-900 dark:text-white">{safeRecord.testingScore}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Compliance</span>
-                      <span className="font-bold text-emerald-600">{record.complianceScore}</span>
+                      <span className="font-bold text-emerald-600">{safeRecord.complianceScore}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Laboratory</span>
-                      <span className="font-bold text-slate-900 dark:text-white">{record.laboratoryScore}</span>
+                      <span className="font-bold text-slate-900 dark:text-white">{safeRecord.laboratoryScore}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">AI Assessment</span>
-                      <span className="font-bold text-purple-600">{record.aiScore}</span>
+                      <span className="font-bold text-purple-600">{safeRecord.aiScore}</span>
                     </div>
                   </div>
                 </CardContent>
@@ -1089,7 +1205,6 @@ function CertificationReadinessNewPage() {
               </Card>
             </div>
           </div>
-        </div>
 
         {/* ====================================================================
            MODALS & DIALOGS
@@ -1129,7 +1244,6 @@ function CertificationReadinessNewPage() {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-      </div>
     </AppShell>
   );
 }

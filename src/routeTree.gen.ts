@@ -48,8 +48,10 @@ import { Route as ManagementFinanceBudgetingRouteImport } from './routes/managem
 import { Route as ManagementFinanceAuditRouteImport } from './routes/management.finance.audit'
 import { Route as ManagementFinanceAssetsRouteImport } from './routes/management.finance.assets'
 import { Route as DevelopmentResearchInnovationReportsRouteImport } from './routes/development.research-innovation.reports'
+import { Route as DevelopmentResearchInnovationProductReleaseManagementRouteImport } from './routes/development.research-innovation.product-release-management'
 import { Route as DevelopmentResearchInnovationOverviewRouteImport } from './routes/development.research-innovation.overview'
 import { Route as DevelopmentProductDevelopmentOverviewRouteImport } from './routes/development.product-development.overview'
+import { Route as DevelopmentProductDevelopmentCertificationReadinessRouteImport } from './routes/development.product-development.certification-readiness'
 import { Route as DevelopmentManufacturingDevelopmentOverviewRouteImport } from './routes/development.manufacturing-development.overview'
 import { Route as AdministrationHomeUsersRouteImport } from './routes/administration.home.users'
 import { Route as AdministrationHomeRolesRouteImport } from './routes/administration.home.roles'
@@ -444,6 +446,12 @@ const DevelopmentResearchInnovationReportsRoute =
     path: '/development/research-innovation/reports',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationProductReleaseManagementRoute =
+  DevelopmentResearchInnovationProductReleaseManagementRouteImport.update({
+    id: '/development/research-innovation/product-release-management',
+    path: '/development/research-innovation/product-release-management',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationOverviewRoute =
   DevelopmentResearchInnovationOverviewRouteImport.update({
     id: '/development/research-innovation/overview',
@@ -454,6 +462,12 @@ const DevelopmentProductDevelopmentOverviewRoute =
   DevelopmentProductDevelopmentOverviewRouteImport.update({
     id: '/development/product-development/overview',
     path: '/development/product-development/overview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentCertificationReadinessRoute =
+  DevelopmentProductDevelopmentCertificationReadinessRouteImport.update({
+    id: '/development/product-development/certification-readiness',
+    path: '/development/product-development/certification-readiness',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentManufacturingDevelopmentOverviewRoute =
@@ -608,9 +622,10 @@ const DevelopmentResearchInnovationProductRoadmapIndexRoute =
   } as any)
 const DevelopmentResearchInnovationProductReleaseManagementIndexRoute =
   DevelopmentResearchInnovationProductReleaseManagementIndexRouteImport.update({
-    id: '/development/research-innovation/product-release-management/',
-    path: '/development/research-innovation/product-release-management/',
-    getParentRoute: () => rootRouteImport,
+    id: '/',
+    path: '/',
+    getParentRoute: () =>
+      DevelopmentResearchInnovationProductReleaseManagementRoute,
   } as any)
 const DevelopmentResearchInnovationProductLifecycleManagementIndexRoute =
   DevelopmentResearchInnovationProductLifecycleManagementIndexRouteImport.update(
@@ -972,9 +987,10 @@ const DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRoute =
   } as any)
 const DevelopmentProductDevelopmentCertificationReadinessIndexRoute =
   DevelopmentProductDevelopmentCertificationReadinessIndexRouteImport.update({
-    id: '/development/product-development/certification-readiness/',
-    path: '/development/product-development/certification-readiness/',
-    getParentRoute: () => rootRouteImport,
+    id: '/',
+    path: '/',
+    getParentRoute: () =>
+      DevelopmentProductDevelopmentCertificationReadinessRoute,
   } as any)
 const DevelopmentProductDevelopmentApiDevelopmentIndexRoute =
   DevelopmentProductDevelopmentApiDevelopmentIndexRouteImport.update({
@@ -1286,9 +1302,10 @@ const DevelopmentResearchInnovationProductRoadmapNewRoute =
   } as any)
 const DevelopmentResearchInnovationProductReleaseManagementNewRoute =
   DevelopmentResearchInnovationProductReleaseManagementNewRouteImport.update({
-    id: '/development/research-innovation/product-release-management/new',
-    path: '/development/research-innovation/product-release-management/new',
-    getParentRoute: () => rootRouteImport,
+    id: '/new',
+    path: '/new',
+    getParentRoute: () =>
+      DevelopmentResearchInnovationProductReleaseManagementRoute,
   } as any)
 const DevelopmentResearchInnovationProductLifecycleManagementNewRoute =
   DevelopmentResearchInnovationProductLifecycleManagementNewRouteImport.update({
@@ -1542,8 +1559,10 @@ export interface FileRoutesByFullPath {
   '/administration/home/roles': typeof AdministrationHomeRolesRoute
   '/administration/home/users': typeof AdministrationHomeUsersRoute
   '/development/manufacturing-development/overview': typeof DevelopmentManufacturingDevelopmentOverviewRoute
+  '/development/product-development/certification-readiness': typeof DevelopmentProductDevelopmentCertificationReadinessRouteWithChildren
   '/development/product-development/overview': typeof DevelopmentProductDevelopmentOverviewRoute
   '/development/research-innovation/overview': typeof DevelopmentResearchInnovationOverviewRoute
+  '/development/research-innovation/product-release-management': typeof DevelopmentResearchInnovationProductReleaseManagementRouteWithChildren
   '/development/research-innovation/reports': typeof DevelopmentResearchInnovationReportsRoute
   '/management/finance/assets': typeof ManagementFinanceAssetsRoute
   '/management/finance/audit': typeof ManagementFinanceAuditRoute
@@ -1975,8 +1994,10 @@ export interface FileRoutesById {
   '/administration/home/roles': typeof AdministrationHomeRolesRoute
   '/administration/home/users': typeof AdministrationHomeUsersRoute
   '/development/manufacturing-development/overview': typeof DevelopmentManufacturingDevelopmentOverviewRoute
+  '/development/product-development/certification-readiness': typeof DevelopmentProductDevelopmentCertificationReadinessRouteWithChildren
   '/development/product-development/overview': typeof DevelopmentProductDevelopmentOverviewRoute
   '/development/research-innovation/overview': typeof DevelopmentResearchInnovationOverviewRoute
+  '/development/research-innovation/product-release-management': typeof DevelopmentResearchInnovationProductReleaseManagementRouteWithChildren
   '/development/research-innovation/reports': typeof DevelopmentResearchInnovationReportsRoute
   '/management/finance/assets': typeof ManagementFinanceAssetsRoute
   '/management/finance/audit': typeof ManagementFinanceAuditRoute
@@ -2193,8 +2214,10 @@ export interface FileRouteTypes {
     | '/administration/home/roles'
     | '/administration/home/users'
     | '/development/manufacturing-development/overview'
+    | '/development/product-development/certification-readiness'
     | '/development/product-development/overview'
     | '/development/research-innovation/overview'
+    | '/development/research-innovation/product-release-management'
     | '/development/research-innovation/reports'
     | '/management/finance/assets'
     | '/management/finance/audit'
@@ -2625,8 +2648,10 @@ export interface FileRouteTypes {
     | '/administration/home/roles'
     | '/administration/home/users'
     | '/development/manufacturing-development/overview'
+    | '/development/product-development/certification-readiness'
     | '/development/product-development/overview'
     | '/development/research-innovation/overview'
+    | '/development/research-innovation/product-release-management'
     | '/development/research-innovation/reports'
     | '/management/finance/assets'
     | '/management/finance/audit'
@@ -2842,8 +2867,10 @@ export interface RootRouteChildren {
   AdministrationHomeRolesRoute: typeof AdministrationHomeRolesRoute
   AdministrationHomeUsersRoute: typeof AdministrationHomeUsersRoute
   DevelopmentManufacturingDevelopmentOverviewRoute: typeof DevelopmentManufacturingDevelopmentOverviewRoute
+  DevelopmentProductDevelopmentCertificationReadinessRoute: typeof DevelopmentProductDevelopmentCertificationReadinessRouteWithChildren
   DevelopmentProductDevelopmentOverviewRoute: typeof DevelopmentProductDevelopmentOverviewRoute
   DevelopmentResearchInnovationOverviewRoute: typeof DevelopmentResearchInnovationOverviewRoute
+  DevelopmentResearchInnovationProductReleaseManagementRoute: typeof DevelopmentResearchInnovationProductReleaseManagementRouteWithChildren
   DevelopmentResearchInnovationReportsRoute: typeof DevelopmentResearchInnovationReportsRoute
   ManagementFinanceAssetsRoute: typeof ManagementFinanceAssetsRoute
   ManagementFinanceAuditRoute: typeof ManagementFinanceAuditRoute
@@ -2913,7 +2940,6 @@ export interface RootRouteChildren {
   DevelopmentResearchInnovationProductArchitectureNewRoute: typeof DevelopmentResearchInnovationProductArchitectureNewRoute
   DevelopmentResearchInnovationProductDocumentationNewRoute: typeof DevelopmentResearchInnovationProductDocumentationNewRoute
   DevelopmentResearchInnovationProductLifecycleManagementNewRoute: typeof DevelopmentResearchInnovationProductLifecycleManagementNewRoute
-  DevelopmentResearchInnovationProductReleaseManagementNewRoute: typeof DevelopmentResearchInnovationProductReleaseManagementNewRoute
   DevelopmentResearchInnovationProductRoadmapNewRoute: typeof DevelopmentResearchInnovationProductRoadmapNewRoute
   DevelopmentResearchInnovationProductStrategyNewRoute: typeof DevelopmentResearchInnovationProductStrategyNewRoute
   DevelopmentResearchInnovationProductStrategyOverviewRoute: typeof DevelopmentResearchInnovationProductStrategyOverviewRoute
@@ -2962,7 +2988,6 @@ export interface RootRouteChildren {
   DevelopmentManufacturingDevelopmentWorkInstructionDevelopmentIndexRoute: typeof DevelopmentManufacturingDevelopmentWorkInstructionDevelopmentIndexRoute
   DevelopmentProductDevelopmentAiModelDevelopmentIndexRoute: typeof DevelopmentProductDevelopmentAiModelDevelopmentIndexRoute
   DevelopmentProductDevelopmentApiDevelopmentIndexRoute: typeof DevelopmentProductDevelopmentApiDevelopmentIndexRoute
-  DevelopmentProductDevelopmentCertificationReadinessIndexRoute: typeof DevelopmentProductDevelopmentCertificationReadinessIndexRoute
   DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRoute: typeof DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRoute
   DevelopmentProductDevelopmentCybersecurityEngineeringIndexRoute: typeof DevelopmentProductDevelopmentCybersecurityEngineeringIndexRoute
   DevelopmentProductDevelopmentElectricalDesignIndexRoute: typeof DevelopmentProductDevelopmentElectricalDesignIndexRoute
@@ -3021,7 +3046,6 @@ export interface RootRouteChildren {
   DevelopmentResearchInnovationProductArchitectureIndexRoute: typeof DevelopmentResearchInnovationProductArchitectureIndexRoute
   DevelopmentResearchInnovationProductDocumentationIndexRoute: typeof DevelopmentResearchInnovationProductDocumentationIndexRoute
   DevelopmentResearchInnovationProductLifecycleManagementIndexRoute: typeof DevelopmentResearchInnovationProductLifecycleManagementIndexRoute
-  DevelopmentResearchInnovationProductReleaseManagementIndexRoute: typeof DevelopmentResearchInnovationProductReleaseManagementIndexRoute
   DevelopmentResearchInnovationProductRoadmapIndexRoute: typeof DevelopmentResearchInnovationProductRoadmapIndexRoute
   DevelopmentResearchInnovationProductStrategyIndexRoute: typeof DevelopmentResearchInnovationProductStrategyIndexRoute
   DevelopmentResearchInnovationProductionEngineeringIndexRoute: typeof DevelopmentResearchInnovationProductionEngineeringIndexRoute
@@ -3317,6 +3341,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationReportsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/product-release-management': {
+      id: '/development/research-innovation/product-release-management'
+      path: '/development/research-innovation/product-release-management'
+      fullPath: '/development/research-innovation/product-release-management'
+      preLoaderRoute: typeof DevelopmentResearchInnovationProductReleaseManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/overview': {
       id: '/development/research-innovation/overview'
       path: '/development/research-innovation/overview'
@@ -3329,6 +3360,13 @@ declare module '@tanstack/react-router' {
       path: '/development/product-development/overview'
       fullPath: '/development/product-development/overview'
       preLoaderRoute: typeof DevelopmentProductDevelopmentOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/certification-readiness': {
+      id: '/development/product-development/certification-readiness'
+      path: '/development/product-development/certification-readiness'
+      fullPath: '/development/product-development/certification-readiness'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentCertificationReadinessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/manufacturing-development/overview': {
@@ -3508,10 +3546,10 @@ declare module '@tanstack/react-router' {
     }
     '/development/research-innovation/product-release-management/': {
       id: '/development/research-innovation/product-release-management/'
-      path: '/development/research-innovation/product-release-management'
+      path: '/'
       fullPath: '/development/research-innovation/product-release-management/'
       preLoaderRoute: typeof DevelopmentResearchInnovationProductReleaseManagementIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof DevelopmentResearchInnovationProductReleaseManagementRoute
     }
     '/development/research-innovation/product-lifecycle-management/': {
       id: '/development/research-innovation/product-lifecycle-management/'
@@ -3921,10 +3959,10 @@ declare module '@tanstack/react-router' {
     }
     '/development/product-development/certification-readiness/': {
       id: '/development/product-development/certification-readiness/'
-      path: '/development/product-development/certification-readiness'
+      path: '/'
       fullPath: '/development/product-development/certification-readiness/'
       preLoaderRoute: typeof DevelopmentProductDevelopmentCertificationReadinessIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof DevelopmentProductDevelopmentCertificationReadinessRoute
     }
     '/development/product-development/api-development/': {
       id: '/development/product-development/api-development/'
@@ -4264,10 +4302,10 @@ declare module '@tanstack/react-router' {
     }
     '/development/research-innovation/product-release-management/new': {
       id: '/development/research-innovation/product-release-management/new'
-      path: '/development/research-innovation/product-release-management/new'
+      path: '/new'
       fullPath: '/development/research-innovation/product-release-management/new'
       preLoaderRoute: typeof DevelopmentResearchInnovationProductReleaseManagementNewRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof DevelopmentResearchInnovationProductReleaseManagementRoute
     }
     '/development/research-innovation/product-lifecycle-management/new': {
       id: '/development/research-innovation/product-lifecycle-management/new'
@@ -4545,6 +4583,39 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface DevelopmentProductDevelopmentCertificationReadinessRouteChildren {
+  DevelopmentProductDevelopmentCertificationReadinessIndexRoute: typeof DevelopmentProductDevelopmentCertificationReadinessIndexRoute
+}
+
+const DevelopmentProductDevelopmentCertificationReadinessRouteChildren: DevelopmentProductDevelopmentCertificationReadinessRouteChildren =
+  {
+    DevelopmentProductDevelopmentCertificationReadinessIndexRoute:
+      DevelopmentProductDevelopmentCertificationReadinessIndexRoute,
+  }
+
+const DevelopmentProductDevelopmentCertificationReadinessRouteWithChildren =
+  DevelopmentProductDevelopmentCertificationReadinessRoute._addFileChildren(
+    DevelopmentProductDevelopmentCertificationReadinessRouteChildren,
+  )
+
+interface DevelopmentResearchInnovationProductReleaseManagementRouteChildren {
+  DevelopmentResearchInnovationProductReleaseManagementNewRoute: typeof DevelopmentResearchInnovationProductReleaseManagementNewRoute
+  DevelopmentResearchInnovationProductReleaseManagementIndexRoute: typeof DevelopmentResearchInnovationProductReleaseManagementIndexRoute
+}
+
+const DevelopmentResearchInnovationProductReleaseManagementRouteChildren: DevelopmentResearchInnovationProductReleaseManagementRouteChildren =
+  {
+    DevelopmentResearchInnovationProductReleaseManagementNewRoute:
+      DevelopmentResearchInnovationProductReleaseManagementNewRoute,
+    DevelopmentResearchInnovationProductReleaseManagementIndexRoute:
+      DevelopmentResearchInnovationProductReleaseManagementIndexRoute,
+  }
+
+const DevelopmentResearchInnovationProductReleaseManagementRouteWithChildren =
+  DevelopmentResearchInnovationProductReleaseManagementRoute._addFileChildren(
+    DevelopmentResearchInnovationProductReleaseManagementRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExpensesRoute: ExpensesRoute,
@@ -4563,10 +4634,14 @@ const rootRouteChildren: RootRouteChildren = {
   AdministrationHomeUsersRoute: AdministrationHomeUsersRoute,
   DevelopmentManufacturingDevelopmentOverviewRoute:
     DevelopmentManufacturingDevelopmentOverviewRoute,
+  DevelopmentProductDevelopmentCertificationReadinessRoute:
+    DevelopmentProductDevelopmentCertificationReadinessRouteWithChildren,
   DevelopmentProductDevelopmentOverviewRoute:
     DevelopmentProductDevelopmentOverviewRoute,
   DevelopmentResearchInnovationOverviewRoute:
     DevelopmentResearchInnovationOverviewRoute,
+  DevelopmentResearchInnovationProductReleaseManagementRoute:
+    DevelopmentResearchInnovationProductReleaseManagementRouteWithChildren,
   DevelopmentResearchInnovationReportsRoute:
     DevelopmentResearchInnovationReportsRoute,
   ManagementFinanceAssetsRoute: ManagementFinanceAssetsRoute,
@@ -4691,8 +4766,6 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationProductDocumentationNewRoute,
   DevelopmentResearchInnovationProductLifecycleManagementNewRoute:
     DevelopmentResearchInnovationProductLifecycleManagementNewRoute,
-  DevelopmentResearchInnovationProductReleaseManagementNewRoute:
-    DevelopmentResearchInnovationProductReleaseManagementNewRoute,
   DevelopmentResearchInnovationProductRoadmapNewRoute:
     DevelopmentResearchInnovationProductRoadmapNewRoute,
   DevelopmentResearchInnovationProductStrategyNewRoute:
@@ -4789,8 +4862,6 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentProductDevelopmentAiModelDevelopmentIndexRoute,
   DevelopmentProductDevelopmentApiDevelopmentIndexRoute:
     DevelopmentProductDevelopmentApiDevelopmentIndexRoute,
-  DevelopmentProductDevelopmentCertificationReadinessIndexRoute:
-    DevelopmentProductDevelopmentCertificationReadinessIndexRoute,
   DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRoute:
     DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRoute,
   DevelopmentProductDevelopmentCybersecurityEngineeringIndexRoute:
@@ -4907,8 +4978,6 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationProductDocumentationIndexRoute,
   DevelopmentResearchInnovationProductLifecycleManagementIndexRoute:
     DevelopmentResearchInnovationProductLifecycleManagementIndexRoute,
-  DevelopmentResearchInnovationProductReleaseManagementIndexRoute:
-    DevelopmentResearchInnovationProductReleaseManagementIndexRoute,
   DevelopmentResearchInnovationProductRoadmapIndexRoute:
     DevelopmentResearchInnovationProductRoadmapIndexRoute,
   DevelopmentResearchInnovationProductStrategyIndexRoute:

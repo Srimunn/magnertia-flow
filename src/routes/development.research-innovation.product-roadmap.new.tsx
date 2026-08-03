@@ -117,7 +117,13 @@ function CircularScoreGauge({ score }: { score: number }) {
   );
 }
 
-function ProductRoadmapFormPage() {
+export function ProductRoadmapFormPage({
+  breadcrumb,
+  tabs,
+}: {
+  breadcrumb?: string;
+  tabs?: React.ReactNode;
+} = {}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -219,7 +225,8 @@ function ProductRoadmapFormPage() {
     return (
       <AppShell
         title="Product Roadmap"
-        breadcrumb="Development > Research & Innovation Development > Product Roadmap > Product Roadmap Form"
+        breadcrumb={breadcrumb}
+        tabs={tabs}
       >
         <div className="flex items-center justify-center h-96">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -245,8 +252,9 @@ function ProductRoadmapFormPage() {
   return (
     <AppShell
       title="Product Roadmap"
-      breadcrumb="Development > Research & Innovation Development > Product Roadmap > Product Roadmap Form"
-      tabs={<ProductRoadmapTabBar activeTab={activeTab} onTabChange={setActiveTab} />}
+      breadcrumb={breadcrumb}
+      description="Track product milestones, release horizons, feature dependencies, and strategic delivery schedules."
+      tabs={tabs}
     >
       <div className="space-y-6 pb-12">
         {/* ========================================================================= */}

@@ -46,7 +46,7 @@ export function calculateManufacturingScore(checks: {
   cycleTimeVerified: boolean;
   standardWorkAvailable: boolean;
 }): number {
-  const values = Object.values(checks).map((v) => (v ? 100 : 0));
+  const values: number[] = Object.values(checks).map((v) => (v ? 100 : 0));
   return Math.round(values.reduce((a, b) => a + b, 0) / values.length);
 }
 
@@ -111,7 +111,7 @@ export function calculateOperationalScore(checks: {
   emergencyResponsePlan: boolean;
   itMesReady: boolean;
 }): number {
-  const values = Object.values(checks).map((v) => (v ? 100 : 0));
+  const values: number[] = Object.values(checks).map((v) => (v ? 100 : 0));
   return Math.round(values.reduce((a, b) => a + b, 0) / values.length);
 }
 
