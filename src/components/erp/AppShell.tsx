@@ -296,6 +296,20 @@ const NAV_GROUPS: GroupItem[] = [
           },
           {
             kind: "leaf",
+            to: "/development/research-innovation/smart-factory-development/new",
+            matchPrefix: "/development/research-innovation/smart-factory-development",
+            label: "Smart Factory Development",
+            icon: Cpu,
+          },
+          {
+            kind: "leaf",
+            to: "/development/research-innovation/manufacturing-excellence/new",
+            matchPrefix: "/development/research-innovation/manufacturing-excellence",
+            label: "Manufacturing Excellence",
+            icon: Star,
+          },
+          {
+            kind: "leaf",
             to: "/development/research-innovation/capacity-planning/new",
             matchPrefix: "/development/research-innovation/capacity-planning",
             label: "Capacity Planning",

@@ -63,6 +63,7 @@ import { Route as DevelopmentResearchInnovationTestingValidationIndexRouteImport
 import { Route as DevelopmentResearchInnovationTechnologyScoutingIndexRouteImport } from './routes/development.research-innovation.technology-scouting.index'
 import { Route as DevelopmentResearchInnovationSopDevelopmentIndexRouteImport } from './routes/development.research-innovation.sop-development.index'
 import { Route as DevelopmentResearchInnovationSoftwareDevelopmentIndexRouteImport } from './routes/development.research-innovation.software-development.index'
+import { Route as DevelopmentResearchInnovationSmartFactoryDevelopmentIndexRouteImport } from './routes/development.research-innovation.smart-factory-development.index'
 import { Route as DevelopmentResearchInnovationSimulationAnalysisIndexRouteImport } from './routes/development.research-innovation.simulation-analysis.index'
 import { Route as DevelopmentResearchInnovationRoutingDevelopmentIndexRouteImport } from './routes/development.research-innovation.routing-development.index'
 import { Route as DevelopmentResearchInnovationResearchManagementIndexRouteImport } from './routes/development.research-innovation.research-management.index'
@@ -84,6 +85,7 @@ import { Route as DevelopmentResearchInnovationPfmeaDevelopmentIndexRouteImport 
 import { Route as DevelopmentResearchInnovationOpportunityDiscoveryIndexRouteImport } from './routes/development.research-innovation.opportunity-discovery.index'
 import { Route as DevelopmentResearchInnovationMobileAppDevelopmentIndexRouteImport } from './routes/development.research-innovation.mobile-app-development.index'
 import { Route as DevelopmentResearchInnovationMechanicalDesignIndexRouteImport } from './routes/development.research-innovation.mechanical-design.index'
+import { Route as DevelopmentResearchInnovationManufacturingExcellenceIndexRouteImport } from './routes/development.research-innovation.manufacturing-excellence.index'
 import { Route as DevelopmentResearchInnovationJigDevelopmentIndexRouteImport } from './routes/development.research-innovation.jig-development.index'
 import { Route as DevelopmentResearchInnovationIotDevelopmentIndexRouteImport } from './routes/development.research-innovation.iot-development.index'
 import { Route as DevelopmentResearchInnovationInnovationPortfolioIndexRouteImport } from './routes/development.research-innovation.innovation-portfolio.index'
@@ -118,6 +120,7 @@ import { Route as DevelopmentResearchInnovationTestingValidationNewRouteImport }
 import { Route as DevelopmentResearchInnovationTechnologyScoutingNewRouteImport } from './routes/development.research-innovation.technology-scouting.new'
 import { Route as DevelopmentResearchInnovationSopDevelopmentNewRouteImport } from './routes/development.research-innovation.sop-development.new'
 import { Route as DevelopmentResearchInnovationSoftwareDevelopmentNewRouteImport } from './routes/development.research-innovation.software-development.new'
+import { Route as DevelopmentResearchInnovationSmartFactoryDevelopmentNewRouteImport } from './routes/development.research-innovation.smart-factory-development.new'
 import { Route as DevelopmentResearchInnovationSimulationAnalysisNewRouteImport } from './routes/development.research-innovation.simulation-analysis.new'
 import { Route as DevelopmentResearchInnovationRoutingDevelopmentNewRouteImport } from './routes/development.research-innovation.routing-development.new'
 import { Route as DevelopmentResearchInnovationResearchManagementNewRouteImport } from './routes/development.research-innovation.research-management.new'
@@ -143,6 +146,7 @@ import { Route as DevelopmentResearchInnovationPfmeaDevelopmentNewRouteImport } 
 import { Route as DevelopmentResearchInnovationOpportunityDiscoveryNewRouteImport } from './routes/development.research-innovation.opportunity-discovery.new'
 import { Route as DevelopmentResearchInnovationMobileAppDevelopmentNewRouteImport } from './routes/development.research-innovation.mobile-app-development.new'
 import { Route as DevelopmentResearchInnovationMechanicalDesignNewRouteImport } from './routes/development.research-innovation.mechanical-design.new'
+import { Route as DevelopmentResearchInnovationManufacturingExcellenceNewRouteImport } from './routes/development.research-innovation.manufacturing-excellence.new'
 import { Route as DevelopmentResearchInnovationJigDevelopmentNewRouteImport } from './routes/development.research-innovation.jig-development.new'
 import { Route as DevelopmentResearchInnovationIotDevelopmentNewRouteImport } from './routes/development.research-innovation.iot-development.new'
 import { Route as DevelopmentResearchInnovationInnovationPortfolioNewRouteImport } from './routes/development.research-innovation.innovation-portfolio.new'
@@ -481,6 +485,12 @@ const DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute =
     path: '/development/research-innovation/software-development/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationSmartFactoryDevelopmentIndexRoute =
+  DevelopmentResearchInnovationSmartFactoryDevelopmentIndexRouteImport.update({
+    id: '/development/research-innovation/smart-factory-development/',
+    path: '/development/research-innovation/smart-factory-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationSimulationAnalysisIndexRoute =
   DevelopmentResearchInnovationSimulationAnalysisIndexRouteImport.update({
     id: '/development/research-innovation/simulation-analysis/',
@@ -607,6 +617,12 @@ const DevelopmentResearchInnovationMechanicalDesignIndexRoute =
   DevelopmentResearchInnovationMechanicalDesignIndexRouteImport.update({
     id: '/development/research-innovation/mechanical-design/',
     path: '/development/research-innovation/mechanical-design/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationManufacturingExcellenceIndexRoute =
+  DevelopmentResearchInnovationManufacturingExcellenceIndexRouteImport.update({
+    id: '/development/research-innovation/manufacturing-excellence/',
+    path: '/development/research-innovation/manufacturing-excellence/',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationJigDevelopmentIndexRoute =
@@ -817,6 +833,12 @@ const DevelopmentResearchInnovationSoftwareDevelopmentNewRoute =
     path: '/development/research-innovation/software-development/new',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentResearchInnovationSmartFactoryDevelopmentNewRoute =
+  DevelopmentResearchInnovationSmartFactoryDevelopmentNewRouteImport.update({
+    id: '/development/research-innovation/smart-factory-development/new',
+    path: '/development/research-innovation/smart-factory-development/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DevelopmentResearchInnovationSimulationAnalysisNewRoute =
   DevelopmentResearchInnovationSimulationAnalysisNewRouteImport.update({
     id: '/development/research-innovation/simulation-analysis/new',
@@ -965,6 +987,12 @@ const DevelopmentResearchInnovationMechanicalDesignNewRoute =
   DevelopmentResearchInnovationMechanicalDesignNewRouteImport.update({
     id: '/development/research-innovation/mechanical-design/new',
     path: '/development/research-innovation/mechanical-design/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentResearchInnovationManufacturingExcellenceNewRoute =
+  DevelopmentResearchInnovationManufacturingExcellenceNewRouteImport.update({
+    id: '/development/research-innovation/manufacturing-excellence/new',
+    path: '/development/research-innovation/manufacturing-excellence/new',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DevelopmentResearchInnovationJigDevelopmentNewRoute =
@@ -1204,6 +1232,7 @@ export interface FileRoutesByFullPath {
   '/development/research-innovation/innovation-portfolio/new': typeof DevelopmentResearchInnovationInnovationPortfolioNewRoute
   '/development/research-innovation/iot-development/new': typeof DevelopmentResearchInnovationIotDevelopmentNewRoute
   '/development/research-innovation/jig-development/new': typeof DevelopmentResearchInnovationJigDevelopmentNewRoute
+  '/development/research-innovation/manufacturing-excellence/new': typeof DevelopmentResearchInnovationManufacturingExcellenceNewRoute
   '/development/research-innovation/mechanical-design/new': typeof DevelopmentResearchInnovationMechanicalDesignNewRoute
   '/development/research-innovation/mobile-app-development/new': typeof DevelopmentResearchInnovationMobileAppDevelopmentNewRoute
   '/development/research-innovation/opportunity-discovery/new': typeof DevelopmentResearchInnovationOpportunityDiscoveryNewRoute
@@ -1229,6 +1258,7 @@ export interface FileRoutesByFullPath {
   '/development/research-innovation/research-management/new': typeof DevelopmentResearchInnovationResearchManagementNewRoute
   '/development/research-innovation/routing-development/new': typeof DevelopmentResearchInnovationRoutingDevelopmentNewRoute
   '/development/research-innovation/simulation-analysis/new': typeof DevelopmentResearchInnovationSimulationAnalysisNewRoute
+  '/development/research-innovation/smart-factory-development/new': typeof DevelopmentResearchInnovationSmartFactoryDevelopmentNewRoute
   '/development/research-innovation/software-development/new': typeof DevelopmentResearchInnovationSoftwareDevelopmentNewRoute
   '/development/research-innovation/sop-development/new': typeof DevelopmentResearchInnovationSopDevelopmentNewRoute
   '/development/research-innovation/technology-scouting/new': typeof DevelopmentResearchInnovationTechnologyScoutingNewRoute
@@ -1263,6 +1293,7 @@ export interface FileRoutesByFullPath {
   '/development/research-innovation/innovation-portfolio/': typeof DevelopmentResearchInnovationInnovationPortfolioIndexRoute
   '/development/research-innovation/iot-development/': typeof DevelopmentResearchInnovationIotDevelopmentIndexRoute
   '/development/research-innovation/jig-development/': typeof DevelopmentResearchInnovationJigDevelopmentIndexRoute
+  '/development/research-innovation/manufacturing-excellence/': typeof DevelopmentResearchInnovationManufacturingExcellenceIndexRoute
   '/development/research-innovation/mechanical-design/': typeof DevelopmentResearchInnovationMechanicalDesignIndexRoute
   '/development/research-innovation/mobile-app-development/': typeof DevelopmentResearchInnovationMobileAppDevelopmentIndexRoute
   '/development/research-innovation/opportunity-discovery/': typeof DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute
@@ -1284,6 +1315,7 @@ export interface FileRoutesByFullPath {
   '/development/research-innovation/research-management/': typeof DevelopmentResearchInnovationResearchManagementIndexRoute
   '/development/research-innovation/routing-development/': typeof DevelopmentResearchInnovationRoutingDevelopmentIndexRoute
   '/development/research-innovation/simulation-analysis/': typeof DevelopmentResearchInnovationSimulationAnalysisIndexRoute
+  '/development/research-innovation/smart-factory-development/': typeof DevelopmentResearchInnovationSmartFactoryDevelopmentIndexRoute
   '/development/research-innovation/software-development/': typeof DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute
   '/development/research-innovation/sop-development/': typeof DevelopmentResearchInnovationSopDevelopmentIndexRoute
   '/development/research-innovation/technology-scouting/': typeof DevelopmentResearchInnovationTechnologyScoutingIndexRoute
@@ -1367,6 +1399,7 @@ export interface FileRoutesByTo {
   '/development/research-innovation/innovation-portfolio/new': typeof DevelopmentResearchInnovationInnovationPortfolioNewRoute
   '/development/research-innovation/iot-development/new': typeof DevelopmentResearchInnovationIotDevelopmentNewRoute
   '/development/research-innovation/jig-development/new': typeof DevelopmentResearchInnovationJigDevelopmentNewRoute
+  '/development/research-innovation/manufacturing-excellence/new': typeof DevelopmentResearchInnovationManufacturingExcellenceNewRoute
   '/development/research-innovation/mechanical-design/new': typeof DevelopmentResearchInnovationMechanicalDesignNewRoute
   '/development/research-innovation/mobile-app-development/new': typeof DevelopmentResearchInnovationMobileAppDevelopmentNewRoute
   '/development/research-innovation/opportunity-discovery/new': typeof DevelopmentResearchInnovationOpportunityDiscoveryNewRoute
@@ -1392,6 +1425,7 @@ export interface FileRoutesByTo {
   '/development/research-innovation/research-management/new': typeof DevelopmentResearchInnovationResearchManagementNewRoute
   '/development/research-innovation/routing-development/new': typeof DevelopmentResearchInnovationRoutingDevelopmentNewRoute
   '/development/research-innovation/simulation-analysis/new': typeof DevelopmentResearchInnovationSimulationAnalysisNewRoute
+  '/development/research-innovation/smart-factory-development/new': typeof DevelopmentResearchInnovationSmartFactoryDevelopmentNewRoute
   '/development/research-innovation/software-development/new': typeof DevelopmentResearchInnovationSoftwareDevelopmentNewRoute
   '/development/research-innovation/sop-development/new': typeof DevelopmentResearchInnovationSopDevelopmentNewRoute
   '/development/research-innovation/technology-scouting/new': typeof DevelopmentResearchInnovationTechnologyScoutingNewRoute
@@ -1426,6 +1460,7 @@ export interface FileRoutesByTo {
   '/development/research-innovation/innovation-portfolio': typeof DevelopmentResearchInnovationInnovationPortfolioIndexRoute
   '/development/research-innovation/iot-development': typeof DevelopmentResearchInnovationIotDevelopmentIndexRoute
   '/development/research-innovation/jig-development': typeof DevelopmentResearchInnovationJigDevelopmentIndexRoute
+  '/development/research-innovation/manufacturing-excellence': typeof DevelopmentResearchInnovationManufacturingExcellenceIndexRoute
   '/development/research-innovation/mechanical-design': typeof DevelopmentResearchInnovationMechanicalDesignIndexRoute
   '/development/research-innovation/mobile-app-development': typeof DevelopmentResearchInnovationMobileAppDevelopmentIndexRoute
   '/development/research-innovation/opportunity-discovery': typeof DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute
@@ -1447,6 +1482,7 @@ export interface FileRoutesByTo {
   '/development/research-innovation/research-management': typeof DevelopmentResearchInnovationResearchManagementIndexRoute
   '/development/research-innovation/routing-development': typeof DevelopmentResearchInnovationRoutingDevelopmentIndexRoute
   '/development/research-innovation/simulation-analysis': typeof DevelopmentResearchInnovationSimulationAnalysisIndexRoute
+  '/development/research-innovation/smart-factory-development': typeof DevelopmentResearchInnovationSmartFactoryDevelopmentIndexRoute
   '/development/research-innovation/software-development': typeof DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute
   '/development/research-innovation/sop-development': typeof DevelopmentResearchInnovationSopDevelopmentIndexRoute
   '/development/research-innovation/technology-scouting': typeof DevelopmentResearchInnovationTechnologyScoutingIndexRoute
@@ -1531,6 +1567,7 @@ export interface FileRoutesById {
   '/development/research-innovation/innovation-portfolio/new': typeof DevelopmentResearchInnovationInnovationPortfolioNewRoute
   '/development/research-innovation/iot-development/new': typeof DevelopmentResearchInnovationIotDevelopmentNewRoute
   '/development/research-innovation/jig-development/new': typeof DevelopmentResearchInnovationJigDevelopmentNewRoute
+  '/development/research-innovation/manufacturing-excellence/new': typeof DevelopmentResearchInnovationManufacturingExcellenceNewRoute
   '/development/research-innovation/mechanical-design/new': typeof DevelopmentResearchInnovationMechanicalDesignNewRoute
   '/development/research-innovation/mobile-app-development/new': typeof DevelopmentResearchInnovationMobileAppDevelopmentNewRoute
   '/development/research-innovation/opportunity-discovery/new': typeof DevelopmentResearchInnovationOpportunityDiscoveryNewRoute
@@ -1556,6 +1593,7 @@ export interface FileRoutesById {
   '/development/research-innovation/research-management/new': typeof DevelopmentResearchInnovationResearchManagementNewRoute
   '/development/research-innovation/routing-development/new': typeof DevelopmentResearchInnovationRoutingDevelopmentNewRoute
   '/development/research-innovation/simulation-analysis/new': typeof DevelopmentResearchInnovationSimulationAnalysisNewRoute
+  '/development/research-innovation/smart-factory-development/new': typeof DevelopmentResearchInnovationSmartFactoryDevelopmentNewRoute
   '/development/research-innovation/software-development/new': typeof DevelopmentResearchInnovationSoftwareDevelopmentNewRoute
   '/development/research-innovation/sop-development/new': typeof DevelopmentResearchInnovationSopDevelopmentNewRoute
   '/development/research-innovation/technology-scouting/new': typeof DevelopmentResearchInnovationTechnologyScoutingNewRoute
@@ -1590,6 +1628,7 @@ export interface FileRoutesById {
   '/development/research-innovation/innovation-portfolio/': typeof DevelopmentResearchInnovationInnovationPortfolioIndexRoute
   '/development/research-innovation/iot-development/': typeof DevelopmentResearchInnovationIotDevelopmentIndexRoute
   '/development/research-innovation/jig-development/': typeof DevelopmentResearchInnovationJigDevelopmentIndexRoute
+  '/development/research-innovation/manufacturing-excellence/': typeof DevelopmentResearchInnovationManufacturingExcellenceIndexRoute
   '/development/research-innovation/mechanical-design/': typeof DevelopmentResearchInnovationMechanicalDesignIndexRoute
   '/development/research-innovation/mobile-app-development/': typeof DevelopmentResearchInnovationMobileAppDevelopmentIndexRoute
   '/development/research-innovation/opportunity-discovery/': typeof DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute
@@ -1611,6 +1650,7 @@ export interface FileRoutesById {
   '/development/research-innovation/research-management/': typeof DevelopmentResearchInnovationResearchManagementIndexRoute
   '/development/research-innovation/routing-development/': typeof DevelopmentResearchInnovationRoutingDevelopmentIndexRoute
   '/development/research-innovation/simulation-analysis/': typeof DevelopmentResearchInnovationSimulationAnalysisIndexRoute
+  '/development/research-innovation/smart-factory-development/': typeof DevelopmentResearchInnovationSmartFactoryDevelopmentIndexRoute
   '/development/research-innovation/software-development/': typeof DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute
   '/development/research-innovation/sop-development/': typeof DevelopmentResearchInnovationSopDevelopmentIndexRoute
   '/development/research-innovation/technology-scouting/': typeof DevelopmentResearchInnovationTechnologyScoutingIndexRoute
@@ -1696,6 +1736,7 @@ export interface FileRouteTypes {
     | '/development/research-innovation/innovation-portfolio/new'
     | '/development/research-innovation/iot-development/new'
     | '/development/research-innovation/jig-development/new'
+    | '/development/research-innovation/manufacturing-excellence/new'
     | '/development/research-innovation/mechanical-design/new'
     | '/development/research-innovation/mobile-app-development/new'
     | '/development/research-innovation/opportunity-discovery/new'
@@ -1721,6 +1762,7 @@ export interface FileRouteTypes {
     | '/development/research-innovation/research-management/new'
     | '/development/research-innovation/routing-development/new'
     | '/development/research-innovation/simulation-analysis/new'
+    | '/development/research-innovation/smart-factory-development/new'
     | '/development/research-innovation/software-development/new'
     | '/development/research-innovation/sop-development/new'
     | '/development/research-innovation/technology-scouting/new'
@@ -1755,6 +1797,7 @@ export interface FileRouteTypes {
     | '/development/research-innovation/innovation-portfolio/'
     | '/development/research-innovation/iot-development/'
     | '/development/research-innovation/jig-development/'
+    | '/development/research-innovation/manufacturing-excellence/'
     | '/development/research-innovation/mechanical-design/'
     | '/development/research-innovation/mobile-app-development/'
     | '/development/research-innovation/opportunity-discovery/'
@@ -1776,6 +1819,7 @@ export interface FileRouteTypes {
     | '/development/research-innovation/research-management/'
     | '/development/research-innovation/routing-development/'
     | '/development/research-innovation/simulation-analysis/'
+    | '/development/research-innovation/smart-factory-development/'
     | '/development/research-innovation/software-development/'
     | '/development/research-innovation/sop-development/'
     | '/development/research-innovation/technology-scouting/'
@@ -1859,6 +1903,7 @@ export interface FileRouteTypes {
     | '/development/research-innovation/innovation-portfolio/new'
     | '/development/research-innovation/iot-development/new'
     | '/development/research-innovation/jig-development/new'
+    | '/development/research-innovation/manufacturing-excellence/new'
     | '/development/research-innovation/mechanical-design/new'
     | '/development/research-innovation/mobile-app-development/new'
     | '/development/research-innovation/opportunity-discovery/new'
@@ -1884,6 +1929,7 @@ export interface FileRouteTypes {
     | '/development/research-innovation/research-management/new'
     | '/development/research-innovation/routing-development/new'
     | '/development/research-innovation/simulation-analysis/new'
+    | '/development/research-innovation/smart-factory-development/new'
     | '/development/research-innovation/software-development/new'
     | '/development/research-innovation/sop-development/new'
     | '/development/research-innovation/technology-scouting/new'
@@ -1918,6 +1964,7 @@ export interface FileRouteTypes {
     | '/development/research-innovation/innovation-portfolio'
     | '/development/research-innovation/iot-development'
     | '/development/research-innovation/jig-development'
+    | '/development/research-innovation/manufacturing-excellence'
     | '/development/research-innovation/mechanical-design'
     | '/development/research-innovation/mobile-app-development'
     | '/development/research-innovation/opportunity-discovery'
@@ -1939,6 +1986,7 @@ export interface FileRouteTypes {
     | '/development/research-innovation/research-management'
     | '/development/research-innovation/routing-development'
     | '/development/research-innovation/simulation-analysis'
+    | '/development/research-innovation/smart-factory-development'
     | '/development/research-innovation/software-development'
     | '/development/research-innovation/sop-development'
     | '/development/research-innovation/technology-scouting'
@@ -2022,6 +2070,7 @@ export interface FileRouteTypes {
     | '/development/research-innovation/innovation-portfolio/new'
     | '/development/research-innovation/iot-development/new'
     | '/development/research-innovation/jig-development/new'
+    | '/development/research-innovation/manufacturing-excellence/new'
     | '/development/research-innovation/mechanical-design/new'
     | '/development/research-innovation/mobile-app-development/new'
     | '/development/research-innovation/opportunity-discovery/new'
@@ -2047,6 +2096,7 @@ export interface FileRouteTypes {
     | '/development/research-innovation/research-management/new'
     | '/development/research-innovation/routing-development/new'
     | '/development/research-innovation/simulation-analysis/new'
+    | '/development/research-innovation/smart-factory-development/new'
     | '/development/research-innovation/software-development/new'
     | '/development/research-innovation/sop-development/new'
     | '/development/research-innovation/technology-scouting/new'
@@ -2081,6 +2131,7 @@ export interface FileRouteTypes {
     | '/development/research-innovation/innovation-portfolio/'
     | '/development/research-innovation/iot-development/'
     | '/development/research-innovation/jig-development/'
+    | '/development/research-innovation/manufacturing-excellence/'
     | '/development/research-innovation/mechanical-design/'
     | '/development/research-innovation/mobile-app-development/'
     | '/development/research-innovation/opportunity-discovery/'
@@ -2102,6 +2153,7 @@ export interface FileRouteTypes {
     | '/development/research-innovation/research-management/'
     | '/development/research-innovation/routing-development/'
     | '/development/research-innovation/simulation-analysis/'
+    | '/development/research-innovation/smart-factory-development/'
     | '/development/research-innovation/software-development/'
     | '/development/research-innovation/sop-development/'
     | '/development/research-innovation/technology-scouting/'
@@ -2186,6 +2238,7 @@ export interface RootRouteChildren {
   DevelopmentResearchInnovationInnovationPortfolioNewRoute: typeof DevelopmentResearchInnovationInnovationPortfolioNewRoute
   DevelopmentResearchInnovationIotDevelopmentNewRoute: typeof DevelopmentResearchInnovationIotDevelopmentNewRoute
   DevelopmentResearchInnovationJigDevelopmentNewRoute: typeof DevelopmentResearchInnovationJigDevelopmentNewRoute
+  DevelopmentResearchInnovationManufacturingExcellenceNewRoute: typeof DevelopmentResearchInnovationManufacturingExcellenceNewRoute
   DevelopmentResearchInnovationMechanicalDesignNewRoute: typeof DevelopmentResearchInnovationMechanicalDesignNewRoute
   DevelopmentResearchInnovationMobileAppDevelopmentNewRoute: typeof DevelopmentResearchInnovationMobileAppDevelopmentNewRoute
   DevelopmentResearchInnovationOpportunityDiscoveryNewRoute: typeof DevelopmentResearchInnovationOpportunityDiscoveryNewRoute
@@ -2211,6 +2264,7 @@ export interface RootRouteChildren {
   DevelopmentResearchInnovationResearchManagementNewRoute: typeof DevelopmentResearchInnovationResearchManagementNewRoute
   DevelopmentResearchInnovationRoutingDevelopmentNewRoute: typeof DevelopmentResearchInnovationRoutingDevelopmentNewRoute
   DevelopmentResearchInnovationSimulationAnalysisNewRoute: typeof DevelopmentResearchInnovationSimulationAnalysisNewRoute
+  DevelopmentResearchInnovationSmartFactoryDevelopmentNewRoute: typeof DevelopmentResearchInnovationSmartFactoryDevelopmentNewRoute
   DevelopmentResearchInnovationSoftwareDevelopmentNewRoute: typeof DevelopmentResearchInnovationSoftwareDevelopmentNewRoute
   DevelopmentResearchInnovationSopDevelopmentNewRoute: typeof DevelopmentResearchInnovationSopDevelopmentNewRoute
   DevelopmentResearchInnovationTechnologyScoutingNewRoute: typeof DevelopmentResearchInnovationTechnologyScoutingNewRoute
@@ -2245,6 +2299,7 @@ export interface RootRouteChildren {
   DevelopmentResearchInnovationInnovationPortfolioIndexRoute: typeof DevelopmentResearchInnovationInnovationPortfolioIndexRoute
   DevelopmentResearchInnovationIotDevelopmentIndexRoute: typeof DevelopmentResearchInnovationIotDevelopmentIndexRoute
   DevelopmentResearchInnovationJigDevelopmentIndexRoute: typeof DevelopmentResearchInnovationJigDevelopmentIndexRoute
+  DevelopmentResearchInnovationManufacturingExcellenceIndexRoute: typeof DevelopmentResearchInnovationManufacturingExcellenceIndexRoute
   DevelopmentResearchInnovationMechanicalDesignIndexRoute: typeof DevelopmentResearchInnovationMechanicalDesignIndexRoute
   DevelopmentResearchInnovationMobileAppDevelopmentIndexRoute: typeof DevelopmentResearchInnovationMobileAppDevelopmentIndexRoute
   DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute: typeof DevelopmentResearchInnovationOpportunityDiscoveryIndexRoute
@@ -2266,6 +2321,7 @@ export interface RootRouteChildren {
   DevelopmentResearchInnovationResearchManagementIndexRoute: typeof DevelopmentResearchInnovationResearchManagementIndexRoute
   DevelopmentResearchInnovationRoutingDevelopmentIndexRoute: typeof DevelopmentResearchInnovationRoutingDevelopmentIndexRoute
   DevelopmentResearchInnovationSimulationAnalysisIndexRoute: typeof DevelopmentResearchInnovationSimulationAnalysisIndexRoute
+  DevelopmentResearchInnovationSmartFactoryDevelopmentIndexRoute: typeof DevelopmentResearchInnovationSmartFactoryDevelopmentIndexRoute
   DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute: typeof DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute
   DevelopmentResearchInnovationSopDevelopmentIndexRoute: typeof DevelopmentResearchInnovationSopDevelopmentIndexRoute
   DevelopmentResearchInnovationTechnologyScoutingIndexRoute: typeof DevelopmentResearchInnovationTechnologyScoutingIndexRoute
@@ -2656,6 +2712,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationSoftwareDevelopmentIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/smart-factory-development/': {
+      id: '/development/research-innovation/smart-factory-development/'
+      path: '/development/research-innovation/smart-factory-development'
+      fullPath: '/development/research-innovation/smart-factory-development/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationSmartFactoryDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/simulation-analysis/': {
       id: '/development/research-innovation/simulation-analysis/'
       path: '/development/research-innovation/simulation-analysis'
@@ -2801,6 +2864,13 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/mechanical-design'
       fullPath: '/development/research-innovation/mechanical-design/'
       preLoaderRoute: typeof DevelopmentResearchInnovationMechanicalDesignIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/manufacturing-excellence/': {
+      id: '/development/research-innovation/manufacturing-excellence/'
+      path: '/development/research-innovation/manufacturing-excellence'
+      fullPath: '/development/research-innovation/manufacturing-excellence/'
+      preLoaderRoute: typeof DevelopmentResearchInnovationManufacturingExcellenceIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/jig-development/': {
@@ -3041,6 +3111,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentResearchInnovationSoftwareDevelopmentNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/development/research-innovation/smart-factory-development/new': {
+      id: '/development/research-innovation/smart-factory-development/new'
+      path: '/development/research-innovation/smart-factory-development/new'
+      fullPath: '/development/research-innovation/smart-factory-development/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationSmartFactoryDevelopmentNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/development/research-innovation/simulation-analysis/new': {
       id: '/development/research-innovation/simulation-analysis/new'
       path: '/development/research-innovation/simulation-analysis/new'
@@ -3214,6 +3291,13 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/mechanical-design/new'
       fullPath: '/development/research-innovation/mechanical-design/new'
       preLoaderRoute: typeof DevelopmentResearchInnovationMechanicalDesignNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/research-innovation/manufacturing-excellence/new': {
+      id: '/development/research-innovation/manufacturing-excellence/new'
+      path: '/development/research-innovation/manufacturing-excellence/new'
+      fullPath: '/development/research-innovation/manufacturing-excellence/new'
+      preLoaderRoute: typeof DevelopmentResearchInnovationManufacturingExcellenceNewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/research-innovation/jig-development/new': {
@@ -3526,6 +3610,8 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationIotDevelopmentNewRoute,
   DevelopmentResearchInnovationJigDevelopmentNewRoute:
     DevelopmentResearchInnovationJigDevelopmentNewRoute,
+  DevelopmentResearchInnovationManufacturingExcellenceNewRoute:
+    DevelopmentResearchInnovationManufacturingExcellenceNewRoute,
   DevelopmentResearchInnovationMechanicalDesignNewRoute:
     DevelopmentResearchInnovationMechanicalDesignNewRoute,
   DevelopmentResearchInnovationMobileAppDevelopmentNewRoute:
@@ -3576,6 +3662,8 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationRoutingDevelopmentNewRoute,
   DevelopmentResearchInnovationSimulationAnalysisNewRoute:
     DevelopmentResearchInnovationSimulationAnalysisNewRoute,
+  DevelopmentResearchInnovationSmartFactoryDevelopmentNewRoute:
+    DevelopmentResearchInnovationSmartFactoryDevelopmentNewRoute,
   DevelopmentResearchInnovationSoftwareDevelopmentNewRoute:
     DevelopmentResearchInnovationSoftwareDevelopmentNewRoute,
   DevelopmentResearchInnovationSopDevelopmentNewRoute:
@@ -3644,6 +3732,8 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationIotDevelopmentIndexRoute,
   DevelopmentResearchInnovationJigDevelopmentIndexRoute:
     DevelopmentResearchInnovationJigDevelopmentIndexRoute,
+  DevelopmentResearchInnovationManufacturingExcellenceIndexRoute:
+    DevelopmentResearchInnovationManufacturingExcellenceIndexRoute,
   DevelopmentResearchInnovationMechanicalDesignIndexRoute:
     DevelopmentResearchInnovationMechanicalDesignIndexRoute,
   DevelopmentResearchInnovationMobileAppDevelopmentIndexRoute:
@@ -3686,6 +3776,8 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationRoutingDevelopmentIndexRoute,
   DevelopmentResearchInnovationSimulationAnalysisIndexRoute:
     DevelopmentResearchInnovationSimulationAnalysisIndexRoute,
+  DevelopmentResearchInnovationSmartFactoryDevelopmentIndexRoute:
+    DevelopmentResearchInnovationSmartFactoryDevelopmentIndexRoute,
   DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute:
     DevelopmentResearchInnovationSoftwareDevelopmentIndexRoute,
   DevelopmentResearchInnovationSopDevelopmentIndexRoute:
