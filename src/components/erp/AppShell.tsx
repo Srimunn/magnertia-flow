@@ -357,6 +357,48 @@ const NAV_GROUPS: GroupItem[] = [
             label: "Process Validation",
             icon: CheckSquare,
           },
+          {
+            kind: "leaf",
+            to: "/manufacturing-development/pilot-production",
+            matchPrefix: "/manufacturing-development/pilot-production",
+            label: "Pilot Production",
+            icon: Repeat,
+          },
+          {
+            kind: "leaf",
+            to: "/manufacturing-development/mass-production-readiness",
+            matchPrefix: "/manufacturing-development/mass-production-readiness",
+            label: "Mass Production Readiness",
+            icon: Rocket,
+          },
+          {
+            kind: "leaf",
+            to: "/manufacturing-development/lean-manufacturing",
+            matchPrefix: "/manufacturing-development/lean-manufacturing",
+            label: "Lean Manufacturing",
+            icon: Zap,
+          },
+          {
+            kind: "leaf",
+            to: "/manufacturing-development/six-sigma-projects",
+            matchPrefix: "/manufacturing-development/six-sigma-projects",
+            label: "Six Sigma Projects",
+            icon: Target,
+          },
+          {
+            kind: "leaf",
+            to: "/manufacturing-development/automation-development",
+            matchPrefix: "/manufacturing-development/automation-development",
+            label: "Automation Development",
+            icon: Cpu,
+          },
+          {
+            kind: "leaf",
+            to: "/manufacturing-development/robotics-integration",
+            matchPrefix: "/manufacturing-development/robotics-integration",
+            label: "Robotics Integration",
+            icon: Cpu,
+          },
 
 
 

@@ -18,6 +18,21 @@ import { Route as OverviewRouteImport } from './routes/overview'
 import { Route as LedgerRouteImport } from './routes/ledger'
 import { Route as ExpensesRouteImport } from './routes/expenses'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ManufacturingDevelopmentRoboticsIntegrationIndexRouteImport } from './routes/manufacturing-development.robotics-integration.index'
+import { Route as ManufacturingDevelopmentPilotProductionIndexRouteImport } from './routes/manufacturing-development.pilot-production.index'
+import { Route as ManufacturingDevelopmentMassProductionReadinessIndexRouteImport } from './routes/manufacturing-development.mass-production-readiness.index'
+import { Route as ManufacturingDevelopmentLeanManufacturingIndexRouteImport } from './routes/manufacturing-development.lean-manufacturing.index'
+import { Route as ManufacturingDevelopmentAutomationDevelopmentIndexRouteImport } from './routes/manufacturing-development.automation-development.index'
+import { Route as ManufacturingDevelopmentRoboticsIntegrationNewRouteImport } from './routes/manufacturing-development.robotics-integration.new'
+import { Route as ManufacturingDevelopmentRoboticsIntegrationIdRouteImport } from './routes/manufacturing-development.robotics-integration.$id'
+import { Route as ManufacturingDevelopmentPilotProductionNewRouteImport } from './routes/manufacturing-development.pilot-production.new'
+import { Route as ManufacturingDevelopmentPilotProductionIdRouteImport } from './routes/manufacturing-development.pilot-production.$id'
+import { Route as ManufacturingDevelopmentMassProductionReadinessNewRouteImport } from './routes/manufacturing-development.mass-production-readiness.new'
+import { Route as ManufacturingDevelopmentMassProductionReadinessIdRouteImport } from './routes/manufacturing-development.mass-production-readiness.$id'
+import { Route as ManufacturingDevelopmentLeanManufacturingNewRouteImport } from './routes/manufacturing-development.lean-manufacturing.new'
+import { Route as ManufacturingDevelopmentLeanManufacturingIdRouteImport } from './routes/manufacturing-development.lean-manufacturing.$id'
+import { Route as ManufacturingDevelopmentAutomationDevelopmentNewRouteImport } from './routes/manufacturing-development.automation-development.new'
+import { Route as ManufacturingDevelopmentAutomationDevelopmentIdRouteImport } from './routes/manufacturing-development.automation-development.$id'
 import { Route as ManagementFinanceTaxRouteImport } from './routes/management.finance.tax'
 import { Route as ManagementFinanceSetupRouteImport } from './routes/management.finance.setup'
 import { Route as ManagementFinanceReportsRouteImport } from './routes/management.finance.reports'
@@ -201,6 +216,96 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ManufacturingDevelopmentRoboticsIntegrationIndexRoute =
+  ManufacturingDevelopmentRoboticsIntegrationIndexRouteImport.update({
+    id: '/manufacturing-development/robotics-integration/',
+    path: '/manufacturing-development/robotics-integration/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentPilotProductionIndexRoute =
+  ManufacturingDevelopmentPilotProductionIndexRouteImport.update({
+    id: '/manufacturing-development/pilot-production/',
+    path: '/manufacturing-development/pilot-production/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentMassProductionReadinessIndexRoute =
+  ManufacturingDevelopmentMassProductionReadinessIndexRouteImport.update({
+    id: '/manufacturing-development/mass-production-readiness/',
+    path: '/manufacturing-development/mass-production-readiness/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentLeanManufacturingIndexRoute =
+  ManufacturingDevelopmentLeanManufacturingIndexRouteImport.update({
+    id: '/manufacturing-development/lean-manufacturing/',
+    path: '/manufacturing-development/lean-manufacturing/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentAutomationDevelopmentIndexRoute =
+  ManufacturingDevelopmentAutomationDevelopmentIndexRouteImport.update({
+    id: '/manufacturing-development/automation-development/',
+    path: '/manufacturing-development/automation-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentRoboticsIntegrationNewRoute =
+  ManufacturingDevelopmentRoboticsIntegrationNewRouteImport.update({
+    id: '/manufacturing-development/robotics-integration/new',
+    path: '/manufacturing-development/robotics-integration/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentRoboticsIntegrationIdRoute =
+  ManufacturingDevelopmentRoboticsIntegrationIdRouteImport.update({
+    id: '/manufacturing-development/robotics-integration/$id',
+    path: '/manufacturing-development/robotics-integration/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentPilotProductionNewRoute =
+  ManufacturingDevelopmentPilotProductionNewRouteImport.update({
+    id: '/manufacturing-development/pilot-production/new',
+    path: '/manufacturing-development/pilot-production/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentPilotProductionIdRoute =
+  ManufacturingDevelopmentPilotProductionIdRouteImport.update({
+    id: '/manufacturing-development/pilot-production/$id',
+    path: '/manufacturing-development/pilot-production/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentMassProductionReadinessNewRoute =
+  ManufacturingDevelopmentMassProductionReadinessNewRouteImport.update({
+    id: '/manufacturing-development/mass-production-readiness/new',
+    path: '/manufacturing-development/mass-production-readiness/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentMassProductionReadinessIdRoute =
+  ManufacturingDevelopmentMassProductionReadinessIdRouteImport.update({
+    id: '/manufacturing-development/mass-production-readiness/$id',
+    path: '/manufacturing-development/mass-production-readiness/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentLeanManufacturingNewRoute =
+  ManufacturingDevelopmentLeanManufacturingNewRouteImport.update({
+    id: '/manufacturing-development/lean-manufacturing/new',
+    path: '/manufacturing-development/lean-manufacturing/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentLeanManufacturingIdRoute =
+  ManufacturingDevelopmentLeanManufacturingIdRouteImport.update({
+    id: '/manufacturing-development/lean-manufacturing/$id',
+    path: '/manufacturing-development/lean-manufacturing/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentAutomationDevelopmentNewRoute =
+  ManufacturingDevelopmentAutomationDevelopmentNewRouteImport.update({
+    id: '/manufacturing-development/automation-development/new',
+    path: '/manufacturing-development/automation-development/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ManufacturingDevelopmentAutomationDevelopmentIdRoute =
+  ManufacturingDevelopmentAutomationDevelopmentIdRouteImport.update({
+    id: '/manufacturing-development/automation-development/$id',
+    path: '/manufacturing-development/automation-development/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ManagementFinanceTaxRoute = ManagementFinanceTaxRouteImport.update({
   id: '/management/finance/tax',
   path: '/management/finance/tax',
@@ -1057,6 +1162,21 @@ export interface FileRoutesByFullPath {
   '/management/finance/reports': typeof ManagementFinanceReportsRoute
   '/management/finance/setup': typeof ManagementFinanceSetupRoute
   '/management/finance/tax': typeof ManagementFinanceTaxRoute
+  '/manufacturing-development/automation-development/$id': typeof ManufacturingDevelopmentAutomationDevelopmentIdRoute
+  '/manufacturing-development/automation-development/new': typeof ManufacturingDevelopmentAutomationDevelopmentNewRoute
+  '/manufacturing-development/lean-manufacturing/$id': typeof ManufacturingDevelopmentLeanManufacturingIdRoute
+  '/manufacturing-development/lean-manufacturing/new': typeof ManufacturingDevelopmentLeanManufacturingNewRoute
+  '/manufacturing-development/mass-production-readiness/$id': typeof ManufacturingDevelopmentMassProductionReadinessIdRoute
+  '/manufacturing-development/mass-production-readiness/new': typeof ManufacturingDevelopmentMassProductionReadinessNewRoute
+  '/manufacturing-development/pilot-production/$id': typeof ManufacturingDevelopmentPilotProductionIdRoute
+  '/manufacturing-development/pilot-production/new': typeof ManufacturingDevelopmentPilotProductionNewRoute
+  '/manufacturing-development/robotics-integration/$id': typeof ManufacturingDevelopmentRoboticsIntegrationIdRoute
+  '/manufacturing-development/robotics-integration/new': typeof ManufacturingDevelopmentRoboticsIntegrationNewRoute
+  '/manufacturing-development/automation-development/': typeof ManufacturingDevelopmentAutomationDevelopmentIndexRoute
+  '/manufacturing-development/lean-manufacturing/': typeof ManufacturingDevelopmentLeanManufacturingIndexRoute
+  '/manufacturing-development/mass-production-readiness/': typeof ManufacturingDevelopmentMassProductionReadinessIndexRoute
+  '/manufacturing-development/pilot-production/': typeof ManufacturingDevelopmentPilotProductionIndexRoute
+  '/manufacturing-development/robotics-integration/': typeof ManufacturingDevelopmentRoboticsIntegrationIndexRoute
   '/development/ip-development/patent-management/new': typeof DevelopmentIpDevelopmentPatentManagementNewRoute
   '/development/research-innovation/ai-model-development/new': typeof DevelopmentResearchInnovationAiModelDevelopmentNewRoute
   '/development/research-innovation/api-development/new': typeof DevelopmentResearchInnovationApiDevelopmentNewRoute
@@ -1205,6 +1325,21 @@ export interface FileRoutesByTo {
   '/management/finance/reports': typeof ManagementFinanceReportsRoute
   '/management/finance/setup': typeof ManagementFinanceSetupRoute
   '/management/finance/tax': typeof ManagementFinanceTaxRoute
+  '/manufacturing-development/automation-development/$id': typeof ManufacturingDevelopmentAutomationDevelopmentIdRoute
+  '/manufacturing-development/automation-development/new': typeof ManufacturingDevelopmentAutomationDevelopmentNewRoute
+  '/manufacturing-development/lean-manufacturing/$id': typeof ManufacturingDevelopmentLeanManufacturingIdRoute
+  '/manufacturing-development/lean-manufacturing/new': typeof ManufacturingDevelopmentLeanManufacturingNewRoute
+  '/manufacturing-development/mass-production-readiness/$id': typeof ManufacturingDevelopmentMassProductionReadinessIdRoute
+  '/manufacturing-development/mass-production-readiness/new': typeof ManufacturingDevelopmentMassProductionReadinessNewRoute
+  '/manufacturing-development/pilot-production/$id': typeof ManufacturingDevelopmentPilotProductionIdRoute
+  '/manufacturing-development/pilot-production/new': typeof ManufacturingDevelopmentPilotProductionNewRoute
+  '/manufacturing-development/robotics-integration/$id': typeof ManufacturingDevelopmentRoboticsIntegrationIdRoute
+  '/manufacturing-development/robotics-integration/new': typeof ManufacturingDevelopmentRoboticsIntegrationNewRoute
+  '/manufacturing-development/automation-development': typeof ManufacturingDevelopmentAutomationDevelopmentIndexRoute
+  '/manufacturing-development/lean-manufacturing': typeof ManufacturingDevelopmentLeanManufacturingIndexRoute
+  '/manufacturing-development/mass-production-readiness': typeof ManufacturingDevelopmentMassProductionReadinessIndexRoute
+  '/manufacturing-development/pilot-production': typeof ManufacturingDevelopmentPilotProductionIndexRoute
+  '/manufacturing-development/robotics-integration': typeof ManufacturingDevelopmentRoboticsIntegrationIndexRoute
   '/development/ip-development/patent-management/new': typeof DevelopmentIpDevelopmentPatentManagementNewRoute
   '/development/research-innovation/ai-model-development/new': typeof DevelopmentResearchInnovationAiModelDevelopmentNewRoute
   '/development/research-innovation/api-development/new': typeof DevelopmentResearchInnovationApiDevelopmentNewRoute
@@ -1354,6 +1489,21 @@ export interface FileRoutesById {
   '/management/finance/reports': typeof ManagementFinanceReportsRoute
   '/management/finance/setup': typeof ManagementFinanceSetupRoute
   '/management/finance/tax': typeof ManagementFinanceTaxRoute
+  '/manufacturing-development/automation-development/$id': typeof ManufacturingDevelopmentAutomationDevelopmentIdRoute
+  '/manufacturing-development/automation-development/new': typeof ManufacturingDevelopmentAutomationDevelopmentNewRoute
+  '/manufacturing-development/lean-manufacturing/$id': typeof ManufacturingDevelopmentLeanManufacturingIdRoute
+  '/manufacturing-development/lean-manufacturing/new': typeof ManufacturingDevelopmentLeanManufacturingNewRoute
+  '/manufacturing-development/mass-production-readiness/$id': typeof ManufacturingDevelopmentMassProductionReadinessIdRoute
+  '/manufacturing-development/mass-production-readiness/new': typeof ManufacturingDevelopmentMassProductionReadinessNewRoute
+  '/manufacturing-development/pilot-production/$id': typeof ManufacturingDevelopmentPilotProductionIdRoute
+  '/manufacturing-development/pilot-production/new': typeof ManufacturingDevelopmentPilotProductionNewRoute
+  '/manufacturing-development/robotics-integration/$id': typeof ManufacturingDevelopmentRoboticsIntegrationIdRoute
+  '/manufacturing-development/robotics-integration/new': typeof ManufacturingDevelopmentRoboticsIntegrationNewRoute
+  '/manufacturing-development/automation-development/': typeof ManufacturingDevelopmentAutomationDevelopmentIndexRoute
+  '/manufacturing-development/lean-manufacturing/': typeof ManufacturingDevelopmentLeanManufacturingIndexRoute
+  '/manufacturing-development/mass-production-readiness/': typeof ManufacturingDevelopmentMassProductionReadinessIndexRoute
+  '/manufacturing-development/pilot-production/': typeof ManufacturingDevelopmentPilotProductionIndexRoute
+  '/manufacturing-development/robotics-integration/': typeof ManufacturingDevelopmentRoboticsIntegrationIndexRoute
   '/development/ip-development/patent-management/new': typeof DevelopmentIpDevelopmentPatentManagementNewRoute
   '/development/research-innovation/ai-model-development/new': typeof DevelopmentResearchInnovationAiModelDevelopmentNewRoute
   '/development/research-innovation/api-development/new': typeof DevelopmentResearchInnovationApiDevelopmentNewRoute
@@ -1504,6 +1654,21 @@ export interface FileRouteTypes {
     | '/management/finance/reports'
     | '/management/finance/setup'
     | '/management/finance/tax'
+    | '/manufacturing-development/automation-development/$id'
+    | '/manufacturing-development/automation-development/new'
+    | '/manufacturing-development/lean-manufacturing/$id'
+    | '/manufacturing-development/lean-manufacturing/new'
+    | '/manufacturing-development/mass-production-readiness/$id'
+    | '/manufacturing-development/mass-production-readiness/new'
+    | '/manufacturing-development/pilot-production/$id'
+    | '/manufacturing-development/pilot-production/new'
+    | '/manufacturing-development/robotics-integration/$id'
+    | '/manufacturing-development/robotics-integration/new'
+    | '/manufacturing-development/automation-development/'
+    | '/manufacturing-development/lean-manufacturing/'
+    | '/manufacturing-development/mass-production-readiness/'
+    | '/manufacturing-development/pilot-production/'
+    | '/manufacturing-development/robotics-integration/'
     | '/development/ip-development/patent-management/new'
     | '/development/research-innovation/ai-model-development/new'
     | '/development/research-innovation/api-development/new'
@@ -1652,6 +1817,21 @@ export interface FileRouteTypes {
     | '/management/finance/reports'
     | '/management/finance/setup'
     | '/management/finance/tax'
+    | '/manufacturing-development/automation-development/$id'
+    | '/manufacturing-development/automation-development/new'
+    | '/manufacturing-development/lean-manufacturing/$id'
+    | '/manufacturing-development/lean-manufacturing/new'
+    | '/manufacturing-development/mass-production-readiness/$id'
+    | '/manufacturing-development/mass-production-readiness/new'
+    | '/manufacturing-development/pilot-production/$id'
+    | '/manufacturing-development/pilot-production/new'
+    | '/manufacturing-development/robotics-integration/$id'
+    | '/manufacturing-development/robotics-integration/new'
+    | '/manufacturing-development/automation-development'
+    | '/manufacturing-development/lean-manufacturing'
+    | '/manufacturing-development/mass-production-readiness'
+    | '/manufacturing-development/pilot-production'
+    | '/manufacturing-development/robotics-integration'
     | '/development/ip-development/patent-management/new'
     | '/development/research-innovation/ai-model-development/new'
     | '/development/research-innovation/api-development/new'
@@ -1800,6 +1980,21 @@ export interface FileRouteTypes {
     | '/management/finance/reports'
     | '/management/finance/setup'
     | '/management/finance/tax'
+    | '/manufacturing-development/automation-development/$id'
+    | '/manufacturing-development/automation-development/new'
+    | '/manufacturing-development/lean-manufacturing/$id'
+    | '/manufacturing-development/lean-manufacturing/new'
+    | '/manufacturing-development/mass-production-readiness/$id'
+    | '/manufacturing-development/mass-production-readiness/new'
+    | '/manufacturing-development/pilot-production/$id'
+    | '/manufacturing-development/pilot-production/new'
+    | '/manufacturing-development/robotics-integration/$id'
+    | '/manufacturing-development/robotics-integration/new'
+    | '/manufacturing-development/automation-development/'
+    | '/manufacturing-development/lean-manufacturing/'
+    | '/manufacturing-development/mass-production-readiness/'
+    | '/manufacturing-development/pilot-production/'
+    | '/manufacturing-development/robotics-integration/'
     | '/development/ip-development/patent-management/new'
     | '/development/research-innovation/ai-model-development/new'
     | '/development/research-innovation/api-development/new'
@@ -1949,6 +2144,21 @@ export interface RootRouteChildren {
   ManagementFinanceReportsRoute: typeof ManagementFinanceReportsRoute
   ManagementFinanceSetupRoute: typeof ManagementFinanceSetupRoute
   ManagementFinanceTaxRoute: typeof ManagementFinanceTaxRoute
+  ManufacturingDevelopmentAutomationDevelopmentIdRoute: typeof ManufacturingDevelopmentAutomationDevelopmentIdRoute
+  ManufacturingDevelopmentAutomationDevelopmentNewRoute: typeof ManufacturingDevelopmentAutomationDevelopmentNewRoute
+  ManufacturingDevelopmentLeanManufacturingIdRoute: typeof ManufacturingDevelopmentLeanManufacturingIdRoute
+  ManufacturingDevelopmentLeanManufacturingNewRoute: typeof ManufacturingDevelopmentLeanManufacturingNewRoute
+  ManufacturingDevelopmentMassProductionReadinessIdRoute: typeof ManufacturingDevelopmentMassProductionReadinessIdRoute
+  ManufacturingDevelopmentMassProductionReadinessNewRoute: typeof ManufacturingDevelopmentMassProductionReadinessNewRoute
+  ManufacturingDevelopmentPilotProductionIdRoute: typeof ManufacturingDevelopmentPilotProductionIdRoute
+  ManufacturingDevelopmentPilotProductionNewRoute: typeof ManufacturingDevelopmentPilotProductionNewRoute
+  ManufacturingDevelopmentRoboticsIntegrationIdRoute: typeof ManufacturingDevelopmentRoboticsIntegrationIdRoute
+  ManufacturingDevelopmentRoboticsIntegrationNewRoute: typeof ManufacturingDevelopmentRoboticsIntegrationNewRoute
+  ManufacturingDevelopmentAutomationDevelopmentIndexRoute: typeof ManufacturingDevelopmentAutomationDevelopmentIndexRoute
+  ManufacturingDevelopmentLeanManufacturingIndexRoute: typeof ManufacturingDevelopmentLeanManufacturingIndexRoute
+  ManufacturingDevelopmentMassProductionReadinessIndexRoute: typeof ManufacturingDevelopmentMassProductionReadinessIndexRoute
+  ManufacturingDevelopmentPilotProductionIndexRoute: typeof ManufacturingDevelopmentPilotProductionIndexRoute
+  ManufacturingDevelopmentRoboticsIntegrationIndexRoute: typeof ManufacturingDevelopmentRoboticsIntegrationIndexRoute
   DevelopmentIpDevelopmentPatentManagementNewRoute: typeof DevelopmentIpDevelopmentPatentManagementNewRoute
   DevelopmentResearchInnovationAiModelDevelopmentNewRoute: typeof DevelopmentResearchInnovationAiModelDevelopmentNewRoute
   DevelopmentResearchInnovationApiDevelopmentNewRoute: typeof DevelopmentResearchInnovationApiDevelopmentNewRoute
@@ -2129,6 +2339,111 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/robotics-integration/': {
+      id: '/manufacturing-development/robotics-integration/'
+      path: '/manufacturing-development/robotics-integration'
+      fullPath: '/manufacturing-development/robotics-integration/'
+      preLoaderRoute: typeof ManufacturingDevelopmentRoboticsIntegrationIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/pilot-production/': {
+      id: '/manufacturing-development/pilot-production/'
+      path: '/manufacturing-development/pilot-production'
+      fullPath: '/manufacturing-development/pilot-production/'
+      preLoaderRoute: typeof ManufacturingDevelopmentPilotProductionIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/mass-production-readiness/': {
+      id: '/manufacturing-development/mass-production-readiness/'
+      path: '/manufacturing-development/mass-production-readiness'
+      fullPath: '/manufacturing-development/mass-production-readiness/'
+      preLoaderRoute: typeof ManufacturingDevelopmentMassProductionReadinessIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/lean-manufacturing/': {
+      id: '/manufacturing-development/lean-manufacturing/'
+      path: '/manufacturing-development/lean-manufacturing'
+      fullPath: '/manufacturing-development/lean-manufacturing/'
+      preLoaderRoute: typeof ManufacturingDevelopmentLeanManufacturingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/automation-development/': {
+      id: '/manufacturing-development/automation-development/'
+      path: '/manufacturing-development/automation-development'
+      fullPath: '/manufacturing-development/automation-development/'
+      preLoaderRoute: typeof ManufacturingDevelopmentAutomationDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/robotics-integration/new': {
+      id: '/manufacturing-development/robotics-integration/new'
+      path: '/manufacturing-development/robotics-integration/new'
+      fullPath: '/manufacturing-development/robotics-integration/new'
+      preLoaderRoute: typeof ManufacturingDevelopmentRoboticsIntegrationNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/robotics-integration/$id': {
+      id: '/manufacturing-development/robotics-integration/$id'
+      path: '/manufacturing-development/robotics-integration/$id'
+      fullPath: '/manufacturing-development/robotics-integration/$id'
+      preLoaderRoute: typeof ManufacturingDevelopmentRoboticsIntegrationIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/pilot-production/new': {
+      id: '/manufacturing-development/pilot-production/new'
+      path: '/manufacturing-development/pilot-production/new'
+      fullPath: '/manufacturing-development/pilot-production/new'
+      preLoaderRoute: typeof ManufacturingDevelopmentPilotProductionNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/pilot-production/$id': {
+      id: '/manufacturing-development/pilot-production/$id'
+      path: '/manufacturing-development/pilot-production/$id'
+      fullPath: '/manufacturing-development/pilot-production/$id'
+      preLoaderRoute: typeof ManufacturingDevelopmentPilotProductionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/mass-production-readiness/new': {
+      id: '/manufacturing-development/mass-production-readiness/new'
+      path: '/manufacturing-development/mass-production-readiness/new'
+      fullPath: '/manufacturing-development/mass-production-readiness/new'
+      preLoaderRoute: typeof ManufacturingDevelopmentMassProductionReadinessNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/mass-production-readiness/$id': {
+      id: '/manufacturing-development/mass-production-readiness/$id'
+      path: '/manufacturing-development/mass-production-readiness/$id'
+      fullPath: '/manufacturing-development/mass-production-readiness/$id'
+      preLoaderRoute: typeof ManufacturingDevelopmentMassProductionReadinessIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/lean-manufacturing/new': {
+      id: '/manufacturing-development/lean-manufacturing/new'
+      path: '/manufacturing-development/lean-manufacturing/new'
+      fullPath: '/manufacturing-development/lean-manufacturing/new'
+      preLoaderRoute: typeof ManufacturingDevelopmentLeanManufacturingNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/lean-manufacturing/$id': {
+      id: '/manufacturing-development/lean-manufacturing/$id'
+      path: '/manufacturing-development/lean-manufacturing/$id'
+      fullPath: '/manufacturing-development/lean-manufacturing/$id'
+      preLoaderRoute: typeof ManufacturingDevelopmentLeanManufacturingIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/automation-development/new': {
+      id: '/manufacturing-development/automation-development/new'
+      path: '/manufacturing-development/automation-development/new'
+      fullPath: '/manufacturing-development/automation-development/new'
+      preLoaderRoute: typeof ManufacturingDevelopmentAutomationDevelopmentNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manufacturing-development/automation-development/$id': {
+      id: '/manufacturing-development/automation-development/$id'
+      path: '/manufacturing-development/automation-development/$id'
+      fullPath: '/manufacturing-development/automation-development/$id'
+      preLoaderRoute: typeof ManufacturingDevelopmentAutomationDevelopmentIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/management/finance/tax': {
@@ -3127,6 +3442,36 @@ const rootRouteChildren: RootRouteChildren = {
   ManagementFinanceReportsRoute: ManagementFinanceReportsRoute,
   ManagementFinanceSetupRoute: ManagementFinanceSetupRoute,
   ManagementFinanceTaxRoute: ManagementFinanceTaxRoute,
+  ManufacturingDevelopmentAutomationDevelopmentIdRoute:
+    ManufacturingDevelopmentAutomationDevelopmentIdRoute,
+  ManufacturingDevelopmentAutomationDevelopmentNewRoute:
+    ManufacturingDevelopmentAutomationDevelopmentNewRoute,
+  ManufacturingDevelopmentLeanManufacturingIdRoute:
+    ManufacturingDevelopmentLeanManufacturingIdRoute,
+  ManufacturingDevelopmentLeanManufacturingNewRoute:
+    ManufacturingDevelopmentLeanManufacturingNewRoute,
+  ManufacturingDevelopmentMassProductionReadinessIdRoute:
+    ManufacturingDevelopmentMassProductionReadinessIdRoute,
+  ManufacturingDevelopmentMassProductionReadinessNewRoute:
+    ManufacturingDevelopmentMassProductionReadinessNewRoute,
+  ManufacturingDevelopmentPilotProductionIdRoute:
+    ManufacturingDevelopmentPilotProductionIdRoute,
+  ManufacturingDevelopmentPilotProductionNewRoute:
+    ManufacturingDevelopmentPilotProductionNewRoute,
+  ManufacturingDevelopmentRoboticsIntegrationIdRoute:
+    ManufacturingDevelopmentRoboticsIntegrationIdRoute,
+  ManufacturingDevelopmentRoboticsIntegrationNewRoute:
+    ManufacturingDevelopmentRoboticsIntegrationNewRoute,
+  ManufacturingDevelopmentAutomationDevelopmentIndexRoute:
+    ManufacturingDevelopmentAutomationDevelopmentIndexRoute,
+  ManufacturingDevelopmentLeanManufacturingIndexRoute:
+    ManufacturingDevelopmentLeanManufacturingIndexRoute,
+  ManufacturingDevelopmentMassProductionReadinessIndexRoute:
+    ManufacturingDevelopmentMassProductionReadinessIndexRoute,
+  ManufacturingDevelopmentPilotProductionIndexRoute:
+    ManufacturingDevelopmentPilotProductionIndexRoute,
+  ManufacturingDevelopmentRoboticsIntegrationIndexRoute:
+    ManufacturingDevelopmentRoboticsIntegrationIndexRoute,
   DevelopmentIpDevelopmentPatentManagementNewRoute:
     DevelopmentIpDevelopmentPatentManagementNewRoute,
   DevelopmentResearchInnovationAiModelDevelopmentNewRoute:

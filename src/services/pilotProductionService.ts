@@ -1,14 +1,11 @@
 import {
-  INITIAL_PILOT_PRODUCTION_RECORD,
+  MOCK_PILOT_RECORD_78,
   getPilotProductionRecordFn,
+  listPilotProductionRecordsFn,
   savePilotProductionDraftFn,
-  submitPilotProductionFn,
 } from "@/lib/pilotProductionFns.server";
-import type {
-  PilotAttachment,
-  PilotProductionRecord,
-  PilotProductionFormInput,
-} from "./types";
+import type { PilotProductionRecord, ApprovalDecision } from "@/lib/pilot-production/types";
+import { handleWorkflowTransition } from "@/lib/pilot-production/workflow";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function unwrap<T>(res: any): T {
@@ -16,65 +13,49 @@ function unwrap<T>(res: any): T {
   return (res.data ?? res) as T;
 }
 
-export async function fetchPilotProductionRecord(): Promise<PilotProductionRecord> {
+export async function fetchPilotProductionRecord(id?: string): Promise<PilotProductionRecord> {
   try {
-    const res = await getPilotProductionRecordFn();
+    const res = await getPilotProductionRecordFn({ data: { id } });
     return unwrap<PilotProductionRecord>(res);
   } catch (err) {
     console.warn("pilotProductionService fetchRecord fallback:", err);
-    return INITIAL_PILOT_PRODUCTION_RECORD;
+    return MOCK_PILOT_RECORD_78;
   }
 }
 
-export async function savePilotProductionDraft(
-  input: PilotProductionFormInput
+export async function listPilotProductionRecords(): Promise<PilotProductionRecord[]> {
+  try {
+    const res = await listPilotProductionRecordsFn();
+    return unwrap<PilotProductionRecord[]>(res);
+  } catch (err) {
+    return [MOCK_PILOT_RECORD_78];
+  }
+}
+
+export async function savePilotProductionRecord(
+  record: PilotProductionRecord
 ): Promise<PilotProductionRecord> {
-  return unwrap<PilotProductionRecord>(
-    await savePilotProductionDraftFn({ data: { input } })
-  );
+  const res = await savePilotProductionDraftFn({ data: { record } });
+  return unwrap<PilotProductionRecord>(res);
 }
 
-export async function submitPilotProductionForReview(): Promise<PilotProductionRecord> {
-  return unwrap<PilotProductionRecord>(await submitPilotProductionFn());
+export async function applyWorkflowDecision(
+  record: PilotProductionRecord,
+  decision: ApprovalDecision,
+  comments: string,
+  actor = "Rahul Sharma"
+): Promise<{ record: PilotProductionRecord; newChildRecord?: PilotProductionRecord; message: string }> {
+  const result = handleWorkflowTransition(record, decision, comments, actor);
+  await savePilotProductionRecord(result.record);
+  if (result.newChildRecord) {
+    await savePilotProductionRecord(result.newChildRecord);
+  }
+  return result;
 }
-
-export async function uploadPilotAttachment(file: {
-  name: string;
-  type: string;
-  size: number;
-  documentType: string;
-}): Promise<PilotAttachment> {
-  const newAttachment: PilotAttachment = {
-    id: `att-pl-${Date.now()}`,
-    fileName: file.name,
-    fileType: file.type || "Document",
-    documentType: file.documentType || "Supporting Documents",
-    version: "1.0",
-    uploadedBy: "Current User",
-    uploadedDate: new Date().toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    }),
-    fileSize: `${(file.size / (1024 * 1024)).toFixed(1)} MB`,
-    status: "Active",
-  };
-  return newAttachment;
-}
-
-export const fetchRecord = fetchPilotProductionRecord;
-export const saveDraft = savePilotProductionDraft;
-export const submitForReview = submitPilotProductionForReview;
-export const uploadAttachment = uploadPilotAttachment;
-export const reviewDecision = async (args: { id: string; decision: "Approved" | "Rejected"; comments?: string }) => {
-  const record = await fetchPilotProductionRecord();
-  return record;
-};
 
 export const pilotProductionService = {
-  fetchRecord,
-  saveDraft,
-  submitForReview,
-  uploadAttachment,
-  reviewDecision,
+  fetchRecord: fetchPilotProductionRecord,
+  listRecords: listPilotProductionRecords,
+  saveRecord: savePilotProductionRecord,
+  applyDecision: applyWorkflowDecision,
 };

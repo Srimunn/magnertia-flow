@@ -5,7 +5,7 @@ export const Route = createFileRoute(
 )({
   beforeLoad: () => {
     throw redirect({
-      to: "/development/research-innovation/pilot-production/new",
+      to: "/manufacturing-development/pilot-production",
     });
   },
 });
