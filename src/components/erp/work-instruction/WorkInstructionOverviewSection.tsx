@@ -205,27 +205,21 @@ export function WorkInstructionOverviewSection({
                 </p>
               </div>
 
-              {/* Visual Gallery */}
+              {/* Visual Instruction Steps Checklist (No stock images) */}
               <div className="space-y-2 pt-2">
-                <span className="font-bold text-foreground block">Visual Work Instructions</span>
-                <div className="flex items-center gap-3 overflow-x-auto scrollbar-none pb-1">
-                  <img
-                    src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&auto=format&fit=crop&q=80"
-                    alt="Assembly Visual 1"
-                    className="h-24 w-36 object-cover rounded-lg border border-slate-200 dark:border-slate-700 shrink-0"
-                  />
-                  <img
-                    src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=300&auto=format&fit=crop&q=80"
-                    alt="Assembly Visual 2"
-                    className="h-24 w-36 object-cover rounded-lg border border-slate-200 dark:border-slate-700 shrink-0"
-                  />
-                  <img
-                    src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=300&auto=format&fit=crop&q=80"
-                    alt="Assembly Visual 3"
-                    className="h-24 w-36 object-cover rounded-lg border border-slate-200 dark:border-slate-700 shrink-0"
-                  />
-                  <div className="h-24 w-20 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-bold text-slate-600 dark:text-slate-300 text-xs shrink-0 cursor-pointer">
-                    +5 More
+                <span className="font-bold text-foreground block">Visual Instruction Control Steps</span>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <div className="p-2.5 rounded-lg border border-border bg-slate-50 dark:bg-slate-800/40 text-[11px]">
+                    <span className="font-bold text-primary block">Step 1: Alignment</span>
+                    <span className="text-muted-foreground">Verify locator pins and latch initial seating.</span>
+                  </div>
+                  <div className="p-2.5 rounded-lg border border-border bg-slate-50 dark:bg-slate-800/40 text-[11px]">
+                    <span className="font-bold text-primary block">Step 2: Torquing</span>
+                    <span className="text-muted-foreground">Torque M6 bolts in star pattern to 12.5 Nm.</span>
+                  </div>
+                  <div className="p-2.5 rounded-lg border border-border bg-slate-50 dark:bg-slate-800/40 text-[11px]">
+                    <span className="font-bold text-primary block">Step 3: Verification</span>
+                    <span className="text-muted-foreground">Check continuity and seal integrity.</span>
                   </div>
                 </div>
               </div>

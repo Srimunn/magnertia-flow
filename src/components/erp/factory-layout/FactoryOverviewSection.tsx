@@ -50,12 +50,7 @@ export function FactoryOverviewSection({
   return (
     <Card className="border-border/80 shadow-xs bg-white dark:bg-slate-900">
       <CardHeader className="pb-3">
-        <div className="flex items-center gap-2">
-          <span className="h-6 w-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">
-            1
-          </span>
-          <CardTitle className="text-base font-bold">Factory Overview</CardTitle>
-        </div>
+        <CardTitle className="text-base font-bold">Factory Overview</CardTitle>
         <CardDescription className="text-xs">
           High-level facility identity, plant classification, land dimensions, capacity & strategic objectives.
         </CardDescription>
@@ -63,23 +58,21 @@ export function FactoryOverviewSection({
 
       <CardContent className="space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Left Column: Factory Render Asset */}
-          <div className="lg:col-span-4 flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200/80 dark:border-slate-700/80">
-            <div className="relative w-full aspect-4/3 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 flex items-center justify-center shadow-inner">
-              <img
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&auto=format&fit=crop&q=80"
-                alt="Factory Aerial Master Plan Render"
-                className="w-full h-full object-cover rounded-md opacity-90 hover:opacity-100 transition-opacity"
-              />
-              <div className="absolute top-2 left-2">
-                <Badge className="bg-primary/90 text-white text-[10px] font-semibold">
-                  3D Digital Twin Layout
-                </Badge>
-              </div>
+          {/* Left Column: Structured Facility Specification Card (No stock images) */}
+          <div className="lg:col-span-4 flex flex-col p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200/80 dark:border-slate-700/80 space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b border-border">
+              <span className="text-xs font-bold text-foreground">Facility Baseline Data</span>
+              <Badge className="bg-primary/90 text-white text-[10px] font-semibold">
+                Master Plan v1.2
+              </Badge>
             </div>
-            <p className="text-[11px] text-muted-foreground mt-2 text-center font-medium">
-              Magnertia EV Plant — Pune Facility Master Plan v1.2
-            </p>
+            <div className="space-y-2 text-xs">
+              <div className="flex justify-between"><span className="text-muted-foreground">Facility Baseline:</span><span className="font-semibold text-foreground">Magnertia EV Plant</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">Location:</span><span className="font-semibold text-foreground">Pune Campus Phase 2</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">Layout Status:</span><span className="font-semibold text-foreground">Digital Twin Approved</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">Footprint Area:</span><span className="font-semibold text-foreground">125,000 sq ft</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">Target Lines:</span><span className="font-semibold text-foreground">4 Modular Cells</span></div>
+            </div>
           </div>
 
           {/* Right Column: Form Fields Grid */}

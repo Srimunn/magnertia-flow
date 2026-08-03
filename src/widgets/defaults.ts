@@ -92,6 +92,21 @@ export const DEFAULT_LAYOUTS: Record<WidgetPageId, WidgetInstance[]> = {
   "finance-assets": [],
   "finance-audit": [],
 
+  "pd-overview": [
+    { ...base, id: "pd-ovw-active", widgetId: "kpi.pd.active-projects", size: "sm" },
+    { ...base, id: "pd-ovw-dev", widgetId: "kpi.pd.in-development", size: "sm" },
+    { ...base, id: "pd-ovw-release", widgetId: "kpi.pd.ready-release", size: "sm" },
+    { ...base, id: "pd-ovw-lifecycle", widgetId: "kpi.pd.active-lifecycle", size: "sm" },
+    { ...base, id: "pd-ovw-health", widgetId: "kpi.pd.overall-health", size: "sm" },
+  ],
+  "md-overview": [
+    { ...base, id: "md-ovw-active", widgetId: "kpi.md.active-projects", size: "sm" },
+    { ...base, id: "md-ovw-pilot", widgetId: "kpi.md.in-pilot", size: "sm" },
+    { ...base, id: "md-ovw-ppap", widgetId: "kpi.md.ready-ppap", size: "sm" },
+    { ...base, id: "md-ovw-mass", widgetId: "kpi.md.mass-production", size: "sm" },
+    { ...base, id: "md-ovw-readiness", widgetId: "kpi.md.overall-readiness", size: "sm" },
+  ],
+
   /* R&I module dashboards — reproduce today's KPI row exactly (all sm/1-of-5). */
   "ri-overview": [
     { ...base, id: "ri-ovw-ideas", widgetId: "kpi.ri.ideas-total", size: "sm" },

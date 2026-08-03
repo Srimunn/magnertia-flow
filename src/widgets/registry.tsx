@@ -3,6 +3,8 @@ import { DASHBOARD_WIDGETS } from "./content/dashboard";
 import { OVERVIEW_WIDGETS } from "./content/overview";
 import { FINANCE_KPI_WIDGETS } from "./content/finance/kpis";
 import { RI_KPI_WIDGETS } from "./content/ri/kpis";
+import { pdWidgets } from "./content/pd/pdWidgets";
+import { mdWidgets } from "./content/md/mdWidgets";
 
 /* ===========================================================================
    Widget registry
@@ -19,6 +21,8 @@ const ALL_DEFINITIONS: WidgetDefinition[] = [
   ...OVERVIEW_WIDGETS,
   ...FINANCE_KPI_WIDGETS,
   ...RI_KPI_WIDGETS,
+  ...pdWidgets,
+  ...mdWidgets,
   // Future modules append here: ...INVENTORY_WIDGETS, ...FLEET_WIDGETS, ...
 ];
 

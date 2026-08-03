@@ -78,7 +78,10 @@ export type WidgetPageId =
   | "ri-trl"
   | "ri-commercialization"
   | "ri-innovation"
-  | "ri-patents";
+  | "ri-patents"
+  // Product Development & Manufacturing Development Overviews
+  | "pd-overview"
+  | "md-overview";
 
 /** Grid spans per breakpoint tier, expressed in that tier's column count. */
 export type WidgetSpan = {

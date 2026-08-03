@@ -49,6 +49,8 @@ import { Route as ManagementFinanceAuditRouteImport } from './routes/management.
 import { Route as ManagementFinanceAssetsRouteImport } from './routes/management.finance.assets'
 import { Route as DevelopmentResearchInnovationReportsRouteImport } from './routes/development.research-innovation.reports'
 import { Route as DevelopmentResearchInnovationOverviewRouteImport } from './routes/development.research-innovation.overview'
+import { Route as DevelopmentProductDevelopmentOverviewRouteImport } from './routes/development.product-development.overview'
+import { Route as DevelopmentManufacturingDevelopmentOverviewRouteImport } from './routes/development.manufacturing-development.overview'
 import { Route as AdministrationHomeUsersRouteImport } from './routes/administration.home.users'
 import { Route as AdministrationHomeRolesRouteImport } from './routes/administration.home.roles'
 import { Route as AdministrationHomeOverviewRouteImport } from './routes/administration.home.overview'
@@ -111,6 +113,53 @@ import { Route as DevelopmentResearchInnovationBomEngineeringIndexRouteImport } 
 import { Route as DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRouteImport } from './routes/development.research-innovation.assembly-line-development.index'
 import { Route as DevelopmentResearchInnovationApiDevelopmentIndexRouteImport } from './routes/development.research-innovation.api-development.index'
 import { Route as DevelopmentResearchInnovationAiModelDevelopmentIndexRouteImport } from './routes/development.research-innovation.ai-model-development.index'
+import { Route as DevelopmentProductDevelopmentUiUxDevelopmentIndexRouteImport } from './routes/development.product-development.ui-ux-development.index'
+import { Route as DevelopmentProductDevelopmentTestingValidationIndexRouteImport } from './routes/development.product-development.testing-validation.index'
+import { Route as DevelopmentProductDevelopmentSoftwareDevelopmentIndexRouteImport } from './routes/development.product-development.software-development.index'
+import { Route as DevelopmentProductDevelopmentSimulationAnalysisIndexRouteImport } from './routes/development.product-development.simulation-analysis.index'
+import { Route as DevelopmentProductDevelopmentProductStrategyIndexRouteImport } from './routes/development.product-development.product-strategy.index'
+import { Route as DevelopmentProductDevelopmentProductRoadmapIndexRouteImport } from './routes/development.product-development.product-roadmap.index'
+import { Route as DevelopmentProductDevelopmentProductReleaseManagementIndexRouteImport } from './routes/development.product-development.product-release-management.index'
+import { Route as DevelopmentProductDevelopmentProductLifecycleManagementIndexRouteImport } from './routes/development.product-development.product-lifecycle-management.index'
+import { Route as DevelopmentProductDevelopmentProductDocumentationIndexRouteImport } from './routes/development.product-development.product-documentation.index'
+import { Route as DevelopmentProductDevelopmentProductArchitectureIndexRouteImport } from './routes/development.product-development.product-architecture.index'
+import { Route as DevelopmentProductDevelopmentPrdIndexRouteImport } from './routes/development.product-development.prd.index'
+import { Route as DevelopmentProductDevelopmentMobileAppDevelopmentIndexRouteImport } from './routes/development.product-development.mobile-app-development.index'
+import { Route as DevelopmentProductDevelopmentMechanicalDesignIndexRouteImport } from './routes/development.product-development.mechanical-design.index'
+import { Route as DevelopmentProductDevelopmentIotDevelopmentIndexRouteImport } from './routes/development.product-development.iot-development.index'
+import { Route as DevelopmentProductDevelopmentIndustrialDesignIndexRouteImport } from './routes/development.product-development.industrial-design.index'
+import { Route as DevelopmentProductDevelopmentFirmwareDevelopmentIndexRouteImport } from './routes/development.product-development.firmware-development.index'
+import { Route as DevelopmentProductDevelopmentEmbeddedSystemsDevelopmentIndexRouteImport } from './routes/development.product-development.embedded-systems-development.index'
+import { Route as DevelopmentProductDevelopmentElectronicsDesignIndexRouteImport } from './routes/development.product-development.electronics-design.index'
+import { Route as DevelopmentProductDevelopmentElectricalDesignIndexRouteImport } from './routes/development.product-development.electrical-design.index'
+import { Route as DevelopmentProductDevelopmentCybersecurityEngineeringIndexRouteImport } from './routes/development.product-development.cybersecurity-engineering.index'
+import { Route as DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRouteImport } from './routes/development.product-development.cloud-platform-development.index'
+import { Route as DevelopmentProductDevelopmentCertificationReadinessIndexRouteImport } from './routes/development.product-development.certification-readiness.index'
+import { Route as DevelopmentProductDevelopmentApiDevelopmentIndexRouteImport } from './routes/development.product-development.api-development.index'
+import { Route as DevelopmentProductDevelopmentAiModelDevelopmentIndexRouteImport } from './routes/development.product-development.ai-model-development.index'
+import { Route as DevelopmentManufacturingDevelopmentWorkInstructionDevelopmentIndexRouteImport } from './routes/development.manufacturing-development.work-instruction-development.index'
+import { Route as DevelopmentManufacturingDevelopmentToolingDevelopmentIndexRouteImport } from './routes/development.manufacturing-development.tooling-development.index'
+import { Route as DevelopmentManufacturingDevelopmentSopDevelopmentIndexRouteImport } from './routes/development.manufacturing-development.sop-development.index'
+import { Route as DevelopmentManufacturingDevelopmentSmartFactoryDevelopmentIndexRouteImport } from './routes/development.manufacturing-development.smart-factory-development.index'
+import { Route as DevelopmentManufacturingDevelopmentSixSigmaProjectsIndexRouteImport } from './routes/development.manufacturing-development.six-sigma-projects.index'
+import { Route as DevelopmentManufacturingDevelopmentRoutingDevelopmentIndexRouteImport } from './routes/development.manufacturing-development.routing-development.index'
+import { Route as DevelopmentManufacturingDevelopmentRoboticsIntegrationIndexRouteImport } from './routes/development.manufacturing-development.robotics-integration.index'
+import { Route as DevelopmentManufacturingDevelopmentQualityPlanningApqpIndexRouteImport } from './routes/development.manufacturing-development.quality-planning-apqp.index'
+import { Route as DevelopmentManufacturingDevelopmentProductionEngineeringIndexRouteImport } from './routes/development.manufacturing-development.production-engineering.index'
+import { Route as DevelopmentManufacturingDevelopmentProcessValidationIndexRouteImport } from './routes/development.manufacturing-development.process-validation.index'
+import { Route as DevelopmentManufacturingDevelopmentPilotProductionIndexRouteImport } from './routes/development.manufacturing-development.pilot-production.index'
+import { Route as DevelopmentManufacturingDevelopmentPfmeaDevelopmentIndexRouteImport } from './routes/development.manufacturing-development.pfmea-development.index'
+import { Route as DevelopmentManufacturingDevelopmentMassProductionReadinessIndexRouteImport } from './routes/development.manufacturing-development.mass-production-readiness.index'
+import { Route as DevelopmentManufacturingDevelopmentManufacturingExcellenceIndexRouteImport } from './routes/development.manufacturing-development.manufacturing-excellence.index'
+import { Route as DevelopmentManufacturingDevelopmentLeanManufacturingIndexRouteImport } from './routes/development.manufacturing-development.lean-manufacturing.index'
+import { Route as DevelopmentManufacturingDevelopmentJigDevelopmentIndexRouteImport } from './routes/development.manufacturing-development.jig-development.index'
+import { Route as DevelopmentManufacturingDevelopmentFixtureDevelopmentIndexRouteImport } from './routes/development.manufacturing-development.fixture-development.index'
+import { Route as DevelopmentManufacturingDevelopmentFactoryLayoutDesignIndexRouteImport } from './routes/development.manufacturing-development.factory-layout-design.index'
+import { Route as DevelopmentManufacturingDevelopmentControlPlanIndexRouteImport } from './routes/development.manufacturing-development.control-plan.index'
+import { Route as DevelopmentManufacturingDevelopmentCapacityPlanningIndexRouteImport } from './routes/development.manufacturing-development.capacity-planning.index'
+import { Route as DevelopmentManufacturingDevelopmentBomEngineeringIndexRouteImport } from './routes/development.manufacturing-development.bom-engineering.index'
+import { Route as DevelopmentManufacturingDevelopmentAutomationDevelopmentIndexRouteImport } from './routes/development.manufacturing-development.automation-development.index'
+import { Route as DevelopmentManufacturingDevelopmentAssemblyLineDevelopmentIndexRouteImport } from './routes/development.manufacturing-development.assembly-line-development.index'
 import { Route as DevelopmentIpDevelopmentPatentManagementIndexRouteImport } from './routes/development.ip-development.patent-management.index'
 import { Route as DevelopmentResearchInnovationWorkInstructionDevelopmentNewRouteImport } from './routes/development.research-innovation.work-instruction-development.new'
 import { Route as DevelopmentResearchInnovationUiUxDevelopmentNewRouteImport } from './routes/development.research-innovation.ui-ux-development.new'
@@ -399,6 +448,18 @@ const DevelopmentResearchInnovationOverviewRoute =
   DevelopmentResearchInnovationOverviewRouteImport.update({
     id: '/development/research-innovation/overview',
     path: '/development/research-innovation/overview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentOverviewRoute =
+  DevelopmentProductDevelopmentOverviewRouteImport.update({
+    id: '/development/product-development/overview',
+    path: '/development/product-development/overview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentOverviewRoute =
+  DevelopmentManufacturingDevelopmentOverviewRouteImport.update({
+    id: '/development/manufacturing-development/overview',
+    path: '/development/manufacturing-development/overview',
     getParentRoute: () => rootRouteImport,
   } as any)
 const AdministrationHomeUsersRoute = AdministrationHomeUsersRouteImport.update({
@@ -779,6 +840,312 @@ const DevelopmentResearchInnovationAiModelDevelopmentIndexRoute =
     path: '/development/research-innovation/ai-model-development/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DevelopmentProductDevelopmentUiUxDevelopmentIndexRoute =
+  DevelopmentProductDevelopmentUiUxDevelopmentIndexRouteImport.update({
+    id: '/development/product-development/ui-ux-development/',
+    path: '/development/product-development/ui-ux-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentTestingValidationIndexRoute =
+  DevelopmentProductDevelopmentTestingValidationIndexRouteImport.update({
+    id: '/development/product-development/testing-validation/',
+    path: '/development/product-development/testing-validation/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentSoftwareDevelopmentIndexRoute =
+  DevelopmentProductDevelopmentSoftwareDevelopmentIndexRouteImport.update({
+    id: '/development/product-development/software-development/',
+    path: '/development/product-development/software-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentSimulationAnalysisIndexRoute =
+  DevelopmentProductDevelopmentSimulationAnalysisIndexRouteImport.update({
+    id: '/development/product-development/simulation-analysis/',
+    path: '/development/product-development/simulation-analysis/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentProductStrategyIndexRoute =
+  DevelopmentProductDevelopmentProductStrategyIndexRouteImport.update({
+    id: '/development/product-development/product-strategy/',
+    path: '/development/product-development/product-strategy/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentProductRoadmapIndexRoute =
+  DevelopmentProductDevelopmentProductRoadmapIndexRouteImport.update({
+    id: '/development/product-development/product-roadmap/',
+    path: '/development/product-development/product-roadmap/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentProductReleaseManagementIndexRoute =
+  DevelopmentProductDevelopmentProductReleaseManagementIndexRouteImport.update({
+    id: '/development/product-development/product-release-management/',
+    path: '/development/product-development/product-release-management/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentProductLifecycleManagementIndexRoute =
+  DevelopmentProductDevelopmentProductLifecycleManagementIndexRouteImport.update(
+    {
+      id: '/development/product-development/product-lifecycle-management/',
+      path: '/development/product-development/product-lifecycle-management/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const DevelopmentProductDevelopmentProductDocumentationIndexRoute =
+  DevelopmentProductDevelopmentProductDocumentationIndexRouteImport.update({
+    id: '/development/product-development/product-documentation/',
+    path: '/development/product-development/product-documentation/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentProductArchitectureIndexRoute =
+  DevelopmentProductDevelopmentProductArchitectureIndexRouteImport.update({
+    id: '/development/product-development/product-architecture/',
+    path: '/development/product-development/product-architecture/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentPrdIndexRoute =
+  DevelopmentProductDevelopmentPrdIndexRouteImport.update({
+    id: '/development/product-development/prd/',
+    path: '/development/product-development/prd/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentMobileAppDevelopmentIndexRoute =
+  DevelopmentProductDevelopmentMobileAppDevelopmentIndexRouteImport.update({
+    id: '/development/product-development/mobile-app-development/',
+    path: '/development/product-development/mobile-app-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentMechanicalDesignIndexRoute =
+  DevelopmentProductDevelopmentMechanicalDesignIndexRouteImport.update({
+    id: '/development/product-development/mechanical-design/',
+    path: '/development/product-development/mechanical-design/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentIotDevelopmentIndexRoute =
+  DevelopmentProductDevelopmentIotDevelopmentIndexRouteImport.update({
+    id: '/development/product-development/iot-development/',
+    path: '/development/product-development/iot-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentIndustrialDesignIndexRoute =
+  DevelopmentProductDevelopmentIndustrialDesignIndexRouteImport.update({
+    id: '/development/product-development/industrial-design/',
+    path: '/development/product-development/industrial-design/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentFirmwareDevelopmentIndexRoute =
+  DevelopmentProductDevelopmentFirmwareDevelopmentIndexRouteImport.update({
+    id: '/development/product-development/firmware-development/',
+    path: '/development/product-development/firmware-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentEmbeddedSystemsDevelopmentIndexRoute =
+  DevelopmentProductDevelopmentEmbeddedSystemsDevelopmentIndexRouteImport.update(
+    {
+      id: '/development/product-development/embedded-systems-development/',
+      path: '/development/product-development/embedded-systems-development/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const DevelopmentProductDevelopmentElectronicsDesignIndexRoute =
+  DevelopmentProductDevelopmentElectronicsDesignIndexRouteImport.update({
+    id: '/development/product-development/electronics-design/',
+    path: '/development/product-development/electronics-design/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentElectricalDesignIndexRoute =
+  DevelopmentProductDevelopmentElectricalDesignIndexRouteImport.update({
+    id: '/development/product-development/electrical-design/',
+    path: '/development/product-development/electrical-design/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentCybersecurityEngineeringIndexRoute =
+  DevelopmentProductDevelopmentCybersecurityEngineeringIndexRouteImport.update({
+    id: '/development/product-development/cybersecurity-engineering/',
+    path: '/development/product-development/cybersecurity-engineering/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRoute =
+  DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRouteImport.update({
+    id: '/development/product-development/cloud-platform-development/',
+    path: '/development/product-development/cloud-platform-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentCertificationReadinessIndexRoute =
+  DevelopmentProductDevelopmentCertificationReadinessIndexRouteImport.update({
+    id: '/development/product-development/certification-readiness/',
+    path: '/development/product-development/certification-readiness/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentApiDevelopmentIndexRoute =
+  DevelopmentProductDevelopmentApiDevelopmentIndexRouteImport.update({
+    id: '/development/product-development/api-development/',
+    path: '/development/product-development/api-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentProductDevelopmentAiModelDevelopmentIndexRoute =
+  DevelopmentProductDevelopmentAiModelDevelopmentIndexRouteImport.update({
+    id: '/development/product-development/ai-model-development/',
+    path: '/development/product-development/ai-model-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentWorkInstructionDevelopmentIndexRoute =
+  DevelopmentManufacturingDevelopmentWorkInstructionDevelopmentIndexRouteImport.update(
+    {
+      id: '/development/manufacturing-development/work-instruction-development/',
+      path: '/development/manufacturing-development/work-instruction-development/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const DevelopmentManufacturingDevelopmentToolingDevelopmentIndexRoute =
+  DevelopmentManufacturingDevelopmentToolingDevelopmentIndexRouteImport.update({
+    id: '/development/manufacturing-development/tooling-development/',
+    path: '/development/manufacturing-development/tooling-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentSopDevelopmentIndexRoute =
+  DevelopmentManufacturingDevelopmentSopDevelopmentIndexRouteImport.update({
+    id: '/development/manufacturing-development/sop-development/',
+    path: '/development/manufacturing-development/sop-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentSmartFactoryDevelopmentIndexRoute =
+  DevelopmentManufacturingDevelopmentSmartFactoryDevelopmentIndexRouteImport.update(
+    {
+      id: '/development/manufacturing-development/smart-factory-development/',
+      path: '/development/manufacturing-development/smart-factory-development/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const DevelopmentManufacturingDevelopmentSixSigmaProjectsIndexRoute =
+  DevelopmentManufacturingDevelopmentSixSigmaProjectsIndexRouteImport.update({
+    id: '/development/manufacturing-development/six-sigma-projects/',
+    path: '/development/manufacturing-development/six-sigma-projects/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentRoutingDevelopmentIndexRoute =
+  DevelopmentManufacturingDevelopmentRoutingDevelopmentIndexRouteImport.update({
+    id: '/development/manufacturing-development/routing-development/',
+    path: '/development/manufacturing-development/routing-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentRoboticsIntegrationIndexRoute =
+  DevelopmentManufacturingDevelopmentRoboticsIntegrationIndexRouteImport.update(
+    {
+      id: '/development/manufacturing-development/robotics-integration/',
+      path: '/development/manufacturing-development/robotics-integration/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const DevelopmentManufacturingDevelopmentQualityPlanningApqpIndexRoute =
+  DevelopmentManufacturingDevelopmentQualityPlanningApqpIndexRouteImport.update(
+    {
+      id: '/development/manufacturing-development/quality-planning-apqp/',
+      path: '/development/manufacturing-development/quality-planning-apqp/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const DevelopmentManufacturingDevelopmentProductionEngineeringIndexRoute =
+  DevelopmentManufacturingDevelopmentProductionEngineeringIndexRouteImport.update(
+    {
+      id: '/development/manufacturing-development/production-engineering/',
+      path: '/development/manufacturing-development/production-engineering/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const DevelopmentManufacturingDevelopmentProcessValidationIndexRoute =
+  DevelopmentManufacturingDevelopmentProcessValidationIndexRouteImport.update({
+    id: '/development/manufacturing-development/process-validation/',
+    path: '/development/manufacturing-development/process-validation/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentPilotProductionIndexRoute =
+  DevelopmentManufacturingDevelopmentPilotProductionIndexRouteImport.update({
+    id: '/development/manufacturing-development/pilot-production/',
+    path: '/development/manufacturing-development/pilot-production/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentPfmeaDevelopmentIndexRoute =
+  DevelopmentManufacturingDevelopmentPfmeaDevelopmentIndexRouteImport.update({
+    id: '/development/manufacturing-development/pfmea-development/',
+    path: '/development/manufacturing-development/pfmea-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentMassProductionReadinessIndexRoute =
+  DevelopmentManufacturingDevelopmentMassProductionReadinessIndexRouteImport.update(
+    {
+      id: '/development/manufacturing-development/mass-production-readiness/',
+      path: '/development/manufacturing-development/mass-production-readiness/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const DevelopmentManufacturingDevelopmentManufacturingExcellenceIndexRoute =
+  DevelopmentManufacturingDevelopmentManufacturingExcellenceIndexRouteImport.update(
+    {
+      id: '/development/manufacturing-development/manufacturing-excellence/',
+      path: '/development/manufacturing-development/manufacturing-excellence/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const DevelopmentManufacturingDevelopmentLeanManufacturingIndexRoute =
+  DevelopmentManufacturingDevelopmentLeanManufacturingIndexRouteImport.update({
+    id: '/development/manufacturing-development/lean-manufacturing/',
+    path: '/development/manufacturing-development/lean-manufacturing/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentJigDevelopmentIndexRoute =
+  DevelopmentManufacturingDevelopmentJigDevelopmentIndexRouteImport.update({
+    id: '/development/manufacturing-development/jig-development/',
+    path: '/development/manufacturing-development/jig-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentFixtureDevelopmentIndexRoute =
+  DevelopmentManufacturingDevelopmentFixtureDevelopmentIndexRouteImport.update({
+    id: '/development/manufacturing-development/fixture-development/',
+    path: '/development/manufacturing-development/fixture-development/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentFactoryLayoutDesignIndexRoute =
+  DevelopmentManufacturingDevelopmentFactoryLayoutDesignIndexRouteImport.update(
+    {
+      id: '/development/manufacturing-development/factory-layout-design/',
+      path: '/development/manufacturing-development/factory-layout-design/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const DevelopmentManufacturingDevelopmentControlPlanIndexRoute =
+  DevelopmentManufacturingDevelopmentControlPlanIndexRouteImport.update({
+    id: '/development/manufacturing-development/control-plan/',
+    path: '/development/manufacturing-development/control-plan/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentCapacityPlanningIndexRoute =
+  DevelopmentManufacturingDevelopmentCapacityPlanningIndexRouteImport.update({
+    id: '/development/manufacturing-development/capacity-planning/',
+    path: '/development/manufacturing-development/capacity-planning/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentBomEngineeringIndexRoute =
+  DevelopmentManufacturingDevelopmentBomEngineeringIndexRouteImport.update({
+    id: '/development/manufacturing-development/bom-engineering/',
+    path: '/development/manufacturing-development/bom-engineering/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DevelopmentManufacturingDevelopmentAutomationDevelopmentIndexRoute =
+  DevelopmentManufacturingDevelopmentAutomationDevelopmentIndexRouteImport.update(
+    {
+      id: '/development/manufacturing-development/automation-development/',
+      path: '/development/manufacturing-development/automation-development/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const DevelopmentManufacturingDevelopmentAssemblyLineDevelopmentIndexRoute =
+  DevelopmentManufacturingDevelopmentAssemblyLineDevelopmentIndexRouteImport.update(
+    {
+      id: '/development/manufacturing-development/assembly-line-development/',
+      path: '/development/manufacturing-development/assembly-line-development/',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
 const DevelopmentIpDevelopmentPatentManagementIndexRoute =
   DevelopmentIpDevelopmentPatentManagementIndexRouteImport.update({
     id: '/development/ip-development/patent-management/',
@@ -1174,6 +1541,8 @@ export interface FileRoutesByFullPath {
   '/administration/home/overview': typeof AdministrationHomeOverviewRoute
   '/administration/home/roles': typeof AdministrationHomeRolesRoute
   '/administration/home/users': typeof AdministrationHomeUsersRoute
+  '/development/manufacturing-development/overview': typeof DevelopmentManufacturingDevelopmentOverviewRoute
+  '/development/product-development/overview': typeof DevelopmentProductDevelopmentOverviewRoute
   '/development/research-innovation/overview': typeof DevelopmentResearchInnovationOverviewRoute
   '/development/research-innovation/reports': typeof DevelopmentResearchInnovationReportsRoute
   '/management/finance/assets': typeof ManagementFinanceAssetsRoute
@@ -1268,6 +1637,53 @@ export interface FileRoutesByFullPath {
   '/development/research-innovation/ui-ux-development/new': typeof DevelopmentResearchInnovationUiUxDevelopmentNewRoute
   '/development/research-innovation/work-instruction-development/new': typeof DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute
   '/development/ip-development/patent-management/': typeof DevelopmentIpDevelopmentPatentManagementIndexRoute
+  '/development/manufacturing-development/assembly-line-development/': typeof DevelopmentManufacturingDevelopmentAssemblyLineDevelopmentIndexRoute
+  '/development/manufacturing-development/automation-development/': typeof DevelopmentManufacturingDevelopmentAutomationDevelopmentIndexRoute
+  '/development/manufacturing-development/bom-engineering/': typeof DevelopmentManufacturingDevelopmentBomEngineeringIndexRoute
+  '/development/manufacturing-development/capacity-planning/': typeof DevelopmentManufacturingDevelopmentCapacityPlanningIndexRoute
+  '/development/manufacturing-development/control-plan/': typeof DevelopmentManufacturingDevelopmentControlPlanIndexRoute
+  '/development/manufacturing-development/factory-layout-design/': typeof DevelopmentManufacturingDevelopmentFactoryLayoutDesignIndexRoute
+  '/development/manufacturing-development/fixture-development/': typeof DevelopmentManufacturingDevelopmentFixtureDevelopmentIndexRoute
+  '/development/manufacturing-development/jig-development/': typeof DevelopmentManufacturingDevelopmentJigDevelopmentIndexRoute
+  '/development/manufacturing-development/lean-manufacturing/': typeof DevelopmentManufacturingDevelopmentLeanManufacturingIndexRoute
+  '/development/manufacturing-development/manufacturing-excellence/': typeof DevelopmentManufacturingDevelopmentManufacturingExcellenceIndexRoute
+  '/development/manufacturing-development/mass-production-readiness/': typeof DevelopmentManufacturingDevelopmentMassProductionReadinessIndexRoute
+  '/development/manufacturing-development/pfmea-development/': typeof DevelopmentManufacturingDevelopmentPfmeaDevelopmentIndexRoute
+  '/development/manufacturing-development/pilot-production/': typeof DevelopmentManufacturingDevelopmentPilotProductionIndexRoute
+  '/development/manufacturing-development/process-validation/': typeof DevelopmentManufacturingDevelopmentProcessValidationIndexRoute
+  '/development/manufacturing-development/production-engineering/': typeof DevelopmentManufacturingDevelopmentProductionEngineeringIndexRoute
+  '/development/manufacturing-development/quality-planning-apqp/': typeof DevelopmentManufacturingDevelopmentQualityPlanningApqpIndexRoute
+  '/development/manufacturing-development/robotics-integration/': typeof DevelopmentManufacturingDevelopmentRoboticsIntegrationIndexRoute
+  '/development/manufacturing-development/routing-development/': typeof DevelopmentManufacturingDevelopmentRoutingDevelopmentIndexRoute
+  '/development/manufacturing-development/six-sigma-projects/': typeof DevelopmentManufacturingDevelopmentSixSigmaProjectsIndexRoute
+  '/development/manufacturing-development/smart-factory-development/': typeof DevelopmentManufacturingDevelopmentSmartFactoryDevelopmentIndexRoute
+  '/development/manufacturing-development/sop-development/': typeof DevelopmentManufacturingDevelopmentSopDevelopmentIndexRoute
+  '/development/manufacturing-development/tooling-development/': typeof DevelopmentManufacturingDevelopmentToolingDevelopmentIndexRoute
+  '/development/manufacturing-development/work-instruction-development/': typeof DevelopmentManufacturingDevelopmentWorkInstructionDevelopmentIndexRoute
+  '/development/product-development/ai-model-development/': typeof DevelopmentProductDevelopmentAiModelDevelopmentIndexRoute
+  '/development/product-development/api-development/': typeof DevelopmentProductDevelopmentApiDevelopmentIndexRoute
+  '/development/product-development/certification-readiness/': typeof DevelopmentProductDevelopmentCertificationReadinessIndexRoute
+  '/development/product-development/cloud-platform-development/': typeof DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRoute
+  '/development/product-development/cybersecurity-engineering/': typeof DevelopmentProductDevelopmentCybersecurityEngineeringIndexRoute
+  '/development/product-development/electrical-design/': typeof DevelopmentProductDevelopmentElectricalDesignIndexRoute
+  '/development/product-development/electronics-design/': typeof DevelopmentProductDevelopmentElectronicsDesignIndexRoute
+  '/development/product-development/embedded-systems-development/': typeof DevelopmentProductDevelopmentEmbeddedSystemsDevelopmentIndexRoute
+  '/development/product-development/firmware-development/': typeof DevelopmentProductDevelopmentFirmwareDevelopmentIndexRoute
+  '/development/product-development/industrial-design/': typeof DevelopmentProductDevelopmentIndustrialDesignIndexRoute
+  '/development/product-development/iot-development/': typeof DevelopmentProductDevelopmentIotDevelopmentIndexRoute
+  '/development/product-development/mechanical-design/': typeof DevelopmentProductDevelopmentMechanicalDesignIndexRoute
+  '/development/product-development/mobile-app-development/': typeof DevelopmentProductDevelopmentMobileAppDevelopmentIndexRoute
+  '/development/product-development/prd/': typeof DevelopmentProductDevelopmentPrdIndexRoute
+  '/development/product-development/product-architecture/': typeof DevelopmentProductDevelopmentProductArchitectureIndexRoute
+  '/development/product-development/product-documentation/': typeof DevelopmentProductDevelopmentProductDocumentationIndexRoute
+  '/development/product-development/product-lifecycle-management/': typeof DevelopmentProductDevelopmentProductLifecycleManagementIndexRoute
+  '/development/product-development/product-release-management/': typeof DevelopmentProductDevelopmentProductReleaseManagementIndexRoute
+  '/development/product-development/product-roadmap/': typeof DevelopmentProductDevelopmentProductRoadmapIndexRoute
+  '/development/product-development/product-strategy/': typeof DevelopmentProductDevelopmentProductStrategyIndexRoute
+  '/development/product-development/simulation-analysis/': typeof DevelopmentProductDevelopmentSimulationAnalysisIndexRoute
+  '/development/product-development/software-development/': typeof DevelopmentProductDevelopmentSoftwareDevelopmentIndexRoute
+  '/development/product-development/testing-validation/': typeof DevelopmentProductDevelopmentTestingValidationIndexRoute
+  '/development/product-development/ui-ux-development/': typeof DevelopmentProductDevelopmentUiUxDevelopmentIndexRoute
   '/development/research-innovation/ai-model-development/': typeof DevelopmentResearchInnovationAiModelDevelopmentIndexRoute
   '/development/research-innovation/api-development/': typeof DevelopmentResearchInnovationApiDevelopmentIndexRoute
   '/development/research-innovation/assembly-line-development/': typeof DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRoute
@@ -1341,6 +1757,8 @@ export interface FileRoutesByTo {
   '/administration/home/overview': typeof AdministrationHomeOverviewRoute
   '/administration/home/roles': typeof AdministrationHomeRolesRoute
   '/administration/home/users': typeof AdministrationHomeUsersRoute
+  '/development/manufacturing-development/overview': typeof DevelopmentManufacturingDevelopmentOverviewRoute
+  '/development/product-development/overview': typeof DevelopmentProductDevelopmentOverviewRoute
   '/development/research-innovation/overview': typeof DevelopmentResearchInnovationOverviewRoute
   '/development/research-innovation/reports': typeof DevelopmentResearchInnovationReportsRoute
   '/management/finance/assets': typeof ManagementFinanceAssetsRoute
@@ -1435,6 +1853,53 @@ export interface FileRoutesByTo {
   '/development/research-innovation/ui-ux-development/new': typeof DevelopmentResearchInnovationUiUxDevelopmentNewRoute
   '/development/research-innovation/work-instruction-development/new': typeof DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute
   '/development/ip-development/patent-management': typeof DevelopmentIpDevelopmentPatentManagementIndexRoute
+  '/development/manufacturing-development/assembly-line-development': typeof DevelopmentManufacturingDevelopmentAssemblyLineDevelopmentIndexRoute
+  '/development/manufacturing-development/automation-development': typeof DevelopmentManufacturingDevelopmentAutomationDevelopmentIndexRoute
+  '/development/manufacturing-development/bom-engineering': typeof DevelopmentManufacturingDevelopmentBomEngineeringIndexRoute
+  '/development/manufacturing-development/capacity-planning': typeof DevelopmentManufacturingDevelopmentCapacityPlanningIndexRoute
+  '/development/manufacturing-development/control-plan': typeof DevelopmentManufacturingDevelopmentControlPlanIndexRoute
+  '/development/manufacturing-development/factory-layout-design': typeof DevelopmentManufacturingDevelopmentFactoryLayoutDesignIndexRoute
+  '/development/manufacturing-development/fixture-development': typeof DevelopmentManufacturingDevelopmentFixtureDevelopmentIndexRoute
+  '/development/manufacturing-development/jig-development': typeof DevelopmentManufacturingDevelopmentJigDevelopmentIndexRoute
+  '/development/manufacturing-development/lean-manufacturing': typeof DevelopmentManufacturingDevelopmentLeanManufacturingIndexRoute
+  '/development/manufacturing-development/manufacturing-excellence': typeof DevelopmentManufacturingDevelopmentManufacturingExcellenceIndexRoute
+  '/development/manufacturing-development/mass-production-readiness': typeof DevelopmentManufacturingDevelopmentMassProductionReadinessIndexRoute
+  '/development/manufacturing-development/pfmea-development': typeof DevelopmentManufacturingDevelopmentPfmeaDevelopmentIndexRoute
+  '/development/manufacturing-development/pilot-production': typeof DevelopmentManufacturingDevelopmentPilotProductionIndexRoute
+  '/development/manufacturing-development/process-validation': typeof DevelopmentManufacturingDevelopmentProcessValidationIndexRoute
+  '/development/manufacturing-development/production-engineering': typeof DevelopmentManufacturingDevelopmentProductionEngineeringIndexRoute
+  '/development/manufacturing-development/quality-planning-apqp': typeof DevelopmentManufacturingDevelopmentQualityPlanningApqpIndexRoute
+  '/development/manufacturing-development/robotics-integration': typeof DevelopmentManufacturingDevelopmentRoboticsIntegrationIndexRoute
+  '/development/manufacturing-development/routing-development': typeof DevelopmentManufacturingDevelopmentRoutingDevelopmentIndexRoute
+  '/development/manufacturing-development/six-sigma-projects': typeof DevelopmentManufacturingDevelopmentSixSigmaProjectsIndexRoute
+  '/development/manufacturing-development/smart-factory-development': typeof DevelopmentManufacturingDevelopmentSmartFactoryDevelopmentIndexRoute
+  '/development/manufacturing-development/sop-development': typeof DevelopmentManufacturingDevelopmentSopDevelopmentIndexRoute
+  '/development/manufacturing-development/tooling-development': typeof DevelopmentManufacturingDevelopmentToolingDevelopmentIndexRoute
+  '/development/manufacturing-development/work-instruction-development': typeof DevelopmentManufacturingDevelopmentWorkInstructionDevelopmentIndexRoute
+  '/development/product-development/ai-model-development': typeof DevelopmentProductDevelopmentAiModelDevelopmentIndexRoute
+  '/development/product-development/api-development': typeof DevelopmentProductDevelopmentApiDevelopmentIndexRoute
+  '/development/product-development/certification-readiness': typeof DevelopmentProductDevelopmentCertificationReadinessIndexRoute
+  '/development/product-development/cloud-platform-development': typeof DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRoute
+  '/development/product-development/cybersecurity-engineering': typeof DevelopmentProductDevelopmentCybersecurityEngineeringIndexRoute
+  '/development/product-development/electrical-design': typeof DevelopmentProductDevelopmentElectricalDesignIndexRoute
+  '/development/product-development/electronics-design': typeof DevelopmentProductDevelopmentElectronicsDesignIndexRoute
+  '/development/product-development/embedded-systems-development': typeof DevelopmentProductDevelopmentEmbeddedSystemsDevelopmentIndexRoute
+  '/development/product-development/firmware-development': typeof DevelopmentProductDevelopmentFirmwareDevelopmentIndexRoute
+  '/development/product-development/industrial-design': typeof DevelopmentProductDevelopmentIndustrialDesignIndexRoute
+  '/development/product-development/iot-development': typeof DevelopmentProductDevelopmentIotDevelopmentIndexRoute
+  '/development/product-development/mechanical-design': typeof DevelopmentProductDevelopmentMechanicalDesignIndexRoute
+  '/development/product-development/mobile-app-development': typeof DevelopmentProductDevelopmentMobileAppDevelopmentIndexRoute
+  '/development/product-development/prd': typeof DevelopmentProductDevelopmentPrdIndexRoute
+  '/development/product-development/product-architecture': typeof DevelopmentProductDevelopmentProductArchitectureIndexRoute
+  '/development/product-development/product-documentation': typeof DevelopmentProductDevelopmentProductDocumentationIndexRoute
+  '/development/product-development/product-lifecycle-management': typeof DevelopmentProductDevelopmentProductLifecycleManagementIndexRoute
+  '/development/product-development/product-release-management': typeof DevelopmentProductDevelopmentProductReleaseManagementIndexRoute
+  '/development/product-development/product-roadmap': typeof DevelopmentProductDevelopmentProductRoadmapIndexRoute
+  '/development/product-development/product-strategy': typeof DevelopmentProductDevelopmentProductStrategyIndexRoute
+  '/development/product-development/simulation-analysis': typeof DevelopmentProductDevelopmentSimulationAnalysisIndexRoute
+  '/development/product-development/software-development': typeof DevelopmentProductDevelopmentSoftwareDevelopmentIndexRoute
+  '/development/product-development/testing-validation': typeof DevelopmentProductDevelopmentTestingValidationIndexRoute
+  '/development/product-development/ui-ux-development': typeof DevelopmentProductDevelopmentUiUxDevelopmentIndexRoute
   '/development/research-innovation/ai-model-development': typeof DevelopmentResearchInnovationAiModelDevelopmentIndexRoute
   '/development/research-innovation/api-development': typeof DevelopmentResearchInnovationApiDevelopmentIndexRoute
   '/development/research-innovation/assembly-line-development': typeof DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRoute
@@ -1509,6 +1974,8 @@ export interface FileRoutesById {
   '/administration/home/overview': typeof AdministrationHomeOverviewRoute
   '/administration/home/roles': typeof AdministrationHomeRolesRoute
   '/administration/home/users': typeof AdministrationHomeUsersRoute
+  '/development/manufacturing-development/overview': typeof DevelopmentManufacturingDevelopmentOverviewRoute
+  '/development/product-development/overview': typeof DevelopmentProductDevelopmentOverviewRoute
   '/development/research-innovation/overview': typeof DevelopmentResearchInnovationOverviewRoute
   '/development/research-innovation/reports': typeof DevelopmentResearchInnovationReportsRoute
   '/management/finance/assets': typeof ManagementFinanceAssetsRoute
@@ -1603,6 +2070,53 @@ export interface FileRoutesById {
   '/development/research-innovation/ui-ux-development/new': typeof DevelopmentResearchInnovationUiUxDevelopmentNewRoute
   '/development/research-innovation/work-instruction-development/new': typeof DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute
   '/development/ip-development/patent-management/': typeof DevelopmentIpDevelopmentPatentManagementIndexRoute
+  '/development/manufacturing-development/assembly-line-development/': typeof DevelopmentManufacturingDevelopmentAssemblyLineDevelopmentIndexRoute
+  '/development/manufacturing-development/automation-development/': typeof DevelopmentManufacturingDevelopmentAutomationDevelopmentIndexRoute
+  '/development/manufacturing-development/bom-engineering/': typeof DevelopmentManufacturingDevelopmentBomEngineeringIndexRoute
+  '/development/manufacturing-development/capacity-planning/': typeof DevelopmentManufacturingDevelopmentCapacityPlanningIndexRoute
+  '/development/manufacturing-development/control-plan/': typeof DevelopmentManufacturingDevelopmentControlPlanIndexRoute
+  '/development/manufacturing-development/factory-layout-design/': typeof DevelopmentManufacturingDevelopmentFactoryLayoutDesignIndexRoute
+  '/development/manufacturing-development/fixture-development/': typeof DevelopmentManufacturingDevelopmentFixtureDevelopmentIndexRoute
+  '/development/manufacturing-development/jig-development/': typeof DevelopmentManufacturingDevelopmentJigDevelopmentIndexRoute
+  '/development/manufacturing-development/lean-manufacturing/': typeof DevelopmentManufacturingDevelopmentLeanManufacturingIndexRoute
+  '/development/manufacturing-development/manufacturing-excellence/': typeof DevelopmentManufacturingDevelopmentManufacturingExcellenceIndexRoute
+  '/development/manufacturing-development/mass-production-readiness/': typeof DevelopmentManufacturingDevelopmentMassProductionReadinessIndexRoute
+  '/development/manufacturing-development/pfmea-development/': typeof DevelopmentManufacturingDevelopmentPfmeaDevelopmentIndexRoute
+  '/development/manufacturing-development/pilot-production/': typeof DevelopmentManufacturingDevelopmentPilotProductionIndexRoute
+  '/development/manufacturing-development/process-validation/': typeof DevelopmentManufacturingDevelopmentProcessValidationIndexRoute
+  '/development/manufacturing-development/production-engineering/': typeof DevelopmentManufacturingDevelopmentProductionEngineeringIndexRoute
+  '/development/manufacturing-development/quality-planning-apqp/': typeof DevelopmentManufacturingDevelopmentQualityPlanningApqpIndexRoute
+  '/development/manufacturing-development/robotics-integration/': typeof DevelopmentManufacturingDevelopmentRoboticsIntegrationIndexRoute
+  '/development/manufacturing-development/routing-development/': typeof DevelopmentManufacturingDevelopmentRoutingDevelopmentIndexRoute
+  '/development/manufacturing-development/six-sigma-projects/': typeof DevelopmentManufacturingDevelopmentSixSigmaProjectsIndexRoute
+  '/development/manufacturing-development/smart-factory-development/': typeof DevelopmentManufacturingDevelopmentSmartFactoryDevelopmentIndexRoute
+  '/development/manufacturing-development/sop-development/': typeof DevelopmentManufacturingDevelopmentSopDevelopmentIndexRoute
+  '/development/manufacturing-development/tooling-development/': typeof DevelopmentManufacturingDevelopmentToolingDevelopmentIndexRoute
+  '/development/manufacturing-development/work-instruction-development/': typeof DevelopmentManufacturingDevelopmentWorkInstructionDevelopmentIndexRoute
+  '/development/product-development/ai-model-development/': typeof DevelopmentProductDevelopmentAiModelDevelopmentIndexRoute
+  '/development/product-development/api-development/': typeof DevelopmentProductDevelopmentApiDevelopmentIndexRoute
+  '/development/product-development/certification-readiness/': typeof DevelopmentProductDevelopmentCertificationReadinessIndexRoute
+  '/development/product-development/cloud-platform-development/': typeof DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRoute
+  '/development/product-development/cybersecurity-engineering/': typeof DevelopmentProductDevelopmentCybersecurityEngineeringIndexRoute
+  '/development/product-development/electrical-design/': typeof DevelopmentProductDevelopmentElectricalDesignIndexRoute
+  '/development/product-development/electronics-design/': typeof DevelopmentProductDevelopmentElectronicsDesignIndexRoute
+  '/development/product-development/embedded-systems-development/': typeof DevelopmentProductDevelopmentEmbeddedSystemsDevelopmentIndexRoute
+  '/development/product-development/firmware-development/': typeof DevelopmentProductDevelopmentFirmwareDevelopmentIndexRoute
+  '/development/product-development/industrial-design/': typeof DevelopmentProductDevelopmentIndustrialDesignIndexRoute
+  '/development/product-development/iot-development/': typeof DevelopmentProductDevelopmentIotDevelopmentIndexRoute
+  '/development/product-development/mechanical-design/': typeof DevelopmentProductDevelopmentMechanicalDesignIndexRoute
+  '/development/product-development/mobile-app-development/': typeof DevelopmentProductDevelopmentMobileAppDevelopmentIndexRoute
+  '/development/product-development/prd/': typeof DevelopmentProductDevelopmentPrdIndexRoute
+  '/development/product-development/product-architecture/': typeof DevelopmentProductDevelopmentProductArchitectureIndexRoute
+  '/development/product-development/product-documentation/': typeof DevelopmentProductDevelopmentProductDocumentationIndexRoute
+  '/development/product-development/product-lifecycle-management/': typeof DevelopmentProductDevelopmentProductLifecycleManagementIndexRoute
+  '/development/product-development/product-release-management/': typeof DevelopmentProductDevelopmentProductReleaseManagementIndexRoute
+  '/development/product-development/product-roadmap/': typeof DevelopmentProductDevelopmentProductRoadmapIndexRoute
+  '/development/product-development/product-strategy/': typeof DevelopmentProductDevelopmentProductStrategyIndexRoute
+  '/development/product-development/simulation-analysis/': typeof DevelopmentProductDevelopmentSimulationAnalysisIndexRoute
+  '/development/product-development/software-development/': typeof DevelopmentProductDevelopmentSoftwareDevelopmentIndexRoute
+  '/development/product-development/testing-validation/': typeof DevelopmentProductDevelopmentTestingValidationIndexRoute
+  '/development/product-development/ui-ux-development/': typeof DevelopmentProductDevelopmentUiUxDevelopmentIndexRoute
   '/development/research-innovation/ai-model-development/': typeof DevelopmentResearchInnovationAiModelDevelopmentIndexRoute
   '/development/research-innovation/api-development/': typeof DevelopmentResearchInnovationApiDevelopmentIndexRoute
   '/development/research-innovation/assembly-line-development/': typeof DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRoute
@@ -1678,6 +2192,8 @@ export interface FileRouteTypes {
     | '/administration/home/overview'
     | '/administration/home/roles'
     | '/administration/home/users'
+    | '/development/manufacturing-development/overview'
+    | '/development/product-development/overview'
     | '/development/research-innovation/overview'
     | '/development/research-innovation/reports'
     | '/management/finance/assets'
@@ -1772,6 +2288,53 @@ export interface FileRouteTypes {
     | '/development/research-innovation/ui-ux-development/new'
     | '/development/research-innovation/work-instruction-development/new'
     | '/development/ip-development/patent-management/'
+    | '/development/manufacturing-development/assembly-line-development/'
+    | '/development/manufacturing-development/automation-development/'
+    | '/development/manufacturing-development/bom-engineering/'
+    | '/development/manufacturing-development/capacity-planning/'
+    | '/development/manufacturing-development/control-plan/'
+    | '/development/manufacturing-development/factory-layout-design/'
+    | '/development/manufacturing-development/fixture-development/'
+    | '/development/manufacturing-development/jig-development/'
+    | '/development/manufacturing-development/lean-manufacturing/'
+    | '/development/manufacturing-development/manufacturing-excellence/'
+    | '/development/manufacturing-development/mass-production-readiness/'
+    | '/development/manufacturing-development/pfmea-development/'
+    | '/development/manufacturing-development/pilot-production/'
+    | '/development/manufacturing-development/process-validation/'
+    | '/development/manufacturing-development/production-engineering/'
+    | '/development/manufacturing-development/quality-planning-apqp/'
+    | '/development/manufacturing-development/robotics-integration/'
+    | '/development/manufacturing-development/routing-development/'
+    | '/development/manufacturing-development/six-sigma-projects/'
+    | '/development/manufacturing-development/smart-factory-development/'
+    | '/development/manufacturing-development/sop-development/'
+    | '/development/manufacturing-development/tooling-development/'
+    | '/development/manufacturing-development/work-instruction-development/'
+    | '/development/product-development/ai-model-development/'
+    | '/development/product-development/api-development/'
+    | '/development/product-development/certification-readiness/'
+    | '/development/product-development/cloud-platform-development/'
+    | '/development/product-development/cybersecurity-engineering/'
+    | '/development/product-development/electrical-design/'
+    | '/development/product-development/electronics-design/'
+    | '/development/product-development/embedded-systems-development/'
+    | '/development/product-development/firmware-development/'
+    | '/development/product-development/industrial-design/'
+    | '/development/product-development/iot-development/'
+    | '/development/product-development/mechanical-design/'
+    | '/development/product-development/mobile-app-development/'
+    | '/development/product-development/prd/'
+    | '/development/product-development/product-architecture/'
+    | '/development/product-development/product-documentation/'
+    | '/development/product-development/product-lifecycle-management/'
+    | '/development/product-development/product-release-management/'
+    | '/development/product-development/product-roadmap/'
+    | '/development/product-development/product-strategy/'
+    | '/development/product-development/simulation-analysis/'
+    | '/development/product-development/software-development/'
+    | '/development/product-development/testing-validation/'
+    | '/development/product-development/ui-ux-development/'
     | '/development/research-innovation/ai-model-development/'
     | '/development/research-innovation/api-development/'
     | '/development/research-innovation/assembly-line-development/'
@@ -1845,6 +2408,8 @@ export interface FileRouteTypes {
     | '/administration/home/overview'
     | '/administration/home/roles'
     | '/administration/home/users'
+    | '/development/manufacturing-development/overview'
+    | '/development/product-development/overview'
     | '/development/research-innovation/overview'
     | '/development/research-innovation/reports'
     | '/management/finance/assets'
@@ -1939,6 +2504,53 @@ export interface FileRouteTypes {
     | '/development/research-innovation/ui-ux-development/new'
     | '/development/research-innovation/work-instruction-development/new'
     | '/development/ip-development/patent-management'
+    | '/development/manufacturing-development/assembly-line-development'
+    | '/development/manufacturing-development/automation-development'
+    | '/development/manufacturing-development/bom-engineering'
+    | '/development/manufacturing-development/capacity-planning'
+    | '/development/manufacturing-development/control-plan'
+    | '/development/manufacturing-development/factory-layout-design'
+    | '/development/manufacturing-development/fixture-development'
+    | '/development/manufacturing-development/jig-development'
+    | '/development/manufacturing-development/lean-manufacturing'
+    | '/development/manufacturing-development/manufacturing-excellence'
+    | '/development/manufacturing-development/mass-production-readiness'
+    | '/development/manufacturing-development/pfmea-development'
+    | '/development/manufacturing-development/pilot-production'
+    | '/development/manufacturing-development/process-validation'
+    | '/development/manufacturing-development/production-engineering'
+    | '/development/manufacturing-development/quality-planning-apqp'
+    | '/development/manufacturing-development/robotics-integration'
+    | '/development/manufacturing-development/routing-development'
+    | '/development/manufacturing-development/six-sigma-projects'
+    | '/development/manufacturing-development/smart-factory-development'
+    | '/development/manufacturing-development/sop-development'
+    | '/development/manufacturing-development/tooling-development'
+    | '/development/manufacturing-development/work-instruction-development'
+    | '/development/product-development/ai-model-development'
+    | '/development/product-development/api-development'
+    | '/development/product-development/certification-readiness'
+    | '/development/product-development/cloud-platform-development'
+    | '/development/product-development/cybersecurity-engineering'
+    | '/development/product-development/electrical-design'
+    | '/development/product-development/electronics-design'
+    | '/development/product-development/embedded-systems-development'
+    | '/development/product-development/firmware-development'
+    | '/development/product-development/industrial-design'
+    | '/development/product-development/iot-development'
+    | '/development/product-development/mechanical-design'
+    | '/development/product-development/mobile-app-development'
+    | '/development/product-development/prd'
+    | '/development/product-development/product-architecture'
+    | '/development/product-development/product-documentation'
+    | '/development/product-development/product-lifecycle-management'
+    | '/development/product-development/product-release-management'
+    | '/development/product-development/product-roadmap'
+    | '/development/product-development/product-strategy'
+    | '/development/product-development/simulation-analysis'
+    | '/development/product-development/software-development'
+    | '/development/product-development/testing-validation'
+    | '/development/product-development/ui-ux-development'
     | '/development/research-innovation/ai-model-development'
     | '/development/research-innovation/api-development'
     | '/development/research-innovation/assembly-line-development'
@@ -2012,6 +2624,8 @@ export interface FileRouteTypes {
     | '/administration/home/overview'
     | '/administration/home/roles'
     | '/administration/home/users'
+    | '/development/manufacturing-development/overview'
+    | '/development/product-development/overview'
     | '/development/research-innovation/overview'
     | '/development/research-innovation/reports'
     | '/management/finance/assets'
@@ -2106,6 +2720,53 @@ export interface FileRouteTypes {
     | '/development/research-innovation/ui-ux-development/new'
     | '/development/research-innovation/work-instruction-development/new'
     | '/development/ip-development/patent-management/'
+    | '/development/manufacturing-development/assembly-line-development/'
+    | '/development/manufacturing-development/automation-development/'
+    | '/development/manufacturing-development/bom-engineering/'
+    | '/development/manufacturing-development/capacity-planning/'
+    | '/development/manufacturing-development/control-plan/'
+    | '/development/manufacturing-development/factory-layout-design/'
+    | '/development/manufacturing-development/fixture-development/'
+    | '/development/manufacturing-development/jig-development/'
+    | '/development/manufacturing-development/lean-manufacturing/'
+    | '/development/manufacturing-development/manufacturing-excellence/'
+    | '/development/manufacturing-development/mass-production-readiness/'
+    | '/development/manufacturing-development/pfmea-development/'
+    | '/development/manufacturing-development/pilot-production/'
+    | '/development/manufacturing-development/process-validation/'
+    | '/development/manufacturing-development/production-engineering/'
+    | '/development/manufacturing-development/quality-planning-apqp/'
+    | '/development/manufacturing-development/robotics-integration/'
+    | '/development/manufacturing-development/routing-development/'
+    | '/development/manufacturing-development/six-sigma-projects/'
+    | '/development/manufacturing-development/smart-factory-development/'
+    | '/development/manufacturing-development/sop-development/'
+    | '/development/manufacturing-development/tooling-development/'
+    | '/development/manufacturing-development/work-instruction-development/'
+    | '/development/product-development/ai-model-development/'
+    | '/development/product-development/api-development/'
+    | '/development/product-development/certification-readiness/'
+    | '/development/product-development/cloud-platform-development/'
+    | '/development/product-development/cybersecurity-engineering/'
+    | '/development/product-development/electrical-design/'
+    | '/development/product-development/electronics-design/'
+    | '/development/product-development/embedded-systems-development/'
+    | '/development/product-development/firmware-development/'
+    | '/development/product-development/industrial-design/'
+    | '/development/product-development/iot-development/'
+    | '/development/product-development/mechanical-design/'
+    | '/development/product-development/mobile-app-development/'
+    | '/development/product-development/prd/'
+    | '/development/product-development/product-architecture/'
+    | '/development/product-development/product-documentation/'
+    | '/development/product-development/product-lifecycle-management/'
+    | '/development/product-development/product-release-management/'
+    | '/development/product-development/product-roadmap/'
+    | '/development/product-development/product-strategy/'
+    | '/development/product-development/simulation-analysis/'
+    | '/development/product-development/software-development/'
+    | '/development/product-development/testing-validation/'
+    | '/development/product-development/ui-ux-development/'
     | '/development/research-innovation/ai-model-development/'
     | '/development/research-innovation/api-development/'
     | '/development/research-innovation/assembly-line-development/'
@@ -2180,6 +2841,8 @@ export interface RootRouteChildren {
   AdministrationHomeOverviewRoute: typeof AdministrationHomeOverviewRoute
   AdministrationHomeRolesRoute: typeof AdministrationHomeRolesRoute
   AdministrationHomeUsersRoute: typeof AdministrationHomeUsersRoute
+  DevelopmentManufacturingDevelopmentOverviewRoute: typeof DevelopmentManufacturingDevelopmentOverviewRoute
+  DevelopmentProductDevelopmentOverviewRoute: typeof DevelopmentProductDevelopmentOverviewRoute
   DevelopmentResearchInnovationOverviewRoute: typeof DevelopmentResearchInnovationOverviewRoute
   DevelopmentResearchInnovationReportsRoute: typeof DevelopmentResearchInnovationReportsRoute
   ManagementFinanceAssetsRoute: typeof ManagementFinanceAssetsRoute
@@ -2274,6 +2937,53 @@ export interface RootRouteChildren {
   DevelopmentResearchInnovationUiUxDevelopmentNewRoute: typeof DevelopmentResearchInnovationUiUxDevelopmentNewRoute
   DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute: typeof DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute
   DevelopmentIpDevelopmentPatentManagementIndexRoute: typeof DevelopmentIpDevelopmentPatentManagementIndexRoute
+  DevelopmentManufacturingDevelopmentAssemblyLineDevelopmentIndexRoute: typeof DevelopmentManufacturingDevelopmentAssemblyLineDevelopmentIndexRoute
+  DevelopmentManufacturingDevelopmentAutomationDevelopmentIndexRoute: typeof DevelopmentManufacturingDevelopmentAutomationDevelopmentIndexRoute
+  DevelopmentManufacturingDevelopmentBomEngineeringIndexRoute: typeof DevelopmentManufacturingDevelopmentBomEngineeringIndexRoute
+  DevelopmentManufacturingDevelopmentCapacityPlanningIndexRoute: typeof DevelopmentManufacturingDevelopmentCapacityPlanningIndexRoute
+  DevelopmentManufacturingDevelopmentControlPlanIndexRoute: typeof DevelopmentManufacturingDevelopmentControlPlanIndexRoute
+  DevelopmentManufacturingDevelopmentFactoryLayoutDesignIndexRoute: typeof DevelopmentManufacturingDevelopmentFactoryLayoutDesignIndexRoute
+  DevelopmentManufacturingDevelopmentFixtureDevelopmentIndexRoute: typeof DevelopmentManufacturingDevelopmentFixtureDevelopmentIndexRoute
+  DevelopmentManufacturingDevelopmentJigDevelopmentIndexRoute: typeof DevelopmentManufacturingDevelopmentJigDevelopmentIndexRoute
+  DevelopmentManufacturingDevelopmentLeanManufacturingIndexRoute: typeof DevelopmentManufacturingDevelopmentLeanManufacturingIndexRoute
+  DevelopmentManufacturingDevelopmentManufacturingExcellenceIndexRoute: typeof DevelopmentManufacturingDevelopmentManufacturingExcellenceIndexRoute
+  DevelopmentManufacturingDevelopmentMassProductionReadinessIndexRoute: typeof DevelopmentManufacturingDevelopmentMassProductionReadinessIndexRoute
+  DevelopmentManufacturingDevelopmentPfmeaDevelopmentIndexRoute: typeof DevelopmentManufacturingDevelopmentPfmeaDevelopmentIndexRoute
+  DevelopmentManufacturingDevelopmentPilotProductionIndexRoute: typeof DevelopmentManufacturingDevelopmentPilotProductionIndexRoute
+  DevelopmentManufacturingDevelopmentProcessValidationIndexRoute: typeof DevelopmentManufacturingDevelopmentProcessValidationIndexRoute
+  DevelopmentManufacturingDevelopmentProductionEngineeringIndexRoute: typeof DevelopmentManufacturingDevelopmentProductionEngineeringIndexRoute
+  DevelopmentManufacturingDevelopmentQualityPlanningApqpIndexRoute: typeof DevelopmentManufacturingDevelopmentQualityPlanningApqpIndexRoute
+  DevelopmentManufacturingDevelopmentRoboticsIntegrationIndexRoute: typeof DevelopmentManufacturingDevelopmentRoboticsIntegrationIndexRoute
+  DevelopmentManufacturingDevelopmentRoutingDevelopmentIndexRoute: typeof DevelopmentManufacturingDevelopmentRoutingDevelopmentIndexRoute
+  DevelopmentManufacturingDevelopmentSixSigmaProjectsIndexRoute: typeof DevelopmentManufacturingDevelopmentSixSigmaProjectsIndexRoute
+  DevelopmentManufacturingDevelopmentSmartFactoryDevelopmentIndexRoute: typeof DevelopmentManufacturingDevelopmentSmartFactoryDevelopmentIndexRoute
+  DevelopmentManufacturingDevelopmentSopDevelopmentIndexRoute: typeof DevelopmentManufacturingDevelopmentSopDevelopmentIndexRoute
+  DevelopmentManufacturingDevelopmentToolingDevelopmentIndexRoute: typeof DevelopmentManufacturingDevelopmentToolingDevelopmentIndexRoute
+  DevelopmentManufacturingDevelopmentWorkInstructionDevelopmentIndexRoute: typeof DevelopmentManufacturingDevelopmentWorkInstructionDevelopmentIndexRoute
+  DevelopmentProductDevelopmentAiModelDevelopmentIndexRoute: typeof DevelopmentProductDevelopmentAiModelDevelopmentIndexRoute
+  DevelopmentProductDevelopmentApiDevelopmentIndexRoute: typeof DevelopmentProductDevelopmentApiDevelopmentIndexRoute
+  DevelopmentProductDevelopmentCertificationReadinessIndexRoute: typeof DevelopmentProductDevelopmentCertificationReadinessIndexRoute
+  DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRoute: typeof DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRoute
+  DevelopmentProductDevelopmentCybersecurityEngineeringIndexRoute: typeof DevelopmentProductDevelopmentCybersecurityEngineeringIndexRoute
+  DevelopmentProductDevelopmentElectricalDesignIndexRoute: typeof DevelopmentProductDevelopmentElectricalDesignIndexRoute
+  DevelopmentProductDevelopmentElectronicsDesignIndexRoute: typeof DevelopmentProductDevelopmentElectronicsDesignIndexRoute
+  DevelopmentProductDevelopmentEmbeddedSystemsDevelopmentIndexRoute: typeof DevelopmentProductDevelopmentEmbeddedSystemsDevelopmentIndexRoute
+  DevelopmentProductDevelopmentFirmwareDevelopmentIndexRoute: typeof DevelopmentProductDevelopmentFirmwareDevelopmentIndexRoute
+  DevelopmentProductDevelopmentIndustrialDesignIndexRoute: typeof DevelopmentProductDevelopmentIndustrialDesignIndexRoute
+  DevelopmentProductDevelopmentIotDevelopmentIndexRoute: typeof DevelopmentProductDevelopmentIotDevelopmentIndexRoute
+  DevelopmentProductDevelopmentMechanicalDesignIndexRoute: typeof DevelopmentProductDevelopmentMechanicalDesignIndexRoute
+  DevelopmentProductDevelopmentMobileAppDevelopmentIndexRoute: typeof DevelopmentProductDevelopmentMobileAppDevelopmentIndexRoute
+  DevelopmentProductDevelopmentPrdIndexRoute: typeof DevelopmentProductDevelopmentPrdIndexRoute
+  DevelopmentProductDevelopmentProductArchitectureIndexRoute: typeof DevelopmentProductDevelopmentProductArchitectureIndexRoute
+  DevelopmentProductDevelopmentProductDocumentationIndexRoute: typeof DevelopmentProductDevelopmentProductDocumentationIndexRoute
+  DevelopmentProductDevelopmentProductLifecycleManagementIndexRoute: typeof DevelopmentProductDevelopmentProductLifecycleManagementIndexRoute
+  DevelopmentProductDevelopmentProductReleaseManagementIndexRoute: typeof DevelopmentProductDevelopmentProductReleaseManagementIndexRoute
+  DevelopmentProductDevelopmentProductRoadmapIndexRoute: typeof DevelopmentProductDevelopmentProductRoadmapIndexRoute
+  DevelopmentProductDevelopmentProductStrategyIndexRoute: typeof DevelopmentProductDevelopmentProductStrategyIndexRoute
+  DevelopmentProductDevelopmentSimulationAnalysisIndexRoute: typeof DevelopmentProductDevelopmentSimulationAnalysisIndexRoute
+  DevelopmentProductDevelopmentSoftwareDevelopmentIndexRoute: typeof DevelopmentProductDevelopmentSoftwareDevelopmentIndexRoute
+  DevelopmentProductDevelopmentTestingValidationIndexRoute: typeof DevelopmentProductDevelopmentTestingValidationIndexRoute
+  DevelopmentProductDevelopmentUiUxDevelopmentIndexRoute: typeof DevelopmentProductDevelopmentUiUxDevelopmentIndexRoute
   DevelopmentResearchInnovationAiModelDevelopmentIndexRoute: typeof DevelopmentResearchInnovationAiModelDevelopmentIndexRoute
   DevelopmentResearchInnovationApiDevelopmentIndexRoute: typeof DevelopmentResearchInnovationApiDevelopmentIndexRoute
   DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRoute: typeof DevelopmentResearchInnovationAssemblyLineDevelopmentIndexRoute
@@ -2612,6 +3322,20 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/overview'
       fullPath: '/development/research-innovation/overview'
       preLoaderRoute: typeof DevelopmentResearchInnovationOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/overview': {
+      id: '/development/product-development/overview'
+      path: '/development/product-development/overview'
+      fullPath: '/development/product-development/overview'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/overview': {
+      id: '/development/manufacturing-development/overview'
+      path: '/development/manufacturing-development/overview'
+      fullPath: '/development/manufacturing-development/overview'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentOverviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/administration/home/users': {
@@ -3046,6 +3770,335 @@ declare module '@tanstack/react-router' {
       path: '/development/research-innovation/ai-model-development'
       fullPath: '/development/research-innovation/ai-model-development/'
       preLoaderRoute: typeof DevelopmentResearchInnovationAiModelDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/ui-ux-development/': {
+      id: '/development/product-development/ui-ux-development/'
+      path: '/development/product-development/ui-ux-development'
+      fullPath: '/development/product-development/ui-ux-development/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentUiUxDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/testing-validation/': {
+      id: '/development/product-development/testing-validation/'
+      path: '/development/product-development/testing-validation'
+      fullPath: '/development/product-development/testing-validation/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentTestingValidationIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/software-development/': {
+      id: '/development/product-development/software-development/'
+      path: '/development/product-development/software-development'
+      fullPath: '/development/product-development/software-development/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentSoftwareDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/simulation-analysis/': {
+      id: '/development/product-development/simulation-analysis/'
+      path: '/development/product-development/simulation-analysis'
+      fullPath: '/development/product-development/simulation-analysis/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentSimulationAnalysisIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/product-strategy/': {
+      id: '/development/product-development/product-strategy/'
+      path: '/development/product-development/product-strategy'
+      fullPath: '/development/product-development/product-strategy/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentProductStrategyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/product-roadmap/': {
+      id: '/development/product-development/product-roadmap/'
+      path: '/development/product-development/product-roadmap'
+      fullPath: '/development/product-development/product-roadmap/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentProductRoadmapIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/product-release-management/': {
+      id: '/development/product-development/product-release-management/'
+      path: '/development/product-development/product-release-management'
+      fullPath: '/development/product-development/product-release-management/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentProductReleaseManagementIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/product-lifecycle-management/': {
+      id: '/development/product-development/product-lifecycle-management/'
+      path: '/development/product-development/product-lifecycle-management'
+      fullPath: '/development/product-development/product-lifecycle-management/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentProductLifecycleManagementIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/product-documentation/': {
+      id: '/development/product-development/product-documentation/'
+      path: '/development/product-development/product-documentation'
+      fullPath: '/development/product-development/product-documentation/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentProductDocumentationIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/product-architecture/': {
+      id: '/development/product-development/product-architecture/'
+      path: '/development/product-development/product-architecture'
+      fullPath: '/development/product-development/product-architecture/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentProductArchitectureIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/prd/': {
+      id: '/development/product-development/prd/'
+      path: '/development/product-development/prd'
+      fullPath: '/development/product-development/prd/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentPrdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/mobile-app-development/': {
+      id: '/development/product-development/mobile-app-development/'
+      path: '/development/product-development/mobile-app-development'
+      fullPath: '/development/product-development/mobile-app-development/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentMobileAppDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/mechanical-design/': {
+      id: '/development/product-development/mechanical-design/'
+      path: '/development/product-development/mechanical-design'
+      fullPath: '/development/product-development/mechanical-design/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentMechanicalDesignIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/iot-development/': {
+      id: '/development/product-development/iot-development/'
+      path: '/development/product-development/iot-development'
+      fullPath: '/development/product-development/iot-development/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentIotDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/industrial-design/': {
+      id: '/development/product-development/industrial-design/'
+      path: '/development/product-development/industrial-design'
+      fullPath: '/development/product-development/industrial-design/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentIndustrialDesignIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/firmware-development/': {
+      id: '/development/product-development/firmware-development/'
+      path: '/development/product-development/firmware-development'
+      fullPath: '/development/product-development/firmware-development/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentFirmwareDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/embedded-systems-development/': {
+      id: '/development/product-development/embedded-systems-development/'
+      path: '/development/product-development/embedded-systems-development'
+      fullPath: '/development/product-development/embedded-systems-development/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentEmbeddedSystemsDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/electronics-design/': {
+      id: '/development/product-development/electronics-design/'
+      path: '/development/product-development/electronics-design'
+      fullPath: '/development/product-development/electronics-design/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentElectronicsDesignIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/electrical-design/': {
+      id: '/development/product-development/electrical-design/'
+      path: '/development/product-development/electrical-design'
+      fullPath: '/development/product-development/electrical-design/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentElectricalDesignIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/cybersecurity-engineering/': {
+      id: '/development/product-development/cybersecurity-engineering/'
+      path: '/development/product-development/cybersecurity-engineering'
+      fullPath: '/development/product-development/cybersecurity-engineering/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentCybersecurityEngineeringIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/cloud-platform-development/': {
+      id: '/development/product-development/cloud-platform-development/'
+      path: '/development/product-development/cloud-platform-development'
+      fullPath: '/development/product-development/cloud-platform-development/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/certification-readiness/': {
+      id: '/development/product-development/certification-readiness/'
+      path: '/development/product-development/certification-readiness'
+      fullPath: '/development/product-development/certification-readiness/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentCertificationReadinessIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/api-development/': {
+      id: '/development/product-development/api-development/'
+      path: '/development/product-development/api-development'
+      fullPath: '/development/product-development/api-development/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentApiDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/product-development/ai-model-development/': {
+      id: '/development/product-development/ai-model-development/'
+      path: '/development/product-development/ai-model-development'
+      fullPath: '/development/product-development/ai-model-development/'
+      preLoaderRoute: typeof DevelopmentProductDevelopmentAiModelDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/work-instruction-development/': {
+      id: '/development/manufacturing-development/work-instruction-development/'
+      path: '/development/manufacturing-development/work-instruction-development'
+      fullPath: '/development/manufacturing-development/work-instruction-development/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentWorkInstructionDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/tooling-development/': {
+      id: '/development/manufacturing-development/tooling-development/'
+      path: '/development/manufacturing-development/tooling-development'
+      fullPath: '/development/manufacturing-development/tooling-development/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentToolingDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/sop-development/': {
+      id: '/development/manufacturing-development/sop-development/'
+      path: '/development/manufacturing-development/sop-development'
+      fullPath: '/development/manufacturing-development/sop-development/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentSopDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/smart-factory-development/': {
+      id: '/development/manufacturing-development/smart-factory-development/'
+      path: '/development/manufacturing-development/smart-factory-development'
+      fullPath: '/development/manufacturing-development/smart-factory-development/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentSmartFactoryDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/six-sigma-projects/': {
+      id: '/development/manufacturing-development/six-sigma-projects/'
+      path: '/development/manufacturing-development/six-sigma-projects'
+      fullPath: '/development/manufacturing-development/six-sigma-projects/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentSixSigmaProjectsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/routing-development/': {
+      id: '/development/manufacturing-development/routing-development/'
+      path: '/development/manufacturing-development/routing-development'
+      fullPath: '/development/manufacturing-development/routing-development/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentRoutingDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/robotics-integration/': {
+      id: '/development/manufacturing-development/robotics-integration/'
+      path: '/development/manufacturing-development/robotics-integration'
+      fullPath: '/development/manufacturing-development/robotics-integration/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentRoboticsIntegrationIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/quality-planning-apqp/': {
+      id: '/development/manufacturing-development/quality-planning-apqp/'
+      path: '/development/manufacturing-development/quality-planning-apqp'
+      fullPath: '/development/manufacturing-development/quality-planning-apqp/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentQualityPlanningApqpIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/production-engineering/': {
+      id: '/development/manufacturing-development/production-engineering/'
+      path: '/development/manufacturing-development/production-engineering'
+      fullPath: '/development/manufacturing-development/production-engineering/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentProductionEngineeringIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/process-validation/': {
+      id: '/development/manufacturing-development/process-validation/'
+      path: '/development/manufacturing-development/process-validation'
+      fullPath: '/development/manufacturing-development/process-validation/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentProcessValidationIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/pilot-production/': {
+      id: '/development/manufacturing-development/pilot-production/'
+      path: '/development/manufacturing-development/pilot-production'
+      fullPath: '/development/manufacturing-development/pilot-production/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentPilotProductionIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/pfmea-development/': {
+      id: '/development/manufacturing-development/pfmea-development/'
+      path: '/development/manufacturing-development/pfmea-development'
+      fullPath: '/development/manufacturing-development/pfmea-development/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentPfmeaDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/mass-production-readiness/': {
+      id: '/development/manufacturing-development/mass-production-readiness/'
+      path: '/development/manufacturing-development/mass-production-readiness'
+      fullPath: '/development/manufacturing-development/mass-production-readiness/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentMassProductionReadinessIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/manufacturing-excellence/': {
+      id: '/development/manufacturing-development/manufacturing-excellence/'
+      path: '/development/manufacturing-development/manufacturing-excellence'
+      fullPath: '/development/manufacturing-development/manufacturing-excellence/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentManufacturingExcellenceIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/lean-manufacturing/': {
+      id: '/development/manufacturing-development/lean-manufacturing/'
+      path: '/development/manufacturing-development/lean-manufacturing'
+      fullPath: '/development/manufacturing-development/lean-manufacturing/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentLeanManufacturingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/jig-development/': {
+      id: '/development/manufacturing-development/jig-development/'
+      path: '/development/manufacturing-development/jig-development'
+      fullPath: '/development/manufacturing-development/jig-development/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentJigDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/fixture-development/': {
+      id: '/development/manufacturing-development/fixture-development/'
+      path: '/development/manufacturing-development/fixture-development'
+      fullPath: '/development/manufacturing-development/fixture-development/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentFixtureDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/factory-layout-design/': {
+      id: '/development/manufacturing-development/factory-layout-design/'
+      path: '/development/manufacturing-development/factory-layout-design'
+      fullPath: '/development/manufacturing-development/factory-layout-design/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentFactoryLayoutDesignIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/control-plan/': {
+      id: '/development/manufacturing-development/control-plan/'
+      path: '/development/manufacturing-development/control-plan'
+      fullPath: '/development/manufacturing-development/control-plan/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentControlPlanIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/capacity-planning/': {
+      id: '/development/manufacturing-development/capacity-planning/'
+      path: '/development/manufacturing-development/capacity-planning'
+      fullPath: '/development/manufacturing-development/capacity-planning/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentCapacityPlanningIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/bom-engineering/': {
+      id: '/development/manufacturing-development/bom-engineering/'
+      path: '/development/manufacturing-development/bom-engineering'
+      fullPath: '/development/manufacturing-development/bom-engineering/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentBomEngineeringIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/automation-development/': {
+      id: '/development/manufacturing-development/automation-development/'
+      path: '/development/manufacturing-development/automation-development'
+      fullPath: '/development/manufacturing-development/automation-development/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentAutomationDevelopmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development/manufacturing-development/assembly-line-development/': {
+      id: '/development/manufacturing-development/assembly-line-development/'
+      path: '/development/manufacturing-development/assembly-line-development'
+      fullPath: '/development/manufacturing-development/assembly-line-development/'
+      preLoaderRoute: typeof DevelopmentManufacturingDevelopmentAssemblyLineDevelopmentIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/development/ip-development/patent-management/': {
@@ -3508,6 +4561,10 @@ const rootRouteChildren: RootRouteChildren = {
   AdministrationHomeOverviewRoute: AdministrationHomeOverviewRoute,
   AdministrationHomeRolesRoute: AdministrationHomeRolesRoute,
   AdministrationHomeUsersRoute: AdministrationHomeUsersRoute,
+  DevelopmentManufacturingDevelopmentOverviewRoute:
+    DevelopmentManufacturingDevelopmentOverviewRoute,
+  DevelopmentProductDevelopmentOverviewRoute:
+    DevelopmentProductDevelopmentOverviewRoute,
   DevelopmentResearchInnovationOverviewRoute:
     DevelopmentResearchInnovationOverviewRoute,
   DevelopmentResearchInnovationReportsRoute:
@@ -3682,6 +4739,100 @@ const rootRouteChildren: RootRouteChildren = {
     DevelopmentResearchInnovationWorkInstructionDevelopmentNewRoute,
   DevelopmentIpDevelopmentPatentManagementIndexRoute:
     DevelopmentIpDevelopmentPatentManagementIndexRoute,
+  DevelopmentManufacturingDevelopmentAssemblyLineDevelopmentIndexRoute:
+    DevelopmentManufacturingDevelopmentAssemblyLineDevelopmentIndexRoute,
+  DevelopmentManufacturingDevelopmentAutomationDevelopmentIndexRoute:
+    DevelopmentManufacturingDevelopmentAutomationDevelopmentIndexRoute,
+  DevelopmentManufacturingDevelopmentBomEngineeringIndexRoute:
+    DevelopmentManufacturingDevelopmentBomEngineeringIndexRoute,
+  DevelopmentManufacturingDevelopmentCapacityPlanningIndexRoute:
+    DevelopmentManufacturingDevelopmentCapacityPlanningIndexRoute,
+  DevelopmentManufacturingDevelopmentControlPlanIndexRoute:
+    DevelopmentManufacturingDevelopmentControlPlanIndexRoute,
+  DevelopmentManufacturingDevelopmentFactoryLayoutDesignIndexRoute:
+    DevelopmentManufacturingDevelopmentFactoryLayoutDesignIndexRoute,
+  DevelopmentManufacturingDevelopmentFixtureDevelopmentIndexRoute:
+    DevelopmentManufacturingDevelopmentFixtureDevelopmentIndexRoute,
+  DevelopmentManufacturingDevelopmentJigDevelopmentIndexRoute:
+    DevelopmentManufacturingDevelopmentJigDevelopmentIndexRoute,
+  DevelopmentManufacturingDevelopmentLeanManufacturingIndexRoute:
+    DevelopmentManufacturingDevelopmentLeanManufacturingIndexRoute,
+  DevelopmentManufacturingDevelopmentManufacturingExcellenceIndexRoute:
+    DevelopmentManufacturingDevelopmentManufacturingExcellenceIndexRoute,
+  DevelopmentManufacturingDevelopmentMassProductionReadinessIndexRoute:
+    DevelopmentManufacturingDevelopmentMassProductionReadinessIndexRoute,
+  DevelopmentManufacturingDevelopmentPfmeaDevelopmentIndexRoute:
+    DevelopmentManufacturingDevelopmentPfmeaDevelopmentIndexRoute,
+  DevelopmentManufacturingDevelopmentPilotProductionIndexRoute:
+    DevelopmentManufacturingDevelopmentPilotProductionIndexRoute,
+  DevelopmentManufacturingDevelopmentProcessValidationIndexRoute:
+    DevelopmentManufacturingDevelopmentProcessValidationIndexRoute,
+  DevelopmentManufacturingDevelopmentProductionEngineeringIndexRoute:
+    DevelopmentManufacturingDevelopmentProductionEngineeringIndexRoute,
+  DevelopmentManufacturingDevelopmentQualityPlanningApqpIndexRoute:
+    DevelopmentManufacturingDevelopmentQualityPlanningApqpIndexRoute,
+  DevelopmentManufacturingDevelopmentRoboticsIntegrationIndexRoute:
+    DevelopmentManufacturingDevelopmentRoboticsIntegrationIndexRoute,
+  DevelopmentManufacturingDevelopmentRoutingDevelopmentIndexRoute:
+    DevelopmentManufacturingDevelopmentRoutingDevelopmentIndexRoute,
+  DevelopmentManufacturingDevelopmentSixSigmaProjectsIndexRoute:
+    DevelopmentManufacturingDevelopmentSixSigmaProjectsIndexRoute,
+  DevelopmentManufacturingDevelopmentSmartFactoryDevelopmentIndexRoute:
+    DevelopmentManufacturingDevelopmentSmartFactoryDevelopmentIndexRoute,
+  DevelopmentManufacturingDevelopmentSopDevelopmentIndexRoute:
+    DevelopmentManufacturingDevelopmentSopDevelopmentIndexRoute,
+  DevelopmentManufacturingDevelopmentToolingDevelopmentIndexRoute:
+    DevelopmentManufacturingDevelopmentToolingDevelopmentIndexRoute,
+  DevelopmentManufacturingDevelopmentWorkInstructionDevelopmentIndexRoute:
+    DevelopmentManufacturingDevelopmentWorkInstructionDevelopmentIndexRoute,
+  DevelopmentProductDevelopmentAiModelDevelopmentIndexRoute:
+    DevelopmentProductDevelopmentAiModelDevelopmentIndexRoute,
+  DevelopmentProductDevelopmentApiDevelopmentIndexRoute:
+    DevelopmentProductDevelopmentApiDevelopmentIndexRoute,
+  DevelopmentProductDevelopmentCertificationReadinessIndexRoute:
+    DevelopmentProductDevelopmentCertificationReadinessIndexRoute,
+  DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRoute:
+    DevelopmentProductDevelopmentCloudPlatformDevelopmentIndexRoute,
+  DevelopmentProductDevelopmentCybersecurityEngineeringIndexRoute:
+    DevelopmentProductDevelopmentCybersecurityEngineeringIndexRoute,
+  DevelopmentProductDevelopmentElectricalDesignIndexRoute:
+    DevelopmentProductDevelopmentElectricalDesignIndexRoute,
+  DevelopmentProductDevelopmentElectronicsDesignIndexRoute:
+    DevelopmentProductDevelopmentElectronicsDesignIndexRoute,
+  DevelopmentProductDevelopmentEmbeddedSystemsDevelopmentIndexRoute:
+    DevelopmentProductDevelopmentEmbeddedSystemsDevelopmentIndexRoute,
+  DevelopmentProductDevelopmentFirmwareDevelopmentIndexRoute:
+    DevelopmentProductDevelopmentFirmwareDevelopmentIndexRoute,
+  DevelopmentProductDevelopmentIndustrialDesignIndexRoute:
+    DevelopmentProductDevelopmentIndustrialDesignIndexRoute,
+  DevelopmentProductDevelopmentIotDevelopmentIndexRoute:
+    DevelopmentProductDevelopmentIotDevelopmentIndexRoute,
+  DevelopmentProductDevelopmentMechanicalDesignIndexRoute:
+    DevelopmentProductDevelopmentMechanicalDesignIndexRoute,
+  DevelopmentProductDevelopmentMobileAppDevelopmentIndexRoute:
+    DevelopmentProductDevelopmentMobileAppDevelopmentIndexRoute,
+  DevelopmentProductDevelopmentPrdIndexRoute:
+    DevelopmentProductDevelopmentPrdIndexRoute,
+  DevelopmentProductDevelopmentProductArchitectureIndexRoute:
+    DevelopmentProductDevelopmentProductArchitectureIndexRoute,
+  DevelopmentProductDevelopmentProductDocumentationIndexRoute:
+    DevelopmentProductDevelopmentProductDocumentationIndexRoute,
+  DevelopmentProductDevelopmentProductLifecycleManagementIndexRoute:
+    DevelopmentProductDevelopmentProductLifecycleManagementIndexRoute,
+  DevelopmentProductDevelopmentProductReleaseManagementIndexRoute:
+    DevelopmentProductDevelopmentProductReleaseManagementIndexRoute,
+  DevelopmentProductDevelopmentProductRoadmapIndexRoute:
+    DevelopmentProductDevelopmentProductRoadmapIndexRoute,
+  DevelopmentProductDevelopmentProductStrategyIndexRoute:
+    DevelopmentProductDevelopmentProductStrategyIndexRoute,
+  DevelopmentProductDevelopmentSimulationAnalysisIndexRoute:
+    DevelopmentProductDevelopmentSimulationAnalysisIndexRoute,
+  DevelopmentProductDevelopmentSoftwareDevelopmentIndexRoute:
+    DevelopmentProductDevelopmentSoftwareDevelopmentIndexRoute,
+  DevelopmentProductDevelopmentTestingValidationIndexRoute:
+    DevelopmentProductDevelopmentTestingValidationIndexRoute,
+  DevelopmentProductDevelopmentUiUxDevelopmentIndexRoute:
+    DevelopmentProductDevelopmentUiUxDevelopmentIndexRoute,
   DevelopmentResearchInnovationAiModelDevelopmentIndexRoute:
     DevelopmentResearchInnovationAiModelDevelopmentIndexRoute,
   DevelopmentResearchInnovationApiDevelopmentIndexRoute:

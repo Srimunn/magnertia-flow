@@ -56,12 +56,7 @@ export function JigOverviewSection({
   return (
     <Card className="border-border/80 shadow-xs bg-white dark:bg-slate-900">
       <CardHeader className="pb-3">
-        <div className="flex items-center gap-2">
-          <span className="h-6 w-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">
-            1
-          </span>
-          <CardTitle className="text-base font-bold">Jig Overview</CardTitle>
-        </div>
+        <CardTitle className="text-base font-bold">Jig Overview</CardTitle>
         <CardDescription className="text-xs">
           General identity, classification, manufacturing context, and operational parameters.
         </CardDescription>
@@ -69,23 +64,21 @@ export function JigOverviewSection({
 
       <CardContent className="space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Left Column: Visual Preview Asset */}
-          <div className="lg:col-span-4 flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200/80 dark:border-slate-700/80">
-            <div className="relative w-full aspect-4/3 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 flex items-center justify-center shadow-inner">
-              <img
-                src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&auto=format&fit=crop&q=80"
-                alt="Jig Visual Assembly Render"
-                className="w-full h-full object-cover rounded-md opacity-90 hover:opacity-100 transition-opacity"
-              />
-              <div className="absolute top-2 left-2">
-                <Badge className="bg-primary/90 text-white text-[10px] font-semibold">
-                  3D Render Concept
-                </Badge>
-              </div>
+          {/* Left Column: Structured Jig Specification Card (No stock images) */}
+          <div className="lg:col-span-4 flex flex-col p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200/80 dark:border-slate-700/80 space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b border-border">
+              <span className="text-xs font-bold text-foreground">Jig Engineering Baseline</span>
+              <Badge className="bg-primary/90 text-white text-[10px] font-semibold">
+                CAD v1.2
+              </Badge>
             </div>
-            <p className="text-[11px] text-muted-foreground mt-2 text-center font-medium">
-              Top Cover Drilling Jig Assembly — CAD v1.2
-            </p>
+            <div className="space-y-2 text-xs">
+              <div className="flex justify-between"><span className="text-muted-foreground">Jig Category:</span><span className="font-semibold text-foreground">Drilling & Tapping</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">Target Component:</span><span className="font-semibold text-foreground">Top Cover Housing</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">Locating System:</span><span className="font-semibold text-foreground">3-2-1 Diamond Pin</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">Clamping Mechanism:</span><span className="font-semibold text-foreground">Pneumatic Toggle Clamp</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">Positional Accuracy:</span><span className="font-semibold text-foreground">±0.02 mm</span></div>
+            </div>
           </div>
 
           {/* Right Column: Form Fields Grid */}
