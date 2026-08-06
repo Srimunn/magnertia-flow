@@ -70,7 +70,7 @@ import type {
   CybersecurityReviewer,
   CybersecurityAuditEntry,
 } from "@/services/types";
-import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
+import { ResearchInnovationTabBar, InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import {
   CybersecurityEngineeringTabBar,
   CYBERSECURITY_TABS,
@@ -219,8 +219,8 @@ export function CybersecurityEngineeringNewPage({
     return (
       <AppShell
         title="Cybersecurity Engineering"
-        breadcrumb={breadcrumb}
-        tabs={tabs}
+        breadcrumb={breadcrumb ?? "Research & Innovation Development"}
+        tabs={tabs ?? <ResearchInnovationTabBar />}
       >
         <div className="p-8 space-y-6">
           <div className="h-12 bg-slate-200 dark:bg-slate-800 rounded-lg animate-pulse" />
@@ -237,9 +237,9 @@ export function CybersecurityEngineeringNewPage({
   return (
     <AppShell
       title="Cybersecurity Engineering"
-      breadcrumb={breadcrumb}
+      breadcrumb={breadcrumb ?? "Research & Innovation Development"}
       description="Perform threat modeling (STRIDE), vulnerability assessments, penetration testing, and security compliance audits."
-      tabs={tabs}
+      tabs={tabs ?? <ResearchInnovationTabBar />}
     >
       <div className="space-y-6 pb-16">
         <div className="flex flex-wrap items-center justify-between gap-4">

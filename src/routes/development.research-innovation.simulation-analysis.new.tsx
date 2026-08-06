@@ -74,7 +74,7 @@ import type {
   SimulationReviewer,
   SimulationAuditEntry,
 } from "@/services/types";
-import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
+import { ResearchInnovationTabBar, InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import {
   SimulationAnalysisTabBar,
   SIMULATION_TABS,
@@ -222,8 +222,8 @@ export function SimulationAnalysisNewPage({
     return (
       <AppShell
         title="Simulation & Analysis"
-        breadcrumb={breadcrumb}
-        tabs={tabs}
+        breadcrumb={breadcrumb ?? "Research & Innovation Development"}
+        tabs={tabs ?? <ResearchInnovationTabBar />}
       >
         <div className="p-8 space-y-6">
           <div className="h-12 bg-slate-200 dark:bg-slate-800 rounded-lg animate-pulse" />
@@ -240,9 +240,9 @@ export function SimulationAnalysisNewPage({
   return (
     <AppShell
       title="Simulation & Analysis"
-      breadcrumb={breadcrumb}
+      breadcrumb={breadcrumb ?? "Research & Innovation Development"}
       description="Execute multi-physics FEA/CFD CAE simulations, structural mesh validation, and thermal analyses."
-      tabs={tabs}
+      tabs={tabs ?? <ResearchInnovationTabBar />}
     >
       <div className="space-y-6 pb-16">
         <div className="flex flex-wrap items-center justify-between gap-4">

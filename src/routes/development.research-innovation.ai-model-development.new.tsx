@@ -73,7 +73,7 @@ import type {
   AiReviewer,
   AiAuditEntry,
 } from "@/services/types";
-import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
+import { ResearchInnovationTabBar, InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import {
   AiModelDevelopmentTabBar,
   AI_MODEL_TABS,
@@ -280,8 +280,8 @@ export function AiModelDevelopmentNewPage({
     return (
       <AppShell
         title="AI Model Development"
-        breadcrumb={breadcrumb}
-        tabs={tabs}
+        breadcrumb={breadcrumb ?? "Research & Innovation Development"}
+        tabs={tabs ?? <ResearchInnovationTabBar />}
       >
         <div className="p-8 space-y-6">
           <div className="h-12 bg-slate-200 dark:bg-slate-800 rounded-lg animate-pulse" />
@@ -298,9 +298,9 @@ export function AiModelDevelopmentNewPage({
   return (
     <AppShell
       title="AI Model Development"
-      breadcrumb={breadcrumb}
+      breadcrumb={breadcrumb ?? "Research & Innovation Development"}
       description="Train neural network architectures, LLM fine-tuning, MLflow model registries, and ONNX deployment."
-      tabs={tabs}
+      tabs={tabs ?? <ResearchInnovationTabBar />}
     >
       <div className="space-y-6 pb-16">
         <div className="flex flex-wrap items-center justify-between gap-4">

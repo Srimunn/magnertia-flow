@@ -70,7 +70,7 @@ import type {
   CloudReviewer,
   CloudAuditEntry,
 } from "@/services/types";
-import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
+import { ResearchInnovationTabBar, InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import {
   CloudPlatformDevelopmentTabBar,
   CLOUD_PLATFORM_TABS,
@@ -201,8 +201,8 @@ export function CloudPlatformDevelopmentNewPage({
     return (
       <AppShell
         title="Cloud Platform Development"
-        breadcrumb={breadcrumb}
-        tabs={tabs}
+        breadcrumb={breadcrumb ?? "Research & Innovation Development"}
+        tabs={tabs ?? <ResearchInnovationTabBar />}
       >
         <div className="p-8 space-y-6">
           <div className="h-12 bg-slate-200 dark:bg-slate-800 rounded-lg animate-pulse" />
@@ -219,9 +219,9 @@ export function CloudPlatformDevelopmentNewPage({
   return (
     <AppShell
       title="Cloud Platform Development"
-      breadcrumb={breadcrumb}
+      breadcrumb={breadcrumb ?? "Research & Innovation Development"}
       description="Architect multi-region cloud infrastructure, Kubernetes clusters, microservices, and serverless compute."
-      tabs={tabs}
+      tabs={tabs ?? <ResearchInnovationTabBar />}
     >
       <div className="space-y-6 pb-16">
         <div className="flex items-center justify-between">

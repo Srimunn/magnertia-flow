@@ -75,7 +75,7 @@ import type {
   IotChecklistItem,
   IotAttachment,
 } from "@/services/types";
-import { InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
+import { ResearchInnovationTabBar, InnovationAreaTabs } from "@/components/erp/ResearchInnovationTabBar";
 import { IotDevelopmentTabBar, type IotTabId } from "@/components/erp/IotDevelopmentTabBar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -337,9 +337,9 @@ export function IotPage({
   return (
     <AppShell
       title="IoT Development"
-      breadcrumb={breadcrumb}
+      breadcrumb={breadcrumb ?? "Research & Innovation Development"}
       description="Manage connected IoT devices, MQTT/CoAP telemetry, edge gateways, OTA firmware updates, and digital twin state."
-      tabs={tabs}
+      tabs={tabs ?? <ResearchInnovationTabBar />}
     >
       <div className="space-y-6 pb-16">
         <div className="flex items-center justify-between">

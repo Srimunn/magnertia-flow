@@ -301,7 +301,7 @@ export function PlmPage({
     return (
       <AppShell
         title="Product Lifecycle Management (PLM)"
-        breadcrumb={breadcrumb}
+        breadcrumb={breadcrumb ?? "Research & Innovation Development"}
         tabs={tabs ?? <ResearchInnovationTabBar />}
       >
         <div className="flex h-96 w-full items-center justify-center p-8">
@@ -341,7 +341,7 @@ export function PlmPage({
   return (
     <AppShell
       title="Product Lifecycle Management (PLM)"
-      breadcrumb={breadcrumb}
+      breadcrumb={breadcrumb ?? "Research & Innovation Development"}
       description="Manage digital thread traceability, ECO/ECN change control, BOM revisions, and End-of-Life sunsetting."
       tabs={tabs ?? <ResearchInnovationTabBar />}
     >

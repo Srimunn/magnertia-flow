@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { ResearchInnovationTabBar } from "@/components/erp/ResearchInnovationTabBar";
 import {
   ClipboardCheck,
   Save,
@@ -216,9 +217,9 @@ export function TestingValidationNewPage({
   return (
     <AppShell
       title="Testing & Validation"
-      breadcrumb={breadcrumb}
+      breadcrumb={breadcrumb ?? "Research & Innovation Development"}
       description="Validate test protocols, HALT/HASS stress testing, EMC compliance, and defect tracking."
-      tabs={tabs}
+      tabs={tabs ?? <ResearchInnovationTabBar />}
     >
       <div className="space-y-6 pb-12 font-sans text-slate-900 dark:text-slate-100">
 

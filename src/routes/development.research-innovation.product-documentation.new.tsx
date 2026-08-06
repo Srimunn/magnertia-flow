@@ -333,7 +333,7 @@ export function ProductDocumentationPage({
   return (
     <AppShell
       title="Product Documentation"
-      breadcrumb={breadcrumb}
+      breadcrumb={breadcrumb ?? "Development > Product Development"}
       description="Centralized repository for technical specs, user manuals, engineering guides, and compliance documentation."
       tabs={tabs ?? <ResearchInnovationTabBar />}
     >
